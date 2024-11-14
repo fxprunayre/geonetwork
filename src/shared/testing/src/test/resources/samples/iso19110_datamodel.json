@@ -161,10 +161,22 @@
   "isPublishedToGuest" : false,
   "hasxlinks" : false,
   "valid_inspire" : 0,
+  "OrgForResourceObject" : [ {
+    "default" : "Departement Mobiliteit en Openbare Werken, afdeling Maritieme Toegang",
+    "link" : "https://data.vlaanderen.be/id/organisatie/OVO000532"
+  } ],
   "contactForResource" : [ {
     "role" : "pointOfContact",
     "email" : "maritieme.toegang@mow.vlaanderen.be",
     "address" : "Thonetlaan 102 bus 2, Antwerpen, 2050, België",
-    "website" : "https://www.vlaanderen.be/departement-mobiliteit-en-openbare-werken/maritieme-toegang"
+    "website" : "https://www.vlaanderen.be/departement-mobiliteit-en-openbare-werken/maritieme-toegang",
+    "organisationObject" : {
+      "default" : "Departement Mobiliteit en Openbare Werken, afdeling Maritieme Toegang",
+      "link" : "https://data.vlaanderen.be/id/organisatie/OVO000532"
+    }
+  } ],
+  "pointOfContactOrgForResourceObject" : [ {
+    "default" : "Departement Mobiliteit en Openbare Werken, afdeling Maritieme Toegang",
+    "link" : "https://data.vlaanderen.be/id/organisatie/OVO000532"
   } ]
 }

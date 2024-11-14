@@ -54,7 +54,7 @@
                   as="xs:string?"/>
 
     <xsl:variable name="organisationName"
-                  select="(.//*:CI_Organisation/*:name)[1]"
+                  select="(.//*:CI_Organisation/*:name|*/*:organisationName)[1]"
                   as="node()?"/>
     <xsl:variable name="uuid" select="@uuid"/>
     <xsl:variable name="elementName" select="name()"/>

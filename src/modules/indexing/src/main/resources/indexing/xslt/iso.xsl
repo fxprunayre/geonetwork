@@ -20,9 +20,6 @@
   <xsl:include href="common.xsl"/>
 
   <xsl:variable name="multilingualProperties" as="node()*">
-    <property name="standardName" xpath="metadataStandard/*/title"/>
-    <property name="standardVersion" xpath="metadataStandard/*/edition"/>
-    <property name="resourceTypeName" xpath="metadataScope/*/name"/>
     <property name="resourceTitle" xpath="identificationInfo/*/citation/*/title"/>
     <property name="resourceAltTitle" xpath="identificationInfo/*/citation/*/alternateTitle"/>
     <property name="resourceAbstract" xpath="identificationInfo/*/abstract"/>
@@ -39,10 +36,15 @@
               xpath="identificationInfo/*/resourceConstraints/*/otherConstraints"/>
 
     <!-- ISO 19115-3 only -->
+    <property name="standardName" xpath="metadataStandard/*/title"/>
+    <property name="standardVersion" xpath="metadataStandard/*/edition"/>
+    <property name="resourceTypeName" xpath="metadataScope/*/name"/>
     <property name="lineage" xpath="resourceLineage/*/statement"/>
     <property name="sourceDescription" xpath="resourceLineage/*/source/*/description"/>
 
     <!-- ISO 19139 only -->
+    <property name="standardName" xpath="metadataStandardName"/>
+    <property name="resourceTypeName" xpath="hierarchyLevelName"/>
     <property name="lineage" xpath="dataQualityInfo/*/lineage/*/statement"/>
   </xsl:variable>
 
