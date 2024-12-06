@@ -39,7 +39,7 @@ public class SimpleGn4SecurityHeaderAppender {
     /**
      * main entry for the GN5->GN4 security token. JUST USERNAME
      *
-     * @param request incomming gn4 request
+     * @param request incoming gn4 request
      * @param gn4AuthHeaderName name of the header to set with security info
      * @return new request that has the gn4AuthHeaderName (with json security info - JUST USERNAME)
      */
@@ -57,12 +57,12 @@ public class SimpleGn4SecurityHeaderAppender {
 
         var user = getUser(request);
         if (user == null) {
-            return null;
+            return changedRequest.build();
         }
 
         var username = user.getUsername();
         if (username == null) {
-            return null;
+            return changedRequest.build();
         }
         var token = new Gn4SecurityToken(username);
 
