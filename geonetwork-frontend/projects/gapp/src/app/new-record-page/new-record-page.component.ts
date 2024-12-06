@@ -8,4 +8,6 @@ import { NewRecordPanelComponent } from 'glib';
   imports: [NewRecordPanelComponent],
   styleUrl: './new-record-page.component.css',
 })
-export class NewRecordPageComponent {}
+export class NewRecordPageComponent {
+
+}

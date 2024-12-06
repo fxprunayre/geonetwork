@@ -7,6 +7,8 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { AppStore } from '../../app.state';
+import {Ripple} from "primeng/ripple";
+import {AvatarModule} from "primeng/avatar";
 
 @Component({
   selector: 'g-sign-in-form',
@@ -20,6 +22,8 @@ import { AppStore } from '../../app.state';
     InputTextModule,
     FormsModule,
     ButtonDirective,
+    Ripple,
+    AvatarModule,
   ],
   templateUrl: './sign-in-form.component.html',
   styleUrl: './sign-in-form.component.css',
