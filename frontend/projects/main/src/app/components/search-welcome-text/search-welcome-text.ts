@@ -9,7 +9,5 @@ import { SearchBase } from 'gn-library';
 export class SearchWelcomeText extends SearchBase {
   override ngOnInit() {
     super.ngOnInit();
-    // TODO: Remove, search can be done on search context load
-    this.search.searchWithPagination('', 0, 0);
   }
 }

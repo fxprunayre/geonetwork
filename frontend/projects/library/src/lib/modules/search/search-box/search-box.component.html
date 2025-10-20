@@ -3,22 +3,26 @@
     <p-inputgroup>
       <input
         [placeholder]="'search.input.placeholder' | translate"
+        [pAutoFocus]="autofocus()"
         class="border border-gray-400 focus:border-blue-400 rounded-full"
         type="text"
         pInputText
         name="search"
-        [(ngModel)]="query"
-        (input)="onInput($event)"
-        (keydown)="onKeyDown($event)"
+        [ngModel]="search.searchQuery()"
+        (ngModelChange)="onModelChange($event)"
       />
       <p-inputgroup-addon>
-        <p-button severity="secondary" variant="text" (onClick)="onSearch()">
+        <p-button
+          severity="secondary"
+          variant="text"
+          (onClick)="onModelChange(search.searchQuery())"
+        >
           <ng-icon name="faSolidMagnifyingGlass" pButtonIcon></ng-icon>
         </p-button>
       </p-inputgroup-addon>
     </p-inputgroup>
 
-    @if (query) {
+    @if (search.searchQuery()) {
       <button
         type="button"
         (click)="clearQuery()"

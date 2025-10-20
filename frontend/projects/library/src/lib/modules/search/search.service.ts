@@ -3,8 +3,8 @@ import { map, Observable } from 'rxjs';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
 import { SearchService as ApiSearchService } from 'gn4-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
-import { SearchRegistry, SearchStoreType, TRACK_TOTAL_HITS } from './search.store';
-import { Filter } from './search.store';
+import { SearchRegistry, SearchStoreType } from './search.store';
+import { SearchFilter, TRACK_TOTAL_HITS } from './search.store.model';
 import { SEARCH_SOURCE } from './search.constant';
 
 @Injectable({
@@ -43,7 +43,10 @@ export class SearchService {
     return queryString.replace(/(\+|-|&&|\|\||!|\{|\}|\[|\]|\^|\~|\?|:|\\{1}|\(|\)|\/)/g, '\\$1');
   }
 
-  buildQuery(query: string, filters: Filter[]): elasticsearch.QueryDslQueryContainer {
+  buildQuery(
+    query: string,
+    filters: Record<string, SearchFilter>,
+  ): elasticsearch.QueryDslQueryContainer {
     const filter = [
       {
         terms: {
@@ -61,10 +64,10 @@ export class SearchService {
         },
       });
     }
-    for (const filter of filters) {
+    for (const field of Object.keys(filters)) {
       must.push({
         terms: {
-          [filter.field]: filter.values,
+          [field]: filters[field].values,
         },
       });
     }
@@ -114,7 +117,7 @@ export class SearchService {
     query: string,
     page: number = 0,
     size: number = 10,
-    filters: Filter[],
+    filters: Record<string, SearchFilter> = {},
   ): Observable<{
     results: IndexRecord[];
     aggregations: Record<string, elasticsearch.AggregationsAggregationContainer> | {};

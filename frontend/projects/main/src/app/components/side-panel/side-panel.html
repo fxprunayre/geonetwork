@@ -3,14 +3,4 @@
   <pre>{{ selectedFilters | json }}</pre>
 </div>
 
-<p-accordion [multiple]="true">
-  @for (key of aggregationKeys(); track $index) {
-    <app-aggregations-component
-      [keyName]="key"
-      [aggregation]="aggregations[key]"
-      [getBuckets]="getBuckets"
-      [getSelected]="getSelected"
-      [setSelected]="setSelected"
-    ></app-aggregations-component>
-  }
-</p-accordion>
+<app-aggregations-component></app-aggregations-component>

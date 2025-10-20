@@ -7,7 +7,7 @@ import { ResultItemGrid } from '../result-item-grid/result-item-grid';
 import { ResultHeader } from '../result-header/result-header';
 import { LoadingComponent } from '../loading-component/loading-component';
 import { EmptyStateComponent } from '../empty-state/empty-state';
-import { SearchStore } from 'gn-library';
+import { SearchStore, SearchStoreType } from 'gn-library';
 
 @Component({
   selector: 'app-result-view',
@@ -31,7 +31,7 @@ export class ResultViewComponent implements OnInit {
   pageSize = 10;
   pageSizeOptions = [5, 10, 20, 50];
 
-  readonly store = inject(SearchStore);
+  readonly store: SearchStoreType = inject(SearchStore);
 
   get results() {
     return this.store.results();
@@ -72,6 +72,7 @@ export class ResultViewComponent implements OnInit {
     this.currentPage = event.page;
     this.pageSize = event.rows;
 
+    // TODO: Route changes should be handled in the SearchStore with routing enabled
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
@@ -81,7 +82,6 @@ export class ResultViewComponent implements OnInit {
       queryParamsHandling: 'merge',
     });
 
-    const query = this.route.snapshot.queryParamMap.get('q') || '';
-    this.store.searchWithPagination(query, this.currentPage, this.pageSize);
+    this.store.setPage(this.currentPage, this.pageSize);
   }
 }

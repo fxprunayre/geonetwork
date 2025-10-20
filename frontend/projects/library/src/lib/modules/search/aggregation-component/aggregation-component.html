@@ -1,8 +1,9 @@
 <div class="flex items-center mb-4">
   <p-checkbox
     [binary]="true"
+    [value]="isActive()"
     [inputId]="keyName + '_' + bucket.key"
-    [ngModel]="getSelected(keyName, bucket.key)"
+    [(ngModel)]="checked"
     (ngModelChange)="setSelected(keyName, bucket.key, $event)"
   ></p-checkbox>
   <label class="ml-2" [for]="keyName + '_' + bucket.key">

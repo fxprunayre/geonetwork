@@ -53,9 +53,7 @@
               [rows]="pageSize"
               [totalRecords]="store.totalCount()"
               [rowsPerPageOptions]="pageSizeOptions"
-              [showCurrentPageReport]="true"
               [showJumpToPageDropdown]="true"
-              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
               (onPageChange)="onPageChange($event)"
             >
             </p-paginator>

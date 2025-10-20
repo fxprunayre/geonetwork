@@ -1,0 +1,12 @@
+<p-accordion [multiple]="true">
+  @for (key of aggregationKeys(); track $index) {
+    <p-accordion-panel [value]="key">
+      <p-accordion-header>{{ key | translate }}</p-accordion-header>
+      <p-accordion-content>
+        @for (bucket of getBuckets(key); track bucket.key) {
+          <app-aggregation-component [keyName]="key" [bucket]="bucket"></app-aggregation-component>
+        }
+      </p-accordion-content>
+    </p-accordion-panel>
+  }
+</p-accordion>
