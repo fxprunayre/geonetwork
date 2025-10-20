@@ -1,0 +1,10 @@
+@if (hasActiveFilters()) {
+  <p>Active filters</p>
+
+  <pre>{{ search.filters() | json }}</pre>
+
+  <p-button (onClick)="search.reset()">
+    <ng-icon name="faSolidXmark" pButtonIcon />
+    <span pButtonLabel>Reset filters</span>
+  </p-button>
+}

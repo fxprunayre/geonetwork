@@ -194,6 +194,12 @@ export const SearchStore = signalStore(
           });
         }
       },
+      reset() {
+        patchState(store, {
+          searchQuery: '',
+          filters: {},
+        });
+      },
       more(pageSize: number) {
         patchState(store, { currentPage: store.currentPage() + store.pageSize() });
       },
