@@ -8,9 +8,8 @@ describe('AggregationsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AggregationsComponent]
-    })
-    .compileComponents();
+      imports: [AggregationsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AggregationsComponent);
     component = fixture.componentInstance;

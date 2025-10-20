@@ -1,4 +1,4 @@
-import {Component, computed, inject, Input, OnInit} from '@angular/core';
+import { Component, computed, inject, Input, OnInit } from '@angular/core';
 import { SearchStore } from 'gn-library';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -26,12 +26,7 @@ interface AggregationsAggregate {
   templateUrl: './side-panel.html',
   styleUrl: './side-panel.scss',
   standalone: true,
-  imports: [
-    FormsModule,
-    Accordion,
-    CommonModule,
-    AggregationsComponent,
-  ],
+  imports: [FormsModule, Accordion, CommonModule, AggregationsComponent],
 })
 export class SidePanel implements OnInit {
   readonly searchStore = inject(SearchStore);

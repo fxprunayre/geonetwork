@@ -7,13 +7,7 @@ import { ButtonDirective, ButtonLabel } from 'primeng/button';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    SearchBox,
-    SearchContextDirective,
-    SearchWelcomeText,
-    ButtonLabel,
-    ButtonDirective,
-  ],
+  imports: [SearchBox, SearchContextDirective, SearchWelcomeText, ButtonLabel, ButtonDirective],
   templateUrl: './home-component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
