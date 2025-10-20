@@ -18,5 +18,6 @@ export * from './lib/modules/search/search-active-filters/search-active-filters.
 export * from './lib/modules/search/aggregation-translate-pipe';
 export * from './lib/modules/search/aggregations-component/aggregations-component';
 export * from './lib/modules/search/aggregation-component/aggregation-component';
+export * from './lib/modules/results/search-results-paginator/search-results-paginator';
 export * from './lib/modules/record/record-view/record-view.component';
 export * from './lib/modules/record/record-field-overview/record-field-overview.component';

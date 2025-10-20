@@ -7,18 +7,18 @@ import { ResultItemGrid } from '../result-item-grid/result-item-grid';
 import { ResultHeader } from '../result-header/result-header';
 import { LoadingComponent } from '../loading-component/loading-component';
 import { EmptyStateComponent } from '../empty-state/empty-state';
-import { SearchStore, SearchStoreType } from 'gn-library';
+import { SearchStore, SearchStoreType, SearchResultsPaginator } from 'gn-library';
 
 @Component({
   selector: 'app-result-view',
   standalone: true,
   imports: [
-    Paginator,
     ResultItemGrid,
     ResultItemList,
     ResultHeader,
     LoadingComponent,
     EmptyStateComponent,
+    SearchResultsPaginator,
   ],
   templateUrl: './result-view-component.html',
   styleUrls: ['./result-view-component.scss'],
@@ -29,8 +29,6 @@ export class ResultViewComponent implements OnInit {
   private route = inject(ActivatedRoute);
   currentPage = 0;
   pageSize = 10;
-  pageSizeOptions = [5, 10, 20, 50];
-
   readonly store: SearchStoreType = inject(SearchStore);
 
   get results() {
@@ -43,6 +41,7 @@ export class ResultViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    // TODO: Q: Do we want paging in route params?
     this.route.queryParamMap.subscribe((params) => {
       const page = params.get('page');
       const size = params.get('size');
@@ -66,22 +65,5 @@ export class ResultViewComponent implements OnInit {
   onDownload(id: string) {
     // Implement download logic here
     console.log('Download:', id);
-  }
-
-  onPageChange(event: any) {
-    this.currentPage = event.page;
-    this.pageSize = event.rows;
-
-    // TODO: Route changes should be handled in the SearchStore with routing enabled
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        page: this.currentPage > 0 ? this.currentPage : null,
-        size: this.pageSize !== 10 ? this.pageSize : null,
-      },
-      queryParamsHandling: 'merge',
-    });
-
-    this.store.setPage(this.currentPage, this.pageSize);
   }
 }

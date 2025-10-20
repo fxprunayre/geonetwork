@@ -45,20 +45,7 @@
             }
           </div>
         }
-        <!-- Paginator -->
-        @if (store.totalCount() > pageSize) {
-          <div class="paginator-container border-top-1 pt-4 mt-4">
-            <p-paginator
-              [first]="currentPage * pageSize"
-              [rows]="pageSize"
-              [totalRecords]="store.totalCount()"
-              [rowsPerPageOptions]="pageSizeOptions"
-              [showJumpToPageDropdown]="true"
-              (onPageChange)="onPageChange($event)"
-            >
-            </p-paginator>
-          </div>
-        }
+        <app-search-results-paginator />
       </div>
     }
   </div>

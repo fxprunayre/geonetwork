@@ -1,0 +1,13 @@
+@if (this.search.totalCount() > this.search.pageSize()) {
+  <div class="paginator-container border-top-1 pt-4 mt-4">
+    <p-paginator
+      [first]="this.search.currentPage() * this.search.pageSize()"
+      [rows]="this.search.pageSize()"
+      [totalRecords]="this.search.totalCount()"
+      [rowsPerPageOptions]="pageSizeOptions"
+      [showJumpToPageDropdown]="true"
+      (onPageChange)="onPageChange($event)"
+    >
+    </p-paginator>
+  </div>
+}
