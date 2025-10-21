@@ -23,6 +23,7 @@ export interface I18nApp extends App {
 
 export interface SearchApp extends App {
   topTabFilter?: string;
+  filter?: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
   aggregations: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
   advanced?: SearchAppAdvanced;
 }

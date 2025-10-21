@@ -15,7 +15,7 @@ export type SearchState = {
   routing: boolean;
   searchQuery: string;
   // A general filter string that can be used to apply additional filtering
-  filter: string;
+  filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
   // Aggregation to display on top of the search results
   topFilter?: string;
   filters: Record<string, SearchFilter>;
@@ -31,7 +31,7 @@ export type SearchState = {
 
 export interface SearchFilterParameters {
   searchQuery: string;
-  filter: string;
+  filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
   filters: Record<string, SearchFilter>;
   aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
   sort: elasticsearch.Sort;

@@ -4,7 +4,7 @@ import { elasticsearch, IndexRecord } from 'gn-api-client';
 import { SearchService as ApiSearchService } from 'gn4-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { SearchRegistry, SearchStoreType } from './search.store';
-import { SearchFilter, TRACK_TOTAL_HITS } from './search.store.model';
+import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './search.store.model';
 import { SEARCH_SOURCE } from './search.constant';
 import { AggregationService } from './aggregation.service';
 
@@ -48,15 +48,10 @@ export class SearchService {
 
   buildQuery(
     query: string,
+    queryFilter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
     filters: Record<string, SearchFilter>,
   ): elasticsearch.QueryDslQueryContainer {
-    const filter = [
-      {
-        terms: {
-          isTemplate: ['n'],
-        },
-      },
-    ];
+    const filter = queryFilter;
     const must: elasticsearch.QueryDslQueryContainer[] = [];
     if (query) {
       must.push({
@@ -87,22 +82,28 @@ export class SearchService {
   }
 
   buildSearchRequest(
-    page: number,
-    size: number,
-    query: string,
-    filters: { [p: string]: SearchFilter },
+    searchRequestParameters: SearchRequestParameters,
+    withAggregation: boolean = true,
   ) {
     // TODO: add sorting
-    return {
-      from: page * size,
-      size: size,
+    let request: elasticsearch.SearchRequest = {
+      from: searchRequestParameters.currentPage * searchRequestParameters.pageSize,
+      size: searchRequestParameters.pageSize,
       track_total_hits: TRACK_TOTAL_HITS,
-      query: this.buildQuery(query, filters),
-      aggregations: this.aggregationService.buildAggregationQuery(
-        this.uiConfiguration?.apps?.search?.aggregations ?? [],
+      query: this.buildQuery(
+        searchRequestParameters.searchQuery,
+        searchRequestParameters.filter,
+        searchRequestParameters.filters,
       ),
       _source: SEARCH_SOURCE,
     };
+
+    if (withAggregation) {
+      request.aggregations = this.aggregationService.buildAggregationQuery(
+        searchRequestParameters.aggregationsConfig ?? [],
+      );
+    }
+    return request;
   }
 
   buildIndexRecord(hit: elasticsearch.SearchHit<IndexRecord>): IndexRecord {
@@ -115,17 +116,12 @@ export class SearchService {
     } as IndexRecord;
   }
 
-  search(
-    query: string,
-    page: number = 0,
-    size: number = 10,
-    filters: Record<string, SearchFilter> = {},
-  ): Observable<{
+  search(searchRequestParameters: SearchRequestParameters): Observable<{
     results: IndexRecord[];
     aggregations: Record<string, elasticsearch.AggregationsAggregate> | {};
     totalCount: number;
   }> {
-    return this.searchService.search(this.buildSearchRequest(page, size, query, filters)).pipe(
+    return this.searchService.search(this.buildSearchRequest(searchRequestParameters)).pipe(
       map(
         (
           response: elasticsearch.SearchResponse<
@@ -138,6 +134,29 @@ export class SearchService {
               return this.buildIndexRecord(hit);
             }),
             aggregations: response.aggregations ?? {},
+            totalCount: this.getTotalHits(response),
+          };
+        },
+      ),
+    );
+  }
+
+  page(searchRequestParameters: SearchRequestParameters): Observable<{
+    results: IndexRecord[];
+    totalCount: number;
+  }> {
+    return this.searchService.search(this.buildSearchRequest(searchRequestParameters, false)).pipe(
+      map(
+        (
+          response: elasticsearch.SearchResponse<
+            IndexRecord,
+            Record<string, elasticsearch.AggregationsAggregate>
+          >,
+        ) => {
+          return {
+            results: response.hits.hits.map((hit) => {
+              return this.buildIndexRecord(hit);
+            }),
             totalCount: this.getTotalHits(response),
           };
         },

@@ -29,7 +29,11 @@ import { toObservable } from '@angular/core/rxjs-interop';
 const initialState: SearchState = {
   id: 'default',
   routing: false,
-  filter: '',
+  filter: {
+    terms: {
+      _isTemplate: 'n',
+    },
+  },
   searchQuery: '',
   filters: {},
   results: [],
@@ -87,6 +91,7 @@ export const SearchStore = signalStore(
           )[],
           size: number,
           routing: boolean = false,
+          filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
         ) {
           console.log(`Initializing search store with id: ${searchId}`);
           patchState(store, {
@@ -94,6 +99,7 @@ export const SearchStore = signalStore(
             aggregationsConfig,
             pageSize: size,
             routing,
+            filter,
           });
 
           store.results$.subscribe(() => {
@@ -120,12 +126,11 @@ export const SearchStore = signalStore(
               });
 
               return searchService
-                .search(
-                  searchFilterParameters.searchQuery,
-                  0,
-                  DEFAULT_PAGE_SIZE,
-                  searchFilterParameters.filters,
-                )
+                .search({
+                  ...searchFilterParameters,
+                  currentPage: store.currentPage() || 0,
+                  pageSize: store.pageSize(),
+                } as SearchRequestParameters)
                 .pipe(
                   tapResponse({
                     next: (response) => {
@@ -158,20 +163,23 @@ export const SearchStore = signalStore(
           pipe(
             distinctUntilChanged(),
             tap(() => patchState(store, { isLoading: true })),
-            switchMap((searchResquestPageParameters) => {
+            switchMap((searchRequestPageParameters) => {
               patchState(store, {
-                currentPage: searchResquestPageParameters.currentPage,
-                pageSize: searchResquestPageParameters.pageSize,
+                currentPage: searchRequestPageParameters.currentPage,
+                pageSize: searchRequestPageParameters.pageSize,
               });
 
               return searchService
-                .search(store.searchQuery(), store.currentPage(), store.pageSize(), store.filters())
+                .page({
+                  ...store.searchFilterParameters(),
+                  ...searchRequestPageParameters,
+                } as SearchRequestParameters)
                 .pipe(
                   tapResponse({
                     next: (response) =>
                       patchState(store, {
                         results: response.results,
-                        aggregations: response.aggregations || {},
+                        aggregations: store.aggregations(),
                         totalCount: response.totalCount,
                       }),
                     error: console.error,

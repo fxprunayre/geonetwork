@@ -649,9 +649,9 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
         },
       },
       filters: null,
-      // 'filters': [{
+      // filters: [{
       //     "query_string": {
-      //       "query": "-resourceType:service"
+      //       "query": "+resourceType:service"
       //     }
       //   }],
       sortbyValues: [

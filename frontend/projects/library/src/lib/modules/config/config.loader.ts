@@ -43,6 +43,7 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
         (module as Search).facetConfig[(module as Search).facetTabField]
       ) {
         conf.apps.search.topTabFilter = (module as Search).facetTabField;
+        conf.apps.search.filter = (module as Search).filters;
       }
     } else if (modKey === 'header') {
       conf.apps.i18n = {

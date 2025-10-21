@@ -12,6 +12,7 @@ import { SearchStore } from './search.store';
 export class SearchContextDirective implements OnInit {
   scope = input<string>('', { alias: 'appSearchContext' });
   routing = input<boolean>(false);
+  filter = input<any>({});
   aggregations = input<any>({});
   size = input<number>(DEFAULT_PAGE_SIZE);
   response = model<elasticsearch.SearchResponse<IndexRecord> | null>();
@@ -22,7 +23,13 @@ export class SearchContextDirective implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.searchStore.init(this.scope(), this.aggregations(), this.size(), this.routing());
+    this.searchStore.init(
+      this.scope(),
+      this.aggregations(),
+      this.size(),
+      this.routing(),
+      this.filter(),
+    );
     this.searchService.register(this.scope(), this.searchStore);
   }
 }

@@ -4,6 +4,7 @@
     class="flex-grow"
     appSearchContext="main"
     [aggregations]="searchConfig.aggregations"
+    [filter]="searchConfig.filter"
     [routing]="true"
     filter="+isTemplate:n"
   >
