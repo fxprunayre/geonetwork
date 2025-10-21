@@ -18,6 +18,11 @@ export class AggregationTranslatePipe implements PipeTransform {
 
   transform(value: string | number, aggregation: string): string | number {
     if (typeof value === 'number') return value;
+    // TODO: Temporary handling hierachy of keyword separated by caret (^) in aggregation values
+    // E.g. "Europe^Germany^Berlin" -> "Berlin"
+    if (aggregation.indexOf("_tree.") !== -1 && value.indexOf("^")) {
+      value = value.split("^").at(-1) || value;
+    }
     const key = `${AggregationTranslatePipe.translationKeys.get(aggregation) ?? aggregation}-${value}`;
     const translation = this.translateService.instant(key);
     return translation !== key

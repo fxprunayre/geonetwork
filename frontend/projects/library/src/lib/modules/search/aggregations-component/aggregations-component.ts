@@ -1,4 +1,4 @@
-import { Component, computed, inject, Input } from '@angular/core';
+import { Component, computed, inject, effect } from '@angular/core';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AggregationComponent } from '../aggregation-component/aggregation-component';
@@ -29,6 +29,16 @@ export class AggregationsComponent extends SearchBase {
   activePanels = computed(() => {
     return this.aggregationService.getActive(this.search.aggregationsConfig());
   });
+
+  constructor() {
+    super();
+    effect(() => {
+      this.aggregationService.loadTranslations(
+        this.search.aggregations(),
+        this.search.aggregationsConfig(),
+      );
+    });
+  }
 
   aggregationKeys = computed(() => {
     // TODO: Get ordered keys from configuration
