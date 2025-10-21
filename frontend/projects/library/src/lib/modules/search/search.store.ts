@@ -6,6 +6,7 @@ import {
   withComputed,
   withHooks,
   withMethods,
+  withProps,
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -17,13 +18,17 @@ import {
   DEFAULT_SORT,
   SearchFilter,
   SearchFilterParameters,
-  SearchRequestPageParameters,
-  SearchState,
+  SearchRequestPageParameters, SearchRequestParameters,
+  SearchState
 } from './search.store.model';
+import { SearchRouteService } from './search-route.service';
+import { ActivatedRoute } from '@angular/router';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 const initialState: SearchState = {
   id: 'default',
   routing: false,
+  filter: '',
   searchQuery: '',
   filters: {},
   results: [],
@@ -38,11 +43,15 @@ const initialState: SearchState = {
 
 export const SearchStore = signalStore(
   withState(initialState),
-
+  withProps(({ results }) => ({
+    activeRoute: inject(ActivatedRoute),
+    results$: toObservable(results),
+  })),
   withComputed((store) => ({
     searchFilterParameters: computed(() => {
       return {
         searchQuery: store.searchQuery(),
+        filter: store.filter(),
         filters: store.filters(),
         sort: store.sort(),
         aggregationsConfig: store.aggregationsConfig(),
@@ -60,7 +69,11 @@ export const SearchStore = signalStore(
     totalPages: computed(() => Math.ceil(store.totalCount() / store.pageSize())),
   })),
 
-  withMethods((store, searchService = inject(SearchService)) => {
+  withMethods((
+    store,
+    searchService = inject(SearchService),
+    searchRouteService = inject(SearchRouteService)
+  ) => {
     const injector = inject(Injector);
 
     return {
@@ -80,6 +93,16 @@ export const SearchStore = signalStore(
           pageSize: size,
           routing,
         });
+
+        store.results$.subscribe(() => {
+          if ((store.results().length) > 0) {
+            this.setRouting();
+          }
+        });
+
+        if (store.routing()) {
+          this.subscribeToRouteChange();
+        }
       },
 
       search: rxMethod<SearchFilterParameters>(
@@ -215,6 +238,37 @@ export const SearchStore = signalStore(
       },
       previous() {
         patchState(store, { currentPage: store.currentPage() - store.pageSize() });
+      },
+      setRouting() {
+        if (!store.routing()) {
+          return;
+        }
+        searchRouteService.setRoute(
+          {
+            currentPage: store.currentPage() || 0,
+            pageSize: store.pageSize(),
+            sort: store.sort(),
+            searchQuery: store.searchQuery(),
+            filter: store.filter(),
+            filters: store.filters(),
+          } as SearchRequestParameters,
+          store.pageSize()
+        );
+      },
+      subscribeToRouteChange() {
+        if (!store.routing()) {
+          return;
+        }
+
+        store.activeRoute.queryParams.subscribe(params => {
+          patchState(
+            store,
+            searchRouteService.convertRouteParamsToSearch(
+              params,
+              store.pageSize()
+            )
+          );
+        });
       },
     };
   }),

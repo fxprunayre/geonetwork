@@ -9,13 +9,14 @@
         pInputText
         name="search"
         [ngModel]="search.searchQuery()"
-        (ngModelChange)="onModelChange($event)"
+        (ngModelChange)="searchOnInputChange($event)"
+        (keyup.enter)="searchOnClick()"
       />
       <p-inputgroup-addon>
         <p-button
           severity="secondary"
           variant="text"
-          (onClick)="onModelChange(search.searchQuery())"
+          (onClick)="searchOnClick()"
         >
           <ng-icon name="faSolidMagnifyingGlass" pButtonIcon></ng-icon>
         </p-button>

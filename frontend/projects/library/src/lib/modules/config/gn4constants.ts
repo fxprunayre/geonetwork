@@ -1303,7 +1303,7 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
             meta: {
               collapsed: true,
               orderByTranslation: true,
-              // 'translateOnLoad': true,
+              translateOnLoad: true,
               // 'treeKeySeparator': '^'
             },
           },
