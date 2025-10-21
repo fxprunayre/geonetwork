@@ -1,4 +1,4 @@
-<p-accordion [multiple]="true">
+<p-accordion [multiple]="true" [value]="activePanels()">
   @for (key of aggregationKeys(); track $index) {
     <p-accordion-panel [value]="key">
       <p-accordion-header>{{ key | translate }}</p-accordion-header>

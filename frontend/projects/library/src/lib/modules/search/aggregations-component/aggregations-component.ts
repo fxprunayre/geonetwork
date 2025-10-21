@@ -1,9 +1,10 @@
-import { Component, computed, Input } from '@angular/core';
+import { Component, computed, inject, Input } from '@angular/core';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AggregationComponent } from '../aggregation-component/aggregation-component';
 import { SearchBase } from '../search-base/search-base';
 import { elasticsearch } from 'gn-api-client';
+import { AggregationService } from '../aggregation.service';
 
 @Component({
   selector: 'app-aggregations-component',
@@ -19,9 +20,16 @@ import { elasticsearch } from 'gn-api-client';
   styleUrl: './aggregations-component.scss',
 })
 export class AggregationsComponent extends SearchBase {
+  aggregationService = inject(AggregationService);
+
   get aggregations(): Record<string, elasticsearch.AggregationsAggregate> {
     return this.search.aggregations();
   }
+
+  activePanels = computed(() => {
+    return this.aggregationService.getActive(this.search.aggregationsConfig());
+  });
+
   aggregationKeys = computed(() => {
     // TODO: Get ordered keys from configuration
     return Object.keys(this.aggregations) || [];

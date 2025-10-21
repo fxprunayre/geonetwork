@@ -6,6 +6,7 @@ import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { SearchRegistry, SearchStoreType } from './search.store';
 import { SearchFilter, TRACK_TOTAL_HITS } from './search.store.model';
 import { SEARCH_SOURCE } from './search.constant';
+import { AggregationService } from './aggregation.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,8 @@ export class SearchService {
   store: SearchRegistry = {};
 
   searchService: ApiSearchService = inject(ApiSearchService);
+
+  aggregationService = inject(AggregationService);
 
   uiConfiguration = inject(APPLICATION_CONFIGURATION).config;
 
@@ -83,26 +86,6 @@ export class SearchService {
     };
   }
 
-  buildAggregation(
-    aggregationConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
-  ): Record<string, elasticsearch.AggregationsAggregationContainer> {
-    const aggregations: Record<string, elasticsearch.AggregationsAggregationContainer> = {};
-
-    for (const config of aggregationConfig) {
-      if (typeof config === 'string') {
-        aggregations[config] = {
-          terms: {
-            field: config,
-            size: 10,
-          },
-        };
-      } else if (typeof config === 'object' && config !== null) {
-        Object.assign(aggregations, config);
-      }
-    }
-    return aggregations;
-  }
-
   buildIndexRecord(hit: elasticsearch.SearchHit<IndexRecord>): IndexRecord {
     // TODO: Handle multilingual fields
     return {
@@ -128,7 +111,9 @@ export class SearchService {
       size: size,
       track_total_hits: TRACK_TOTAL_HITS,
       query: this.buildQuery(query, filters),
-      aggregations: this.buildAggregation(this.uiConfiguration?.apps?.search?.aggregations ?? []),
+      aggregations: this.aggregationService.buildAggregationQuery(
+        this.uiConfiguration?.apps?.search?.aggregations ?? [],
+      ),
       _source: SEARCH_SOURCE,
     };
     // TODO: add sorting

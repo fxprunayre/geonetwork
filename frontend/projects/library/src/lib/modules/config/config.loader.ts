@@ -52,7 +52,7 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
       };
     }
   }
-
+  console.log('Migrated GN4 config:', conf);
   return conf;
 }
 

@@ -3,6 +3,7 @@ import { elasticsearch, IndexRecord } from 'gn-api-client';
 export const DEFAULT_PAGE_SIZE = 10;
 export const TRACK_TOTAL_HITS = true;
 export const DEFAULT_SORT: elasticsearch.Sort = ['_score'];
+export const DEFAULT_AGGREGATION_SIZE = 10;
 
 export type SearchFilter = {
   field: string;

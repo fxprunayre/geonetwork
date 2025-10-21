@@ -4,7 +4,12 @@ import { TopNavigation } from './components/navigation/top-navigation/top-naviga
 import { BottomNavigation } from './components/navigation/bottom-navigation/bottom-navigation';
 import { FormsModule } from '@angular/forms';
 import { Gn4ApiModule } from 'gn4-api-client';
-import { SearchContextDirective, SearchService } from 'gn-library';
+import {
+  SearchContextDirective,
+  SearchService,
+  SearchApp,
+  APPLICATION_CONFIGURATION,
+} from 'gn-library';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -26,6 +31,9 @@ export class App {
   private translate = inject(TranslateService);
 
   protected readonly title = signal('main');
+
+  searchConfig: SearchApp =
+    inject(APPLICATION_CONFIGURATION).config?.apps.search || ({} as SearchApp);
 
   constructor() {
     this.translate.addLangs(['en']);

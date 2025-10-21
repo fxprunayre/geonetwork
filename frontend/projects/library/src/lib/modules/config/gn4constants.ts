@@ -1287,7 +1287,7 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
               orderByTranslation: true,
               filterByTranslation: true,
               displayFilter: true,
-              collapsed: true,
+              collapsed: false,
             },
           },
           // (Experimental) A tree field which contains a URI
