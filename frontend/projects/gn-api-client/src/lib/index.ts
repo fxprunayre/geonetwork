@@ -5,4 +5,4 @@ export * from './configuration';
 export * from './api.module';
 export * from './provide-api';
 export * from './param';
-export * from './elasticsearch/types';
+export * from './elasticsearch/gn.types';
