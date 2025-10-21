@@ -352,7 +352,7 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
             size: 20,
           },
           meta: {
-            placement: 'main-filters',
+            placement: 'primary',
             label: false,
             // layout: SearchAggLayout.MULTISELECT,
             // Always display filter even no more elements
@@ -373,7 +373,7 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
             field: 'resourceType',
           },
           meta: {
-            placement: 'main-filters',
+            placement: 'primary',
             label: false,
             // layout: SearchAggLayout.MULTISELECT,
             decorator: {
@@ -397,7 +397,7 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
             size: 10,
           },
           meta: {
-            placement: 'additional-filters',
+            placement: 'secondary',
             label: false,
             // layout: SearchAggLayout.MULTISELECT,
           },
@@ -407,7 +407,7 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
             field: 'format',
           },
           meta: {
-            placement: 'additional-filters',
+            placement: 'secondary',
             label: false,
             // layout: SearchAggLayout.MULTISELECT,
             // refreshPolicy: SearchAggRefreshPolicy.NO_REFRESH,
@@ -1403,6 +1403,7 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
             },
             meta: {
               collapsed: true,
+              refreshPolicy: 'none',
             },
           },
         },

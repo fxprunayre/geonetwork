@@ -86,6 +86,25 @@ export class SearchService {
     };
   }
 
+  buildSearchRequest(
+    page: number,
+    size: number,
+    query: string,
+    filters: { [p: string]: SearchFilter },
+  ) {
+    // TODO: add sorting
+    return {
+      from: page * size,
+      size: size,
+      track_total_hits: TRACK_TOTAL_HITS,
+      query: this.buildQuery(query, filters),
+      aggregations: this.aggregationService.buildAggregationQuery(
+        this.uiConfiguration?.apps?.search?.aggregations ?? [],
+      ),
+      _source: SEARCH_SOURCE,
+    };
+  }
+
   buildIndexRecord(hit: elasticsearch.SearchHit<IndexRecord>): IndexRecord {
     // TODO: Handle multilingual fields
     return {
@@ -96,29 +115,17 @@ export class SearchService {
     } as IndexRecord;
   }
 
-  getByQuery(
+  search(
     query: string,
     page: number = 0,
     size: number = 10,
     filters: Record<string, SearchFilter> = {},
   ): Observable<{
     results: IndexRecord[];
-    aggregations: Record<string, elasticsearch.AggregationsAggregationContainer> | {};
+    aggregations: Record<string, elasticsearch.AggregationsAggregate> | {};
     totalCount: number;
   }> {
-    let searchRequest: elasticsearch.SearchRequest = {
-      from: page * size,
-      size: size,
-      track_total_hits: TRACK_TOTAL_HITS,
-      query: this.buildQuery(query, filters),
-      aggregations: this.aggregationService.buildAggregationQuery(
-        this.uiConfiguration?.apps?.search?.aggregations ?? [],
-      ),
-      _source: SEARCH_SOURCE,
-    };
-    // TODO: add sorting
-
-    return this.searchService.search(searchRequest).pipe(
+    return this.searchService.search(this.buildSearchRequest(page, size, query, filters)).pipe(
       map(
         (
           response: elasticsearch.SearchResponse<
@@ -126,27 +133,35 @@ export class SearchService {
             Record<string, elasticsearch.AggregationsAggregate>
           >,
         ) => {
-          let totalCount = 0;
-          if (typeof response.hits.total === 'number') {
-            totalCount = response.hits.total;
-          } else if (
-            response.hits.total &&
-            typeof response.hits.total === 'object' &&
-            'value' in response.hits.total
-          ) {
-            totalCount = response.hits.total.value;
-          }
-
           return {
             results: response.hits.hits.map((hit) => {
               return this.buildIndexRecord(hit);
             }),
             aggregations: response.aggregations ?? {},
-            totalCount: totalCount,
+            totalCount: this.getTotalHits(response),
           };
         },
       ),
     );
+  }
+
+  private getTotalHits(
+    response: elasticsearch.SearchResponse<
+      IndexRecord,
+      Record<string, elasticsearch.AggregationsAggregate>
+    >,
+  ) {
+    let totalCount = 0;
+    if (typeof response.hits.total === 'number') {
+      totalCount = response.hits.total;
+    } else if (
+      response.hits.total &&
+      typeof response.hits.total === 'object' &&
+      'value' in response.hits.total
+    ) {
+      totalCount = response.hits.total.value;
+    }
+    return totalCount;
   }
 
   getById(id: string): Observable<IndexRecord | null> {

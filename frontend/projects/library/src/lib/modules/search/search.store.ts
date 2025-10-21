@@ -120,7 +120,7 @@ export const SearchStore = signalStore(
               });
 
               return searchService
-                .getByQuery(
+                .search(
                   searchFilterParameters.searchQuery,
                   0,
                   DEFAULT_PAGE_SIZE,
@@ -128,12 +128,24 @@ export const SearchStore = signalStore(
                 )
                 .pipe(
                   tapResponse({
-                    next: (response) =>
+                    next: (response) => {
+                      const aggregationToKeep = Object.fromEntries(
+                        Object.entries(store.aggregations()).filter(
+                          ([key, agg]) => agg?.meta?.refreshPolicy === 'none',
+                        ),
+                      );
+
+                      const aggregations = {
+                        ...response.aggregations,
+                        ...aggregationToKeep,
+                      };
+
                       patchState(store, {
                         results: response.results,
-                        aggregations: response.aggregations || {},
+                        aggregations: aggregations,
                         totalCount: response.totalCount,
-                      }),
+                      });
+                    },
                     error: console.error,
                     finalize: () => patchState(store, { isLoading: false }),
                   }),
@@ -153,12 +165,7 @@ export const SearchStore = signalStore(
               });
 
               return searchService
-                .getByQuery(
-                  store.searchQuery(),
-                  store.currentPage(),
-                  store.pageSize(),
-                  store.filters(),
-                )
+                .search(store.searchQuery(), store.currentPage(), store.pageSize(), store.filters())
                 .pipe(
                   tapResponse({
                     next: (response) =>

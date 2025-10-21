@@ -14,7 +14,22 @@ export type SequenceNumber = long;
 export type IndexName = string;
 export type Routing = string;
 
-export type Metadata = Record<string, any>;
+export type Decorator = {
+  type: 'map' | 'icon' | 'img';
+  map?: Record<string, string>;
+  prefix?: string;
+  expression?: string;
+};
+export type Metadata = Record<string, any> & {
+  collapsed?: boolean;
+  placement?: 'side' | 'primary' | 'secondary';
+  decorator?: Decorator;
+  refreshPolicy?: 'none';
+  icon?: string;
+  layout?: 'checkbox' | 'dropdown' | 'tabs' | 'card';
+  orderByTranslation?: boolean;
+  userHasRole?: string;
+};
 
 export interface AggregationsMultiBucketBase {
   doc_count: long;
