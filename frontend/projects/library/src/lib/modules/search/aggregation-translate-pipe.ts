@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Pipe({
   name: 'aggregationTranslate',
   standalone: true,
+  pure: false
 })
 export class AggregationTranslatePipe implements PipeTransform {
   private readonly translateService = inject(TranslateService);
