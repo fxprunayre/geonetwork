@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   OnInit,
-  input, output
+  input,
+  output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 

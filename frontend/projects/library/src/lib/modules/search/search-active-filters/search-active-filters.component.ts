@@ -6,7 +6,6 @@ import { faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 
-
 @Component({
   selector: 'app-active-filters',
   imports: [Button, ButtonIcon, NgIcon, ButtonLabel, TranslatePipe],
@@ -15,7 +14,6 @@ import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
   providers: [AggregationTranslatePipe],
   templateUrl: './search-active-filters.component.html',
 })
-
 export class SearchActiveFilters extends SearchBase {
   hasActiveFilters = computed(() => {
     return Object.keys(this.search.filters()).length > 0;
@@ -36,7 +34,7 @@ export class SearchActiveFilters extends SearchBase {
   getBucketLabel(groupKey: string, bucketKey: string | number): string {
     const key = String(bucketKey);
     const buckets = this.getBuckets(groupKey);
-    const bucket = buckets?.find(b => String(b.key) === key);
+    const bucket = buckets?.find((b) => String(b.key) === key);
 
     if (!bucket) return key;
 

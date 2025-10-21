@@ -36,7 +36,6 @@ export class ResultDetailComponent implements OnInit {
   }
 
   goBack() {
-    const queryParams = history.state?.searchQuery ? { q: history.state.searchQuery } : {};
-    this.router.navigate(['/catalogue'], { queryParams });
+    this.router.navigate(['/search']);
   }
 }

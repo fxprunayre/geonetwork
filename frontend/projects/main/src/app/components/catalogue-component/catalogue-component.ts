@@ -10,6 +10,4 @@ import { SearchInput } from 'gn-library';
   templateUrl: './catalogue-component.html',
   styleUrl: './catalogue-component.scss',
 })
-export class CatalogueComponent {
-
-}
+export class CatalogueComponent {}

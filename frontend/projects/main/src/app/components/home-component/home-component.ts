@@ -4,7 +4,6 @@ import { SearchWelcomeText } from '../search-welcome-text/search-welcome-text';
 import { ButtonDirective, ButtonLabel } from 'primeng/button';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-home',
   standalone: true,

@@ -5,11 +5,11 @@ import { MapComponent } from './components/map-component/map-component';
 import { ResultDetailComponent } from './components/result-detail/result-detail';
 
 export function recordMatcher(url: UrlSegment[]): UrlMatchResult | null {
-  if (url.length === 3 && url[0].path === 'search' && url[1].path === 'record') {
+  if (url.length === 2 && url[0].path === 'record') {
     return {
-      consumed: url, // Consume all three segments
+      consumed: url, // Consume all segments
       posParams: {
-        uuid: url[2],
+        uuid: url[1],
       },
     };
   }

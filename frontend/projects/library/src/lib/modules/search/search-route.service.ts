@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { SearchFilter, SearchRequestParameters } from './search.store.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchRouteService {
   router = inject(Router);
@@ -19,10 +19,7 @@ export class SearchRouteService {
       urlParams = urlParams.concat(
         Object.entries(store.filters)
           .filter(([field, filter]) => filter.values.length > 0)
-          .map(
-            ([field, filter]) =>
-              `${field}="${filter.values.join('" OR "')}"`
-          )
+          .map(([field, filter]) => `${field}="${filter.values.join('" OR "')}"`),
       );
     }
     if (store.currentPage !== 0) {
@@ -31,7 +28,7 @@ export class SearchRouteService {
     if (store.pageSize !== pageSize) {
       urlParams.push(`size=${store.pageSize}`);
     }
-    this.location.go('/search', urlParams.filter(v => v !== '').join('&'));
+    this.location.go('/search', urlParams.filter((v) => v !== '').join('&'));
   }
 
   convertRouteParamsToSearch(params: Params, pageSize: number): any {
@@ -43,7 +40,7 @@ export class SearchRouteService {
         const values = value.slice(1, -1).split('" OR "');
         filter[key] = {
           field: key,
-          values: values
+          values: values,
         };
       }
     });
@@ -52,7 +49,7 @@ export class SearchRouteService {
       from: parseInt(params['from']) || 0,
       size: parseInt(params['size']) || pageSize,
       searchQuery: params['q'] || '',
-      filters: filter
+      filters: filter,
     };
   }
 

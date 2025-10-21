@@ -18,8 +18,9 @@ import {
   DEFAULT_SORT,
   SearchFilter,
   SearchFilterParameters,
-  SearchRequestPageParameters, SearchRequestParameters,
-  SearchState
+  SearchRequestPageParameters,
+  SearchRequestParameters,
+  SearchState,
 } from './search.store.model';
 import { SearchRouteService } from './search-route.service';
 import { ActivatedRoute } from '@angular/router';
@@ -69,209 +70,208 @@ export const SearchStore = signalStore(
     totalPages: computed(() => Math.ceil(store.totalCount() / store.pageSize())),
   })),
 
-  withMethods((
-    store,
-    searchService = inject(SearchService),
-    searchRouteService = inject(SearchRouteService)
-  ) => {
-    const injector = inject(Injector);
+  withMethods(
+    (
+      store,
+      searchService = inject(SearchService),
+      searchRouteService = inject(SearchRouteService),
+    ) => {
+      const injector = inject(Injector);
 
-    return {
-      init(
-        searchId: string,
-        aggregationsConfig: (
-          | string
-          | Record<string, elasticsearch.AggregationsAggregationContainer>
-        )[],
-        size: number,
-        routing: boolean = false,
-      ) {
-        console.log(`Initializing search store with id: ${searchId}`);
-        patchState(store, {
-          id: searchId,
-          aggregationsConfig,
-          pageSize: size,
-          routing,
-        });
+      return {
+        init(
+          searchId: string,
+          aggregationsConfig: (
+            | string
+            | Record<string, elasticsearch.AggregationsAggregationContainer>
+          )[],
+          size: number,
+          routing: boolean = false,
+        ) {
+          console.log(`Initializing search store with id: ${searchId}`);
+          patchState(store, {
+            id: searchId,
+            aggregationsConfig,
+            pageSize: size,
+            routing,
+          });
 
-        store.results$.subscribe(() => {
-          if ((store.results().length) > 0) {
-            this.setRouting();
+          store.results$.subscribe(() => {
+            if (store.results().length > 0) {
+              this.setRouting();
+            }
+          });
+
+          if (store.routing()) {
+            this.subscribeToRouteChange();
           }
-        });
+        },
 
-        if (store.routing()) {
-          this.subscribeToRouteChange();
-        }
-      },
+        search: rxMethod<SearchFilterParameters>(
+          pipe(
+            debounceTime(300),
+            distinctUntilChanged(),
+            tap(() => patchState(store, { isLoading: true })),
+            switchMap((searchFilterParameters) => {
+              patchState(store, {
+                currentPage: 0,
+                pageSize: DEFAULT_PAGE_SIZE,
+                results: [],
+              });
 
-      search: rxMethod<SearchFilterParameters>(
-        pipe(
-          debounceTime(300),
-          distinctUntilChanged(),
-          tap(() => patchState(store, { isLoading: true })),
-          switchMap((searchFilterParameters) => {
-            patchState(store, {
-              currentPage: 0,
-              pageSize: DEFAULT_PAGE_SIZE,
-              results: [],
-            });
-
-            return searchService
-              .getByQuery(
-                searchFilterParameters.searchQuery,
-                0,
-                DEFAULT_PAGE_SIZE,
-                searchFilterParameters.filters,
-              )
-              .pipe(
-                tapResponse({
-                  next: (response) =>
-                    patchState(store, {
-                      results: response.results,
-                      aggregations: response.aggregations || {},
-                      totalCount: response.totalCount,
-                    }),
-                  error: console.error,
-                  finalize: () => patchState(store, { isLoading: false }),
-                }),
-              );
-          }),
+              return searchService
+                .getByQuery(
+                  searchFilterParameters.searchQuery,
+                  0,
+                  DEFAULT_PAGE_SIZE,
+                  searchFilterParameters.filters,
+                )
+                .pipe(
+                  tapResponse({
+                    next: (response) =>
+                      patchState(store, {
+                        results: response.results,
+                        aggregations: response.aggregations || {},
+                        totalCount: response.totalCount,
+                      }),
+                    error: console.error,
+                    finalize: () => patchState(store, { isLoading: false }),
+                  }),
+                );
+            }),
+          ),
         ),
-      ),
 
-      paging: rxMethod<SearchRequestPageParameters>(
-        pipe(
-          distinctUntilChanged(),
-          tap(() => patchState(store, { isLoading: true })),
-          switchMap((searchResquestPageParameters) => {
-            patchState(store, {
-              currentPage: searchResquestPageParameters.currentPage,
-              pageSize: searchResquestPageParameters.pageSize,
-            });
+        paging: rxMethod<SearchRequestPageParameters>(
+          pipe(
+            distinctUntilChanged(),
+            tap(() => patchState(store, { isLoading: true })),
+            switchMap((searchResquestPageParameters) => {
+              patchState(store, {
+                currentPage: searchResquestPageParameters.currentPage,
+                pageSize: searchResquestPageParameters.pageSize,
+              });
 
-            return searchService
-              .getByQuery(
-                store.searchQuery(),
-                store.currentPage(),
-                store.pageSize(),
-                store.filters(),
-              )
-              .pipe(
-                tapResponse({
-                  next: (response) =>
-                    patchState(store, {
-                      results: response.results,
-                      aggregations: response.aggregations || {},
-                      totalCount: response.totalCount,
-                    }),
-                  error: console.error,
-                  finalize: () => patchState(store, { isLoading: false }),
-                }),
-              );
-          }),
+              return searchService
+                .getByQuery(
+                  store.searchQuery(),
+                  store.currentPage(),
+                  store.pageSize(),
+                  store.filters(),
+                )
+                .pipe(
+                  tapResponse({
+                    next: (response) =>
+                      patchState(store, {
+                        results: response.results,
+                        aggregations: response.aggregations || {},
+                        totalCount: response.totalCount,
+                      }),
+                    error: console.error,
+                    finalize: () => patchState(store, { isLoading: false }),
+                  }),
+                );
+            }),
+          ),
         ),
-      ),
-      setFullTextQuery(value: string) {
-        patchState(store, { searchQuery: value });
-      },
-      isFilterActive(field: string, value: string | number) {
-        const filter = store.filters()[field];
-        return filter?.values.includes(value);
-      },
-      addFilter(field: string, value: string | number): void {
-        const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
-        let targetFilter = currentFilters[field];
+        setFullTextQuery(value: string) {
+          patchState(store, { searchQuery: value });
+        },
+        isFilterActive(field: string, value: string | number) {
+          const filter = store.filters()[field];
+          return filter?.values.includes(value);
+        },
+        addFilter(field: string, value: string | number): void {
+          const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
+          let targetFilter = currentFilters[field];
 
-        if (targetFilter) {
-          targetFilter.values.push(value);
-        } else {
-          currentFilters[field] = { field: field, values: [value] };
-        }
-
-        patchState(store, {
-          currentPage: 0,
-          filters: currentFilters,
-        });
-      },
-      removeFilter(field: string, value: string | number): void {
-        const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
-        let targetFilter = currentFilters[field];
-
-        if (targetFilter) {
-          let currentValues = targetFilter.values;
-          let clickedFilterIndex = currentValues.indexOf(value);
-
-          if (clickedFilterIndex > -1) {
-            currentValues.splice(clickedFilterIndex, 1);
-          }
-
-          // No more values for this filter
-          if (currentValues.length === 0) {
-            delete currentFilters[field];
+          if (targetFilter) {
+            targetFilter.values.push(value);
+          } else {
+            currentFilters[field] = { field: field, values: [value] };
           }
 
           patchState(store, {
             currentPage: 0,
             filters: currentFilters,
           });
-        }
-      },
-      reset() {
-        patchState(store, {
-          searchQuery: '',
-          filters: {},
-        });
-      },
-      more(pageSize: number) {
-        patchState(store, { currentPage: store.currentPage() + store.pageSize() });
-      },
-      setPage(currentPage: number, pageSize: number) {
-        let results = JSON.parse(JSON.stringify(store.results()));
-        if (results) {
-          results = [];
-        }
-        patchState(store, { currentPage, pageSize, results });
-      },
-      next() {
-        patchState(store, { currentPage: store.currentPage() + store.pageSize() });
-      },
-      previous() {
-        patchState(store, { currentPage: store.currentPage() - store.pageSize() });
-      },
-      setRouting() {
-        if (!store.routing()) {
-          return;
-        }
-        searchRouteService.setRoute(
-          {
-            currentPage: store.currentPage() || 0,
-            pageSize: store.pageSize(),
-            sort: store.sort(),
-            searchQuery: store.searchQuery(),
-            filter: store.filter(),
-            filters: store.filters(),
-          } as SearchRequestParameters,
-          store.pageSize()
-        );
-      },
-      subscribeToRouteChange() {
-        if (!store.routing()) {
-          return;
-        }
+        },
+        removeFilter(field: string, value: string | number): void {
+          const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
+          let targetFilter = currentFilters[field];
 
-        store.activeRoute.queryParams.subscribe(params => {
-          patchState(
-            store,
-            searchRouteService.convertRouteParamsToSearch(
-              params,
-              store.pageSize()
-            )
+          if (targetFilter) {
+            let currentValues = targetFilter.values;
+            let clickedFilterIndex = currentValues.indexOf(value);
+
+            if (clickedFilterIndex > -1) {
+              currentValues.splice(clickedFilterIndex, 1);
+            }
+
+            // No more values for this filter
+            if (currentValues.length === 0) {
+              delete currentFilters[field];
+            }
+
+            patchState(store, {
+              currentPage: 0,
+              filters: currentFilters,
+            });
+          }
+        },
+        reset() {
+          patchState(store, {
+            searchQuery: '',
+            filters: {},
+          });
+        },
+        more(pageSize: number) {
+          patchState(store, { currentPage: store.currentPage() + store.pageSize() });
+        },
+        setPage(currentPage: number, pageSize: number) {
+          let results = JSON.parse(JSON.stringify(store.results()));
+          if (results) {
+            results = [];
+          }
+          patchState(store, { currentPage, pageSize, results });
+        },
+        next() {
+          patchState(store, { currentPage: store.currentPage() + store.pageSize() });
+        },
+        previous() {
+          patchState(store, { currentPage: store.currentPage() - store.pageSize() });
+        },
+        setRouting() {
+          if (!store.routing()) {
+            return;
+          }
+          searchRouteService.setRoute(
+            {
+              currentPage: store.currentPage() || 0,
+              pageSize: store.pageSize(),
+              sort: store.sort(),
+              searchQuery: store.searchQuery(),
+              filter: store.filter(),
+              filters: store.filters(),
+            } as SearchRequestParameters,
+            store.pageSize(),
           );
-        });
-      },
-    };
-  }),
+        },
+        subscribeToRouteChange() {
+          if (!store.routing()) {
+            return;
+          }
+
+          store.activeRoute.queryParams.subscribe((params) => {
+            patchState(
+              store,
+              searchRouteService.convertRouteParamsToSearch(params, store.pageSize()),
+            );
+          });
+        },
+      };
+    },
+  ),
   withHooks({
     onInit({ search, searchFilterParameters, paging, searchRequestPageParameters }) {
       search(searchFilterParameters);
