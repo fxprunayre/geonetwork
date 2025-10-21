@@ -3,9 +3,14 @@
     <p-accordion-panel [value]="key">
       <p-accordion-header>{{ key | translate }}</p-accordion-header>
       <p-accordion-content>
-        @for (bucket of getBuckets(key); track bucket.key) {
-          <app-aggregation-component [keyName]="key" [bucket]="bucket"></app-aggregation-component>
-        }
+        <div class="max-h-80 overflow-y-auto overflow-x-hidden">
+          @for (bucket of getBuckets(key); track bucket.key) {
+            <app-aggregation-component
+              [keyName]="key"
+              [bucket]="bucket"
+            ></app-aggregation-component>
+          }
+        </div>
       </p-accordion-content>
     </p-accordion-panel>
   }
