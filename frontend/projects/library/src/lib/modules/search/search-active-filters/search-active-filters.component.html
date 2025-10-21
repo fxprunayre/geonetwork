@@ -1,7 +1,17 @@
 @if (hasActiveFilters()) {
   <p>Active filters</p>
 
-  <pre>{{ search.filters() | json }}</pre>
+  @for (filter of Object.entries(search.filters()); track filter[0]) {
+    @for (val of filter[1].values; track String(val)) {
+      <p-button
+        (onClick)="search.removeFilter(filter[0], val)"
+        [label]="(filter[0] | translate) + ': ' + getBucketLabel(filter[0], val)"
+        variant="outlined"
+        class="me-2"
+        severity="secondary"
+      ></p-button>
+    }
+  }
 
   <p-button (onClick)="search.reset()">
     <ng-icon name="faSolidXmark" pButtonIcon />
