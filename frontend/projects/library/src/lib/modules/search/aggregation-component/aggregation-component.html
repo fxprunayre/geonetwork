@@ -1,12 +1,42 @@
-<div class="flex items-center mb-4">
-  <p-checkbox
-    [binary]="true"
-    [value]="isActive()"
-    [inputId]="keyName + '_' + bucket.key"
-    [(ngModel)]="checked"
-    (ngModelChange)="setSelected(keyName, bucket.key, $event)"
-  ></p-checkbox>
-  <label class="ml-2" [for]="keyName + '_' + bucket.key">
-    {{ bucket.key | aggregationTranslate: keyName }} ({{ bucket.doc_count }})
-  </label>
-</div>
+@switch (displayType) {
+  @case ('checkbox') {
+    @for (bucket of buckets; track bucket.key) {
+      <div class="flex items-center mb-2">
+        <p-checkbox
+          [binary]="true"
+          [inputId]="keyName + '_' + bucket.key"
+          [ngModel]="isChecked(bucket.key)"
+          (ngModelChange)="onCheckboxChange(bucket.key, $event)"
+        ></p-checkbox>
+        <label class="ml-2" [for]="keyName + '_' + bucket.key">
+          {{ bucket.key | aggregationTranslate: keyName }} ({{ bucket.doc_count }})
+        </label>
+      </div>
+    }
+  }
+
+  @case ('dropdown') {
+    <p-select
+      [options]="dropdownOptions"
+      [ngModel]="selectedValue"
+      (ngModelChange)="onDropdownChange($event)"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Select"
+    />
+  }
+
+  @case ('buttons') {
+    <div class="flex flex-wrap gap-2 mb-4">
+      @for (bucket of buckets; track bucket.key) {
+        <button
+          pButton
+          [label]="bucket.key + ' (' + bucket.doc_count + ')'"
+          [outlined]="selectedValue !== bucket.key"
+          [severity]="selectedValue === bucket.key ? 'primary' : undefined"
+          (click)="onButtonClick(bucket.key)"
+        ></button>
+      }
+    </div>
+  }
+}
