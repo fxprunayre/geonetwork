@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class AggregationComponent extends SearchBase {
   @Input() keyName!: string;
+  @Input() bucket: any;
   @Input() buckets: { key: string; doc_count: number }[] = [];
   @Input() displayType: 'checkbox' | 'dropdown' | 'buttons' = 'checkbox';
 
