@@ -5,11 +5,12 @@ import { ButtonModule } from 'primeng/button';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { SearchBase } from '../search-base/search-base';
 import { FormsModule } from '@angular/forms';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-aggregation-component',
   standalone: true,
-  imports: [Checkbox, Select, ButtonModule, AggregationTranslatePipe, FormsModule],
+  imports: [Checkbox, Select, ButtonModule, AggregationTranslatePipe, FormsModule, TranslatePipe],
   templateUrl: './aggregation-component.html',
   styleUrl: './aggregation-component.scss',
 })
@@ -20,6 +21,7 @@ export class AggregationComponent extends SearchBase {
   @Input() displayType: 'checkbox' | 'dropdown' | 'buttons' = 'checkbox';
 
   selectedValue: string | null = null;
+  active: string | null = 'all';
 
   get dropdownOptions() {
     return this.buckets.map((bucket) => ({
@@ -46,12 +48,17 @@ export class AggregationComponent extends SearchBase {
   }
 
   onButtonClick(bucketKey: string) {
-    if (this.selectedValue === bucketKey) return; // avoid redundant call
+    if (this.selectedValue === bucketKey) return;
     this.buckets.forEach((bucket) => {
       const isSelected = bucket.key === bucketKey;
       this.setSelected(this.keyName, bucket.key, isSelected);
     });
     this.selectedValue = bucketKey;
+    this.setActive(bucketKey);
+  }
+
+  setActive(name: string): void {
+    this.active = this.active === name ? null : name;
   }
 
   setSelected(groupKey: string, bucketKey: string, value: boolean) {
