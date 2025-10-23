@@ -3,16 +3,15 @@
     <div class="flex items-center gap-3 flex-start flex-wrap">
       <span class="font-semibold text-primary me-4 text-base">{{ totalCount }} results:</span>
 
-      @for (bucket of getFilterBuckets; track $index) {
-        <p-button
-          [label]="(bucket.key | translate) + ' (' + bucket.doc_count + ')'"
-          variant="outlined"
-          severity="secondary"
-          (onClick)="setActive(bucket.key)"
-          [styleClass]="active === bucket.key ? 'active' : ''"
-          [attr.aria-pressed]="active === bucket.key"
-          size="small"
-        ></p-button>
+      @if (getFilterData) {
+        @for (bucket of getFilterData.buckets; track bucket.key) {
+          <app-aggregation-component
+            [keyName]="getFilterData.key"
+            [bucket]="bucket"
+            [displayType]="'buttons'"
+            (tabSelected)="onTabSelected($event)"
+          ></app-aggregation-component>
+        }
       }
     </div>
   </div>

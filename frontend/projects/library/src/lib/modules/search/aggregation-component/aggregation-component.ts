@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Checkbox } from 'primeng/checkbox';
 import { Select } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { SearchBase } from '../search-base/search-base';
 import { FormsModule } from '@angular/forms';
-import {TranslatePipe} from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-aggregation-component',
@@ -19,6 +19,8 @@ export class AggregationComponent extends SearchBase {
   @Input() bucket: any;
   @Input() buckets: { key: string; doc_count: number }[] = [];
   @Input() displayType: 'checkbox' | 'dropdown' | 'buttons' = 'checkbox';
+
+  @Output() tabSelected = new EventEmitter<string>();
 
   selectedValue: string | null = null;
   active: string | null = 'all';
@@ -55,6 +57,7 @@ export class AggregationComponent extends SearchBase {
     });
     this.selectedValue = bucketKey;
     this.setActive(bucketKey);
+    this.tabSelected.emit(bucketKey);
   }
 
   setActive(name: string): void {
