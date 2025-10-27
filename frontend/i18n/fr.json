@@ -20,5 +20,9 @@
   "tag.default": "Mots-clés",
   "creationYearForResource": "Années de création",
   "OrgForResource": "Organisation",
-  "resourceType": "Type de ressource"
+  "resourceType": "Type de ressource",
+  "activeFilters": "Filtres actifs",
+  "resetFilters": "Réinitialiser les filtres",
+  "result": "résultat",
+  "results": "résultats"
 }

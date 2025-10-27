@@ -1,5 +1,5 @@
 @if (hasActiveFilters()) {
-  <p>Active filters</p>
+  <p>{{ 'activeFilters' | translate }}</p>
 
   @for (filter of Object.entries(search.filters()); track filter[0]) {
     @for (val of filter[1].values; track String(val)) {
@@ -12,9 +12,9 @@
       ></p-button>
     }
   }
-
-  <p-button (onClick)="search.reset()">
-    <ng-icon name="faSolidXmark" pButtonIcon />
-    <span pButtonLabel>Reset filters</span>
+  <p-button (onClick)="search.reset()" class="ms-2" severity="primary">
+    <ng-icon name="faSolidXmark"></ng-icon>
+    {{ 'resetFilters' | translate }}
   </p-button>
+
 }

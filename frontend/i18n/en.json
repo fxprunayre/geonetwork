@@ -20,5 +20,9 @@
   "tag.default": "Keywords",
   "creationYearForResource": "Creation year",
   "OrgForResource": "Organisation",
-  "resourceType": "Resource type"
+  "resourceType": "Resource type",
+  "activeFilters": "Active filters",
+  "resetFilters": "Reset filters",
+  "result": "result",
+  "results": "results"
 }

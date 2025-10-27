@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ResultItemList } from '../result-item-list/result-item-list';
 import { ResultItemGrid } from '../result-item-grid/result-item-grid';
 import { ResultHeader } from '../result-header/result-header';

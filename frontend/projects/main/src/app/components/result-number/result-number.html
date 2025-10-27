@@ -1,1 +1,3 @@
-{{ totalCount }} results:
+@if (search.totalCount() > 0) {
+  {{ search.totalCount() }} {{ getResultTranslationKey() | translate }}:
+}

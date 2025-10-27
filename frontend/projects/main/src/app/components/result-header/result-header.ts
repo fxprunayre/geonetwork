@@ -3,7 +3,7 @@ import { ResultNumber } from '../result-number/result-number';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { APPLICATION_CONFIGURATION, SearchStore, Aggregation } from 'gn-library';
+import { APPLICATION_CONFIGURATION, Aggregation } from 'gn-library';
 
 @Component({
   selector: 'app-result-header',
@@ -13,7 +13,6 @@ import { APPLICATION_CONFIGURATION, SearchStore, Aggregation } from 'gn-library'
   styleUrl: './result-header.scss',
 })
 export class ResultHeader {
-  @Input() totalCount: number = 0;
   @Input() currentCount: number = 0;
   @Input() layout: 'list' | 'grid' = 'list';
   @Output() layoutChange = new EventEmitter<'list' | 'grid'>();
