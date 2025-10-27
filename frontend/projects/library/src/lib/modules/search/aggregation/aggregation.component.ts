@@ -1,30 +1,45 @@
 import { Component, computed, EventEmitter, inject, input, Output } from '@angular/core';
-import { Select } from 'primeng/select';
+import { Select, SelectChangeEvent } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
-import { SelectChangeEvent } from 'primeng/select';
 import { SearchBase } from '../search-base/search-base';
 import { FormsModule } from '@angular/forms';
 import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationLayout } from 'gn-api-client';
 import { TranslateService } from '@ngx-translate/core';
+import { SearchFilter, SearchFilterChange } from '../search.store.model';
+import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-aggregation',
   standalone: true,
-  imports: [Select, ButtonModule, FormsModule, AggregationBucket, AggregationTranslatePipe],
+  imports: [
+    Select,
+    ButtonModule,
+    FormsModule,
+    AggregationBucket,
+    AggregationTranslatePipe,
+    MultiSelect,
+  ],
   templateUrl: './aggregation.component.html',
 })
 export class Aggregation extends SearchBase {
   keyName = input.required<string>();
   displayType = input<AggregationLayout | undefined>();
-  // TODO
-  @Output() tabSelected = new EventEmitter<string>();
+
+  @Output()
+  onSelected = new EventEmitter<SearchFilterChange>();
+
+  DISPLAY_FILTER_THRESHOLD = 10;
 
   translateService = inject(TranslateService);
 
+  displayFilter = computed(() => {
+    return this.buckets().length > this.DISPLAY_FILTER_THRESHOLD;
+  });
+
   buckets = computed(() => {
-    let buckets = this.search.aggregations()[this.keyName()].buckets;
+    let buckets = this.search.aggregations()[this.keyName()]?.buckets || [];
     if (Array.isArray(buckets)) {
       return buckets as { key: string | number; doc_count: number }[];
     }
@@ -42,10 +57,52 @@ export class Aggregation extends SearchBase {
   });
 
   handleChange(event: SelectChangeEvent) {
-    if (event.value === null) {
+    this.filter({
+      field: this.keyName(),
+      values: event.value === null ? [] : [event.value.key],
+      add: true,
+    });
+  }
+
+  handleMultiSelectChange(event: MultiSelectChangeEvent) {
+    const isSelected =
+      event.itemValue &&
+      event.value.find((item: any) => {
+        return item.key === event.itemValue.key;
+      }) !== undefined;
+
+    const values = [];
+    if (event.itemValue) {
+      values.push(event.itemValue.key);
+    } else if (event.value.length > 0) {
+      event.value.forEach((item: any) => {
+        values.push(item.key);
+      });
+    }
+
+    this.filter({
+      field: this.keyName(),
+      values: values,
+      add: isSelected,
+    });
+  }
+
+  handleMultiSelectClear() {
+    this.search.clearFilter(this.keyName());
+  }
+
+  filter(event: SearchFilterChange) {
+    if (this.onSelected.observed) {
+      this.onSelected.emit(event);
+      return;
+    }
+
+    if (event.values.length === 0) {
       this.search.clearFilter(this.keyName());
-    } else {
-      this.search.addFilter(this.keyName(), event.value.key);
+    } else if (event.add) {
+      this.search.addFilter(this.keyName(), event.values[0]);
+    } else if (!event.add) {
+      this.search.removeFilter(this.keyName(), event.values[0]);
     }
   }
 }

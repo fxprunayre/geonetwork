@@ -93,7 +93,7 @@ export const SearchStore = signalStore(
           routing: boolean = false,
           filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
         ) {
-          console.log(`Initializing search store with id: ${searchId}`);
+          console.log(`Initializing search store with id: ${searchId}`, aggregationsConfig);
           patchState(store, {
             id: searchId,
             aggregationsConfig,

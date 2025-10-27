@@ -1,5 +1,5 @@
 <section
-  class="relative h-[480px] flex flex-col justify-center items-center bg-cover bg-center"
+  class="relative flex flex-col justify-center items-center bg-cover bg-center"
   [style.background-image]="'url(' + bgFirst + ')'"
 >
   <div class="absolute inset-0 bg-primary/80"></div>
@@ -11,9 +11,19 @@
     <p class="text-white text-[22px] mb-[35px] w-full md:w-[500px]">
       Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.
     </p>
+
     <app-search-input (onSearch)="setRouteToSearch()" [searchOnInput]="false"></app-search-input>
+
     <div appSearchContext="home" [aggregations]="['resourceType']">
       <app-search-welcome-text scope="home"></app-search-welcome-text>
+
+      <app-aggregation
+        scope="home"
+        keyName="resourceType"
+        displayType="card"
+        class="my-12 grid grid-cols-4 gap-6"
+        (onSelected)="setRouteForAggregation($event)"
+      ></app-aggregation>
     </div>
   </div>
 </section>

@@ -10,6 +10,10 @@ export class SearchRouteService {
   router = inject(Router);
   location = inject(Location);
 
+  buildFilterQueryParams(filter: SearchFilter): string {
+    return `"${filter.values.join('" OR "')}"`;
+  }
+
   setRoute(store: SearchRequestParameters, pageSize: number) {
     let urlParams = [];
     if (store.searchQuery) {
@@ -19,7 +23,7 @@ export class SearchRouteService {
       urlParams = urlParams.concat(
         Object.entries(store.filters)
           .filter(([field, filter]) => filter.values.length > 0)
-          .map(([field, filter]) => `${field}="${filter.values.join('" OR "')}"`),
+          .map(([field, filter]) => `${field}=${this.buildFilterQueryParams(filter)}`),
       );
     }
     if (store.currentPage !== 0) {
@@ -51,9 +55,5 @@ export class SearchRouteService {
       searchQuery: params['q'] || '',
       filters: filter,
     };
-  }
-
-  buildFilterQueryParams(filter: SearchFilter) {
-    return { [filter.field]: `"${Object.keys(filter.values).join('" OR "')}"` };
   }
 }

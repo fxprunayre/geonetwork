@@ -11,6 +11,7 @@ export * from './lib/modules/i18n/language-switcher/language-switcher';
 export * from './lib/modules/search/search.store.model';
 export * from './lib/modules/search/search.store';
 export * from './lib/modules/search/search.service';
+export * from './lib/modules/search/search-route.service';
 export * from './lib/modules/search/search-context.directive';
 export * from './lib/modules/search/search-base/search-base';
 export * from './lib/modules/search/search-input/search-input.component';

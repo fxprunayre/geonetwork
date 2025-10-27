@@ -21,7 +21,7 @@ export class AggregationService {
   ) {
     if (typeof config === 'string') {
       return {
-        config: {
+        [config]: {
           terms: {
             field: config,
             size: DEFAULT_AGGREGATION_SIZE,

@@ -10,6 +10,12 @@ export type SearchFilter = {
   values: (string | number)[];
 };
 
+export type SearchFilterChange = {
+  field: string;
+  values: (string | number)[];
+  add: boolean;
+};
+
 export type SearchState = {
   id: string;
   routing: boolean;
