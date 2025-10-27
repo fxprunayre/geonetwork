@@ -2,14 +2,39 @@
   @case ('checkbox') {
     @for (bucket of buckets(); track bucket.key) {
       <div class="flex items-center mb-2">
-        <app-aggregation-bucket [keyName]="keyName()" [bucket]="bucket" [displayType]="layout()" />
+        <app-aggregation-bucket
+          [scope]="scope()"
+          [keyName]="keyName()"
+          [bucket]="bucket"
+          [displayType]="layout()"
+          (onSelected)="filter($event)"
+        />
       </div>
     }
   }
-  @case ('buttons') {
+  @case ('button') {
     @for (bucket of buckets(); track bucket.key) {
       <div class="flex items-center mb-2">
-        <app-aggregation-bucket [keyName]="keyName()" [bucket]="bucket" [displayType]="layout()" />
+        <app-aggregation-bucket
+          [scope]="scope()"
+          [keyName]="keyName()"
+          [bucket]="bucket"
+          [displayType]="layout()"
+          (onSelected)="filter($event)"
+        />
+      </div>
+    }
+  }
+  @case ('card') {
+    @for (bucket of buckets(); track bucket.key) {
+      <div class="w-full cursor-pointer">
+        <app-aggregation-bucket
+          [scope]="scope()"
+          [keyName]="keyName()"
+          [bucket]="bucket"
+          [displayType]="layout()"
+          (onSelected)="filter($event)"
+        />
       </div>
     }
   }

@@ -1,14 +1,25 @@
-import { Component, computed, inject, input, model, output } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  inject,
+  input,
+  model,
+  Output,
+  output,
+} from '@angular/core';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { Checkbox } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Button } from 'primeng/button';
 import { SearchBase } from '../search-base/search-base';
 import { AggregationLayout } from 'gn-api-client';
+import { Card } from 'primeng/card';
+import { SearchFilter, SearchFilterChange } from '../search.store.model';
 
 @Component({
   selector: 'app-aggregation-bucket',
-  imports: [Checkbox, FormsModule, Button],
+  imports: [Checkbox, FormsModule, Button, Card, AggregationTranslatePipe],
   templateUrl: './aggregation-bucket.html',
   providers: [AggregationTranslatePipe],
   standalone: true,
@@ -18,6 +29,9 @@ export class AggregationBucket extends SearchBase {
   bucket = input.required<{ key: string | number; doc_count: number }>();
   displayType = input<AggregationLayout | undefined>();
   selectedValue = model();
+
+  @Output()
+  onSelected = new EventEmitter<SearchFilterChange>();
 
   aggregationTranslate = inject(AggregationTranslatePipe);
 
@@ -38,10 +52,10 @@ export class AggregationBucket extends SearchBase {
   tabSelected = output<string>();
 
   handleChange(bucketValue: string | number, value: boolean) {
-    if (value && !this.isActive()) {
-      this.search.addFilter(this.keyName(), bucketValue);
-    } else if (!value && this.isActive()) {
-      this.search.removeFilter(this.keyName(), bucketValue);
-    }
+    this.onSelected.emit({
+      field: this.keyName(),
+      values: [bucketValue],
+      add: !this.isActive(),
+    });
   }
 }

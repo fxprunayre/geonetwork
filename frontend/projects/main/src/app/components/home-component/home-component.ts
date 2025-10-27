@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { SearchInput, SearchContextDirective, SearchService } from 'gn-library';
+import {
+  Aggregation,
+  SearchContextDirective,
+  SearchFilter,
+  SearchInput,
+  SearchService,
+  SearchRouteService,
+} from 'gn-library';
 import { SearchWelcomeText } from '../search-welcome-text/search-welcome-text';
 import { ButtonDirective, ButtonLabel } from 'primeng/button';
 import { Router } from '@angular/router';
@@ -7,12 +14,20 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SearchInput, SearchContextDirective, SearchWelcomeText, ButtonLabel, ButtonDirective],
+  imports: [
+    SearchInput,
+    SearchContextDirective,
+    SearchWelcomeText,
+    ButtonLabel,
+    ButtonDirective,
+    Aggregation,
+  ],
   templateUrl: './home-component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
   router = inject(Router);
+  searchRouteService = inject(SearchRouteService);
 
   currentQuery = '';
   parentIsHomepage = true;
@@ -23,5 +38,13 @@ export class HomeComponent {
 
   setRouteToSearch() {
     this.router.navigate(['/search']);
+  }
+
+  setRouteForAggregation(filter: SearchFilter) {
+    this.router.navigate(['/search'], {
+      queryParams: {
+        [filter.field]: this.searchRouteService.buildFilterQueryParams(filter),
+      },
+    });
   }
 }
