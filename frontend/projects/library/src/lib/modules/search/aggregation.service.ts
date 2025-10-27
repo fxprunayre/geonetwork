@@ -100,22 +100,30 @@ export class AggregationService {
 
         // TODO: OpenApi is not using inBody, so passing large number of ids may hit URL length limits.
         // TODO: Modify OpenApi spec to use POST with body for this endpoint.
-        this.registriesService
-          .getKeywordByIds(Array.from(bucketKeySet).join(','), thesaurus, [currentLang])
-          .subscribe((keywords) => {
-            const newTranslations: Record<string, string> = {};
-            Object.entries(keywords).forEach(
-              ([key, value]: [string, { label?: string; definition?: string }]) => {
-                newTranslations[key] = value.label || key;
-                if (value.definition) {
-                  newTranslations[`${key}-definition`] = value.definition;
-                }
-                this.alreadyLoadedTranslations.add(`${currentLang}-${key}`);
-              },
-            );
+        // Loop on batches of 50 ids
+        const idsArray = Array.from(bucketKeySet);
+        const BATCH_SIZE = 60;
 
-            this.translateService.setTranslation(currentLang, newTranslations, true);
-          });
+        for (let i = 0; i < idsArray.length; i += BATCH_SIZE) {
+          const batch = idsArray.slice(i, i + BATCH_SIZE);
+          // Call service per batch; type the response to avoid implicit any
+          this.registriesService
+            .getKeywordByIds(Array.from(batch).join(','), thesaurus, [currentLang])
+            .subscribe((keywords) => {
+              const newTranslations: Record<string, string> = {};
+              Object.entries(keywords).forEach(
+                ([key, value]: [string, { label?: string; definition?: string }]) => {
+                  newTranslations[key] = value.label || key;
+                  if (value.definition) {
+                    newTranslations[`${key}-definition`] = value.definition;
+                  }
+                  this.alreadyLoadedTranslations.add(`${currentLang}-${key}`);
+                },
+              );
+
+              this.translateService.setTranslation(currentLang, newTranslations, true);
+            });
+        }
       }
     }
   }
