@@ -1,9 +1,20 @@
+<ng-template #defaultLabelTemplate let-key>
+  {{ key | translate }}
+  @if (hasActiveFilter(key)) {
+    *
+  }
+</ng-template>
+
 @switch (panelType()) {
   @case ('none') {
     @for (key of aggregationKeys(); track $index) {
       @if (hasBuckets(key)) {
         <div class="grid grid-cols-1 gap-4 mb-12">
-          <label class="w-full">{{ key | translate }}</label>
+          <label class="w-full">
+            <ng-container
+              *ngTemplateOutlet="labelTemplate || defaultLabelTemplate; context: { $implicit: key }"
+            ></ng-container>
+          </label>
           <app-aggregation [scope]="scope()" [keyName]="key"></app-aggregation>
         </div>
       }
@@ -14,7 +25,14 @@
       @for (key of aggregationKeys(); track $index) {
         @if (hasBuckets(key)) {
           <p-accordion-panel [value]="key">
-            <p-accordion-header>{{ key | translate }}</p-accordion-header>
+            <p-accordion-header>
+              <ng-container
+                *ngTemplateOutlet="
+                  labelTemplate || defaultLabelTemplate;
+                  context: { $implicit: key }
+                "
+              ></ng-container>
+            </p-accordion-header>
             <p-accordion-content class="max-h-80 overflow-y-auto overflow-x-hidden">
               <app-aggregation [scope]="scope()" [keyName]="key"></app-aggregation>
             </p-accordion-content>

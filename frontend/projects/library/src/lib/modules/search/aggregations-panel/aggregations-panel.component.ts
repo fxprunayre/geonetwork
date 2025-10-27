@@ -1,10 +1,19 @@
-import { Component, computed, inject, effect, Input, input } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  effect,
+  input,
+  ContentChild,
+  TemplateRef,
+} from '@angular/core';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Aggregation } from '.././aggregation/aggregation.component';
 import { SearchBase } from '../search-base/search-base';
 import { elasticsearch } from 'gn-api-client';
 import { AggregationService } from '../aggregation.service';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-aggregations-panel',
@@ -15,10 +24,13 @@ import { AggregationService } from '../aggregation.service';
     TranslatePipe,
     Aggregation,
     Accordion,
+    NgTemplateOutlet,
   ],
   templateUrl: './aggregations-panel.component.html',
 })
 export class AggregationsPanel extends SearchBase {
+  @ContentChild('labelTemplate') labelTemplate: TemplateRef<any> | undefined;
+
   aggregationService = inject(AggregationService);
   panelType = input<'accordion' | 'none'>('accordion');
   position = input<'left' | 'top'>('left');
@@ -49,5 +61,17 @@ export class AggregationsPanel extends SearchBase {
   hasBuckets = (key: string) => {
     const agg = this.aggregations[key];
     return agg && Array.isArray(agg.buckets) && agg.buckets.length > 0;
+  };
+
+  hasActiveFilter = (keyName: string) => {
+    let buckets = this.search.aggregations()[keyName]?.buckets || [];
+    if (Array.isArray(buckets)) {
+      for (const bucket of buckets) {
+        if (this.search.isFilterActive(keyName, bucket.key)) {
+          return true;
+        }
+      }
+    }
+    return false;
   };
 }
