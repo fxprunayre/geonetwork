@@ -7,13 +7,12 @@ import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 
 @Component({
-  selector: 'app-aggregation-component',
+  selector: 'app-aggregation',
   standalone: true,
   imports: [Select, ButtonModule, FormsModule, AggregationBucket, AggregationTranslatePipe],
-  templateUrl: './aggregation-component.html',
-  styleUrl: './aggregation-component.scss',
+  templateUrl: './aggregation.component.html',
 })
-export class AggregationComponent extends SearchBase {
+export class Aggregation extends SearchBase {
   @Input() keyName!: string;
   @Input() buckets: { key: string | number; doc_count: number }[] = [];
   @Input() displayType: 'checkbox' | 'dropdown' | 'buttons' = 'checkbox';

@@ -1,25 +1,24 @@
 import { Component, computed, inject, effect, Input, input } from '@angular/core';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
 import { TranslatePipe } from '@ngx-translate/core';
-import { AggregationComponent } from '../aggregation-component/aggregation-component';
+import { Aggregation } from '.././aggregation/aggregation.component';
 import { SearchBase } from '../search-base/search-base';
 import { elasticsearch } from 'gn-api-client';
 import { AggregationService } from '../aggregation.service';
 
 @Component({
-  selector: 'app-aggregations-component',
+  selector: 'app-aggregations-panel',
   imports: [
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
     TranslatePipe,
-    AggregationComponent,
+    Aggregation,
     Accordion,
   ],
-  templateUrl: './aggregations-component.html',
-  styleUrl: './aggregations-component.scss',
+  templateUrl: './aggregations-panel.component.html',
 })
-export class AggregationsComponent extends SearchBase {
+export class AggregationsPanel extends SearchBase {
   aggregationService = inject(AggregationService);
   panelType = input<'accordion' | 'none'>('accordion');
   position = input<'left' | 'top'>('left');

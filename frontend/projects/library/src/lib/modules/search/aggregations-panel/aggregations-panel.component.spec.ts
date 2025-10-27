@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AggregationComponent } from './aggregation-component';
+import { AggregationsPanel } from './aggregations-panel.component';
 
-describe('AggregationComponent', () => {
-  let component: AggregationComponent;
-  let fixture: ComponentFixture<AggregationComponent>;
+describe('AggregationsComponent', () => {
+  let component: AggregationsPanel;
+  let fixture: ComponentFixture<AggregationsPanel>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AggregationComponent],
+      imports: [AggregationsPanel],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AggregationComponent);
+    fixture = TestBed.createComponent(AggregationsPanel);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

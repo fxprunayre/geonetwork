@@ -10,7 +10,6 @@ import { SearchBase } from '../search-base/search-base';
   selector: 'app-aggregation-bucket',
   imports: [TranslatePipe, AggregationTranslatePipe, Checkbox, FormsModule, Button],
   templateUrl: './aggregation-bucket.html',
-  styleUrl: './aggregation-bucket.scss',
 })
 export class AggregationBucket extends SearchBase {
   @Input() keyName!: string;

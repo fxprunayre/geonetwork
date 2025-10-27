@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AggregationsComponent, SearchActiveFilters } from 'gn-library';
+import { Component } from '@angular/core';
+import { AggregationsPanel, SearchActiveFilters } from 'gn-library';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -8,12 +8,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './side-panel.html',
   styleUrl: './side-panel.scss',
   standalone: true,
-  imports: [
-    FormsModule,
-    CommonModule,
-    AggregationsComponent,
-    AggregationsComponent,
-    SearchActiveFilters,
-  ],
+  imports: [FormsModule, CommonModule, AggregationsPanel, SearchActiveFilters],
 })
 export class SidePanel {}

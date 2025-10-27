@@ -2,11 +2,11 @@
   @case ('none') {
     @for (key of aggregationKeys(); track $index) {
       <div class="flex">
-        <app-aggregation-component
+        <app-aggregation
           [keyName]="key"
           [buckets]="getBuckets(key)"
           [displayType]="'dropdown'"
-        ></app-aggregation-component>
+        ></app-aggregation>
       </div>
     }
   }
@@ -16,11 +16,11 @@
         <p-accordion-panel [value]="key">
           <p-accordion-header>{{ key | translate }}</p-accordion-header>
           <p-accordion-content class="max-h-80 overflow-y-auto overflow-x-hidden">
-            <app-aggregation-component
+            <app-aggregation
               [keyName]="key"
               [buckets]="getBuckets(key)"
               [displayType]="'checkbox'"
-            ></app-aggregation-component>
+            ></app-aggregation>
           </p-accordion-content>
         </p-accordion-panel>
       }

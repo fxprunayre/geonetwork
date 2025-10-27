@@ -1,16 +1,14 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { APPLICATION_CONFIGURATION, SearchStore } from 'gn-library';
-import { elasticsearch } from 'gn-api-client';
-import { AggregationComponent } from '../../../../../library/src/lib/modules/search/aggregation-component/aggregation-component';
 
 @Component({
   selector: 'app-result-header',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonModule, AggregationComponent],
+  imports: [CommonModule, FormsModule, ButtonModule],
   templateUrl: './result-header.html',
   styleUrl: './result-header.scss',
 })
