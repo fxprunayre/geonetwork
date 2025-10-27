@@ -8,11 +8,19 @@ import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationLayout } from 'gn-api-client';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchFilter, SearchFilterChange } from '../search.store.model';
+import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-aggregation',
   standalone: true,
-  imports: [Select, ButtonModule, FormsModule, AggregationBucket, AggregationTranslatePipe],
+  imports: [
+    Select,
+    ButtonModule,
+    FormsModule,
+    AggregationBucket,
+    AggregationTranslatePipe,
+    MultiSelect,
+  ],
   templateUrl: './aggregation.component.html',
 })
 export class Aggregation extends SearchBase {
@@ -22,7 +30,13 @@ export class Aggregation extends SearchBase {
   @Output()
   onSelected = new EventEmitter<SearchFilterChange>();
 
+  DISPLAY_FILTER_THRESHOLD = 10;
+
   translateService = inject(TranslateService);
+
+  displayFilter = computed(() => {
+    return this.buckets().length > this.DISPLAY_FILTER_THRESHOLD;
+  });
 
   buckets = computed(() => {
     let buckets = this.search.aggregations()[this.keyName()]?.buckets || [];
@@ -48,6 +62,33 @@ export class Aggregation extends SearchBase {
       values: event.value === null ? [] : [event.value.key],
       add: true,
     });
+  }
+
+  handleMultiSelectChange(event: MultiSelectChangeEvent) {
+    const isSelected =
+      event.itemValue &&
+      event.value.find((item: any) => {
+        return item.key === event.itemValue.key;
+      }) !== undefined;
+
+    const values = [];
+    if (event.itemValue) {
+      values.push(event.itemValue.key);
+    } else if (event.value.length > 0) {
+      event.value.forEach((item: any) => {
+        values.push(item.key);
+      });
+    }
+
+    this.filter({
+      field: this.keyName(),
+      values: values,
+      add: isSelected,
+    });
+  }
+
+  handleMultiSelectClear() {
+    this.search.clearFilter(this.keyName());
   }
 
   filter(event: SearchFilterChange) {

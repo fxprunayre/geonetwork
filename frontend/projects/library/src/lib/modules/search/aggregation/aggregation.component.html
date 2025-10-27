@@ -38,13 +38,46 @@
       </div>
     }
   }
-  @case ('dropdown') {
+  @case ('multiselect') {
+    <p-multiSelect
+      (onChange)="handleMultiSelectChange($event)"
+      (onClear)="handleMultiSelectClear()"
+      [filter]="displayFilter()"
+      filterBy="key"
+      display="chip"
+      optionLabel="key"
+      [options]="buckets()"
+      [showClear]="true"
+      panelStyleClass="w-80"
+      placeholder="{{ placeholder() || '' }}"
+      scrollHeight="400px"
+      class="w-80"
+      appendTo="body"
+    >
+      <!--<ng-template let-value pTemplate="selectedItems">
+        <div class="inline-flex align-items-center gap-2 px-1">
+          @for(option of value; track option.key) {
+            <div>{{ option.key }},</div>
+          }
+          @if (!value || value.length === 0) {
+            <div>Select ...</div>
+          }
+        </div>
+      </ng-template>-->
+      <ng-template let-bucket pTemplate="item">
+        <div class="flex align-items-center gap-2">
+          <div>{{ bucket.key | aggregationTranslate: keyName() }} ({{ bucket.doc_count }})</div>
+        </div>
+      </ng-template>
+    </p-multiSelect>
+  }
+  @case ('select') {
     <p-select
       [options]="buckets()"
       (onChange)="handleChange($event)"
       optionLabel="key"
       [placeholder]="placeholder()"
-      [filter]="buckets().length > 10"
+      [filter]="displayFilter()"
       filterBy="key"
       [showClear]="true"
       panelStyleClass="w-80"

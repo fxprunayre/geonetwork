@@ -21,7 +21,7 @@ export type Decorator = {
   expression?: string;
 };
 
-export type AggregationLayout = 'checkbox' | 'select' | 'dropdown' | 'button' | 'card';
+export type AggregationLayout = 'checkbox' | 'select' | 'multiselect' | 'button' | 'card';
 
 export type Metadata = Record<string, any> & {
   collapsed?: boolean;
