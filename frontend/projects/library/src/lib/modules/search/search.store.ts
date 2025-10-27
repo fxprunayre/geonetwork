@@ -211,6 +211,7 @@ export const SearchStore = signalStore(
             filters: currentFilters,
           });
         },
+        // TODO: Add clear filter
         removeFilter(field: string, value: string | number): void {
           const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
           let targetFilter = currentFilters[field];

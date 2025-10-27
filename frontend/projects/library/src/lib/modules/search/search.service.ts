@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
 import { SearchService as ApiSearchService } from 'gn4-api-client';
-import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { SearchRegistry, SearchStoreType } from './search.store';
 import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './search.store.model';
 import { SEARCH_SOURCE } from './search.constant';
@@ -19,8 +18,6 @@ export class SearchService {
   searchService: ApiSearchService = inject(ApiSearchService);
 
   aggregationService = inject(AggregationService);
-
-  uiConfiguration = inject(APPLICATION_CONFIGURATION).config;
 
   register(searchId: string, searchStore: SearchStoreType) {
     if (this.store[searchId]) {

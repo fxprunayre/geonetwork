@@ -1,4 +1,4 @@
-import { Component, computed, inject, effect } from '@angular/core';
+import { Component, computed, inject, effect, Input, input } from '@angular/core';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AggregationComponent } from '../aggregation-component/aggregation-component';
@@ -21,6 +21,8 @@ import { AggregationService } from '../aggregation.service';
 })
 export class AggregationsComponent extends SearchBase {
   aggregationService = inject(AggregationService);
+  panelType = input<'accordion' | 'none'>('accordion');
+  position = input<'left' | 'top'>('left');
 
   get aggregations(): Record<string, elasticsearch.AggregationsAggregate> {
     return this.search.aggregations();
@@ -51,7 +53,7 @@ export class AggregationsComponent extends SearchBase {
   getBuckets(field: string) {
     let buckets = this.search.aggregations()[field].buckets;
     if (Array.isArray(buckets)) {
-      return buckets;
+      return buckets as { key: string | number; doc_count: number }[];
     }
     return [];
   }

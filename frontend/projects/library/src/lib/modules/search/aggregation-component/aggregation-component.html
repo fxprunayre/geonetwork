@@ -2,43 +2,31 @@
   @case ('checkbox') {
     @for (bucket of buckets; track bucket.key) {
       <div class="flex items-center mb-2">
-        <p-checkbox
-          [binary]="true"
-          [inputId]="keyName + '_' + bucket.key"
-          [ngModel]="isChecked(bucket.key)"
-          (ngModelChange)="onCheckboxChange(bucket.key, $event)"
-        ></p-checkbox>
-        <label class="ml-2" [for]="keyName + '_' + bucket.key">
-          {{ bucket.key | aggregationTranslate: keyName }} ({{ bucket.doc_count }})
-        </label>
+        <app-aggregation-bucket [keyName]="keyName" [bucket]="bucket" [displayType]="displayType" />
       </div>
     }
   }
-
+  @case ('buttons') {
+    @for (bucket of buckets; track bucket.key) {
+      <div class="flex items-center mb-2">
+        <app-aggregation-bucket [keyName]="keyName" [bucket]="bucket" [displayType]="displayType" />
+      </div>
+    }
+  }
   @case ('dropdown') {
     <p-select
-      [options]="dropdownOptions"
+      [options]="buckets"
       [ngModel]="selectedValue"
       (ngModelChange)="onDropdownChange($event)"
-      optionLabel="label"
+      optionLabel="key"
       optionValue="value"
-      placeholder="Select"
-    />
-  }
-
-  @case ('buttons') {
-    <div class="flex flex-wrap gap-2 mb-4">
-      @for (bucket of buckets; track bucket.key) {
-        <p-button
-          [label]="(bucket.key | translate) + ' (' + bucket.doc_count + ')'"
-          variant="outlined"
-          [severity]="selectedValue === bucket.key ? 'primary' : undefined"
-          (click)="onButtonClick(bucket.key)"
-          [styleClass]="active === bucket.key ? 'active' : ''"
-          [attr.aria-pressed]="active === bucket.key"
-          size="small"
-        ></p-button>
-      }
-    </div>
+      [placeholder]="'Choose ' + keyName"
+    >
+      <ng-template let-bucket pTemplate="item">
+        <div class="flex align-items-center gap-2">
+          <div>{{ bucket.key | aggregationTranslate: keyName }} ({{ bucket.doc_count }})</div>
+        </div>
+      </ng-template>
+    </p-select>
   }
 }
