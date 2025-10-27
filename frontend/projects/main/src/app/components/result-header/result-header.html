@@ -4,9 +4,8 @@
       <span class="font-semibold text-primary me-4 text-base">{{ totalCount }} results:</span>
 
       @if (topTabFilter) {
-        <div class="">
-          <app-aggregation [keyName]="topTabFilter" [displayType]="'button'"></app-aggregation>
-        </div>
+          <app-aggregation [keyName]="topTabFilter" [displayType]="'button'"
+                           class="flex items-start gap-2 "></app-aggregation>
       }
     </div>
   </div>
