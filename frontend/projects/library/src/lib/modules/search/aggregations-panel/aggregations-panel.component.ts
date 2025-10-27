@@ -45,15 +45,9 @@ export class AggregationsPanel extends SearchBase {
     // TODO: Get ordered keys from configuration
     return Object.keys(this.aggregations) || [];
   });
-  aggregationList = computed(() => {
-    return Object.values(this.aggregations) || [];
-  });
 
-  getBuckets(field: string) {
-    let buckets = this.search.aggregations()[field].buckets;
-    if (Array.isArray(buckets)) {
-      return buckets as { key: string | number; doc_count: number }[];
-    }
-    return [];
-  }
+  hasBuckets = (key: string) => {
+    const agg = this.aggregations[key];
+    return agg && Array.isArray(agg.buckets) && agg.buckets.length > 0;
+  };
 }

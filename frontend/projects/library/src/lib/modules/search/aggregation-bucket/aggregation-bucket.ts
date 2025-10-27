@@ -1,54 +1,47 @@
-import { Component, Input, model, output } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, computed, inject, input, model, output } from '@angular/core';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { Checkbox } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { Button } from 'primeng/button';
 import { SearchBase } from '../search-base/search-base';
+import { AggregationLayout } from 'gn-api-client';
 
 @Component({
   selector: 'app-aggregation-bucket',
-  imports: [TranslatePipe, AggregationTranslatePipe, Checkbox, FormsModule, Button],
+  imports: [Checkbox, FormsModule, Button],
   templateUrl: './aggregation-bucket.html',
+  providers: [AggregationTranslatePipe],
+  standalone: true,
 })
 export class AggregationBucket extends SearchBase {
-  @Input() keyName!: string;
-  @Input() bucket: any;
-  @Input() displayType: 'checkbox' | 'dropdown' | 'buttons' = 'checkbox';
+  keyName = input.required<string>();
+  bucket = input.required<{ key: string | number; doc_count: number }>();
+  displayType = input<AggregationLayout | undefined>();
   selectedValue = model();
 
-  active = false;
+  aggregationTranslate = inject(AggregationTranslatePipe);
+
+  layout = computed(() => {
+    return (
+      this.displayType() || this.search.aggregations()[this.keyName()].meta?.layout || 'checkbox'
+    );
+  });
+
+  label = computed(() => {
+    return `${this.aggregationTranslate.transform(this.bucket().key, this.keyName())}  (${this.bucket().doc_count})`;
+  });
+
+  isActive = computed(() => {
+    return this.search.isFilterActive(this.keyName(), this.bucket().key);
+  });
+
   tabSelected = output<string>();
 
-  isChecked(bucketKey: string): boolean {
-    return this.search.isFilterActive(this.keyName, bucketKey);
-  }
-
-  onCheckboxChange(bucketKey: string, selected: boolean) {
-    this.setSelected(this.keyName, bucketKey, selected);
-  }
-
-  onButtonClick(bucketKey: string) {
-    // if (this.selectedValue === bucketKey) return;
-    // this.buckets.forEach((bucket) => {
-    //   const isSelected = bucket.key === bucketKey;
-    //   this.setSelected(this.keyName, bucket.key, isSelected);
-    // });
-    // this.selectedValue = bucketKey;
-    // this.setActive(bucketKey);
-    // this.tabSelected.emit(bucketKey);
-  }
-
-  setActive(name: string): void {
-    // this.active = this.active === name ? null : name;
-  }
-
-  setSelected(groupKey: string, bucketKey: string, value: boolean) {
-    const alreadyActive = this.search.isFilterActive(groupKey, bucketKey);
-    if (value && !alreadyActive) {
-      this.search.addFilter(groupKey, bucketKey);
-    } else if (!value && alreadyActive) {
-      this.search.removeFilter(groupKey, bucketKey);
+  handleChange(bucketValue: string | number, value: boolean) {
+    if (value && !this.isActive()) {
+      this.search.addFilter(this.keyName(), bucketValue);
+    } else if (!value && this.isActive()) {
+      this.search.removeFilter(this.keyName(), bucketValue);
     }
   }
 }

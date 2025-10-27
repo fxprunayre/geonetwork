@@ -1,30 +1,34 @@
-@switch (displayType) {
+@switch (layout()) {
   @case ('checkbox') {
-    @for (bucket of buckets; track bucket.key) {
+    @for (bucket of buckets(); track bucket.key) {
       <div class="flex items-center mb-2">
-        <app-aggregation-bucket [keyName]="keyName" [bucket]="bucket" [displayType]="displayType" />
+        <app-aggregation-bucket [keyName]="keyName()" [bucket]="bucket" [displayType]="layout()" />
       </div>
     }
   }
   @case ('buttons') {
-    @for (bucket of buckets; track bucket.key) {
+    @for (bucket of buckets(); track bucket.key) {
       <div class="flex items-center mb-2">
-        <app-aggregation-bucket [keyName]="keyName" [bucket]="bucket" [displayType]="displayType" />
+        <app-aggregation-bucket [keyName]="keyName()" [bucket]="bucket" [displayType]="layout()" />
       </div>
     }
   }
   @case ('dropdown') {
     <p-select
-      [options]="buckets"
-      [ngModel]="selectedValue"
-      (ngModelChange)="onDropdownChange($event)"
+      [options]="buckets()"
+      (onChange)="handleChange($event)"
       optionLabel="key"
-      optionValue="value"
-      [placeholder]="'Choose ' + keyName"
+      [placeholder]="placeholder()"
+      [filter]="buckets().length > 10"
+      filterBy="key"
+      [showClear]="true"
+      panelStyleClass="w-80"
+      scrollHeight="400px"
+      class="w-80"
     >
       <ng-template let-bucket pTemplate="item">
         <div class="flex align-items-center gap-2">
-          <div>{{ bucket.key | aggregationTranslate: keyName }} ({{ bucket.doc_count }})</div>
+          <div>{{ bucket.key | aggregationTranslate: keyName() }} ({{ bucket.doc_count }})</div>
         </div>
       </ng-template>
     </p-select>

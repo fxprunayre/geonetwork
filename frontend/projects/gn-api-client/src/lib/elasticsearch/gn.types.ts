@@ -20,13 +20,16 @@ export type Decorator = {
   prefix?: string;
   expression?: string;
 };
+
+export type AggregationLayout = 'checkbox' | 'dropdown' | 'buttons' | 'card';
+
 export type Metadata = Record<string, any> & {
   collapsed?: boolean;
   placement?: 'side' | 'primary' | 'secondary';
   decorator?: Decorator;
   refreshPolicy?: 'none';
   icon?: string;
-  layout?: 'checkbox' | 'dropdown' | 'tabs' | 'card';
+  layout?: AggregationLayout;
   orderByTranslation?: boolean;
   userHasRole?: string;
 };

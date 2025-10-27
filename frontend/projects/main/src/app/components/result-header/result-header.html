@@ -3,14 +3,11 @@
     <div class="flex items-center gap-3 flex-start flex-wrap">
       <span class="font-semibold text-primary me-4 text-base">{{ totalCount }} results:</span>
 
-      <!--      @if (getFilterData) {-->
-      <!--          <app-aggregation-->
-      <!--            [keyName]="getFilterData.key"-->
-      <!--            [buckets]="getFilterData.buckets"-->
-      <!--            [displayType]="'buttons'"-->
-      <!--            (tabSelected)="onTabSelected($event)"-->
-      <!--          ></app-aggregation>-->
-      <!--      }-->
+      @if (topTabFilter) {
+        <div class="">
+          <app-aggregation [keyName]="topTabFilter" [displayType]="'buttons'"></app-aggregation>
+        </div>
+      }
     </div>
   </div>
 }

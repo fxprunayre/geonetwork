@@ -46,8 +46,8 @@ export class SearchRouteService {
     });
 
     return {
-      from: parseInt(params['from']) || 0,
-      size: parseInt(params['size']) || pageSize,
+      currentPage: parseInt(params['from']) || 0,
+      pageSize: parseInt(params['size']) || pageSize,
       searchQuery: params['q'] || '',
       filters: filter,
     };

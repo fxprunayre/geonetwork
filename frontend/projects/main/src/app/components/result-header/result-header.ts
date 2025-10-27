@@ -3,12 +3,12 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { APPLICATION_CONFIGURATION, SearchStore } from 'gn-library';
+import { APPLICATION_CONFIGURATION, SearchStore, Aggregation } from 'gn-library';
 
 @Component({
   selector: 'app-result-header',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonModule],
+  imports: [CommonModule, FormsModule, ButtonModule, Aggregation],
   templateUrl: './result-header.html',
   styleUrl: './result-header.scss',
 })
@@ -19,29 +19,6 @@ export class ResultHeader {
   @Output() layoutChange = new EventEmitter<'list' | 'grid'>();
 
   topTabFilter = inject(APPLICATION_CONFIGURATION).config?.apps.search?.topTabFilter;
-
-  selectedTabFilter?: string;
-
-  onTabSelected(key: string) {
-    this.selectedTabFilter = key;
-  }
-
-  readonly searchStore = inject(SearchStore);
-
-  get getFilterData() {
-    const filterKey = this.selectedTabFilter ?? this.topTabFilter;
-    if (!filterKey) return undefined;
-
-    const agg = this.searchStore.aggregations()?.[filterKey];
-    const rawBuckets = agg?.buckets;
-
-    const buckets = Array.isArray(rawBuckets) ? rawBuckets : Object.values(rawBuckets ?? {});
-
-    return {
-      key: filterKey,
-      buckets,
-    };
-  }
 
   layoutOptions: ('list' | 'grid')[] = ['list', 'grid'];
 

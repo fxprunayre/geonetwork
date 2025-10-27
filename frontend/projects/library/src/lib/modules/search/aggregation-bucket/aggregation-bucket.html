@@ -1,26 +1,26 @@
-@switch (displayType) {
+@switch (layout()) {
   @case ('checkbox') {
     <div class="flex items-center mb-2">
       <p-checkbox
         [binary]="true"
-        [inputId]="keyName + '_' + bucket.key"
-        [ngModel]="isChecked(bucket.key)"
-        (ngModelChange)="onCheckboxChange(bucket.key, $event)"
+        [inputId]="keyName() + '_' + bucket().key"
+        [ngModel]="isActive"
+        (ngModelChange)="handleChange(bucket().key, $event)"
       ></p-checkbox>
-      <label class="ml-2" [for]="keyName + '_' + bucket.key">
-        {{ bucket.key | aggregationTranslate: keyName }} ({{ bucket.doc_count }})
+      <label class="ml-2" [for]="keyName() + '_' + bucket().key">
+        {{ label() }}
       </label>
     </div>
   }
   @case ('buttons') {
     <div class="flex flex-row gap-2 mb-4">
       <p-button
-        [label]="(bucket.key | translate) + ' (' + bucket.doc_count + ')'"
+        [label]="label()"
         variant="outlined"
-        [severity]="selectedValue === bucket.key ? 'primary' : undefined"
-        (click)="onButtonClick(bucket.key)"
-        [styleClass]="active === bucket.key ? 'active' : ''"
-        [attr.aria-pressed]="active === bucket.key"
+        [severity]="isActive() ? 'primary' : undefined"
+        (click)="handleChange(bucket().key, !isActive())"
+        [styleClass]="isActive() ? 'active' : ''"
+        [attr.aria-pressed]="isActive()"
         size="small"
       ></p-button>
     </div>

@@ -1,28 +1,25 @@
 @switch (panelType()) {
   @case ('none') {
     @for (key of aggregationKeys(); track $index) {
-      <div class="flex">
-        <app-aggregation
-          [keyName]="key"
-          [buckets]="getBuckets(key)"
-          [displayType]="'dropdown'"
-        ></app-aggregation>
-      </div>
+      @if (hasBuckets(key)) {
+        <div class="grid grid-cols-1 gap-4 mb-12">
+          <label class="w-full">{{ key | translate }}</label>
+          <app-aggregation [keyName]="key"></app-aggregation>
+        </div>
+      }
     }
   }
   @case ('accordion') {
     <p-accordion [multiple]="true" [value]="activePanels()">
       @for (key of aggregationKeys(); track $index) {
-        <p-accordion-panel [value]="key">
-          <p-accordion-header>{{ key | translate }}</p-accordion-header>
-          <p-accordion-content class="max-h-80 overflow-y-auto overflow-x-hidden">
-            <app-aggregation
-              [keyName]="key"
-              [buckets]="getBuckets(key)"
-              [displayType]="'checkbox'"
-            ></app-aggregation>
-          </p-accordion-content>
-        </p-accordion-panel>
+        @if (hasBuckets(key)) {
+          <p-accordion-panel [value]="key">
+            <p-accordion-header>{{ key | translate }}</p-accordion-header>
+            <p-accordion-content class="max-h-80 overflow-y-auto overflow-x-hidden">
+              <app-aggregation [keyName]="key"></app-aggregation>
+            </p-accordion-content>
+          </p-accordion-panel>
+        }
       }
     </p-accordion>
   }
