@@ -4,9 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResultItemList } from '../result-item-list/result-item-list';
 import { ResultItemGrid } from '../result-item-grid/result-item-grid';
 import { ResultHeader } from '../result-header/result-header';
-import { LoadingComponent } from '../loading-component/loading-component';
 import { EmptyStateComponent } from '../empty-state/empty-state';
-import { SearchResultsPaginator, SearchStore, SearchStoreType } from 'gn-library';
+import { SearchResultsPaginator, SearchStore, SearchStoreType, LoadingMask } from 'gn-library';
 
 @Component({
   selector: 'app-result-view',
@@ -15,7 +14,7 @@ import { SearchResultsPaginator, SearchStore, SearchStoreType } from 'gn-library
     ResultItemGrid,
     ResultItemList,
     ResultHeader,
-    LoadingComponent,
+    LoadingMask,
     EmptyStateComponent,
     SearchResultsPaginator,
   ],

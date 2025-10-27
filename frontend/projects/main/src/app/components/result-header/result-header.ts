@@ -3,7 +3,7 @@ import { ResultNumber } from '../result-number/result-number';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { APPLICATION_CONFIGURATION, SearchStore, Aggregation } from 'gn-library';
+import { Aggregation, APPLICATION_CONFIGURATION } from 'gn-library';
 
 @Component({
   selector: 'app-result-header',
