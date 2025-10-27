@@ -11,6 +11,7 @@ import {
   APPLICATION_CONFIGURATION,
 } from 'gn-library';
 import { TranslateService } from '@ngx-translate/core';
+import { ScrollTop } from 'primeng/scrolltop';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ import { TranslateService } from '@ngx-translate/core';
     FormsModule,
     Gn4ApiModule,
     SearchContextDirective,
+    ScrollTop
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
