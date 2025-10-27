@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-
+import { ResultNumber } from '../result-number/result-number';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -8,7 +8,7 @@ import { APPLICATION_CONFIGURATION, SearchStore, Aggregation } from 'gn-library'
 @Component({
   selector: 'app-result-header',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonModule, Aggregation],
+  imports: [CommonModule, FormsModule, ButtonModule, Aggregation, ResultNumber],
   templateUrl: './result-header.html',
   styleUrl: './result-header.scss',
 })

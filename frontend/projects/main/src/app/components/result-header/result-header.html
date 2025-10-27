@@ -1,7 +1,9 @@
 @if (topTabFilter) {
   <div class="flex items-center mb-4 bg-[#F2F5F9] py-[23px] px-[17px] rounded">
     <div class="flex items-center gap-3 flex-start flex-wrap">
-      <span class="font-semibold text-primary me-4 text-base">{{ totalCount }} results:</span>
+      <span class="font-semibold text-primary me-4 text-base">
+        <app-result-number [totalCount]="totalCount"></app-result-number>
+      </span>
 
       @if (topTabFilter) {
         <div class="">
