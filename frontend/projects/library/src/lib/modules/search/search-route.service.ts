@@ -23,7 +23,7 @@ export class SearchRouteService {
       urlParams = urlParams.concat(
         Object.entries(store.filters)
           .filter(([field, filter]) => filter.values.length > 0)
-          .map(([field, filter]) => `${field}="${this.buildFilterQueryParams(filter)}"`),
+          .map(([field, filter]) => `${field}=${this.buildFilterQueryParams(filter)}`),
       );
     }
     if (store.currentPage !== 0) {
