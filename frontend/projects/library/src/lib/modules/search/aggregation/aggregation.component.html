@@ -1,5 +1,14 @@
+<ng-template #defaultFilterTemplate>
+  @if (isInputFilter()) {
+    <!--   TODO? <input pInputText class="w-full" [(ngModel)]="filter"/>-->
+  }
+</ng-template>
+
 @switch (layout()) {
   @case ('checkbox') {
+    <ng-container
+      *ngTemplateOutlet="defaultFilterTemplate; context: { $implicit: this }"
+    ></ng-container>
     @for (bucket of buckets(); track bucket.key) {
       <div class="flex items-center mb-2">
         <app-aggregation-bucket
@@ -40,18 +49,20 @@
   }
   @case ('multiselect') {
     <p-multiSelect
+      [options]="buckets()"
+      optionLabel="label"
+      display="chip"
+      [filter]="displayFilter()"
+      filterBy="label"
       (onChange)="handleMultiSelectChange($event)"
       (onClear)="handleMultiSelectClear()"
-      [filter]="displayFilter()"
-      filterBy="key"
-      display="chip"
-      optionLabel="key"
-      [options]="buckets()"
+      [(ngModel)]="selectedDropdownOptions"
       [showClear]="true"
-      panelStyleClass="w-80"
+      [showToggleAll]="false"
+      panelStyleClass="w-full"
       placeholder="{{ placeholder() || '' }}"
       scrollHeight="400px"
-      class="w-80"
+      class="w-100"
       appendTo="body"
     >
       <!--<ng-template let-value pTemplate="selectedItems">
@@ -66,7 +77,7 @@
       </ng-template>-->
       <ng-template let-bucket pTemplate="item">
         <div class="flex align-items-center gap-2">
-          <div>{{ bucket.key | aggregationTranslate: keyName() }} ({{ bucket.doc_count }})</div>
+          <div>{{ bucket.label }}</div>
         </div>
       </ng-template>
     </p-multiSelect>
@@ -87,7 +98,7 @@
     >
       <ng-template let-bucket pTemplate="item">
         <div class="flex align-items-center gap-2">
-          <div>{{ bucket.key | aggregationTranslate: keyName() }} ({{ bucket.doc_count }})</div>
+          <div>{{ bucket.label }}</div>
         </div>
       </ng-template>
     </p-select>

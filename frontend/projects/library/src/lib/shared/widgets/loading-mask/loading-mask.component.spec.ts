@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoadingComponent } from './loading-component';
+import { LoadingMask } from './loading-mask.component';
 
 describe('LoadingComponent', () => {
-  let component: LoadingComponent;
-  let fixture: ComponentFixture<LoadingComponent>;
+  let component: LoadingMask;
+  let fixture: ComponentFixture<LoadingMask>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoadingComponent],
+      imports: [LoadingMask],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LoadingComponent);
+    fixture = TestBed.createComponent(LoadingMask);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
