@@ -9,7 +9,12 @@ import {
   faSolidDownload,
   faSolidShareNodes,
 } from '@ng-icons/font-awesome/solid';
-import { RecordFieldOverviewComponent } from 'gn-library';
+import {
+  RecordFieldOverviewComponent,
+  RecordFieldType,
+  RecordFieldCredit,
+  RecordFieldTitle,
+} from 'gn-library';
 
 @Component({
   selector: 'app-result-item-list',
@@ -21,8 +26,9 @@ import { RecordFieldOverviewComponent } from 'gn-library';
     ButtonModule,
     NgIcon,
     RecordFieldOverviewComponent,
-    RecordFieldOverviewComponent,
-    RecordFieldOverviewComponent,
+    RecordFieldType,
+    RecordFieldCredit,
+    RecordFieldTitle,
   ],
   viewProviders: [
     provideIcons({ faImage, faMap, faSolidShareNodes, faSolidDownload, faSolidCircleInfo }),
@@ -33,52 +39,11 @@ export class ResultItemList {
   @Input() isFirst: boolean = false;
   @Output() viewDetails = new EventEmitter<string>();
 
-  getTruncatedTitle(): string {
-    const title = this.result.resourceTitleObject?.['default'] ?? 'No title available';
-    return title.substring(0, 180) + '...';
-  }
-
-  getTruncatedDescription(): string {
-    const description =
-      this.result.resourceAbstractObject?.['default'] ?? 'No description available';
-    return description.substring(0, 250) + '...';
-  }
-
-  getSourceName(): string {
-    const nameObject = this.result.OrgObject as { [key: string]: string } | undefined;
-    const name = nameObject?.['default'];
-    return name ?? 'No name available';
+  getDescription(): string {
+    return this.result.resourceAbstractObject?.['default'] ?? '';
   }
 
   onViewDetails() {
     this.viewDetails.emit(this.result.info?._id);
-  }
-
-  getOverviewImage(): string | null {
-    const overview = this.result?.overview;
-    if (overview && overview.length > 0) {
-      if (overview[0].data && overview[0].data.startsWith('data:image')) {
-        return overview[0].data;
-      }
-      if (overview[0].url) {
-        return overview[0].url;
-      }
-    }
-    return null;
-  }
-
-  getOverviewImageName(): string {
-    const overview = this.result?.overview;
-    if (overview && overview.length > 0 && overview[0].nameObject) {
-      return overview[0].nameObject['default'] || overview[0].nameObject['langfre'] || 'Image';
-    }
-    return 'Preview Image';
-  }
-
-  onImageError(event: Event): void {
-    const target = event.target as HTMLImageElement;
-    if (target) {
-      target.style.display = 'none';
-    }
   }
 }

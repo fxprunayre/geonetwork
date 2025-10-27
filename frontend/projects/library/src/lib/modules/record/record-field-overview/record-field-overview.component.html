@@ -38,6 +38,7 @@
     [class]="'w-full h-full'"
     [src]="overview.url"
     [title]="overview.nameObject?.default || 'overview'"
+    (onImageError)="onImageError($event)"
   ></p-image>
 </ng-template>
 

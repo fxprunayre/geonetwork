@@ -1,13 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { SearchBase } from 'gn-library';
+import { TranslateDirective, TranslateService } from '@ngx-translate/core';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-search-welcome-text',
   templateUrl: './search-welcome-text.html',
   standalone: true,
+  imports: [TranslateDirective, DecimalPipe],
 })
 export class SearchWelcomeText extends SearchBase {
+  maxBucketsToShow = input(3);
+
+  translateService = inject(TranslateService);
+
+  RESOURCE_TYPE_FIELD = 'resourceType';
+
+  locale = signal(this.translateService.getCurrentLang());
+
   override ngOnInit() {
     super.ngOnInit();
+    this.translateService.onLangChange.subscribe((lang) => {
+      this.locale.set(lang.lang);
+    });
   }
+
+  mainBuckets = computed(() => {
+    const mainBuckets = this.search.aggregations()[this.RESOURCE_TYPE_FIELD]?.buckets || [];
+    if (Array.isArray(mainBuckets)) {
+      return mainBuckets
+        .slice(0, this.maxBucketsToShow())
+        .map((bucket) => this.translateService.instant(bucket.key))
+        .join(', ');
+    } else {
+      return 'resources';
+    }
+  });
 }

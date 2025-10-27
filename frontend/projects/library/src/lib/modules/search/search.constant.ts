@@ -23,6 +23,7 @@ export const SEARCH_SOURCE = [
   'link',
   'rating',
   'resourceAbstract*',
+  'resourceCreditObject',
   'logo',
   'overview',
 ];

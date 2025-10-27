@@ -1,0 +1,8 @@
+@if (credits()) {
+  @for (c of credits(); track $index) {
+    @if ((displayFirstOnly() && $index === 0) || !displayFirstOnly()) {
+      <span>{{ 'record.field.credit' | translate }}</span
+      ><span class="text-base" [title]="c['default']">{{ c['default'] }}</span>
+    }
+  }
+}

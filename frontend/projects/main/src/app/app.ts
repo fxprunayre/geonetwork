@@ -23,7 +23,7 @@ import { ScrollTop } from 'primeng/scrolltop';
     FormsModule,
     Gn4ApiModule,
     SearchContextDirective,
-    ScrollTop
+    ScrollTop,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

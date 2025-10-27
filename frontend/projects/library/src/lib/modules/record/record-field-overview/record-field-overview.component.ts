@@ -31,4 +31,11 @@ export class RecordFieldOverviewComponent {
   });
   styleClass = input<string>('');
   preview = input<boolean>(true);
+
+  onImageError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    if (target) {
+      target.style.display = 'none';
+    }
+  }
 }

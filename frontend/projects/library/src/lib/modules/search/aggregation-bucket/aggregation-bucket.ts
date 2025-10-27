@@ -16,12 +16,14 @@ import { SearchBase } from '../search-base/search-base';
 import { AggregationLayout } from 'gn-api-client';
 import { Card } from 'primeng/card';
 import { SearchFilter, SearchFilterChange } from '../search.store.model';
+import { DecimalPipe } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-aggregation-bucket',
   imports: [Checkbox, FormsModule, Button, Card, AggregationTranslatePipe],
   templateUrl: './aggregation-bucket.html',
-  providers: [AggregationTranslatePipe],
+  providers: [AggregationTranslatePipe, DecimalPipe],
   standalone: true,
 })
 export class AggregationBucket extends SearchBase {
@@ -34,6 +36,8 @@ export class AggregationBucket extends SearchBase {
   onSelected = new EventEmitter<SearchFilterChange>();
 
   aggregationTranslate = inject(AggregationTranslatePipe);
+  translateService = inject(TranslateService);
+  decimalPipe = inject(DecimalPipe);
 
   layout = computed(() => {
     return (
@@ -42,7 +46,7 @@ export class AggregationBucket extends SearchBase {
   });
 
   label = computed(() => {
-    return `${this.aggregationTranslate.transform(this.bucket().key, this.keyName())}  (${this.bucket().doc_count})`;
+    return `${this.aggregationTranslate.transform(this.bucket().key, this.keyName())}  (${this.decimalPipe.transform(this.bucket().doc_count, undefined, this.translateService.getCurrentLang())})`;
   });
 
   isActive = computed(() => {

@@ -1,5 +1,13 @@
 <p class="text-white mt-4">
   @if (search.totalCount() > 0) {
-    Search over {{ search.totalCount() }} datasets, services, maps, ...
+    <span
+      [translateParams]="{
+        count: (search.totalCount() | number: undefined : locale()),
+        mainBuckets: mainBuckets(),
+      }"
+      translate
+    >
+      search.welcome.text
+    </span>
   }
 </p>

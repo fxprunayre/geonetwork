@@ -22,7 +22,7 @@ import {
   MultiSelectChangeEvent,
   MultiSelectSelectAllChangeEvent,
 } from 'primeng/multiselect';
-import { NgTemplateOutlet } from '@angular/common';
+import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
 
 export type AggregationBucketType = {
   key: string | number;
@@ -33,16 +33,8 @@ export type AggregationBucketType = {
 @Component({
   selector: 'app-aggregation',
   standalone: true,
-  imports: [
-    Select,
-    ButtonModule,
-    FormsModule,
-    AggregationBucket,
-    AggregationTranslatePipe,
-    MultiSelect,
-    NgTemplateOutlet,
-  ],
-  providers: [AggregationTranslatePipe],
+  imports: [Select, ButtonModule, FormsModule, AggregationBucket, MultiSelect, NgTemplateOutlet],
+  providers: [AggregationTranslatePipe, DecimalPipe],
   templateUrl: './aggregation.component.html',
 })
 export class Aggregation extends SearchBase {
@@ -56,6 +48,7 @@ export class Aggregation extends SearchBase {
 
   translateService = inject(TranslateService);
   aggregationTranslatePipe = inject(AggregationTranslatePipe);
+  decimalPipe = inject(DecimalPipe);
 
   selectedDropdownOptions = signal<AggregationBucketType[]>([]);
 
@@ -82,7 +75,7 @@ export class Aggregation extends SearchBase {
       return buckets.map((bucket) => {
         return {
           key: bucket.key,
-          label: `${this.aggregationTranslatePipe.transform(bucket.key, this.keyName())} (${bucket.doc_count})`,
+          label: `${this.aggregationTranslatePipe.transform(bucket.key, this.keyName())} (${this.decimalPipe.transform(bucket.doc_count, undefined, this.translateService.getCurrentLang())})`,
           doc_count: bucket.doc_count,
         } as AggregationBucketType;
       });

@@ -12,6 +12,8 @@ import { APPLICATION_CONFIGURATION } from 'gn-library';
 import Sextant from './sextant';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslationsLoader } from 'gn-library';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   return new TranslationsLoader(_httpBackend, [
@@ -47,6 +49,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
   ],
 };
+
+registerLocaleData(localeFr);
 
 export function getAppConfig(config: any): ApplicationConfig {
   return {
