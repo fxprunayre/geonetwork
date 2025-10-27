@@ -26,7 +26,20 @@ const Sextant = definePreset(Aura, {
     border: '#E0E0E0',
     text: '#6A6E73',
     muted: '#CCCCCC',
+    borderRadius: {
+      md: '16px',
+    },
   },
+  // components :{
+  //   accordion: {
+  //     panel: {
+  //       borderWidth: '0px',
+  //     },
+  //     header: {
+  //       borderWidth: '0px 0px 1px 0px',
+  //     }
+  //   }
+  // }
 });
 
 export default Sextant;
