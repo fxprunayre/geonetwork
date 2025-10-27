@@ -12,13 +12,6 @@
     <!-- Results Display -->
     @if (store.hasResults()) {
       <div class="card">
-        <!-- Results Header -->
-        <app-result-header
-          [currentCount]="results.length"
-          [layout]="layout"
-          (layoutChange)="onLayoutChange($event)"
-        >
-        </app-result-header>
         <!-- List View -->
         @if (layout === 'list') {
           <div class="results-list">

@@ -1,7 +1,7 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
-import { SearchBase } from 'gn-library';
 import { TranslateDirective, TranslateService } from '@ngx-translate/core';
 import { DecimalPipe } from '@angular/common';
+import { SearchBase } from '../search-base/search-base';
 
 @Component({
   selector: 'app-search-welcome-text',

@@ -6,15 +6,20 @@ import { IndexRecord } from 'gn-api-client';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import { faSolidEye } from '@ng-icons/font-awesome/solid';
-import { RecordFieldOverviewComponent } from 'gn-library';
+import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
 
 @Component({
   selector: 'app-result-item-grid',
   standalone: true,
-  imports: [ButtonModule, TooltipModule, NgIcon, RecordFieldOverviewComponent],
+  imports: [
+    ButtonModule,
+    TooltipModule,
+    NgIcon,
+    RecordFieldOverviewComponent,
+    RecordFieldOverviewComponent,
+  ],
   templateUrl: './result-item-grid.html',
   viewProviders: [provideIcons({ faImage, faSolidEye })],
-  styleUrl: './result-item-grid.scss',
 })
 export class ResultItemGrid {
   @Input() result!: IndexRecord;
@@ -30,33 +35,5 @@ export class ResultItemGrid {
 
   onViewDetails() {
     this.viewDetails.emit(this.result.info?._id);
-  }
-
-  getOverviewImage(): string | null {
-    const overview = this.result?.overview;
-    if (overview && overview.length > 0) {
-      if (overview[0].data && overview[0].data.startsWith('data:image')) {
-        return overview[0].data;
-      }
-      if (overview[0].url) {
-        return overview[0].url;
-      }
-    }
-    return null;
-  }
-
-  getOverviewImageName(): string {
-    const overview = this.result?.overview;
-    if (overview && overview.length > 0 && overview[0].nameObject) {
-      return overview[0].nameObject['default'] || overview[0].nameObject['langfre'] || 'Image';
-    }
-    return 'Preview Image';
-  }
-
-  onImageError(event: Event): void {
-    const target = event.target as HTMLImageElement;
-    if (target) {
-      target.style.display = 'none';
-    }
   }
 }

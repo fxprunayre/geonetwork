@@ -9,12 +9,10 @@ import {
   faSolidDownload,
   faSolidShareNodes,
 } from '@ng-icons/font-awesome/solid';
-import {
-  RecordFieldOverviewComponent,
-  RecordFieldType,
-  RecordFieldCredit,
-  RecordFieldTitle,
-} from 'gn-library';
+import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
+import { RecordFieldType } from '../../record/record-field-type/record-field-type';
+import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
+import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 
 @Component({
   selector: 'app-result-item-list',

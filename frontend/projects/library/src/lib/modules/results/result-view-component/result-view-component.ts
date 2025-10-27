@@ -2,9 +2,10 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResultItemList } from '../result-item-list/result-item-list';
 import { ResultItemGrid } from '../result-item-grid/result-item-grid';
-import { ResultHeader } from '../result-header/result-header';
+import { SearchStore, SearchStoreType } from '../../search/search.store';
+import { LoadingMask } from '../../../shared/widgets/loading-mask/loading-mask.component';
+import { SearchResultsPaginator } from '../search-results-paginator/search-results-paginator';
 import { EmptyStateComponent } from '../empty-state/empty-state';
-import { SearchResultsPaginator, SearchStore, SearchStoreType, LoadingMask } from 'gn-library';
 
 @Component({
   selector: 'app-result-view',
@@ -12,10 +13,9 @@ import { SearchResultsPaginator, SearchStore, SearchStoreType, LoadingMask } fro
   imports: [
     ResultItemGrid,
     ResultItemList,
-    ResultHeader,
     LoadingMask,
-    EmptyStateComponent,
     SearchResultsPaginator,
+    EmptyStateComponent,
   ],
   templateUrl: './result-view-component.html',
   styleUrls: ['./result-view-component.scss'],
@@ -34,6 +34,7 @@ export class ResultViewComponent {
     this.layout = newLayout;
   }
 
+  // TODO: Move to app
   viewDetails(id: string) {
     this.router.navigate(['/record/', id]);
   }

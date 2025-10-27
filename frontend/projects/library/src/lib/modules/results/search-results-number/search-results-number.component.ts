@@ -1,15 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { SearchBase } from 'gn-library';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DecimalPipe } from '@angular/common';
+import { SearchBase } from '../../search/search-base/search-base';
 
 @Component({
-  selector: 'app-result-number',
+  selector: 'app-search-results-number',
   imports: [TranslatePipe, DecimalPipe],
-  templateUrl: './result-number.html',
-  styleUrl: './result-number.scss',
+  templateUrl: './search-results-number.component.html',
 })
-export class ResultNumber extends SearchBase {
+export class SearchResultsNumber extends SearchBase {
   getResultTranslationKey() {
     return this.search.totalCount() === 1 ? 'result' : 'results';
   }

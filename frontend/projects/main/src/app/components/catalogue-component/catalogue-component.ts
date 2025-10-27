@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { SidePanel } from '../side-panel/side-panel';
-import { ResultViewComponent } from '../result-view-component/result-view-component';
-import { SearchInput } from 'gn-library';
+import { SearchInput, ResultViewComponent } from 'gn-library';
+import { ResultHeader } from '../result-header/result-header';
 
 @Component({
   selector: 'app-catalogue-component',
-  imports: [SidePanel, ResultViewComponent, SearchInput],
+  imports: [SidePanel, ResultViewComponent, SearchInput, ResultHeader, ResultViewComponent],
   standalone: true,
   templateUrl: './catalogue-component.html',
   styleUrl: './catalogue-component.scss',

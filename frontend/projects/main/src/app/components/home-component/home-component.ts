@@ -6,8 +6,8 @@ import {
   SearchInput,
   SearchService,
   SearchRouteService,
+  SearchWelcomeText,
 } from 'gn-library';
-import { SearchWelcomeText } from '../search-welcome-text/search-welcome-text';
 import { ButtonDirective, ButtonLabel } from 'primeng/button';
 import { Router } from '@angular/router';
 
