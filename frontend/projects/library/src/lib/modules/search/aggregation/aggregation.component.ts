@@ -1,4 +1,13 @@
-import { Component, computed, EventEmitter, inject, input, Output } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  EventEmitter,
+  inject,
+  input,
+  Output,
+  signal,
+} from '@angular/core';
 import { Select, SelectChangeEvent } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
 import { SearchBase } from '../search-base/search-base';
@@ -7,8 +16,19 @@ import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationLayout } from 'gn-api-client';
 import { TranslateService } from '@ngx-translate/core';
-import { SearchFilter, SearchFilterChange } from '../search.store.model';
-import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
+import { SearchFilterChange } from '../search.store.model';
+import {
+  MultiSelect,
+  MultiSelectChangeEvent,
+  MultiSelectSelectAllChangeEvent,
+} from 'primeng/multiselect';
+import { NgTemplateOutlet } from '@angular/common';
+
+export type AggregationBucketType = {
+  key: string | number;
+  label: string;
+  doc_count: number;
+};
 
 @Component({
   selector: 'app-aggregation',
@@ -20,7 +40,9 @@ import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
     AggregationBucket,
     AggregationTranslatePipe,
     MultiSelect,
+    NgTemplateOutlet,
   ],
+  providers: [AggregationTranslatePipe],
   templateUrl: './aggregation.component.html',
 })
 export class Aggregation extends SearchBase {
@@ -33,15 +55,37 @@ export class Aggregation extends SearchBase {
   DISPLAY_FILTER_THRESHOLD = 10;
 
   translateService = inject(TranslateService);
+  aggregationTranslatePipe = inject(AggregationTranslatePipe);
+
+  selectedDropdownOptions = signal<AggregationBucketType[]>([]);
+
+  constructor() {
+    super();
+    effect(() => {
+      this.selectedDropdownOptions.set(
+        this.buckets().filter((bucket) => this.search.isFilterActive(this.keyName(), bucket.key)),
+      );
+    });
+  }
 
   displayFilter = computed(() => {
     return this.buckets().length > this.DISPLAY_FILTER_THRESHOLD;
   });
 
+  isInputFilter = computed(() => {
+    return this.displayFilter() && ['checkbox', 'button', 'card'].includes(this.layout());
+  });
+
   buckets = computed(() => {
     let buckets = this.search.aggregations()[this.keyName()]?.buckets || [];
     if (Array.isArray(buckets)) {
-      return buckets as { key: string | number; doc_count: number }[];
+      return buckets.map((bucket) => {
+        return {
+          key: bucket.key,
+          label: `${this.aggregationTranslatePipe.transform(bucket.key, this.keyName())} (${bucket.doc_count})`,
+          doc_count: bucket.doc_count,
+        } as AggregationBucketType;
+      });
     }
     return [];
   });

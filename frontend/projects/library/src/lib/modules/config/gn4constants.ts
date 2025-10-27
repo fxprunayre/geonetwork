@@ -1288,6 +1288,7 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
               filterByTranslation: true,
               displayFilter: true,
               collapsed: false,
+              layout: 'multiselect',
             },
           },
           // (Experimental) A tree field which contains a URI
@@ -1339,7 +1340,8 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
               },
             },
             meta: {
-              collapsed: true,
+              collapsed: false,
+              // layout: 'multiselect',
             },
           },
           // resourceTemporalDateRange: {
