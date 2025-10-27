@@ -24,7 +24,7 @@ export class SearchActiveFilters extends SearchBase {
   }
 
   getBuckets(field: string) {
-    let buckets = this.search.aggregations()[field].buckets;
+    let buckets = this.search.aggregations()[field]?.buckets || [];
     if (Array.isArray(buckets)) {
       return buckets;
     }
