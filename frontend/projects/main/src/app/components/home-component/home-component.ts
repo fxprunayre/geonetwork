@@ -29,9 +29,6 @@ export class HomeComponent {
   router = inject(Router);
   searchRouteService = inject(SearchRouteService);
 
-  currentQuery = '';
-  parentIsHomepage = true;
-  searchService = inject(SearchService);
   bgFirst = '/images/bgFirst.jpg';
   bgSecond = '/images/bgSecond.png';
   island = '/images/island.jpg';
