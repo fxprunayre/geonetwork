@@ -684,17 +684,17 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
       resultViewTpls: [
         {
           tplUrl:
-            '../../catalog/components/' + 'search/resultsview/partials/viewtemplates/grid.html',
-          tooltip: 'Grid',
-          icon: 'fa-th',
-          related: [],
-        },
-        {
-          tplUrl:
             '../../catalog/components/' + 'search/resultsview/partials/viewtemplates/list.html',
           tooltip: 'List',
           icon: 'fa-bars',
           related: ['parent', 'children', 'services', 'datasets'],
+        },
+        {
+          tplUrl:
+            '../../catalog/components/' + 'search/resultsview/partials/viewtemplates/grid.html',
+          tooltip: 'Grid',
+          icon: 'fa-th',
+          related: [],
         },
         {
           tplUrl:

@@ -1,11 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResultItemList } from '../result-item-list/result-item-list';
 import { ResultItemGrid } from '../result-item-grid/result-item-grid';
-import { SearchStore, SearchStoreType } from '../../search/search.store';
 import { LoadingMask } from '../../../shared/widgets/loading-mask/loading-mask.component';
 import { SearchResultsPaginator } from '../search-results-paginator/search-results-paginator';
 import { EmptyStateComponent } from '../empty-state/empty-state';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { SearchBase } from '../../search/search-base/search-base';
+import { SearchAppLayout } from '../../config/model/gnConfig';
 
 @Component({
   selector: 'app-result-view',
@@ -20,19 +22,12 @@ import { EmptyStateComponent } from '../empty-state/empty-state';
   templateUrl: './result-view-component.html',
   styleUrls: ['./result-view-component.scss'],
 })
-export class ResultViewComponent {
-  layout: 'list' | 'grid' = 'list';
+export class ResultViewComponent extends SearchBase {
   private router = inject(Router);
-  readonly store: SearchStoreType = inject(SearchStore);
 
-  get results() {
-    return this.store.results();
-  }
-
-  // Add this method to handle layout changes
-  onLayoutChange(newLayout: 'list' | 'grid') {
-    this.layout = newLayout;
-  }
+  resultsLayoutOptions =
+    inject(APPLICATION_CONFIGURATION).config?.apps.search?.resultsLayoutOptions;
+  layout = signal<SearchAppLayout>(this.resultsLayoutOptions?.[0] || 'list');
 
   // TODO: Move to app
   viewDetails(id: string) {

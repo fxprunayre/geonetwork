@@ -21,6 +21,8 @@ export interface I18nApp extends App {
   detection?: 'browser' | 'url' | 'html' | 'none';
 }
 
+export type SearchAppLayout = 'list' | 'grid';
+
 export interface SearchApp extends App {
   topTabFilter?: string;
   filter?: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
@@ -29,6 +31,7 @@ export interface SearchApp extends App {
   sort?: string[];
   currentSort?: string;
   hitsPerPageOptions: number[];
+  resultsLayoutOptions?: SearchAppLayout[];
 }
 
 export interface SearchAppAdvanced {

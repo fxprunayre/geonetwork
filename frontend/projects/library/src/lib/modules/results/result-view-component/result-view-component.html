@@ -1,40 +1,37 @@
-@if (store.isLoading()) {
+@if (search.isLoading()) {
   <app-loading-mask></app-loading-mask>
 }
 
 <!-- Results Container -->
-@if (!store.isLoading()) {
+@if (!search.isLoading()) {
   <div class="results-container">
-    <!-- No Results State -->
-    @if (!store.hasResults()) {
+    @if (!search.hasResults()) {
       <app-empty-state></app-empty-state>
-    }
-    <!-- Results Display -->
-    @if (store.hasResults()) {
+    } @else {
       <div class="card">
-        <!-- List View -->
-        @if (layout === 'list') {
-          <div class="results-list">
-            @for (result of results; track $index; let first = $first) {
-              <app-result-item-list
-                [result]="result"
-                [isFirst]="first"
-                (viewDetails)="viewDetails($event)"
-              >
-              </app-result-item-list>
-            }
-          </div>
-        }
-        <!-- Grid View -->
-        @if (layout === 'grid') {
-          <div
-            class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-          >
-            @for (result of results; track $index) {
-              <app-result-item-grid [result]="result" (viewDetails)="viewDetails($event)">
-              </app-result-item-grid>
-            }
-          </div>
+        @switch (layout()) {
+          @case ('list') {
+            <div class="results-list">
+              @for (result of search.results(); track $index; let first = $first) {
+                <app-result-item-list
+                  [result]="result"
+                  [isFirst]="first"
+                  (viewDetails)="viewDetails($event)"
+                >
+                </app-result-item-list>
+              }
+            </div>
+          }
+          @case ('grid') {
+            <div
+              class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+            >
+              @for (result of search.results(); track $index) {
+                <app-result-item-grid [result]="result" (viewDetails)="viewDetails($event)">
+                </app-result-item-grid>
+              }
+            </div>
+          }
         }
         <app-search-results-paginator />
       </div>

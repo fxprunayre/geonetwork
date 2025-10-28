@@ -45,6 +45,16 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
         currentSort:
           (module as Search).sortBy === 'relevance' ? '_score' : (module as Search).sortBy,
         hitsPerPageOptions: (module as Search).hitsperpageValues,
+        resultsLayoutOptions: (module as Search).resultViewTpls
+          .map((layout) => {
+            if (layout.tplUrl.indexOf('grid.html') !== -1) {
+              return 'grid';
+            } else if (layout.tplUrl.indexOf('list.html') !== -1) {
+              return 'list';
+            }
+            return undefined;
+          })
+          .filter((layout) => layout !== undefined),
       };
       if (
         (module as Search).facetTabField &&
