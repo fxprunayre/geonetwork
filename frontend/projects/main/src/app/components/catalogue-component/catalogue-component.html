@@ -1,9 +1,10 @@
 <section>
-  <div class="py-4 px-[400px]">
-    <app-search-input></app-search-input>
+  <div class="py-4 px-[400px] flex flex-row gap-4">
+    <app-search-input class="w-full"></app-search-input>
 
-    @if (filterPanelMode == 'drawer') {
+    @if (filterPanelMode() == 'drawer') {
       <p-button (click)="visible = !visible">
+        <ng-icon name="faSolidFilter" pButtonIcon></ng-icon>
         <span pButtonLabel>Filter</span>
       </p-button>
     }
@@ -11,7 +12,7 @@
   <hr />
 
   <div class="flex flex-col md:flex-row min-h-screen gap-6 p-4">
-    @switch (filterPanelMode) {
+    @switch (filterPanelMode()) {
       @case ('side') {
         <div class="w-full xl:w-1/3">
           <app-side-panel />
@@ -23,10 +24,19 @@
         </p-drawer>
       }
     }
-    <div class="w-full" [class.px-[300px]]="filterPanelMode === 'drawer'">
+    <div class="w-full" [class.px-[300px]]="filterPanelMode() === 'drawer'">
       <app-result-header />
       <app-sort-results />
       <app-result-view />
+    </div>
+
+    <div>
+      Temporary options:
+      <ul>
+        <li>
+          Filter panel: <p-select [options]="['drawer', 'side']" [(ngModel)]="filterPanelMode" />
+        </li>
+      </ul>
     </div>
   </div>
 </section>
