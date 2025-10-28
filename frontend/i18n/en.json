@@ -26,5 +26,10 @@
   "activeFilters": "Active filters",
   "resetFilters": "Reset filters",
   "result": "result",
-  "results": "results"
+  "results": "results",
+  "sort": {
+    "lastUpdate": "Last update",
+    "popularity": "Popularity",
+    "title": "Title"
+  }
 }

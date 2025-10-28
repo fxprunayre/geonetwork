@@ -1,0 +1,12 @@
+<div class="card flex justify-end my-4">
+  <p-select
+    [options]="sortOptions"
+    [(ngModel)]="selectedSort"
+    (ngModelChange)="onSortChange($event)"
+    optionLabel="label"
+    optionValue="value"
+    [showClear]="false"
+    placeholder="Sort by"
+    class="w-full md:w-56"
+  />
+</div>

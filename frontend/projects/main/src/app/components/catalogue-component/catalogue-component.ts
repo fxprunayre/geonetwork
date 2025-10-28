@@ -4,6 +4,7 @@ import { SearchInput, ResultViewComponent } from 'gn-library';
 import { ResultHeader } from '../result-header/result-header';
 import { Drawer } from 'primeng/drawer';
 import { Button, ButtonLabel } from 'primeng/button';
+import { SortResults } from '../sort-results/sort-results';
 
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 
@@ -18,6 +19,7 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     Drawer,
     Button,
     ButtonLabel,
+    SortResults,
   ],
   standalone: true,
   templateUrl: './catalogue-component.html',

@@ -93,6 +93,7 @@ export class SearchService {
         searchRequestParameters.filters,
       ),
       _source: SEARCH_SOURCE,
+      sort: searchRequestParameters.sort
     };
 
     if (withAggregation) {

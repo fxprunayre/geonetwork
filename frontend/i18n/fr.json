@@ -26,5 +26,10 @@
   "activeFilters": "Filtres actifs",
   "resetFilters": "Réinitialiser les filtres",
   "result": "résultat",
-  "results": "résultats"
+  "results": "résultats",
+  "sort": {
+    "lastUpdate": "Dernière mise à jour",
+    "popularity": "Popularité",
+    "title": "Titre"
+  }
 }

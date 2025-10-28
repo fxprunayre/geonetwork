@@ -292,9 +292,12 @@ export const SearchStore = signalStore(
             );
           });
         },
+        setSort(sort: elasticsearch.Sort) {
+          patchState(store, { sort });
+        }
       };
     },
-  ),
+),
   withHooks({
     onInit({ search, searchFilterParameters, paging, searchRequestPageParameters }) {
       search(searchFilterParameters);
