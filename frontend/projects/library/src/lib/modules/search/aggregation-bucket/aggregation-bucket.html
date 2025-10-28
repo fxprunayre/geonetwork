@@ -30,8 +30,9 @@
       class="w-full"
       header="{{ bucket().doc_count }}"
       (click)="handleChange(bucket().key, !isActive())"
+      [title]="bucket().key | aggregationTranslate: keyName()"
     >
-      <p class="m-0">
+      <p class="m-0 line-clamp-1">
         {{ bucket().key | aggregationTranslate: keyName() }}
       </p>
     </p-card>
