@@ -6,6 +6,7 @@
     [aggregations]="searchConfig.aggregations"
     [filter]="searchConfig.filter"
     [routing]="true"
+    [size]="searchPageSize"
     filter="+isTemplate:n"
   >
     <router-outlet></router-outlet>

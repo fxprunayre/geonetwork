@@ -37,6 +37,9 @@ export class App {
   searchConfig: SearchApp =
     inject(APPLICATION_CONFIGURATION).config?.apps.search || ({} as SearchApp);
 
+  searchPageSize =
+    inject(APPLICATION_CONFIGURATION).config?.apps.search?.hitsPerPageOptions[0] || 10;
+
   constructor() {
     this.translate.addLangs(['en']);
   }

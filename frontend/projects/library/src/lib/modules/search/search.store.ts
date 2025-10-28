@@ -121,7 +121,7 @@ export const SearchStore = signalStore(
             switchMap((searchFilterParameters) => {
               patchState(store, {
                 currentPage: 0,
-                pageSize: DEFAULT_PAGE_SIZE,
+                pageSize: store.pageSize(),
                 results: [],
               });
 
