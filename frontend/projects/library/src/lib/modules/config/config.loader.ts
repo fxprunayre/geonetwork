@@ -1,7 +1,7 @@
 import { Search, UiConfiguration } from './model/gn4config';
 import { InjectionToken } from '@angular/core';
 import { DEFAULT_UI_CONFIGURATION, SEXTANT_UI_CONFIGURATION } from './gn4constants';
-import { AppsConfiguration, I18nApp } from './model/gnConfig';
+import { AppsConfiguration } from './model/gnConfig';
 
 export interface ApplicationConfiguration {
   config: AppsConfiguration | undefined;
@@ -37,6 +37,14 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
         aggregations: Object.entries((module as Search).facetConfig).map(([key, value]) => ({
           [key]: value,
         })),
+        sort: (module as Search).sortbyValues.map((sortOpt) => {
+          const sortField = sortOpt.sortBy === 'relevance' ? '_score' : sortOpt.sortBy;
+          const sortOrder = sortOpt.sortOrder === 'desc' ? '-' : '';
+          return sortOrder + sortField;
+        }),
+        currentSort:
+          (module as Search).sortBy === 'relevance' ? '_score' : (module as Search).sortBy,
+        hitsPerPageOptions: (module as Search).hitsperpageValues,
       };
       if (
         (module as Search).facetTabField &&

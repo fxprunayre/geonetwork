@@ -26,6 +26,9 @@ export interface SearchApp extends App {
   filter?: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
   aggregations: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
   advanced?: SearchAppAdvanced;
+  sort?: string[];
+  currentSort?: string;
+  hitsPerPageOptions: number[];
 }
 
 export interface SearchAppAdvanced {
