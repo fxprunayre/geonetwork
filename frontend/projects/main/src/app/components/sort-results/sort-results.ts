@@ -1,11 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
-import {
-  SearchService,
-  SearchStoreType,
-} from 'gn-library';
-import {elasticsearch} from 'gn-api-client';
+import { SearchService, SearchStoreType } from 'gn-library';
+import { elasticsearch } from 'gn-api-client';
 
 interface SortOption {
   label: string;
@@ -50,9 +47,7 @@ export class SortResults implements OnInit {
 
     switch (value) {
       case 'popularity':
-        sort = [
-          { popularity: { order: 'desc' } as unknown as elasticsearch.SortOrder },
-        ];
+        sort = [{ popularity: { order: 'desc' } as unknown as elasticsearch.SortOrder }];
         break;
       case 'title':
         sort = [
@@ -65,9 +60,7 @@ export class SortResults implements OnInit {
         break;
       case 'lastUpdate':
       default:
-        sort = [
-          { changeDate: { order: 'desc' } as unknown as elasticsearch.SortOrder },
-        ];
+        sort = [{ changeDate: { order: 'desc' } as unknown as elasticsearch.SortOrder }];
     }
 
     this.searchStore.setSort(sort);

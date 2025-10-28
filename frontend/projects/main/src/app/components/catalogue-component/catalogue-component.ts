@@ -8,7 +8,6 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidFilter } from '@ng-icons/font-awesome/solid';
 import { Select } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
-import { Button, ButtonLabel } from 'primeng/button';
 import { SortResults } from '../sort-results/sort-results';
 
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
