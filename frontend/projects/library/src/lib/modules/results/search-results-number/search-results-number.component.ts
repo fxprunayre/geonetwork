@@ -5,6 +5,7 @@ import { SearchBase } from '../../search/search-base/search-base';
 
 @Component({
   selector: 'app-search-results-number',
+  standalone: true,
   imports: [TranslatePipe, DecimalPipe],
   templateUrl: './search-results-number.component.html',
 })

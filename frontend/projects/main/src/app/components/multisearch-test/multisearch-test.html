@@ -1,0 +1,30 @@
+<div class="grid grid-cols-2 gap-4 m-6">
+  <div
+    appSearchContext="search1"
+    [aggregations]="['resourceType']"
+    [filter]="[{ query_string: { query: '+resourceType:dataset' } }]"
+  >
+    <h1>Search 1</h1>
+    <app-search-input [scope]="'search1'" class="w-full"></app-search-input>
+    <app-search-results-number
+      [scope]="'search1'"
+      class="font-semibold text-primary me-4 text-base"
+    />
+    <app-sort-results />
+    <app-result-view [scope]="'search1'" />
+  </div>
+  <div
+    appSearchContext="search2"
+    [aggregations]="['tag.default']"
+    [filter]="[{ query_string: { query: '-resourceType:dataset' } }]"
+  >
+    <h1>Search 2</h1>
+    <app-search-input [scope]="'search2'" class="w-full"></app-search-input>
+    <app-search-results-number
+      [scope]="'search2'"
+      class="font-semibold text-primary me-4 text-base"
+    />
+    <app-sort-results />
+    <app-result-view [scope]="'search2'" />
+  </div>
+</div>

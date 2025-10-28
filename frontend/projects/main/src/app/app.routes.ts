@@ -3,6 +3,7 @@ import { HomeComponent } from './components/home-component/home-component';
 import { CatalogueComponent } from './components/catalogue-component/catalogue-component';
 import { MapComponent } from './components/map-component/map-component';
 import { ResultDetailComponent } from './components/result-detail/result-detail';
+import { MultisearchTest } from './components/multisearch-test/multisearch-test';
 
 export function recordMatcher(url: UrlSegment[]): UrlMatchResult | null {
   if (url.length === 2 && url[0].path === 'record') {
@@ -25,5 +26,6 @@ export const routes: Routes = [
     component: ResultDetailComponent,
   },
   { path: 'map', component: MapComponent },
+  { path: 'test', component: MultisearchTest },
   { path: '**', redirectTo: '' },
 ];
