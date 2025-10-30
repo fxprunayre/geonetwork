@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StyleClassModule } from 'primeng/styleclass';
 import { RouterLink } from '@angular/router';
@@ -22,6 +22,6 @@ export class TopNavigation {
   menuOpen = signal(false);
 
   toggleMenu() {
-    this.menuOpen.update(v => !v);
+    this.menuOpen.update((v) => !v);
   }
 }
