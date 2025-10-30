@@ -49,7 +49,7 @@ const Sextant = definePreset(Aura, {
       100: "#D4F7E1",
       200: "#A8F0C3",
       300: "#7DE8A4",
-      400: "#51E186",
+      400: "#1A75AE",
       500: "#093564", // primary
       600: "#1EAE53",
       700: "#17823E",

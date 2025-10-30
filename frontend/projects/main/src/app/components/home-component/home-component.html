@@ -14,7 +14,7 @@
 
     <app-search-input (onSearch)="setRouteToSearch()" [searchOnInput]="false"></app-search-input>
 
-    <div appSearchContext="home" [aggregations]="['resourceType']">
+    <div appSearchContext="home" [aggregations]="['resourceType']" class="mb-10">
       <app-search-welcome-text scope="home"></app-search-welcome-text>
     </div>
   </div>
