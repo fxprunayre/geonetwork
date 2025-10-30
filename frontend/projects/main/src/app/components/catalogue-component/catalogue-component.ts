@@ -34,6 +34,7 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
   viewProviders: [provideIcons({ faSolidFilter })],
 })
 export class CatalogueComponent {
+  bgFirst = '/images/bgFirst.jpg';
   visible = false;
   filterPanelMode = signal<FilterPanelLayout>('drawer');
 }

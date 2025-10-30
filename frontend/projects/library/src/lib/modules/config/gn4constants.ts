@@ -1406,6 +1406,19 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
             meta: {
               collapsed: true,
               refreshPolicy: 'none',
+              decorator: {
+                type: 'icon',
+                map: {
+                  dataset: 'faSolidDatabase',
+                  map: 'faSolidMap',
+                  featureCatalog: 'faSolidTable',
+                  document: 'faSolidCopy',
+                  service: 'faSolidCloud',
+                  series: 'faSolidCopy',
+                  nonGeographicDataset: 'faSolidChartColumn',
+                  publication: 'faSolidBook',
+                },
+              },
             },
           },
         },

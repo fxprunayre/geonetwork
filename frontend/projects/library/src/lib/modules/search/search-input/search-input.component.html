@@ -8,9 +8,11 @@
         type="text"
         pInputText
         name="search"
+        autocomplete="off"
         [ngModel]="search.searchQuery()"
         (ngModelChange)="searchOnInputChange($event)"
         (keyup.enter)="searchOnClick()"
+        (click)="handleInputClick($event)"
       />
       <p-inputgroup-addon>
         <p-button severity="secondary" variant="text" (onClick)="searchOnClick()">
@@ -18,6 +20,12 @@
         </p-button>
       </p-inputgroup-addon>
     </p-inputgroup>
+
+    @if (popOverTemplate()) {
+      <p-popover #op>
+        <ng-container *ngTemplateOutlet="popOverTemplate()"></ng-container>
+      </p-popover>
+    }
 
     @if (search.searchQuery()) {
       <button

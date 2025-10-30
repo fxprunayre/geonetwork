@@ -8,6 +8,7 @@
         (ngModelChange)="handleChange(bucket().key, $event)"
       ></p-checkbox>
       <label class="ml-2" [for]="keyName() + '_' + bucket().key">
+        <app-aggregation-bucket-decorator [bucket]="bucket()" [decorator]="decorator()" />
         {{ label() }}
       </label>
     </div>
@@ -22,16 +23,29 @@
         [styleClass]="isActive() ? 'active' : ''"
         [attr.aria-pressed]="isActive()"
         size="small"
-      ></p-button>
+      >
+        <app-aggregation-bucket-decorator
+          pButtonIcon
+          [bucket]="bucket()"
+          [decorator]="decorator()"
+        />
+      </p-button>
     </div>
   }
   @case ('card') {
     <p-card
       class="w-full"
-      header="{{ bucket().doc_count }}"
       (click)="handleChange(bucket().key, !isActive())"
       [title]="bucket().key | aggregationTranslate: keyName()"
     >
+      <ng-template #header>
+        <app-aggregation-bucket-decorator
+          class="bg-primary/90 text-white w-full flex justify-center"
+          [bucket]="bucket()"
+          [decorator]="decorator()"
+        />
+      </ng-template>
+      <div class="font-bold text-2xl w-full">{{ bucket().doc_count }}</div>
       <p class="m-0 line-clamp-1">
         {{ bucket().key | aggregationTranslate: keyName() }}
       </p>

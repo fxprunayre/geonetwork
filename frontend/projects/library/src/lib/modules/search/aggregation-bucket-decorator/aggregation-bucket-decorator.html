@@ -1,0 +1,10 @@
+@if (decorator()) {
+  @if (icon()) {
+    <span [class]="decorator()?.prefix || ''">
+      <ng-icon [name]="icon()"></ng-icon>
+    </span>
+  }
+  @if (image()) {
+    <div class="w-full h-40 bg-cover" [style.background-image]="'url(' + image() + ')'"></div>
+  }
+}

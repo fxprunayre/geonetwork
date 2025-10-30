@@ -1,9 +1,7 @@
 <section
-  class="relative flex flex-col justify-center items-center bg-cover bg-center"
+  class="relative flex flex-col justify-center items-center bg-top-left bg-auto bg-blend-overlay bg-primary/80"
   [style.background-image]="'url(' + bgFirst + ')'"
 >
-  <div class="absolute inset-0 bg-primary/80"></div>
-
   <div class="relative z-10 mx-auto md:w-[1280px] w-full pb-4">
     <h1 class="text-white text-[60px] font-extrabold w-full md:w-[700px]">
       Charting the ocean's story through data
@@ -12,20 +10,33 @@
       Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.
     </p>
 
-    <app-search-input (onSearch)="setRouteToSearch()" [searchOnInput]="false"></app-search-input>
+    <app-search-input
+      (onSearch)="setRouteToSearch()"
+      [searchOnInput]="false"
+      [popOverTemplate]="popOverTemplate"
+    >
+      <ng-template #popOverTemplate>
+        <span>{{ 'search.input.popover.resourceType.title' | translate }}</span>
+        <app-aggregation
+          scope="home"
+          keyName="resourceType"
+          displayType="card"
+          class="my-12 grid grid-cols-4 gap-6"
+          (onSelected)="setRouteForAggregation($event)"
+        ></app-aggregation>
+      </ng-template>
+    </app-search-input>
 
-    <div appSearchContext="home" [aggregations]="['resourceType']" class="mb-10">
+    <div appSearchContext="home" [aggregations]="homeAggregationConfig" class="mb-10">
       <app-search-welcome-text scope="home"></app-search-welcome-text>
     </div>
   </div>
 </section>
 
-<section class="relative flex flex-col justify-center items-center py-[35px] overflow-hidden">
-  <div
-    class="absolute inset-0 bg-center bg-cover opacity-20"
-    [style.background-image]="'url(' + bgSecond + ')'"
-  ></div>
-
+<section
+  class="relative flex flex-col justify-center items-center py-[35px] overflow-hidden bg-center bg-cover bg-blend-overlay bg-white/80"
+  [style.background-image]="'url(' + bgSecond + ')'"
+>
   <div class="relative z-10 grid grid-cols-2 gap-48 md:w-[1280px] w-full">
     <div>
       <h2 class="text-primary text-[60px] font-extrabold">
@@ -49,14 +60,16 @@
       <h2 class="text-[60px] text-primary font-extrabold mb-[40px] w-[475px]">
         Discover interactive maps
       </h2>
-
-      <app-aggregation
-        scope="home"
-        keyName="resourceType"
-        displayType="card"
-        class="my-12 grid grid-cols-4 gap-6"
-        (onSelected)="setRouteForAggregation($event)"
-      ></app-aggregation>
     </div>
+  </div>
+
+  <div class="flex flex-col justify-center md:w-[1280px] w-full">
+    <app-aggregation
+      scope="home"
+      keyName="th_sextant-theme_tree.key"
+      displayType="card"
+      class="my-12 grid grid-cols-3 gap-6"
+      (onSelected)="setRouteForAggregation($event)"
+    ></app-aggregation>
   </div>
 </section>

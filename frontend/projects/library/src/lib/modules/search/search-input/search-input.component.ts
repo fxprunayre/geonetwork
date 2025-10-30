@@ -1,33 +1,33 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   inject,
-  Input,
-  Output,
-  OnInit,
   input,
+  OnInit,
   output,
+  TemplateRef,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { InputText } from 'primeng/inputtext';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { Button, ButtonIcon } from 'primeng/button';
-import { ActivatedRoute, Router } from '@angular/router';
 import { SearchStore } from '../search.store';
 import { SearchBase } from '../search-base/search-base';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidXmark, faSolidMagnifyingGlass } from '@ng-icons/font-awesome/solid';
+import { faSolidMagnifyingGlass, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { faMap } from '@ng-icons/font-awesome/regular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AutoFocus } from 'primeng/autofocus';
+import { NgTemplateOutlet } from '@angular/common';
+import { Popover } from 'primeng/popover';
 
 @Component({
   selector: 'app-search-input',
   standalone: true,
   imports: [
+    NgTemplateOutlet,
     FormsModule,
     InputText,
     InputGroup,
@@ -37,6 +37,7 @@ import { AutoFocus } from 'primeng/autofocus';
     ButtonIcon,
     TranslatePipe,
     AutoFocus,
+    Popover,
   ],
   viewProviders: [provideIcons({ faSolidMagnifyingGlass, faSolidXmark, faMap })],
   templateUrl: './search-input.component.html',
@@ -45,6 +46,9 @@ import { AutoFocus } from 'primeng/autofocus';
 export class SearchInput extends SearchBase implements OnInit {
   autofocus = input<boolean>(true);
   searchOnInput = input<boolean>(true);
+
+  popOverTemplate = input<TemplateRef<unknown>>();
+  op = viewChild<Popover>('op');
 
   onSearch = output();
 
@@ -66,6 +70,12 @@ export class SearchInput extends SearchBase implements OnInit {
   onModelChange(queryString: string) {
     this.search.setFullTextQuery(queryString);
     this.onSearch.emit();
+  }
+
+  handleInputClick(event: MouseEvent) {
+    if (this.op()) {
+      this.op()?.toggle(event);
+    }
   }
 
   clearQuery() {

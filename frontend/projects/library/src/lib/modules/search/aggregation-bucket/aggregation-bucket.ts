@@ -11,17 +11,26 @@ import {
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { Checkbox } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
-import { Button } from 'primeng/button';
+import { Button, ButtonIcon } from 'primeng/button';
 import { SearchBase } from '../search-base/search-base';
-import { AggregationLayout } from 'gn-api-client';
+import { AggregationLayout, Decorator } from 'gn-api-client';
 import { Card } from 'primeng/card';
 import { SearchFilter, SearchFilterChange } from '../search.store.model';
 import { DecimalPipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
 
 @Component({
   selector: 'app-aggregation-bucket',
-  imports: [Checkbox, FormsModule, Button, Card, AggregationTranslatePipe],
+  imports: [
+    Checkbox,
+    FormsModule,
+    Button,
+    Card,
+    AggregationTranslatePipe,
+    AggregationBucketDecorator,
+    ButtonIcon,
+  ],
   templateUrl: './aggregation-bucket.html',
   providers: [AggregationTranslatePipe, DecimalPipe],
   standalone: true,
@@ -43,6 +52,10 @@ export class AggregationBucket extends SearchBase {
     return (
       this.displayType() || this.search.aggregations()[this.keyName()].meta?.layout || 'checkbox'
     );
+  });
+
+  decorator = computed<Decorator | undefined>(() => {
+    return this.search.aggregations()[this.keyName()].meta?.decorator;
   });
 
   label = computed(() => {
