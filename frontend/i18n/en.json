@@ -6,7 +6,6 @@
     "welcome.text": "Search over {{count}} {{mainBuckets}}, ..."
   },
   "record.field.overview.notAvailable": "No preview",
-  "record.field.credit": "Source: ",
   "i18n": {
     "languageSwitcher": {
       "select": "Choose your language."

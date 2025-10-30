@@ -6,7 +6,6 @@
     "welcome.text": "Rechercher parmi {{count}} {{mainBuckets}}, ..."
   },
   "record.field.overview.notAvailable": "Pas d'aperçu",
-  "record.field.credit": "Source : ",
   "i18n": {
     "languageSwitcher": {
       "select": "Sélectionner votre langue."
