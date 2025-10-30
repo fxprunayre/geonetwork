@@ -27,7 +27,7 @@
         </p-drawer>
       }
     }
-    <div class="w-full" [class.px-[300px]]="filterPanelMode() === 'drawer'">
+    <div class="w-full" [class.xl:px-[300px]]="filterPanelMode() === 'drawer'">
       <app-result-header />
       <div class="flex flex-row justify-end items-center gap-2">
         <p-select [options]="['drawer', 'side']" [(ngModel)]="filterPanelMode" />
