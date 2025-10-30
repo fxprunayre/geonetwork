@@ -1,0 +1,24 @@
+<div
+  #contentContainer
+  class="content-container relative"
+  [ngStyle]="{ 'max-height': calculatedMaxHeight() }"
+>
+  <ng-content></ng-content>
+
+  @if (!isExpanded() && needsToggle()) {
+    <div
+      class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none"
+    ></div>
+  }
+</div>
+
+@if (needsToggle()) {
+  <div class="my-6 text-right">
+    <p-button variant="outlined" size="small" (click)="toggleContent()">
+      <ng-icon pButtonIcon [name]="isExpanded() ? 'faSolidChevronUp' : 'faSolidChevronDown'" />
+      <span pButtonLabel="">{{
+        'shared.show-more-toggle.' + (isExpanded() ? 'less' : 'more') | translate
+      }}</span>
+    </p-button>
+  </div>
+}

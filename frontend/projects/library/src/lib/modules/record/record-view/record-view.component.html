@@ -24,11 +24,13 @@
           </div>
         </div>
         <div class="md:col-span-2">
-          <h3 class="text-xl font-semibold mb-3">Description</h3>
-          <p
-            class="text-surface-700 leading-relaxed mb-6"
-            [innerHTML]="record.resourceAbstractObject?.['default'] || '' | markdown | async"
-          ></p>
+          <app-show-more-toggle>
+            <h3 class="text-xl font-semibold mb-3">Description</h3>
+            <p
+              class="text-surface-700 leading-relaxed mb-6"
+              [innerHTML]="record.resourceAbstractObject?.['default'] || '' | markdown | async"
+            ></p>
+          </app-show-more-toggle>
           <div class="flex gap-3">
             <button pButton class="flex-auto md:flex-initial">
               <ng-icon name="faSolidDownload" pButtonIcon></ng-icon>
@@ -89,8 +91,10 @@
     </div>
 
     <div class="my-6 border p-3 border-gray-300">
-      <h3 class="text-xl">Lineage</h3>
-      <p>{{ getLineage() }}</p>
+      <app-show-more-toggle>
+        <h3 class="text-xl">Lineage</h3>
+        <p [innerHTML]="getLineage() | markdown | async"></p>
+      </app-show-more-toggle>
     </div>
 
     <div class="my-6 border p-3 border-gray-300">

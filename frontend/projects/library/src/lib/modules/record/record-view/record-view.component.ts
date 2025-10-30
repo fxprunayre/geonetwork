@@ -15,6 +15,7 @@ import { Card } from 'primeng/card';
 import { RecordFieldOverviewComponent } from '../record-field-overview/record-field-overview.component';
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { MarkdownPipe } from 'ngx-markdown';
+import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 
 @Component({
   selector: 'app-record-view',
@@ -32,6 +33,7 @@ import { MarkdownPipe } from 'ngx-markdown';
     RecordFieldType,
     MarkdownPipe,
     AsyncPipe,
+    ShowMoreToggle,
   ],
   viewProviders: [
     provideIcons({

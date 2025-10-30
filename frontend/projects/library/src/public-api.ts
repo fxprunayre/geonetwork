@@ -29,3 +29,4 @@ export * from './lib/modules/record/record-field-type/record-field-type';
 export * from './lib/modules/record/record-field-title/record-field-title';
 export * from './lib/modules/record/record-field-credit/record-field-credit';
 export * from './lib/shared/widgets/loading-mask/loading-mask.component';
+export * from './lib/shared/widgets/show-more-toggle/show-more-toggle';

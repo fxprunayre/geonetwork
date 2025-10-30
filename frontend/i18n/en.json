@@ -15,6 +15,12 @@
     "eng": "English",
     "fre": "Français"
   },
+  "shared": {
+    "show-more-toggle": {
+      "more": "Read more",
+      "less": "View less"
+    }
+  },
   "groupPublishedId": "Groups",
   "th_sextant-theme_tree.key": "Sextant themes",
   "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",

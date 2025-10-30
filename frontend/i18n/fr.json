@@ -15,6 +15,12 @@
     "eng": "English",
     "fre": "Français"
   },
+  "shared": {
+    "show-more-toggle": {
+      "more": "Lire la suite",
+      "less": "Réduire"
+    }
+  },
   "groupPublishedId": "Catalogues",
   "th_sextant-theme_tree.key": "Thèmes Sextant",
   "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
