@@ -1,38 +1,60 @@
-<div class="py-4 flex items-center justify-between bg-primary mx-auto w-full h-[81px] px-[200px]">
-  <div class="flex items-center gap-4">
-    <a class="text-white" routerLink="/"
-      ><img [src]="logo" [attr.alt]="" loading="lazy" class="h-[32px]"
-    /></a>
-    <a class="text-white" routerLink="/">Home</a>
-    <a routerLink="/search" class="text-white">Catalog</a>
-    <a routerLink="/map" class="text-white">Map</a>
-  </div>
-  <div class="flex items-center gap-4">
-    <span class="hidden sm:flex flex-col sm:flex-row gap-4">
-      <a routerLink="/extras" class="text-white">Extras</a>
-      <a routerLink="/settings" class="text-white">Settings</a>
-    </span>
-    <button
-      type="button"
-      class="cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-400 dark:hover:bg-surface-800 transition-all text-white dark:text-surface-0 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 dark:focus-visible:ring-offset-surface-950"
-    >
-      <ng-icon name="faUser" />
-    </button>
+<nav class="bg-primary text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-[81px] items-center">
 
-    <app-language-switcher />
+      <div class="flex items-center gap-3">
+        <a routerLink="/">
+          <img [src]="logo" alt="Logo" class="h-[32px]" />
+        </a>
+      </div>
 
-    <!--          <button-->
-    <!--            type="button"-->
-    <!--            class="cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-100 dark:hover:bg-surface-800 transition-all text-surface-900 dark:text-surface-0 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 dark:focus-visible:ring-offset-surface-950"-->
-    <!--            (click)="toggleDarkMode()"-->
-    <!--          >-->
-    <!--            <i-->
-    <!--              class="pi text-base"-->
-    <!--              [ngClass]="{-->
-    <!--                'pi-moon': isDarkMode(),-->
-    <!--                'pi-sun': !isDarkMode()-->
-    <!--              }"-->
-    <!--            ></i>-->
-    <!--          </button>-->
+      <div class="flex md:hidden">
+        <button
+          type="button"
+          (click)="toggleMenu()"
+          class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-surface-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+        >
+          <ng-icon [name]="menuOpen() ? 'faSolidXmark' : 'faSolidBars'"></ng-icon>
+        </button>
+      </div>
+
+      <div class="hidden md:flex flex-1 justify-between items-center">
+        <div class="flex items-center gap-6 ms-4">
+          <a routerLink="/" class="hover:text-surface-200">Home</a>
+          <a routerLink="/search" class="hover:text-surface-200">Catalog</a>
+          <a routerLink="/map" class="hover:text-surface-200">Map</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <a routerLink="/extras" class="hover:text-surface-200">Extras</a>
+          <a routerLink="/settings" class="hover:text-surface-200">Settings</a>
+          <button
+            type="button"
+            class="cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-400 dark:hover:bg-surface-800 transition-all text-white dark:text-surface-0 focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            <ng-icon name="faUser"></ng-icon>
+          </button>
+          <app-language-switcher></app-language-switcher>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+
+
+  @if (menuOpen()) {
+    <div class="md:hidden bg-primary border-t border-surface-400 px-4 pb-4 space-y-2">
+      <a routerLink="/" class="block py-2 hover:text-surface-200">Home</a>
+      <a routerLink="/search" class="block py-2 hover:text-surface-200">Catalog</a>
+      <a routerLink="/map" class="block py-2 hover:text-surface-200">Map</a>
+      <a routerLink="/extras" class="block py-2 hover:text-surface-200">Extras</a>
+      <a routerLink="/settings" class="block py-2 hover:text-surface-200">Settings</a>
+      <button
+        type="button"
+        class="cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-400 text-white"
+      >
+        <ng-icon name="faUser"></ng-icon>
+      </button>
+      <app-language-switcher></app-language-switcher>
+    </div>
+  }
+</nav>
