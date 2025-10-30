@@ -20,7 +20,7 @@ export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   return new TranslationsLoader(_httpBackend, [
     // Order is important. The last files can override previous ones.
     { prefix: '/geonetwork/srv/api/i18n/packages/gnui', suffix: '', useHeader: true },
-    { prefix: '/i18n/', suffix: '.json' },
+    { prefix: 'i18n/', suffix: '.json' },
   ]);
 }
 

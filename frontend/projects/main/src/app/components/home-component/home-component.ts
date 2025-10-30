@@ -95,9 +95,9 @@ export class HomeComponent {
     },
   ];
 
-  bgFirst = '/images/bgFirst.jpg';
-  bgSecond = '/images/bgSecond.png';
-  island = '/images/island.jpg';
+  bgFirst = 'images/bgFirst.jpg';
+  bgSecond = 'images/bgSecond.png';
+  island = 'images/island.jpg';
 
   setRouteToSearch() {
     this.router.navigate(['/search']);

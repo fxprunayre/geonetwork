@@ -16,5 +16,5 @@ import { LanguageSwitcher } from 'gn-library';
   imports: [ButtonModule, StyleClassModule, RouterLink, NgIcon, FormsModule, LanguageSwitcher],
 })
 export class TopNavigation {
-  logo = '/images/logo.svg';
+  logo = 'images/logo.svg';
 }
