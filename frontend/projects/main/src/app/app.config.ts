@@ -14,6 +14,7 @@ import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslationsLoader } from 'gn-library';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { provideMarkdown } from 'ngx-markdown';
 
 export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   return new TranslationsLoader(_httpBackend, [
@@ -47,6 +48,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideMarkdown(),
   ],
 };
 

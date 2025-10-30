@@ -29,8 +29,8 @@ export class ResultViewComponent extends SearchBase {
     inject(APPLICATION_CONFIGURATION).config?.apps.search?.resultsLayoutOptions;
   layout = signal<SearchAppLayout>(this.resultsLayoutOptions?.[0] || 'list');
 
-  // TODO: Move to app
-  viewDetails(id: string) {
-    this.router.navigate(['/record/', id]);
+  // TODO: Move to appq
+  viewDetails(uuid: string) {
+    this.router.navigate(['/record/', uuid]);
   }
 }

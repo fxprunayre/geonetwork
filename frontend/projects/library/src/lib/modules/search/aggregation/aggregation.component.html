@@ -23,13 +23,13 @@
   }
   @case ('button') {
     @for (bucket of buckets(); track bucket.key) {
-        <app-aggregation-bucket
-          [scope]="scope()"
-          [keyName]="keyName()"
-          [bucket]="bucket"
-          [displayType]="layout()"
-          (onSelected)="filter($event)"
-        />
+      <app-aggregation-bucket
+        [scope]="scope()"
+        [keyName]="keyName()"
+        [bucket]="bucket"
+        [displayType]="layout()"
+        (onSelected)="filter($event)"
+      />
     }
   }
   @case ('card') {

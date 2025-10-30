@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit, signal, TemplateRef } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
@@ -13,6 +13,8 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { ButtonDirective, ButtonIcon, ButtonLabel } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { RecordFieldOverviewComponent } from '../record-field-overview/record-field-overview.component';
+import { RecordFieldType } from '../record-field-type/record-field-type';
+import { MarkdownPipe } from 'ngx-markdown';
 
 @Component({
   selector: 'app-record-view',
@@ -27,6 +29,9 @@ import { RecordFieldOverviewComponent } from '../record-field-overview/record-fi
     ButtonIcon,
     Card,
     RecordFieldOverviewComponent,
+    RecordFieldType,
+    MarkdownPipe,
+    AsyncPipe,
   ],
   viewProviders: [
     provideIcons({
