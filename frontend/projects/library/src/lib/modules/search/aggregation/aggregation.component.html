@@ -23,7 +23,6 @@
   }
   @case ('button') {
     @for (bucket of buckets(); track bucket.key) {
-      <div class="flex items-center mb-2">
         <app-aggregation-bucket
           [scope]="scope()"
           [keyName]="keyName()"
@@ -31,7 +30,6 @@
           [displayType]="layout()"
           (onSelected)="filter($event)"
         />
-      </div>
     }
   }
   @case ('card') {

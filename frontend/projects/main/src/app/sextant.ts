@@ -62,7 +62,7 @@ const Sextant = definePreset(Aura, {
     primary: {
       50: "{myprimary.50}",
       100: "{myprimary.100}",
-      200: "{myprimary.200}",
+      200: "{myprimary.500}",
       300: "{myprimary.300}",
       400: "{myprimary.400}",
       500: "{myprimary.500}",
