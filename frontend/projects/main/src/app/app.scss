@@ -1,0 +1,9 @@
+:host ::ng-deep .p-scrolltop {
+  background-color: var(--p-primary-500);
+  border: 1px solid var(--p-primary-500);
+
+  &:hover {
+    background-color: var(--p-primary-300);
+    border: 1px solid var(--p-primary-300);
+  }
+}
