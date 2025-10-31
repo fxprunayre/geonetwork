@@ -18,7 +18,11 @@
   <name>GeoNetwork main app</name>
   <description>The main GeoNetwork application</description>
   <dependencies>
-
+    <dependency>
+      <groupId>org.geonetwork</groupId>
+      <artifactId>gn-frontend</artifactId>
+      <version>${project.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.geonetwork</groupId>
       <artifactId>gn-ogcapi-records-implementation</artifactId>
@@ -244,6 +248,28 @@
             <id>repackage</id>
             <configuration>
               <classifier>exec</classifier>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-frontend</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.outputDirectory}/public</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${maven.multiModuleProjectDirectory}/frontend/dist/main/browser</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
             </configuration>
           </execution>
         </executions>

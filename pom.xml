@@ -39,6 +39,7 @@
   </licenses>
 
   <modules>
+    <module>frontend</module>
     <module>src/shared</module>
     <module>src/modules</module>
     <module>src/apps</module>
@@ -348,7 +349,7 @@
                 <include>pom.xml</include>
               </includes>
               <excludes>
-                <exclude>frontend/**</exclude>
+                <exclude>projects/**</exclude>
                 <exclude>**/target/**</exclude>
                 <exclude>src/*/resources/schemas/iso19139/schema2007/**</exclude>
                 <exclude>src/*/resources/schemas/iso19139/schema/**</exclude>
