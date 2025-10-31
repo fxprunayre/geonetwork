@@ -46,59 +46,37 @@
     </div>
   </p-card>
 
-  <!-- if resourcetype is metadata -->
-  <div>
-    <div class="my-6 border p-3 border-gray-300">
-      <h3 class="text-xl">Date(s)</h3>
-      <p>{{ record.resourceTemporalExtentDetails?.[0]?.start?.date }} (Creation)</p>
-      <p>{{ record.createDate }} (Publication)</p>
-      <p>{{ record.resourceTemporalExtentDetails?.[0]?.start?.date }} (Temporal coverage)</p>
-    </div>
+  <ng-template #aboutContent>
+    <app-record-field [label]="'resourceDate'">
+      @for (date of record.resourceDate; track $index) {
+        <ul>
+          <li>{{ date.type }}: {{ date.date | date: 'long' }}</li>
+        </ul>
+      }
+    </app-record-field>
 
-    <div class="my-6 border p-3 border-gray-300">
-      <h3 class="text-xl">Authors</h3>
-      <ul>
-        @for (author of getAuthors(); track $index) {
-          <li>
-            <span>{{ author.individual }}</span>
-            <span> ({{ getOrgName() }}) </span>
-            @if (author.email) {
-              - <a href="mailto:{{ author.email }}">{{ author.email }}</a>
-            }
-          </li>
-        }
-      </ul>
-    </div>
+    <app-record-field [label]="'temporalExtent'">
+      @if (record.resourceTemporalExtentDetails) {
+        <p>
+          {{ record.resourceTemporalExtentDetails?.[0]?.start?.date }}
+          - {{ record.resourceTemporalExtentDetails?.[0]?.end?.date }}
+        </p>
+      }
+    </app-record-field>
 
-    <div class="my-6 border p-3 border-gray-300">
-      <h3 class="text-xl">Contacts</h3>
-      <ul>
-        @for (contact of getContacts(); track $index) {
-          <li>
-            <span>{{ contact.individual }}</span>
-            <span> ({{ getOrgName() }}) </span>
-            @if (contact.email) {
-              - <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-            }
-          </li>
-        }
-      </ul>
-    </div>
+    <app-record-field [label]="'Contacts'">
+      <app-record-field-contact [record]="record" />
+    </app-record-field>
 
-    <div class="my-6 border p-3 border-gray-300">
-      <h3 class="text-xl">Source</h3>
-      <p>{{ getOrgName() }}</p>
-    </div>
+    <app-record-field [label]="'Credits'">
+      <app-record-field-credit [record]="record" />
+    </app-record-field>
+  </ng-template>
 
-    <div class="my-6 border p-3 border-gray-300">
-      <app-show-more-toggle>
-        <h3 class="text-xl">Lineage</h3>
-        <p [innerHTML]="getLineage() | markdown | async"></p>
-      </app-show-more-toggle>
-    </div>
+  <ng-template #dataAccessContent> </ng-template>
 
-    <div class="my-6 border p-3 border-gray-300">
-      <h3 class="text-xl">Constraints</h3>
+  <ng-template #licenseContent>
+    <app-record-field [label]="'Constraints'">
       <p>
         Use limitation:
         <a [href]="getConstraints().link" target="_blank" class="font-bold">
@@ -117,10 +95,20 @@
           {{ getOtherConstraint().default }}
         </a>
       </p>
-    </div>
+    </app-record-field>
+  </ng-template>
 
-    <div class="my-6 border p-3 border-gray-300">
-      <h3 class="text-xl">Spatial informations</h3>
+  <ng-template #lineageContent>
+    <app-record-field [label]="'Lineage'">
+      <app-show-more-toggle>
+        <h3 class="text-xl">Lineage</h3>
+        <p [innerHTML]="getLineage() | markdown | async"></p>
+      </app-show-more-toggle>
+    </app-record-field>
+  </ng-template>
+
+  <ng-template #spatialInfoContent>
+    <app-record-field [label]="'Spatial information'">
       <p>
         <span>Data type: {{ record['cl_spatialRepresentationType']?.[0]?.key }}</span>
       </p>
@@ -130,24 +118,33 @@
       <p>
         <span>Coordinate system: {{ record.coordinateSystem?.[0] }}</span>
       </p>
-    </div>
+    </app-record-field>
+  </ng-template>
 
-    <div class="my-6 border p-3 border-gray-300">
-      <h3 class="text-xl">Related resources</h3>
+  <ng-template #associatedContent> </ng-template>
 
-      <div class="my-6 border p-3 border-gray-300">
-        <h5 class="text-lg font-semibold">Children</h5>
-        <ul>
-          <li></li>
-        </ul>
-      </div>
-
-      <div class="my-6 border p-3 border-gray-300">
-        <h5 class="text-lg font-semibold">Associated resources</h5>
-        <ul>
-          <li></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  @for (
+    section of [
+      { label: 'about', tpl: aboutContent },
+      { label: 'dataAccess', tpl: dataAccessContent },
+      { label: 'license', tpl: licenseContent },
+      { label: 'lineage', tpl: lineageContent },
+      { label: 'spatialInfo', tpl: spatialInfoContent },
+      { label: 'associatedResources', tpl: associatedContent },
+    ];
+    track section.label
+  ) {
+    @switch (layout()) {
+      @case ('fieldset') {
+        <p-fieldset [legend]="section.label | translate" [toggleable]="true" class="mb-10">
+          <ng-container *ngTemplateOutlet="section.tpl" />
+        </p-fieldset>
+      }
+      @default {
+        <p-panel [header]="section.label | translate" [toggleable]="true" class="mb-10">
+          <ng-container *ngTemplateOutlet="section.tpl" />
+        </p-panel>
+      }
+    }
+  }
 }

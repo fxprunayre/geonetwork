@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit, signal, TemplateRef } from '@angular/core';
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, DatePipe, KeyValuePipe, NgTemplateOutlet } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
@@ -16,6 +16,12 @@ import { RecordFieldOverviewComponent } from '../record-field-overview/record-fi
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
+import { Fieldset } from 'primeng/fieldset';
+import { Panel } from 'primeng/panel';
+import { RecordField } from '../record-field/record-field';
+import { RecordFieldContact } from '../record-field-contact/record-field-contact';
+import { RecordFieldCredit } from '../record-field-credit/record-field-credit';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-record-view',
@@ -34,6 +40,14 @@ import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-mo
     MarkdownPipe,
     AsyncPipe,
     ShowMoreToggle,
+    Fieldset,
+    DatePipe,
+    Panel,
+    RecordField,
+    RecordFieldContact,
+    RecordFieldCredit,
+    TranslatePipe,
+    KeyValuePipe,
   ],
   viewProviders: [
     provideIcons({
@@ -46,6 +60,8 @@ import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-mo
 })
 export class RecordViewComponent implements OnInit {
   uuid = input<string | null>();
+
+  layout = input<'fieldset' | 'panel'>('panel');
 
   searchService = inject(SearchService);
 

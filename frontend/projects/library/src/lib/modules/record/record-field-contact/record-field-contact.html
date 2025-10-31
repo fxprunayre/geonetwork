@@ -1,0 +1,35 @@
+@for (role of contactsByRole() | keyvalue; track role.key) {
+  <label class="text-2xl font-bold">{{ role.key | translate }} ({{ role.value.length }})</label>
+
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    @for (contact of role.value; track $index) {
+      <p-card (click)="op.toggle($event)" class="cursor-pointer">
+        <ng-template #title>
+          @let mainContact = contact.organisationObject.default || contact.individual;
+          @let firstLetter = mainContact.charAt(0).toUpperCase();
+          <p-avatar [label]="firstLetter" class="mr-2" size="xlarge" shape="circle" />
+          {{ mainContact }}
+        </ng-template>
+        <ng-template #subtitle>
+          {{ contact.individual }}
+        </ng-template>
+      </p-card>
+      <p-popover #op>
+        <h4>More info</h4>
+        @if (contact.email) {
+          <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+        }
+
+        @if (contact.website) {
+          <div class="mt-2">
+            <a href="{{ contact.website }}" target="_blank" rel="noopener">
+              {{ contact.website }}
+            </a>
+          </div>
+        }
+
+        <!-- TODO address, phone-->
+      </p-popover>
+    }
+  </section>
+}
