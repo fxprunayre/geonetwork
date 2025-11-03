@@ -1,8 +1,9 @@
-@if (credits()) {
-  @for (c of credits(); track $index) {
+@let creds = credits();
+@if (creds) {
+  @for (c of creds; track $index) {
     @if ((displayFirstOnly() && $index === 0) || !displayFirstOnly()) {
       <span class="text-base text-primary-400" [title]="c['default']">
-        @if ($index < credits().length - 1 && !displayFirstOnly()) {
+        @if ($index < creds.length - 1 && !displayFirstOnly()) {
           {{ c['default'] }},
         } @else {
           {{ c['default'] }}
