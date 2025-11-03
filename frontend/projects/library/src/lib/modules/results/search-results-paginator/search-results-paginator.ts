@@ -14,5 +14,10 @@ export class SearchResultsPaginator extends SearchBase {
 
   onPageChange(event: any) {
     this.search.setPage(event.page, event.rows);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 }
