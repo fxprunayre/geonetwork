@@ -6,6 +6,7 @@ import { CardModule } from 'primeng/card';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidArrowLeft } from '@ng-icons/font-awesome/solid';
 import { RecordViewComponent } from 'gn-library';
+import {TranslatePipe} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-result-detail',
@@ -18,6 +19,7 @@ import { RecordViewComponent } from 'gn-library';
     ButtonIcon,
     CardModule,
     NgIcon,
+    TranslatePipe,
   ],
   viewProviders: [
     provideIcons({

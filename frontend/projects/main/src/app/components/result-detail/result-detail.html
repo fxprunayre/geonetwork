@@ -1,9 +1,9 @@
 <div class="container mx-auto p-4">
   <app-record-view [uuid]="uuid()" [backButtonTplRef]="backButton">
     <ng-template #backButton>
-      <button pButton (click)="goBack()" [outlined]="true">
+      <button pButton (click)="goBack()" [outlined]="true" class="mb-4">
         <ng-icon name="faSolidArrowLeft" pButtonIcon></ng-icon>
-        <span pButtonLabel>Back to Results</span>
+        <span pButtonLabel>{{ 'backToResults' | translate }}</span>
       </button>
     </ng-template>
   </app-record-view>
