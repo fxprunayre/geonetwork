@@ -1,7 +1,12 @@
 {
   "search": {
     "input": {
-      "placeholder": "Search ..."
+      "placeholder": "Search ...",
+      "popover": {
+        "resourceType": {
+          "title": "Resource type"
+        }
+      }
     },
     "welcome.text": "Search over {{count}} {{mainBuckets}}, ..."
   },
@@ -37,5 +42,13 @@
     "lastUpdate": "Last update",
     "popularity": "Popularity",
     "title": "Title"
+  },
+  "home": {
+    "title": "Charting the ocean's story through data",
+    "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",
+    "secondTitle": "Marine and coastal geographic data infrastructure",
+    "secondSubtitle": "Sextant aims to document, disseminate, and promote a catalog of marine data. Intended for laboratories, Ifremer partners, and national and European marine stakeholders, this infrastructure offers tools for archiving, accessing, and sharing data.",
+    "button": "Our mission",
+    "thirdTitle": "Discover interactive maps"
   }
 }
