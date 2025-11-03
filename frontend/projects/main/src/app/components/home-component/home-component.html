@@ -2,47 +2,50 @@
   class="relative flex flex-col justify-center items-center bg-top-left bg-auto bg-blend-overlay bg-primary/80"
   [style.background-image]="'url(' + bgFirst + ')'"
 >
-  <div class="relative z-10 mx-auto md:w-[1280px] w-full pb-4">
-    <h1 class="text-white text-[60px] font-extrabold w-full md:w-[700px]">
+  <div class="relative z-10 mx-auto max-w-screen-xl w-full px-6 py-12 text-center md:text-left">
+    <h1 class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight max-w-2xl mx-auto md:mx-0">
       Charting the ocean's story through data
     </h1>
-    <p class="text-white text-[22px] mb-[35px] w-full md:w-[500px]">
+
+    <p class="text-white text-lg sm:text-xl md:text-2xl mt-4 mb-8 max-w-xl mx-auto md:mx-0">
       Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.
     </p>
 
-    <app-search-input
-      (onSearch)="setRouteToSearch()"
-      [searchOnInput]="false"
-      [popOverTemplate]="popOverTemplate"
-    >
-      <ng-template #popOverTemplate>
-        <span>{{ 'search.input.popover.resourceType.title' | translate }}</span>
-        <app-aggregation
-          scope="home"
-          keyName="resourceType"
-          displayType="card"
-          class="my-12 grid grid-cols-4 gap-6"
-          (onSelected)="setRouteForAggregation($event)"
-        ></app-aggregation>
-      </ng-template>
-    </app-search-input>
+    <div class="flex justify-center md:justify-start">
+      <app-search-input
+        (onSearch)="setRouteToSearch()"
+        [searchOnInput]="false"
+        [popOverTemplate]="popOverTemplate"
+      >
+        <ng-template #popOverTemplate>
+          <span>{{ 'search.input.popover.resourceType.title' | translate }}</span>
+          <app-aggregation
+            scope="home"
+            keyName="resourceType"
+            displayType="card"
+            class="my-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"
+            (onSelected)="setRouteForAggregation($event)"
+          ></app-aggregation>
+        </ng-template>
+      </app-search-input>
+    </div>
 
-    <div appSearchContext="home" [aggregations]="homeAggregationConfig" class="mb-10">
+    <div appSearchContext="home" [aggregations]="homeAggregationConfig" class="mt-10">
       <app-search-welcome-text scope="home"></app-search-welcome-text>
     </div>
   </div>
 </section>
 
 <section
-  class="relative flex flex-col justify-center items-center py-[35px] overflow-hidden bg-center bg-cover bg-blend-overlay bg-white/80"
+  class="relative flex flex-col justify-center items-center py-12 overflow-hidden bg-center bg-cover bg-blend-overlay bg-white/80"
   [style.background-image]="'url(' + bgSecond + ')'"
 >
-  <div class="relative z-10 grid grid-cols-2 gap-48 md:w-[1280px] w-full">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center max-w-screen-xl w-full px-6">
     <div>
-      <h2 class="text-primary text-[60px] font-extrabold">
+      <h2 class="text-primary text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6">
         Infrastructure de données géographiques marines et littorales
       </h2>
-      <p class="mb-[20px]">
+      <p class="mb-8 text-base md:text-lg leading-relaxed">
         Sextant vise à documenter, diffuser et promouvoir un catalogue de données marines. Destinée
         aux laboratoires, partenaires de l’Ifremer et acteurs marins nationaux et européens, cette
         infrastructure propose des outils pour archiver, consulter et partager les données.
@@ -52,23 +55,26 @@
       </button>
     </div>
 
-    <div>
-      <img [src]="island" [attr.alt]="" loading="lazy" class="h-[551px] w-[467px] rounded-2xl" />
-    </div>
-
-    <div class="flex flex-col justify-center md:w-[1280px] w-full">
-      <h2 class="text-[60px] text-primary font-extrabold mb-[40px] w-[475px]">
-        Discover interactive maps
-      </h2>
+    <div class="flex justify-center">
+      <img
+        [src]="island"
+        [attr.alt]="''"
+        loading="lazy"
+        class="w-72 sm:w-96 md:w-[467px] h-auto rounded-2xl"
+      />
     </div>
   </div>
 
-  <div class="flex flex-col justify-center md:w-[1280px] w-full">
+  <div class="flex flex-col justify-center max-w-screen-xl w-full px-6 mt-16 text-center">
+    <h2 class="text-4xl sm:text-5xl md:text-6xl text-primary font-extrabold mb-10">
+      Discover interactive maps
+    </h2>
+
     <app-aggregation
       scope="home"
       keyName="th_sextant-theme_tree.key"
       displayType="card"
-      class="my-12 grid grid-cols-3 gap-6"
+      class="my-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
       (onSelected)="setRouteForAggregation($event)"
     ></app-aggregation>
   </div>
