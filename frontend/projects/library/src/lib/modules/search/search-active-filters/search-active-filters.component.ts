@@ -31,6 +31,14 @@ export class SearchActiveFilters extends SearchBase {
     return [];
   }
 
+  getActiveFilterCount(): number {
+    let count = 0;
+    for (const [, filter] of Object.entries(this.search.filters())) {
+      count += filter.values.length;
+    }
+    return count;
+  }
+
   getBucketLabel(groupKey: string, bucketKey: string | number): string {
     const key = String(bucketKey);
     const buckets = this.getBuckets(groupKey);
