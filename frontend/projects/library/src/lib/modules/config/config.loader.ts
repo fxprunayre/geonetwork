@@ -1,4 +1,4 @@
-import { Search, UiConfiguration } from './model/gn4config';
+import { Recordview, Search, UiConfiguration } from './model/gn4config';
 import { InjectionToken } from '@angular/core';
 import { DEFAULT_UI_CONFIGURATION, SEXTANT_UI_CONFIGURATION } from './gn4constants';
 import { AppsConfiguration } from './model/gnConfig';
@@ -69,8 +69,16 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
         languages: (module as any).languages || DEFAULT_UI_CONFIGURATION.mods.header.languages,
         language: gn4config.langDetector.default || DEFAULT_LANGUAGE,
       };
+    } else if (modKey === 'recordview') {
+      conf.apps.record = {
+        enabled: true,
+        distribution:
+          (module as Recordview).distributionConfig ||
+          DEFAULT_UI_CONFIGURATION.mods.recordview.distributionConfig,
+      };
     }
   }
+
   return conf;
 }
 

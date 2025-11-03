@@ -22,6 +22,7 @@ import { RecordField } from '../record-field/record-field';
 import { RecordFieldContact } from '../record-field-contact/record-field-contact';
 import { RecordFieldCredit } from '../record-field-credit/record-field-credit';
 import { TranslatePipe } from '@ngx-translate/core';
+import { RecordDistributionPanel } from '../distributions/record-distribution-panel/record-distribution-panel';
 
 @Component({
   selector: 'app-record-view',
@@ -48,6 +49,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     RecordFieldCredit,
     TranslatePipe,
     KeyValuePipe,
+    RecordDistributionPanel,
   ],
   viewProviders: [
     provideIcons({

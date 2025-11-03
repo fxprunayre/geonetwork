@@ -1,4 +1,5 @@
 import { elasticsearch } from 'gn-api-client';
+import { DistributionConfig } from './gn4config';
 
 export interface AppsConfiguration {
   apps: Apps;
@@ -6,6 +7,7 @@ export interface AppsConfiguration {
 
 export interface Apps {
   search?: SearchApp;
+  record?: RecordDetailsApp;
   i18n?: I18nApp;
 }
 
@@ -36,4 +38,8 @@ export interface SearchApp extends App {
 
 export interface SearchAppAdvanced {
   score: string;
+}
+
+export interface RecordDetailsApp extends App {
+  distribution: DistributionConfig;
 }

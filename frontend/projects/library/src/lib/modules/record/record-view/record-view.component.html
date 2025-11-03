@@ -73,7 +73,9 @@
     </app-record-field>
   </ng-template>
 
-  <ng-template #dataAccessContent> </ng-template>
+  <ng-template #dataAccessContent>
+    <app-record-distribution-panel [record]="record" />
+  </ng-template>
 
   <ng-template #licenseContent>
     <app-record-field [label]="'Constraints'">
