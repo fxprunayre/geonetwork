@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -9,5 +9,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   templateUrl: './loading-mask.component.html',
 })
 export class LoadingMask {
+  loading = input.required<boolean>();
   message = signal('Loading...');
 }

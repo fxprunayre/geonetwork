@@ -1,22 +1,43 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {
+  APPLICATION_CONFIGURATION,
+  createMockSearchService,
+  DEFAULT_TEST_CONFIG,
+  provideMockTranslateService,
+  SearchStore,
+} from 'gn-library';
 import { CatalogueComponent } from './catalogue-component';
+import { provideRouter } from '@angular/router';
+import { routes } from '../../app.routes';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { fireEvent, render, screen } from '@testing-library/angular';
+import { userEvent } from '@testing-library/user-event';
 
 describe('CatalogueComponent', () => {
-  let component: CatalogueComponent;
-  let fixture: ComponentFixture<CatalogueComponent>;
+  it('should provide a search box', async () => {
+    await render(CatalogueComponent, {
+      providers: [
+        SearchStore,
+        provideMockTranslateService(),
+        createMockSearchService(),
+        provideRouter(routes),
+        provideHttpClient(withInterceptorsFromDi()),
+        { provide: APPLICATION_CONFIGURATION, useValue: DEFAULT_TEST_CONFIG },
+      ],
+    });
+    const user = userEvent.setup();
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [CatalogueComponent],
-    }).compileComponents();
+    // const searchBox = screen.getByTestId('search-input');
+    const searchBox = screen.getByRole('textbox');
+    expect(searchBox).toBeTruthy();
+    await user.type(searchBox, 'surval');
 
-    fixture = TestBed.createComponent(CatalogueComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    const searchButton = screen.getByTestId('search-input-button');
+    expect(searchButton).toBeTruthy();
+    await user.click(searchButton);
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    console.log(searchBox);
+    // screen.debug();
+    const hitsNumber = await screen.findByTestId('search-results-number');
+    // expect(hitsNumber?.innerText).toBe('10 results');
   });
 });

@@ -1,21 +1,15 @@
 import { AggregationTranslatePipe } from './aggregation-translate-pipe';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { TestBed } from '@angular/core/testing';
-import { MockTranslateService } from '../../shared/translate.service.mock';
+import { provideMockTranslateService } from '../../shared/translate.service.mock.spec';
 
 describe('AggregationTranslatePipe', () => {
   let pipe: AggregationTranslatePipe;
-  let mockTranslateService: MockTranslateService;
 
   beforeEach(async () => {
-    mockTranslateService = new MockTranslateService();
-
     await TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      providers: [
-        { provide: TranslateService, useValue: mockTranslateService },
-        AggregationTranslatePipe,
-      ],
+      providers: [provideMockTranslateService(), AggregationTranslatePipe],
     });
     pipe = TestBed.inject(AggregationTranslatePipe);
   });

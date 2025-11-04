@@ -1,5 +1,5 @@
 @if (search.totalCount() > 0) {
-  <span class="text-primary-400"
+  <span class="text-primary-400" data-testid="search-results-number"
     >{{ search.totalCount() | number }} {{ getResultTranslationKey() | translate }}</span
   >
 }

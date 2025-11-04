@@ -1,22 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { render, screen } from '@testing-library/angular';
 import { LoadingMask } from './loading-mask.component';
+import { inputBinding } from '@angular/core';
+import { provideMockTranslateService } from '../../translate.service.mock.spec';
 
-describe('LoadingComponent', () => {
-  let component: LoadingMask;
-  let fixture: ComponentFixture<LoadingMask>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [LoadingMask],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(LoadingMask);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+describe('"Loading mask', () => {
+  it('should show mask when loading', async () => {
+    await render(LoadingMask, {
+      providers: [provideMockTranslateService()],
+      bindings: [inputBinding('loading', () => true)],
+    });
+    expect(screen.getByTestId('loading-mask')).toBeTruthy();
+    expect(screen.getByText('Loading...')).toBeTruthy();
+    expect(screen.getByRole('progressbar')).toBeTruthy();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should hide mask when not loading', async () => {
+    const { container } = await render(LoadingMask, {
+      providers: [provideMockTranslateService()],
+      bindings: [inputBinding('loading', () => false)],
+    });
+    expect(container.querySelector('div')).toBeNull();
   });
 });

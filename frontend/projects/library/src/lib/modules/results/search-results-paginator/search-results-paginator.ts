@@ -17,7 +17,7 @@ export class SearchResultsPaginator extends SearchBase {
 
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
 }

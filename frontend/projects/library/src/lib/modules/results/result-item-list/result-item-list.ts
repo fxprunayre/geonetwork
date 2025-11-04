@@ -17,7 +17,6 @@ import { RecordFieldTitle } from '../../record/record-field-title/record-field-t
 @Component({
   selector: 'app-result-item-list',
   templateUrl: './result-item-list.html',
-  styleUrl: './result-item-list.scss',
   standalone: true,
   imports: [
     CommonModule,

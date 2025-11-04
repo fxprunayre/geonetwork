@@ -17,11 +17,7 @@ import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationLayout } from 'gn-api-client';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchFilterChange } from '../search.store.model';
-import {
-  MultiSelect,
-  MultiSelectChangeEvent,
-  MultiSelectSelectAllChangeEvent,
-} from 'primeng/multiselect';
+import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
 
 export type AggregationBucketType = {

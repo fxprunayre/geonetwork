@@ -11,7 +11,6 @@ import { DistributionService } from '../distribution.service';
   selector: 'app-record-distribution-panel',
   imports: [KeyValuePipe, Badge, Button, JsonPipe],
   templateUrl: './record-distribution-panel.html',
-  styleUrl: './record-distribution-panel.scss',
 })
 export class RecordDistributionPanel extends RecordFieldBase {
   distributionConfig = inject(APPLICATION_CONFIGURATION).config?.apps.record?.distribution;

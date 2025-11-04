@@ -9,7 +9,7 @@ import { faSolidMagnifyingGlass } from '@ng-icons/font-awesome/solid';
   viewProviders: [provideIcons({ faSolidMagnifyingGlass })],
   templateUrl: './empty-state.html',
 })
-export class EmptyStateComponent {
+export class EmptyState {
   @Input() title: string = 'No results found';
   @Input() message: string = 'Try adjusting your search terms or filters';
 }

@@ -26,7 +26,7 @@ import { SearchRouteService } from './search-route.service';
 import { ActivatedRoute } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
 
-const initialState: SearchState = {
+export const initialState: SearchState = {
   id: 'default',
   routing: false,
   filter: {

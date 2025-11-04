@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   input,
   OnInit,
   output,
@@ -13,7 +12,6 @@ import { InputText } from 'primeng/inputtext';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { Button, ButtonIcon } from 'primeng/button';
-import { SearchStore } from '../search.store';
 import { SearchBase } from '../search-base/search-base';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidMagnifyingGlass, faSolidXmark } from '@ng-icons/font-awesome/solid';
@@ -51,8 +49,6 @@ export class SearchInput extends SearchBase implements OnInit {
   op = viewChild<Popover>('op');
 
   onSearch = output();
-
-  readonly store = inject(SearchStore);
 
   queryString = '';
 

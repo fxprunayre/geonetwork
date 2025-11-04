@@ -1,6 +1,4 @@
-@if (search.isLoading()) {
-  <app-loading-mask></app-loading-mask>
-}
+<app-loading-mask [loading]="search.isLoading()" />
 
 <!-- Results Container -->
 @if (!search.isLoading()) {

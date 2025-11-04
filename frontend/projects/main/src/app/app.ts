@@ -3,7 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { TopNavigation } from './components/navigation/top-navigation/top-navigation';
 import { BottomNavigation } from './components/navigation/bottom-navigation/bottom-navigation';
 import { FormsModule } from '@angular/forms';
-import { Gn4ApiModule } from 'gn4-api-client';
 import {
   SearchContextDirective,
   SearchService,
@@ -21,7 +20,6 @@ import { ScrollTop } from 'primeng/scrolltop';
     BottomNavigation,
     RouterOutlet,
     FormsModule,
-    Gn4ApiModule,
     SearchContextDirective,
     ScrollTop,
   ],

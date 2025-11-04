@@ -46,8 +46,6 @@ export const appConfig: ApplicationConfig = {
         options: { darkModeSelector: '.p-dark' },
       },
     }),
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
     provideMarkdown(),
   ],
 };

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultDetail } from './result-detail';
+import { ResultDetailComponent as ResultDetail } from './result-detail';
 
 describe('ResultDetail', () => {
   let component: ResultDetail;

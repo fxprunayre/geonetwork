@@ -1,6 +1,6 @@
 import { Component, computed } from '@angular/core';
 import { SearchBase } from '../search-base/search-base';
-import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
+import { Button } from 'primeng/button';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -8,7 +8,7 @@ import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 
 @Component({
   selector: 'app-active-filters',
-  imports: [Button, ButtonIcon, NgIcon, ButtonLabel, TranslatePipe],
+  imports: [Button, NgIcon, TranslatePipe],
   viewProviders: [provideIcons({ faSolidXmark })],
   standalone: true,
   providers: [AggregationTranslatePipe],

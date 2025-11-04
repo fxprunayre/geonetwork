@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LanguageSwitcher } from './language-switcher';
+import { MockProvider } from 'ng-mocks';
+import { TranslateService } from '@ngx-translate/core';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
+import { provideMockTranslateService } from '../../../shared/translate.service.mock.spec';
 
 describe('LanguageSwitcher', () => {
   let component: LanguageSwitcher;
@@ -9,6 +14,10 @@ describe('LanguageSwitcher', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LanguageSwitcher],
+      providers: [
+        provideMockTranslateService(),
+        { provide: APPLICATION_CONFIGURATION, useValue: DEFAULT_TEST_CONFIG },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LanguageSwitcher);

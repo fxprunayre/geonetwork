@@ -13,13 +13,13 @@ describe('ConfigService', () => {
   it('should parse a single filter expression correctly', () => {
     const filters = 'protocol:OGC:.*';
     const result = service.parseFilterExpression(filters);
-    expect(result).equal([{ field: 'protocol', regex: /OGC:.*/, not: false }]);
+    expect(result).toEqual([{ field: 'protocol', regex: /OGC:.*/, not: false }]);
   });
 
   it('should parse multiple filter expressions correctly', () => {
     const filters = 'protocol:OGC:.*|ESRI:.* AND function:legend|featureCatalogue';
     const result = service.parseFilterExpression(filters);
-    expect(result).equal([
+    expect(result).toEqual([
       { field: 'protocol', regex: /OGC:.*|ESRI:.*/, not: false },
       { field: 'function', regex: /legend|featureCatalogue/, not: false },
     ]);
@@ -28,18 +28,18 @@ describe('ConfigService', () => {
   it('should parse negated filter expressions correctly', () => {
     const filters = '-protocol:OGC:.*|ESRI:.*';
     const result = service.parseFilterExpression(filters);
-    expect(result).equal([{ field: 'protocol', regex: /OGC:.*|ESRI:.*/, not: true }]);
+    expect(result).toEqual([{ field: 'protocol', regex: /OGC:.*|ESRI:.*/, not: true }]);
   });
 
   it('should return an empty array for an empty filter string', () => {
     const filters = '';
     const result = service.parseFilterExpression(filters);
-    expect(result).equal([]);
+    expect(result).toEqual([]);
   });
 
   it('should return an empty array for a filter string with only AND', () => {
     const filters = ' AND ';
     const result = service.parseFilterExpression(filters);
-    expect(result).equal([]);
+    expect(result).toEqual([]);
   });
 });

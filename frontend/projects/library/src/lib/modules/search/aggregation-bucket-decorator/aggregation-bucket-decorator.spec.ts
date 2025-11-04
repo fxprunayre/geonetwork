@@ -13,6 +13,8 @@ describe('AggregationBucketDecorator', () => {
 
     fixture = TestBed.createComponent(AggregationBucketDecorator);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('bucket', { key: 'test', doc_count: 10 });
+    fixture.componentRef.setInput('decorator', undefined);
     fixture.detectChanges();
   });
 
