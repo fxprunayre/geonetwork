@@ -6,45 +6,7 @@
 @if (record(); as record) {
   <ng-container *ngTemplateOutlet="backButtonTplRef() || defaultBackButton"></ng-container>
 
-  <p-card>
-    <ng-template pTemplate="header">
-      <div class="p-4 bg-surface-50">
-        <h1 class="text-2xl font-bold">
-          {{ record.resourceTitleObject?.['default'] }}
-        </h1>
-
-        <app-record-field-type [field]="record.resourceType" class="text-xl" />
-      </div>
-    </ng-template>
-    <div class="p-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="md:col-span-1">
-          <div class="bg-surface-100 rounded p-8 text-center">
-            <app-record-field-overview [field]="record.overview" />
-          </div>
-        </div>
-        <div class="md:col-span-2">
-          <app-show-more-toggle>
-            <h3 class="text-xl font-semibold mb-3">Description</h3>
-            <p
-              class="text-surface-700 leading-relaxed mb-6"
-              [innerHTML]="record.resourceAbstractObject?.['default'] || '' | markdown | async"
-            ></p>
-          </app-show-more-toggle>
-          <div class="flex gap-3">
-            <button pButton class="flex-auto md:flex-initial">
-              <ng-icon name="faSolidDownload" pButtonIcon></ng-icon>
-              <span pButtonLabel>Download</span>
-            </button>
-            <button pButton [outlined]="true">
-              <ng-icon name="faSolidShareNodes" pButtonIcon></ng-icon>
-              <span pButtonLabel>Share</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </p-card>
+  <app-record-view-header [record]="record" [vocabularies]="mainVocabularies()" />
 
   <ng-template #aboutContent>
     <app-record-field [label]="'resourceDate'">
@@ -52,15 +14,6 @@
         <ul>
           <li>{{ date.type }}: {{ date.date | date: 'long' }}</li>
         </ul>
-      }
-    </app-record-field>
-
-    <app-record-field [label]="'temporalExtent'">
-      @if (record.resourceTemporalExtentDetails) {
-        <p>
-          {{ record.resourceTemporalExtentDetails?.[0]?.start?.date }}
-          - {{ record.resourceTemporalExtentDetails?.[0]?.end?.date }}
-        </p>
       }
     </app-record-field>
 
@@ -109,44 +62,132 @@
     </app-record-field>
   </ng-template>
 
-  <ng-template #spatialInfoContent>
-    <app-record-field [label]="'Spatial information'">
-      <p>
-        <span>Data type: {{ record['cl_spatialRepresentationType']?.[0]?.key }}</span>
-      </p>
-      <p>
-        <span>Resolution: {{ record.resolutionDistance?.[0] }}</span>
-      </p>
-      <p>
-        <span>Coordinate system: {{ record.coordinateSystem?.[0] }}</span>
-      </p>
+  <ng-template #coverageContent>
+    <app-record-field [label]="'Geospatial coverage'">
+      @if (record.geom) {
+        <pre>
+         {{ record.geom[0]?.['coordinates'] | json }}
+        </pre>
+      }
+    </app-record-field>
+
+    <app-record-field [label]="'Temporal coverage'">
+      @if (record.resourceTemporalExtentDetails) {
+        <p>
+          {{ record.resourceTemporalExtentDetails?.[0]?.start?.date }}
+          - {{ record.resourceTemporalExtentDetails?.[0]?.end?.date }}
+        </p>
+      }
+    </app-record-field>
+
+    <app-record-field [label]="'Vertical coverage'">
+      @if (record.resourceVerticalRange) {
+        <p>
+          {{ record.resourceVerticalRange?.[0]?.gte }}
+          - {{ record.resourceVerticalRange?.[0]?.lte }} ({{
+            record.resourceVerticalRange?.[0]?.unit
+          }})
+        </p>
+      }
     </app-record-field>
   </ng-template>
 
-  <ng-template #associatedContent> </ng-template>
+  <ng-template #spatialInfoContent>
+    <app-record-field [label]="'Data type'">
+      <app-record-field-type [record]="record" [withSpatialType]="true" />
+    </app-record-field>
 
-  @for (
-    section of [
-      { label: 'about', tpl: aboutContent },
-      { label: 'dataAccess', tpl: dataAccessContent },
-      { label: 'license', tpl: licenseContent },
-      { label: 'lineage', tpl: lineageContent },
-      { label: 'spatialInfo', tpl: spatialInfoContent },
-      { label: 'associatedResources', tpl: associatedContent },
-    ];
-    track section.label
-  ) {
-    @switch (layout()) {
-      @case ('fieldset') {
-        <p-fieldset [legend]="section.label | translate" [toggleable]="true" class="mb-10">
-          <ng-container *ngTemplateOutlet="section.tpl" />
-        </p-fieldset>
+    <app-record-field [label]="'Resolution'">
+      @for (res of record.resolutionDistance; track $index) {
+        <p-chip [label]="res"></p-chip>
       }
-      @default {
-        <p-panel [header]="section.label | translate" [toggleable]="true" class="mb-10">
-          <ng-container *ngTemplateOutlet="section.tpl" />
+      @for (scale of record.resolutionScaleDenominator; track $index) {
+        <p-chip [label]="'1:' + scale"></p-chip>
+      }
+    </app-record-field>
+
+    <app-record-field [label]="'Coordinate system'">
+      @for (crs of record.coordinateSystem; track $index) {
+        <p-chip [label]="crs"></p-chip>
+      }
+    </app-record-field>
+  </ng-template>
+
+  <ng-template #classificationContent>
+    <app-record-field-vocabulary [record]="record" [exclude]="mainVocabularies()" />
+  </ng-template>
+
+  <ng-template #relatedContent> </ng-template>
+
+  <ng-template #similarContent> </ng-template>
+
+  <ng-template #metadata>
+    <div class="flex flex-row gap-6">
+      <div class="w-3/4">
+        @for (
+          section of [
+            { label: 'about', tpl: aboutContent },
+            { label: 'dataAccess', tpl: dataAccessContent },
+            { label: 'usageAndAccess', tpl: licenseContent },
+            { label: 'coverage', tpl: coverageContent },
+            { label: 'spatialInfo', tpl: spatialInfoContent },
+            { label: 'lineage', tpl: lineageContent },
+            { label: 'classification', tpl: classificationContent },
+            { label: 'relatedResources', tpl: relatedContent },
+            { label: 'similarResources', tpl: similarContent, collapsed: true },
+          ];
+          track section.label
+        ) {
+          @let sectionLabel =
+            'record.view.section.' + section.label
+              | translate: { resourceType: record.resourceType };
+          @switch (layout()) {
+            @case ('fieldset') {
+              <p-fieldset [legend]="sectionLabel" [toggleable]="true" class="my-10">
+                <ng-container *ngTemplateOutlet="section.tpl" />
+              </p-fieldset>
+            }
+            @default {
+              <p-panel
+                [header]="sectionLabel"
+                [toggleable]="true"
+                [collapsed]="section.collapsed || false"
+                class="my-10"
+              >
+                <ng-container *ngTemplateOutlet="section.tpl" />
+              </p-panel>
+            }
+          }
+        }
+      </div>
+      <div class="w-1/4">
+        <p-panel [header]="'Citation'" [toggleable]="false" class="my-10">
+          Citation content goes here.
         </p-panel>
-      }
-    }
-  }
+
+        <p-panel [header]="'Contact'" [toggleable]="false" class="my-10">
+          Main contact content goes here.
+        </p-panel>
+
+        <p-panel [header]="'Catalogue'" [toggleable]="false" class="my-10">
+          Catalogue/harvester logo.
+        </p-panel>
+      </div>
+    </div>
+  </ng-template>
+
+  <p-tabs value="0">
+    <p-tablist>
+      <p-tab value="0">{{ 'Data card' | translate }}</p-tab>
+      <p-tab value="1">{{ 'Discussion' | translate }}</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+      <p-tabpanel value="0">
+        <ng-container *ngTemplateOutlet="metadata"></ng-container>
+      </p-tabpanel>
+      <p-tabpanel value="1">
+        <app-feedback-panel />
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
 }

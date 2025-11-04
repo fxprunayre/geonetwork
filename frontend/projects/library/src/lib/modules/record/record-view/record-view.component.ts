@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit, signal, TemplateRef } from '@angular/core';
-import { AsyncPipe, DatePipe, KeyValuePipe, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, DatePipe, JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
@@ -9,11 +9,7 @@ import {
   faSolidDownload,
   faSolidShareNodes,
 } from '@ng-icons/font-awesome/solid';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { ButtonDirective, ButtonIcon, ButtonLabel } from 'primeng/button';
-import { Card } from 'primeng/card';
-import { RecordFieldOverviewComponent } from '../record-field-overview/record-field-overview.component';
-import { RecordFieldType } from '../record-field-type/record-field-type';
+import { provideIcons } from '@ng-icons/core';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 import { Fieldset } from 'primeng/fieldset';
@@ -23,6 +19,12 @@ import { RecordFieldContact } from '../record-field-contact/record-field-contact
 import { RecordFieldCredit } from '../record-field-credit/record-field-credit';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RecordDistributionPanel } from '../distributions/record-distribution-panel/record-distribution-panel';
+import { RecordViewHeader } from '../record-view-header/record-view-header';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
+import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
+import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
+import { RecordFieldType } from '../record-field-type/record-field-type';
+import { Chip } from 'primeng/chip';
 
 @Component({
   selector: 'app-record-view',
@@ -31,13 +33,6 @@ import { RecordDistributionPanel } from '../distributions/record-distribution-pa
   imports: [
     NgTemplateOutlet,
     AccordionModule,
-    NgIcon,
-    ButtonDirective,
-    ButtonLabel,
-    ButtonIcon,
-    Card,
-    RecordFieldOverviewComponent,
-    RecordFieldType,
     MarkdownPipe,
     AsyncPipe,
     ShowMoreToggle,
@@ -48,8 +43,18 @@ import { RecordDistributionPanel } from '../distributions/record-distribution-pa
     RecordFieldContact,
     RecordFieldCredit,
     TranslatePipe,
-    KeyValuePipe,
     RecordDistributionPanel,
+    RecordViewHeader,
+    Tabs,
+    Tab,
+    TabPanels,
+    TabPanel,
+    TabList,
+    FeedbackPanel,
+    RecordFieldVocabulary,
+    JsonPipe,
+    RecordFieldType,
+    Chip,
   ],
   viewProviders: [
     provideIcons({
@@ -73,6 +78,8 @@ export class RecordViewComponent implements OnInit {
 
   recordStatus = signal<string | undefined>(undefined);
 
+  mainVocabularies = signal(['th_sextant-theme']);
+
   ngOnInit() {
     const uuid = this.uuid();
     if (!uuid) return;
@@ -91,41 +98,6 @@ export class RecordViewComponent implements OnInit {
     });
   }
   protected readonly statusbar = statusbar;
-
-  getOverviewImage(): string | null {
-    const overview = this.record()?.overview;
-    if (overview && overview.length > 0) {
-      if (overview[0].data && overview[0].data.startsWith('data:image')) {
-        return overview[0].data;
-      }
-      if (overview[0].url) {
-        return overview[0].url;
-      }
-    }
-    return null;
-  }
-
-  getOverviewImageName(): string {
-    const overview = this.record()?.overview;
-    if (overview && overview.length > 0 && overview[0].nameObject) {
-      return overview[0].nameObject['default'] || 'Image';
-    }
-    return 'Preview Image';
-  }
-
-  getAuthors(): any[] {
-    const contacts = this.record()?.['contactForResource'] || [];
-    return contacts.filter((contact: any) => contact.role === 'author');
-  }
-
-  getOrgName(): string {
-    return (this.record()?.OrgObject as any)?.['default'] ?? '';
-  }
-
-  getContacts(): any[] {
-    const contacts = this.record()?.['contact'] || [];
-    return contacts.filter((contact: any) => contact.role === 'pointOfContact');
-  }
 
   getLineage(): string {
     return (this.record()?.lineageObject as any)?.['default'] ?? '';

@@ -1,19 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecordFieldTitle } from './record-field-title';
+import { FeedbackPanel } from './feedback-panel';
 
-describe('RecordFieldTitle', () => {
-  let component: RecordFieldTitle;
-  let fixture: ComponentFixture<RecordFieldTitle>;
+describe('FeedbackPanel', () => {
+  let component: FeedbackPanel;
+  let fixture: ComponentFixture<FeedbackPanel>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RecordFieldTitle],
+      imports: [FeedbackPanel],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RecordFieldTitle);
+    fixture = TestBed.createComponent(FeedbackPanel);
     component = fixture.componentInstance;
-    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 

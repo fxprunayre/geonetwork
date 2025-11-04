@@ -9,9 +9,7 @@
 
   <div class="flex flex-col justify-between items-start gap-2 w-full">
     <div class="flex justify-between items-center w-full">
-      <div class="pt-[2px] pb-[3px] px-[5px] bg-neutral-100 w-auto">
-        <app-record-field-type [field]="result.resourceType" />
-      </div>
+      <app-record-field-type [record]="result" />
       <div>
         <div class="flex gap-3 justify-around">
           <ng-icon name="faMap" />

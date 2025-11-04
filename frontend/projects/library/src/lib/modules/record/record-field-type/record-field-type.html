@@ -1,6 +1,18 @@
-@if (resourceType()) {
-  <h6 class="uppercase font-bold text-secondary-500 text-[10px]">
-    <!-- TODO icon mode -->
-    {{ resourceType() }}
-  </h6>
+@if (record()?.resourceType) {
+  <div class="justify-items-center uppercase font-bold text-secondary-500 text-[10px]">
+    @for (type of record()?.resourceType; track $index) {
+      <p-chip class="" [label]="type">
+        <!-- TODO icon mode -->
+      </p-chip>
+    }
+    @let spatialType = record()?.['cl_spatialRepresentationType'];
+    @if (withSpatialType() && spatialType) {
+      @for (type of spatialType; track $index) {
+        <ng-icon name="faSolidChevronRight" />
+        <p-chip [label]="type.default">
+          <!-- TODO icon mode -->
+        </p-chip>
+      }
+    }
+  </div>
 }

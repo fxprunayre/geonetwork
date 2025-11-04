@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecordFieldTitle } from './record-field-title';
+import { KeywordList } from './keyword-list';
 
-describe('RecordFieldTitle', () => {
-  let component: RecordFieldTitle;
-  let fixture: ComponentFixture<RecordFieldTitle>;
+describe('KeywordList', () => {
+  let component: KeywordList;
+  let fixture: ComponentFixture<KeywordList>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RecordFieldTitle],
+      imports: [KeywordList],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RecordFieldTitle);
+    fixture = TestBed.createComponent(KeywordList);
     component = fixture.componentInstance;
-    fixture.componentRef.setInput('record', {});
+    fixture.componentRef.setInput('keywords', []);
     fixture.detectChanges();
   });
 

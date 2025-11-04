@@ -10,7 +10,31 @@
     },
     "welcome.text": "Search over {{count}} {{mainBuckets}}, ..."
   },
-  "record.field.overview.notAvailable": "No preview",
+  "record": {
+    "view": {
+      "section": {
+        "about": "About this {{resourceType}}",
+        "dataAccess": "Data access",
+        "dataExplorer": "Data explorer",
+        "contact": "Contact",
+        "coverage": "Coverage",
+        "spatialInfo": "Spatial information",
+        "lineage": "Lineage",
+        "content": "Content",
+        "classification": "Classification",
+        "citation": "Citation",
+        "usageAndAccess": "Use and access",
+        "relatedResources": "Related resources",
+        "similarResources": "Similar resources"
+      }
+    },
+    "field": {
+      "abstract": "Overview",
+      "overview": {
+        "notAvailable": "No preview"
+      }
+    }
+  },
   "i18n": {
     "languageSwitcher": {
       "select": "Choose your language."

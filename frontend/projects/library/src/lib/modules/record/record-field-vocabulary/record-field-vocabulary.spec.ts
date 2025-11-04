@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecordFieldTitle } from './record-field-title';
+import { RecordFieldVocabulary } from './record-field-vocabulary';
 
-describe('RecordFieldTitle', () => {
-  let component: RecordFieldTitle;
-  let fixture: ComponentFixture<RecordFieldTitle>;
+describe('RecordFieldVocabulary', () => {
+  let component: RecordFieldVocabulary;
+  let fixture: ComponentFixture<RecordFieldVocabulary>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RecordFieldTitle],
+      imports: [RecordFieldVocabulary],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RecordFieldTitle);
+    fixture = TestBed.createComponent(RecordFieldVocabulary);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('record', {});
     fixture.detectChanges();

@@ -7,6 +7,6 @@ import { IndexRecord } from 'gn-api-client';
   template: '',
 })
 export class RecordFieldBase {
-  record = input<IndexRecord>();
+  record = input.required<IndexRecord>();
   class = input<string>();
 }

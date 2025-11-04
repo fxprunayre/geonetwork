@@ -73,6 +73,13 @@ const Sextant = definePreset(Aura, {
       950: '{myprimary.950}',
     },
   },
+  components: {
+    chip: {
+      root: {
+        borderRadius: '4px',
+      },
+    },
+  },
 });
 
 export default Sextant;

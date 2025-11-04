@@ -16,6 +16,7 @@ describe('RecordDistributionPanel', () => {
 
     fixture = TestBed.createComponent(RecordDistributionPanel);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 

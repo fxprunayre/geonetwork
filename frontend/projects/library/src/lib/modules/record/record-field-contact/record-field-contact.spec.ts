@@ -13,6 +13,7 @@ describe('RecordFieldContact', () => {
 
     fixture = TestBed.createComponent(RecordFieldContact);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 

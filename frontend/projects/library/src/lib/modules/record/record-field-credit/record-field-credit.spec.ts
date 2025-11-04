@@ -13,6 +13,7 @@ describe('RecordFieldCredit', () => {
 
     fixture = TestBed.createComponent(RecordFieldCredit);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 

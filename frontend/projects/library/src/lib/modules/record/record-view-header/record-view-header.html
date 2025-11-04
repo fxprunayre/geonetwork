@@ -1,0 +1,38 @@
+<p-card>
+  <ng-template pTemplate="header">
+    <div class="p-4 bg-surface-50 flex flex-row">
+      <div class="flex-grow">
+        <h1 class="text-2xl font-bold">
+          {{ record().resourceTitleObject?.['default'] }}
+        </h1>
+
+        <app-record-field-type [record]="record()" [withSpatialType]="true" class="text-xl" />
+      </div>
+      <div class="flex gap-3">
+        <button pButton [outlined]="true">
+          <ng-icon name="faSolidShareNodes" pButtonIcon></ng-icon>
+          <span pButtonLabel>Share</span>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <div class="p-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-1">
+        <div class="bg-surface-100 rounded p-8 text-center">
+          <app-record-field-overview [field]="record().overview" />
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <app-show-more-toggle>
+          <p
+            class="text-surface-700 leading-relaxed mb-6"
+            [innerHTML]="record().resourceAbstractObject?.['default'] || '' | markdown | async"
+          ></p>
+        </app-show-more-toggle>
+
+        <app-record-field-vocabulary [record]="record()" [include]="vocabularies()" />
+      </div>
+    </div>
+  </div>
+</p-card>
