@@ -13,6 +13,7 @@ describe('DataModelPanel', () => {
 
     fixture = TestBed.createComponent(DataModelPanel);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 

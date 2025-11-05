@@ -16,9 +16,9 @@ describe('ResultItemGrid', () => {
 
     fixture = TestBed.createComponent(ResultItemGrid);
     component = fixture.componentInstance;
-    component.result = {
+    fixture.componentRef.setInput('result', {
       uuid: 'test-uuid',
-    };
+    });
     fixture.detectChanges();
   });
 

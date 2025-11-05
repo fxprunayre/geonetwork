@@ -14,7 +14,6 @@ interface SortOption {
   standalone: true,
   imports: [FormsModule, Select],
   templateUrl: './sort-results.html',
-  styleUrls: ['./sort-results.scss'],
 })
 export class SortResults extends SearchBase {
   sortOptions: SortOption[] = [
