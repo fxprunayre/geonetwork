@@ -117,9 +117,11 @@
     <app-record-field-vocabulary [record]="record" [exclude]="mainVocabularies()" />
   </ng-template>
 
-  <ng-template #relatedContent> </ng-template>
+  <ng-template #relatedContent>
+    <app-associated-records-panel [record]="record" />
+  </ng-template>
 
-  <ng-template #similarContent> </ng-template>
+  <ng-template #similarContent></ng-template>
 
   <ng-template #metadata>
     <div class="flex flex-row gap-6">

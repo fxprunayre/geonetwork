@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { elasticsearch, IndexRecord } from 'gn-api-client';
+import { elasticsearch, IndexRecord, RelatedItemType } from 'gn-api-client';
 import { SearchService as ApiSearchService } from 'gn4-api-client';
 import { SearchRegistry, SearchStoreType } from './search.store';
 import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './search.store.model';
@@ -104,14 +104,36 @@ export class SearchService {
     return request;
   }
 
+  parseRelated(related: Record<string, elasticsearch.SearchHit<IndexRecord>[] | IndexRecord[]>) {
+    const parsedRelated: Record<string, IndexRecord[]> = {};
+    for (const key of Object.keys(related || {})) {
+      parsedRelated[key] = (related[key] || []).map((item) => {
+        if ('_source' in item) {
+          return this.buildIndexRecord(item as elasticsearch.SearchHit<IndexRecord>);
+        } else {
+          return item as IndexRecord;
+        }
+      });
+    }
+    return parsedRelated;
+  }
+
   buildIndexRecord(hit: elasticsearch.SearchHit<IndexRecord>): IndexRecord {
     // TODO: Handle multilingual fields
-    return {
+    const record = {
       ...hit._source,
       info: {
         _id: hit._id,
+        view: hit.view,
+        edit: hit.edit,
+        selected: hit.selected,
       },
     } as IndexRecord;
+
+    if (hit.related) {
+      record.related = this.parseRelated(hit.related);
+    }
+    return record;
   }
 
   search(searchRequestParameters: SearchRequestParameters): Observable<{
@@ -181,7 +203,7 @@ export class SearchService {
     return totalCount;
   }
 
-  getById(id: string): Observable<IndexRecord | null> {
+  getById(id: string, relatedTypes?: RelatedItemType[]): Observable<IndexRecord | null> {
     let searchRequest: elasticsearch.SearchRequest = {
       query: {
         term: {
@@ -191,7 +213,7 @@ export class SearchService {
       size: 1,
     };
 
-    return this.searchService.search(searchRequest).pipe(
+    return this.searchService.search(searchRequest, undefined, relatedTypes).pipe(
       map(
         (
           response: elasticsearch.SearchResponse<

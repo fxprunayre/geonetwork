@@ -669,6 +669,13 @@ export interface SearchHit<TDocument = unknown> {
   _primary_term?: long;
   _version?: VersionNumber;
   sort?: SortResults;
+  // GN specific
+  view?: boolean;
+  edit?: boolean;
+  selected?: boolean;
+  related?: Record<string, SearchHit<TDocument>[] | TDocument[]>;
+  origin: 'catalog' | 'remote';
+  properties?: Record<string, any>;
 }
 export type SearchTotalHitsRelation = 'eq' | 'gte';
 export interface SearchTotalHits {

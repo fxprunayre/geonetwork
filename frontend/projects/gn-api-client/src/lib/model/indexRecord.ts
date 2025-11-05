@@ -30,6 +30,7 @@ export interface IndexRecord {
     _id: string;
     [key: string]: any;
   };
+  related?: Record<string, IndexRecord[]>;
   docType?: IndexRecord.DocTypeEnum;
   document?: string;
   metadataIdentifier?: string;

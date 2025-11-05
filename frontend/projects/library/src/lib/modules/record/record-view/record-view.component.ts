@@ -2,6 +2,7 @@ import { Component, inject, input, OnInit, signal, TemplateRef } from '@angular/
 import { AsyncPipe, DatePipe, JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord } from 'gn-api-client';
+import { RelatedItemType } from 'gn4-api-client';
 import { SearchService } from '../../search/search.service';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import {
@@ -25,6 +26,7 @@ import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
 import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { Chip } from 'primeng/chip';
+import { AssociatedRecordsPanel } from '../associated/associated-records-panel/associated-records-panel';
 
 @Component({
   selector: 'app-record-view',
@@ -55,6 +57,7 @@ import { Chip } from 'primeng/chip';
     JsonPipe,
     RecordFieldType,
     Chip,
+    AssociatedRecordsPanel,
   ],
   viewProviders: [
     provideIcons({
@@ -84,19 +87,28 @@ export class RecordViewComponent implements OnInit {
     const uuid = this.uuid();
     if (!uuid) return;
 
-    this.searchService.getById(uuid).subscribe({
-      next: (result) => {
-        if (result) {
-          this.record.set(result);
-        } else {
+    this.searchService
+      .getById(uuid, [
+        RelatedItemType.Parent,
+        RelatedItemType.Children,
+        RelatedItemType.Services,
+        RelatedItemType.Sources,
+        RelatedItemType.Associated,
+      ])
+      .subscribe({
+        next: (result) => {
+          if (result) {
+            this.record.set(result);
+          } else {
+            this.recordStatus.set('not-found-or-not-shared-with-you');
+          }
+        },
+        error: (error) => {
           this.recordStatus.set('not-found-or-not-shared-with-you');
-        }
-      },
-      error: (error) => {
-        this.recordStatus.set('not-found-or-not-shared-with-you');
-      },
-    });
+        },
+      });
   }
+
   protected readonly statusbar = statusbar;
 
   getLineage(): string {

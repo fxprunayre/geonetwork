@@ -1,0 +1,13 @@
+@for (type of types(); track $index) {
+  <div class="has-[>section:empty]:hidden">
+    <div class="text-2xl">
+      {{ type | translate }}
+    </div>
+
+    <section class="grid grid-cols-3 gap-4">
+      @for (record of relations()[type]; track $index) {
+        <app-result-item-grid [result]="record" (viewDetails)="viewDetails($event)" />
+      }
+    </section>
+  </div>
+}
