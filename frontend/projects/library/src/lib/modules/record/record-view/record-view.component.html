@@ -47,6 +47,10 @@
     <app-record-distribution-panel [record]="record" />
   </ng-template>
 
+  <ng-template #dataModel>
+    <app-data-model-panel [record]="record" />
+  </ng-template>
+
   <ng-template #licenseContent>
     <app-record-field [label]="'Constraints'">
       <p>
@@ -146,13 +150,14 @@
     />
   </ng-template>
 
-  <ng-template #similarContent></ng-template>
+  <ng-template #similarContent> Similar resources content goes here. </ng-template>
 
   <ng-template #metadata>
     @for (
       section of [
         { label: 'about', tpl: aboutContent },
         { label: 'dataAccess', tpl: dataAccessContent },
+        { label: 'dataModel', tpl: dataModel },
         { label: 'usageAndAccess', tpl: licenseContent },
         { label: 'coverage', tpl: coverageContent },
         { label: 'spatialInfo', tpl: spatialInfoContent },

@@ -1,0 +1,32 @@
+@for (table of tables(); track $index) {
+  @let definition = table.attributeTable;
+
+  @if (definition) {
+    <h2 class="text-xl font-semibold mt-4 mb-2">{{ table.typeName }}</h2>
+
+    <p-table [value]="definition" stripedRows [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header>
+        <tr class="font-bold">
+          <th>Field</th>
+          <th>Label</th>
+          <th>Description</th>
+          <th>Type</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-field>
+        <tr>
+          <td>{{ field.code }}</td>
+          <td>{{ field.name }}</td>
+          <td>{{ field.definition }}</td>
+          <td>
+            {{ field.type }}
+            @if (field.cardinality) {
+              ({{ field.cardinality }})
+            }
+          </td>
+          <!-- TODO: Add list of values -->
+        </tr>
+      </ng-template>
+    </p-table>
+  }
+}

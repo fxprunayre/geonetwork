@@ -26,6 +26,7 @@ import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-v
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { Chip } from 'primeng/chip';
 import { AssociatedRecordsPanel } from '../associated/associated-records-panel/associated-records-panel';
+import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
 
 @Component({
   selector: 'app-record-view',
@@ -57,6 +58,7 @@ import { AssociatedRecordsPanel } from '../associated/associated-records-panel/a
     RecordFieldType,
     Chip,
     AssociatedRecordsPanel,
+    DataModelPanel,
   ],
   viewProviders: [
     provideIcons({
