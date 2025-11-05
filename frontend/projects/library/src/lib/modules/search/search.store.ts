@@ -23,7 +23,7 @@ import {
   SearchState,
 } from './search.store.model';
 import { SearchRouteService } from './search-route.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 export const initialState: SearchState = {
@@ -50,6 +50,7 @@ export const SearchStore = signalStore(
   withState(initialState),
   withProps(({ results }) => ({
     activeRoute: inject(ActivatedRoute),
+    router: inject(Router),
     results$: toObservable(results),
   })),
   withComputed((store) => ({
@@ -265,9 +266,11 @@ export const SearchStore = signalStore(
           patchState(store, { currentPage: store.currentPage() - store.pageSize() });
         },
         setRouting() {
-          if (!store.routing()) {
+          // TODO: All apps may not be using /search as search route
+          if (!store.routing() || store.router.url !== '/search') {
             return;
           }
+
           searchRouteService.setRoute(
             {
               currentPage: store.currentPage() || 0,
