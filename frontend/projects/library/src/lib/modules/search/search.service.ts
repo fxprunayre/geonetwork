@@ -127,11 +127,17 @@ export class SearchService {
         view: hit.view,
         edit: hit.edit,
         selected: hit.selected,
+        origin: hit.origin,
       },
     } as IndexRecord;
 
     if (hit.related) {
       record.related = this.parseRelated(hit.related);
+    }
+    const overview = hit.properties?.['overview'];
+    if (overview) {
+      // Related records have overview as string, not array of strings
+      record.overview = [{ url: overview }];
     }
     return record;
   }

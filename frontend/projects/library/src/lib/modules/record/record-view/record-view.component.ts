@@ -1,8 +1,7 @@
 import { Component, effect, inject, input, OnInit, signal, TemplateRef } from '@angular/core';
 import { AsyncPipe, DatePipe, JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
-import { IndexRecord } from 'gn-api-client';
-import { RelatedItemType } from 'gn4-api-client';
+import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import {
@@ -71,7 +70,7 @@ import { AssociatedRecordsPanel } from '../associated/associated-records-panel/a
 export class RecordViewComponent {
   uuid = input<string | null>();
 
-  layout = input<'fieldset' | 'panel'>('panel');
+  layout = input<'fieldset' | 'panel' | ''>('');
 
   searchService = inject(SearchService);
 
@@ -146,4 +145,6 @@ export class RecordViewComponent {
       link: constraint?.link ?? '',
     };
   }
+
+  protected readonly RelatedItemType = RelatedItemType;
 }

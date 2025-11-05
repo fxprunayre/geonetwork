@@ -1,24 +1,43 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, input, TemplateRef } from '@angular/core';
 import { RecordFieldBase } from '../../record-field-base/record-field-base';
 import { TranslatePipe } from '@ngx-translate/core';
-import { IndexRecord } from 'gn-api-client';
+import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { ResultItemGrid } from '../../../results/result-item-grid/result-item-grid';
 import { Router } from '@angular/router';
+import { JsonPipe, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-associated-records-panel',
-  imports: [TranslatePipe, ResultItemGrid],
+  imports: [TranslatePipe, ResultItemGrid, NgTemplateOutlet, JsonPipe],
   templateUrl: './associated-records-panel.html',
 })
 export class AssociatedRecordsPanel extends RecordFieldBase {
   router = inject(Router);
 
+  include = input<RelatedItemType[]>([]);
+  exclude = input<RelatedItemType[]>([]);
+
+  styleClass = input<string>('grid grid-cols-3 gap-4');
+
+  resultTemplate = input<TemplateRef<unknown>>();
+
   relations = computed<Record<string, IndexRecord[]>>(() => {
-    return this.record().related || {};
+    const relations = JSON.parse(JSON.stringify(this.record().related || {}));
+    Object.keys(relations).forEach((key) => {
+      if (
+        (this.include().length > 0 && !this.include().includes(key as RelatedItemType)) ||
+        (this.exclude().length > 0 && this.exclude().includes(key as RelatedItemType))
+      ) {
+        delete relations?.[key];
+      }
+    });
+    return relations;
   });
+
   types = computed(() => {
     return Object.keys(this.relations());
   });
+
   // TODO: Move to app
   viewDetails(uuid: string) {
     this.router.navigate(['/record/', uuid]);

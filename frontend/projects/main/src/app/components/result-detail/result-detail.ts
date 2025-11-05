@@ -37,7 +37,6 @@ export class ResultDetailComponent {
 
   constructor() {
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
-      console.log(params);
       this.uuid.set(params.get('uuid'));
     });
   }

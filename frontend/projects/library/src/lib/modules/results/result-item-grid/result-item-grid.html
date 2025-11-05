@@ -1,32 +1,20 @@
 <div
-  class="p-6 border border-surface-200 dark:border-surface-700 bg-surface-0 dark:bg-surface-900 rounded flex flex-col h-full"
+  (click)="onViewDetails()"
+  class="p-6 border border-surface-200 dark:border-surface-700 cursor-pointer bg-surface-0 dark:bg-surface-900 rounded flex flex-col h-full"
 >
-  <div class="bg-surface-50 flex justify-center rounded p-4 mb-4">
-    <div class="relative mx-auto">
-      <div class="rounded w-full h-32 flex items-center justify-center">
-        <app-record-field-overview [field]="result.overview?.[0] || []" [preview]="false" />
-      </div>
-    </div>
-  </div>
+  <app-record-field-overview [field]="result().overview?.[0] || []" [preview]="false" />
   <div class="pt-4 flex-1 flex flex-col">
     <div class="flex flex-row justify-between items-start gap-2 mb-4">
       <div class="flex-1">
-        <span class="font-medium text-surface-500 dark:text-surface-400 text-sm"
-          >UUID: {{ result.info?._id }}</span
-        >
-        <div class="text-lg font-medium mt-1">
-          {{ result.resourceTitleObject?.['default'] }}
-        </div>
+        <app-record-field-type [record]="result()" />
+        <app-record-field-title [record]="result()" class="text-primary text-xl line-clamp-2" />
       </div>
     </div>
     <div class="flex flex-col gap-4 mt-auto">
-      <p class="text-sm text-surface-600">{{ getTruncatedDescription() }}</p>
-      <div class="flex gap-2">
-        <button pButton class="flex-auto whitespace-nowrap" size="small" (click)="onViewDetails()">
-          <ng-icon name="faSolidEye" pButtonIcon></ng-icon>
-          <span pButtonLabel>View Details</span>
-        </button>
-      </div>
+      @let description = result().resourceAbstractObject?.['default'] || '';
+      <span class="text-base line-clamp-3" [title]="description">
+        {{ description }}
+      </span>
     </div>
   </div>
 </div>

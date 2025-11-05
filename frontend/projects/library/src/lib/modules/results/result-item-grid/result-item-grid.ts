@@ -1,12 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, output, Output } from '@angular/core';
 
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { IndexRecord } from 'gn-api-client';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { provideIcons } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import { faSolidEye } from '@ng-icons/font-awesome/solid';
 import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
+import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
+import { RecordFieldType } from '../../record/record-field-type/record-field-type';
 
 @Component({
   selector: 'app-result-item-grid',
@@ -14,26 +16,21 @@ import { RecordFieldOverviewComponent } from '../../record/record-field-overview
   imports: [
     ButtonModule,
     TooltipModule,
-    NgIcon,
     RecordFieldOverviewComponent,
     RecordFieldOverviewComponent,
+    RecordFieldTitle,
+    RecordFieldType,
   ],
   templateUrl: './result-item-grid.html',
   viewProviders: [provideIcons({ faImage, faSolidEye })],
 })
 export class ResultItemGrid {
-  @Input() result!: IndexRecord;
-  @Output() viewDetails = new EventEmitter<string>();
-  @Output() download = new EventEmitter<string>();
-
-  getTruncatedDescription(): string {
-    const description = this.result.resourceAbstractObject?.['default'];
-    if (!description) return 'No description available';
-
-    return description.length > 100 ? description.substring(0, 100) + '...' : description;
-  }
+  result = input.required<IndexRecord>();
+  viewDetails = output<string>();
 
   onViewDetails() {
-    this.viewDetails.emit(this.result.info?._id);
+    const id = this.result().info?._id;
+    if (!id) return;
+    this.viewDetails.emit(id);
   }
 }

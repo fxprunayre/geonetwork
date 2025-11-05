@@ -1,15 +1,14 @@
 <div
   (click)="onViewDetails()"
   class="flex flex-col lg:flex-row items-center gap-4 cursor-pointer rounded-xl p-[27px] border border-surface-200"
-  [ngClass]="{ 'mt-4': !isFirst }"
 >
   <div class="w-full lg:w-[190px] lg:aspect-square lg:flex-shrink-0 lg:overflow-hidden rounded">
-    <app-record-field-overview [field]="result.overview?.[0]" [preview]="false" />
+    <app-record-field-overview [field]="result().overview?.[0]" [preview]="false" />
   </div>
 
   <div class="flex flex-col justify-between items-start gap-2 w-full">
     <div class="flex justify-between items-center w-full">
-      <app-record-field-type [record]="result" />
+      <app-record-field-type [record]="result()" />
       <div>
         <div class="flex gap-3 justify-around">
           <ng-icon name="faMap" />
@@ -20,12 +19,13 @@
       </div>
     </div>
 
-    <app-record-field-title [record]="result" class="text-primary text-xl line-clamp-2" />
+    <app-record-field-title [record]="result()" class="text-primary text-xl line-clamp-2" />
 
-    <span class="text-base line-clamp-3" [title]="getDescription()">
-      {{ getDescription() }}
+    @let description = result().resourceAbstractObject?.['default'] || '';
+    <span class="text-base line-clamp-3" [title]="description">
+      {{ description }}
     </span>
 
-    <app-record-field-credit [record]="result" class="line-clamp-1" />
+    <app-record-field-credit [record]="result()" class="line-clamp-1" />
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, output, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
@@ -32,15 +32,12 @@ import { RecordFieldTitle } from '../../record/record-field-title/record-field-t
   ],
 })
 export class ResultItemList {
-  @Input() result!: IndexRecord;
-  @Input() isFirst: boolean = false;
-  @Output() viewDetails = new EventEmitter<string>();
-
-  getDescription(): string {
-    return this.result.resourceAbstractObject?.['default'] ?? '';
-  }
+  result = input.required<IndexRecord>();
+  viewDetails = output<string>();
 
   onViewDetails() {
-    this.viewDetails.emit(this.result.info?._id);
+    const id = this.result().info?._id;
+    if (!id) return;
+    this.viewDetails.emit(id);
   }
 }

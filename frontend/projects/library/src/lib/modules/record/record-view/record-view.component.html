@@ -9,21 +9,38 @@
   <app-record-view-header [record]="record" [vocabularies]="mainVocabularies()" />
 
   <ng-template #aboutContent>
-    <app-record-field [label]="'resourceDate'">
-      @for (date of record.resourceDate; track $index) {
-        <ul>
-          <li>{{ date.type }}: {{ date.date | date: 'long' }}</li>
-        </ul>
-      }
-    </app-record-field>
+    <div class="flex flex-row gap-6">
+      <div class="w-3/4">
+        <app-record-field [label]="'resourceDate'">
+          @for (date of record.resourceDate; track $index) {
+            <ul>
+              <li>{{ date.type }}: {{ date.date | date: 'long' }}</li>
+            </ul>
+          }
+        </app-record-field>
 
-    <app-record-field [label]="'Contacts'">
-      <app-record-field-contact [record]="record" />
-    </app-record-field>
+        <app-record-field [label]="'Contacts'">
+          <app-record-field-contact [record]="record" />
+        </app-record-field>
 
-    <app-record-field [label]="'Credits'">
-      <app-record-field-credit [record]="record" />
-    </app-record-field>
+        <app-record-field [label]="'Credits'">
+          <app-record-field-credit [record]="record" />
+        </app-record-field>
+      </div>
+      <div class="w-1/4">
+        <p-panel [header]="'Citation'" [toggleable]="false" class="mb-10">
+          Citation content goes here.
+        </p-panel>
+
+        <p-panel [header]="'Contact'" [toggleable]="false" class="my-10">
+          Main contact content goes here.
+        </p-panel>
+
+        <p-panel [header]="'Catalogue'" [toggleable]="false" class="my-10">
+          Catalogue/harvester logo.
+        </p-panel>
+      </div>
+    </div>
   </ng-template>
 
   <ng-template #dataAccessContent>
@@ -60,6 +77,11 @@
         <p [innerHTML]="getLineage() | markdown | async"></p>
       </app-show-more-toggle>
     </app-record-field>
+    <app-associated-records-panel
+      [record]="record"
+      styleClass="grid grid-cols-3 gap-4"
+      [include]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
+    />
   </ng-template>
 
   <ng-template #coverageContent>
@@ -118,64 +140,55 @@
   </ng-template>
 
   <ng-template #relatedContent>
-    <app-associated-records-panel [record]="record" />
+    <app-associated-records-panel
+      [record]="record"
+      [exclude]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
+    />
   </ng-template>
 
   <ng-template #similarContent></ng-template>
 
   <ng-template #metadata>
-    <div class="flex flex-row gap-6">
-      <div class="w-3/4">
-        @for (
-          section of [
-            { label: 'about', tpl: aboutContent },
-            { label: 'dataAccess', tpl: dataAccessContent },
-            { label: 'usageAndAccess', tpl: licenseContent },
-            { label: 'coverage', tpl: coverageContent },
-            { label: 'spatialInfo', tpl: spatialInfoContent },
-            { label: 'lineage', tpl: lineageContent },
-            { label: 'classification', tpl: classificationContent },
-            { label: 'relatedResources', tpl: relatedContent },
-            { label: 'similarResources', tpl: similarContent, collapsed: true },
-          ];
-          track section.label
-        ) {
-          @let sectionLabel =
-            'record.view.section.' + section.label
-              | translate: { resourceType: record.resourceType };
-          @switch (layout()) {
-            @case ('fieldset') {
-              <p-fieldset [legend]="sectionLabel" [toggleable]="true" class="my-10">
-                <ng-container *ngTemplateOutlet="section.tpl" />
-              </p-fieldset>
-            }
-            @default {
-              <p-panel
-                [header]="sectionLabel"
-                [toggleable]="true"
-                [collapsed]="section.collapsed || false"
-                class="my-10"
-              >
-                <ng-container *ngTemplateOutlet="section.tpl" />
-              </p-panel>
-            }
-          }
+    @for (
+      section of [
+        { label: 'about', tpl: aboutContent },
+        { label: 'dataAccess', tpl: dataAccessContent },
+        { label: 'usageAndAccess', tpl: licenseContent },
+        { label: 'coverage', tpl: coverageContent },
+        { label: 'spatialInfo', tpl: spatialInfoContent },
+        { label: 'lineage', tpl: lineageContent },
+        { label: 'classification', tpl: classificationContent },
+        { label: 'relatedResources', tpl: relatedContent },
+        { label: 'similarResources', tpl: similarContent, collapsed: true },
+      ];
+      track section.label
+    ) {
+      @let sectionLabel =
+        'record.view.section.' + section.label | translate: { resourceType: record.resourceType };
+      @switch (layout()) {
+        @case ('fieldset') {
+          <p-fieldset [legend]="sectionLabel" [toggleable]="true" class="my-10">
+            <ng-container *ngTemplateOutlet="section.tpl" />
+          </p-fieldset>
         }
-      </div>
-      <div class="w-1/4">
-        <p-panel [header]="'Citation'" [toggleable]="false" class="my-10">
-          Citation content goes here.
-        </p-panel>
-
-        <p-panel [header]="'Contact'" [toggleable]="false" class="my-10">
-          Main contact content goes here.
-        </p-panel>
-
-        <p-panel [header]="'Catalogue'" [toggleable]="false" class="my-10">
-          Catalogue/harvester logo.
-        </p-panel>
-      </div>
-    </div>
+        @case ('panel') {
+          <p-panel
+            [header]="sectionLabel"
+            [toggleable]="true"
+            [collapsed]="section.collapsed || false"
+            class="my-10"
+          >
+            <ng-container *ngTemplateOutlet="section.tpl" />
+          </p-panel>
+        }
+        @default {
+          <h1 class="text-4xl p-4 mb-10">{{ sectionLabel }}</h1>
+          <div class="border-b-2 pb-10">
+            <ng-container *ngTemplateOutlet="section.tpl" />
+          </div>
+        }
+      }
+    }
   </ng-template>
 
   <p-tabs value="0">
