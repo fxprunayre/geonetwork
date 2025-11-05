@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, signal, TemplateRef } from '@angular/core';
+import { Component, effect, inject, input, OnInit, signal, TemplateRef } from '@angular/core';
 import { AsyncPipe, DatePipe, JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord } from 'gn-api-client';
@@ -68,7 +68,7 @@ import { AssociatedRecordsPanel } from '../associated/associated-records-panel/a
     }),
   ],
 })
-export class RecordViewComponent implements OnInit {
+export class RecordViewComponent {
   uuid = input<string | null>();
 
   layout = input<'fieldset' | 'panel'>('panel');
@@ -83,30 +83,32 @@ export class RecordViewComponent implements OnInit {
 
   mainVocabularies = signal(['th_sextant-theme']);
 
-  ngOnInit() {
-    const uuid = this.uuid();
-    if (!uuid) return;
+  constructor() {
+    effect(() => {
+      const uuid = this.uuid();
+      if (!uuid) return;
 
-    this.searchService
-      .getById(uuid, [
-        RelatedItemType.Parent,
-        RelatedItemType.Children,
-        RelatedItemType.Services,
-        RelatedItemType.Sources,
-        RelatedItemType.Associated,
-      ])
-      .subscribe({
-        next: (result) => {
-          if (result) {
-            this.record.set(result);
-          } else {
+      this.searchService
+        .getById(uuid, [
+          RelatedItemType.Parent,
+          RelatedItemType.Children,
+          RelatedItemType.Services,
+          RelatedItemType.Sources,
+          RelatedItemType.Associated,
+        ])
+        .subscribe({
+          next: (result) => {
+            if (result) {
+              this.record.set(result);
+            } else {
+              this.recordStatus.set('not-found-or-not-shared-with-you');
+            }
+          },
+          error: (error) => {
             this.recordStatus.set('not-found-or-not-shared-with-you');
-          }
-        },
-        error: (error) => {
-          this.recordStatus.set('not-found-or-not-shared-with-you');
-        },
-      });
+          },
+        });
+    });
   }
 
   protected readonly statusbar = statusbar;

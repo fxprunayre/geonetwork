@@ -7,6 +7,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidArrowLeft } from '@ng-icons/font-awesome/solid';
 import { RecordViewComponent } from 'gn-library';
 import { TranslatePipe } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-result-detail',
@@ -28,13 +29,17 @@ import { TranslatePipe } from '@ngx-translate/core';
   ],
   templateUrl: './result-detail.html',
 })
-export class ResultDetailComponent implements OnInit {
+export class ResultDetailComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
   uuid = signal<string | null>(null);
-  ngOnInit() {
-    this.uuid.set(this.route.snapshot.paramMap.get('uuid'));
+
+  constructor() {
+    this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
+      console.log(params);
+      this.uuid.set(params.get('uuid'));
+    });
   }
 
   goBack() {
