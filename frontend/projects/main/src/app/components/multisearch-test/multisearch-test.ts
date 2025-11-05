@@ -4,8 +4,8 @@ import {
   SearchResultsNumber,
   SearchInput,
   ResultViewComponent,
+  SortResults
 } from 'gn-library';
-import { SortResults } from '../sort-results/sort-results';
 
 @Component({
   selector: 'app-multisearch-test',
