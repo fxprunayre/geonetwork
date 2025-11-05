@@ -8,6 +8,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidFilter } from '@ng-icons/font-awesome/solid';
 import { Select } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
+import { SearchBase } from 'gn-library';
 
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 
@@ -32,8 +33,12 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
   templateUrl: './catalogue-component.html',
   viewProviders: [provideIcons({ faSolidFilter })],
 })
-export class CatalogueComponent {
+export class CatalogueComponent extends SearchBase {
   bgFirst = 'images/bgFirst.jpg';
   visible = false;
   filterPanelMode = signal<FilterPanelLayout>('drawer');
+
+  get hasResults(): boolean {
+    return this.search?.totalCount() > 0;
+  }
 }

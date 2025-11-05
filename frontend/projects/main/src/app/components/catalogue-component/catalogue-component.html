@@ -27,11 +27,14 @@
         </p-drawer>
       }
     }
+
     <div class="w-full" [class.xl:px-[300px]]="filterPanelMode() === 'drawer'">
       <app-result-header />
-      <div class="flex flex-row justify-end items-center gap-2">
+      <div class="flex flex-row justify-end items-center gap-2 my-4">
         <p-select [options]="['drawer', 'side']" [(ngModel)]="filterPanelMode" />
-        <app-sort-results />
+        @if (this.hasResults) {
+          <app-sort-results />
+        }
       </div>
       <app-result-view />
     </div>
