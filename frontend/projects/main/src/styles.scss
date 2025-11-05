@@ -1,14 +1,19 @@
 @use 'tailwind.css';
 
-//.p-multiselect-chip {
-//  flex-wrap: wrap;
-//  align-content: space-between;
-//  padding-bottom: 0;
-//}
-//
-//.p-chips-token, .p-chips-input-token {
-//  margin-bottom: 0.5rem;
-//}
+@layer base {
+  ul {
+    @apply mb-4 ml-10 list-disc;
+  }
+  li {
+    @apply text-gray-800;
+  }
+  p {
+    @apply mb-4;
+  }
+  a:hover {
+    @apply underline;
+  }
+}
 
 * {
   font-family: 'Inter', sans-serif;
