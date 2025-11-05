@@ -32,22 +32,17 @@ export class SortResults extends SearchBase {
 
     switch (value) {
       case 'popularity':
-        sort = [{ popularity: { order: 'desc' } }];
+        sort = [{ popularity: 'desc' }];
         break;
       case 'title':
-        sort = [
-          {
-            'resourceTitleObject.default.keyword': {
-              order: 'asc',
-            },
-          },
-        ];
+        sort = [{ 'resourceTitleObject.default.keyword': 'asc' }];
         break;
       case 'lastUpdate':
       default:
-        sort = [{ changeDate: { order: 'desc' } }];
+        sort = [{ changeDate: 'desc' }];
     }
 
     this.search.setSort(sort);
   }
+
 }
