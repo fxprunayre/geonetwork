@@ -44,5 +44,4 @@ export class SortResults extends SearchBase {
 
     this.search.setSort(sort);
   }
-
 }

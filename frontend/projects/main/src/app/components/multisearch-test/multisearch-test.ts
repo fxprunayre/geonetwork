@@ -4,7 +4,7 @@ import {
   SearchResultsNumber,
   SearchInput,
   ResultViewComponent,
-  SortResults
+  SortResults,
 } from 'gn-library';
 
 @Component({
