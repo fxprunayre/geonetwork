@@ -16,9 +16,9 @@ describe('ResultItemList', () => {
 
     fixture = TestBed.createComponent(ResultItemList);
     component = fixture.componentInstance;
-    component.result = {
+    fixture.componentRef.setInput('result', {
       uuid: 'test-uuid',
-    };
+    });
     fixture.detectChanges();
   });
 

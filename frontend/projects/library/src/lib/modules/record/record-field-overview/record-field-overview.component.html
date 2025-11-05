@@ -18,13 +18,8 @@
       [containerStyle]="{ 'max-width': '640px' }"
       [numVisible]="5"
     >
-      <ng-template pTemplate="item" let-item>
+      <ng-template #item let-item>
         <ng-container *ngTemplateOutlet="overview; context: { $implicit: item }"></ng-container>
-      </ng-template>
-      <ng-template pTemplate="thumbnail" let-item>
-        <div class="grid grid-nogutter justify-content-center">
-          <img [src]="item.url" />
-        </div>
       </ng-template>
     </p-galleria>
   }

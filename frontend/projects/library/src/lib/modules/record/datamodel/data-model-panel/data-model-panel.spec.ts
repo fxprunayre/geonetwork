@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssociatedRecordsPanel } from './associated-records-panel';
+import { DataModelPanel } from './data-model-panel';
 
-describe('AssociatedRecordsPanel', () => {
-  let component: AssociatedRecordsPanel;
-  let fixture: ComponentFixture<AssociatedRecordsPanel>;
+describe('DataModelPanel', () => {
+  let component: DataModelPanel;
+  let fixture: ComponentFixture<DataModelPanel>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AssociatedRecordsPanel],
+      imports: [DataModelPanel],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AssociatedRecordsPanel);
+    fixture = TestBed.createComponent(DataModelPanel);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
