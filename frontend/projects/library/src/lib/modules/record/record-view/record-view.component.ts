@@ -94,6 +94,12 @@ export class RecordViewComponent {
           RelatedItemType.Children,
           RelatedItemType.Services,
           RelatedItemType.Sources,
+          RelatedItemType.Hassources,
+          RelatedItemType.BrothersAndSisters,
+          RelatedItemType.Datasets,
+          RelatedItemType.Siblings,
+          RelatedItemType.Fcats,
+          RelatedItemType.Hasfeaturecats,
           RelatedItemType.Associated,
         ])
         .subscribe({
