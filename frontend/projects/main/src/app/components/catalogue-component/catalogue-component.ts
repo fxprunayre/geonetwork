@@ -21,7 +21,6 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     SearchInput,
     ResultHeader,
     ResultViewComponent,
-    SearchActiveFilters,
     Drawer,
     Button,
     ButtonLabel,

@@ -18,7 +18,6 @@ import {
     ButtonModule,
     Aggregation,
     SearchResultsNumber,
-    SearchActiveFilters,
   ],
   templateUrl: './result-header.html',
   styleUrl: './result-header.scss',
