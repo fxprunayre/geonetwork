@@ -33,11 +33,11 @@ import { RecordFieldTitle } from '../../record/record-field-title/record-field-t
 })
 export class ResultItemList {
   result = input.required<IndexRecord>();
-  viewDetails = output<string>();
+  onRecordClick = output<string>();
 
-  onViewDetails() {
+  handleRecordClick() {
     const id = this.result().info?._id;
     if (!id) return;
-    this.viewDetails.emit(id);
+    this.onRecordClick.emit(id);
   }
 }

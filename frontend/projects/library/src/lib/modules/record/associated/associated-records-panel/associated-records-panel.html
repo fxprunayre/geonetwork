@@ -1,5 +1,5 @@
 <ng-template #defaultHitTemplate let-record>
-  <app-result-item-grid [result]="record" (viewDetails)="viewDetails($event)" />
+  <app-result-item-grid [result]="record" (onRecordClick)="handleRecordClick($event)" />
 </ng-template>
 
 @for (type of types(); track $index) {

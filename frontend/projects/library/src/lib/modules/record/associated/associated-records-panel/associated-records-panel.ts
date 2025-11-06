@@ -1,4 +1,13 @@
-import { Component, computed, inject, input, TemplateRef } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  inject,
+  input,
+  Output,
+  output,
+  TemplateRef,
+} from '@angular/core';
 import { RecordFieldBase } from '../../record-field-base/record-field-base';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
@@ -13,6 +22,9 @@ import { JsonPipe, NgTemplateOutlet } from '@angular/common';
 })
 export class AssociatedRecordsPanel extends RecordFieldBase {
   router = inject(Router);
+
+  @Output()
+  onRecordClick = new EventEmitter<string>();
 
   include = input<RelatedItemType[]>([]);
   exclude = input<RelatedItemType[]>([]);
@@ -38,8 +50,7 @@ export class AssociatedRecordsPanel extends RecordFieldBase {
     return Object.keys(this.relations());
   });
 
-  // TODO: Move to app
-  viewDetails(uuid: string) {
-    this.router.navigate(['/record/', uuid]);
+  handleRecordClick(uuid: string) {
+    this.onRecordClick.emit(uuid);
   }
 }

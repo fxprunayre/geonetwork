@@ -85,6 +85,7 @@
       [record]="record"
       styleClass="grid grid-cols-3 gap-4"
       [include]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
+      (onRecordClick)="handleRecordClick($event)"
     />
   </ng-template>
 
@@ -147,6 +148,7 @@
     <app-associated-records-panel
       [record]="record"
       [exclude]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
+      (onRecordClick)="handleRecordClick($event)"
     />
   </ng-template>
 

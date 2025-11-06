@@ -1,4 +1,14 @@
-import { Component, effect, inject, input, OnInit, signal, TemplateRef } from '@angular/core';
+import {
+  Component,
+  effect,
+  EventEmitter,
+  inject,
+  input,
+  OnInit,
+  Output,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { AsyncPipe, DatePipe, JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
@@ -84,6 +94,9 @@ export class RecordViewComponent {
 
   mainVocabularies = signal(['th_sextant-theme']);
 
+  @Output()
+  onRecordClick = new EventEmitter<string>();
+
   constructor() {
     effect(() => {
       const uuid = this.uuid();
@@ -118,7 +131,9 @@ export class RecordViewComponent {
     });
   }
 
-  protected readonly statusbar = statusbar;
+  handleRecordClick(uuid: string) {
+    this.onRecordClick.emit(uuid);
+  }
 
   getLineage(): string {
     return (this.record()?.lineageObject as any)?.['default'] ?? '';

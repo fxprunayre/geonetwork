@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ButtonIcon, ButtonLabel, ButtonModule } from 'primeng/button';
@@ -35,11 +35,19 @@ export class ResultDetailComponent {
 
   uuid = signal<string | null>(null);
 
+  @ViewChild('recordDetails') contentRef!: ElementRef<HTMLDivElement>;
+
   constructor() {
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
       this.uuid.set(params.get('uuid'));
+      this.contentRef &&
+        this.contentRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'start' });
     });
   }
+
+  handleRecordClick = (uuid: string) => {
+    this.router.navigate(['/record/', uuid]);
+  };
 
   goBack() {
     this.router.navigate(['/search']);

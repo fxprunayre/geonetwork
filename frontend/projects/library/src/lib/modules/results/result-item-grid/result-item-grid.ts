@@ -26,11 +26,11 @@ import { RecordFieldType } from '../../record/record-field-type/record-field-typ
 })
 export class ResultItemGrid {
   result = input.required<IndexRecord>();
-  viewDetails = output<string>();
+  onRecordClick = output<string>();
 
-  onViewDetails() {
+  handleRecordClick() {
     const id = this.result().info?._id;
     if (!id) return;
-    this.viewDetails.emit(id);
+    this.onRecordClick.emit(id);
   }
 }
