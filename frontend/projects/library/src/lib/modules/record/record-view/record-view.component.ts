@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   effect,
   EventEmitter,
@@ -9,7 +10,7 @@ import {
   signal,
   TemplateRef,
 } from '@angular/core';
-import { AsyncPipe, DatePipe, JsonPipe, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, DatePipe, JsonPipe, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
@@ -37,6 +38,8 @@ import { RecordFieldType } from '../record-field-type/record-field-type';
 import { Chip } from 'primeng/chip';
 import { AssociatedRecordsPanel } from '../associated/associated-records-panel/associated-records-panel';
 import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-record-view',
@@ -79,12 +82,10 @@ import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
     }),
   ],
 })
-export class RecordViewComponent {
+export class RecordViewComponent implements AfterViewInit {
   uuid = input<string | null>();
 
   layout = input<'fieldset' | 'panel' | ''>('');
-
-  searchService = inject(SearchService);
 
   backButtonTplRef = input<TemplateRef<unknown>>();
 
@@ -96,6 +97,10 @@ export class RecordViewComponent {
 
   @Output()
   onRecordClick = new EventEmitter<string>();
+
+  searchService = inject(SearchService);
+  scroller = inject(ViewportScroller);
+  route = inject(ActivatedRoute);
 
   constructor() {
     effect(() => {
@@ -133,6 +138,16 @@ export class RecordViewComponent {
 
   handleRecordClick(uuid: string) {
     this.onRecordClick.emit(uuid);
+  }
+
+  ngAfterViewInit(): void {
+    this.route.fragment.pipe(filter((fragment) => !!fragment)).subscribe((fragment) => {
+      if (fragment) {
+        setTimeout(() => {
+          this.scroller.scrollToAnchor(fragment);
+        }, 100);
+      }
+    });
   }
 
   getLineage(): string {
