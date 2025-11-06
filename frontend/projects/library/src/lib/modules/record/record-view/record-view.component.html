@@ -208,7 +208,7 @@
           </p-panel>
         }
         @default {
-          <h1 class="text-4xl p-4 mb-10">{{ sectionLabel }}</h1>
+          <h1 [id]="section.label" class="text-4xl p-4 mb-10">{{ sectionLabel }}</h1>
           <div class="border-b-2 pb-10">
             <ng-container *ngTemplateOutlet="section.tpl" />
           </div>
