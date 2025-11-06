@@ -32,7 +32,12 @@
       </app-search-input>
     </div>
 
-    <div appSearchContext="home" [aggregations]="homeAggregationConfig" class="mt-10">
+    <div
+      appSearchContext="home"
+      [aggregations]="homeAggregationConfig"
+      [filter]="[{ query_string: { query: '+isTemplate:n' } }]"
+      class="mt-10"
+    >
       <app-search-welcome-text scope="home"></app-search-welcome-text>
     </div>
   </div>

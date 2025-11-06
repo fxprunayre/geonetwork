@@ -7,7 +7,7 @@
     [filter]="searchConfig.filter"
     [routing]="true"
     [size]="searchPageSize"
-    filter="+isTemplate:n"
+    [filter]="[{ query_string: { query: '+isTemplate:n' } }]"
   >
     <router-outlet></router-outlet>
     <p-scroll-top />

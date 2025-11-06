@@ -41,10 +41,22 @@
         </p-panel>
       </div>
     </div>
+
+    <app-associated-records-panel
+      [record]="record"
+      [include]="[RelatedItemType.Parent, RelatedItemType.Children]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
   </ng-template>
 
   <ng-template #dataAccessContent>
     <app-record-distribution-panel [record]="record" />
+
+    <app-associated-records-panel
+      [record]="record"
+      [include]="[RelatedItemType.Services, RelatedItemType.Datasets]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
   </ng-template>
 
   <ng-template #dataModel>
@@ -147,7 +159,14 @@
   <ng-template #relatedContent>
     <app-associated-records-panel
       [record]="record"
-      [exclude]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
+      [exclude]="[
+        RelatedItemType.Sources,
+        RelatedItemType.Hassources,
+        RelatedItemType.Services,
+        RelatedItemType.Datasets,
+        RelatedItemType.Children,
+        RelatedItemType.Parent,
+      ]"
       (onRecordClick)="handleRecordClick($event)"
     />
   </ng-template>

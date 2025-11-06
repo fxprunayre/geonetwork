@@ -2,12 +2,24 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { APPLICATION_CONFIGURATION, Aggregation, SearchResultsNumber } from 'gn-library';
+import {
+  APPLICATION_CONFIGURATION,
+  Aggregation,
+  SearchResultsNumber,
+  SearchActiveFilters,
+} from 'gn-library';
 
 @Component({
   selector: 'app-result-header',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonModule, Aggregation, SearchResultsNumber],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ButtonModule,
+    Aggregation,
+    SearchResultsNumber,
+    SearchActiveFilters,
+  ],
   templateUrl: './result-header.html',
   styleUrl: './result-header.scss',
 })
