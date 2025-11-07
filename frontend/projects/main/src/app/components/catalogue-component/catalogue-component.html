@@ -1,16 +1,23 @@
 <section>
   <div
-    class="py-4 px-[20px] xl:px-[400px] flex flex-row gap-4 bg-top-left bg-auto bg-blend-overlay z-30 bg-primary/80 sticky top-0"
+    class="py-4 px-[20px] xl:px-[400px] flex flex-col gap-4 bg-top-left bg-auto bg-blend-overlay z-30 bg-primary/80 sticky top-0"
     [style.background-image]="'url(' + bgFirst + ')'"
   >
-    <app-search-input class="w-full"></app-search-input>
+    <div class="flex flex-row gap-4">
+      <app-search-input class="w-full"></app-search-input>
 
-    @if (filterPanelMode() == 'drawer') {
-      <p-button (click)="visible = !visible">
-        <ng-icon name="faSolidFilter" pButtonIcon></ng-icon>
-        <span pButtonLabel>Filter</span>
-      </p-button>
-    }
+      @if (filterPanelMode() == 'drawer') {
+        <p-button
+          (click)="visible = !visible"
+          [badge]="search.activeFilterCount() === 0 ? undefined : search.activeFilterCount() + ''"
+        >
+          <ng-icon name="faSolidFilter" pButtonIcon></ng-icon>
+          <div pButtonLabel>
+            {{ 'search.filter.panel.open' | translate }}
+          </div>
+        </p-button>
+      }
+    </div>
   </div>
   <hr />
 

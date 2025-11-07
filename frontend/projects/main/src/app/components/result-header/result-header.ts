@@ -12,13 +12,7 @@ import {
 @Component({
   selector: 'app-result-header',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ButtonModule,
-    Aggregation,
-    SearchResultsNumber,
-  ],
+  imports: [CommonModule, FormsModule, ButtonModule, Aggregation, SearchResultsNumber],
   templateUrl: './result-header.html',
   styleUrl: './result-header.scss',
 })

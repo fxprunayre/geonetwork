@@ -8,7 +8,12 @@
         }
       }
     },
-    "welcome.text": "Rechercher parmi {{count}} {{mainBuckets}}, ..."
+    "welcome.text": "Rechercher parmi {{count}} {{mainBuckets}}, ...",
+    "filter": {
+      "panel": {
+        "open": "Focus"
+      }
+    }
   },
   "record.field.overview.notAvailable": "Pas d'aperçu",
   "i18n": {

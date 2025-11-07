@@ -73,6 +73,16 @@ export const SearchStore = signalStore(
     hasResults: computed(() => store.results().length > 0),
     isEmpty: computed(() => store.results().length === 0),
     totalPages: computed(() => Math.ceil(store.totalCount() / store.pageSize())),
+    hasActiveFilters: computed(() => {
+      return Object.keys(store.filters()).length > 0;
+    }),
+    activeFilterCount: computed(() => {
+      let count = 0;
+      for (const [, filter] of Object.entries(store.filters())) {
+        count += filter.values.length;
+      }
+      return count;
+    }),
   })),
 
   withMethods(

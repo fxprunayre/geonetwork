@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SearchBase } from '../search-base/search-base';
 import { Button } from 'primeng/button';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -15,13 +15,7 @@ import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
   templateUrl: './search-active-filters.component.html',
 })
 export class SearchActiveFilters extends SearchBase {
-  hasActiveFilters = computed(() => {
-    return Object.keys(this.search.filters()).length > 0;
-  });
-
-  constructor(private aggregationTranslate: AggregationTranslatePipe) {
-    super();
-  }
+  private aggregationTranslate = inject(AggregationTranslatePipe);
 
   getBuckets(field: string) {
     let buckets = this.search.aggregations()[field]?.buckets || [];
@@ -29,14 +23,6 @@ export class SearchActiveFilters extends SearchBase {
       return buckets;
     }
     return [];
-  }
-
-  getActiveFilterCount(): number {
-    let count = 0;
-    for (const [, filter] of Object.entries(this.search.filters())) {
-      count += filter.values.length;
-    }
-    return count;
   }
 
   getBucketLabel(groupKey: string, bucketKey: string | number): string {

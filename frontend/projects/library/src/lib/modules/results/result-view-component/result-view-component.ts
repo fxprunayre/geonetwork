@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output, output, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResultItemList } from '../result-item-list/result-item-list';
 import { ResultItemGrid } from '../result-item-grid/result-item-grid';
@@ -8,7 +8,6 @@ import { EmptyState } from '../empty-state/empty-state';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchAppLayout } from '../../config/model/gnConfig';
-import { SearchFilterChange } from '../../search/search.store.model';
 
 @Component({
   selector: 'app-result-view',
@@ -17,9 +16,7 @@ import { SearchFilterChange } from '../../search/search.store.model';
   templateUrl: './result-view-component.html',
 })
 export class ResultViewComponent extends SearchBase {
-  // onRecordClick = output<string>();
-  @Output()
-  onRecordClick = new EventEmitter<string>();
+  onRecordClick = output<string>();
 
   private router = inject(Router);
 

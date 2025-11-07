@@ -1,11 +1,11 @@
-@if (hasActiveFilters()) {
+@if (search.hasActiveFilters()) {
   <div class="border-b-1 border-b-gray-400 pb-2 flex items-center flex-row mb-2 justify-between">
     <div class="flex items-center gap-2">
       <span class="text-sm">{{ 'activeFilters' | translate }}</span>
       <span
         class="bg-primary-500 rounded-full text-white w-[26px] h-[26px] flex items-center justify-center text-xs"
       >
-        {{ getActiveFilterCount() }}
+        {{ search.activeFilterCount() }}
       </span>
     </div>
     <p-button (onClick)="search.reset()" severity="primary">

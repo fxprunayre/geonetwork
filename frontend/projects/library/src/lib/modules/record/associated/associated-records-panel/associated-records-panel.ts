@@ -23,8 +23,7 @@ import { JsonPipe, NgTemplateOutlet } from '@angular/common';
 export class AssociatedRecordsPanel extends RecordFieldBase {
   router = inject(Router);
 
-  @Output()
-  onRecordClick = new EventEmitter<string>();
+  onRecordClick = output<string>();
 
   include = input<RelatedItemType[]>([]);
   exclude = input<RelatedItemType[]>([]);

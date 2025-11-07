@@ -6,6 +6,7 @@ import {
   inject,
   input,
   OnInit,
+  output,
   Output,
   signal,
   TemplateRef,
@@ -95,8 +96,7 @@ export class RecordViewComponent implements AfterViewInit {
 
   mainVocabularies = signal(['th_sextant-theme']);
 
-  @Output()
-  onRecordClick = new EventEmitter<string>();
+  onRecordClick = output<string>();
 
   searchService = inject(SearchService);
   scroller = inject(ViewportScroller);

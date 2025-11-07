@@ -8,7 +8,12 @@
         }
       }
     },
-    "welcome.text": "Search over {{count}} {{mainBuckets}}, ..."
+    "welcome.text": "Search over {{count}} {{mainBuckets}}, ...",
+    "filter": {
+      "panel": {
+        "open": "Filter"
+      }
+    }
   },
   "record": {
     "view": {
