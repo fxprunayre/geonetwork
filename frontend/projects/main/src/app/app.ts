@@ -8,7 +8,9 @@ import {
   SearchService,
   SearchApp,
   APPLICATION_CONFIGURATION,
+  environment,
 } from 'gn-library';
+import { GnApiModule, Configuration } from 'gn-api-client';
 import { TranslateService } from '@ngx-translate/core';
 import { ScrollTop } from 'primeng/scrolltop';
 

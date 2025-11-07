@@ -2,6 +2,7 @@ import { Recordview, Search, UiConfiguration } from './model/gn4config';
 import { InjectionToken } from '@angular/core';
 import { DEFAULT_UI_CONFIGURATION, SEXTANT_UI_CONFIGURATION } from './gn4constants';
 import { AppsConfiguration } from './model/gnConfig';
+import { environment } from '../../../environments/environment';
 
 export interface ApplicationConfiguration {
   config: AppsConfiguration | undefined;
@@ -84,8 +85,7 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
 
 export function loadAppConfig() {
   appConfigLoading = true;
-  // TODO: /geonetwork should be configurable
-  return fetch(`/geonetwork/srv/api/ui/${appConfig.space}`, {
+  return fetch(`${environment.geonetworkApiUrl}/srv/api/ui/${appConfig.space}`, {
     headers: {
       Accept: 'application/json',
     },

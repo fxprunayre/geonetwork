@@ -2,6 +2,7 @@
  * Public API Surface of library
  */
 
+export * from './environments/environment';
 export * from './lib/modules/config/config.loader';
 export * from './lib/modules/config/model/gn4config';
 export * from './lib/modules/config/model/gnConfig';

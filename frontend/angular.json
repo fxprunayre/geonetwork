@@ -48,7 +48,21 @@
                   "maximumError": "80000kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "projects/library/src/environments/environment.ts",
+                  "with": "projects/library/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "sextant": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/library/src/environments/environment.ts",
+                  "with": "projects/library/src/environments/environment.sextant.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
