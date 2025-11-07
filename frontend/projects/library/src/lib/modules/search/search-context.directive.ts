@@ -1,7 +1,7 @@
 import { Directive, inject, input, model, OnInit } from '@angular/core';
 import { SearchService } from './search.service';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
-import { DEFAULT_PAGE_SIZE } from './search.store.model';
+import { DEFAULT_PAGE_SIZE, DEFAULT_SORT } from './search.store.model';
 import { SearchStore } from './search.store';
 
 @Directive({
@@ -15,6 +15,8 @@ export class SearchContextDirective implements OnInit {
   filter = input<any>({});
   aggregations = input<any>({});
   size = input<number>(DEFAULT_PAGE_SIZE);
+  sort = input<string[] | undefined>([DEFAULT_SORT]);
+  currentSort = input<string | undefined>(DEFAULT_SORT);
   response = model<elasticsearch.SearchResponse<IndexRecord> | null>();
 
   searchStore = inject(SearchStore);
@@ -29,6 +31,8 @@ export class SearchContextDirective implements OnInit {
       this.size(),
       this.routing(),
       this.filter(),
+      this.sort() || [DEFAULT_SORT],
+      this.currentSort() || DEFAULT_SORT,
     );
     this.searchService.register(this.scope(), this.searchStore);
   }

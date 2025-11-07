@@ -8,6 +8,18 @@
         }
       }
     },
+    "sort": {
+      "placeholder": "Sort by",
+      "options": {
+        "_score": "Relevance",
+        "-revisionDateForResource,-publicationDateForResource,-creationDateForResource": "Last update",
+        "-changeDate": "Latest record",
+        "-createDate": "New record",
+        "resourceTitleObject.default.sort": "Title",
+        "-rating": "Rating",
+        "-popularity": "Popularity"
+      }
+    },
     "welcome.text": "Search over {{count}} {{mainBuckets}}, ...",
     "filter": {
       "panel": {

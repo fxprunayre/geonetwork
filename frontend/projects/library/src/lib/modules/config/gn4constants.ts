@@ -660,21 +660,25 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
           sortOrder: '',
         },
         {
-          sortBy: 'changeDate',
-          sortOrder: 'desc',
+          sortBy: '-revisionDateForResource,-publicationDateForResource,-creationDateForResource',
+          sortOrder: '',
         },
-        {
-          sortBy: 'createDate',
-          sortOrder: 'desc',
-        },
+        // {
+        //   sortBy: 'changeDate',
+        //   sortOrder: 'desc',
+        // },
+        // {
+        //   sortBy: 'createDate',
+        //   sortOrder: 'desc',
+        // },
         {
           sortBy: 'resourceTitleObject.default.sort',
           sortOrder: '',
         },
-        {
-          sortBy: 'rating',
-          sortOrder: 'desc',
-        },
+        // {
+        //   sortBy: 'rating',
+        //   sortOrder: 'desc',
+        // },
         {
           sortBy: 'popularity',
           sortOrder: 'desc',

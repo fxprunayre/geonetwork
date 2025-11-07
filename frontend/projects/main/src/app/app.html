@@ -8,6 +8,8 @@
     [routing]="true"
     [size]="searchPageSize"
     [filter]="[{ query_string: { query: '+isTemplate:n' } }]"
+    [sort]="searchConfig.sort"
+    [currentSort]="searchConfig.currentSort"
   >
     <router-outlet></router-outlet>
     <p-scroll-top />

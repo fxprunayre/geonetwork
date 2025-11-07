@@ -2,7 +2,8 @@ import { elasticsearch, IndexRecord } from 'gn-api-client';
 
 export const DEFAULT_PAGE_SIZE = 10;
 export const TRACK_TOTAL_HITS = true;
-export const DEFAULT_SORT: elasticsearch.Sort = ['_score'];
+export const DEFAULT_SORT = '_score';
+export const DEFAULT_SORT_OPTIONS = [DEFAULT_SORT];
 export const DEFAULT_AGGREGATION_SIZE = 10;
 
 export type SearchFilter = {
@@ -28,7 +29,8 @@ export type SearchState = {
   results: IndexRecord[];
   aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
   aggregations: Record<string, elasticsearch.AggregationsAggregate>;
-  sort: elasticsearch.Sort;
+  sort: string[];
+  currentSort: string;
   isLoading: boolean;
   totalCount: number;
   currentPage: number;
@@ -40,7 +42,7 @@ export interface SearchFilterParameters {
   filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
   filters: Record<string, SearchFilter>;
   aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
-  sort: elasticsearch.Sort;
+  currentSort: string;
 }
 
 export interface SearchRequestPageParameters {

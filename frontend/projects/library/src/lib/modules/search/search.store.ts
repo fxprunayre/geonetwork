@@ -16,6 +16,7 @@ import { elasticsearch } from 'gn-api-client';
 import {
   DEFAULT_PAGE_SIZE,
   DEFAULT_SORT,
+  DEFAULT_SORT_OPTIONS,
   SearchFilter,
   SearchFilterParameters,
   SearchRequestPageParameters,
@@ -39,7 +40,8 @@ export const initialState: SearchState = {
   results: [],
   aggregationsConfig: [],
   aggregations: {},
-  sort: DEFAULT_SORT,
+  sort: DEFAULT_SORT_OPTIONS,
+  currentSort: DEFAULT_SORT,
   isLoading: false,
   totalCount: 0,
   currentPage: 0,
@@ -59,7 +61,7 @@ export const SearchStore = signalStore(
         searchQuery: store.searchQuery(),
         filter: store.filter(),
         filters: store.filters(),
-        sort: store.sort(),
+        currentSort: store.currentSort(),
         aggregationsConfig: store.aggregationsConfig(),
       } as SearchFilterParameters;
     }),
@@ -103,6 +105,8 @@ export const SearchStore = signalStore(
           size: number,
           routing: boolean = false,
           filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+          sort: string[],
+          currentSort: string,
         ) {
           console.log(`Initializing search store with id: ${searchId}`, aggregationsConfig);
           patchState(store, {
@@ -111,6 +115,8 @@ export const SearchStore = signalStore(
             pageSize: size,
             routing,
             filter,
+            sort: sort || DEFAULT_SORT_OPTIONS,
+            currentSort: currentSort || DEFAULT_SORT,
           });
 
           store.results$.subscribe(() => {
@@ -286,7 +292,7 @@ export const SearchStore = signalStore(
             {
               currentPage: store.currentPage() || 0,
               pageSize: store.pageSize(),
-              sort: store.sort(),
+              currentSort: store.currentSort(),
               searchQuery: store.searchQuery(),
               filter: store.filter(),
               filters: store.filters(),
@@ -306,8 +312,8 @@ export const SearchStore = signalStore(
             );
           });
         },
-        setSort(sort: elasticsearch.Sort) {
-          patchState(store, { sort });
+        setSort(currentSort: string) {
+          patchState(store, { currentSort });
         },
       };
     },

@@ -1,12 +1,11 @@
 <div class="card flex justify-end">
   <p-select
-    [options]="sortOptions"
-    [(ngModel)]="selectedSort"
-    (ngModelChange)="onSortChange($event)"
+    [options]="sortOptions()"
     optionLabel="label"
     optionValue="value"
+    [(ngModel)]="search.currentSort"
     [showClear]="false"
-    placeholder="Sort by"
+    [placeholder]="'search.sort.placeholder' | translate"
     class="w-full md:w-56"
   />
 </div>

@@ -93,7 +93,7 @@ export class SearchService {
         searchRequestParameters.filters,
       ),
       _source: SEARCH_SOURCE,
-      sort: searchRequestParameters.sort,
+      sort: this.buildSort(searchRequestParameters.currentSort),
     };
 
     if (withAggregation) {
@@ -102,6 +102,23 @@ export class SearchService {
       );
     }
     return request;
+  }
+
+  buildSort(currentSort: string): elasticsearch.SortCombinations[] {
+    if (!currentSort) {
+      return [];
+    }
+    const sort: elasticsearch.SortCombinations[] = [];
+    const sortFields = currentSort.split(',');
+    for (const field of sortFields) {
+      const trimmedField = field.trim();
+      if (trimmedField.startsWith('-')) {
+        sort.push({ [trimmedField.substring(1)]: 'desc' });
+      } else {
+        sort.push({ [trimmedField]: 'asc' });
+      }
+    }
+    return sort;
   }
 
   parseRelated(related: Record<string, elasticsearch.SearchHit<IndexRecord>[] | IndexRecord[]>) {

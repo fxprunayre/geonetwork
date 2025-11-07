@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
-import { elasticsearch } from 'gn-api-client';
 import { SearchBase } from '../../search/search-base/search-base';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 interface SortOption {
   label: string;
@@ -12,35 +12,16 @@ interface SortOption {
 @Component({
   selector: 'app-sort-results',
   standalone: true,
-  imports: [FormsModule, Select],
+  imports: [FormsModule, Select, TranslatePipe],
   templateUrl: './sort-results.html',
 })
 export class SortResults extends SearchBase {
-  sortOptions: SortOption[] = [
-    { label: 'Last update', value: 'lastUpdate' },
-    { label: 'Popularity', value: 'popularity' },
-    { label: 'Title', value: 'title' },
-  ];
+  private readonly translateService = inject(TranslateService);
 
-  selectedSort: string = 'lastUpdate';
-
-  onSortChange(value: string): void {
-    this.selectedSort = value;
-
-    let sort: elasticsearch.Sort;
-
-    switch (value) {
-      case 'popularity':
-        sort = [{ popularity: 'desc' }];
-        break;
-      case 'title':
-        sort = [{ 'resourceTitleObject.default.keyword': 'asc' }];
-        break;
-      case 'lastUpdate':
-      default:
-        sort = [{ changeDate: 'desc' }];
-    }
-
-    this.search.setSort(sort);
-  }
+  sortOptions = computed<SortOption[]>(() =>
+    this.search.sort().map((sort) => ({
+      label: this.translateService.instant(`search.sort.options.${sort}`),
+      value: sort,
+    })),
+  );
 }
