@@ -1,5 +1,5 @@
 import { computed, inject, Injector } from '@angular/core';
-import { debounceTime, distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
 import {
   patchState,
   signalStore,
@@ -172,6 +172,7 @@ export const SearchStore = signalStore(
 
         paging: rxMethod<SearchRequestPageParameters>(
           pipe(
+            filter(() => store.totalCount() > 0),
             distinctUntilChanged(),
             tap(() => patchState(store, { isLoading: true })),
             switchMap((searchRequestPageParameters) => {
