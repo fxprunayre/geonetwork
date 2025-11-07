@@ -44,6 +44,7 @@ import { Popover } from 'primeng/popover';
 export class SearchInput extends SearchBase implements OnInit {
   autofocus = input<boolean>(true);
   searchOnInput = input<boolean>(true);
+  placeholder = input<string | undefined>();
 
   popOverTemplate = input<TemplateRef<unknown>>();
   op = viewChild<Popover>('op');

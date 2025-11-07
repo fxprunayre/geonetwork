@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   Aggregation,
   SearchContextDirective,
   SearchFilter,
   SearchInput,
   SearchRouteService,
-  SearchWelcomeText,
+  SearchService,
+  SearchStoreType,
+  SearchWelcomeTextPipe,
 } from 'gn-library';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -13,13 +15,15 @@ import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'first-section',
   standalone: true,
-  imports: [SearchInput, SearchContextDirective, SearchWelcomeText, Aggregation, TranslatePipe],
+  imports: [SearchInput, SearchContextDirective, Aggregation, TranslatePipe, SearchWelcomeTextPipe],
   templateUrl: './first-section.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FirstSection {
+export class FirstSection implements AfterViewInit {
   router = inject(Router);
   searchRouteService = inject(SearchRouteService);
+  searchService = inject(SearchService);
+  search: SearchStoreType | undefined = undefined;
 
   homeAggregationConfig = [
     {
@@ -87,6 +91,10 @@ export class FirstSection {
   ];
 
   bgFirst = 'images/bgFirst.jpg';
+
+  ngAfterViewInit() {
+    this.search = this.searchService.getSearch('home');
+  }
 
   setRouteToSearch() {
     this.router.navigate(['/search']);

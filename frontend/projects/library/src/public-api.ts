@@ -23,6 +23,7 @@ export * from './lib/modules/search/aggregation-translate-pipe';
 export * from './lib/modules/search/aggregations-panel/aggregations-panel.component';
 export * from './lib/modules/search/aggregation/aggregation.component';
 export * from './lib/modules/search/search-welcome-text/search-welcome-text';
+export * from './lib/modules/search/search-welcome-text/search-welcome-text-pipe';
 export * from './lib/modules/results/search-results-paginator/search-results-paginator';
 export * from './lib/modules/results/search-results-number/search-results-number.component';
 export * from './lib/modules/results/result-view-component/result-view-component';
