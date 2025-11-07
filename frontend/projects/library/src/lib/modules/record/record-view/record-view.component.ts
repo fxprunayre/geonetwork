@@ -41,6 +41,7 @@ import { AssociatedRecordsPanel } from '../associated/associated-records-panel/a
 import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
+import { DataExplorer } from '../../data/data-explorer/data-explorer';
 
 @Component({
   selector: 'app-record-view',
@@ -73,6 +74,7 @@ import { filter } from 'rxjs';
     Chip,
     AssociatedRecordsPanel,
     DataModelPanel,
+    DataExplorer,
   ],
   viewProviders: [
     provideIcons({
