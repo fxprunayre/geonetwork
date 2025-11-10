@@ -1,46 +1,52 @@
-<form>
-  <div class="relative flex gap-2 px-[20px] md:px-0">
-    <p-inputgroup>
-      <input
-        [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
-        [pAutoFocus]="autofocus()"
-        class="border border-gray-400 focus:border-blue-400 rounded-full"
-        type="text"
-        pInputText
-        name="search"
-        autocomplete="off"
-        [ngModel]="search.searchQuery()"
-        (ngModelChange)="searchOnInputChange($event)"
-        (keyup.enter)="searchOnClick()"
-        (click)="handleInputClick($event)"
-        data-testid="search-input"
-      />
-      <p-inputgroup-addon>
-        <p-button
-          severity="secondary"
-          variant="text"
-          (onClick)="searchOnClick()"
-          data-testid="search-input-button"
-        >
-          <ng-icon name="faSolidMagnifyingGlass" pButtonIcon></ng-icon>
-        </p-button>
-      </p-inputgroup-addon>
-    </p-inputgroup>
+<div class="relative flex gap-2 px-[20px] md:px-0">
+  <p-auto-complete
+    [(ngModel)]="queryString"
+    [suggestions]="items"
+    [pAutoFocus]="autofocus()"
+    [minQueryLength]="1"
+    (completeMethod)="onSearchWithText($event)"
+    [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
+    (ngModelChange)="searchOnInputChange($event)"
+    (keyup.enter)="searchOnClick()"
+    (click)="handleInputClick($event)"
+    data-testid="search-input"
+    class="w-full flex-1"
+    name="search"
+  >
+    <ng-template let-item pTemplate="item">
+      <span>{{ item.title }}</span>
+    </ng-template>
+    <p-button
+      severity="secondary"
+      variant="text"
+      (onClick)="searchOnClick()"
+      data-testid="search-input-button"
+    >
+      <ng-icon name="faSolidMagnifyingGlass" pButtonIcon></ng-icon>
+    </p-button>
+  </p-auto-complete>
 
-    @if (popOverTemplate()) {
-      <p-popover #op>
-        <ng-container *ngTemplateOutlet="popOverTemplate()"></ng-container>
-      </p-popover>
-    }
+  <button
+    type="button"
+    (click)="searchOnClick()"
+    class="px-5 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90"
+  >
+    <ng-icon name="faSolidMagnifyingGlass" class="w-4 h-4"></ng-icon>
+  </button>
 
-    @if (search.searchQuery()) {
-      <button
-        type="button"
-        (click)="clearQuery()"
-        class="z-50 absolute right-15 top-1/2 transform -translate-y-1/2 w-[32px] h-[32px] rounded-full bg-primary text-white leading-[35px]"
-      >
-        <ng-icon name="faSolidXmark" />
-      </button>
-    }
-  </div>
-</form>
+  @if (popOverTemplate()) {
+    <p-popover #op>
+      <ng-container *ngTemplateOutlet="popOverTemplate()"></ng-container>
+    </p-popover>
+  }
+
+  @if (search.searchQuery()) {
+    <button
+      type="button"
+      (click)="clearQuery()"
+      class="z-50 absolute right-15 top-1/2 transform -translate-y-1/2 w-[32px] h-[32px] rounded-full bg-primary text-white leading-[35px]"
+    >
+      <ng-icon name="faSolidXmark" />
+    </button>
+  }
+</div>

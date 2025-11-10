@@ -2,24 +2,29 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
-  OnInit,
   output,
   TemplateRef,
   viewChild,
+  inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { InputText } from 'primeng/inputtext';
-import { InputGroup } from 'primeng/inputgroup';
-import { InputGroupAddon } from 'primeng/inputgroupaddon';
-import { Button, ButtonIcon } from 'primeng/button';
-import { SearchBase } from '../search-base/search-base';
+import { AutoComplete } from 'primeng/autocomplete';
+import { AutoFocus } from 'primeng/autofocus';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidMagnifyingGlass, faSolidXmark } from '@ng-icons/font-awesome/solid';
-import { faMap } from '@ng-icons/font-awesome/regular';
-import { TranslatePipe } from '@ngx-translate/core';
-import { AutoFocus } from 'primeng/autofocus';
 import { NgTemplateOutlet } from '@angular/common';
 import { Popover } from 'primeng/popover';
+import { TranslatePipe } from '@ngx-translate/core';
+import { elasticsearch } from 'gn-api-client';
+import { SearchService } from '../../search/search.service';
+import { SearchBase } from '../search-base/search-base';
+import { PrimeTemplate } from 'primeng/api';
+import { Button, ButtonIcon } from 'primeng/button';
+
+interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
 
 @Component({
   selector: 'app-search-input',
@@ -27,21 +32,23 @@ import { Popover } from 'primeng/popover';
   imports: [
     NgTemplateOutlet,
     FormsModule,
-    InputText,
-    InputGroup,
-    InputGroupAddon,
-    Button,
     NgIcon,
-    ButtonIcon,
     TranslatePipe,
     AutoFocus,
     Popover,
+    AutoComplete,
+    PrimeTemplate,
+    Button,
+    ButtonIcon,
   ],
-  viewProviders: [provideIcons({ faSolidMagnifyingGlass, faSolidXmark, faMap })],
+  viewProviders: [provideIcons({ faSolidMagnifyingGlass, faSolidXmark })],
   templateUrl: './search-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./search-input.component.scss'],
 })
-export class SearchInput extends SearchBase implements OnInit {
+export class SearchInput extends SearchBase {
+  override searchService = inject(SearchService);
+
   autofocus = input<boolean>(true);
   searchOnInput = input<boolean>(true);
   placeholder = input<string | undefined>();
@@ -50,8 +57,66 @@ export class SearchInput extends SearchBase implements OnInit {
   op = viewChild<Popover>('op');
 
   onSearch = output();
-
   queryString = '';
+  items: any[] = [];
+  value: any;
+
+  async onSearchWithText(event: AutoCompleteCompleteEvent) {
+    const query = event.query.trim();
+    if (!query) {
+      this.items = [];
+      return;
+    }
+
+    const request: elasticsearch.SearchRequest = {
+      query: {
+        bool: {
+          must: [
+            {
+              multi_match: {
+                query,
+                type: 'bool_prefix' as any,
+                fields: [
+                  'resourceTitleObject.*^6',
+                  'resourceAbstractObject.*^.5',
+                  'tag',
+                  'uuid',
+                  'resourceIdentifier',
+                ],
+              },
+            },
+            {
+              terms: {
+                isTemplate: ['n'],
+              },
+            },
+          ],
+        },
+      },
+      size: 20,
+      sort: ['_score'],
+      _source: ['resourceTitleObject.*', 'resourceType'],
+    };
+
+    try {
+      const response: any = await this.searchService.searchService.search(request).toPromise();
+
+      this.items = response.hits.hits.map((hit: any) => {
+        const title =
+          hit._source.resourceTitleObject?.eng ||
+          Object.values(hit._source.resourceTitleObject || {})[0] ||
+          'Untitled';
+        return {
+          title,
+          type: hit._source.resourceType,
+          id: hit._id,
+        };
+      });
+    } catch (err) {
+      console.error('Autocomplete error:', err);
+      this.items = [];
+    }
+  }
 
   searchOnClick() {
     this.onModelChange(this.queryString);
