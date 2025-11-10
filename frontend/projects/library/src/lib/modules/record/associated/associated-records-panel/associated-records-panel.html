@@ -3,16 +3,33 @@
 </ng-template>
 
 @for (type of types(); track $index) {
-  <div class="has-[>section:empty]:hidden">
+  <div class="w-full has-[>section:empty]:hidden">
     <div class="text-2xl">
-      {{ type | translate }}
+      {{ 'record.association.' + type | translate }}
     </div>
 
     <section [class]="styleClass()">
-      @for (record of relations()[type]; track $index) {
-        <ng-container
-          *ngTemplateOutlet="resultTemplate() || defaultHitTemplate; context: { $implicit: record }"
-        />
+      @if (relations()[type].length > 0) {
+        <p-dataview
+          #dv
+          [value]="relations()[type]"
+          [layout]="'grid'"
+          rows="3"
+          [paginator]="relations()[type].length > 3"
+        >
+          <ng-template #grid let-items>
+            <div class="grid grid-cols-3 gap-4">
+              @for (record of items; track $index) {
+                <ng-container
+                  *ngTemplateOutlet="
+                    resultTemplate() || defaultHitTemplate;
+                    context: { $implicit: record }
+                  "
+                />
+              }
+            </div>
+          </ng-template>
+        </p-dataview>
       }
     </section>
   </div>

@@ -1,0 +1,34 @@
+<ng-template #navigation>
+  <div
+    [class]="navPosition() == 'top' ? 'flex items-center justify-center space-x-4' : 'space-y-2'"
+  >
+    @for (section of sections; track section.id) {
+      <a
+        class="scroll-spy-tab"
+        [class.scroll-spy-tab-top]="navPosition() == 'top'"
+        [class.scroll-spy-tab-aside]="navPosition() == 'aside'"
+        [class.scroll-spy-tab-active]="activeSectionId === section.id"
+        [attr.aria-selected]="activeSectionId === section.id"
+        (click)="scrollTo(section.id)"
+      >
+        {{ section.title }}
+      </a>
+    }
+  </div>
+</ng-template>
+
+<div [attr.class]="navPosition() == 'aside' ? 'flex gap-8' : ''">
+  @if (navPosition() === 'top') {
+    <nav class="sticky top-0 z-10 bg-white/95 w-full p-2">
+      <ng-container *ngTemplateOutlet="navigation" />
+    </nav>
+  }
+  <main>
+    <ng-content />
+  </main>
+  @if (navPosition() === 'aside') {
+    <aside class="w-64 p-4 sticky top-4 h-full">
+      <ng-container *ngTemplateOutlet="navigation" />
+    </aside>
+  }
+</div>

@@ -5,18 +5,13 @@
 }
 @if (record(); as record) {
   <ng-container *ngTemplateOutlet="backButtonTplRef() || defaultBackButton"></ng-container>
-
   <app-record-view-header [record]="record" [vocabularies]="mainVocabularies()" />
 
   <ng-template #aboutContent>
     <div class="flex flex-row gap-6">
       <div class="w-3/4">
-        <app-record-field [label]="'resourceDate'">
-          @for (date of record.resourceDate; track $index) {
-            <ul>
-              <li>{{ date.type }}: {{ date.date | date: 'long' }}</li>
-            </ul>
-          }
+        <app-record-field [label]="'record.field.resourceDate' | translate">
+          <app-record-field-dates [record]="record" />
         </app-record-field>
 
         <app-record-field [label]="'Contacts'">
@@ -95,7 +90,6 @@
     </app-record-field>
     <app-associated-records-panel
       [record]="record"
-      styleClass="grid grid-cols-3 gap-4"
       [include]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
       (onRecordClick)="handleRecordClick($event)"
     />
@@ -177,11 +171,10 @@
     @for (
       section of [
         { label: 'about', tpl: aboutContent },
-        { label: 'dataAccess', tpl: dataAccessContent },
-        { label: 'dataModel', tpl: dataModel },
         { label: 'usageAndAccess', tpl: licenseContent },
         { label: 'coverage', tpl: coverageContent },
         { label: 'spatialInfo', tpl: spatialInfoContent },
+        { label: 'dataModel', tpl: dataModel },
         { label: 'lineage', tpl: lineageContent },
         { label: 'classification', tpl: classificationContent },
         { label: 'relatedResources', tpl: relatedContent },
@@ -191,43 +184,47 @@
     ) {
       @let sectionLabel =
         'record.view.section.' + section.label | translate: { resourceType: record.resourceType };
-      @switch (layout()) {
-        @case ('fieldset') {
-          <p-fieldset [legend]="sectionLabel" [toggleable]="true" class="my-10">
-            <ng-container *ngTemplateOutlet="section.tpl" />
-          </p-fieldset>
-        }
-        @case ('panel') {
-          <p-panel
-            [header]="sectionLabel"
-            [toggleable]="true"
-            [collapsed]="section.collapsed || false"
-            class="my-10"
-          >
-            <ng-container *ngTemplateOutlet="section.tpl" />
-          </p-panel>
-        }
-        @default {
-          <h1 [id]="section.label" class="text-4xl p-4 mb-10">{{ sectionLabel }}</h1>
-          <div class="border-b-2 pb-10">
-            <ng-container *ngTemplateOutlet="section.tpl" />
-          </div>
-        }
-      }
+      <section [id]="section.label" class="border border-surface-200 rounded-xl p-10 mb-10">
+        <h1 class="text-4xl mb-10 border-b-2 border-surface-100">{{ sectionLabel }}</h1>
+        <div class="">
+          <ng-container *ngTemplateOutlet="section.tpl" />
+        </div>
+      </section>
+    }
+  </ng-template>
+
+  <ng-template #dataAccess>
+    @for (section of [{ label: 'dataAccess', tpl: dataAccessContent }]; track section.label) {
+      @let sectionLabel =
+        'record.view.section.' + section.label | translate: { resourceType: record.resourceType };
+      <section [id]="section.label" class="border border-surface-200 rounded-xl p-10 mb-10">
+        <h1 class="text-4xl mb-10 border-b-2 border-surface-100">{{ sectionLabel }}</h1>
+        <div class="">
+          <ng-container *ngTemplateOutlet="section.tpl" />
+        </div>
+      </section>
     }
   </ng-template>
 
   <p-tabs value="0">
     <p-tablist>
-      <p-tab value="0">{{ 'Data card' | translate }}</p-tab>
-      <p-tab value="1">{{ 'Explore' | translate }}</p-tab>
-      <p-tab value="2">{{ 'Discussion' | translate }}</p-tab>
+      <p-tab value="0">{{ 'record.view.section.description' | translate }}</p-tab>
+      <p-tab value="2">{{ 'record.view.section.explore' | translate }}</p-tab>
+      <p-tab value="1">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
+      <p-tab value="3">{{ 'record.view.section.discussions' | translate }}</p-tab>
     </p-tablist>
     <p-tabpanels>
       <p-tabpanel value="0">
-        <ng-container *ngTemplateOutlet="metadata"></ng-container>
+        <app-scroll-spy navPosition="aside">
+          <ng-container *ngTemplateOutlet="metadata"></ng-container>
+        </app-scroll-spy>
       </p-tabpanel>
       <p-tabpanel value="1">
+        <app-scroll-spy navPosition="aside">
+          <ng-container *ngTemplateOutlet="dataAccess"></ng-container>
+        </app-scroll-spy>
+      </p-tabpanel>
+      <p-tabpanel value="2">
         <app-data-explorer />
       </p-tabpanel>
       <p-tabpanel value="2">

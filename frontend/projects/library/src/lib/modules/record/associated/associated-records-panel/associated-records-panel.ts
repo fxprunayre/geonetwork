@@ -14,10 +14,12 @@ import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { ResultItemGrid } from '../../../results/result-item-grid/result-item-grid';
 import { Router } from '@angular/router';
 import { JsonPipe, NgTemplateOutlet } from '@angular/common';
+import { Carousel } from 'primeng/carousel';
+import { DataView } from 'primeng/dataview';
 
 @Component({
   selector: 'app-associated-records-panel',
-  imports: [TranslatePipe, ResultItemGrid, NgTemplateOutlet, JsonPipe],
+  imports: [TranslatePipe, ResultItemGrid, NgTemplateOutlet, JsonPipe, Carousel, DataView],
   templateUrl: './associated-records-panel.html',
 })
 export class AssociatedRecordsPanel extends RecordFieldBase {
@@ -28,7 +30,7 @@ export class AssociatedRecordsPanel extends RecordFieldBase {
   include = input<RelatedItemType[]>([]);
   exclude = input<RelatedItemType[]>([]);
 
-  styleClass = input<string>('grid grid-cols-3 gap-4');
+  styleClass = input<string>('');
 
   resultTemplate = input<TemplateRef<unknown>>();
 

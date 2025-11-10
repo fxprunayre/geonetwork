@@ -42,6 +42,8 @@ import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 import { DataExplorer } from '../../data/data-explorer/data-explorer';
+import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
+import { RecordFieldDates } from '../record-field-dates/record-field-dates';
 
 @Component({
   selector: 'app-record-view',
@@ -75,6 +77,8 @@ import { DataExplorer } from '../../data/data-explorer/data-explorer';
     AssociatedRecordsPanel,
     DataModelPanel,
     DataExplorer,
+    ScrollSpy,
+    RecordFieldDates,
   ],
   viewProviders: [
     provideIcons({

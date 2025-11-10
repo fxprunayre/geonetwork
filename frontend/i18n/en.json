@@ -30,9 +30,13 @@
   "record": {
     "view": {
       "section": {
+        "description": "Description",
         "about": "About this {{resourceType}}",
         "dataAccess": "Data access",
+        "explore": "Explore",
+        "discussions": "Discussions",
         "dataExplorer": "Data explorer",
+        "dataModel": "Data model",
         "contact": "Contact",
         "coverage": "Coverage",
         "spatialInfo": "Spatial information",
@@ -49,7 +53,14 @@
       "abstract": "Overview",
       "overview": {
         "notAvailable": "No preview"
-      }
+      },
+      "resourceDate": "Dates"
+    },
+    "association": {
+      "parent": "Part of",
+      "children": "Composed of",
+      "hassources": "Used for",
+      "sources": "Derived from"
     }
   },
   "i18n": {
