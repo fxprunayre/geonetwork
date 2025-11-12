@@ -39,7 +39,12 @@
 
     <app-associated-records-panel
       [record]="record"
-      [include]="[RelatedItemType.Parent, RelatedItemType.Children]"
+      [include]="[RelatedItemType.Parent]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
+    <app-associated-records-panel
+      [record]="record"
+      [include]="[RelatedItemType.Children]"
       (onRecordClick)="handleRecordClick($event)"
     />
   </ng-template>
@@ -165,7 +170,7 @@
     />
   </ng-template>
 
-  <ng-template #similarContent> Similar resources content goes here. </ng-template>
+  <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
   <ng-template #metadata>
     @for (

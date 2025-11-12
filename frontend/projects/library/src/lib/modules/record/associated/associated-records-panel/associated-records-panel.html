@@ -3,13 +3,13 @@
 </ng-template>
 
 @for (type of types(); track $index) {
-  <div class="w-full has-[>section:empty]:hidden">
-    <div class="text-2xl">
-      {{ 'record.association.' + type | translate }}
-    </div>
+  @if (relations()[type].length > 0) {
+    <div class="w-full has-[>section:empty]:hidden">
+      <div class="text-2xl">
+        {{ 'record.association.' + type | translate: { count: relations()[type].length } }}
+      </div>
 
-    <section [class]="styleClass()">
-      @if (relations()[type].length > 0) {
+      <section [class]="styleClass()">
         <p-dataview
           #dv
           [value]="relations()[type]"
@@ -30,7 +30,7 @@
             </div>
           </ng-template>
         </p-dataview>
-      }
-    </section>
-  </div>
+      </section>
+    </div>
+  }
 }
