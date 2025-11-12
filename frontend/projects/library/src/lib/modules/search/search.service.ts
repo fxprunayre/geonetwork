@@ -25,8 +25,9 @@ export class SearchService {
       // throw new Error(
       //   `Search ${searchId} already registered. Choose another search id.`
       // );
+    } else {
+      this.store[searchId] = searchStore;
     }
-    this.store[searchId] = searchStore;
   }
 
   getSearch(searchId: string): SearchStoreType {

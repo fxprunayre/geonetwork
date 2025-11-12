@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import {
   Aggregation,
   SearchContextDirective,
@@ -21,6 +21,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 })
 export class FirstSection implements AfterViewInit {
   router = inject(Router);
+  cdr = inject(ChangeDetectorRef);
   searchRouteService = inject(SearchRouteService);
   searchService = inject(SearchService);
   search: SearchStoreType | undefined = undefined;
@@ -94,6 +95,7 @@ export class FirstSection implements AfterViewInit {
 
   ngAfterViewInit() {
     this.search = this.searchService.getSearch('home');
+    this.cdr.detectChanges();
   }
 
   setRouteToSearch() {
