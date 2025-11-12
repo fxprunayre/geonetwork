@@ -34,6 +34,7 @@
     [src]="overview.url"
     [title]="overview.nameObject?.default || 'overview'"
     (onImageError)="onImageError($event)"
+    loading="lazy"
   ></p-image>
 </ng-template>
 
