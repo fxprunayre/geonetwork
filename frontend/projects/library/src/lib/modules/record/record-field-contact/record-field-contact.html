@@ -5,7 +5,7 @@
     @for (contact of role.value; track $index) {
       <p-card (click)="op.toggle($event)" class="cursor-pointer">
         <ng-template #title>
-          @let mainContact = contact.organisationObject.default || contact.individual;
+          @let mainContact = contact.organisationObject?.default || contact.individual;
           @let firstLetter = mainContact.charAt(0).toUpperCase();
           <p-avatar [label]="firstLetter" class="mr-2" size="xlarge" shape="circle" />
           {{ mainContact }}

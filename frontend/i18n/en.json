@@ -57,10 +57,11 @@
       "resourceDate": "Dates"
     },
     "association": {
-      "parent": "Part of",
-      "children": "Composed of",
-      "hassources": "Used for",
-      "sources": "Derived from"
+      "parent": "Part of {{count}} resource(s)",
+      "children": "Composed of {{count}} resource(s)",
+      "hassources": "Used for {{count}} resource(s)",
+      "sources": "Derived from {{count}} resource(s)",
+      "associated": "Associated with {{count}} resource(s)"
     }
   },
   "i18n": {

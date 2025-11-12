@@ -10,6 +10,7 @@ import { RecordFieldOverviewComponent } from '../record-field-overview/record-fi
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
+import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
 
 @Component({
   selector: 'app-record-view-header',
@@ -26,6 +27,7 @@ import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-v
     RecordFieldType,
     ShowMoreToggle,
     RecordFieldVocabulary,
+    RecordFieldDoi,
   ],
   templateUrl: './record-view-header.html',
 })

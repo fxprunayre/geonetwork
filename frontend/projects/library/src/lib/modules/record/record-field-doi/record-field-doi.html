@@ -1,0 +1,14 @@
+@if (doi(); as doi) {
+  <a [href]="doi.url" [title]="doi.code" target="_blank" rel="noopener noreferrer">
+    <p-chip class="!py-0 !pl-0 !pr-4">
+      <span
+        class="bg-primary text-primary-contrast text-xs rounded-full w-8 h-8 flex items-center justify-center"
+      >
+        DOI
+      </span>
+      <span class="ml-2 line-clamp-1">
+        {{ doi.code }}
+      </span>
+    </p-chip>
+  </a>
+}

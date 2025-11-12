@@ -44,6 +44,7 @@ import { filter } from 'rxjs';
 import { DataExplorer } from '../../data/data-explorer/data-explorer';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { RecordFieldDates } from '../record-field-dates/record-field-dates';
+import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
 
 @Component({
   selector: 'app-record-view',

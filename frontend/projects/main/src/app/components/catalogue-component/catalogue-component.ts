@@ -17,7 +17,6 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
   selector: 'app-catalogue-component',
   imports: [
     SidePanel,
-    ResultViewComponent,
     SearchInput,
     ResultHeader,
     ResultViewComponent,
