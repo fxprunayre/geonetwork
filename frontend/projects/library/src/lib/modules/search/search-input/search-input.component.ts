@@ -6,6 +6,7 @@ import {
   TemplateRef,
   viewChild,
   inject,
+  signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AutoComplete } from 'primeng/autocomplete';
@@ -15,7 +16,7 @@ import { faSolidMagnifyingGlass, faSolidXmark } from '@ng-icons/font-awesome/sol
 import { NgTemplateOutlet } from '@angular/common';
 import { Popover } from 'primeng/popover';
 import { TranslatePipe } from '@ngx-translate/core';
-import { elasticsearch } from 'gn-api-client';
+import { elasticsearch, IndexRecord } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
 import { SearchBase } from '../search-base/search-base';
 import { PrimeTemplate } from 'primeng/api';
@@ -57,13 +58,14 @@ export class SearchInput extends SearchBase {
 
   onSearch = output();
   queryString = '';
-  items: any[] = [];
+  items = signal<IndexRecord[]>([]);
   value: any;
 
   async onSearchWithText(event: AutoCompleteCompleteEvent) {
+    console.log('onSearchWithText', event.query);
     const query = event.query.trim();
     if (!query) {
-      this.items = [];
+      this.items.set([]);
       return;
     }
 
@@ -99,21 +101,19 @@ export class SearchInput extends SearchBase {
 
     try {
       const response: any = await this.searchService.searchService.search(request).toPromise();
-
-      this.items = response.hits.hits.map((hit: any) => {
-        const title =
-          hit._source.resourceTitleObject?.eng ||
-          Object.values(hit._source.resourceTitleObject || {})[0] ||
-          'Untitled';
-        return {
-          title,
-          type: hit._source.resourceType,
-          id: hit._id,
-        };
-      });
+      console.log(response);
+      this.items.set(
+        response.hits.hits.map((hit: any) => {
+          const title = hit._source.resourceTitleObject?.['default'];
+          return {
+            title,
+            resourceType: hit._source.resourceType,
+          };
+        }) || [],
+      );
     } catch (err) {
       console.error('Autocomplete error:', err);
-      this.items = [];
+      this.items.set([]);
     }
   }
 
@@ -128,7 +128,12 @@ export class SearchInput extends SearchBase {
     }
   }
 
+  onItemSelect(event: { value: { title: string } }) {
+    this.queryString = event.value.title;
+  }
+
   onModelChange(queryString: string) {
+    console.log('Search input changed:', queryString, this.queryString);
     this.search.setFullTextQuery(queryString);
     this.onSearch.emit();
   }
@@ -140,6 +145,7 @@ export class SearchInput extends SearchBase {
   }
 
   clearQuery() {
+    this.queryString = '';
     this.search.setFullTextQuery('');
   }
 }

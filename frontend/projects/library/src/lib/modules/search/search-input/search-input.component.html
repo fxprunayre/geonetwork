@@ -1,12 +1,13 @@
 <div class="relative flex gap-2 px-[20px] md:px-0">
   <p-auto-complete
     [(ngModel)]="queryString"
-    [suggestions]="items"
+    [suggestions]="items()"
     optionLabel="title"
-    optionValue="title"
     [pAutoFocus]="autofocus()"
     [minQueryLength]="1"
     (completeMethod)="onSearchWithText($event)"
+    (onSelect)="onItemSelect($event)"
+    [forceSelection]="false"
     [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
     (ngModelChange)="searchOnInputChange($event)"
     (keyup.enter)="searchOnClick()"
