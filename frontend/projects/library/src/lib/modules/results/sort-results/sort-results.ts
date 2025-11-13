@@ -24,4 +24,9 @@ export class SortResults extends SearchBase {
       value: sort,
     })),
   );
+
+  onSortChange(sort: string) {
+    this.search.setSort(sort);
+    this.search.setRouting();
+  }
 }

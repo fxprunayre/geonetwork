@@ -283,8 +283,12 @@ export const SearchStore = signalStore(
           patchState(store, { currentPage: store.currentPage() - store.pageSize() });
         },
         setRouting() {
-          // TODO: All apps may not be using /search as search route
-          if (!store.routing() || store.router.url !== '/search') {
+          if (!store.routing()) {
+            return;
+          }
+
+          const baseUrl = store.router.url.split('?')[0];
+          if (baseUrl !== '/search') {
             return;
           }
 
