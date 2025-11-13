@@ -155,6 +155,21 @@
     <app-record-field-vocabulary [record]="record" [exclude]="mainVocabularies()" />
   </ng-template>
 
+  <ng-template #relatedContent>
+    <app-associated-records-panel
+      [record]="record"
+      [exclude]="[
+        RelatedItemType.Sources,
+        RelatedItemType.Hassources,
+        RelatedItemType.Services,
+        RelatedItemType.Datasets,
+        RelatedItemType.Children,
+        RelatedItemType.Parent,
+      ]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
+  </ng-template>
+
   <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
   <ng-template #metadata>
@@ -167,7 +182,6 @@
         { label: 'dataModel', tpl: dataModel },
         { label: 'lineage', tpl: lineageContent },
         { label: 'classification', tpl: classificationContent },
-        { label: 'relatedResources', tpl: relatedContent },
         { label: 'similarResources', tpl: similarContent, collapsed: true },
       ];
       track section.label
@@ -184,16 +198,7 @@
   </ng-template>
 
   <ng-template #dataAccess>
-    @for (section of [{ label: 'dataAccess', tpl: dataAccessContent }]; track section.label) {
-      @let sectionLabel =
-        'record.view.section.' + section.label | translate: { resourceType: record.resourceType };
-      <section [id]="section.label" class="border border-surface-200 rounded-xl p-10 mb-10">
-        <h1 class="text-4xl mb-10 border-b-2 border-surface-100">{{ sectionLabel }}</h1>
-        <div class="">
-          <ng-container *ngTemplateOutlet="section.tpl" />
-        </div>
-      </section>
-    }
+    <ng-container *ngTemplateOutlet="dataAccessContent" />
   </ng-template>
 
   <p-tabs value="0">
@@ -219,20 +224,7 @@
         <app-data-explorer />
       </p-tabpanel>
       <p-tabpanel value="3">
-        <ng-template #relatedContent>
-          <app-associated-records-panel
-            [record]="record"
-            [exclude]="[
-              RelatedItemType.Sources,
-              RelatedItemType.Hassources,
-              RelatedItemType.Services,
-              RelatedItemType.Datasets,
-              RelatedItemType.Children,
-              RelatedItemType.Parent,
-            ]"
-            (onRecordClick)="handleRecordClick($event)"
-          />
-        </ng-template>
+        <ng-container *ngTemplateOutlet="relatedContent"></ng-container>
       </p-tabpanel>
       <p-tabpanel value="4">
         <app-feedback-panel />
