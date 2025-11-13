@@ -2,6 +2,8 @@
   <p-auto-complete
     [(ngModel)]="queryString"
     [suggestions]="items"
+    optionLabel="title"
+    optionValue="title"
     [pAutoFocus]="autofocus()"
     [minQueryLength]="1"
     (completeMethod)="onSearchWithText($event)"
