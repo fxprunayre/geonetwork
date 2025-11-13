@@ -155,21 +155,6 @@
     <app-record-field-vocabulary [record]="record" [exclude]="mainVocabularies()" />
   </ng-template>
 
-  <ng-template #relatedContent>
-    <app-associated-records-panel
-      [record]="record"
-      [exclude]="[
-        RelatedItemType.Sources,
-        RelatedItemType.Hassources,
-        RelatedItemType.Services,
-        RelatedItemType.Datasets,
-        RelatedItemType.Children,
-        RelatedItemType.Parent,
-      ]"
-      (onRecordClick)="handleRecordClick($event)"
-    />
-  </ng-template>
-
   <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
   <ng-template #metadata>
@@ -216,7 +201,8 @@
       <p-tab value="0">{{ 'record.view.section.description' | translate }}</p-tab>
       <p-tab value="1">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
       <p-tab value="2">{{ 'record.view.section.explore' | translate }}</p-tab>
-      <p-tab value="3">{{ 'record.view.section.discussions' | translate }}</p-tab>
+      <p-tab value="3">{{ 'record.view.section.publications' | translate }}</p-tab>
+      <p-tab value="4">{{ 'record.view.section.discussions' | translate }}</p-tab>
     </p-tablist>
     <p-tabpanels>
       <p-tabpanel value="0">
@@ -232,7 +218,23 @@
       <p-tabpanel value="2">
         <app-data-explorer />
       </p-tabpanel>
-      <p-tabpanel value="2">
+      <p-tabpanel value="3">
+        <ng-template #relatedContent>
+          <app-associated-records-panel
+            [record]="record"
+            [exclude]="[
+              RelatedItemType.Sources,
+              RelatedItemType.Hassources,
+              RelatedItemType.Services,
+              RelatedItemType.Datasets,
+              RelatedItemType.Children,
+              RelatedItemType.Parent,
+            ]"
+            (onRecordClick)="handleRecordClick($event)"
+          />
+        </ng-template>
+      </p-tabpanel>
+      <p-tabpanel value="4">
         <app-feedback-panel />
       </p-tabpanel>
     </p-tabpanels>

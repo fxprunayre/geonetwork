@@ -34,6 +34,7 @@
         "about": "About this {{resourceType}}",
         "dataAccess": "Data access",
         "explore": "Explore",
+        "publications": "Publications",
         "discussions": "Discussions",
         "dataExplorer": "Data explorer",
         "dataModel": "Data model",
