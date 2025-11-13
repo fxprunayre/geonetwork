@@ -1,0 +1,51 @@
+<ng-template #defaultHitTemplate let-record>
+  <app-result-item-grid [result]="record" (onRecordClick)="handleRecordClick($event)" />
+</ng-template>
+
+@if (relations().length > 0) {
+  @let label = 'record.association.' + type() | translate: { count: relations().length };
+
+  <ng-template #content>
+    <div class="w-full has-[>section:empty]:hidden">
+      @if (!isFullScreen) {
+        <div class="text-2xl">
+          {{ label }}
+        </div>
+      }
+
+      <section [class]="styleClass()">
+        <p-dataview
+          #dv
+          [value]="relations()"
+          [layout]="'grid'"
+          [rows]="isFullScreen ? relations().length : pageSize"
+          [paginator]="isFullScreen ? false : relations().length > pageSize"
+        >
+          <ng-template #grid let-items>
+            <div class="grid grid-cols-3 gap-4">
+              @for (record of items; track $index) {
+                <ng-container
+                  *ngTemplateOutlet="
+                    resultTemplate() || defaultHitTemplate;
+                    context: { $implicit: record }
+                  "
+                />
+              }
+            </div>
+          </ng-template>
+        </p-dataview>
+      </section>
+    </div>
+  </ng-template>
+
+  @if (!isFullScreen) {
+    @if (relations().length > pageSize) {
+      <p-button (click)="isFullScreen = true" link styleClass="float-right" label="See all ..." />
+    }
+    <ng-container *ngTemplateOutlet="content" />
+  } @else {
+    <p-drawer [header]="label" [(visible)]="isFullScreen" position="full">
+      <ng-container *ngTemplateOutlet="content" />
+    </p-drawer>
+  }
+}

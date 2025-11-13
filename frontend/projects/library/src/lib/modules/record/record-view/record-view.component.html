@@ -37,12 +37,12 @@
       </div>
     </div>
 
-    <app-associated-records-panel
+    <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Parent]"
       (onRecordClick)="handleRecordClick($event)"
     />
-    <app-associated-records-panel
+    <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Children]"
       (onRecordClick)="handleRecordClick($event)"
@@ -52,7 +52,7 @@
   <ng-template #dataAccessContent>
     <app-record-distribution-panel [record]="record" />
 
-    <app-associated-records-panel
+    <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Services, RelatedItemType.Datasets]"
       (onRecordClick)="handleRecordClick($event)"
@@ -93,7 +93,7 @@
         <p [innerHTML]="getLineage() | markdown | async"></p>
       </app-show-more-toggle>
     </app-record-field>
-    <app-associated-records-panel
+    <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
       (onRecordClick)="handleRecordClick($event)"
@@ -156,7 +156,7 @@
   </ng-template>
 
   <ng-template #relatedContent>
-    <app-associated-records-panel
+    <app-associated-panel
       [record]="record"
       [exclude]="[
         RelatedItemType.Sources,

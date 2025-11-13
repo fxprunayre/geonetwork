@@ -2,16 +2,13 @@ import {
   AfterViewInit,
   Component,
   effect,
-  EventEmitter,
   inject,
   input,
-  OnInit,
   output,
-  Output,
   signal,
   TemplateRef,
 } from '@angular/core';
-import { AsyncPipe, DatePipe, JsonPipe, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import { AsyncPipe, JsonPipe, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
@@ -24,7 +21,6 @@ import {
 import { provideIcons } from '@ng-icons/core';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
-import { Fieldset } from 'primeng/fieldset';
 import { Panel } from 'primeng/panel';
 import { RecordField } from '../record-field/record-field';
 import { RecordFieldContact } from '../record-field-contact/record-field-contact';
@@ -37,14 +33,13 @@ import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
 import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { Chip } from 'primeng/chip';
-import { AssociatedRecordsPanel } from '../associated/associated-records-panel/associated-records-panel';
 import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
 import { DataExplorer } from '../../data/data-explorer/data-explorer';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { RecordFieldDates } from '../record-field-dates/record-field-dates';
-import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
+import { AssociatedPanel } from '../associated/associated-panel/associated-panel';
 
 @Component({
   selector: 'app-record-view',
@@ -56,8 +51,6 @@ import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
     MarkdownPipe,
     AsyncPipe,
     ShowMoreToggle,
-    Fieldset,
-    DatePipe,
     Panel,
     RecordField,
     RecordFieldContact,
@@ -75,7 +68,7 @@ import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
     JsonPipe,
     RecordFieldType,
     Chip,
-    AssociatedRecordsPanel,
+    AssociatedPanel,
     DataModelPanel,
     DataExplorer,
     ScrollSpy,
