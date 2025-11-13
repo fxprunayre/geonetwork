@@ -22,9 +22,20 @@
         <div class="">OR</div>
         <div class="w-1/2">
           <p-inputgroup>
+            <p-select
+              [options]="datasources()"
+              optionValue="url"
+              optionLabel="url"
+              [(ngModel)]="fileUrl"
+            >
+              <ng-template let-datasource #item>
+                <div class="flex items-center gap-2">
+                  <div>{{ datasource.url }} ({{ datasource.format }})</div>
+                </div>
+              </ng-template>
+            </p-select>
             <input
               id="url-input"
-              type="text"
               pInputText
               [(ngModel)]="fileUrl"
               placeholder="Load from URL eg. https://example.com/data.parquet"
@@ -85,7 +96,7 @@
           [pAutoFocus]="true"
           (keydown.control.enter)="runQuery()"
         ></textarea>
-        <div class="flex flex-row gap-2">
+        <div class="flex flex-row gap-2 items-center">
           <p-button (click)="runQuery()" [disabled]="loading || !initialized">
             <ng-icon name="faSolidPlay" class="run-icon"></ng-icon>
             Run Query
@@ -93,6 +104,10 @@
           <p-button (click)="query = defaultQuery" [disabled]="loading || !initialized">
             <ng-icon name="faSolidXmark" class="run-icon"></ng-icon>
           </p-button>
+          @if (rowCount !== null) {
+            <div class="text-sm mx-4">Rows: {{ rowCount() }}</div>
+          }
+          <p-slider [(ngModel)]="limit" [step]="step" [max]="rowCount()" class="w-56" />
         </div>
       </p-panel>
     }

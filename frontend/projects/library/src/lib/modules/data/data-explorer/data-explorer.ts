@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -6,9 +6,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { MessageModule } from 'primeng/message';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
+  faSolidExpand,
   faSolidPlay,
   faSolidUpload,
-  faSolidExpand,
   faSolidXmark,
 } from '@ng-icons/font-awesome/solid';
 import { Textarea } from 'primeng/textarea';
@@ -16,13 +16,20 @@ import { AutoFocus } from 'primeng/autofocus';
 import { LoadingMask } from '../../../shared/widgets/loading-mask/loading-mask.component';
 import { Select } from 'primeng/select';
 import { UIChart } from 'primeng/chart';
-import { JsonPipe, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { InputText } from 'primeng/inputtext';
 import { InputGroup } from 'primeng/inputgroup';
 import { FileUpload, FileUploadHandlerEvent } from 'primeng/fileupload';
 import { Panel } from 'primeng/panel';
 import { Drawer } from 'primeng/drawer';
 import { DuckDbService } from './duck-db.service';
+import { IndexRecord, Link } from 'gn-api-client';
+import { Slider } from 'primeng/slider';
+
+interface Datasource {
+  url: string;
+  format: 'csv' | 'parquet' | 'json' | 'geojson' | 'gml' | 'wfs';
+}
 
 @Component({
   selector: 'app-data-explorer',
@@ -41,16 +48,44 @@ import { DuckDbService } from './duck-db.service';
     Select,
     Drawer,
     UIChart,
-    JsonPipe,
     InputText,
     InputGroup,
     FileUpload,
     Panel,
+    Slider,
     NgTemplateOutlet,
   ],
   providers: [provideIcons({ faSolidPlay, faSolidXmark, faSolidExpand, faSolidUpload })],
 })
 export class DataExplorer {
+  record = input<IndexRecord>();
+
+  datasources = computed(() => {
+    const supportedLinks: Datasource[] = [];
+    const record = this.record();
+    if (!record) return supportedLinks;
+
+    record.link?.forEach((link: Link) => {
+      const url = link.urlObject?.['default'] || '';
+      const protocol = link.protocol || '';
+      const extension = url.split('.').pop()?.toLowerCase();
+      if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'parquet') {
+        supportedLinks.push({ url: url, format: 'parquet' });
+      } else if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'csv') {
+        supportedLinks.push({ url: url, format: 'csv' });
+      } else if (
+        protocol.startsWith('WWW:DOWNLOAD') &&
+        (extension === 'json' || url.indexOf('f=pjson') != -1)
+      ) {
+        supportedLinks.push({ url: url, format: 'json' });
+      } else if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'gml') {
+        supportedLinks.push({ url: url, format: 'gml' });
+      }
+    });
+
+    return supportedLinks;
+  });
+
   private duckDbService = inject(DuckDbService);
 
   initialized = false;
@@ -64,6 +99,14 @@ export class DataExplorer {
   columns: { field: string; header: string }[] = [];
   rows: any[] = [];
   error?: string;
+
+  // Row count and limit
+  rowCount = signal<number | null>(null);
+  limit = signal(100);
+  step = computed(() => {
+    const count = this.rowCount();
+    return count ? count / 10 : 10;
+  });
 
   // For statistics
   selectedColumnsForStats: string[] = [];
@@ -88,6 +131,10 @@ export class DataExplorer {
 
   constructor() {
     this.initDuckDB();
+
+    effect(() => {
+      this.query = this.replaceLimitClause(this.query, this.limit());
+    });
   }
 
   async initDuckDB(): Promise<void> {
@@ -112,6 +159,39 @@ export class DataExplorer {
     this.selectedColumnY = null;
     this.twoColumnChartData = null;
   }
+
+  private async updateRowCount(): Promise<void> {
+    try {
+      const res = await this.duckDbService.runQuery('SELECT COUNT(*) AS count FROM data;');
+      if (res && res.length > 0 && res[0].count !== undefined) {
+        this.rowCount.set(Number(res[0].count));
+      } else {
+        this.rowCount.set(null);
+      }
+    } catch (e: any) {
+      // If counting fails, keep null and do not block loading
+      this.rowCount.set(null);
+    }
+  }
+
+  private replaceLimitClause(sql: string, limit: number): string {
+    const trimmed = sql.trim();
+    const hasLimit = /LIMIT\s+\d+/i.test(trimmed);
+    if (hasLimit) {
+      return trimmed.replace(/LIMIT\s+\d+/i, `LIMIT ${limit}`);
+    } else {
+      return `${trimmed} LIMIT ${limit}`;
+    }
+  }
+
+  async setLimit(newLimit: number): Promise<void> {
+    const max = this.rowCount() ?? Number.MAX_SAFE_INTEGER;
+    const clamped = Math.max(0, Math.min(newLimit, max));
+    this.limit.set(clamped);
+    this.query = this.replaceLimitClause(this.query, this.limit());
+    await this.runQuery();
+  }
+
   private async loadData(fileName: string, data: ArrayBuffer): Promise<void> {
     this.dataLoaded = false;
     this.loading = true;
@@ -120,6 +200,12 @@ export class DataExplorer {
 
     try {
       await this.duckDbService.loadData(fileName, data);
+
+      await this.updateRowCount();
+      const count = this.rowCount();
+      this.limit.set(count !== null ? Math.min(100, count) : 100);
+
+      this.query = this.replaceLimitClause(this.query, this.limit());
       this.dataLoaded = true;
       await this.runQuery();
     } catch (e: any) {
@@ -312,7 +398,8 @@ export class DataExplorer {
       const colX = this.selectedColumnX;
       const colY = this.selectedColumnY;
 
-      const chartQuery = `SELECT "${colX}", "${colY}" FROM (${this.query});`;
+      const chartQuery = `SELECT "${colX}", "${colY}"
+                          FROM (${this.query});`;
       const data = await this.duckDbService.runQuery(chartQuery);
 
       this.twoColumnChartData = {

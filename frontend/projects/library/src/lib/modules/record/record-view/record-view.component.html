@@ -221,7 +221,7 @@
         </app-scroll-spy>
       </p-tabpanel>
       <p-tabpanel value="2">
-        <app-data-explorer />
+        <app-data-explorer [record]="record" />
       </p-tabpanel>
       <p-tabpanel value="3">
         <ng-container *ngTemplateOutlet="relatedContent"></ng-container>
