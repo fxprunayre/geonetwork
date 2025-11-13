@@ -50,7 +50,7 @@ export class SearchInput extends SearchBase {
   override searchService = inject(SearchService);
 
   autofocus = input<boolean>(true);
-  searchOnInput = input<boolean>(true);
+  searchOnInput = input<boolean>(false);
   placeholder = input<string | undefined>();
 
   popOverTemplate = input<TemplateRef<unknown>>();
