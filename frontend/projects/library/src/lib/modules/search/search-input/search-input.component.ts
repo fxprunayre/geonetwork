@@ -44,7 +44,6 @@ interface AutoCompleteCompleteEvent {
   viewProviders: [provideIcons({ faSolidMagnifyingGlass, faSolidXmark })],
   templateUrl: './search-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./search-input.component.scss'],
 })
 export class SearchInput extends SearchBase {
   override searchService = inject(SearchService);
