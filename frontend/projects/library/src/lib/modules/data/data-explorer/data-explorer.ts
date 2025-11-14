@@ -25,11 +25,7 @@ import { Drawer } from 'primeng/drawer';
 import { DuckDbService } from './duck-db.service';
 import { IndexRecord, Link } from 'gn-api-client';
 import { Slider } from 'primeng/slider';
-
-interface Datasource {
-  url: string;
-  format: 'csv' | 'parquet' | 'json' | 'geojson' | 'gml' | 'wfs';
-}
+import { Datasource } from '../datasource-select/datasource-select';
 
 @Component({
   selector: 'app-data-explorer',
@@ -58,34 +54,7 @@ interface Datasource {
   providers: [provideIcons({ faSolidPlay, faSolidXmark, faSolidExpand, faSolidUpload })],
 })
 export class DataExplorer {
-  record = input<IndexRecord>();
-
-  datasources = computed(() => {
-    const supportedLinks: Datasource[] = [];
-    const record = this.record();
-    if (!record) return supportedLinks;
-
-    record.link?.forEach((link: Link) => {
-      const url = link.urlObject?.['default'] || '';
-      const protocol = link.protocol || '';
-      const extension = url.split('.').pop()?.toLowerCase();
-      if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'parquet') {
-        supportedLinks.push({ url: url, format: 'parquet' });
-      } else if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'csv') {
-        supportedLinks.push({ url: url, format: 'csv' });
-      } else if (
-        protocol.startsWith('WWW:DOWNLOAD') &&
-        (extension === 'json' || url.indexOf('f=pjson') != -1)
-      ) {
-        supportedLinks.push({ url: url, format: 'json' });
-      } else if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'gml') {
-        supportedLinks.push({ url: url, format: 'gml' });
-      }
-    });
-
-    return supportedLinks;
-  });
-
+  datasource = input<Datasource | undefined>();
   private duckDbService = inject(DuckDbService);
 
   initialized = false;
@@ -105,7 +74,10 @@ export class DataExplorer {
   limit = signal(100);
   step = computed(() => {
     const count = this.rowCount();
-    return count ? count / 10 : 10;
+    if (!count || count <= 0) return 10;
+    // exponent = max(1, ceil(log10(count)) - 1) -> yields 1,2,3,... for steps 10^1,10^2,...
+    const exp = Math.max(1, Math.ceil(Math.log10(count)) - 1);
+    return Math.pow(10, exp);
   });
 
   // For statistics
@@ -134,6 +106,12 @@ export class DataExplorer {
 
     effect(() => {
       this.query = this.replaceLimitClause(this.query, this.limit());
+    });
+
+    effect(() => {
+      const ds = this.datasource();
+      if (!ds) return;
+      this.loadFileFromUrl(ds.url);
     });
   }
 
@@ -230,17 +208,17 @@ export class DataExplorer {
     }
   }
 
-  async loadFileFromUrl(): Promise<void> {
-    if (!this.fileUrl) return;
+  async loadFileFromUrl(fileUrl: string): Promise<void> {
+    if (!fileUrl) return;
 
     try {
-      const response = await fetch(this.fileUrl);
+      const response = await fetch(fileUrl);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const buffer = await response.arrayBuffer();
-      let fileName = this.fileUrl.split('/').pop() || 'data';
+      let fileName = fileUrl.split('/').pop() || 'data';
       const fileExt = (fileName.split('.').pop() || '').toLowerCase();
       const supportedExts = ['csv', 'parquet', 'json', 'geojson', 'gml'];
 

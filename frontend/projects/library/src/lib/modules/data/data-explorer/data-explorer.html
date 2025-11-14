@@ -1,55 +1,5 @@
 <div class="flex flex-col gap-4">
   <ng-template #explorer>
-    <p-panel header="Choose a dataset" class="mb-10">
-      <div class="flex flex-row gap-2 mb-10 justify-items-center">
-        <div class="w-1/2">
-          <p-fileupload
-            #fu
-            mode="basic"
-            class="w-full"
-            [auto]="true"
-            [customUpload]="true"
-            chooseLabel="Choose a file"
-            accept=".csv,.parquet,.json,.geojson,.gml"
-            maxFileSize="100000000"
-            (uploadHandler)="onFileSelected($event)"
-          >
-            <ng-template #chooseicon>
-              <ng-icon name="faSolidUpload"></ng-icon>
-            </ng-template>
-          </p-fileupload>
-        </div>
-        <div class="">OR</div>
-        <div class="w-1/2">
-          <p-inputgroup>
-            <p-select
-              [options]="datasources()"
-              optionValue="url"
-              optionLabel="url"
-              [(ngModel)]="fileUrl"
-            >
-              <ng-template let-datasource #item>
-                <div class="flex items-center gap-2">
-                  <div>{{ datasource.url }} ({{ datasource.format }})</div>
-                </div>
-              </ng-template>
-            </p-select>
-            <input
-              id="url-input"
-              pInputText
-              [(ngModel)]="fileUrl"
-              placeholder="Load from URL eg. https://example.com/data.parquet"
-            />
-            <p-button
-              label="Load"
-              (click)="loadFileFromUrl()"
-              [disabled]="!fileUrl || loading"
-            ></p-button>
-          </p-inputgroup>
-        </div>
-      </div>
-    </p-panel>
-
     @if (error) {
       <p-message severity="error">{{ error }}</p-message>
     }
@@ -107,7 +57,7 @@
           @if (rowCount !== null) {
             <div class="text-sm mx-4">Rows: {{ rowCount() }}</div>
           }
-          <p-slider [(ngModel)]="limit" [step]="step" [max]="rowCount()" class="w-56" />
+          <p-slider [(ngModel)]="limit" [step]="step()" [max]="rowCount()" class="w-56" />
         </div>
       </p-panel>
     }

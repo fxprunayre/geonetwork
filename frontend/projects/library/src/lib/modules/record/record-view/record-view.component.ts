@@ -1,23 +1,10 @@
-import {
-  AfterViewInit,
-  Component,
-  effect,
-  inject,
-  input,
-  output,
-  signal,
-  TemplateRef,
-} from '@angular/core';
-import { AsyncPipe, JsonPipe, NgTemplateOutlet, ViewportScroller } from '@angular/common';
+import { AfterViewInit, Component, effect, inject, input, output, signal, TemplateRef } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
 import { faImage } from '@ng-icons/font-awesome/regular';
-import {
-  faSolidCircleExclamation,
-  faSolidDownload,
-  faSolidShareNodes,
-} from '@ng-icons/font-awesome/solid';
+import { faSolidCircleExclamation, faSolidDownload, faSolidShareNodes } from '@ng-icons/font-awesome/solid';
 import { provideIcons } from '@ng-icons/core';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
@@ -40,16 +27,18 @@ import { DataExplorer } from '../../data/data-explorer/data-explorer';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { RecordFieldDates } from '../record-field-dates/record-field-dates';
 import { AssociatedPanel } from '../associated/associated-panel/associated-panel';
+import { Perspective } from '../../data/perspective/perspective';
+import { Datasource, DatasourceSelect } from '../../data/datasource-select/datasource-select';
+import { RadioButton } from 'primeng/radiobutton';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-record-view',
   templateUrl: './record-view.component.html',
   standalone: true,
   imports: [
-    NgTemplateOutlet,
     AccordionModule,
     MarkdownPipe,
-    AsyncPipe,
     ShowMoreToggle,
     Panel,
     RecordField,
@@ -65,7 +54,6 @@ import { AssociatedPanel } from '../associated/associated-panel/associated-panel
     TabList,
     FeedbackPanel,
     RecordFieldVocabulary,
-    JsonPipe,
     RecordFieldType,
     Chip,
     AssociatedPanel,
@@ -73,6 +61,10 @@ import { AssociatedPanel } from '../associated/associated-panel/associated-panel
     DataExplorer,
     ScrollSpy,
     RecordFieldDates,
+    Perspective,
+    DatasourceSelect,
+    RadioButton,
+    FormsModule
   ],
   viewProviders: [
     provideIcons({
@@ -101,6 +93,9 @@ export class RecordViewComponent implements AfterViewInit {
   searchService = inject(SearchService);
   scroller = inject(ViewportScroller);
   route = inject(ActivatedRoute);
+
+  datasource = signal<Datasource | undefined>(undefined);
+  exploreMode = signal<'perspective' | 'duckdb'>('perspective');
 
   constructor() {
     effect(() => {

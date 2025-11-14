@@ -1,0 +1,12 @@
+<p-select
+  placeholder="Choose a datasource"
+  [options]="datasources()"
+  optionLabel="url"
+  [(ngModel)]="datasource"
+>
+  <ng-template let-ds #item>
+    <div class="flex items-center gap-2">
+      <div>{{ ds.url }} ({{ ds.format }})</div>
+    </div>
+  </ng-template>
+</p-select>
