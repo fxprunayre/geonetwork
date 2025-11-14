@@ -4,7 +4,7 @@
     [style.background-image]="'url(' + bgFirst + ')'"
   >
     <div class="flex flex-row gap-4">
-      <app-search-input class="w-full"></app-search-input>
+      <app-search-input class="w-full" [autocompleteEnabled]="false"></app-search-input>
 
       @if (filterPanelMode() == 'drawer') {
         <p-button

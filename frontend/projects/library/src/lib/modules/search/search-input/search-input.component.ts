@@ -52,9 +52,10 @@ export class SearchInput extends SearchBase {
   autofocus = input<boolean>(true);
   searchOnInput = input<boolean>(false);
   placeholder = input<string | undefined>();
-
   popOverTemplate = input<TemplateRef<unknown>>();
   op = viewChild<Popover>('op');
+  autocompleteEnabled = input<boolean>(true);
+  inputClasses = 'w-full flex-1 px-4 py-2 border border-gray-400 rounded-full bg-white text-black focus:border-primary focus:ring-1 focus:ring-primary transition-colors';
 
   onSearch = output();
   queryString = '';
@@ -62,55 +63,17 @@ export class SearchInput extends SearchBase {
   value: any;
 
   async onSearchWithText(event: AutoCompleteCompleteEvent) {
-    console.log('onSearchWithText', event.query);
+    if (!this.autocompleteEnabled()) return;
+
     const query = event.query.trim();
     if (!query) {
       this.items.set([]);
       return;
     }
 
-    const request: elasticsearch.SearchRequest = {
-      query: {
-        bool: {
-          must: [
-            {
-              multi_match: {
-                query,
-                type: 'bool_prefix' as any,
-                fields: [
-                  'resourceTitleObject.*^6',
-                  'resourceAbstractObject.*^.5',
-                  'tag',
-                  'uuid',
-                  'resourceIdentifier',
-                ],
-              },
-            },
-            {
-              terms: {
-                isTemplate: ['n'],
-              },
-            },
-          ],
-        },
-      },
-      size: 20,
-      sort: ['_score'],
-      _source: ['resourceTitleObject.*', 'resourceType'],
-    };
-
     try {
-      const response: any = await this.searchService.searchService.search(request).toPromise();
-      console.log(response);
-      this.items.set(
-        response.hits.hits.map((hit: any) => {
-          const title = hit._source.resourceTitleObject?.['default'];
-          return {
-            title,
-            resourceType: hit._source.resourceType,
-          };
-        }) || [],
-      );
+      const results = await this.searchService.autocompleteSearch(query);
+      this.items.set(results);
     } catch (err) {
       console.error('Autocomplete error:', err);
       this.items.set([]);
@@ -123,10 +86,16 @@ export class SearchInput extends SearchBase {
 
   searchOnInputChange($event: string) {
     this.queryString = $event;
+
+    if (!this.autocompleteEnabled()) {
+      this.items.set([]);
+    }
+
     if (this.searchOnInput()) {
       this.onModelChange(this.queryString);
     }
   }
+
 
   onItemSelect(event: { value: { title: string } }) {
     this.queryString = event.value.title;

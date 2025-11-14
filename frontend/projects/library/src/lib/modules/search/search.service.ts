@@ -256,4 +256,47 @@ export class SearchService {
       ),
     );
   }
+
+  async autocompleteSearch(query: string) {
+    const request: elasticsearch.SearchRequest = {
+      query: {
+        bool: {
+          must: [
+            {
+              multi_match: {
+                query,
+                type: 'bool_prefix' as any,
+                fields: [
+                  'resourceTitleObject.*^6',
+                  'resourceAbstractObject.*^5',
+                  'tag',
+                  'uuid',
+                  'resourceIdentifier',
+                ],
+              },
+            },
+            {
+              terms: {
+                isTemplate: ['n'],
+              },
+            },
+          ],
+        },
+      },
+      size: 20,
+      sort: ['_score'],
+      _source: ['resourceTitleObject.*', 'resourceType'],
+    };
+
+    const response: any = await this.searchService.search(request).toPromise();
+
+    return response?.hits?.hits?.map((hit: any) => {
+      const title = hit._source?.resourceTitleObject?.['default'];
+      return {
+        title,
+        resourceType: hit._source?.resourceType,
+      };
+    }) ?? [];
+  }
+
 }

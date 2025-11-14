@@ -23,6 +23,7 @@
           [searchOnInput]="false"
           [placeholder]="search | searchWelcomeTextPipe: 'resourceType' : 3"
           [popOverTemplate]="popOverTemplate"
+          [autocompleteEnabled]="true"
         >
           <ng-template #popOverTemplate>
             <span>{{ 'search.input.popover.resourceType.title' | translate }}</span>

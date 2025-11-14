@@ -1,42 +1,56 @@
 <div class="relative flex gap-2 px-[20px] md:px-0">
-  <p-auto-complete
-    [(ngModel)]="queryString"
-    [suggestions]="items()"
-    optionLabel="title"
-    [pAutoFocus]="autofocus()"
-    [minQueryLength]="1"
-    (completeMethod)="onSearchWithText($event)"
-    (onSelect)="onItemSelect($event)"
-    [forceSelection]="false"
-    [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
-    (ngModelChange)="searchOnInputChange($event)"
-    (keyup.enter)="searchOnClick()"
-    (click)="handleInputClick($event)"
-    data-testid="search-input"
-    class="w-full flex-1"
-    inputStyleClass="w-full"
-    name="search"
-  >
-    <ng-template let-item pTemplate="item">
-      <span>{{ item.title }}</span>
-    </ng-template>
-    <p-button
-      severity="secondary"
-      variant="text"
-      (onClick)="searchOnClick()"
-      data-testid="search-input-button"
-    >
-      <ng-icon name="faSolidMagnifyingGlass" pButtonIcon></ng-icon>
-    </p-button>
-  </p-auto-complete>
 
-  <button
-    type="button"
-    (click)="searchOnClick()"
-    class="px-5 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90"
-  >
-    <ng-icon name="faSolidMagnifyingGlass" class="w-4 h-4"></ng-icon>
-  </button>
+  @if (autocompleteEnabled()) {
+    <p-auto-complete
+      [(ngModel)]="queryString"
+      [suggestions]="items()"
+      optionLabel="title"
+      [pAutoFocus]="autofocus()"
+      [minQueryLength]="1"
+      (completeMethod)="onSearchWithText($event)"
+      (onSelect)="onItemSelect($event)"
+      [forceSelection]="false"
+      [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
+      (ngModelChange)="searchOnInputChange($event)"
+      (keyup.enter)="searchOnClick()"
+      (click)="handleInputClick($event)"
+      data-testid="search-input"
+      inputStyleClass="{{ inputClasses }}"
+      name="search"
+    >
+      <ng-template let-item pTemplate="item">
+        <span>{{ item.title }}</span>
+      </ng-template>
+
+      <p-button
+        severity="secondary"
+        variant="text"
+        (onClick)="searchOnClick()"
+        data-testid="search-input-button"
+      >
+        <ng-icon name="faSolidMagnifyingGlass" pButtonIcon></ng-icon>
+      </p-button>
+    </p-auto-complete>
+  }
+  @else {
+    <input
+      type="text"
+      class="{{ inputClasses }}"
+      [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
+      [ngModel]="queryString"
+      (ngModelChange)="searchOnInputChange($event)"
+      (keyup.enter)="searchOnClick()"
+      name="search"
+    />
+
+    <button
+      type="button"
+      (click)="searchOnClick()"
+      class="px-5 rounded-full bg-primary text-white flex items-center justify-center hover:bg-primary/90"
+    >
+      <ng-icon name="faSolidMagnifyingGlass" class="w-4 h-4"></ng-icon>
+    </button>
+  }
 
   @if (popOverTemplate()) {
     <p-popover #op>
