@@ -1,10 +1,23 @@
-import { AfterViewInit, Component, effect, inject, input, output, signal, TemplateRef } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
 import { faImage } from '@ng-icons/font-awesome/regular';
-import { faSolidCircleExclamation, faSolidDownload, faSolidShareNodes } from '@ng-icons/font-awesome/solid';
+import {
+  faSolidCircleExclamation,
+  faSolidDownload,
+  faSolidShareNodes,
+} from '@ng-icons/font-awesome/solid';
 import { provideIcons } from '@ng-icons/core';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
@@ -31,6 +44,7 @@ import { Perspective } from '../../data/perspective/perspective';
 import { Datasource, DatasourceSelect } from '../../data/datasource-select/datasource-select';
 import { RadioButton } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
+import { NgTemplateOutlet, JsonPipe, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-record-view',
@@ -64,7 +78,10 @@ import { FormsModule } from '@angular/forms';
     Perspective,
     DatasourceSelect,
     RadioButton,
-    FormsModule
+    FormsModule,
+    NgTemplateOutlet,
+    JsonPipe,
+    AsyncPipe,
   ],
   viewProviders: [
     provideIcons({

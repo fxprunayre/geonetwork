@@ -10,7 +10,6 @@ import { Chip } from 'primeng/chip';
 export class RecordFieldDoi extends RecordFieldBase {
   doi = computed(() => {
     const links = this.record().link;
-    console.log('DOI links:', links);
     if (!links) {
       return undefined;
     }
