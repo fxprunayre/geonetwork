@@ -9,13 +9,15 @@ import { TranslatePipe } from '@ngx-translate/core';
   standalone: true,
   imports: [ButtonLabel, ButtonDirective, Aggregation, TranslatePipe],
   templateUrl: './second-section.html',
+  styleUrl: './second-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SecondSection {
   router = inject(Router);
   searchRouteService = inject(SearchRouteService);
-  bgSecond = 'images/bgSecond.png';
   island = 'images/island.jpg';
+
+
 
   setRouteForAggregation(filter: SearchFilter) {
     this.router.navigate(['/search'], {

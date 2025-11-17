@@ -23,6 +23,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   standalone: true,
   imports: [SearchInput, SearchContextDirective, Aggregation, TranslatePipe, SearchWelcomeTextPipe],
   templateUrl: './first-section.html',
+  styleUrl: './first-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FirstSection implements AfterViewInit {
@@ -96,8 +97,6 @@ export class FirstSection implements AfterViewInit {
       },
     },
   ];
-
-  bgFirst = 'images/bgFirst.jpg';
 
   ngAfterViewInit() {
     this.search = this.searchService.getSearch('home');

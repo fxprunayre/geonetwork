@@ -1,0 +1,15 @@
+.bg-image {
+  background-image: url('/images/bgSecond-desktop.webp');
+}
+
+@media (max-width: 1024px) {
+  .bg-image {
+    background-image: url('/images/bgSecond-tablet.webp');
+  }
+}
+
+@media (max-width: 640px) {
+  .bg-image {
+    background-image: url('/images/bgSecond-mobile.webp');
+  }
+}
