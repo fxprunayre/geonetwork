@@ -32,10 +32,11 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
   ],
   standalone: true,
   templateUrl: './catalogue-component.html',
+  styleUrl: './catalogue-component.scss',
   viewProviders: [provideIcons({ faSolidFilter })],
 })
 export class CatalogueComponent extends SearchBase {
-  bgFirst = 'images/bgFirst.jpg';
+
   visible = false;
   filterPanelMode = signal<FilterPanelLayout>('drawer');
 
