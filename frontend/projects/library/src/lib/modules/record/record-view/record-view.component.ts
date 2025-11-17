@@ -9,7 +9,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
-import { AccordionModule } from 'primeng/accordion';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
 import { faImage } from '@ng-icons/font-awesome/regular';
@@ -45,6 +44,7 @@ import { Datasource, DatasourceSelect } from '../../data/datasource-select/datas
 import { RadioButton } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
 import { NgTemplateOutlet, JsonPipe, AsyncPipe } from '@angular/common';
+import { AccordionModule } from 'primeng/accordion';
 
 @Component({
   selector: 'app-record-view',
@@ -82,6 +82,7 @@ import { NgTemplateOutlet, JsonPipe, AsyncPipe } from '@angular/common';
     NgTemplateOutlet,
     JsonPipe,
     AsyncPipe,
+    AccordionModule,
   ],
   viewProviders: [
     provideIcons({

@@ -172,30 +172,38 @@
 
   <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
-  <ng-template #metadata>
-    @for (
-      section of [
-        { label: 'about', tpl: aboutContent },
-        { label: 'usageAndAccess', tpl: licenseContent },
-        { label: 'coverage', tpl: coverageContent },
-        { label: 'spatialInfo', tpl: spatialInfoContent },
-        { label: 'dataModel', tpl: dataModel },
-        { label: 'lineage', tpl: lineageContent },
-        { label: 'classification', tpl: classificationContent },
-        { label: 'similarResources', tpl: similarContent, collapsed: true },
-      ];
-      track section.label
-    ) {
-      @let sectionLabel =
-        'record.view.section.' + section.label | translate: { resourceType: record.resourceType };
-      <section [id]="section.label" class="border border-surface-200 rounded-xl p-10 mb-10">
-        <h1 class="text-4xl mb-10 border-b-2 border-surface-100">{{ sectionLabel }}</h1>
-        <div class="">
-          <ng-container *ngTemplateOutlet="section.tpl" />
-        </div>
-      </section>
-    }
-  </ng-template>
+  <p-accordion [value]="0">
+    <ng-template #metadata>
+      @for (
+        section of [
+          { label: 'about', tpl: aboutContent },
+          { label: 'usageAndAccess', tpl: licenseContent },
+          { label: 'coverage', tpl: coverageContent },
+          { label: 'spatialInfo', tpl: spatialInfoContent },
+          { label: 'dataModel', tpl: dataModel },
+          { label: 'lineage', tpl: lineageContent },
+          { label: 'classification', tpl: classificationContent },
+          { label: 'similarResources', tpl: similarContent, collapsed: true },
+        ];
+        track section.label;
+        let i = $index
+      ) {
+        @let sectionLabel =
+          'record.view.section.' + section.label | translate: { resourceType: record.resourceType };
+
+        <p-accordion-panel [value]="i">
+          <p-accordion-header>{{ sectionLabel }}</p-accordion-header>
+          <p-accordion-content>
+            <section [id]="section.label" class="border border-surface-200 rounded-xl p-10 mb-10">
+              <div>
+                <ng-container *ngTemplateOutlet="section.tpl" />
+              </div>
+            </section>
+          </p-accordion-content>
+        </p-accordion-panel>
+      }
+    </ng-template>
+  </p-accordion>
 
   <ng-template #dataAccess>
     <ng-container *ngTemplateOutlet="dataAccessContent" />
