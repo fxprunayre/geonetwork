@@ -1,5 +1,4 @@
 <div class="relative flex gap-2 px-[20px] md:px-0">
-
   @if (autocompleteEnabled()) {
     <p-auto-complete
       [(ngModel)]="queryString"
@@ -31,8 +30,7 @@
         <ng-icon name="faSolidMagnifyingGlass" pButtonIcon></ng-icon>
       </p-button>
     </p-auto-complete>
-  }
-  @else {
+  } @else {
     <input
       type="text"
       class="{{ inputClasses }}"

@@ -290,13 +290,14 @@ export class SearchService {
 
     const response: any = await this.searchService.search(request).toPromise();
 
-    return response?.hits?.hits?.map((hit: any) => {
-      const title = hit._source?.resourceTitleObject?.['default'];
-      return {
-        title,
-        resourceType: hit._source?.resourceType,
-      };
-    }) ?? [];
+    return (
+      response?.hits?.hits?.map((hit: any) => {
+        const title = hit._source?.resourceTitleObject?.['default'];
+        return {
+          title,
+          resourceType: hit._source?.resourceType,
+        };
+      }) ?? []
+    );
   }
-
 }

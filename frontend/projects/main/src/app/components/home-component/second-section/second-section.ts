@@ -17,8 +17,6 @@ export class SecondSection {
   searchRouteService = inject(SearchRouteService);
   island = 'images/island.jpg';
 
-
-
   setRouteForAggregation(filter: SearchFilter) {
     this.router.navigate(['/search'], {
       queryParams: {

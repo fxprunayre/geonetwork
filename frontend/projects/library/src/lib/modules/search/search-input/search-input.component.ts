@@ -55,7 +55,8 @@ export class SearchInput extends SearchBase {
   popOverTemplate = input<TemplateRef<unknown>>();
   op = viewChild<Popover>('op');
   autocompleteEnabled = input<boolean>(true);
-  inputClasses = 'w-full flex-1 px-4 py-2 border border-gray-400 rounded-full bg-white text-black focus:border-primary focus:ring-1 focus:ring-primary transition-colors';
+  inputClasses =
+    'w-full flex-1 px-4 py-2 border border-gray-400 rounded-full bg-white text-black focus:border-primary focus:ring-1 focus:ring-primary transition-colors';
 
   onSearch = output();
   queryString = '';
@@ -95,7 +96,6 @@ export class SearchInput extends SearchBase {
       this.onModelChange(this.queryString);
     }
   }
-
 
   onItemSelect(event: { value: { title: string } }) {
     this.queryString = event.value.title;
