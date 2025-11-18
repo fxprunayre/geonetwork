@@ -218,16 +218,17 @@
       <p-tab value="6">{{ 'record.view.section.citation' | translate }}</p-tab>
       <p-tab value="5">{{ 'record.view.section.discussions' | translate }}</p-tab>
     </p-tablist>
+
     <p-tabpanels>
       <p-tabpanel value="0">
-        <app-scroll-spy navPosition="aside">
-          <ng-container *ngTemplateOutlet="metadata"></ng-container>
-        </app-scroll-spy>
+        <ng-container *ngTemplateOutlet="metadata"></ng-container>
       </p-tabpanel>
       <p-tabpanel value="1">
-        <app-scroll-spy navPosition="aside">
+
+
           <ng-container *ngTemplateOutlet="dataAccess"></ng-container>
-        </app-scroll-spy>
+
+
       </p-tabpanel>
       <p-tabpanel value="2">
         <ng-template #content>
