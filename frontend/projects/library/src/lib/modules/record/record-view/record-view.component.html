@@ -22,19 +22,7 @@
           <app-record-field-credit [record]="record" />
         </app-record-field>
       </div>
-      <div class="w-1/4">
-        <p-panel [header]="'Citation'" [toggleable]="false" class="mb-10">
-          Citation content goes here.
-        </p-panel>
 
-        <p-panel [header]="'Contact'" [toggleable]="false" class="my-10">
-          Main contact content goes here.
-        </p-panel>
-
-        <p-panel [header]="'Catalogue'" [toggleable]="false" class="my-10">
-          Catalogue/harvester logo.
-        </p-panel>
-      </div>
     </div>
 
     <app-associated-panel
@@ -172,103 +160,121 @@
 
   <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
-  <p-accordion>
-    <ng-template #metadata>
-      @for (
-        section of [
-          { label: 'about', tpl: aboutContent },
-          { label: 'usageAndAccess', tpl: licenseContent },
-          { label: 'coverage', tpl: coverageContent },
-          { label: 'spatialInfo', tpl: spatialInfoContent },
-          { label: 'dataModel', tpl: dataModel },
-          { label: 'lineage', tpl: lineageContent },
-          { label: 'classification', tpl: classificationContent },
-          { label: 'similarResources', tpl: similarContent, collapsed: true },
-        ];
-        track section.label;
-        let i = $index
-      ) {
-        @let sectionLabel =
-          'record.view.section.' + section.label | translate: { resourceType: record.resourceType };
 
-        <p-accordion-panel [value]="i">
-          <p-accordion-header>{{ sectionLabel }}</p-accordion-header>
-          <p-accordion-content>
-            <section [id]="section.label" class="border border-surface-200 rounded-xl p-10 mb-10">
-              <div>
-                <ng-container *ngTemplateOutlet="section.tpl" />
+  <div class="flex flex-row gap-6 mt-25 relative">
+    <div class="w-3/4">
+      <p-accordion>
+        <ng-template #metadata>
+          @for (
+            section of [
+              { label: 'about', tpl: aboutContent },
+              { label: 'usageAndAccess', tpl: licenseContent },
+              { label: 'coverage', tpl: coverageContent },
+              { label: 'spatialInfo', tpl: spatialInfoContent },
+              { label: 'dataModel', tpl: dataModel },
+              { label: 'lineage', tpl: lineageContent },
+              { label: 'classification', tpl: classificationContent },
+              { label: 'similarResources', tpl: similarContent, collapsed: true },
+            ];
+            track section.label;
+            let i = $index
+            ) {
+            @let sectionLabel =
+              'record.view.section.' + section.label | translate: { resourceType: record.resourceType };
+
+            <p-accordion-panel [value]="i">
+              <p-accordion-header>{{ sectionLabel }}</p-accordion-header>
+              <p-accordion-content>
+                <section [id]="section.label" class="border border-surface-200 rounded-xl p-10 mb-10">
+                  <div>
+                    <ng-container *ngTemplateOutlet="section.tpl" />
+                  </div>
+                </section>
+              </p-accordion-content>
+            </p-accordion-panel>
+          }
+        </ng-template>
+      </p-accordion>
+      <p-tabs value="0" lazy>
+        <p-tablist>
+          <p-tab value="0">{{ 'record.view.section.description' | translate }}</p-tab>
+          <p-tab value="1">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
+          <p-tab value="2">{{ 'record.view.section.explore' | translate }}</p-tab>
+          <p-tab value="4">{{ 'record.view.section.publications' | translate }}</p-tab>
+          <p-tab value="6">{{ 'record.view.section.citation' | translate }}</p-tab>
+          <p-tab value="5">{{ 'record.view.section.discussions' | translate }}</p-tab>
+        </p-tablist>
+
+        <p-tabpanels>
+          <p-tabpanel value="0">
+            <ng-container *ngTemplateOutlet="metadata"></ng-container>
+          </p-tabpanel>
+          <p-tabpanel value="1">
+
+
+            <ng-container *ngTemplateOutlet="dataAccess"></ng-container>
+
+
+          </p-tabpanel>
+          <p-tabpanel value="2">
+            <ng-template #content>
+              <div
+                class="border border-surface-200 rounded-xl p-2 mb-10 flex flex-row gap-4 items-center"
+              >
+                <app-datasource-select [record]="record" [(datasource)]="datasource" />
+
+                <div class="flex flex-wrap gap-4">
+                  @for (mode of ['perspective', 'duckdb']; track $index) {
+                    <p-radiobutton
+                      [inputId]="mode"
+                      name="exploreMode"
+                      [value]="mode"
+                      [(ngModel)]="exploreMode"
+                    />
+                    <label [for]="mode" class="ml-2">{{ mode }}</label>
+                  }
+                </div>
               </div>
-            </section>
-          </p-accordion-content>
-        </p-accordion-panel>
-      }
-    </ng-template>
-  </p-accordion>
+
+              @if (datasource()) {
+                @switch (exploreMode()) {
+                  @case ('perspective') {
+                    <app-perspective [datasource]="datasource()" />
+                  }
+                  @case ('duckdb') {
+                    <app-data-explorer [datasource]="datasource()" />
+                  }
+                }
+              }
+            </ng-template>
+          </p-tabpanel>
+          <p-tabpanel value="5">
+            <ng-container *ngTemplateOutlet="relatedContent"></ng-container>
+          </p-tabpanel>
+          <p-tabpanel value="6">
+            <app-feedback-panel />
+          </p-tabpanel>
+          <p-tabpanel value="7"> Citation </p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
+    </div>
+    <div class="w-1/4  fixed right-0">
+      <p-panel [header]="'Citation'" [toggleable]="false" class="mb-10">
+        Citation content goes here.
+      </p-panel>
+
+      <p-panel [header]="'Contact'" [toggleable]="false" class="my-10">
+        Main contact content goes here.
+      </p-panel>
+
+      <p-panel [header]="'Catalogue'" [toggleable]="false" class="my-10">
+        Catalogue/harvester logo.
+      </p-panel>
+    </div>
+  </div>
 
   <ng-template #dataAccess>
     <ng-container *ngTemplateOutlet="dataAccessContent" />
   </ng-template>
 
-  <p-tabs value="0" lazy>
-    <p-tablist>
-      <p-tab value="0">{{ 'record.view.section.description' | translate }}</p-tab>
-      <p-tab value="1">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
-      <p-tab value="2">{{ 'record.view.section.explore' | translate }}</p-tab>
-      <p-tab value="4">{{ 'record.view.section.publications' | translate }}</p-tab>
-      <p-tab value="6">{{ 'record.view.section.citation' | translate }}</p-tab>
-      <p-tab value="5">{{ 'record.view.section.discussions' | translate }}</p-tab>
-    </p-tablist>
-
-    <p-tabpanels>
-      <p-tabpanel value="0">
-        <ng-container *ngTemplateOutlet="metadata"></ng-container>
-      </p-tabpanel>
-      <p-tabpanel value="1">
-
-
-          <ng-container *ngTemplateOutlet="dataAccess"></ng-container>
-
-
-      </p-tabpanel>
-      <p-tabpanel value="2">
-        <ng-template #content>
-          <div
-            class="border border-surface-200 rounded-xl p-2 mb-10 flex flex-row gap-4 items-center"
-          >
-            <app-datasource-select [record]="record" [(datasource)]="datasource" />
-
-            <div class="flex flex-wrap gap-4">
-              @for (mode of ['perspective', 'duckdb']; track $index) {
-                <p-radiobutton
-                  [inputId]="mode"
-                  name="exploreMode"
-                  [value]="mode"
-                  [(ngModel)]="exploreMode"
-                />
-                <label [for]="mode" class="ml-2">{{ mode }}</label>
-              }
-            </div>
-          </div>
-
-          @if (datasource()) {
-            @switch (exploreMode()) {
-              @case ('perspective') {
-                <app-perspective [datasource]="datasource()" />
-              }
-              @case ('duckdb') {
-                <app-data-explorer [datasource]="datasource()" />
-              }
-            }
-          }
-        </ng-template>
-      </p-tabpanel>
-      <p-tabpanel value="5">
-        <ng-container *ngTemplateOutlet="relatedContent"></ng-container>
-      </p-tabpanel>
-      <p-tabpanel value="6">
-        <app-feedback-panel />
-      </p-tabpanel>
-      <p-tabpanel value="7"> Citation </p-tabpanel>
-    </p-tabpanels>
-  </p-tabs>
 }
