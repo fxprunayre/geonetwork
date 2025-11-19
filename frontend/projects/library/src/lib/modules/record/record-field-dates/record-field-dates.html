@@ -1,15 +1,10 @@
 @if (events().length > 0) {
-  <p-timeline [value]="events()" align="left">
-    <ng-template #marker let-event>
-      <span
-        class="flex w-8 h-8 items-center justify-center border border-surface-200 rounded-full z-10 shadow-sm"
-        [style]="{ 'background-color': event.color }"
-      >
-        <ng-icon [svg]="event.icon"></ng-icon>
-      </span>
-    </ng-template>
-    <ng-template #content let-event>
-      <p-card [header]="event.label" [subheader]="event.date" class="mb-4"> </p-card>
-    </ng-template>
-  </p-timeline>
+  @for (event of events(); track $index) {
+    <span class="block text-blue-500">{{ event.label }}</span>
+
+
+    <app-date-parser [value]="event.date"></app-date-parser>
+
+
+  }
 }

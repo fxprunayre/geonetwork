@@ -31,6 +31,7 @@
     "view": {
       "section": {
         "description": "Description",
+        "dates": "Dates",
         "about": "About this {{resourceType}}",
         "dataAccess": "Data access",
         "explore": "Explore",

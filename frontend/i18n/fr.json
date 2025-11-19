@@ -15,6 +15,45 @@
       }
     }
   },
+  "record": {
+    "view": {
+      "section": {
+        "description": "Description",
+        "dates": "Dates",
+        "about": "À propos de ça {{resourceType}}",
+        "dataAccess": "Accès aux données",
+        "explore": "Explorer",
+        "publications": "Publications",
+        "discussions": "Discussions",
+        "dataExplorer": "Explorateur de données",
+        "dataModel": "Modèle de données",
+        "contact": "Contact",
+        "coverage": "Couverture",
+        "spatialInfo": "Informations spatiales",
+        "lineage": "Lignée",
+        "content": "Contenu",
+        "classification": "Classification",
+        "citation": "Citation",
+        "usageAndAccess": "Utilisation et accès",
+        "relatedResources": "Ressources connexes",
+        "similarResources": "Ressources similaires"
+      }
+    },
+    "field": {
+      "abstract": "Aperçu",
+      "overview": {
+        "notAvailable": "Pas d'aperçu"
+      },
+      "resourceDate": "Dates"
+    },
+    "association": {
+      "parent": "Une partie de {{count}} ressource(s)",
+      "children": "Composé de {{count}} ressource(s)",
+      "hassources": "Utilisé pour {{count}} ressource(s)",
+      "sources": "Dérivé de {{count}} ressource(s)",
+      "associated": "Associé à {{count}} ressource(s)"
+    }
+  },
   "record.field.overview.notAvailable": "Pas d'aperçu",
   "i18n": {
     "languageSwitcher": {

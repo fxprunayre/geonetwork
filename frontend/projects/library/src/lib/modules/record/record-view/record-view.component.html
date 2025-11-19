@@ -7,6 +7,23 @@
   <ng-container *ngTemplateOutlet="backButtonTplRef() || defaultBackButton"></ng-container>
   <app-record-view-header [record]="record" [vocabularies]="mainVocabularies()" />
 
+  <ng-template #datesContent>
+    <div class="flex flex-row gap-6">
+      <div class="w-3/4">
+        <app-record-field [label]="'record.field.resourceDate' | translate">
+          <app-record-field-dates [record]="record" />
+        </app-record-field>
+      </div>
+    </div>
+
+    <app-associated-panel
+      [record]="record"
+      [include]="[RelatedItemType.Parent]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
+
+  </ng-template>
+
   <ng-template #aboutContent>
     <div class="flex flex-row gap-6">
       <div class="w-3/4">
@@ -22,7 +39,6 @@
           <app-record-field-credit [record]="record" />
         </app-record-field>
       </div>
-
     </div>
 
     <app-associated-panel
@@ -30,6 +46,7 @@
       [include]="[RelatedItemType.Parent]"
       (onRecordClick)="handleRecordClick($event)"
     />
+
     <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Children]"
@@ -160,13 +177,13 @@
 
   <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
-
-  <div class="flex flex-row gap-6 mt-25 relative">
+  <div class="flex flex-row gap-12 mt-25 relative">
     <div class="w-3/4">
       <p-accordion>
         <ng-template #metadata>
           @for (
             section of [
+              { label: 'dates', tpl: datesContent },
               { label: 'about', tpl: aboutContent },
               { label: 'usageAndAccess', tpl: licenseContent },
               { label: 'coverage', tpl: coverageContent },
@@ -178,14 +195,18 @@
             ];
             track section.label;
             let i = $index
-            ) {
+          ) {
             @let sectionLabel =
-              'record.view.section.' + section.label | translate: { resourceType: record.resourceType };
+              'record.view.section.' + section.label
+                | translate: { resourceType: record.resourceType };
 
             <p-accordion-panel [value]="i">
               <p-accordion-header>{{ sectionLabel }}</p-accordion-header>
               <p-accordion-content>
-                <section [id]="section.label" class="border border-surface-200 rounded-xl p-10 mb-10">
+                <section
+                  [id]="section.label"
+                  class="border border-surface-200 rounded-xl p-10 mb-10"
+                >
                   <div>
                     <ng-container *ngTemplateOutlet="section.tpl" />
                   </div>
@@ -210,11 +231,7 @@
             <ng-container *ngTemplateOutlet="metadata"></ng-container>
           </p-tabpanel>
           <p-tabpanel value="1">
-
-
             <ng-container *ngTemplateOutlet="dataAccess"></ng-container>
-
-
           </p-tabpanel>
           <p-tabpanel value="2">
             <ng-template #content>
@@ -276,5 +293,4 @@
   <ng-template #dataAccess>
     <ng-container *ngTemplateOutlet="dataAccessContent" />
   </ng-template>
-
 }
