@@ -3,7 +3,6 @@
     @for (event of events(); track $index) {
       <div class="mb-2">
         <span class="block text-[#3a75ab]">{{ event.label }}</span>
-
         <app-date-parser [value]="event.date"></app-date-parser>
       </div>
     }

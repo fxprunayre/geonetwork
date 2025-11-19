@@ -21,6 +21,7 @@
         "description": "Description",
         "dates": "Dates",
         "about": "À propos de ça {{resourceType}}",
+        "contacts": "Contacts",
         "dataAccess": "Accès aux données",
         "explore": "Explorer",
         "publications": "Publications",

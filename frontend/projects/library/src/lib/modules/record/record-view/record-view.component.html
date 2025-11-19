@@ -13,13 +13,19 @@
     </app-record-field>
   </ng-template>
 
-  <ng-template #aboutContent>
+  <ng-template #contactsContent>
     <div class="flex flex-row gap-6">
       <div class="w-3/4">
         <app-record-field [label]="'Contacts'">
           <app-record-field-contact [record]="record" />
         </app-record-field>
+      </div>
+    </div>
+  </ng-template>
 
+  <ng-template #aboutContent>
+    <div class="flex flex-row gap-6">
+      <div class="w-3/4">
         <app-record-field [label]="'Credits'">
           <app-record-field-credit [record]="record" />
         </app-record-field>
@@ -169,6 +175,7 @@
           @for (
             section of [
               { label: 'dates', tpl: datesContent },
+              { label: 'contacts', tpl: contactsContent },
               { label: 'about', tpl: aboutContent },
               { label: 'usageAndAccess', tpl: licenseContent },
               { label: 'coverage', tpl: coverageContent },
@@ -261,17 +268,20 @@
       </p-tabs>
     </div>
     <div class="w-1/4 sticky top-10 self-start">
-      <p-panel [header]="'Citation'" [toggleable]="false" class="mb-10">
+      <p-card class="mb-10">
+        <span class="block text-[#3a75ab]">Citation</span>
         Citation content goes here.
-      </p-panel>
+      </p-card>
 
-      <p-panel [header]="'Contact'" [toggleable]="false" class="my-10">
+      <p-card class="my-10">
+        <span class="block text-[#3a75ab]">Contact</span>
         Main contact content goes here.
-      </p-panel>
+      </p-card>
 
-      <p-panel [header]="'Catalogue'" [toggleable]="false" class="my-10">
+      <p-card class="my-10">
+        <span class="block text-[#3a75ab]">Catalogue</span>
         Catalogue/harvester logo.
-      </p-panel>
+      </p-card>
     </div>
   </div>
 

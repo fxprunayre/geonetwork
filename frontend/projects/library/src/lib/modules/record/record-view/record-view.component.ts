@@ -20,7 +20,6 @@ import {
 import { provideIcons } from '@ng-icons/core';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
-import { Panel } from 'primeng/panel';
 import { RecordField } from '../record-field/record-field';
 import { RecordFieldContact } from '../record-field-contact/record-field-contact';
 import { RecordFieldCredit } from '../record-field-credit/record-field-credit';
@@ -36,7 +35,6 @@ import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
 import { DataExplorer } from '../../data/data-explorer/data-explorer';
-import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { RecordFieldDates } from '../record-field-dates/record-field-dates';
 import { AssociatedPanel } from '../associated/associated-panel/associated-panel';
 import { Perspective } from '../../data/perspective/perspective';
@@ -45,6 +43,7 @@ import { RadioButton } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
 import { NgTemplateOutlet, JsonPipe, AsyncPipe } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
+import { Card } from 'primeng/card';
 
 @Component({
   selector: 'app-record-view',
@@ -54,7 +53,6 @@ import { AccordionModule } from 'primeng/accordion';
     AccordionModule,
     MarkdownPipe,
     ShowMoreToggle,
-    Panel,
     RecordField,
     RecordFieldContact,
     RecordFieldCredit,
@@ -73,7 +71,6 @@ import { AccordionModule } from 'primeng/accordion';
     AssociatedPanel,
     DataModelPanel,
     DataExplorer,
-    ScrollSpy,
     RecordFieldDates,
     Perspective,
     DatasourceSelect,
@@ -83,6 +80,7 @@ import { AccordionModule } from 'primeng/accordion';
     JsonPipe,
     AsyncPipe,
     AccordionModule,
+    Card,
   ],
   viewProviders: [
     provideIcons({

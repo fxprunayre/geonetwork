@@ -33,6 +33,7 @@
         "description": "Description",
         "dates": "Dates",
         "about": "About this {{resourceType}}",
+        "contacts": "Contacts",
         "dataAccess": "Data access",
         "explore": "Explore",
         "publications": "Publications",
