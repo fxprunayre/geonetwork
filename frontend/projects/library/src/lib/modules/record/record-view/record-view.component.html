@@ -61,31 +61,24 @@
 
   <ng-template #licenseContent>
     <app-record-field [label]="'Constraints'">
-      <p>
-        Use limitation:
-        <a [href]="getConstraints().link" target="_blank" class="font-bold">
-          {{ getConstraints().default }}
-        </a>
-      </p>
-      <p>
-        Use constraints:
-        <a [href]="getUseConstraint().link" target="_blank">
-          {{ getUseConstraint().default }}
-        </a>
-      </p>
-      <p>
-        Other constraints:
-        <a [href]="getOtherConstraint().link" target="_blank">
-          {{ getOtherConstraint().default }}
-        </a>
-      </p>
+      <span class="block text-[#3a75ab]"> Use limitation:</span>
+      <a [href]="getConstraints().link" target="_blank" class="font-bold">
+        {{ getConstraints().default }}
+      </a>
+      <span class="block text-[#3a75ab]"> Use constraints:</span>
+      <a [href]="getUseConstraint().link" target="_blank">
+        {{ getUseConstraint().default }}
+      </a>
+      <span class="block text-[#3a75ab]"> Other constraints:</span>
+      <a [href]="getOtherConstraint().link" target="_blank">
+        {{ getOtherConstraint().default }}
+      </a>
     </app-record-field>
   </ng-template>
 
   <ng-template #lineageContent>
     <app-record-field [label]="'Lineage'">
       <app-show-more-toggle>
-        <h3 class="text-xl">Lineage</h3>
         <p [innerHTML]="getLineage() | markdown | async"></p>
       </app-show-more-toggle>
     </app-record-field>
