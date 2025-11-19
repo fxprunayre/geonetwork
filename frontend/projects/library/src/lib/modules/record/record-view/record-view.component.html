@@ -8,29 +8,14 @@
   <app-record-view-header [record]="record" [vocabularies]="mainVocabularies()" />
 
   <ng-template #datesContent>
-    <div class="flex flex-row gap-6">
-      <div class="w-3/4">
-        <app-record-field [label]="'record.field.resourceDate' | translate">
-          <app-record-field-dates [record]="record" />
-        </app-record-field>
-      </div>
-    </div>
-
-    <app-associated-panel
-      [record]="record"
-      [include]="[RelatedItemType.Parent]"
-      (onRecordClick)="handleRecordClick($event)"
-    />
-
+    <app-record-field [label]="'record.field.resourceDate' | translate">
+      <app-record-field-dates [record]="record" />
+    </app-record-field>
   </ng-template>
 
   <ng-template #aboutContent>
     <div class="flex flex-row gap-6">
       <div class="w-3/4">
-        <app-record-field [label]="'record.field.resourceDate' | translate">
-          <app-record-field-dates [record]="record" />
-        </app-record-field>
-
         <app-record-field [label]="'Contacts'">
           <app-record-field-contact [record]="record" />
         </app-record-field>

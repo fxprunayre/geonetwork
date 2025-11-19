@@ -3,7 +3,7 @@ import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { TranslateService } from '@ngx-translate/core';
 import { ResourceDate } from 'gn-api-client';
 import { provideIcons } from '@ng-icons/core';
-import  {DateComponent} from '../../../shared/widgets/date-parser/date-parser'
+import { DateComponent } from '../../../shared/widgets/date-parser/date-parser';
 import { faLightbulb, faPaperPlane } from '@ng-icons/font-awesome/regular';
 import {
   faSolidArrowRightToBracket,
@@ -17,7 +17,6 @@ import {
   faSolidShareNodes,
   faSolidXmark,
 } from '@ng-icons/font-awesome/solid';
-
 
 @Component({
   selector: 'app-record-field-dates',

@@ -3,9 +3,7 @@ import { Component, Input, computed, signal } from '@angular/core';
 @Component({
   selector: 'app-date-parser',
   standalone: true,
-  template: `
-    <span>{{ formattedDate() }}</span>
-  `,
+  template: ` <span>{{ formattedDate() }}</span> `,
 })
 export class DateComponent {
   @Input() set value(val: string | null | undefined) {
@@ -24,7 +22,4 @@ export class DateComponent {
 
     return `${day}-${month}-${year}`;
   });
-}
-
-export default class DateParser {
 }

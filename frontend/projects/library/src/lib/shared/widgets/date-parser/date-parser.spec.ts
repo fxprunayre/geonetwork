@@ -8,9 +8,8 @@ describe('DateParser', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DateParser]
-    })
-    .compileComponents();
+      imports: [DateParser],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DateParser);
     component = fixture.componentInstance;
