@@ -1,0 +1,110 @@
+{
+  "search": {
+    "input": {
+      "placeholder": "Zoeken ...",
+      "popover": {
+        "resourceType": {
+          "title": "Bron type"
+        }
+      }
+    },
+    "sort": {
+      "placeholder": "Sorteer op",
+      "options": {
+        "_score": "Relevantie",
+        "-revisionDateForResource,-publicationDateForResource,-creationDateForResource": "Laaste update",
+        "-changeDate": "Laatste record",
+        "-createDate": "Nieuw record",
+        "resourceTitleObject.default.sort": "Titel",
+        "-rating": "Oordeel",
+        "-popularity": "Populariteit"
+      }
+    },
+    "welcome.text": "Zoek door {{count}} {{mainBuckets}}, ...",
+    "filter": {
+      "panel": {
+        "open": "Filter"
+      }
+    }
+  },
+  "record": {
+    "view": {
+      "section": {
+        "description": "Beschrijving",
+        "dates": "Datums",
+        "about": "Over deze {{resourceType}}",
+        "contacts": "Contacten",
+        "dataAccess": "Data toegang",
+        "explore": "Ontdek",
+        "publications": "Publicaties",
+        "discussions": "Discussies",
+        "dataExplorer": "Data explorer",
+        "dataModel": "Data model",
+        "contact": "Contact",
+        "coverage": "Coverage",
+        "spatialInfo": "Spatial informatie",
+        "lineage": "Lineage",
+        "content": "Content",
+        "classification": "Classification",
+        "citation": "Citation",
+        "usageAndAccess": "Use and access",
+        "relatedResources": "Related resources",
+        "similarResources": "Similar resources"
+      }
+    },
+    "field": {
+      "abstract": "Overview",
+      "overview": {
+        "notAvailable": "No preview"
+      },
+      "resourceDate": "Dates"
+    },
+    "association": {
+      "parent": "Part of {{count}} resource(s)",
+      "children": "Composed of {{count}} resource(s)",
+      "hassources": "Used for {{count}} resource(s)",
+      "sources": "Derived from {{count}} resource(s)",
+      "associated": "Associated with {{count}} resource(s)"
+    }
+  },
+  "i18n": {
+    "languageSwitcher": {
+      "select": "Choose your language."
+    }
+  },
+  "languages": {
+    "EN": "English",
+    "FR": "Français",
+    "NL": "Nederlands"
+  },
+  "shared": {
+    "show-more-toggle": {
+      "more": "Read more",
+      "less": "View less"
+    }
+  },
+  "groupPublishedId": "Groups",
+  "th_sextant-theme_tree.key": "Sextant themes",
+  "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
+  "tag.default": "Keywords",
+  "creationYearForResource": "Creation year",
+  "OrgForResource": "Organisation",
+  "resourceType": "Resource type",
+  "activeFilters": "Active filters",
+  "result": "result",
+  "results": "results",
+  "backToResults": "Back to results",
+  "sort": {
+    "lastUpdate": "Last update",
+    "popularity": "Popularity",
+    "title": "Title"
+  },
+  "home": {
+    "title": "Charting the ocean's story through data",
+    "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",
+    "secondTitle": "Marine and coastal geographic data infrastructure",
+    "secondSubtitle": "Sextant aims to document, disseminate, and promote a catalog of marine data. Intended for laboratories, Ifremer partners, and national and European marine stakeholders, this infrastructure offers tools for archiving, accessing, and sharing data.",
+    "button": "Our mission",
+    "thirdTitle": "Discover interactive maps"
+  }
+}
