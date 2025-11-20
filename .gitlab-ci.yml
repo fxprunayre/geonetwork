@@ -50,4 +50,4 @@ pages:
       - public
   only:
     - main
-    - feature/sextant-frontend
+    - features/sextant-frontend
