@@ -1,0 +1,52 @@
+image: maven:3.9.6-eclipse-temurin-21
+
+stages:
+  - build
+  - pages
+
+variables:
+  MAVEN_OPTS: "-Dmaven.test.skip=true"
+
+cache:
+  paths:
+    - .m2/repository
+    - frontend/node_modules/
+
+build_gn5:
+  stage: build
+  script:
+    # 1. Installer Node (Angular a besoin de Node 22 comme ton Dockerfile)
+    - apt-get update
+    - apt-get install -y curl
+    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+    - apt-get install -y nodejs
+
+    # 2. Build Maven complet (génère les libs Angular)
+    - mvn -DskipTests clean install
+
+    # 3. Installer Angular CLI
+    - npm install -g @angular/cli
+
+    # 4. Build Angular main
+    - cd frontend
+    - npm install
+    - ng build main --configuration=sextant --base-href "/${CI_PROJECT_NAME}/"
+
+    # 5. Déplacer le build Angular dans public/ pour GitLab Pages
+    - mkdir -p ../public
+    - cp -r dist/main/browser/* ../public/
+
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+
+pages:
+  stage: pages
+  script:
+    - echo "Publishing GitLab Pages"
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
