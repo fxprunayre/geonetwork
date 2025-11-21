@@ -1,6 +1,6 @@
 import {
   APPLICATION_CONFIGURATION,
-  createMockSearchService,
+  provideMockSearchService,
   DEFAULT_TEST_CONFIG,
   provideMockTranslateService,
   SearchStore,
@@ -18,7 +18,7 @@ describe('CatalogueComponent', () => {
       providers: [
         SearchStore,
         provideMockTranslateService(),
-        createMockSearchService(),
+        provideMockSearchService(),
         provideRouter(routes),
         provideHttpClient(withInterceptorsFromDi()),
         { provide: APPLICATION_CONFIGURATION, useValue: DEFAULT_TEST_CONFIG },

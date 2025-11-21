@@ -15,6 +15,9 @@
       <span class="text-base line-clamp-3" [title]="description">
         {{ description }}
       </span>
+      @if (result().info?.['origin'] === 'remote') {
+        <ng-icon name="faSolidArrowUpRightFromSquare" />
+      }
     </div>
   </div>
 </div>

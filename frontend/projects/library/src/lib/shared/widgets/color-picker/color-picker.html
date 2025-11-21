@@ -1,0 +1,9 @@
+<p-floatlabel>
+  <label for="color">{{ label() }}</label>
+  <p-inputgroup>
+    <input pInputText type="text" [(ngModel)]="color" />
+    <p-inputgroup-addon>
+      <p-colorpicker id="color" [(ngModel)]="color" />
+    </p-inputgroup-addon>
+  </p-inputgroup>
+</p-floatlabel>

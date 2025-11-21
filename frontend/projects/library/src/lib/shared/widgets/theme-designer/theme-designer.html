@@ -1,0 +1,28 @@
+<button (click)="op.toggle($event)" type="button">
+  <ng-icon name="faSolidPaintRoller" pButtonIcon></ng-icon>
+</button>
+<p-popover #op>
+  <div class="flex flex-col gap-10 my-6">
+    <app-color-picker [label]="'Primary'" [(color)]="primaryColor" />
+    <app-color-picker [label]="'Surface'" [(color)]="surfaceColor" />
+    <app-color-picker [label]="'Info'" [(color)]="infoColor" />
+    <app-color-picker [label]="'success'" [(color)]="successColor" />
+    <app-color-picker [label]="'warning'" [(color)]="warningColor" />
+    <app-color-picker [label]="'danger'" [(color)]="dangerColor" />
+    <app-color-picker [label]="'Background'" [(color)]="backgroundColor" />
+
+    <p-float-label>
+      <label for="borderRadius">Radius</label>
+      <p-inputnumber id="borderRadius" [min]="0" [max]="10" [(ngModel)]="borderRadius" />
+    </p-float-label>
+    <p-float-label>
+      <label for="font">Font</label>
+      <input type="text" id="font" pInputText [(ngModel)]="font" />
+    </p-float-label>
+  </div>
+
+  <button (click)="setTheme()" pButton type="button">
+    <ng-icon name="faSolidPaintRoller" pButtonIcon></ng-icon>
+    <span pButtonLabel>Apply</span>
+  </button>
+</p-popover>

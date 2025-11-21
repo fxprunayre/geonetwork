@@ -10,7 +10,7 @@ import { providePrimeNG } from 'primeng/config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpBackend, provideHttpClient } from '@angular/common/http';
 import { APPLICATION_CONFIGURATION, TranslationsLoader } from 'gn-library';
-import Sextant from './sextant';
+import AppTheme from './app.theme';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
@@ -18,6 +18,8 @@ import { provideMarkdown } from 'ngx-markdown';
 import { environment } from '../../../library/src/environments/environment';
 import { Configuration, GnApiModule } from 'gn-api-client';
 import { Gn4ApiModule, Configuration as Gn4Configuration } from 'gn4-api-client';
+import { definePreset } from '@primeuix/themes';
+import Aura from '@primeuix/themes/aura';
 
 export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   return new TranslationsLoader(_httpBackend, [
@@ -61,7 +63,7 @@ export const appConfig: ApplicationConfig = {
     }),
     providePrimeNG({
       theme: {
-        preset: Sextant,
+        preset: definePreset(Aura, AppTheme),
         options: { darkModeSelector: '.p-dark' },
       },
     }),

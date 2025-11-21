@@ -6,7 +6,8 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faUser } from '@ng-icons/font-awesome/regular';
 import { faSolidBars, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { FormsModule } from '@angular/forms';
-import { LanguageSwitcher } from 'gn-library';
+import { LanguageSwitcher, ThemeDesigner } from 'gn-library';
+import AppTheme from '../../../app.theme';
 
 @Component({
   selector: 'app-top-navigation',
@@ -14,12 +15,22 @@ import { LanguageSwitcher } from 'gn-library';
   styleUrl: './top-navigation.scss',
   standalone: true,
   viewProviders: [provideIcons({ faUser, faSolidBars, faSolidXmark })],
-  imports: [ButtonModule, StyleClassModule, RouterLink, NgIcon, FormsModule, LanguageSwitcher],
+  imports: [
+    ButtonModule,
+    StyleClassModule,
+    RouterLink,
+    NgIcon,
+    FormsModule,
+    LanguageSwitcher,
+    ThemeDesigner,
+  ],
 })
 export class TopNavigation {
   logo = 'images/logo.svg';
 
   menuOpen = signal(false);
+
+  theme = AppTheme;
 
   toggleMenu() {
     this.menuOpen.update((v) => !v);

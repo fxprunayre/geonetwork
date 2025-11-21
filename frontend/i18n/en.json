@@ -64,7 +64,8 @@
       "children": "Composed of {{count}} resource(s)",
       "hassources": "Used for {{count}} resource(s)",
       "sources": "Derived from {{count}} resource(s)",
-      "associated": "Associated with {{count}} resource(s)"
+      "associated": "Associated with {{count}} resource(s)",
+      "brothersAndSisters": "{{count}} Siblings"
     }
   },
   "i18n": {

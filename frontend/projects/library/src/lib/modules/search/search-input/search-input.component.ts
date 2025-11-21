@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   input,
   output,
+  signal,
   TemplateRef,
   viewChild,
-  inject,
-  signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AutoComplete } from 'primeng/autocomplete';
@@ -16,11 +16,12 @@ import { faSolidMagnifyingGlass, faSolidXmark } from '@ng-icons/font-awesome/sol
 import { NgTemplateOutlet } from '@angular/common';
 import { Popover } from 'primeng/popover';
 import { TranslatePipe } from '@ngx-translate/core';
-import { elasticsearch, IndexRecord } from 'gn-api-client';
+import { IndexRecord } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
 import { SearchBase } from '../search-base/search-base';
 import { PrimeTemplate } from 'primeng/api';
-import { Button, ButtonIcon } from 'primeng/button';
+import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
+import { InputText } from 'primeng/inputtext';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -41,6 +42,8 @@ interface AutoCompleteCompleteEvent {
     PrimeTemplate,
     Button,
     ButtonIcon,
+    InputText,
+    ButtonLabel,
   ],
   viewProviders: [provideIcons({ faSolidMagnifyingGlass, faSolidXmark })],
   templateUrl: './search-input.component.html',
@@ -55,8 +58,17 @@ export class SearchInput extends SearchBase {
   popOverTemplate = input<TemplateRef<unknown>>();
   op = viewChild<Popover>('op');
   autocompleteEnabled = input<boolean>(true);
-  inputClasses =
-    'w-full flex-1 px-4 py-2 border border-gray-400 rounded-full bg-white text-black focus:border-primary focus:ring-1 focus:ring-primary transition-colors';
+
+  searchBoxDesign = {
+    borderColor: 'var(--p-primary-color)',
+    colorScheme: {
+      light: {
+        root: {
+          color: 'var(--p-primary-color)',
+        },
+      },
+    },
+  };
 
   onSearch = output();
   queryString = '';
