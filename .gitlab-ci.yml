@@ -30,7 +30,7 @@ build_gn5:
     # 4. Build Angular main
     - cd frontend
     - npm install
-    - ng build main --configuration=sextant --base-href "/${CI_PROJECT_NAME}/"
+    - ng build main --configuration=sextant --base-href "/"
 
     # 5. Déplacer le build Angular dans public/ pour GitLab Pages
     - mkdir -p ../public
