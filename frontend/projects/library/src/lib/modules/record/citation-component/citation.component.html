@@ -1,0 +1,39 @@
+<div *ngIf="citationAvailable()">
+  <div class="flex gap-2 mb-4">
+    <h2 class="text-xl font-semibold">Cite Dataset</h2>
+
+    <button
+      *ngFor="let f of formats()"
+      (click)="getCitation(f.id)"
+      class="px-3 py-1 rounded border"
+      [class.bg-neutral-600]="currentFormat() === f.id"
+      [class.text-white]="currentFormat() === f.id"
+    >
+      {{ f.label }}
+    </button>
+  </div>
+
+  <div class="flex gap-3 mb-4">
+    <button
+      (click)="navigator.clipboard.writeText(citationText())"
+      class="px-3 py-1 bg-neutral-800 text-white rounded"
+    >
+      Copy
+    </button>
+
+    <a
+      [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
+      [download]="getFilename()"
+      class="px-3 py-1 bg-neutral-200 rounded"
+    >
+      Download
+    </a>
+  </div>
+
+  <div *ngIf="!isCode()" [innerHTML]="citationText()"></div>
+
+  <pre *ngIf="isCode()" class="bg-neutral-900 text-neutral-200 p-4 rounded"
+    >{{ citationText() }}
+</pre
+  >
+</div>

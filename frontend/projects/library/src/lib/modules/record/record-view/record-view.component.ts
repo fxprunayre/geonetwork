@@ -44,6 +44,7 @@ import { FormsModule } from '@angular/forms';
 import { NgTemplateOutlet, JsonPipe, AsyncPipe } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { Card } from 'primeng/card';
+import { CitationComponent } from '../citation-component/citation.component';
 
 @Component({
   selector: 'app-record-view',
@@ -81,6 +82,7 @@ import { Card } from 'primeng/card';
     AsyncPipe,
     AccordionModule,
     Card,
+    CitationComponent,
   ],
   viewProviders: [
     provideIcons({
@@ -190,4 +192,5 @@ export class RecordViewComponent implements AfterViewInit {
   }
 
   protected readonly RelatedItemType = RelatedItemType;
+  protected readonly Object = Object;
 }
