@@ -1,59 +1,90 @@
-# Frontend
+# Sextant frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
+## User interface configuration
 
-## Development server
+...
 
-To start a local development server, run:
+## Theming
 
-```bash
-ng serve
+Application theme is defined in [app.theme.ts](projects/main/src/app/app.theme.ts). It relies on https://primeng.org/theming.
+
+Different levels of theming are available:
+* Theme configuration in `app.theme.ts` (colors, components default styles, etc.)
+    * primitive for colors, radius
+    * semantic for color scheme
+    * components for component specific styles
+* [Scoped tokens](https://primeng.org/theming#scopedtokens) can then be used in components if a particular style needs to be overridden
+* [Pass through](https://primeng.org/passthrough) can be used to pass arbitrary attributes to underlying DOM elements (eg. adding CSS classes) (see `search-input`)
+
+The current theme is based on PrimeUIX Aura preset. See https://github.com/primefaces/primeuix/tree/main/packages/themes/src/presets/aura
+
+
+
+## Development
+
+To set up the development environment and start the main app, run the following commands:
+
+```sh
+npm install
+npm run build 
+npm run start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`.
 
-## Code scaffolding
+Use the following command to watch for library changes and rebuild automatically:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```sh
+npm run watch-lib
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Running tests
 
-```bash
-ng generate --help
+...
+
+
+## GeoNetwork API
+
+### Building GeoNetwork API client
+
+GeoNetwork 4 and 5 provides an Open API specification that can be used to generate API clients. See
+* http://localhost:8080/geonetwork/doc/api/ for GeoNetwork 4
+* https://apps.titellus.net/geonetwork/doc/api/swagger-ui/index.html for GeoNetwork 5
+
+
+To build GeoNetwork API client, run:
+
+```sh
+npm run download-api-geonetwork4-client
+npm run build-api-geonetwork4-client
+npm run prettier
 ```
 
-## Building
+The search service does not use Elasticsearch types so for now, we need to modify the generated code a bit.
 
-To build the project run:
+In `search.services.ts`, add
+```ts
+import { IndexRecord, elasticsearch } from 'gn-api-client';
+public msearch(
+  -    body: elasticsearch.SearchRequest,
+  +    body: string,
 
-```bash
-ng build
+  -  ): Observable<
+-    HttpEvent<
+-      elasticsearch.SearchResponse<IndexRecord, Record<string, elasticsearch.AggregationsAggregate>>
+-    >
+-  >;
++  ): Observable<HttpEvent<string>>;
 ```
+TODO: automate this step
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+### Improvement of the Open API documentation
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Ongoing PR to improve GeoNetwork Open API documentation:
+* https://github.com/geonetwork/core-geonetwork/pull/9106
+* https://github.com/geonetwork/core-geonetwork/pull/8602
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
