@@ -25,16 +25,20 @@ export class LanguageSwitcher {
     label: key,
   }));
 
-  currentLanguage = signal(this.i18nConfiguration.language);
+  currentLanguage = signal(
+    localStorage.getItem('lang') || this.i18nConfiguration.language
+  );
 
   constructor() {
     effect(() => {
-      this.translate.use(this.i18nConfiguration.languages[this.currentLanguage()]);
+      const lang = this.currentLanguage();
+
+      localStorage.setItem('lang', lang);
+      this.translate.use(this.i18nConfiguration.languages[lang]);
+
       this.translate
         .get(
-          this.languages.map((language) => {
-            return 'languages.' + language.iso3code;
-          }),
+          this.languages.map((language) => 'languages.' + language.iso3code)
         )
         .subscribe((translations: { [key: string]: string }) => {
           this.languages = this.languages.map((language) => ({
