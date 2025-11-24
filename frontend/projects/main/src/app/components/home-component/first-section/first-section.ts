@@ -6,7 +6,6 @@ import {
   inject,
 } from '@angular/core';
 import {
-  Aggregation,
   SearchContextDirective,
   SearchFilter,
   SearchInput,
@@ -21,7 +20,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'first-section',
   standalone: true,
-  imports: [SearchInput, SearchContextDirective, Aggregation, TranslatePipe, SearchWelcomeTextPipe],
+  imports: [SearchInput, SearchContextDirective, TranslatePipe, SearchWelcomeTextPipe],
   templateUrl: './first-section.html',
   styleUrl: './first-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
