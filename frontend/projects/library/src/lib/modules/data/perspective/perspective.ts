@@ -6,108 +6,157 @@ import {
   inject,
   input,
   Renderer2,
-  ViewChild,
+  signal,
+  ViewChild
 } from '@angular/core';
 import perspective from '@perspective-dev/client';
 import perspective_viewer from '@perspective-dev/viewer';
 import { Datasource } from '../datasource-select/datasource-select';
+import { DuckDbService } from '../duck-db.service';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidExpand } from '@ng-icons/font-awesome/solid';
+import { Button, ButtonIcon } from 'primeng/button';
+import { NgClass } from '@angular/common';
+import { ProgressBar } from 'primeng/progressbar';
+import { RecordsService } from 'gn4-api-client';
 
 @Component({
   selector: 'app-perspective',
-  imports: [],
+  imports: [Button, NgIcon, ProgressBar, NgClass, ButtonIcon],
+  viewProviders: [provideIcons({
+    faSolidExpand
+  })],
   template: `
-    <perspective-viewer #perspectiveViewer class="w-full min-h-dvh h-full"></perspective-viewer>
+    @if (progress().status !== 'completed' && progress().status !== 'idle') {
+      <p-progressbar [value]="progress().progress"
+                     class="my-4">
+        <ng-template #content let-value>
+          <span>{{ value }}/100 ({{ progress().status }})</span>
+        </ng-template>
+      </p-progressbar>
+    }
+    <div
+      #viewerContainer
+         class="transition-all duration-300"
+      [ngClass]="{
+              'fixed inset-0 z-[100] h-screen w-screen bg-white p-4 ': isFullScreen(),
+              'relative  min-h-dvh h-full': !isFullScreen()
+          }">
+      <p-button (click)="toggleFullScreen()" styleClass="float-right">
+        <ng-icon name="faSolidExpand" pButtonIcon />
+      </p-button>
+      <perspective-viewer #perspectiveViewer class="w-full min-h-dvh h-full" />
+    </div>
   `,
   styleUrl: './perspective.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Perspective {
   datasource = input<Datasource | undefined>();
 
   @ViewChild('perspectiveViewer') perspectiveViewer!: ElementRef<any>;
 
-  worker: any;
-  initPromise: Promise<void>;
-
+  private duckDbService = inject(DuckDbService);
   private renderer = inject(Renderer2);
 
-  constructor() {
-    // start initialization and keep the promise
-    this.initPromise = this.initPerspective();
+  progress = this.duckDbService.progress;
+  isFullScreen = signal(false);
+  error: string | undefined;
 
-    effect(() => {
+  private worker: any;
+  private readonly initPromise: Promise<any>;
+
+  constructor() {
+    this.initPromise = this.initialize();
+
+    effect(async () => {
       const ds = this.datasource();
-      if (!ds) return;
-      this.loadFileFromUrl(ds);
+      if (ds) {
+      await this.duckDbService.loadDatasource(ds.url);
+        this.loadDataFromQuery();
+      }
     });
   }
 
-  loadScript(url: string, module = false): Promise<void> {
+  toggleFullScreen(): void {
+    this.isFullScreen.update(v => !v);
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
+  }
+
+  private async initialize(): Promise<any> {
+    try {
+      const scriptUrls = [
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-datagrid/dist/cdn/perspective-viewer-datagrid.js',
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-d3fc/dist/cdn/perspective-viewer-d3fc.js',
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers/dist/cdn/perspective-viewer-openlayers.js'
+      ];
+      const wasmUrls = [
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/server/dist/wasm/perspective-server.wasm',
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer/dist/wasm/perspective-viewer.wasm'
+      ];
+
+      await Promise.all([
+        this.duckDbService.init(),
+        ...scriptUrls.map(url => this.loadScript(url, true)),
+        perspective.init_server(fetch(wasmUrls[0])),
+        perspective_viewer.init_client(fetch(wasmUrls[1]))
+      ]);
+    } catch (e: any) {
+      this.error = e.message;
+      console.error('Initialization failed:', e);
+    }
+  }
+
+  private loadScript(url: string, module = false): Promise<void> {
     return new Promise((resolve, reject) => {
       const script = this.renderer.createElement('script');
       script.src = url;
       script.type = module ? 'module' : 'text/javascript';
       script.async = false;
-      script.crossOrigin = 'anonymous'; // important for useful error messages and sourcemap/CORS
       script.onload = () => resolve();
-      script.onerror = (ev: any) => {
-        console.error('Script load error:', { url, ev });
-        reject(new Error(`Failed to load script: ${url}`));
-      };
+      script.onerror = (err: any) => reject(new Error(`Script load error: ${url}`, { cause: err }));
       this.renderer.appendChild(document.head, script);
     });
   }
 
-  async initPerspective(): Promise<void> {
-    try {
-      const scriptsToLoad = [
-        {
-          url: 'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-datagrid/dist/cdn/perspective-viewer-datagrid.js',
-          module: true,
-        },
-        {
-          url: 'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-d3fc/dist/cdn/perspective-viewer-d3fc.js',
-          module: true,
-        },
-        {
-          url: 'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers/dist/cdn/perspective-viewer-openlayers.js',
-          module: true,
-        },
-      ];
-
-      for (const { url, module } of scriptsToLoad) {
-        await this.loadScript(url, module);
-      }
-
-      const SERVER_WASM =
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/server/dist/wasm/perspective-server.wasm';
-      const CLIENT_WASM =
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer/dist/wasm/perspective-viewer.wasm';
-
-      await Promise.all([
-        perspective.init_server(fetch(SERVER_WASM)),
-        perspective_viewer.init_client(fetch(CLIENT_WASM)),
-      ]);
-    } catch (err: any) {
-      console.error('Perspective init failed:', err);
+  private sanitizeData(data: any): any {
+    if (typeof data === 'bigint') {
+      const num = Number(data);
+      return Number.isSafeInteger(num) ? num : data.toString();
     }
+    if (Array.isArray(data)) {
+      return data.map(item => this.sanitizeData(item));
+  }
+    if (data !== null && typeof data === 'object') {
+      return Object.fromEntries(
+        Object.entries(data).map(([key, value]) => [key, this.sanitizeData(value)])
+      );
+    }
+    return data;
   }
 
-  async loadFileFromUrl(ds: Datasource) {
+  private async loadDataFromQuery() {
     await this.initPromise;
+    this.worker = this.worker || await perspective.worker();
 
-    if (!this.worker) {
-      this.worker = await perspective.worker();
-      this.perspectiveViewer.nativeElement.restore({ theme: 'Main' });
+    try {
+      // TODO: Count features and limit rows accordingly
+      const result: any = await this.duckDbService.runQuery2('SELECT * FROM data LIMIT 100000');
+      let table;
+
+      if (result instanceof ArrayBuffer) {
+        table = this.worker.table(result, { type: 'arrow' });
+      } else if (Array.isArray(result)) {
+        table = this.worker.table(this.sanitizeData(result));
+    } else {
+        throw new Error('Unexpected result format from DuckDbService');
     }
 
-    const resp = await fetch(ds.url);
-    const data = await resp.arrayBuffer();
-
-    const opts = ds.format === 'csv' ? { format: 'csv' } : undefined;
-    const table = opts ? this.worker.table(data, opts) : this.worker.table(data);
-
     this.perspectiveViewer.nativeElement.load(table);
-    this.perspectiveViewer.nativeElement.restore({ settings: true, plugin_config: {} });
+    this.perspectiveViewer.nativeElement.restore({ settings: true });
+    } catch (e: any) {
+      this.error = e.message;
+      console.error('Failed to load data into Perspective:', e);
+    }
   }
 }

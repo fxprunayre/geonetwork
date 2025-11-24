@@ -49,7 +49,6 @@
     "@perspective-dev/viewer": "4.0.0",
     "@primeuix/themes": "^1.2.5",
     "@tailwindcss/postcss": "^4.1.16",
-    "chart.js": "4.5.1",
     "chroma-js": "^3.1.2",
     "marked": "^16.4.1",
     "ngx-markdown": "^20.1.0",
