@@ -3,16 +3,24 @@ import * as duckdb from '@duckdb/duckdb-wasm';
 import { AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
 // import * as arrow from 'apache-arrow';
 
-
 export interface DatasourceLoadingProgress {
-  status: 'idle'  | 'connecting' | 'size' | 'downloading' | 'completed' | 'db' | 'format' | 'loading' | 'canceled' | 'error';
+  status:
+    | 'idle'
+    | 'connecting'
+    | 'size'
+    | 'downloading'
+    | 'completed'
+    | 'db'
+    | 'format'
+    | 'loading'
+    | 'canceled'
+    | 'error';
   progress: number; // 0-100%
   downloadedBytes: number;
   totalBytes: number;
   contentType: string | null;
   errorMessage?: string;
 }
-
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +36,7 @@ export class DuckDbService {
     progress: 0,
     downloadedBytes: 0,
     totalBytes: 0,
-    contentType: null
+    contentType: null,
   });
 
   private async createWorkerFromUrl(url: string): Promise<Worker> {
@@ -82,21 +90,27 @@ export class DuckDbService {
     const contentType = headResponse.headers.get('Content-Type');
     totalBytes = contentLengthHeader ? parseInt(contentLengthHeader, 10) : 0;
 
-    this.progress.update(p => ({
+    this.progress.update((p) => ({
       ...p,
-      errorMessage: totalBytes === 0 ? "Warning: No idea about the datasource size (Content-Length missing)." : `Downloading ${totalBytes} ...`,
+      errorMessage:
+        totalBytes === 0
+          ? 'Warning: No idea about the datasource size (Content-Length missing).'
+          : `Downloading ${totalBytes} ...`,
       status: 'downloading',
       progress: 10,
       totalBytes: totalBytes,
-      contentType: this.getFileType(contentType)
+      contentType: this.getFileType(contentType),
     }));
   }
 
-  async downloadDatasource(fileUrl: string, signal: AbortSignal): Promise<{buffer: ArrayBuffer, contentType: string}> {
-    this.progress.update(p => ({ ...p, status: 'downloading', errorMessage: undefined }));
+  async downloadDatasource(
+    fileUrl: string,
+    signal: AbortSignal,
+  ): Promise<{ buffer: ArrayBuffer; contentType: string }> {
+    this.progress.update((p) => ({ ...p, status: 'downloading', errorMessage: undefined }));
 
     const totalBytes = this.progress().totalBytes;
-    const response = await fetch(fileUrl, {signal});
+    const response = await fetch(fileUrl, { signal });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -117,14 +131,14 @@ export class DuckDbService {
 
       let progress = totalBytes > 0 ? (downloadedBytes / totalBytes) * 50 : 0;
 
-      this.progress.update(p => ({
+      this.progress.update((p) => ({
         ...p,
         downloadedBytes,
-        progress: progress
+        progress: progress,
       }));
     }
 
-    this.progress.update(p => ({ ...p, status: 'completed' }));
+    this.progress.update((p) => ({ ...p, status: 'completed' }));
     const receivedSize = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
 
     const finalBuffer = new Uint8Array(receivedSize);
@@ -134,8 +148,8 @@ export class DuckDbService {
       finalBuffer.set(chunk, offset);
       offset += chunk.length;
     }
-    return {buffer: finalBuffer.buffer, contentType: response.headers.get('Content-Type')  ||''};
-    }
+    return { buffer: finalBuffer.buffer, contentType: response.headers.get('Content-Type') || '' };
+  }
 
   cancelDownload(): void {
     if (this.abortController) {
@@ -152,8 +166,7 @@ export class DuckDbService {
     else if (contentType.includes('parquet')) inferredExt = 'parquet';
     else if (contentType.includes('text/xml; subtype=gml/2.1.2')) inferredExt = 'gdal';
     else if (contentType.includes('geo+json')) inferredExt = 'geojson';
-    else if (contentType.includes('application/vnd.apache.arrow.stream'))
-      inferredExt = 'arrows';
+    else if (contentType.includes('application/vnd.apache.arrow.stream')) inferredExt = 'arrows';
     else if (contentType.includes('json')) inferredExt = 'json';
 
     return inferredExt || null;
@@ -169,7 +182,6 @@ export class DuckDbService {
     });
 
     if (!fileUrl) return;
-
 
     this.abortController = new AbortController();
     const signal = this.abortController.signal;
@@ -212,18 +224,18 @@ export class DuckDbService {
 
   async loadData(fileName: string, data: ArrayBuffer): Promise<void> {
     try {
-      this.progress.update(p => ({
-        ... p,
+      this.progress.update((p) => ({
+        ...p,
         status: 'db',
       }));
 
       await this.init();
       if (!this.db || !this.conn) return;
 
-      this.progress.update(p => ({
-        ... p,
+      this.progress.update((p) => ({
+        ...p,
         status: 'format',
-        progress: p.progress + 10
+        progress: p.progress + 10,
       }));
 
       const ext = (fileName.split('.').pop() || '').toLowerCase();
@@ -249,17 +261,17 @@ export class DuckDbService {
           throw new Error(`Unsupported file type: .${ext}`);
       }
 
-      this.progress.update(p => ({
-        ... p,
+      this.progress.update((p) => ({
+        ...p,
         status: 'loading',
-        progress: p.progress + 10
+        progress: p.progress + 10,
       }));
 
       await this.db.registerFileBuffer(fileName, new Uint8Array(data));
 
-      this.progress.update(p => ({
-        ... p,
-        progress: p.progress + 10
+      this.progress.update((p) => ({
+        ...p,
+        progress: p.progress + 10,
       }));
 
       console.log(`CREATE OR REPLACE TABLE data AS SELECT * FROM ${reader}('${fileName}');`);
@@ -267,21 +279,21 @@ export class DuckDbService {
         `CREATE OR REPLACE TABLE data AS SELECT * FROM ${reader}('${fileName}');`,
       );
 
-      this.progress.update(p => ({
-        ... p,
+      this.progress.update((p) => ({
+        ...p,
         status: 'completed',
-        progress: 100
+        progress: 100,
       }));
     } catch (error: any) {
       if (error.name === 'AbortError') {
-        this.progress.update(p => ({ ...p, status: 'canceled', errorMessage: undefined }));
+        this.progress.update((p) => ({ ...p, status: 'canceled', errorMessage: undefined }));
       } else {
-        this.progress.update(p => ({
+        this.progress.update((p) => ({
           ...p,
           status: 'error',
-          errorMessage: `Error: ${error.message}`
+          errorMessage: `Error: ${error.message}`,
         }));
-        console.error("Download error:", error);
+        console.error('Download error:', error);
       }
     }
   }

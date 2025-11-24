@@ -7,7 +7,7 @@ import {
   input,
   Renderer2,
   signal,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import perspective from '@perspective-dev/client';
 import perspective_viewer from '@perspective-dev/viewer';
@@ -23,13 +23,14 @@ import { RecordsService } from 'gn4-api-client';
 @Component({
   selector: 'app-perspective',
   imports: [Button, NgIcon, ProgressBar, NgClass, ButtonIcon],
-  viewProviders: [provideIcons({
-    faSolidExpand
-  })],
+  viewProviders: [
+    provideIcons({
+      faSolidExpand,
+    }),
+  ],
   template: `
     @if (progress().status !== 'completed' && progress().status !== 'idle') {
-      <p-progressbar [value]="progress().progress"
-                     class="my-4">
+      <p-progressbar [value]="progress().progress" class="my-4">
         <ng-template #content let-value>
           <span>{{ value }}/100 ({{ progress().status }})</span>
         </ng-template>
@@ -37,11 +38,12 @@ import { RecordsService } from 'gn4-api-client';
     }
     <div
       #viewerContainer
-         class="transition-all duration-300"
+      class="transition-all duration-300"
       [ngClass]="{
-              'fixed inset-0 z-[100] h-screen w-screen bg-white p-4 ': isFullScreen(),
-              'relative  min-h-dvh h-full': !isFullScreen()
-          }">
+        'fixed inset-0 z-[100] h-screen w-screen bg-white p-4 ': isFullScreen(),
+        'relative  min-h-dvh h-full': !isFullScreen(),
+      }"
+    >
       <p-button (click)="toggleFullScreen()" styleClass="float-right">
         <ng-icon name="faSolidExpand" pButtonIcon />
       </p-button>
@@ -49,7 +51,7 @@ import { RecordsService } from 'gn4-api-client';
     </div>
   `,
   styleUrl: './perspective.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Perspective {
   datasource = input<Datasource | undefined>();
@@ -72,14 +74,14 @@ export class Perspective {
     effect(async () => {
       const ds = this.datasource();
       if (ds) {
-      await this.duckDbService.loadDatasource(ds.url);
+        await this.duckDbService.loadDatasource(ds.url);
         this.loadDataFromQuery();
       }
     });
   }
 
   toggleFullScreen(): void {
-    this.isFullScreen.update(v => !v);
+    this.isFullScreen.update((v) => !v);
     setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
   }
 
@@ -88,18 +90,18 @@ export class Perspective {
       const scriptUrls = [
         'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-datagrid/dist/cdn/perspective-viewer-datagrid.js',
         'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-d3fc/dist/cdn/perspective-viewer-d3fc.js',
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers/dist/cdn/perspective-viewer-openlayers.js'
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers/dist/cdn/perspective-viewer-openlayers.js',
       ];
       const wasmUrls = [
         'https://cdn.jsdelivr.net/npm/@perspective-dev/server/dist/wasm/perspective-server.wasm',
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer/dist/wasm/perspective-viewer.wasm'
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer/dist/wasm/perspective-viewer.wasm',
       ];
 
       await Promise.all([
         this.duckDbService.init(),
-        ...scriptUrls.map(url => this.loadScript(url, true)),
+        ...scriptUrls.map((url) => this.loadScript(url, true)),
         perspective.init_server(fetch(wasmUrls[0])),
-        perspective_viewer.init_client(fetch(wasmUrls[1]))
+        perspective_viewer.init_client(fetch(wasmUrls[1])),
       ]);
     } catch (e: any) {
       this.error = e.message;
@@ -125,11 +127,11 @@ export class Perspective {
       return Number.isSafeInteger(num) ? num : data.toString();
     }
     if (Array.isArray(data)) {
-      return data.map(item => this.sanitizeData(item));
-  }
+      return data.map((item) => this.sanitizeData(item));
+    }
     if (data !== null && typeof data === 'object') {
       return Object.fromEntries(
-        Object.entries(data).map(([key, value]) => [key, this.sanitizeData(value)])
+        Object.entries(data).map(([key, value]) => [key, this.sanitizeData(value)]),
       );
     }
     return data;
@@ -137,7 +139,7 @@ export class Perspective {
 
   private async loadDataFromQuery() {
     await this.initPromise;
-    this.worker = this.worker || await perspective.worker();
+    this.worker = this.worker || (await perspective.worker());
 
     try {
       // TODO: Count features and limit rows accordingly
@@ -148,12 +150,12 @@ export class Perspective {
         table = this.worker.table(result, { type: 'arrow' });
       } else if (Array.isArray(result)) {
         table = this.worker.table(this.sanitizeData(result));
-    } else {
+      } else {
         throw new Error('Unexpected result format from DuckDbService');
-    }
+      }
 
-    this.perspectiveViewer.nativeElement.load(table);
-    this.perspectiveViewer.nativeElement.restore({ settings: true });
+      this.perspectiveViewer.nativeElement.load(table);
+      this.perspectiveViewer.nativeElement.restore({ settings: true });
     } catch (e: any) {
       this.error = e.message;
       console.error('Failed to load data into Perspective:', e);
