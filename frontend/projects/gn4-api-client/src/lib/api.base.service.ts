@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -12,7 +12,7 @@ import { CustomHttpParameterCodec } from './encoder';
 import { Configuration } from './configuration';
 
 export class BaseService {
-  protected basePath = '/geonetwork/srv/api';
+  protected basePath = 'http://localhost:8080/geonetwork/srv/api';
   public defaultHeaders = new HttpHeaders();
   public configuration: Configuration;
   public encoder: HttpParameterCodec;

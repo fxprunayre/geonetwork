@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -50,38 +50,22 @@ export class StatusService extends BaseService {
   public deleteAllHistoryAndStatus(
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteAllHistoryAndStatus(
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteAllHistoryAndStatus(
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteAllHistoryAndStatus(
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarHeaders = this.defaultHeaders;
 

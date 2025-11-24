@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -379,41 +379,25 @@ export class UserselectionsService extends BaseService {
     selectionIdentifier: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteUserSelection(
     selectionIdentifier: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteUserSelection(
     selectionIdentifier: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteUserSelection(
     selectionIdentifier: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (selectionIdentifier === null || selectionIdentifier === undefined) {
       throw new Error(
@@ -644,44 +628,28 @@ export class UserselectionsService extends BaseService {
     selection: Selection,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public updateUserSelection(
     selectionIdentifier: number,
     selection: Selection,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public updateUserSelection(
     selectionIdentifier: number,
     selection: Selection,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public updateUserSelection(
     selectionIdentifier: number,
     selection: Selection,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (selectionIdentifier === null || selectionIdentifier === undefined) {
       throw new Error(

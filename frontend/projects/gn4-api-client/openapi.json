@@ -11,12 +11,12 @@
       "name": "GPL 2.0",
       "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html"
     },
-    "title": "GeoNetwork 4.4.9 OpenAPI Documentation",
-    "version": "4.4.9"
+    "title": "GeoNetwork 4.4.10 OpenAPI Documentation",
+    "version": "4.4.10"
   },
   "externalDocs": {
     "description": "Learn how to access the catalog using the GeoNetwork REST API.",
-    "url": "http://localhost:8282/geonetwork/doc/api"
+    "url": "http://localhost:8080/geonetwork/doc/api"
   },
   "servers": [
     {
@@ -25,8 +25,8 @@
       "variables": {
         "catalog": {
           "description": "The GeoNetwork catalog to contact",
-          "default": "http://localhost:8282/geonetwork",
-          "enum": ["http://localhost:8282/geonetwork", "../.."]
+          "default": "http://localhost:8080/geonetwork",
+          "enum": ["http://localhost:8080/geonetwork", "../.."]
         },
         "portal": {
           "description": "The thematic portal",
@@ -104,10 +104,6 @@
     {
       "description": "Workflow status operations",
       "name": "status"
-    },
-    {
-      "description": "EEA Layout Update API",
-      "name": "eealayoutupdate"
     },
     {
       "description": "Languages operations",
@@ -599,7 +595,7 @@
     },
     "/doiservers/{doiServerId}": {
       "delete": {
-        "operationId": "deleteMapserver_1",
+        "operationId": "deleteMapserver",
         "parameters": [
           {
             "description": "DOI server identifier",
@@ -740,95 +736,6 @@
         },
         "summary": "Update a DOI server authentication",
         "tags": ["doiservers"]
-      }
-    },
-    "/eealayoutupdate/footer": {
-      "get": {
-        "operationId": "getFooter",
-        "responses": {
-          "200": {
-            "content": {
-              "application/xhtml+xml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Get EEA footer html",
-        "tags": ["eealayoutupdate"]
-      }
-    },
-    "/eealayoutupdate/head": {
-      "get": {
-        "operationId": "getHead",
-        "responses": {
-          "200": {
-            "content": {
-              "application/xhtml+xml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Get EEA <head> content",
-        "tags": ["eealayoutupdate"]
-      }
-    },
-    "/eealayoutupdate/header": {
-      "get": {
-        "operationId": "getHeader",
-        "responses": {
-          "200": {
-            "content": {
-              "application/xhtml+xml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Get EEA header html content",
-        "tags": ["eealayoutupdate"]
-      }
-    },
-    "/eealayoutupdate/refreshtemplate": {
-      "get": {
-        "description": "refreshtemplate",
-        "operationId": "refreshTemplate",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "summary": "Refresh EEA Template from API",
-        "tags": ["eealayoutupdate"]
-      }
-    },
-    "/eealayoutupdate/script": {
-      "get": {
-        "operationId": "getScript",
-        "responses": {
-          "200": {
-            "content": {
-              "application/xhtml+xml": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Get EEA embedded scripts",
-        "tags": ["eealayoutupdate"]
       }
     },
     "/formatters": {
@@ -2681,7 +2588,7 @@
     },
     "/mapservers/{mapserverId}": {
       "delete": {
-        "operationId": "deleteMapserver",
+        "operationId": "deleteMapserver_1",
         "parameters": [
           {
             "description": "Mapserver identifier",
@@ -5060,7 +4967,7 @@
             "required": false,
             "schema": {
               "type": "boolean",
-              "default": false
+              "default": true
             }
           }
         ],
@@ -5289,7 +5196,7 @@
                 }
               }
             },
-            "description": "Operation not allowed. Only Administrators can access it."
+            "description": "Operation not allowed. User needs to be able to edit the resource."
           }
         },
         "summary": "Index a set of records",
@@ -5861,7 +5768,7 @@
             "description": "Publication type",
             "in": "query",
             "name": "publicationType",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -6487,7 +6394,7 @@
             "description": "Publication type",
             "in": "query",
             "name": "publicationType",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -6611,7 +6518,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleMetadataProcessingReport"
+                  "$ref": "#/components/schemas/MetadataValidationProcessingReport"
                 }
               }
             },
@@ -6621,7 +6528,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SimpleMetadataProcessingReport"
+                  "$ref": "#/components/schemas/MetadataValidationProcessingReport"
                 }
               }
             },
@@ -6882,6 +6789,15 @@
             "in": "path",
             "name": "metadataUuid",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Formatter to use on the record view page. If invalid or not specified, no redirect to the record view page is performed.",
+            "in": "query",
+            "name": "recordViewFormatter",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -7307,7 +7223,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "default": "*"
+              "default": "*.*"
             }
           }
         ],
@@ -7557,7 +7473,7 @@
         "tags": ["records"]
       }
     },
-    "/records/{metadataUuid}/attachments/{resourceId}/**": {
+    "/records/{metadataUuid}/attachments/{resourceId}": {
       "delete": {
         "operationId": "delResource",
         "parameters": [
@@ -7660,7 +7576,27 @@
             },
             "description": "Record attachment."
           },
+          "206": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "description": "Partial content for resumable downloads."
+          },
           "403": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary",
+                  "example": null
+                }
+              }
+            },
             "description": "Operation not allowed. User needs to be able to download the resource."
           }
         },
@@ -7701,16 +7637,6 @@
             }
           },
           {
-            "description": "The visibility",
-            "example": "public",
-            "in": "query",
-            "name": "newResourceName",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "description": "Use approved version or not",
             "example": true,
             "in": "query",
@@ -7731,7 +7657,7 @@
                 }
               }
             },
-            "description": "Attachment updated."
+            "description": "Attachment visibility updated."
           },
           "403": {
             "content": {
@@ -7744,7 +7670,7 @@
             "description": "Operation not allowed. User needs to be able to edit the resource."
           }
         },
-        "summary": "Update the metadata resource visibility and/or the resource name",
+        "summary": "Update the metadata resource visibility",
         "tags": ["records"]
       }
     },
@@ -9161,65 +9087,69 @@
               "type": "boolean",
               "default": true
             }
+          },
+          {
+            "description": "Additional parameters for the formatter. Can be used to pass any key-value pairs.",
+            "in": "query",
+            "name": "allRequestParameters",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/rdf+xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/vnd.schemaorg.ld+json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xhtml+xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Formatted metadata record."
           }
         },
         "summary": "Get a formatted metadata record",
-        "tags": ["records"]
-      }
-    },
-    "/records/{metadataUuid}/formatters/{formatterId}.pdf": {
-      "get": {
-        "operationId": "getRecordFormattedAsPdfBy",
-        "parameters": [
-          {
-            "description": "Formatter type to use.",
-            "in": "path",
-            "name": "formatterId",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Record UUID.",
-            "in": "path",
-            "name": "metadataUuid",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Optional language ISO 3 letters code to override HTTP Accept-language header.",
-            "in": "query",
-            "name": "language",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Download the approved version",
-            "in": "query",
-            "name": "approved",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        },
-        "summary": "Get a metadata record in PDF format",
         "tags": ["records"]
       }
     },
@@ -9633,7 +9563,7 @@
             "description": "Publication type",
             "in": "query",
             "name": "publicationType",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -10748,7 +10678,7 @@
             "description": "Publication type",
             "in": "query",
             "name": "publicationType",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -11133,36 +11063,6 @@
           }
         },
         "summary": "Check the status of validation with the INSPIRE service.",
-        "tags": ["records"]
-      }
-    },
-    "/records/{uuid}/datastore": {
-      "get": {
-        "description": "Proxy the request to the Nextcloud share. It returns the HTML of the nextcloud share page. Intended to be called directly from the browser in a tab.",
-        "operationId": "checkAndProxyDatastore",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "uuid",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "*/*": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "summary": "Proxy the request to the Nextcloud share",
         "tags": ["records"]
       }
     },
@@ -15734,6 +15634,17 @@
     "/users/groups": {
       "get": {
         "operationId": "retrieveAllUserGroups",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "onlyIncludeWorkspaces",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -17669,8 +17580,15 @@
           "reserved": {
             "type": "boolean"
           },
+          "type": {
+            "type": "string",
+            "enum": ["Workspace", "RecordPrivilege", "SystemPrivilege"]
+          },
           "website": {
             "type": "string"
+          },
+          "workspace": {
+            "type": "boolean"
           }
         },
         "description": "Group details"
@@ -18876,6 +18794,135 @@
           }
         }
       },
+      "MetadataValidationProcessingReport": {
+        "type": "object",
+        "properties": {
+          "ellapsedTimeInSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "endIsoDateTime": {
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "invalidMetadata": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/InfoReport"
+            }
+          },
+          "metadata": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "metadataWithWarnings": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/InfoReport"
+            }
+          },
+          "numberOfInvalidRecords": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfNullRecords": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfRecords": {
+            "type": "integer",
+            "format": "int32",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "numberOfRecordsNotEditable": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfRecordsProcessed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfRecordsWithValidationWarnings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfValidRecords": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "running": {
+            "type": "boolean"
+          },
+          "startIsoDateTime": {
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "totalRecords": {
+            "type": "integer",
+            "format": "int32",
+            "writeOnly": true
+          },
+          "totalTimeInSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "type": {
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "uuid": {
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "validMetadata": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/InfoReport"
+            }
+          },
+          "validationErrors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SchematronValidationReport"
+              }
+            }
+          },
+          "validationWarnings": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SchematronValidationReport"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "report"
+        }
+      },
       "MetadataWorkflowStatusResponse": {
         "type": "object",
         "properties": {
@@ -19838,6 +19885,23 @@
             }
           },
           "xpath": {
+            "type": "string"
+          }
+        }
+      },
+      "SchematronValidationReport": {
+        "type": "object",
+        "properties": {
+          "messages": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "schematron": {
             "type": "string"
           }
         }

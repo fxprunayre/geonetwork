@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -54,41 +54,25 @@ export class SourcesService extends BaseService {
     source: Source,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public addSource(
     source: Source,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public addSource(
     source: Source,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public addSource(
     source: Source,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (source === null || source === undefined) {
       throw new Error('Required parameter source was null or undefined when calling addSource.');
@@ -149,41 +133,25 @@ export class SourcesService extends BaseService {
     sourceIdentifier: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteSource(
     sourceIdentifier: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteSource(
     sourceIdentifier: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteSource(
     sourceIdentifier: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (sourceIdentifier === null || sourceIdentifier === undefined) {
       throw new Error(
@@ -421,44 +389,28 @@ export class SourcesService extends BaseService {
     source: Source,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public updateSource(
     sourceIdentifier: string,
     source: Source,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public updateSource(
     sourceIdentifier: string,
     source: Source,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public updateSource(
     sourceIdentifier: string,
     source: Source,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (sourceIdentifier === null || sourceIdentifier === undefined) {
       throw new Error(

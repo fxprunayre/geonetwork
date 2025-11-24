@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -70,44 +70,28 @@ export class UsersService extends BaseService {
     exist: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public checkUserPropertyExist(
     property: string,
     exist: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public checkUserPropertyExist(
     property: string,
     exist: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public checkUserPropertyExist(
     property: string,
     exist: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (property === null || property === undefined) {
       throw new Error(
@@ -523,44 +507,28 @@ export class UsersService extends BaseService {
     size?: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public getUserIdenticon(
     userIdentifier: number,
     size?: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public getUserIdenticon(
     userIdentifier: number,
     size?: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public getUserIdenticon(
     userIdentifier: number,
     size?: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (userIdentifier === null || userIdentifier === undefined) {
       throw new Error(
@@ -696,41 +664,25 @@ export class UsersService extends BaseService {
     userRegisterDto: UserRegisterDto,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public registerUser(
     userRegisterDto: UserRegisterDto,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public registerUser(
     userRegisterDto: UserRegisterDto,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public registerUser(
     userRegisterDto: UserRegisterDto,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (userRegisterDto === null || userRegisterDto === undefined) {
       throw new Error(
@@ -893,10 +845,12 @@ export class UsersService extends BaseService {
 
   /**
    * Retrieve all user groups
+   * @param onlyIncludeWorkspaces
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
   public retrieveAllUserGroups(
+    onlyIncludeWorkspaces?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
     options?: {
@@ -906,6 +860,7 @@ export class UsersService extends BaseService {
     },
   ): Observable<Array<UserGroupsResponse>>;
   public retrieveAllUserGroups(
+    onlyIncludeWorkspaces?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
     options?: {
@@ -915,6 +870,7 @@ export class UsersService extends BaseService {
     },
   ): Observable<HttpResponse<Array<UserGroupsResponse>>>;
   public retrieveAllUserGroups(
+    onlyIncludeWorkspaces?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
     options?: {
@@ -924,6 +880,7 @@ export class UsersService extends BaseService {
     },
   ): Observable<HttpEvent<Array<UserGroupsResponse>>>;
   public retrieveAllUserGroups(
+    onlyIncludeWorkspaces?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
     options?: {
@@ -932,6 +889,13 @@ export class UsersService extends BaseService {
       transferCache?: boolean;
     },
   ): Observable<any> {
+    let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
+    localVarQueryParameters = this.addToHttpParams(
+      localVarQueryParameters,
+      <any>onlyIncludeWorkspaces,
+      'onlyIncludeWorkspaces',
+    );
+
     let localVarHeaders = this.defaultHeaders;
 
     const localVarHttpHeaderAcceptSelected: string | undefined =
@@ -959,6 +923,7 @@ export class UsersService extends BaseService {
     const { basePath, withCredentials } = this.configuration;
     return this.httpClient.request<Array<UserGroupsResponse>>('get', `${basePath}${localVarPath}`, {
       context: localVarHttpContext,
+      params: localVarQueryParameters,
       responseType: <any>responseType_,
       ...(withCredentials ? { withCredentials } : {}),
       headers: localVarHeaders,
@@ -1165,41 +1130,25 @@ export class UsersService extends BaseService {
     username: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public sendPasswordByEmail(
     username: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public sendPasswordByEmail(
     username: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public sendPasswordByEmail(
     username: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (username === null || username === undefined) {
       throw new Error(
@@ -1264,44 +1213,28 @@ export class UsersService extends BaseService {
     passwordUpdateParameter: PasswordUpdateParameter,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public updatePassword(
     username: string,
     passwordUpdateParameter: PasswordUpdateParameter,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public updatePassword(
     username: string,
     passwordUpdateParameter: PasswordUpdateParameter,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public updatePassword(
     username: string,
     passwordUpdateParameter: PasswordUpdateParameter,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (username === null || username === undefined) {
       throw new Error(

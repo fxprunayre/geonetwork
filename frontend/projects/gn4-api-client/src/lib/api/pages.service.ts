@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -72,11 +72,7 @@ export class PagesService extends BaseService {
     format?: 'LINK' | 'HTML' | 'HTMLPAGE' | 'TEXT' | 'EMAILLINK',
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public addPageUploadingFile(
     language: string,
@@ -96,11 +92,7 @@ export class PagesService extends BaseService {
     format?: 'LINK' | 'HTML' | 'HTMLPAGE' | 'TEXT' | 'EMAILLINK',
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public addPageUploadingFile(
     language: string,
@@ -120,11 +112,7 @@ export class PagesService extends BaseService {
     format?: 'LINK' | 'HTML' | 'HTMLPAGE' | 'TEXT' | 'EMAILLINK',
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public addPageUploadingFile(
     language: string,
@@ -144,11 +132,7 @@ export class PagesService extends BaseService {
     format?: 'LINK' | 'HTML' | 'HTMLPAGE' | 'TEXT' | 'EMAILLINK',
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (language === null || language === undefined) {
       throw new Error(
@@ -256,41 +240,25 @@ export class PagesService extends BaseService {
     pageProperties: PageProperties,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public addPageWithoutUploadingFile(
     pageProperties: PageProperties,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public addPageWithoutUploadingFile(
     pageProperties: PageProperties,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public addPageWithoutUploadingFile(
     pageProperties: PageProperties,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (pageProperties === null || pageProperties === undefined) {
       throw new Error(
@@ -356,44 +324,28 @@ export class PagesService extends BaseService {
     pageId: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deletePage(
     language: string,
     pageId: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deletePage(
     language: string,
     pageId: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deletePage(
     language: string,
     pageId: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (language === null || language === undefined) {
       throw new Error('Required parameter language was null or undefined when calling deletePage.');
@@ -546,44 +498,28 @@ export class PagesService extends BaseService {
     pageId: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public getPageContent(
     language: string,
     pageId: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public getPageContent(
     language: string,
     pageId: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public getPageContent(
     language: string,
     pageId: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (language === null || language === undefined) {
       throw new Error(
@@ -883,11 +819,7 @@ export class PagesService extends BaseService {
     format?: 'LINK' | 'HTML' | 'HTMLPAGE' | 'TEXT' | 'EMAILLINK',
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public listPages(
     language?: string,
@@ -903,11 +835,7 @@ export class PagesService extends BaseService {
     format?: 'LINK' | 'HTML' | 'HTMLPAGE' | 'TEXT' | 'EMAILLINK',
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public listPages(
     language?: string,
@@ -923,11 +851,7 @@ export class PagesService extends BaseService {
     format?: 'LINK' | 'HTML' | 'HTMLPAGE' | 'TEXT' | 'EMAILLINK',
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public listPages(
     language?: string,
@@ -943,11 +867,7 @@ export class PagesService extends BaseService {
     format?: 'LINK' | 'HTML' | 'HTMLPAGE' | 'TEXT' | 'EMAILLINK',
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     localVarQueryParameters = this.addToHttpParams(
@@ -1014,11 +934,7 @@ export class PagesService extends BaseService {
     pageProperties: PageProperties,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public updatePage(
     language: string,
@@ -1026,11 +942,7 @@ export class PagesService extends BaseService {
     pageProperties: PageProperties,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public updatePage(
     language: string,
@@ -1038,11 +950,7 @@ export class PagesService extends BaseService {
     pageProperties: PageProperties,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public updatePage(
     language: string,
@@ -1050,11 +958,7 @@ export class PagesService extends BaseService {
     pageProperties: PageProperties,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (language === null || language === undefined) {
       throw new Error('Required parameter language was null or undefined when calling updatePage.');

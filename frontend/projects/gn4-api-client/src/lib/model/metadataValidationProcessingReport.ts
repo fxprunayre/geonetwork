@@ -7,30 +7,29 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Report } from './report';
+import { SchematronValidationReport } from './schematronValidationReport';
 import { InfoReport } from './infoReport';
 
-export interface XsltMetadataProcessingReport {
+export interface MetadataValidationProcessingReport {
   ellapsedTimeInSeconds?: number;
   endIsoDateTime?: string;
-  errors?: Array<Report>;
-  infos?: Array<InfoReport>;
+  invalidMetadata?: { [key: string]: InfoReport };
   metadata?: Set<number>;
-  metadataErrors?: { [key: string]: Array<Report> };
-  metadataInfos?: { [key: string]: Array<InfoReport> };
-  noProcessFoundCount?: number;
+  metadataWithWarnings?: { [key: string]: InfoReport };
+  numberOfInvalidRecords?: number;
   numberOfNullRecords?: number;
-  numberOfRecordNotFound?: number;
   numberOfRecords?: number;
   numberOfRecordsNotEditable?: number;
   numberOfRecordsProcessed?: number;
-  numberOfRecordsUnchanged?: number;
-  numberOfRecordsWithErrors?: number;
-  processId?: string;
+  numberOfRecordsWithValidationWarnings?: number;
+  numberOfValidRecords?: number;
   running?: boolean;
   startIsoDateTime?: string;
   totalRecords?: number;
   totalTimeInSeconds?: number;
   type?: string;
   uuid?: string;
+  validMetadata?: { [key: string]: InfoReport };
+  validationErrors?: { [key: string]: Array<SchematronValidationReport> };
+  validationWarnings?: { [key: string]: Array<SchematronValidationReport> };
 }

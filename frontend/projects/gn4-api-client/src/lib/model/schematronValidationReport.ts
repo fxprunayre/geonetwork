@@ -8,11 +8,7 @@
  * Do not edit the class manually.
  */
 
-export interface SiteInformation {
-  catalogue?: { [key: string]: string };
-  database?: { [key: string]: string };
-  env?: { [key: string]: string };
-  index?: { [key: string]: string };
-  main?: { [key: string]: string };
-  version?: { [key: string]: string };
+export interface SchematronValidationReport {
+  messages?: { [key: string]: Array<string> };
+  schematron?: string;
 }

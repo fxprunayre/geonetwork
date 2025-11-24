@@ -7,7 +7,6 @@ api/atom.service.ts
 api/auditable.service.ts
 api/customstyle.service.ts
 api/doiservers.service.ts
-api/eealayoutupdate.service.ts
 api/formatters.service.ts
 api/groups.service.ts
 api/harvesters.service.ts
@@ -109,6 +108,7 @@ model/metadataResourceExternalManagementProperties.ts
 model/metadataStatusDto.ts
 model/metadataStatusParameter.ts
 model/metadataStatusResponse.ts
+model/metadataValidationProcessingReport.ts
 model/metadataWorkflowStatusResponse.ts
 model/models.ts
 model/multilingualValue.ts
@@ -150,6 +150,7 @@ model/revisionInfo.ts
 model/rule.ts
 model/rules.ts
 model/savedQuery.ts
+model/schematronValidationReport.ts
 model/section.ts
 model/selection.ts
 model/service.ts

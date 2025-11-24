@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -52,6 +52,8 @@ import { MetadataResource } from '../model/metadataResource';
 import { MetadataStatusParameter } from '../model/metadataStatusParameter';
 // @ts-ignore
 import { MetadataStatusResponse } from '../model/metadataStatusResponse';
+// @ts-ignore
+import { MetadataValidationProcessingReport } from '../model/metadataValidationProcessingReport';
 // @ts-ignore
 import { MetadataWorkflowStatusResponse } from '../model/metadataWorkflowStatusResponse';
 // @ts-ignore
@@ -108,11 +110,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public addElement(
     metadataUuid: string,
@@ -122,11 +120,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public addElement(
     metadataUuid: string,
@@ -136,11 +130,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public addElement(
     metadataUuid: string,
@@ -150,11 +140,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -226,41 +212,25 @@ export class RecordsService extends BaseService {
     schema: Array<string>,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<SimpleMetadataProcessingReport>;
   public addSamples(
     schema: Array<string>,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<SimpleMetadataProcessingReport>>;
   public addSamples(
     schema: Array<string>,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<SimpleMetadataProcessingReport>>;
   public addSamples(
     schema: Array<string>,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (schema === null || schema === undefined) {
       throw new Error('Required parameter schema was null or undefined when calling addSamples.');
@@ -329,41 +299,25 @@ export class RecordsService extends BaseService {
     schema: Array<string>,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<SimpleMetadataProcessingReport>;
   public addTemplates(
     schema: Array<string>,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<SimpleMetadataProcessingReport>>;
   public addTemplates(
     schema: Array<string>,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<SimpleMetadataProcessingReport>>;
   public addTemplates(
     schema: Array<string>,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (schema === null || schema === undefined) {
       throw new Error('Required parameter schema was null or undefined when calling addTemplates.');
@@ -548,41 +502,25 @@ export class RecordsService extends BaseService {
     metadataBatchApproveParameter: MetadataBatchApproveParameter,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<MetadataProcessingReport>;
   public approve(
     metadataBatchApproveParameter: MetadataBatchApproveParameter,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<MetadataProcessingReport>>;
   public approve(
     metadataBatchApproveParameter: MetadataBatchApproveParameter,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<MetadataProcessingReport>>;
   public approve(
     metadataBatchApproveParameter: MetadataBatchApproveParameter,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataBatchApproveParameter === null || metadataBatchApproveParameter === undefined) {
       throw new Error(
@@ -776,41 +714,25 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public cancelEdits(
     metadataUuid: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public cancelEdits(
     metadataUuid: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public cancelEdits(
     metadataUuid: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -844,95 +766,6 @@ export class RecordsService extends BaseService {
     let localVarPath = `/records/${this.configuration.encodeParam({ name: 'metadataUuid', value: metadataUuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/editor`;
     const { basePath, withCredentials } = this.configuration;
     return this.httpClient.request<any>('delete', `${basePath}${localVarPath}`, {
-      context: localVarHttpContext,
-      responseType: <any>responseType_,
-      ...(withCredentials ? { withCredentials } : {}),
-      headers: localVarHeaders,
-      observe: observe,
-      transferCache: localVarTransferCache,
-      reportProgress: reportProgress,
-    });
-  }
-
-  /**
-   * Proxy the request to the Nextcloud share
-   * Proxy the request to the Nextcloud share. It returns the HTML of the nextcloud share page. Intended to be called directly from the browser in a tab.
-   * @param uuid
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public checkAndProxyDatastore(
-    uuid: string,
-    observe?: 'body',
-    reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
-  ): Observable<string>;
-  public checkAndProxyDatastore(
-    uuid: string,
-    observe?: 'response',
-    reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
-  ): Observable<HttpResponse<string>>;
-  public checkAndProxyDatastore(
-    uuid: string,
-    observe?: 'events',
-    reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
-  ): Observable<HttpEvent<string>>;
-  public checkAndProxyDatastore(
-    uuid: string,
-    observe: any = 'body',
-    reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
-  ): Observable<any> {
-    if (uuid === null || uuid === undefined) {
-      throw new Error(
-        'Required parameter uuid was null or undefined when calling checkAndProxyDatastore.',
-      );
-    }
-
-    let localVarHeaders = this.defaultHeaders;
-
-    const localVarHttpHeaderAcceptSelected: string | undefined =
-      options?.httpHeaderAccept ?? this.configuration.selectHeaderAccept(['*/*']);
-    if (localVarHttpHeaderAcceptSelected !== undefined) {
-      localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-    }
-
-    const localVarHttpContext: HttpContext = options?.context ?? new HttpContext();
-
-    const localVarTransferCache: boolean = options?.transferCache ?? true;
-
-    let responseType_: 'text' | 'json' | 'blob' = 'json';
-    if (localVarHttpHeaderAcceptSelected) {
-      if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-        responseType_ = 'text';
-      } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-        responseType_ = 'json';
-      } else {
-        responseType_ = 'blob';
-      }
-    }
-
-    let localVarPath = `/records/${this.configuration.encodeParam({ name: 'uuid', value: uuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/datastore`;
-    const { basePath, withCredentials } = this.configuration;
-    return this.httpClient.request<string>('get', `${basePath}${localVarPath}`, {
       context: localVarHttpContext,
       responseType: <any>responseType_,
       ...(withCredentials ? { withCredentials } : {}),
@@ -1057,44 +890,28 @@ export class RecordsService extends BaseService {
     doiServerId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public checkDoiUrl(
     metadataUuid: string,
     doiServerId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public checkDoiUrl(
     metadataUuid: string,
     doiServerId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public checkDoiUrl(
     metadataUuid: string,
     doiServerId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -1462,11 +1279,7 @@ export class RecordsService extends BaseService {
     closeDate: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public closeTask(
     metadataUuid: string,
@@ -1476,11 +1289,7 @@ export class RecordsService extends BaseService {
     closeDate: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public closeTask(
     metadataUuid: string,
@@ -1490,11 +1299,7 @@ export class RecordsService extends BaseService {
     closeDate: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public closeTask(
     metadataUuid: string,
@@ -1504,11 +1309,7 @@ export class RecordsService extends BaseService {
     closeDate: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -1864,11 +1665,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public delResource(
     metadataUuid: string,
@@ -1876,11 +1673,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public delResource(
     metadataUuid: string,
@@ -1888,11 +1681,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public delResource(
     metadataUuid: string,
@@ -1900,11 +1689,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -1947,7 +1732,7 @@ export class RecordsService extends BaseService {
       }
     }
 
-    let localVarPath = `/records/${this.configuration.encodeParam({ name: 'metadataUuid', value: metadataUuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/attachments/${this.configuration.encodeParam({ name: 'resourceId', value: resourceId, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/**`;
+    let localVarPath = `/records/${this.configuration.encodeParam({ name: 'metadataUuid', value: metadataUuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/attachments/${this.configuration.encodeParam({ name: 'resourceId', value: resourceId, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}`;
     const { basePath, withCredentials } = this.configuration;
     return this.httpClient.request<any>('delete', `${basePath}${localVarPath}`, {
       context: localVarHttpContext,
@@ -1973,44 +1758,28 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public delResources(
     metadataUuid: string,
     approved?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public delResources(
     metadataUuid: string,
     approved?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public delResources(
     metadataUuid: string,
     approved?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -2072,41 +1841,25 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteAllRecordStatus(
     metadataUuid: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteAllRecordStatus(
     metadataUuid: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteAllRecordStatus(
     metadataUuid: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -2164,11 +1917,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteAttribute(
     metadataUuid: string,
@@ -2176,11 +1925,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteAttribute(
     metadataUuid: string,
@@ -2188,11 +1933,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteAttribute(
     metadataUuid: string,
@@ -2200,11 +1941,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -2276,11 +2013,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteElement(
     metadataUuid: string,
@@ -2289,11 +2022,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteElement(
     metadataUuid: string,
@@ -2302,11 +2031,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteElement(
     metadataUuid: string,
@@ -2315,11 +2040,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -2402,44 +2123,28 @@ export class RecordsService extends BaseService {
     withBackup?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteRecord(
     metadataUuid: string,
     withBackup?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteRecord(
     metadataUuid: string,
     withBackup?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteRecord(
     metadataUuid: string,
     withBackup?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -2507,11 +2212,7 @@ export class RecordsService extends BaseService {
     changeDate: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteRecordStatus(
     metadataUuid: string,
@@ -2520,11 +2221,7 @@ export class RecordsService extends BaseService {
     changeDate: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteRecordStatus(
     metadataUuid: string,
@@ -2533,11 +2230,7 @@ export class RecordsService extends BaseService {
     changeDate: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteRecordStatus(
     metadataUuid: string,
@@ -2546,11 +2239,7 @@ export class RecordsService extends BaseService {
     changeDate: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -2856,44 +2545,28 @@ export class RecordsService extends BaseService {
     id?: Array<number>,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteTags(
     metadataUuid: string,
     id?: Array<number>,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteTags(
     metadataUuid: string,
     id?: Array<number>,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteTags(
     metadataUuid: string,
     id?: Array<number>,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -3033,41 +2706,25 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public enableVersionControl(
     metadataUuid: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public enableVersionControl(
     metadataUuid: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public enableVersionControl(
     metadataUuid: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -3234,11 +2891,7 @@ export class RecordsService extends BaseService {
     internalSep?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public exportAsCsv(
     uuids?: Array<string>,
@@ -3250,11 +2903,7 @@ export class RecordsService extends BaseService {
     internalSep?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public exportAsCsv(
     uuids?: Array<string>,
@@ -3266,11 +2915,7 @@ export class RecordsService extends BaseService {
     internalSep?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public exportAsCsv(
     uuids?: Array<string>,
@@ -3282,11 +2927,7 @@ export class RecordsService extends BaseService {
     internalSep?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     if (uuids) {
@@ -3387,11 +3028,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public exportAsMef(
     uuids?: Array<string>,
@@ -3404,11 +3041,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public exportAsMef(
     uuids?: Array<string>,
@@ -3421,11 +3054,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public exportAsMef(
     uuids?: Array<string>,
@@ -3438,11 +3067,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     if (uuids) {
@@ -3534,11 +3159,7 @@ export class RecordsService extends BaseService {
     language?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public exportAsPdf(
     uuids?: Array<string>,
@@ -3546,11 +3167,7 @@ export class RecordsService extends BaseService {
     language?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public exportAsPdf(
     uuids?: Array<string>,
@@ -3558,11 +3175,7 @@ export class RecordsService extends BaseService {
     language?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public exportAsPdf(
     uuids?: Array<string>,
@@ -3570,11 +3183,7 @@ export class RecordsService extends BaseService {
     language?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     if (uuids) {
@@ -3644,11 +3253,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public getActiveUsers(
     dateFrom: string,
@@ -3656,11 +3261,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public getActiveUsers(
     dateFrom: string,
@@ -3668,11 +3269,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public getActiveUsers(
     dateFrom: string,
@@ -3680,11 +3277,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (dateFrom === null || dateFrom === undefined) {
       throw new Error(
@@ -3776,11 +3369,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<Array<string>>;
   public getAllRecordExtentAsImage(
     metadataUuid: string,
@@ -3793,11 +3382,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<Array<string>>>;
   public getAllRecordExtentAsImage(
     metadataUuid: string,
@@ -3810,11 +3395,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<Array<string>>>;
   public getAllRecordExtentAsImage(
     metadataUuid: string,
@@ -3827,11 +3408,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -4365,11 +3942,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<Array<string>>;
   public getOneRecordExtentAsImage(
     metadataUuid: string,
@@ -4383,11 +3956,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<Array<string>>>;
   public getOneRecordExtentAsImage(
     metadataUuid: string,
@@ -4401,11 +3970,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<Array<string>>>;
   public getOneRecordExtentAsImage(
     metadataUuid: string,
@@ -4419,11 +3984,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -4506,38 +4067,22 @@ export class RecordsService extends BaseService {
   public getPublicationOptions(
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<Array<PublicationOption>>;
   public getPublicationOptions(
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<Array<PublicationOption>>>;
   public getPublicationOptions(
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<Array<PublicationOption>>>;
   public getPublicationOptions(
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarHeaders = this.defaultHeaders;
 
@@ -4579,11 +4124,13 @@ export class RecordsService extends BaseService {
    * Get a metadata record
    * Accept header should indicate which is the appropriate format to return. It could be text/html, application/xml, application/zip, ...If no appropriate Accept header found, the XML format is returned.Depending on the accept header the appropriate formatter is used. When requesting a ZIP, a MEF version 2 file is returned. When requesting HTML, the default formatter is used.
    * @param metadataUuid Record UUID.
+   * @param recordViewFormatter Formatter to use on the record view page. If invalid or not specified, no redirect to the record view page is performed.
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
   public getRecord(
     metadataUuid: string,
+    recordViewFormatter?: string,
     observe?: 'body',
     reportProgress?: boolean,
     options?: {
@@ -4603,6 +4150,7 @@ export class RecordsService extends BaseService {
   ): Observable<Blob>;
   public getRecord(
     metadataUuid: string,
+    recordViewFormatter?: string,
     observe?: 'response',
     reportProgress?: boolean,
     options?: {
@@ -4622,6 +4170,7 @@ export class RecordsService extends BaseService {
   ): Observable<HttpResponse<Blob>>;
   public getRecord(
     metadataUuid: string,
+    recordViewFormatter?: string,
     observe?: 'events',
     reportProgress?: boolean,
     options?: {
@@ -4641,6 +4190,7 @@ export class RecordsService extends BaseService {
   ): Observable<HttpEvent<Blob>>;
   public getRecord(
     metadataUuid: string,
+    recordViewFormatter?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
     options?: {
@@ -4663,6 +4213,13 @@ export class RecordsService extends BaseService {
         'Required parameter metadataUuid was null or undefined when calling getRecord.',
       );
     }
+
+    let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
+    localVarQueryParameters = this.addToHttpParams(
+      localVarQueryParameters,
+      <any>recordViewFormatter,
+      'recordViewFormatter',
+    );
 
     let localVarHeaders = this.defaultHeaders;
 
@@ -4691,6 +4248,7 @@ export class RecordsService extends BaseService {
     const { basePath, withCredentials } = this.configuration;
     return this.httpClient.request('get', `${basePath}${localVarPath}`, {
       context: localVarHttpContext,
+      params: localVarQueryParameters,
       responseType: 'blob',
       ...(withCredentials ? { withCredentials } : {}),
       headers: localVarHeaders,
@@ -4983,11 +4541,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public getRecordAsZip(
     metadataUuid: string,
@@ -4999,11 +4553,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public getRecordAsZip(
     metadataUuid: string,
@@ -5015,11 +4565,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public getRecordAsZip(
     metadataUuid: string,
@@ -5031,11 +4577,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -5109,127 +4651,6 @@ export class RecordsService extends BaseService {
   }
 
   /**
-   * Get a metadata record in PDF format
-   * @param formatterId Formatter type to use.
-   * @param metadataUuid Record UUID.
-   * @param language Optional language ISO 3 letters code to override HTTP Accept-language header.
-   * @param approved Download the approved version
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public getRecordFormattedAsPdfBy(
-    formatterId: string,
-    metadataUuid: string,
-    language?: string,
-    approved?: boolean,
-    observe?: 'body',
-    reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
-  ): Observable<any>;
-  public getRecordFormattedAsPdfBy(
-    formatterId: string,
-    metadataUuid: string,
-    language?: string,
-    approved?: boolean,
-    observe?: 'response',
-    reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
-  ): Observable<HttpResponse<any>>;
-  public getRecordFormattedAsPdfBy(
-    formatterId: string,
-    metadataUuid: string,
-    language?: string,
-    approved?: boolean,
-    observe?: 'events',
-    reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
-  ): Observable<HttpEvent<any>>;
-  public getRecordFormattedAsPdfBy(
-    formatterId: string,
-    metadataUuid: string,
-    language?: string,
-    approved?: boolean,
-    observe: any = 'body',
-    reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
-  ): Observable<any> {
-    if (formatterId === null || formatterId === undefined) {
-      throw new Error(
-        'Required parameter formatterId was null or undefined when calling getRecordFormattedAsPdfBy.',
-      );
-    }
-    if (metadataUuid === null || metadataUuid === undefined) {
-      throw new Error(
-        'Required parameter metadataUuid was null or undefined when calling getRecordFormattedAsPdfBy.',
-      );
-    }
-
-    let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
-    localVarQueryParameters = this.addToHttpParams(
-      localVarQueryParameters,
-      <any>language,
-      'language',
-    );
-    localVarQueryParameters = this.addToHttpParams(
-      localVarQueryParameters,
-      <any>approved,
-      'approved',
-    );
-
-    let localVarHeaders = this.defaultHeaders;
-
-    const localVarHttpHeaderAcceptSelected: string | undefined =
-      options?.httpHeaderAccept ?? this.configuration.selectHeaderAccept([]);
-    if (localVarHttpHeaderAcceptSelected !== undefined) {
-      localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-    }
-
-    const localVarHttpContext: HttpContext = options?.context ?? new HttpContext();
-
-    const localVarTransferCache: boolean = options?.transferCache ?? true;
-
-    let responseType_: 'text' | 'json' | 'blob' = 'json';
-    if (localVarHttpHeaderAcceptSelected) {
-      if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-        responseType_ = 'text';
-      } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-        responseType_ = 'json';
-      } else {
-        responseType_ = 'blob';
-      }
-    }
-
-    let localVarPath = `/records/${this.configuration.encodeParam({ name: 'metadataUuid', value: metadataUuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/formatters/${this.configuration.encodeParam({ name: 'formatterId', value: formatterId, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}.pdf`;
-    const { basePath, withCredentials } = this.configuration;
-    return this.httpClient.request<any>('get', `${basePath}${localVarPath}`, {
-      context: localVarHttpContext,
-      params: localVarQueryParameters,
-      responseType: <any>responseType_,
-      ...(withCredentials ? { withCredentials } : {}),
-      headers: localVarHeaders,
-      observe: observe,
-      transferCache: localVarTransferCache,
-      reportProgress: reportProgress,
-    });
-  }
-
-  /**
    * Get a formatted metadata record
    * @param formatterId Formatter type to use.
    * @param metadataUuid Record UUID.
@@ -5238,6 +4659,7 @@ export class RecordsService extends BaseService {
    * @param language Optional language ISO 3 letters code to override HTTP Accept-language header.
    * @param output
    * @param approved Download the approved version
+   * @param allRequestParameters Additional parameters for the formatter. Can be used to pass any key-value pairs.
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
@@ -5249,14 +4671,23 @@ export class RecordsService extends BaseService {
     language?: string,
     output?: 'txt' | 'html' | 'xml' | 'json' | 'jsonld' | 'pdf' | 'testpdf',
     approved?: boolean,
+    allRequestParameters?: { [key: string]: string },
     observe?: 'body',
     reportProgress?: boolean,
     options?: {
-      httpHeaderAccept?: undefined;
+      httpHeaderAccept?:
+        | 'application/json'
+        | 'application/pdf'
+        | 'application/rdf+xml'
+        | 'application/vnd.schemaorg.ld+json'
+        | 'application/xhtml+xml'
+        | 'application/xml'
+        | 'text/html'
+        | 'text/plain';
       context?: HttpContext;
       transferCache?: boolean;
     },
-  ): Observable<any>;
+  ): Observable<string>;
   public getRecordFormattedBy(
     formatterId: string,
     metadataUuid: string,
@@ -5265,14 +4696,23 @@ export class RecordsService extends BaseService {
     language?: string,
     output?: 'txt' | 'html' | 'xml' | 'json' | 'jsonld' | 'pdf' | 'testpdf',
     approved?: boolean,
+    allRequestParameters?: { [key: string]: string },
     observe?: 'response',
     reportProgress?: boolean,
     options?: {
-      httpHeaderAccept?: undefined;
+      httpHeaderAccept?:
+        | 'application/json'
+        | 'application/pdf'
+        | 'application/rdf+xml'
+        | 'application/vnd.schemaorg.ld+json'
+        | 'application/xhtml+xml'
+        | 'application/xml'
+        | 'text/html'
+        | 'text/plain';
       context?: HttpContext;
       transferCache?: boolean;
     },
-  ): Observable<HttpResponse<any>>;
+  ): Observable<HttpResponse<string>>;
   public getRecordFormattedBy(
     formatterId: string,
     metadataUuid: string,
@@ -5281,14 +4721,23 @@ export class RecordsService extends BaseService {
     language?: string,
     output?: 'txt' | 'html' | 'xml' | 'json' | 'jsonld' | 'pdf' | 'testpdf',
     approved?: boolean,
+    allRequestParameters?: { [key: string]: string },
     observe?: 'events',
     reportProgress?: boolean,
     options?: {
-      httpHeaderAccept?: undefined;
+      httpHeaderAccept?:
+        | 'application/json'
+        | 'application/pdf'
+        | 'application/rdf+xml'
+        | 'application/vnd.schemaorg.ld+json'
+        | 'application/xhtml+xml'
+        | 'application/xml'
+        | 'text/html'
+        | 'text/plain';
       context?: HttpContext;
       transferCache?: boolean;
     },
-  ): Observable<HttpEvent<any>>;
+  ): Observable<HttpEvent<string>>;
   public getRecordFormattedBy(
     formatterId: string,
     metadataUuid: string,
@@ -5297,10 +4746,19 @@ export class RecordsService extends BaseService {
     language?: string,
     output?: 'txt' | 'html' | 'xml' | 'json' | 'jsonld' | 'pdf' | 'testpdf',
     approved?: boolean,
+    allRequestParameters?: { [key: string]: string },
     observe: any = 'body',
     reportProgress: boolean = false,
     options?: {
-      httpHeaderAccept?: undefined;
+      httpHeaderAccept?:
+        | 'application/json'
+        | 'application/pdf'
+        | 'application/rdf+xml'
+        | 'application/vnd.schemaorg.ld+json'
+        | 'application/xhtml+xml'
+        | 'application/xml'
+        | 'text/html'
+        | 'text/plain';
       context?: HttpContext;
       transferCache?: boolean;
     },
@@ -5330,11 +4788,26 @@ export class RecordsService extends BaseService {
       <any>approved,
       'approved',
     );
+    localVarQueryParameters = this.addToHttpParams(
+      localVarQueryParameters,
+      <any>allRequestParameters,
+      'allRequestParameters',
+    );
 
     let localVarHeaders = this.defaultHeaders;
 
     const localVarHttpHeaderAcceptSelected: string | undefined =
-      options?.httpHeaderAccept ?? this.configuration.selectHeaderAccept([]);
+      options?.httpHeaderAccept ??
+      this.configuration.selectHeaderAccept([
+        'application/json',
+        'application/pdf',
+        'application/rdf+xml',
+        'application/vnd.schemaorg.ld+json',
+        'application/xhtml+xml',
+        'application/xml',
+        'text/html',
+        'text/plain',
+      ]);
     if (localVarHttpHeaderAcceptSelected !== undefined) {
       localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
     }
@@ -5356,7 +4829,7 @@ export class RecordsService extends BaseService {
 
     let localVarPath = `/records/${this.configuration.encodeParam({ name: 'metadataUuid', value: metadataUuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/formatters/${this.configuration.encodeParam({ name: 'formatterId', value: formatterId, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}`;
     const { basePath, withCredentials } = this.configuration;
-    return this.httpClient.request<any>('get', `${basePath}${localVarPath}`, {
+    return this.httpClient.request<string>('get', `${basePath}${localVarPath}`, {
       context: localVarHttpContext,
       params: localVarQueryParameters,
       responseType: <any>responseType_,
@@ -5467,41 +4940,25 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public getRecordPermalink(
     metadataUuid: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public getRecordPermalink(
     metadataUuid: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public getRecordPermalink(
     metadataUuid: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -5555,41 +5012,25 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public getRecordPopularity(
     metadataUuid: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public getRecordPopularity(
     metadataUuid: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public getRecordPopularity(
     metadataUuid: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -6214,11 +5655,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public getReportDataDownloads(
     dateFrom: string,
@@ -6226,11 +5663,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public getReportDataDownloads(
     dateFrom: string,
@@ -6238,11 +5671,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public getReportDataDownloads(
     dateFrom: string,
@@ -6250,11 +5679,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (dateFrom === null || dateFrom === undefined) {
       throw new Error(
@@ -6335,11 +5760,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public getReportDataUploads(
     dateFrom: string,
@@ -6347,11 +5768,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public getReportDataUploads(
     dateFrom: string,
@@ -6359,11 +5776,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public getReportDataUploads(
     dateFrom: string,
@@ -6371,11 +5784,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (dateFrom === null || dateFrom === undefined) {
       throw new Error(
@@ -6456,11 +5865,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public getReportInternalMetadata(
     dateFrom: string,
@@ -6468,11 +5873,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public getReportInternalMetadata(
     dateFrom: string,
@@ -6480,11 +5881,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public getReportInternalMetadata(
     dateFrom: string,
@@ -6492,11 +5889,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (dateFrom === null || dateFrom === undefined) {
       throw new Error(
@@ -6577,11 +5970,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public getReportUpdatedMetadata(
     dateFrom: string,
@@ -6589,11 +5978,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public getReportUpdatedMetadata(
     dateFrom: string,
@@ -6601,11 +5986,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public getReportUpdatedMetadata(
     dateFrom: string,
@@ -6613,11 +5994,7 @@ export class RecordsService extends BaseService {
     groups?: Array<number>,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (dateFrom === null || dateFrom === undefined) {
       throw new Error(
@@ -6700,11 +6077,7 @@ export class RecordsService extends BaseService {
     size?: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<Blob>;
   public getResource(
     metadataUuid: string,
@@ -6713,11 +6086,7 @@ export class RecordsService extends BaseService {
     size?: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<Blob>>;
   public getResource(
     metadataUuid: string,
@@ -6726,11 +6095,7 @@ export class RecordsService extends BaseService {
     size?: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<Blob>>;
   public getResource(
     metadataUuid: string,
@@ -6739,11 +6104,7 @@ export class RecordsService extends BaseService {
     size?: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -6776,7 +6137,7 @@ export class RecordsService extends BaseService {
 
     const localVarTransferCache: boolean = options?.transferCache ?? true;
 
-    let localVarPath = `/records/${this.configuration.encodeParam({ name: 'metadataUuid', value: metadataUuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/attachments/${this.configuration.encodeParam({ name: 'resourceId', value: resourceId, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/**`;
+    let localVarPath = `/records/${this.configuration.encodeParam({ name: 'metadataUuid', value: metadataUuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/attachments/${this.configuration.encodeParam({ name: 'resourceId', value: resourceId, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}`;
     const { basePath, withCredentials } = this.configuration;
     return this.httpClient.request('get', `${basePath}${localVarPath}`, {
       context: localVarHttpContext,
@@ -7479,41 +6840,25 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public increaseRecordPopularity(
     metadataUuid: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public increaseRecordPopularity(
     metadataUuid: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public increaseRecordPopularity(
     metadataUuid: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -8292,11 +7637,10 @@ export class RecordsService extends BaseService {
   }
 
   /**
-   * Update the metadata resource visibility and/or the resource name
+   * Update the metadata resource visibility
    * @param metadataUuid The metadata UUID
    * @param resourceId The resource identifier (ie. filename)
    * @param visibility The visibility
-   * @param newResourceName The visibility
    * @param approved Use approved version or not
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
@@ -8305,7 +7649,6 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     resourceId: string,
     visibility: 'PUBLIC' | 'PRIVATE',
-    newResourceName: string,
     approved?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
@@ -8319,7 +7662,6 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     resourceId: string,
     visibility: 'PUBLIC' | 'PRIVATE',
-    newResourceName: string,
     approved?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
@@ -8333,7 +7675,6 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     resourceId: string,
     visibility: 'PUBLIC' | 'PRIVATE',
-    newResourceName: string,
     approved?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
@@ -8347,7 +7688,6 @@ export class RecordsService extends BaseService {
     metadataUuid: string,
     resourceId: string,
     visibility: 'PUBLIC' | 'PRIVATE',
-    newResourceName: string,
     approved?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
@@ -8372,22 +7712,12 @@ export class RecordsService extends BaseService {
         'Required parameter visibility was null or undefined when calling patchResource.',
       );
     }
-    if (newResourceName === null || newResourceName === undefined) {
-      throw new Error(
-        'Required parameter newResourceName was null or undefined when calling patchResource.',
-      );
-    }
 
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     localVarQueryParameters = this.addToHttpParams(
       localVarQueryParameters,
       <any>visibility,
       'visibility',
-    );
-    localVarQueryParameters = this.addToHttpParams(
-      localVarQueryParameters,
-      <any>newResourceName,
-      'newResourceName',
     );
     localVarQueryParameters = this.addToHttpParams(
       localVarQueryParameters,
@@ -8418,7 +7748,7 @@ export class RecordsService extends BaseService {
       }
     }
 
-    let localVarPath = `/records/${this.configuration.encodeParam({ name: 'metadataUuid', value: metadataUuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/attachments/${this.configuration.encodeParam({ name: 'resourceId', value: resourceId, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/**`;
+    let localVarPath = `/records/${this.configuration.encodeParam({ name: 'metadataUuid', value: metadataUuid, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}/attachments/${this.configuration.encodeParam({ name: 'resourceId', value: resourceId, in: 'path', style: 'simple', explode: false, dataType: 'string', dataFormat: undefined })}`;
     const { basePath, withCredentials } = this.configuration;
     return this.httpClient.request<MetadataResource>('patch', `${basePath}${localVarPath}`, {
       context: localVarHttpContext,
@@ -8674,44 +8004,28 @@ export class RecordsService extends BaseService {
     process: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public processRecordPreview(
     metadataUuid: string,
     process: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public processRecordPreview(
     metadataUuid: string,
     process: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public processRecordPreview(
     metadataUuid: string,
     process: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -8769,56 +8083,35 @@ export class RecordsService extends BaseService {
    */
   public publish(
     metadataUuid: string,
-    publicationType: string,
+    publicationType?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public publish(
     metadataUuid: string,
-    publicationType: string,
+    publicationType?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public publish(
     metadataUuid: string,
-    publicationType: string,
+    publicationType?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public publish(
     metadataUuid: string,
-    publicationType: string,
+    publicationType?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
         'Required parameter metadataUuid was null or undefined when calling publish.',
-      );
-    }
-    if (publicationType === null || publicationType === undefined) {
-      throw new Error(
-        'Required parameter publicationType was null or undefined when calling publish.',
       );
     }
 
@@ -8869,66 +8162,44 @@ export class RecordsService extends BaseService {
   /**
    * Publish one or more records
    * See record sharing for more details.
-   * @param publicationType Publication type
    * @param uuids Record UUIDs. If null current selection is used.
    * @param bucket Selection bucket name
+   * @param publicationType Publication type
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
   public publishMultipleRecords(
-    publicationType: string,
     uuids?: Array<string>,
     bucket?: string,
+    publicationType?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<MetadataProcessingReport>;
   public publishMultipleRecords(
-    publicationType: string,
     uuids?: Array<string>,
     bucket?: string,
+    publicationType?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<MetadataProcessingReport>>;
   public publishMultipleRecords(
-    publicationType: string,
     uuids?: Array<string>,
     bucket?: string,
+    publicationType?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<MetadataProcessingReport>>;
   public publishMultipleRecords(
-    publicationType: string,
     uuids?: Array<string>,
     bucket?: string,
+    publicationType?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
-    if (publicationType === null || publicationType === undefined) {
-      throw new Error(
-        'Required parameter publicationType was null or undefined when calling publishMultipleRecords.',
-      );
-    }
-
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     if (uuids) {
       uuids.forEach((element) => {
@@ -9260,44 +8531,28 @@ export class RecordsService extends BaseService {
     body: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<number>;
   public rateRecord(
     metadataUuid: string,
     body: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<number>>;
   public rateRecord(
     metadataUuid: string,
     body: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<number>>;
   public rateRecord(
     metadataUuid: string,
     body: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -9369,11 +8624,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public reorderElement(
     metadataUuid: string,
@@ -9382,11 +8633,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public reorderElement(
     metadataUuid: string,
@@ -9395,11 +8642,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public reorderElement(
     metadataUuid: string,
@@ -9408,11 +8651,7 @@ export class RecordsService extends BaseService {
     displayAttributes?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -9489,11 +8728,7 @@ export class RecordsService extends BaseService {
     changeDate: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public restoreAtStatusSave(
     metadataUuid: string,
@@ -9502,11 +8737,7 @@ export class RecordsService extends BaseService {
     changeDate: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public restoreAtStatusSave(
     metadataUuid: string,
@@ -9515,11 +8746,7 @@ export class RecordsService extends BaseService {
     changeDate: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public restoreAtStatusSave(
     metadataUuid: string,
@@ -9528,11 +8755,7 @@ export class RecordsService extends BaseService {
     changeDate: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -9618,11 +8841,7 @@ export class RecordsService extends BaseService {
     data?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public saveEdits(
     metadataUuid: string,
@@ -9636,11 +8855,7 @@ export class RecordsService extends BaseService {
     data?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public saveEdits(
     metadataUuid: string,
@@ -9654,11 +8869,7 @@ export class RecordsService extends BaseService {
     data?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public saveEdits(
     metadataUuid: string,
@@ -9672,11 +8883,7 @@ export class RecordsService extends BaseService {
     data?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -9758,11 +8965,7 @@ export class RecordsService extends BaseService {
     rotationAngle?: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<MetadataResource>;
   public saveThumbnail(
     metadataUuid: string,
@@ -9770,11 +8973,7 @@ export class RecordsService extends BaseService {
     rotationAngle?: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<MetadataResource>>;
   public saveThumbnail(
     metadataUuid: string,
@@ -9782,11 +8981,7 @@ export class RecordsService extends BaseService {
     rotationAngle?: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<MetadataResource>>;
   public saveThumbnail(
     metadataUuid: string,
@@ -9794,11 +8989,7 @@ export class RecordsService extends BaseService {
     rotationAngle?: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -9878,11 +9069,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<MetadataProcessingReport>;
   public setGroupAndOwner(
     groupIdentifier: number,
@@ -9892,11 +9079,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<MetadataProcessingReport>>;
   public setGroupAndOwner(
     groupIdentifier: number,
@@ -9906,11 +9089,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<MetadataProcessingReport>>;
   public setGroupAndOwner(
     groupIdentifier: number,
@@ -9920,11 +9099,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (groupIdentifier === null || groupIdentifier === undefined) {
       throw new Error(
@@ -10014,44 +9189,28 @@ export class RecordsService extends BaseService {
     body: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public setRecordGroup(
     metadataUuid: string,
     body: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public setRecordGroup(
     metadataUuid: string,
     body: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public setRecordGroup(
     metadataUuid: string,
     body: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -10123,11 +9282,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<MetadataProcessingReport>;
   public setRecordOwnership(
     metadataUuid: string,
@@ -10136,11 +9291,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<MetadataProcessingReport>>;
   public setRecordOwnership(
     metadataUuid: string,
@@ -10149,11 +9300,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<MetadataProcessingReport>>;
   public setRecordOwnership(
     metadataUuid: string,
@@ -10162,11 +9309,7 @@ export class RecordsService extends BaseService {
     approved?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -10250,44 +9393,28 @@ export class RecordsService extends BaseService {
     metadataStatusParameter: MetadataStatusParameter,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<{ [key: string]: string }>;
   public setStatus(
     metadataUuid: string,
     metadataStatusParameter: MetadataStatusParameter,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<{ [key: string]: string }>>;
   public setStatus(
     metadataUuid: string,
     metadataStatusParameter: MetadataStatusParameter,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<{ [key: string]: string }>>;
   public setStatus(
     metadataUuid: string,
     metadataStatusParameter: MetadataStatusParameter,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -10358,44 +9485,28 @@ export class RecordsService extends BaseService {
     sharingParameter: SharingParameter,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public share(
     metadataUuid: string,
     sharingParameter: SharingParameter,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public share(
     metadataUuid: string,
     sharingParameter: SharingParameter,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public share(
     metadataUuid: string,
     sharingParameter: SharingParameter,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error('Required parameter metadataUuid was null or undefined when calling share.');
@@ -10466,11 +9577,7 @@ export class RecordsService extends BaseService {
     bucket?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<MetadataProcessingReport>;
   public shareMultipleRecords(
     sharingParameter: SharingParameter,
@@ -10478,11 +9585,7 @@ export class RecordsService extends BaseService {
     bucket?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<MetadataProcessingReport>>;
   public shareMultipleRecords(
     sharingParameter: SharingParameter,
@@ -10490,11 +9593,7 @@ export class RecordsService extends BaseService {
     bucket?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<MetadataProcessingReport>>;
   public shareMultipleRecords(
     sharingParameter: SharingParameter,
@@ -10502,11 +9601,7 @@ export class RecordsService extends BaseService {
     bucket?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (sharingParameter === null || sharingParameter === undefined) {
       throw new Error(
@@ -10823,11 +9918,7 @@ export class RecordsService extends BaseService {
     withAttributes?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public startEditing(
     metadataUuid: string,
@@ -10835,11 +9926,7 @@ export class RecordsService extends BaseService {
     withAttributes?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public startEditing(
     metadataUuid: string,
@@ -10847,11 +9934,7 @@ export class RecordsService extends BaseService {
     withAttributes?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public startEditing(
     metadataUuid: string,
@@ -10859,11 +9942,7 @@ export class RecordsService extends BaseService {
     withAttributes?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -10930,41 +10009,25 @@ export class RecordsService extends BaseService {
     metadataBatchSubmitParameter: MetadataBatchSubmitParameter,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<MetadataProcessingReport>;
   public submit(
     metadataBatchSubmitParameter: MetadataBatchSubmitParameter,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<MetadataProcessingReport>>;
   public submit(
     metadataBatchSubmitParameter: MetadataBatchSubmitParameter,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<MetadataProcessingReport>>;
   public submit(
     metadataBatchSubmitParameter: MetadataBatchSubmitParameter,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataBatchSubmitParameter === null || metadataBatchSubmitParameter === undefined) {
       throw new Error(
@@ -11031,11 +10094,7 @@ export class RecordsService extends BaseService {
     clear?: boolean,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public tagRecord(
     metadataUuid: string,
@@ -11043,11 +10102,7 @@ export class RecordsService extends BaseService {
     clear?: boolean,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public tagRecord(
     metadataUuid: string,
@@ -11055,11 +10110,7 @@ export class RecordsService extends BaseService {
     clear?: boolean,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public tagRecord(
     metadataUuid: string,
@@ -11067,11 +10118,7 @@ export class RecordsService extends BaseService {
     clear?: boolean,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -11344,56 +10391,35 @@ export class RecordsService extends BaseService {
    */
   public unpublish(
     metadataUuid: string,
-    publicationType: string,
+    publicationType?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public unpublish(
     metadataUuid: string,
-    publicationType: string,
+    publicationType?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public unpublish(
     metadataUuid: string,
-    publicationType: string,
+    publicationType?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public unpublish(
     metadataUuid: string,
-    publicationType: string,
+    publicationType?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
         'Required parameter metadataUuid was null or undefined when calling unpublish.',
-      );
-    }
-    if (publicationType === null || publicationType === undefined) {
-      throw new Error(
-        'Required parameter publicationType was null or undefined when calling unpublish.',
       );
     }
 
@@ -11444,66 +10470,44 @@ export class RecordsService extends BaseService {
   /**
    * Un-publish one or more records
    * See record sharing for more details.
-   * @param publicationType Publication type
    * @param uuids Record UUIDs. If null current selection is used.
    * @param bucket Selection bucket name
+   * @param publicationType Publication type
    * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
    * @param reportProgress flag to report request and response progress.
    */
   public unpublishMultipleRecords(
-    publicationType: string,
     uuids?: Array<string>,
     bucket?: string,
+    publicationType?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<MetadataProcessingReport>;
   public unpublishMultipleRecords(
-    publicationType: string,
     uuids?: Array<string>,
     bucket?: string,
+    publicationType?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<MetadataProcessingReport>>;
   public unpublishMultipleRecords(
-    publicationType: string,
     uuids?: Array<string>,
     bucket?: string,
+    publicationType?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<MetadataProcessingReport>>;
   public unpublishMultipleRecords(
-    publicationType: string,
     uuids?: Array<string>,
     bucket?: string,
+    publicationType?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: '*/*';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: '*/*'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
-    if (publicationType === null || publicationType === undefined) {
-      throw new Error(
-        'Required parameter publicationType was null or undefined when calling unpublishMultipleRecords.',
-      );
-    }
-
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     if (uuids) {
       uuids.forEach((element) => {
@@ -11570,44 +10574,28 @@ export class RecordsService extends BaseService {
     doiServerId: number,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public unregisterDoi(
     metadataUuid: string,
     doiServerId: number,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public unregisterDoi(
     metadataUuid: string,
     doiServerId: number,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public unregisterDoi(
     metadataUuid: string,
     doiServerId: number,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -11774,11 +10762,7 @@ export class RecordsService extends BaseService {
     mode?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public validateRecordForInspire(
     metadataUuid: string,
@@ -11786,11 +10770,7 @@ export class RecordsService extends BaseService {
     mode?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public validateRecordForInspire(
     metadataUuid: string,
@@ -11798,11 +10778,7 @@ export class RecordsService extends BaseService {
     mode?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public validateRecordForInspire(
     metadataUuid: string,
@@ -11810,11 +10786,7 @@ export class RecordsService extends BaseService {
     mode?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/plain';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/plain'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (metadataUuid === null || metadataUuid === undefined) {
       throw new Error(
@@ -11892,7 +10864,7 @@ export class RecordsService extends BaseService {
       context?: HttpContext;
       transferCache?: boolean;
     },
-  ): Observable<SimpleMetadataProcessingReport>;
+  ): Observable<MetadataValidationProcessingReport>;
   public validateRecords(
     uuids?: Array<string>,
     approved?: boolean,
@@ -11904,7 +10876,7 @@ export class RecordsService extends BaseService {
       context?: HttpContext;
       transferCache?: boolean;
     },
-  ): Observable<HttpResponse<SimpleMetadataProcessingReport>>;
+  ): Observable<HttpResponse<MetadataValidationProcessingReport>>;
   public validateRecords(
     uuids?: Array<string>,
     approved?: boolean,
@@ -11916,7 +10888,7 @@ export class RecordsService extends BaseService {
       context?: HttpContext;
       transferCache?: boolean;
     },
-  ): Observable<HttpEvent<SimpleMetadataProcessingReport>>;
+  ): Observable<HttpEvent<MetadataValidationProcessingReport>>;
   public validateRecords(
     uuids?: Array<string>,
     approved?: boolean,
@@ -11971,7 +10943,7 @@ export class RecordsService extends BaseService {
 
     let localVarPath = `/records/validate`;
     const { basePath, withCredentials } = this.configuration;
-    return this.httpClient.request<SimpleMetadataProcessingReport>(
+    return this.httpClient.request<MetadataValidationProcessingReport>(
       'put',
       `${basePath}${localVarPath}`,
       {

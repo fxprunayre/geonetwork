@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -25,7 +25,9 @@ export interface Group {
   name?: string;
   referrer?: number;
   reserved?: boolean;
+  type?: Group.TypeEnum;
   website?: string;
+  workspace?: boolean;
 }
 export namespace Group {
   export const MinimumProfileForPrivilegesEnum = {
@@ -39,4 +41,10 @@ export namespace Group {
   } as const;
   export type MinimumProfileForPrivilegesEnum =
     (typeof MinimumProfileForPrivilegesEnum)[keyof typeof MinimumProfileForPrivilegesEnum];
+  export const TypeEnum = {
+    Workspace: 'Workspace',
+    RecordPrivilege: 'RecordPrivilege',
+    SystemPrivilege: 'SystemPrivilege',
+  } as const;
+  export type TypeEnum = (typeof TypeEnum)[keyof typeof TypeEnum];
 }

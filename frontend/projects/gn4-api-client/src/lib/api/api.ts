@@ -6,8 +6,6 @@ export * from './customstyle.service';
 import { CustomstyleService } from './customstyle.service';
 export * from './doiservers.service';
 import { DoiserversService } from './doiservers.service';
-export * from './eealayoutupdate.service';
-import { EealayoutupdateService } from './eealayoutupdate.service';
 export * from './formatters.service';
 import { FormattersService } from './formatters.service';
 export * from './groups.service';
@@ -77,7 +75,6 @@ export const APIS = [
   AuditableService,
   CustomstyleService,
   DoiserversService,
-  EealayoutupdateService,
   FormattersService,
   GroupsService,
   HarvestersService,

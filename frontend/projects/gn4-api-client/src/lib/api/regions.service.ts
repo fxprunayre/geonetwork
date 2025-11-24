@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -71,11 +71,7 @@ export class RegionsService extends BaseService {
     strokeColor?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<Array<string>>;
   public getGeomAsImage(
     mapsrs?: string,
@@ -89,11 +85,7 @@ export class RegionsService extends BaseService {
     strokeColor?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<Array<string>>>;
   public getGeomAsImage(
     mapsrs?: string,
@@ -107,11 +99,7 @@ export class RegionsService extends BaseService {
     strokeColor?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<Array<string>>>;
   public getGeomAsImage(
     mapsrs?: string,
@@ -125,11 +113,7 @@ export class RegionsService extends BaseService {
     strokeColor?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'image/png';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'image/png'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     localVarQueryParameters = this.addToHttpParams(localVarQueryParameters, <any>mapsrs, 'mapsrs');

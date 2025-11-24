@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -59,41 +59,25 @@ export class RegistriesService extends BaseService {
     thesaurus: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public deleteThesaurus(
     thesaurus: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public deleteThesaurus(
     thesaurus: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public deleteThesaurus(
     thesaurus: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (thesaurus === null || thesaurus === undefined) {
       throw new Error(
@@ -443,11 +427,7 @@ export class RegistriesService extends BaseService {
     schema?: string,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public getEntry(
     uuid: string,
@@ -457,11 +437,7 @@ export class RegistriesService extends BaseService {
     schema?: string,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public getEntry(
     uuid: string,
@@ -471,11 +447,7 @@ export class RegistriesService extends BaseService {
     schema?: string,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public getEntry(
     uuid: string,
@@ -485,11 +457,7 @@ export class RegistriesService extends BaseService {
     schema?: string,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (uuid === null || uuid === undefined) {
       throw new Error('Required parameter uuid was null or undefined when calling getEntry.');
@@ -978,11 +946,7 @@ export class RegistriesService extends BaseService {
     uploadThesaurusRequest?: UploadThesaurusRequest,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public importCsvAsThesaurus(
     type?: 'external' | 'local',
@@ -1002,11 +966,7 @@ export class RegistriesService extends BaseService {
     uploadThesaurusRequest?: UploadThesaurusRequest,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public importCsvAsThesaurus(
     type?: 'external' | 'local',
@@ -1026,11 +986,7 @@ export class RegistriesService extends BaseService {
     uploadThesaurusRequest?: UploadThesaurusRequest,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public importCsvAsThesaurus(
     type?: 'external' | 'local',
@@ -1050,11 +1006,7 @@ export class RegistriesService extends BaseService {
     uploadThesaurusRequest?: UploadThesaurusRequest,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     localVarQueryParameters = this.addToHttpParams(localVarQueryParameters, <any>type, 'type');
@@ -2085,44 +2037,28 @@ export class RegistriesService extends BaseService {
     thesaurusInfo: ThesaurusInfo,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any>;
   public updateThesaurus(
     thesaurus: string,
     thesaurusInfo: ThesaurusInfo,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<any>>;
   public updateThesaurus(
     thesaurus: string,
     thesaurusInfo: ThesaurusInfo,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<any>>;
   public updateThesaurus(
     thesaurus: string,
     thesaurusInfo: ThesaurusInfo,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: undefined;
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: undefined; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     if (thesaurus === null || thesaurus === undefined) {
       throw new Error(
@@ -2197,11 +2133,7 @@ export class RegistriesService extends BaseService {
     uploadThesaurusRequest?: UploadThesaurusRequest,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/xml';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/xml'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public uploadThesaurus(
     type?: 'external' | 'local',
@@ -2210,11 +2142,7 @@ export class RegistriesService extends BaseService {
     uploadThesaurusRequest?: UploadThesaurusRequest,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/xml';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/xml'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public uploadThesaurus(
     type?: 'external' | 'local',
@@ -2223,11 +2151,7 @@ export class RegistriesService extends BaseService {
     uploadThesaurusRequest?: UploadThesaurusRequest,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/xml';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/xml'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public uploadThesaurus(
     type?: 'external' | 'local',
@@ -2236,11 +2160,7 @@ export class RegistriesService extends BaseService {
     uploadThesaurusRequest?: UploadThesaurusRequest,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/xml';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/xml'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     localVarQueryParameters = this.addToHttpParams(localVarQueryParameters, <any>type, 'type');
@@ -2322,11 +2242,7 @@ export class RegistriesService extends BaseService {
     thesaurusInfo?: ThesaurusInfo,
     observe?: 'body',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/xml';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/xml'; context?: HttpContext; transferCache?: boolean },
   ): Observable<string>;
   public uploadThesaurusFromUrl(
     url?: string,
@@ -2339,11 +2255,7 @@ export class RegistriesService extends BaseService {
     thesaurusInfo?: ThesaurusInfo,
     observe?: 'response',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/xml';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/xml'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpResponse<string>>;
   public uploadThesaurusFromUrl(
     url?: string,
@@ -2356,11 +2268,7 @@ export class RegistriesService extends BaseService {
     thesaurusInfo?: ThesaurusInfo,
     observe?: 'events',
     reportProgress?: boolean,
-    options?: {
-      httpHeaderAccept?: 'text/xml';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/xml'; context?: HttpContext; transferCache?: boolean },
   ): Observable<HttpEvent<string>>;
   public uploadThesaurusFromUrl(
     url?: string,
@@ -2373,11 +2281,7 @@ export class RegistriesService extends BaseService {
     thesaurusInfo?: ThesaurusInfo,
     observe: any = 'body',
     reportProgress: boolean = false,
-    options?: {
-      httpHeaderAccept?: 'text/xml';
-      context?: HttpContext;
-      transferCache?: boolean;
-    },
+    options?: { httpHeaderAccept?: 'text/xml'; context?: HttpContext; transferCache?: boolean },
   ): Observable<any> {
     let localVarQueryParameters = new HttpParams({ encoder: this.encoder });
     localVarQueryParameters = this.addToHttpParams(localVarQueryParameters, <any>url, 'url');

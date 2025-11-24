@@ -2,7 +2,7 @@
 
 This is the description of the GeoNetwork OpenAPI. Use this API to manage your catalog.
 
-The version of the OpenAPI document: 4.4.9
+The version of the OpenAPI document: 4.4.10
 
 ## Building
 

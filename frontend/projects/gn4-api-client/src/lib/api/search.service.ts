@@ -1,5 +1,5 @@
 /**
- * GeoNetwork 4.4.9 OpenAPI Documentation
+ * GeoNetwork 4.4.10 OpenAPI Documentation
  *
  * Contact: geonetwork-users@lists.sourceforge.net
  *
@@ -29,6 +29,7 @@ import { RelatedItemType } from '../model/relatedItemType';
 import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
 import { Configuration } from '../configuration';
 import { BaseService } from '../api.base.service';
+
 import { IndexRecord, elasticsearch } from 'gn-api-client';
 
 @Injectable({
@@ -185,10 +186,19 @@ export class SearchService extends BaseService {
       context?: HttpContext;
       transferCache?: boolean;
     },
-  ): Observable<
-    elasticsearch.SearchResponse<IndexRecord, Record<string, elasticsearch.AggregationsAggregate>>
-  >;
-  // public search(body: string, bucket?: string, relatedType?: Array<RelatedItemType>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<elasticsearch.SearchResponse<IndexRecord>>>;
+  ): Observable<elasticsearch.SearchResponse<IndexRecord>>;
+  public search(
+    body: elasticsearch.SearchRequest,
+    bucket?: string,
+    relatedType?: Array<RelatedItemType>,
+    observe?: 'response',
+    reportProgress?: boolean,
+    options?: {
+      httpHeaderAccept?: 'application/json';
+      context?: HttpContext;
+      transferCache?: boolean;
+    },
+  ): Observable<HttpResponse<string>>;
   public search(
     body: elasticsearch.SearchRequest,
     bucket?: string,
