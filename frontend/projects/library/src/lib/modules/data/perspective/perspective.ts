@@ -11,8 +11,7 @@ import {
 } from '@angular/core';
 import perspective from '@perspective-dev/client';
 import perspective_viewer from '@perspective-dev/viewer';
-import { Datasource } from '../datasource-select/datasource-select';
-import { DuckDbService } from '../duck-db.service';
+import { Datasource, DuckDbService } from '../duck-db.service';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidExpand } from '@ng-icons/font-awesome/solid';
 import { Button, ButtonIcon } from 'primeng/button';

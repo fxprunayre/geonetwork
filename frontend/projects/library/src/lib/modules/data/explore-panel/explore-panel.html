@@ -1,0 +1,15 @@
+@if (datasources().length > 0) {
+  <p-fieldset>
+    <ng-template #header>
+      <div class="flex items-center gap-2 px-2">
+        <ng-icon name="faSolidDatabase" />
+        Available Datasources
+      </div>
+    </ng-template>
+    <app-datasource-select [datasources]="datasources()" [(datasource)]="datasource" />
+  </p-fieldset>
+
+  @if (datasource()) {
+    <app-perspective [datasource]="datasource()" />
+  }
+}

@@ -16,8 +16,9 @@ import {
   faSolidCircleExclamation,
   faSolidDownload,
   faSolidShareNodes,
+  faSolidDatabase,
 } from '@ng-icons/font-awesome/solid';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 import { RecordField } from '../record-field/record-field';
@@ -34,17 +35,18 @@ import { Chip } from 'primeng/chip';
 import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs';
-import { DataExplorer } from '../../data/data-explorer/data-explorer';
 import { RecordFieldDates } from '../record-field-dates/record-field-dates';
 import { AssociatedPanel } from '../associated/associated-panel/associated-panel';
 import { Perspective } from '../../data/perspective/perspective';
-import { Datasource, DatasourceSelect } from '../../data/datasource-select/datasource-select';
-import { RadioButton } from 'primeng/radiobutton';
+import { DatasourceSelect } from '../../data/datasource-select/datasource-select';
 import { FormsModule } from '@angular/forms';
 import { NgTemplateOutlet, JsonPipe, AsyncPipe } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { Card } from 'primeng/card';
 import { CitationComponent } from '../citation-component/citation.component';
+import { Fieldset } from 'primeng/fieldset';
+import { Datasource } from '../../data/duck-db.service';
+import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 
 @Component({
   selector: 'app-record-view',
@@ -71,11 +73,9 @@ import { CitationComponent } from '../citation-component/citation.component';
     Chip,
     AssociatedPanel,
     DataModelPanel,
-    DataExplorer,
     RecordFieldDates,
     Perspective,
     DatasourceSelect,
-    RadioButton,
     FormsModule,
     NgTemplateOutlet,
     JsonPipe,
@@ -83,6 +83,9 @@ import { CitationComponent } from '../citation-component/citation.component';
     AccordionModule,
     Card,
     CitationComponent,
+    NgIcon,
+    Fieldset,
+    ExplorePanel,
   ],
   viewProviders: [
     provideIcons({
@@ -90,6 +93,7 @@ import { CitationComponent } from '../citation-component/citation.component';
       faSolidDownload,
       faSolidShareNodes,
       faSolidCircleExclamation,
+      faSolidDatabase,
     }),
   ],
 })
@@ -111,9 +115,6 @@ export class RecordViewComponent implements AfterViewInit {
   searchService = inject(SearchService);
   scroller = inject(ViewportScroller);
   route = inject(ActivatedRoute);
-
-  datasource = signal<Datasource | undefined>(undefined);
-  exploreMode = signal<'perspective' | 'duckdb'>('perspective');
 
   constructor() {
     effect(() => {
