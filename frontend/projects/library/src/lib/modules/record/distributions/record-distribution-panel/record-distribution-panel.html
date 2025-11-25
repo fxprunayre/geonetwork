@@ -30,8 +30,13 @@
                   styleClass="block w-full"
                   (click)="addWmsLayers([link])"
                   [label]="'Add to map'"
-                >
-                </p-button>
+                />
+              } @else if (isExplorable(link)) {
+                <p-button
+                  styleClass="block w-full"
+                  (click)="exploreData(link)"
+                  [label]="'Explore data'"
+                />
               }
             </div>
           </div>
