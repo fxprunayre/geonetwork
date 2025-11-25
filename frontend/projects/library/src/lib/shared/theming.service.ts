@@ -16,4 +16,8 @@ export class ThemingService {
 
     return colorMap;
   }
+
+  updateCssVariable(variableName: string, cssValue: string): void {
+    document.documentElement.style.setProperty(variableName, cssValue);
+  }
 }
