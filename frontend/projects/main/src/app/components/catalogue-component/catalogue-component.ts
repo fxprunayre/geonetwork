@@ -1,6 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { SidePanel } from '../side-panel/side-panel';
-import { ResultViewComponent, SearchBase, SearchInput, SortResults } from 'gn-library';
+import {
+  ResultViewComponent,
+  SearchBase,
+  SearchInput,
+  SortResults,
+  SearchWelcomeTextPipe,
+} from 'gn-library';
 import { ResultHeader } from '../result-header/result-header';
 import { Drawer } from 'primeng/drawer';
 import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
@@ -29,6 +35,7 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     FormsModule,
     SortResults,
     TranslatePipe,
+    SearchWelcomeTextPipe,
   ],
   standalone: true,
   templateUrl: './catalogue-component.html',

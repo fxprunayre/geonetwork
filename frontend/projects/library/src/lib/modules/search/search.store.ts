@@ -129,7 +129,6 @@ export const SearchStore = signalStore(
             this.subscribeToRouteChange();
           }
         },
-
         search: rxMethod<SearchFilterParameters>(
           pipe(
             debounceTime(300),
@@ -141,7 +140,6 @@ export const SearchStore = signalStore(
                 pageSize: store.pageSize(),
                 results: [],
               });
-
               return searchService
                 .search({
                   ...searchFilterParameters,

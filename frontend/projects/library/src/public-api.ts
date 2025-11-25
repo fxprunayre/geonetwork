@@ -40,3 +40,4 @@ export * from './lib/shared/widgets/color-picker/color-picker';
 export * from './lib/shared/widgets/theme-designer/theme-designer';
 export * from './lib/shared/translate.service.mock.spec';
 export * from './lib/shared/theming.service';
+export * from './lib/shared/history.service';

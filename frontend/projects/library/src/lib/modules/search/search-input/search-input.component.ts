@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   inject,
   input,
   output,
@@ -75,6 +76,13 @@ export class SearchInput extends SearchBase {
   items = signal<IndexRecord[]>([]);
   value: any;
 
+  constructor() {
+    super();
+    effect(() => {
+      this.queryString = this.search.searchQuery() || '';
+    });
+  }
+
   async onSearchWithText(event: AutoCompleteCompleteEvent) {
     if (!this.autocompleteEnabled()) return;
 
@@ -114,7 +122,6 @@ export class SearchInput extends SearchBase {
   }
 
   onModelChange(queryString: string) {
-    console.log('Search input changed:', queryString, this.queryString);
     this.search.setFullTextQuery(queryString);
     this.onSearch.emit();
   }

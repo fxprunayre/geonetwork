@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SearchFilter, SearchRequestParameters } from './search.store.model';
+import { HistoryService } from '../../shared/history.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { SearchFilter, SearchRequestParameters } from './search.store.model';
 export class SearchRouteService {
   router = inject(Router);
   location = inject(Location);
+  historyService = inject(HistoryService);
 
   buildFilterQueryParams(filter: SearchFilter): string {
     return `"${filter.values.join('" OR "')}"`;
@@ -40,8 +42,9 @@ export class SearchRouteService {
     if (store.currentSort) {
       urlParams.push(`sort=${store.currentSort}`);
     }
-
-    this.location.go('/search', urlParams.filter((v) => v !== '').join('&'));
+    const parameters = urlParams.filter((v) => v !== '').join('&');
+    this.location.go('/search', parameters);
+    this.historyService.addUrlToHistory(`/search?${parameters}`);
   }
 
   convertRouteParamsToSearch(params: Params, pageSize: number): any {

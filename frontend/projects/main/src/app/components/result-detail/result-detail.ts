@@ -9,6 +9,7 @@ import { RecordViewComponent } from 'gn-library';
 import { TranslatePipe } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DEFAULT_TAB } from 'gn-library';
+import { HistoryService } from 'gn-library';
 
 @Component({
   selector: 'app-result-detail',
@@ -33,6 +34,7 @@ import { DEFAULT_TAB } from 'gn-library';
 export class ResultDetailComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private historyService = inject(HistoryService);
 
   uuid = signal<string | null>(null);
   tab = signal<string>(DEFAULT_TAB);
@@ -53,6 +55,6 @@ export class ResultDetailComponent {
   };
 
   goBack() {
-    this.router.navigate(['/search']);
+    this.historyService.goBackToLastMatching('/search');
   }
 }
