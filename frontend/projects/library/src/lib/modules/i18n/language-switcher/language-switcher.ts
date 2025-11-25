@@ -1,14 +1,15 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { APPLICATION_CONFIGURATION, DEFAULT_LANGUAGE } from '../../config/config.loader';
-import { I18nApp } from '../../config/model/gnConfig';
-import { FormsModule } from '@angular/forms';
+import { signal } from '@angular/core';
 import { Select } from 'primeng/select';
+import { FormsModule } from '@angular/forms';
+import { I18nApp } from '../../config/model/gnConfig';
+import { APPLICATION_CONFIGURATION, DEFAULT_LANGUAGE } from '../../config/config.loader';
 
 @Component({
   selector: 'app-language-switcher',
-  imports: [FormsModule, Select, TranslatePipe],
   templateUrl: './language-switcher.html',
+  imports: [TranslatePipe, Select, FormsModule],
 })
 export class LanguageSwitcher {
   private translate = inject(TranslateService);
@@ -18,6 +19,7 @@ export class LanguageSwitcher {
     language: DEFAULT_LANGUAGE,
     languages: { DEFAULT_LANGUAGE: DEFAULT_LANGUAGE.substring(0, 2) },
   };
+
 
   languages = Object.entries(this.i18nConfiguration.languages).map(([key, value]) => ({
     iso3code: key,

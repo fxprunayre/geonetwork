@@ -1,9 +1,8 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { TranslateService } from '@ngx-translate/core';
 import { ResourceDate } from 'gn-api-client';
 import { provideIcons } from '@ng-icons/core';
-import { DateComponent } from '../../../shared/widgets/date-parser/date-parser';
 import { faLightbulb, faPaperPlane } from '@ng-icons/font-awesome/regular';
 import {
   faSolidArrowRightToBracket,
@@ -17,10 +16,11 @@ import {
   faSolidShareNodes,
   faSolidXmark,
 } from '@ng-icons/font-awesome/solid';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-record-field-dates',
-  imports: [DateComponent],
+  imports: [DatePipe],
   viewProviders: [
     provideIcons({
       faLightbulb,
@@ -46,7 +46,13 @@ import {
     `,
   ],
 })
-export class RecordFieldDates extends RecordFieldBase {
+export class RecordFieldDates extends RecordFieldBase implements OnInit {
+  currentLocale = '';
+
+  ngOnInit(): void {
+    this.currentLocale = this.translateService.getCurrentLang();
+  }
+
   translateService = inject(TranslateService);
 
   icons: { [key: string]: any } = {
