@@ -6,11 +6,12 @@ import { ResultDetailComponent } from './components/result-detail/result-detail'
 import { MultisearchTest } from './components/multisearch-test/multisearch-test';
 
 export function recordMatcher(url: UrlSegment[]): UrlMatchResult | null {
-  if (url.length === 2 && url[0].path === 'record') {
+  if ((url.length === 2 || url.length === 3) && url[0].path === 'record') {
     return {
       consumed: url, // Consume all segments
       posParams: {
         uuid: url[1],
+        tab: url[2] || new UrlSegment('', {}),
       },
     };
   }

@@ -201,33 +201,33 @@
           }
         </ng-template>
       </p-accordion>
-      <p-tabs value="0" lazy>
+      <p-tabs [value]="tab()" lazy>
         <p-tablist>
-          <p-tab value="0">{{ 'record.view.section.description' | translate }}</p-tab>
-          <p-tab value="1">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
-          <p-tab value="2">{{ 'record.view.section.explore' | translate }}</p-tab>
-          <p-tab value="4">{{ 'record.view.section.publications' | translate }}</p-tab>
-          <p-tab value="6">{{ 'record.view.section.citation' | translate }}</p-tab>
-          <p-tab value="5">{{ 'record.view.section.discussions' | translate }}</p-tab>
+          <p-tab value="about">{{ 'record.view.section.description' | translate }}</p-tab>
+          <p-tab value="data-access">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
+          <p-tab value="explore">{{ 'record.view.section.explore' | translate }}</p-tab>
+          <p-tab value="publications">{{ 'record.view.section.publications' | translate }}</p-tab>
+          <p-tab value="citation">{{ 'record.view.section.citation' | translate }}</p-tab>
+          <p-tab value="discussions">{{ 'record.view.section.discussions' | translate }}</p-tab>
         </p-tablist>
 
         <p-tabpanels>
-          <p-tabpanel value="0">
+          <p-tabpanel value="about">
             <ng-container *ngTemplateOutlet="metadata"></ng-container>
           </p-tabpanel>
-          <p-tabpanel value="1">
+          <p-tabpanel value="data-access">
             <ng-container *ngTemplateOutlet="dataAccess"></ng-container>
           </p-tabpanel>
-          <p-tabpanel value="2">
+          <p-tabpanel value="explore">
             <app-explore-panel [record]="record" />
           </p-tabpanel>
-          <p-tabpanel value="5">
+          <p-tabpanel value="publications">
             <ng-container *ngTemplateOutlet="relatedContent"></ng-container>
           </p-tabpanel>
-          <p-tabpanel value="6">
+          <p-tabpanel value="citation"> Citation </p-tabpanel>
+          <p-tabpanel value="discussions">
             <app-feedback-panel />
           </p-tabpanel>
-          <p-tabpanel value="7"> Citation </p-tabpanel>
         </p-tabpanels>
       </p-tabs>
     </div>

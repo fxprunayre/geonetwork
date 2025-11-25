@@ -14,6 +14,7 @@ import { RecordFieldType } from '../../record/record-field-type/record-field-typ
 import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 import { RecordDistributionBadges } from '../../record/distributions/record-distribution-badges/record-distribution-badges';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-result-item-list',
@@ -28,6 +29,7 @@ import { RecordDistributionBadges } from '../../record/distributions/record-dist
     RecordFieldCredit,
     RecordFieldTitle,
     RecordDistributionBadges,
+    RouterLink,
   ],
   viewProviders: [
     provideIcons({ faImage, faMap, faSolidShareNodes, faSolidDownload, faSolidCircleInfo }),

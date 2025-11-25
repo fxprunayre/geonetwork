@@ -3,10 +3,11 @@ import { RecordDistributionFieldBase } from '../record-distribution-field-base/r
 import { KeyValuePipe } from '@angular/common';
 import { Link } from 'gn-api-client';
 import { Badge } from 'primeng/badge';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-record-distribution-badges',
-  imports: [KeyValuePipe, Badge],
+  imports: [KeyValuePipe, Badge, RouterLink],
   templateUrl: './record-distribution-badges.html',
 })
 export class RecordDistributionBadges extends RecordDistributionFieldBase {

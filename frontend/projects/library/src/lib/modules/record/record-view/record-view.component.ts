@@ -48,6 +48,8 @@ import { Fieldset } from 'primeng/fieldset';
 import { Datasource } from '../../data/duck-db.service';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 
+export const DEFAULT_TAB = 'about';
+
 @Component({
   selector: 'app-record-view',
   templateUrl: './record-view.component.html',
@@ -99,6 +101,7 @@ import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 })
 export class RecordViewComponent implements AfterViewInit {
   uuid = input<string | null>();
+  tab = input<string>(DEFAULT_TAB);
 
   layout = input<'fieldset' | 'panel' | ''>('');
 

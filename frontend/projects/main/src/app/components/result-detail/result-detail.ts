@@ -8,6 +8,7 @@ import { faSolidArrowLeft } from '@ng-icons/font-awesome/solid';
 import { RecordViewComponent } from 'gn-library';
 import { TranslatePipe } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DEFAULT_TAB } from 'gn-library';
 
 @Component({
   selector: 'app-result-detail',
@@ -34,12 +35,14 @@ export class ResultDetailComponent {
   private router = inject(Router);
 
   uuid = signal<string | null>(null);
+  tab = signal<string>(DEFAULT_TAB);
 
   @ViewChild('recordDetails') contentRef!: ElementRef<HTMLDivElement>;
 
   constructor() {
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
       this.uuid.set(params.get('uuid'));
+      this.tab.set(params.get('tab') || DEFAULT_TAB);
       this.contentRef &&
         this.contentRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'start' });
     });
