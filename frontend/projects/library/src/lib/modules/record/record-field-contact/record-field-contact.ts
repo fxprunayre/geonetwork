@@ -1,8 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { TranslatePipe } from '@ngx-translate/core';
-import { KeyValuePipe } from '@angular/common';
-import { DateComponent } from '../../../shared/widgets/date-parser/date-parser';
+import { DatePipe, KeyValuePipe } from '@angular/common';
 
 // TODO: to add to IndexRecord in gn-api-client
 export interface OrganisationObject {
@@ -24,7 +23,7 @@ export interface ContactInfo {
 
 @Component({
   selector: 'app-record-field-contact',
-  imports: [TranslatePipe, KeyValuePipe, DateComponent],
+  imports: [TranslatePipe, KeyValuePipe, DatePipe],
   templateUrl: './record-field-contact.html',
 })
 export class RecordFieldContact extends RecordFieldBase {
