@@ -25,9 +25,7 @@ export class LanguageSwitcher {
     label: key,
   }));
 
-  currentLanguage = signal(
-    localStorage.getItem('lang') || this.i18nConfiguration.language
-  );
+  currentLanguage = signal(localStorage.getItem('lang') || this.i18nConfiguration.language);
 
   constructor() {
     effect(() => {
@@ -37,9 +35,7 @@ export class LanguageSwitcher {
       this.translate.use(this.i18nConfiguration.languages[lang]);
 
       this.translate
-        .get(
-          this.languages.map((language) => 'languages.' + language.iso3code)
-        )
+        .get(this.languages.map((language) => 'languages.' + language.iso3code))
         .subscribe((translations: { [key: string]: string }) => {
           this.languages = this.languages.map((language) => ({
             ...language,

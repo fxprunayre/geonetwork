@@ -11,10 +11,11 @@
       <app-record-field-type [record]="result()" />
       <div>
         <div class="flex gap-3 justify-around">
-          <ng-icon name="faMap" />
-          <ng-icon name="faSolidShareNodes" />
-          <ng-icon name="faSolidDownload" />
-          <ng-icon name="faSolidCircleInfo" />
+          <app-record-distribution-badges
+            [record]="result()"
+            [types]="['API', 'download']"
+            [layout]="'badge'"
+          />
         </div>
       </div>
     </div>

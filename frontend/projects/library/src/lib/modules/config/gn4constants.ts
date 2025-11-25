@@ -1409,7 +1409,7 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
             },
             meta: {
               collapsed: true,
-              refreshPolicy: 'none',
+              // refreshPolicy: 'none',
               decorator: {
                 type: 'icon',
                 map: {

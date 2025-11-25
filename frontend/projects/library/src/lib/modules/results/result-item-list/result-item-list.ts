@@ -13,6 +13,7 @@ import { RecordFieldOverviewComponent } from '../../record/record-field-overview
 import { RecordFieldType } from '../../record/record-field-type/record-field-type';
 import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
+import { RecordDistributionBadges } from '../../record/distributions/record-distribution-badges/record-distribution-badges';
 
 @Component({
   selector: 'app-result-item-list',
@@ -26,6 +27,7 @@ import { RecordFieldTitle } from '../../record/record-field-title/record-field-t
     RecordFieldType,
     RecordFieldCredit,
     RecordFieldTitle,
+    RecordDistributionBadges,
   ],
   viewProviders: [
     provideIcons({ faImage, faMap, faSolidShareNodes, faSolidDownload, faSolidCircleInfo }),

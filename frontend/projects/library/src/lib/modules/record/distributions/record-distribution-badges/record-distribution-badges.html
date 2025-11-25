@@ -1,0 +1,8 @@
+@if (distributionConfig) {
+  @for (section of linksBySectionsSelected() | keyvalue; track $index) {
+    <p-badge [value]="section.key" severity="success" class="mx-1" />
+    @for (link of section.value; track link) {
+      @if (link) {}
+    }
+  }
+}

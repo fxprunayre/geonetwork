@@ -15,10 +15,11 @@
 
         <app-record-field-doi [record]="record()" />
 
-        <button pButton [outlined]="true">
-          <ng-icon name="faSolidShareNodes" pButtonIcon></ng-icon>
-          <span pButtonLabel>Share</span>
-        </button>
+        <app-record-distribution-badges
+          [record]="record()"
+          [types]="['API', 'download']"
+          [layout]="'badge'"
+        />
       </div>
     </div>
   </ng-template>

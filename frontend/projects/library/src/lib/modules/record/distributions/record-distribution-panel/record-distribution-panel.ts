@@ -1,30 +1,16 @@
-import { Component, computed, inject } from '@angular/core';
-import { RecordFieldBase } from '../../record-field-base/record-field-base';
-import { JsonPipe, KeyValuePipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { KeyValuePipe } from '@angular/common';
 import { Badge } from 'primeng/badge';
 import { Button } from 'primeng/button';
-import { APPLICATION_CONFIGURATION } from '../../../config/config.loader';
 import { Link } from 'gn-api-client';
-import { DistributionService } from '../distribution.service';
+import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 
 @Component({
   selector: 'app-record-distribution-panel',
-  imports: [KeyValuePipe, Badge, Button, JsonPipe],
+  imports: [KeyValuePipe, Badge, Button],
   templateUrl: './record-distribution-panel.html',
 })
-export class RecordDistributionPanel extends RecordFieldBase {
-  distributionConfig = inject(APPLICATION_CONFIGURATION).config?.apps.record?.distribution;
-
-  distributionService = inject(DistributionService);
-
-  links = computed(() => {
-    return this.record()?.link || [];
-  });
-
-  linksBySections = computed(() => {
-    return this.distributionService.linksBySections(this.links());
-  });
-
+export class RecordDistributionPanel extends RecordDistributionFieldBase {
   addWmsLayers = (link: Link[]) => {
     // TODO
   };

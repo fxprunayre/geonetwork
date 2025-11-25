@@ -11,6 +11,7 @@ import { RecordFieldType } from '../record-field-type/record-field-type';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
 import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
+import { RecordDistributionBadges } from '../distributions/record-distribution-badges/record-distribution-badges';
 
 @Component({
   selector: 'app-record-view-header',
@@ -28,6 +29,7 @@ import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
     ShowMoreToggle,
     RecordFieldVocabulary,
     RecordFieldDoi,
+    RecordDistributionBadges,
   ],
   templateUrl: './record-view-header.html',
 })
