@@ -86,5 +86,7 @@ export class ThemeDesigner {
         preset: definePreset(Aura, t),
       },
     });
+
+    this.themingService.updateCssVariable('--app-font-family-sans', this.font());
   }
 }

@@ -1,5 +1,9 @@
 @use 'tailwind.css';
 
+:root {
+  --app-font-family-sans: 'Inter', sans-serif;
+}
+
 @layer base {
   ul {
     @apply mb-4 ml-10 list-disc;
@@ -16,7 +20,7 @@
 }
 
 * {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--app-font-family-sans);
   font-optical-sizing: auto;
   font-style: normal;
 }
