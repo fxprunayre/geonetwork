@@ -2,7 +2,7 @@
 
 ## User interface configuration
 
-...
+...   ...
 
 ## Theming
 
