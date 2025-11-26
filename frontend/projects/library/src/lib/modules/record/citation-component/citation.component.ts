@@ -16,6 +16,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { Button, ButtonDirective } from 'primeng/button';
+import { Card } from 'primeng/card';
 
 interface FormatOption {
   id: string;
@@ -26,7 +27,7 @@ interface FormatOption {
   selector: 'app-citation-component',
   standalone: true,
   templateUrl: './citation.component.html',
-  imports: [FormsModule, CommonModule, TranslatePipe, ToastModule, Button, ButtonDirective],
+  imports: [FormsModule, CommonModule, TranslatePipe, ToastModule, Button, ButtonDirective, Card],
   providers: [MessageService],
 })
 export class CitationComponent implements OnChanges {

@@ -20,7 +20,7 @@
       "section": {
         "description": "Description",
         "dates": "Dates",
-        "about": "À propos de ça {{resourceType}}",
+        "about": "À propos - {{resourceType}}",
         "contacts": "Contacts",
         "dataAccess": "Accès aux données",
         "explore": "Explorer",
@@ -48,7 +48,7 @@
       "resourceDate": "Dates"
     },
     "association": {
-      "parent": "Une partie de {{count}} ressource(s)",
+      "parent": "Fait partie de {{count}} ressource(s)",
       "children": "Composé de {{count}} ressource(s)",
       "hassources": "Utilisé pour {{count}} ressource(s)",
       "sources": "Dérivé de {{count}} ressource(s)",

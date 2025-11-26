@@ -1,41 +1,43 @@
 @if (citationAvailable()) {
   <p-toast></p-toast>
-  <h2>{{ 'citation.title' | translate }}</h2>
 
-  <div class="flex gap-2 mb-4">
-    @for (f of formats(); track f.id) {
-      <p-button severity="secondary" (click)="getCitation(f.id)">
-        {{ f.label }}
-      </p-button>
-    }
-  </div>
-
-  <div class="flex gap-3 mb-4">
-    <p-button (click)="copyToClipboard()">
-      {{ 'citation.copy' | translate }}
-    </p-button>
-
-    <a
-      pButton
-      [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
-      [download]="filename()"
-      class="p-button p-component"
-    >
-      {{ 'citation.download' | translate }}
-    </a>
-  </div>
-
-  @if (loading()) {
-    <div class="italic text-neutral-500 mb-4">
-      {{ 'citation.loading' | translate }}
+  <p-card class="my-10" [header]="'citation.title' | translate">
+    <div class="flex gap-2 mb-4">
+      @for (f of formats(); track f.id) {
+        <p-button severity="secondary" (click)="getCitation(f.id)">
+          {{ f.label }}
+        </p-button>
+      }
     </div>
-  } @else {
-    @if (!isCode()) {
-      <div [innerHTML]="citationText()"></div>
+
+    <div class="flex gap-3 mb-4">
+      <p-button (click)="copyToClipboard()">
+        {{ 'citation.copy' | translate }}
+      </p-button>
+
+      <a
+        pButton
+        [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
+        [download]="filename()"
+        class="p-button p-component"
+      >
+        {{ 'citation.download' | translate }}
+      </a>
+    </div>
+
+    @if (loading()) {
+      <div class="italic text-neutral-500 mb-4">
+        {{ 'citation.loading' | translate }}
+      </div>
     } @else {
-      <pre class="bg-neutral-900 text-neutral-200 p-4 rounded">
+      @if (!isCode()) {
+        <div [innerHTML]="citationText()"></div>
+      } @else {
+        <pre class="bg-neutral-900 text-neutral-200 p-4 rounded">
         {{ citationText() }}
-      </pre>
+      </pre
+        >
+      }
     }
-  }
+  </p-card>
 }
