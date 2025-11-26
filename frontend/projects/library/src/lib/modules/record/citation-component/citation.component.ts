@@ -1,90 +1,154 @@
-import { Component, Input, OnChanges, signal, computed } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ButtonModule } from 'primeng/button';
-import { ButtonGroupModule } from 'primeng/buttongroup';
+import {Component, Input, OnChanges, signal, computed, inject} from '@angular/core';
+import { RecordsService } from 'gn4-api-client';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { CommonModule } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+
+interface FormatOption {
+  id: string;
+  label: string;
+}
 
 @Component({
-  selector: 'app-citation',
+  selector: 'app-citation-component',
   standalone: true,
-  imports: [CommonModule, ButtonModule, ButtonGroupModule, ToastModule],
-  providers: [MessageService],
   templateUrl: './citation.component.html',
+  imports: [FormsModule, CommonModule, TranslatePipe, ToastModule],
+  providers: [MessageService],
 })
 export class CitationComponent implements OnChanges {
-  @Input() format: string = 'html';
   @Input({ required: true }) uuid!: string;
+  @Input() format: string = 'html';
 
-  formats = signal<{ id: string; label: string; help?: string }[]>([]);
-  currentFormat = signal<string | null>(null);
+  private readonly translateService = inject(TranslateService);
+
+  formats = signal<FormatOption[]>([]);
   citationText = signal<string>('');
+  currentFormat = signal<string>('html');
   citationAvailable = signal(false);
-
-  isCode = computed(() => ['ris', 'bibtex'].includes(this.currentFormat() ?? ''));
+  loading = signal(false);
 
   constructor(
-    private http: HttpClient,
-    private toast: MessageService,
+    private recordService: RecordsService,
+    private messageService: MessageService
   ) {}
 
   ngOnChanges() {
-    if (this.uuid) this.loadCitation();
+    if (!this.uuid) return;
+    this.loadFormats();
   }
 
-  private buildUrl() {
-    // return `/catalogue/srv/api/records/${this.uuid}/formatters/citation?format=`;
-    // TO DO WHAT URL??
+  private fetchCitation(
+    output: 'html' | 'json' | 'txt' | 'xml' | 'jsonld' | 'pdf' | 'testpdf' | undefined,
+    params?: Record<string, any>,
+    accept?: string,
+  ) {
+    return this.recordService.getRecordFormattedBy(
+      'citation',
+      this.uuid,
+      undefined,
+      undefined,
+      undefined,
+      output,
+      true,
+      params,
+      undefined,
+      false,
+      accept ? { httpHeaderAccept: accept } : undefined,
+    );
   }
 
-  loadCitation() {
-    this.citationAvailable.set(false);
+  loadFormats() {
+    this.fetchCitation('json', { format: '?' }).subscribe({
+      next: (resp: any) => {
+        const arr: string[] = Array.isArray(resp) ? resp : (resp?.formats ?? []);
 
-    this.getCitation('?').then(() => {
-      this.getCitation(this.format);
+        this.formats.set(
+          arr.map((f: string) => ({
+            id: f,
+            label: f.toUpperCase(),
+          })),
+        );
+
+        this.citationAvailable.set(arr.length > 0);
+
+        if (!arr.length) return;
+
+        const initial = arr.includes('html') ? 'html' : arr[0];
+        this.getCitation(initial);
+      },
+      error: (err) => {
+        console.error('Error loading citation formats', err);
+        this.citationAvailable.set(false);
+      },
     });
   }
 
-  async getCitation(format: string) {
-    const url = this.buildUrl() + format;
+  getCitation(fmt: string) {
+    this.currentFormat.set(fmt);
+    this.loading.set(true);
 
-    if (format === '?') {
-      const data = await this.http.get<string[]>(url).toPromise();
-      if (!data) return;
+    const output = fmt === 'html' ? 'html' : 'txt';
 
-      const fmt = data.map((id) => ({
-        id,
-        label: id.toUpperCase(),
-        help: '',
-      }));
+    const params = fmt === 'html' ? undefined : { format: fmt };
 
-      this.formats.set(fmt);
-      return;
-    }
+    const accept = this.mapAccept(fmt);
 
-    const data = await this.http.get(url, { responseType: 'text' }).toPromise();
-
-    this.currentFormat.set(format);
-    this.citationText.set(data ?? '');
-    this.citationAvailable.set(true);
+    this.fetchCitation(output, params, accept).subscribe({
+      next: (resp: any) => {
+        this.citationText.set(typeof resp === 'string' ? resp : JSON.stringify(resp));
+        this.loading.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading citation for', fmt, err);
+        this.citationText.set('Error loading citation.');
+        this.loading.set(false);
+      },
+    });
   }
+
+  isCode = computed(() => {
+    const f = this.currentFormat();
+    return f === 'json' || f === 'bibtex' || f === 'ris';
+  });
 
   getFilename() {
-    const f = this.currentFormat() ?? 'txt';
-    const ext = f === 'text' ? 'txt' : f;
-    return `citation-${this.uuid}.${ext}`;
+    return `citation-${this.uuid}.${this.currentFormat()}`;
   }
 
-  copy() {
+  private mapAccept(
+    fmt: string,
+  ):
+    | 'text/html'
+    | 'text/plain'
+    | 'application/json'
+    | 'application/pdf'
+    | 'application/rdf+xml'
+    | 'application/vnd.schemaorg.ld+json'
+    | 'application/xhtml+xml'
+    | 'application/xml'
+    | undefined {
+    switch (fmt) {
+      case 'html':
+        return 'text/html';
+      default:
+        return 'text/plain';
+    }
+  }
+
+  copyToClipboard() {
     navigator.clipboard.writeText(this.citationText());
-    this.toast.add({
+
+    this.messageService.add({
       severity: 'success',
-      summary: 'Copied',
-      detail: 'Citation copied to clipboard',
+      summary: this.translateService.instant('citation.copy_title'),
+      detail: this.translateService.instant('citation.copy_detail'),
+      life: 1500,
     });
   }
 
-  protected readonly navigator = navigator;
   protected readonly encodeURIComponent = encodeURIComponent;
 }

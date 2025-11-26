@@ -94,5 +94,13 @@
     "secondSubtitle": " Sextant vise à documenter, diffuser et promouvoir un catalogue de données marines. Destinée aux laboratoires, partenaires de l’Ifremer et acteurs marins nationaux et européens, cette infrastructure propose des outils pour archiver, consulter et partager les données.",
     "button": "Notre mission",
     "thirdTitle": "Découvrez des cartes interactives"
+  },
+  "citation": {
+    "title": "Citer l'ensemble de données",
+    "copy": "Copie",
+    "copy_title": "Copie réussie",
+    "copy_detail": "Copie réussie dans le presse-papiers",
+    "download": "Télécharger",
+    "loading": "Chargement de la citation ..."
   }
 }

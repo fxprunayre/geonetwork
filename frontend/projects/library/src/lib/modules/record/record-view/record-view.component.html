@@ -234,7 +234,12 @@
     <div class="w-1/4 sticky top-10 self-start">
       <p-card class="mb-10">
         <span class="block text-[#3a75ab]">Citation</span>
-        <app-citation [uuid]="record.uuid!" format="html"></app-citation>
+        <!--        <app-citation-->
+        <!--          [uuid]="record.uuid!"-->
+        <!--          [format]="'html'"-->
+        <!--        >-->
+        <!--        </app-citation>-->
+        <app-citation-component [uuid]="record.uuid!" [format]="'html'"> </app-citation-component>
       </p-card>
 
       <p-card class="my-10">

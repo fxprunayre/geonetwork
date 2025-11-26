@@ -106,5 +106,13 @@
     "secondSubtitle": "Sextant aims to document, disseminate, and promote a catalog of marine data. Intended for laboratories, Ifremer partners, and national and European marine stakeholders, this infrastructure offers tools for archiving, accessing, and sharing data.",
     "button": "Our mission",
     "thirdTitle": "Discover interactive maps"
+  },
+  "citation": {
+    "title": "Cite Dataset",
+    "copy": "Copy",
+    "copy_title": "Copy success",
+    "copy_detail": "Succesfully copied to clipboard",
+    "download": "Download",
+    "loading": "Loading citation ..."
   }
 }
