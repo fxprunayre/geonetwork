@@ -4,26 +4,22 @@
 
   <div class="flex gap-2 mb-4">
     @for (f of formats(); track f.id) {
-      <button
-        (click)="getCitation(f.id)"
-        class="p-1 rounded border"
-        [class.bg-neutral-600]="currentFormat() === f.id"
-        [class.text-white]="currentFormat() === f.id"
-      >
+      <p-button severity="secondary" (click)="getCitation(f.id)">
         {{ f.label }}
-      </button>
+      </p-button>
     }
   </div>
 
   <div class="flex gap-3 mb-4">
-    <button (click)="copyToClipboard()" class="p-1 bg-neutral-800 text-white rounded">
+    <p-button (click)="copyToClipboard()">
       {{ 'citation.copy' | translate }}
-    </button>
+    </p-button>
 
     <a
+      pButton
       [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
-      [download]="getFilename()"
-      class="p-1 bg-neutral-200 rounded"
+      [download]="filename()"
+      class="p-button p-component"
     >
       {{ 'citation.download' | translate }}
     </a>

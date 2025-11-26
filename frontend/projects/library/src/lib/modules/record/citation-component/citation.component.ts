@@ -1,4 +1,13 @@
-import { Component, Input, OnChanges, signal, computed, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  signal,
+  computed,
+  inject,
+  input,
+  effect,
+} from '@angular/core';
 import { RecordsService } from 'gn4-api-client';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -6,6 +15,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { Button, ButtonDirective } from 'primeng/button';
 
 interface FormatOption {
   id: string;
@@ -16,14 +26,24 @@ interface FormatOption {
   selector: 'app-citation-component',
   standalone: true,
   templateUrl: './citation.component.html',
-  imports: [FormsModule, CommonModule, TranslatePipe, ToastModule],
+  imports: [FormsModule, CommonModule, TranslatePipe, ToastModule, Button, ButtonDirective],
   providers: [MessageService],
 })
 export class CitationComponent implements OnChanges {
-  @Input({ required: true }) uuid!: string;
-  @Input() format: string = 'html';
+  uuid = input.required<string>();
+  format = input('html');
 
   private readonly translateService = inject(TranslateService);
+  private recordService = inject(RecordsService);
+  private messageService = inject(MessageService);
+
+  constructor() {
+    effect(() => {
+      if (this.uuid()) {
+        this.loadFormats();
+      }
+    });
+  }
 
   formats = signal<FormatOption[]>([]);
   citationText = signal<string>('');
@@ -31,13 +51,8 @@ export class CitationComponent implements OnChanges {
   citationAvailable = signal(false);
   loading = signal(false);
 
-  constructor(
-    private recordService: RecordsService,
-    private messageService: MessageService,
-  ) {}
-
   ngOnChanges() {
-    if (!this.uuid) return;
+    if (!this.uuid()) return;
     this.loadFormats();
   }
 
@@ -56,7 +71,7 @@ export class CitationComponent implements OnChanges {
   ) {
     return this.recordService.getRecordFormattedBy(
       'citation',
-      this.uuid,
+      this.uuid(),
       undefined,
       undefined,
       undefined,
@@ -123,9 +138,9 @@ export class CitationComponent implements OnChanges {
     return f === 'json' || f === 'bibtex' || f === 'ris';
   });
 
-  getFilename() {
-    return `citation-${this.uuid}.${this.currentFormat()}`;
-  }
+  filename = computed(() => {
+    return `citation-${this.uuid()}.${this.currentFormat()}`;
+  });
 
   private mapAccept(
     fmt: string,
