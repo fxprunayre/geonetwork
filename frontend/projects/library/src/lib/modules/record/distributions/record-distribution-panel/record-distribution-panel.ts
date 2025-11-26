@@ -17,7 +17,12 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
   isExplorable = (link: Link) => {
     const url = link.urlObject?.['default'];
     if (url) {
-      return url.endsWith('.parquet') || url.endsWith('.json') || url.endsWith('.csv');
+      return (
+        url.endsWith('.parquet') ||
+        url.endsWith('.json') ||
+        url.endsWith('.csv') ||
+        link.protocol === 'OGC:WFS'
+      );
     }
     return false;
   };
