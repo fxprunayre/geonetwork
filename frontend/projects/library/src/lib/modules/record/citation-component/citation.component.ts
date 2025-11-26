@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, signal, computed, inject} from '@angular/core';
+import { Component, Input, OnChanges, signal, computed, inject } from '@angular/core';
 import { RecordsService } from 'gn4-api-client';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -33,7 +33,7 @@ export class CitationComponent implements OnChanges {
 
   constructor(
     private recordService: RecordsService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {}
 
   ngOnChanges() {
@@ -44,7 +44,15 @@ export class CitationComponent implements OnChanges {
   private fetchCitation(
     output: 'html' | 'json' | 'txt' | 'xml' | 'jsonld' | 'pdf' | 'testpdf' | undefined,
     params?: Record<string, any>,
-    accept?: string,
+    accept?:
+      | 'text/html'
+      | 'text/plain'
+      | 'application/json'
+      | 'application/pdf'
+      | 'application/rdf+xml'
+      | 'application/vnd.schemaorg.ld+json'
+      | 'application/xhtml+xml'
+      | 'application/xml',
   ) {
     return this.recordService.getRecordFormattedBy(
       'citation',
@@ -80,7 +88,7 @@ export class CitationComponent implements OnChanges {
         const initial = arr.includes('html') ? 'html' : arr[0];
         this.getCitation(initial);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error loading citation formats', err);
         this.citationAvailable.set(false);
       },
@@ -102,7 +110,7 @@ export class CitationComponent implements OnChanges {
         this.citationText.set(typeof resp === 'string' ? resp : JSON.stringify(resp));
         this.loading.set(false);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error loading citation for', fmt, err);
         this.citationText.set('Error loading citation.');
         this.loading.set(false);

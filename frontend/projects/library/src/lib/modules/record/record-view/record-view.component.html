@@ -161,8 +161,8 @@
 
   <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
-  <div class="flex flex-row gap-12 mt-25 relative">
-    <div class="w-3/4">
+  <div class="flex flex-row gap-4 mt-25 relative">
+    <div class="w-3/5">
       <p-accordion>
         <ng-template #metadata>
           @for (
@@ -231,14 +231,9 @@
         </p-tabpanels>
       </p-tabs>
     </div>
-    <div class="w-1/4 sticky top-10 self-start">
+    <div class="w-2/5 sticky top-10 self-start">
       <p-card class="mb-10">
         <span class="block text-[#3a75ab]">Citation</span>
-        <!--        <app-citation-->
-        <!--          [uuid]="record.uuid!"-->
-        <!--          [format]="'html'"-->
-        <!--        >-->
-        <!--        </app-citation>-->
         <app-citation-component [uuid]="record.uuid!" [format]="'html'"> </app-citation-component>
       </p-card>
 
