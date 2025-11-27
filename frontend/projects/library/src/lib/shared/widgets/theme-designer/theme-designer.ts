@@ -63,7 +63,6 @@ export class ThemeDesigner implements OnInit {
     Object.entries(this.themePropertiesByColor).forEach(([key, colorName]) => {
       const cssVar = `--p-${colorName}-500`;
       const color = this.themingService.getCssVariable(cssVar);
-      console.log(cssVar, color);
       if (color) {
         (this as any)[key + 'Color'].set(color);
       }
@@ -86,8 +85,8 @@ export class ThemeDesigner implements OnInit {
 
     primitive['borderRadius'] = {
       none: '0',
-      xs: this.borderRadius() === 0 ? '0' : this.borderRadius() * .25 + 'px',
-      sm: this.borderRadius() === 0 ? '0' : this.borderRadius() * .5 + 'px',
+      xs: this.borderRadius() === 0 ? '0' : this.borderRadius() * 0.25 + 'px',
+      sm: this.borderRadius() === 0 ? '0' : this.borderRadius() * 0.5 + 'px',
       md: this.borderRadius() === 0 ? '0' : this.borderRadius() * 1 + 'px',
       lg: this.borderRadius() === 0 ? '0' : this.borderRadius() * 2 + 'px',
       xl: this.borderRadius() === 0 ? '0' : this.borderRadius() * 3 + 'px',

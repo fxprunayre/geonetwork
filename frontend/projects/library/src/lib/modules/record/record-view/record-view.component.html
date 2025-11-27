@@ -177,8 +177,22 @@
 
         <div class="flex flex-row gap-4">
           <div class="w-3/4" #spyTarget>
-            <p-accordion [multiple]="true" [value]="getSectionIds(sections)">
-              @for (section of sections; track section.label) {
+            @let activatedSections = getSectionIds(sections);
+            <p-accordion
+              [multiple]="true"
+              [value]="[
+                'about',
+                'dates',
+                'contacts',
+                'usageAndAccess',
+                'dataModel',
+                'coverage',
+                'spatialInfo',
+                'lineage',
+                'classification',
+              ]"
+            >
+              @for (section of sections; track section.label; let i = $index) {
                 @let sectionLabel =
                   'record.view.section.' + section.label
                     | translate: { resourceType: record.resourceType };
@@ -211,9 +225,9 @@
             ></ng-container>
           </div>
           <div class="w-1/4">
-            <p-card class="my-10" [header]="'Format'"> </p-card>
+            <p-card class="my-10" [header]="'Format'"></p-card>
 
-            <p-card class="my-10" [header]="'Distributor'"> </p-card>
+            <p-card class="my-10" [header]="'Distributor'"></p-card>
           </div>
         </div>
       </p-tabpanel>
@@ -237,8 +251,8 @@
             ></app-citation-component>
           </div>
           <div class="w-1/4">
-            <p-card class="my-10" [header]="'Contact'"> Main contact content goes here. </p-card>
-            <p-card class="my-10" [header]="'Catalogue'"> Catalogue/harvester logo. </p-card>
+            <p-card class="my-10" [header]="'Contact'"> Main contact content goes here.</p-card>
+            <p-card class="my-10" [header]="'Catalogue'"> Catalogue/harvester logo.</p-card>
           </div>
         </div>
       </p-tabpanel>
