@@ -46,7 +46,14 @@
       "overview": {
         "notAvailable": "Pas d'aperçu"
       },
-      "resourceDate": "Dates"
+      "resourceDate": "Dates",
+      "catalogue": {
+        "title": "Catalogue",
+        "help": "Origine de la fiche",
+        "logo": {
+          "alt": "Logo du catalogue"
+        }
+      }
     },
     "association": {
       "parent": "Fait partie de {{count}} ressource(s)",

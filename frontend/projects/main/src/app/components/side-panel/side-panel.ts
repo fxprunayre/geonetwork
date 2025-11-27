@@ -7,6 +7,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-side-panel',
   templateUrl: './side-panel.html',
   standalone: true,
-  imports: [FormsModule, CommonModule, AggregationsPanel, SearchActiveFilters],
+  imports: [FormsModule, CommonModule, AggregationsPanel],
 })
 export class SidePanel {}

@@ -57,7 +57,14 @@
       "overview": {
         "notAvailable": "No preview"
       },
-      "resourceDate": "Dates"
+      "resourceDate": "Dates",
+      "catalogue": {
+        "title": "Catalogue",
+        "help": "Origin of the record",
+        "logo": {
+          "alt": "Catalogue logo"
+        }
+      }
     },
     "association": {
       "parent": "Part of {{count}} resource(s)",

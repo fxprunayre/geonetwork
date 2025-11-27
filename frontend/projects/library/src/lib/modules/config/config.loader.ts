@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 export interface ApplicationConfiguration {
   config: AppsConfiguration | undefined;
   space: string;
+  catalogueUrl: string;
 }
 
 export const DEFAULT_SPACE = 'srv';
@@ -18,6 +19,7 @@ export const APPLICATION_CONFIGURATION = new InjectionToken<ApplicationConfigura
 let appConfig: ApplicationConfiguration = {
   config: undefined,
   space: DEFAULT_SPACE,
+  catalogueUrl: '/',
 };
 
 let appConfigLoading = false;
@@ -42,6 +44,7 @@ export function loadAppConfig() {
     })
     .then((conf) => {
       appConfig.config = migrateGn4Config(SEXTANT_UI_CONFIGURATION);
+      appConfig.catalogueUrl = environment.geonetworkApiUrl;
       // TODO: parseGn4Config(conf);
       console.log(appConfig);
       appConfigLoading = false;

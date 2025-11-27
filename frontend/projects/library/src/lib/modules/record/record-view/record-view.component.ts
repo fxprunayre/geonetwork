@@ -46,6 +46,7 @@ import { Card } from 'primeng/card';
 import { CitationComponent } from '../citation-component/citation.component';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
+import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
 
 export const DEFAULT_TAB = 'about';
 
@@ -83,6 +84,7 @@ export const DEFAULT_TAB = 'about';
     CitationComponent,
     ExplorePanel,
     ScrollSpy,
+    RecordHarvesterLogo,
   ],
   viewProviders: [
     provideIcons({

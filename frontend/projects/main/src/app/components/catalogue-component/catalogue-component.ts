@@ -1,18 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { SidePanel } from '../side-panel/side-panel';
-import {
-  ResultViewComponent,
-  SearchBase,
-  SearchInput,
-  SortResults,
-  SearchWelcomeTextPipe,
-} from 'gn-library';
+import { ResultViewComponent, SearchBase, SearchInput, SearchWelcomeTextPipe } from 'gn-library';
 import { ResultHeader } from '../result-header/result-header';
 import { Drawer } from 'primeng/drawer';
 import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidFilter, faSolidXmark } from '@ng-icons/font-awesome/solid';
-import { Select } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -32,12 +25,10 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     Button,
     ButtonLabel,
     NgIcon,
-    Select,
     ButtonIcon,
     InputGroup,
     InputGroupAddon,
     FormsModule,
-    SortResults,
     TranslatePipe,
     SearchWelcomeTextPipe,
   ],

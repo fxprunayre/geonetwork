@@ -20,7 +20,6 @@ export class LanguageSwitcher {
     languages: { DEFAULT_LANGUAGE: DEFAULT_LANGUAGE.substring(0, 2) },
   };
 
-
   languages = Object.entries(this.i18nConfiguration.languages).map(([key, value]) => ({
     iso3code: key,
     iso2code: value,
