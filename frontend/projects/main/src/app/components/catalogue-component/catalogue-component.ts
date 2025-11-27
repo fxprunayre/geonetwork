@@ -11,11 +11,13 @@ import { ResultHeader } from '../result-header/result-header';
 import { Drawer } from 'primeng/drawer';
 import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidFilter } from '@ng-icons/font-awesome/solid';
+import { faSolidFilter, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { Select } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { InputGroup } from 'primeng/inputgroup';
+import { InputGroupAddon } from 'primeng/inputgroupaddon';
 
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 
@@ -32,6 +34,8 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     NgIcon,
     Select,
     ButtonIcon,
+    InputGroup,
+    InputGroupAddon,
     FormsModule,
     SortResults,
     TranslatePipe,
@@ -40,7 +44,7 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
   standalone: true,
   templateUrl: './catalogue-component.html',
   styleUrl: './catalogue-component.scss',
-  viewProviders: [provideIcons({ faSolidFilter })],
+  viewProviders: [provideIcons({ faSolidFilter, faSolidXmark })],
 })
 export class CatalogueComponent extends SearchBase {
   visible = false;

@@ -1,13 +1,17 @@
-<div class="flex items-center mb-4 bg-[#F2F5F9] py-[23px] px-[17px] rounded">
-  <div class="flex items-center gap-3 flex-start flex-wrap">
-    <app-search-results-number class="font-semibold text-primary me-4 text-base" />
-
-    @if (topTabFilter) {
-      <app-aggregation
-        [keyName]="topTabFilter"
-        [displayType]="'button'"
-        class="flex items-center flex-wrap gap-2"
-      ></app-aggregation>
-    }
+<p-card [dt]="{ colorScheme: { light: { root: { background: 'var(--p-surface-50)' } } } }">
+  <div class="flex flex-col gap-4">
+    <div class="flex items-center gap-3">
+      <app-search-results-number class="grow font-semibold text-primary me-4 text-base" />
+      <app-sort-results />
+    </div>
+    <div>
+      @if (topTabFilter) {
+        <app-aggregation
+          [keyName]="topTabFilter"
+          [displayType]="'button'"
+          class="flex items-center flex-wrap gap-2"
+        ></app-aggregation>
+      }
+    </div>
   </div>
-</div>
+</p-card>

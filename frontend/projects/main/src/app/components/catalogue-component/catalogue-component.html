@@ -4,22 +4,36 @@
   >
     <div class="flex flex-row items-center gap-4">
       <app-search-input
-        class="w-full"
+        class="w-full grow"
         [autocompleteEnabled]="true"
         [placeholder]="search | searchWelcomeTextPipe: 'resourceType' : 3"
       />
 
       @if (filterPanelMode() == 'drawer') {
-        <p-button
-          size="large"
-          (click)="visible = !visible"
-          [badge]="search.activeFilterCount() === 0 ? undefined : search.activeFilterCount() + ''"
-        >
-          <ng-icon name="faSolidFilter" pButtonIcon></ng-icon>
-          <div pButtonLabel>
-            {{ 'search.filter.panel.open' | translate }}
-          </div>
-        </p-button>
+        <div>
+          <p-inputgroup>
+            <p-inputgroup-addon>
+              <p-button size="large" (click)="visible = !visible">
+                <ng-icon name="faSolidFilter" pButtonIcon></ng-icon>
+                <div pButtonLabel>
+                  {{ 'search.filter.panel.open' | translate }}
+                </div>
+              </p-button>
+            </p-inputgroup-addon>
+            <p-inputgroup-addon>
+              <p-button
+                size="large"
+                (click)="search.reset()"
+                [badge]="
+                  search.activeFilterCount() === 0 ? undefined : search.activeFilterCount() + ''
+                "
+              >
+                <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
+                <div pButtonLabel>&nbsp;</div>
+              </p-button>
+            </p-inputgroup-addon>
+          </p-inputgroup>
+        </div>
       }
     </div>
   </div>
@@ -33,7 +47,12 @@
         </div>
       }
       @case ('drawer') {
-        <p-drawer [(visible)]="visible" header="Filter" [modal]="false">
+        <p-drawer
+          [(visible)]="visible"
+          [header]="'search.filter.title' | translate"
+          [modal]="false"
+          position="right"
+        >
           <app-side-panel />
         </p-drawer>
       }
@@ -42,10 +61,7 @@
     <div class="w-full" [class.xl:px-[300px]]="filterPanelMode() === 'drawer'">
       <app-result-header />
       <div class="flex flex-row justify-end items-center gap-2 my-4">
-        <p-select [options]="['drawer', 'side']" [(ngModel)]="filterPanelMode" />
-        @if (this.hasResults) {
-          <app-sort-results />
-        }
+        <!--        <p-select [options]="['drawer', 'side']" [(ngModel)]="filterPanelMode"/>-->
       </div>
       <app-result-view (onRecordClick)="handleRecordClick($event)" />
     </div>

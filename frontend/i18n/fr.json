@@ -10,6 +10,7 @@
     },
     "welcome.text": "Rechercher parmi {{count}} {{mainBuckets}}, ...",
     "filter": {
+      "title": "Focus",
       "panel": {
         "open": "Focus"
       }

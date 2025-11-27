@@ -3,16 +3,25 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import {
-  APPLICATION_CONFIGURATION,
   Aggregation,
+  APPLICATION_CONFIGURATION,
   SearchResultsNumber,
-  SearchActiveFilters,
+  SortResults,
 } from 'gn-library';
+import { Card } from 'primeng/card';
 
 @Component({
   selector: 'app-result-header',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonModule, Aggregation, SearchResultsNumber],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ButtonModule,
+    SortResults,
+    Aggregation,
+    SearchResultsNumber,
+    Card,
+  ],
   templateUrl: './result-header.html',
   styleUrl: './result-header.scss',
 })
