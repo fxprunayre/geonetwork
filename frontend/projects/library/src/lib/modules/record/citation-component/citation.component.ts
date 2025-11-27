@@ -1,22 +1,14 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  signal,
-  computed,
-  inject,
-  input,
-  effect,
-} from '@angular/core';
+import { Component, computed, effect, inject, input, OnChanges, signal } from '@angular/core';
 import { RecordsService } from 'gn4-api-client';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { TranslateService } from '@ngx-translate/core';
 import { Button, ButtonDirective } from 'primeng/button';
 import { Card } from 'primeng/card';
+import { faSolidQuoteRight } from '@ng-icons/font-awesome/solid';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 
 interface FormatOption {
   id: string;
@@ -27,7 +19,17 @@ interface FormatOption {
   selector: 'app-citation-component',
   standalone: true,
   templateUrl: './citation.component.html',
-  imports: [FormsModule, CommonModule, TranslatePipe, ToastModule, Button, ButtonDirective, Card],
+  imports: [
+    FormsModule,
+    CommonModule,
+    TranslatePipe,
+    ToastModule,
+    Button,
+    ButtonDirective,
+    Card,
+    NgIcon,
+  ],
+  viewProviders: [provideIcons({ faSolidQuoteRight })],
   providers: [MessageService],
 })
 export class CitationComponent implements OnChanges {
@@ -128,7 +130,7 @@ export class CitationComponent implements OnChanges {
       },
       error: (err: any) => {
         console.error('Error loading citation for', fmt, err);
-        this.citationText.set('Error loading citation.');
+        this.citationText.set('');
         this.loading.set(false);
       },
     });

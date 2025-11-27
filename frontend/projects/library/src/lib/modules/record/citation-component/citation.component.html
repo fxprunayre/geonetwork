@@ -2,42 +2,58 @@
   <p-toast></p-toast>
 
   <p-card class="my-10" [header]="'citation.title' | translate">
-    <div class="flex gap-2 mb-4">
-      @for (f of formats(); track f.id) {
-        <p-button severity="secondary" (click)="getCitation(f.id)">
-          {{ f.label }}
-        </p-button>
-      }
-    </div>
-
-    <div class="flex gap-3 mb-4">
-      <p-button (click)="copyToClipboard()">
-        {{ 'citation.copy' | translate }}
-      </p-button>
-
-      <a
-        pButton
-        [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
-        [download]="filename()"
-        class="p-button p-component"
-      >
-        {{ 'citation.download' | translate }}
-      </a>
-    </div>
-
-    @if (loading()) {
-      <div class="italic text-neutral-500 mb-4">
-        {{ 'citation.loading' | translate }}
+    <ng-template #title>
+      <div class="flex flex-row">
+        <div class="grow">
+          <span class="">{{ 'citation.title' | translate }}</span>
+        </div>
+        <div class="flex gap-2 mb-4">
+          @for (f of formats(); track f.id) {
+            <p-button
+              severity="secondary"
+              size="small"
+              [disabled]="currentFormat() === f.id"
+              [raised]="currentFormat() === f.id"
+              (click)="getCitation(f.id)"
+            >
+              {{ f.label }}
+            </p-button>
+          }
+        </div>
       </div>
-    } @else {
-      @if (!isCode()) {
-        <div [innerHTML]="citationText()"></div>
-      } @else {
-        <pre class="bg-neutral-900 text-neutral-200 p-4 rounded">
-        {{ citationText() }}
-      </pre
+    </ng-template>
+    <div class="relative min-h-[160px]">
+      <div class="flex gap-3 mb-4">
+        <p-button size="small" (click)="copyToClipboard()">
+          {{ 'citation.copy' | translate }}
+        </p-button>
+
+        <a
+          pButton
+          [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
+          [download]="filename()"
+          size="small"
+          class="p-button p-component"
         >
+          {{ 'citation.download' | translate }}
+        </a>
+      </div>
+
+      @if (loading()) {
+        <div class="italic text-neutral-500 mb-4">
+          {{ 'citation.loading' | translate }}
+        </div>
+      } @else {
+        @if (!isCode()) {
+          <div [innerHTML]="citationText()"></div>
+        } @else {
+          <pre class="bg-neutral-900 text-neutral-200 p-4 rounded">{{ citationText() }}</pre>
+        }
       }
-    }
+      <ng-icon
+        name="faSolidQuoteRight"
+        class="absolute -top-0 -right-0 text-[150px] text-neutral-200 opacity-20 pointer-events-none"
+      ></ng-icon>
+    </div>
   </p-card>
 }
