@@ -47,6 +47,7 @@ import { CitationComponent } from '../citation-component/citation.component';
 import { Fieldset } from 'primeng/fieldset';
 import { Datasource } from '../../data/duck-db.service';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
+import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
 
 export const DEFAULT_TAB = 'about';
 
@@ -88,6 +89,7 @@ export const DEFAULT_TAB = 'about';
     NgIcon,
     Fieldset,
     ExplorePanel,
+    RecordHarvesterLogo,
   ],
   viewProviders: [
     provideIcons({

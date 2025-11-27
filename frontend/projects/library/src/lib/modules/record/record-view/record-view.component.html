@@ -244,7 +244,9 @@
 
       <p-card class="my-10">
         <span class="block text-[#3a75ab]">Catalogue</span>
-        Catalogue/harvester logo.
+        @if (record.logo; as logo) {
+          <app-record-harvester-logo [logo]="logo" />
+        }
       </p-card>
     </div>
   </div>
