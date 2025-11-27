@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import chroma from 'chroma-js';
 import { palette } from '@primeuix/themes';
 
 @Injectable({
@@ -12,5 +11,8 @@ export class ThemingService {
 
   updateCssVariable(variableName: string, cssValue: string): void {
     document.documentElement.style.setProperty(variableName, cssValue);
+  }
+  getCssVariable(variableName: string): string {
+    return getComputedStyle(document.documentElement).getPropertyValue(variableName);
   }
 }
