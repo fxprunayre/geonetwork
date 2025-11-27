@@ -6,6 +6,11 @@ import { Link } from 'gn-api-client';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 import { Router } from '@angular/router';
 
+interface Gn4MapCommand {
+  url: string;
+  name?: string;
+}
+
 @Component({
   selector: 'app-record-distribution-panel',
   imports: [KeyValuePipe, Badge, Button],
@@ -17,7 +22,12 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
   isExplorable = (link: Link) => {
     const url = link.urlObject?.['default'];
     if (url) {
-      return url.endsWith('.parquet') || url.endsWith('.json') || url.endsWith('.csv');
+      return (
+        url.endsWith('.parquet') ||
+        url.endsWith('.json') ||
+        url.endsWith('.csv') ||
+        link.protocol === 'OGC:WFS'
+      );
     }
     return false;
   };
@@ -27,7 +37,24 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
       queryParams: { datasource: link.urlObject?.['default'] },
     });
   };
-  addWmsLayers = (link: Link[]) => {
-    // TODO
+  addWmsLayers = (links: Link[]) => {
+    const command = links
+      .filter((link) => link.urlObject)
+      .map((link) => {
+        const cmd: Gn4MapCommand = {
+          url: encodeURIComponent(link.urlObject!['default']),
+        };
+        if (link.nameObject) {
+          cmd.name = link.nameObject['default'];
+        }
+        return cmd;
+      });
+    if (command.length > 0) {
+      const commandParameter = 'add=' + JSON.stringify(command);
+      window.open(
+        `https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map?${commandParameter}`,
+        'map',
+      );
+    }
   };
 }

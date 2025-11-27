@@ -1,24 +1,27 @@
 import {
   AfterViewInit,
   Component,
+  computed,
   effect,
   inject,
   input,
   output,
+  QueryList,
   signal,
   TemplateRef,
+  ViewChildren,
 } from '@angular/core';
-import { ViewportScroller } from '@angular/common';
+import { AsyncPipe, JsonPipe, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { SearchService } from '../../search/search.service';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import {
   faSolidCircleExclamation,
+  faSolidDatabase,
   faSolidDownload,
   faSolidShareNodes,
-  faSolidDatabase,
 } from '@ng-icons/font-awesome/solid';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { provideIcons } from '@ng-icons/core';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 import { RecordField } from '../record-field/record-field';
@@ -34,20 +37,15 @@ import { RecordFieldType } from '../record-field-type/record-field-type';
 import { Chip } from 'primeng/chip';
 import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
 import { ActivatedRoute } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, first } from 'rxjs';
 import { RecordFieldDates } from '../record-field-dates/record-field-dates';
 import { AssociatedPanel } from '../associated/associated-panel/associated-panel';
-import { Perspective } from '../../data/perspective/perspective';
-import { DatasourceSelect } from '../../data/datasource-select/datasource-select';
 import { FormsModule } from '@angular/forms';
-import { NgTemplateOutlet, JsonPipe, AsyncPipe } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
 import { Card } from 'primeng/card';
 import { CitationComponent } from '../citation-component/citation.component';
-import { Fieldset } from 'primeng/fieldset';
-import { Datasource } from '../../data/duck-db.service';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
-import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
+import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 
 export const DEFAULT_TAB = 'about';
 
@@ -77,19 +75,14 @@ export const DEFAULT_TAB = 'about';
     AssociatedPanel,
     DataModelPanel,
     RecordFieldDates,
-    Perspective,
-    DatasourceSelect,
     FormsModule,
     NgTemplateOutlet,
     JsonPipe,
     AsyncPipe,
-    AccordionModule,
     Card,
     CitationComponent,
-    NgIcon,
-    Fieldset,
     ExplorePanel,
-    RecordHarvesterLogo,
+    ScrollSpy,
   ],
   viewProviders: [
     provideIcons({
@@ -104,15 +97,11 @@ export const DEFAULT_TAB = 'about';
 export class RecordViewComponent implements AfterViewInit {
   uuid = input<string | null>();
   tab = input<string>(DEFAULT_TAB);
-
   layout = input<'fieldset' | 'panel' | ''>('');
-
   backButtonTplRef = input<TemplateRef<unknown>>();
 
   record = signal<IndexRecord | undefined>(undefined);
-
   recordStatus = signal<string | undefined>(undefined);
-
   mainVocabularies = signal(['th_sextant-theme']);
 
   onRecordClick = output<string>();
@@ -124,8 +113,10 @@ export class RecordViewComponent implements AfterViewInit {
   constructor() {
     effect(() => {
       const uuid = this.uuid();
-      if (!uuid) return;
-
+      if (!uuid) {
+        this.record.set(undefined);
+        return;
+      }
       this.searchService
         .getById(uuid, [
           RelatedItemType.Parent,
@@ -141,18 +132,19 @@ export class RecordViewComponent implements AfterViewInit {
           RelatedItemType.Associated,
         ])
         .subscribe({
-          next: (result) => {
-            if (result) {
-              this.record.set(result);
-            } else {
-              this.recordStatus.set('not-found-or-not-shared-with-you');
-            }
-          },
-          error: (error) => {
-            this.recordStatus.set('not-found-or-not-shared-with-you');
-          },
+          next: (result) => this.record.set(result ?? undefined),
+          error: () => this.recordStatus.set('not-found-or-not-shared-with-you'),
         });
     });
+  }
+
+  getSectionIds(sections: any[]): string[] {
+    return sections.map((s) => s.label);
+  }
+
+  hasDataModel(): boolean {
+    const record = this.record();
+    return record?.featureTypes !== undefined && record?.featureTypes.length > 0;
   }
 
   handleRecordClick(uuid: string) {
@@ -160,12 +152,8 @@ export class RecordViewComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.route.fragment.pipe(filter((fragment) => !!fragment)).subscribe((fragment) => {
-      if (fragment) {
-        setTimeout(() => {
-          this.scroller.scrollToAnchor(fragment);
-        }, 100);
-      }
+    this.route.fragment.pipe(filter(Boolean)).subscribe((fragment) => {
+      setTimeout(() => this.scroller.scrollToAnchor(fragment), 100);
     });
   }
 
@@ -175,28 +163,18 @@ export class RecordViewComponent implements AfterViewInit {
 
   getConstraints(): { default: string; link: string } {
     const constraint = this.record()?.['MD_LegalConstraintsUseLimitationObject']?.[0];
-    return {
-      default: constraint?.default ?? '',
-      link: constraint?.link ?? '',
-    };
+    return { default: constraint?.default ?? '', link: constraint?.link ?? '' };
   }
 
   getUseConstraint(): { default: string; link: string } {
     const constraint = this.record()?.['cl_useConstraints']?.[0];
-    return {
-      default: constraint?.default ?? '',
-      link: constraint?.link ?? '',
-    };
+    return { default: constraint?.default ?? '', link: constraint?.link ?? '' };
   }
 
   getOtherConstraint(): { default: string; link: string } {
     const constraint = this.record()?.['MD_LegalConstraintsOtherConstraintsObject']?.[0];
-    return {
-      default: constraint?.default ?? '',
-      link: constraint?.link ?? '',
-    };
+    return { default: constraint?.default ?? '', link: constraint?.link ?? '' };
   }
 
   protected readonly RelatedItemType = RelatedItemType;
-  protected readonly Object = Object;
 }

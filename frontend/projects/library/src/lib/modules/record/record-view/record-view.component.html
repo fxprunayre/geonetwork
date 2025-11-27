@@ -7,6 +7,7 @@
   <ng-container *ngTemplateOutlet="backButtonTplRef() || defaultBackButton"></ng-container>
   <app-record-view-header [record]="record" [vocabularies]="mainVocabularies()" />
 
+  <!-- Content Templates for Accordion Sections -->
   <ng-template #datesContent>
     <app-record-field [label]="'record.field.resourceDate' | translate">
       <app-record-field-dates [record]="record" />
@@ -31,13 +32,11 @@
         </app-record-field>
       </div>
     </div>
-
     <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Parent]"
       (onRecordClick)="handleRecordClick($event)"
     />
-
     <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Children]"
@@ -47,7 +46,6 @@
 
   <ng-template #dataAccessContent>
     <app-record-distribution-panel [record]="record" />
-
     <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Services, RelatedItemType.Datasets]"
@@ -62,17 +60,13 @@
   <ng-template #licenseContent>
     <app-record-field [label]="'Constraints'">
       <span class="block text-[#3a75ab]"> Use limitation:</span>
-      <a [href]="getConstraints().link" target="_blank" class="font-bold">
-        {{ getConstraints().default }}
-      </a>
+      <a [href]="getConstraints().link" target="_blank" class="font-bold">{{
+        getConstraints().default
+      }}</a>
       <span class="block text-[#3a75ab]"> Use constraints:</span>
-      <a [href]="getUseConstraint().link" target="_blank">
-        {{ getUseConstraint().default }}
-      </a>
+      <a [href]="getUseConstraint().link" target="_blank">{{ getUseConstraint().default }}</a>
       <span class="block text-[#3a75ab]"> Other constraints:</span>
-      <a [href]="getOtherConstraint().link" target="_blank">
-        {{ getOtherConstraint().default }}
-      </a>
+      <a [href]="getOtherConstraint().link" target="_blank">{{ getOtherConstraint().default }}</a>
     </app-record-field>
   </ng-template>
 
@@ -92,26 +86,22 @@
   <ng-template #coverageContent>
     <app-record-field [label]="'Geospatial coverage'">
       @if (record.geom) {
-        <pre>
-         {{ record.geom[0]?.['coordinates'] | json }}
-        </pre>
+        <pre>{{ record.geom[0]?.['coordinates'] | json }}</pre>
       }
     </app-record-field>
-
     <app-record-field [label]="'Temporal coverage'">
       @if (record.resourceTemporalExtentDetails) {
         <p>
-          {{ record.resourceTemporalExtentDetails?.[0]?.start?.date }}
-          - {{ record.resourceTemporalExtentDetails?.[0]?.end?.date }}
+          {{ record.resourceTemporalExtentDetails?.[0]?.start?.date }} -
+          {{ record.resourceTemporalExtentDetails?.[0]?.end?.date }}
         </p>
       }
     </app-record-field>
-
     <app-record-field [label]="'Vertical coverage'">
       @if (record.resourceVerticalRange) {
         <p>
-          {{ record.resourceVerticalRange?.[0]?.gte }}
-          - {{ record.resourceVerticalRange?.[0]?.lte }} ({{
+          {{ record.resourceVerticalRange?.[0]?.gte }} -
+          {{ record.resourceVerticalRange?.[0]?.lte }} ({{
             record.resourceVerticalRange?.[0]?.unit
           }})
         </p>
@@ -123,7 +113,6 @@
     <app-record-field [label]="'Data type'">
       <app-record-field-type [record]="record" [withSpatialType]="true" />
     </app-record-field>
-
     <app-record-field [label]="'Resolution'">
       @for (res of record.resolutionDistance; track $index) {
         <p-chip [label]="res"></p-chip>
@@ -132,7 +121,6 @@
         <p-chip [label]="'1:' + scale"></p-chip>
       }
     </app-record-field>
-
     <app-record-field [label]="'Coordinate system'">
       @for (crs of record.coordinateSystem; track $index) {
         <p-chip [label]="crs"></p-chip>
@@ -161,97 +149,103 @@
 
   <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
-  <div class="flex flex-row gap-4 mt-25 relative">
-    <div class="w-3/5">
-      <p-accordion>
-        <ng-template #metadata>
-          @for (
-            section of [
-              { label: 'dates', tpl: datesContent },
-              { label: 'contacts', tpl: contactsContent },
-              { label: 'about', tpl: aboutContent },
-              { label: 'usageAndAccess', tpl: licenseContent },
-              { label: 'coverage', tpl: coverageContent },
-              { label: 'spatialInfo', tpl: spatialInfoContent },
-              { label: 'dataModel', tpl: dataModel },
-              { label: 'lineage', tpl: lineageContent },
-              { label: 'classification', tpl: classificationContent },
-              { label: 'similarResources', tpl: similarContent, collapsed: true },
-            ];
-            track section.label;
-            let i = $index
-          ) {
-            @let sectionLabel =
-              'record.view.section.' + section.label
-                | translate: { resourceType: record.resourceType };
+  <!-- Main Layout with Tabs -->
+  <p-tabs [value]="tab()" lazy>
+    <p-tablist class="text-xl">
+      <p-tab value="about">{{ 'record.view.section.description' | translate }}</p-tab>
+      <p-tab value="data-access">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
+      <p-tab value="explore">{{ 'record.view.section.explore' | translate }}</p-tab>
+      <p-tab value="publications">{{ 'record.view.section.publications' | translate }}</p-tab>
+      <p-tab value="citation">{{ 'record.view.section.citation' | translate }}</p-tab>
+      <p-tab value="discussions">{{ 'record.view.section.discussions' | translate }}</p-tab>
+    </p-tablist>
 
-            <p-accordion-panel [value]="i">
-              <p-accordion-header>{{ sectionLabel }}</p-accordion-header>
-              <p-accordion-content>
-                <section
-                  [id]="section.label"
-                  class="border border-surface-200 rounded-xl p-10 mb-10"
-                >
-                  <div>
-                    <ng-container *ngTemplateOutlet="section.tpl" />
-                  </div>
-                </section>
-              </p-accordion-content>
-            </p-accordion-panel>
-          }
-        </ng-template>
-      </p-accordion>
-      <p-tabs [value]="tab()" lazy>
-        <p-tablist>
-          <p-tab value="about">{{ 'record.view.section.description' | translate }}</p-tab>
-          <p-tab value="data-access">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
-          <p-tab value="explore">{{ 'record.view.section.explore' | translate }}</p-tab>
-          <p-tab value="publications">{{ 'record.view.section.publications' | translate }}</p-tab>
-          <p-tab value="citation">{{ 'record.view.section.citation' | translate }}</p-tab>
-          <p-tab value="discussions">{{ 'record.view.section.discussions' | translate }}</p-tab>
-        </p-tablist>
+    <p-tabpanels>
+      <p-tabpanel value="about">
+        @let sections =
+          [
+            { label: 'about', tpl: aboutContent },
+            { label: 'dates', tpl: datesContent },
+            { label: 'contacts', tpl: contactsContent },
+            { label: 'usageAndAccess', tpl: licenseContent },
+            { label: 'dataModel', tpl: dataModel, hidden: !hasDataModel() },
+            { label: 'coverage', tpl: coverageContent },
+            { label: 'spatialInfo', tpl: spatialInfoContent },
+            { label: 'lineage', tpl: lineageContent },
+            { label: 'classification', tpl: classificationContent },
+          ];
 
-        <p-tabpanels>
-          <p-tabpanel value="about">
-            <ng-container *ngTemplateOutlet="metadata"></ng-container>
-          </p-tabpanel>
-          <p-tabpanel value="data-access">
-            <ng-container *ngTemplateOutlet="dataAccess"></ng-container>
-          </p-tabpanel>
-          <p-tabpanel value="explore">
-            <app-explore-panel [record]="record" />
-          </p-tabpanel>
-          <p-tabpanel value="publications">
-            <ng-container *ngTemplateOutlet="relatedContent"></ng-container>
-          </p-tabpanel>
-          <p-tabpanel value="citation"> Citation </p-tabpanel>
-          <p-tabpanel value="discussions">
-            <app-feedback-panel />
-          </p-tabpanel>
-        </p-tabpanels>
-      </p-tabs>
-    </div>
-    <div class="w-2/5 sticky top-10 self-start">
-      <p-card class="mb-10">
-        <span class="block text-[#3a75ab]">Citation</span>
-        <app-citation-component [uuid]="record.uuid!" [format]="'html'"> </app-citation-component>
-      </p-card>
+        <div class="flex flex-row gap-4">
+          <div class="w-3/4" #spyTarget>
+            <p-accordion [multiple]="true" [value]="getSectionIds(sections)">
+              @for (section of sections; track section.label) {
+                @let sectionLabel =
+                  'record.view.section.' + section.label
+                    | translate: { resourceType: record.resourceType };
+                @if (section.hidden !== true) {
+                  <p-accordion-panel [value]="section.label">
+                    <p-accordion-header class="!text-xl">{{ sectionLabel }}</p-accordion-header>
+                    <p-accordion-content>
+                      <ng-container *ngTemplateOutlet="section.tpl; context: { record: record }" />
+                    </p-accordion-content>
+                  </p-accordion-panel>
+                }
+              }
+            </p-accordion>
+          </div>
+          <div class="w-1/4 sticky top-10 self-start">
+            <app-scroll-spy
+              [target]="spyTarget"
+              [section]="'p-accordion > p-accordion-panel'"
+              [title]="'p-accordion-header'"
+            />
+          </div>
+        </div>
+      </p-tabpanel>
 
-      <p-card class="my-10">
-        <span class="block text-[#3a75ab]">Contact</span>
-        Main contact content goes here.
-      </p-card>
+      <p-tabpanel value="data-access">
+        <div class="flex flex-row gap-4">
+          <div class="w-3/4">
+            <ng-container
+              *ngTemplateOutlet="dataAccessContent; context: { record: record }"
+            ></ng-container>
+          </div>
+          <div class="w-1/4">
+            <p-card class="my-10" [header]="'Format'"> </p-card>
 
-      <p-card class="my-10">
-        <span class="block text-[#3a75ab]">Catalogue</span>
-        @if (record.logo; as logo) {
-          <app-record-harvester-logo [logo]="logo" />
-        }
-      </p-card>
-    </div>
-  </div>
+            <p-card class="my-10" [header]="'Distributor'"> </p-card>
+          </div>
+        </div>
+      </p-tabpanel>
 
-  <ng-template #dataAccess>
-    <ng-container *ngTemplateOutlet="dataAccessContent" />
-  </ng-template>
+      <p-tabpanel value="explore">
+        <app-explore-panel [record]="record" />
+      </p-tabpanel>
+
+      <p-tabpanel value="publications">
+        <ng-container
+          *ngTemplateOutlet="relatedContent; context: { record: record }"
+        ></ng-container>
+      </p-tabpanel>
+
+      <p-tabpanel value="citation">
+        <div class="flex flex-row gap-4">
+          <div class="w-3/4">
+            <app-citation-component
+              [uuid]="record.uuid!"
+              [format]="'html'"
+            ></app-citation-component>
+          </div>
+          <div class="w-1/4">
+            <p-card class="my-10" [header]="'Contact'"> Main contact content goes here. </p-card>
+            <p-card class="my-10" [header]="'Catalogue'"> Catalogue/harvester logo. </p-card>
+          </div>
+        </div>
+      </p-tabpanel>
+
+      <p-tabpanel value="discussions">
+        <app-feedback-panel />
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
 }

@@ -25,6 +25,7 @@ The current theme is based on PrimeUIX Aura preset. See https://github.com/prime
 To set up the development environment and start the main app, run the following commands:
 
 ```sh
+nvm use v22.19.0
 npm install
 npm run build 
 npm run start

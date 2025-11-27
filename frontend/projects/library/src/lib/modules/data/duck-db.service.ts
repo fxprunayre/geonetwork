@@ -1,11 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, Renderer2, signal } from '@angular/core';
 import * as duckdb from '@duckdb/duckdb-wasm';
-import { AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
+import { AsyncDuckDB, AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
 import { IndexRecord, Link } from 'gn-api-client';
+import perspective from '@perspective-dev/client';
+import perspective_viewer from '@perspective-dev/viewer';
 
 export interface Datasource {
   url: string;
-  format: 'csv' | 'parquet' | 'json' | 'geojson' | 'gml' | 'wfs' | 'arrow';
+  format: 'csv' | 'parquet' | 'json' | 'geojson' | 'gml' | 'wfs' | 'arrow' | 'gdal';
+  layer?: string;
 }
 
 export interface DatasourceLoadingProgress {
@@ -15,7 +18,7 @@ export interface DatasourceLoadingProgress {
     | 'size'
     | 'downloading'
     | 'completed'
-    | 'db'
+    | 'database'
     | 'format'
     | 'loading'
     | 'canceled'
@@ -31,10 +34,12 @@ export interface DatasourceLoadingProgress {
   providedIn: 'root',
 })
 export class DuckDbService {
-  private db?: duckdb.AsyncDuckDB;
-  private conn?: duckdb.AsyncDuckDBConnection;
+  private db?: AsyncDuckDB;
+  private conn?: AsyncDuckDBConnection;
   private initialized = false;
+  private perspectiveInitialized = false;
   private abortController: AbortController | null = null;
+  private loadingMode: 'duckdb' | 'browser' = 'duckdb';
 
   public progress = signal<DatasourceLoadingProgress>({
     status: 'idle',
@@ -51,7 +56,7 @@ export class DuckDbService {
     const blob = new Blob([script], { type: 'application/javascript' });
     const blobUrl = URL.createObjectURL(blob);
     const worker = new Worker(blobUrl);
-    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+    URL.revokeObjectURL(blobUrl);
     return worker;
   }
 
@@ -65,15 +70,62 @@ export class DuckDbService {
       await this.db.instantiate(bundles.mainModule);
       this.conn = await this.db.connect();
 
-      await this.conn.query('INSTALL json; LOAD json;');
-      await this.conn.query('INSTALL spatial; LOAD spatial;');
-      await this.conn.query('INSTALL arrow FROM community; LOAD arrow;');
+      await this.conn.query(`
+        INSTALL json; LOAD json;
+        INSTALL spatial; LOAD spatial;
+      `);
+      // INSTALL arrow FROM community; LOAD arrow;
 
       this.initialized = true;
     } catch (e: any) {
-      console.error('Failed to initialize DuckDB', e);
-      throw new Error(`Failed to initialize DuckDB: ${e?.message || e}`);
+      const errorMessage = `DuckDB initialization failed: ${e?.message || e}`;
+      console.error(errorMessage, e);
+      throw new Error(errorMessage);
     }
+  }
+
+  async initializePerspective(renderer: Renderer2): Promise<any> {
+    if (this.perspectiveInitialized) return;
+
+    try {
+      const scriptUrls = [
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-datagrid/dist/cdn/perspective-viewer-datagrid.js',
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-d3fc/dist/cdn/perspective-viewer-d3fc.js',
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers/dist/cdn/perspective-viewer-openlayers.js',
+      ];
+      const wasmUrls = [
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/server/dist/wasm/perspective-server.wasm',
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer/dist/wasm/perspective-viewer.wasm',
+      ];
+
+      await Promise.all([
+        ...scriptUrls.map((url) => this.loadScript(url, true, renderer)),
+        perspective.init_server(fetch(wasmUrls[0])),
+        perspective_viewer.init_client(fetch(wasmUrls[1])),
+      ]);
+
+      this.perspectiveInitialized = true;
+    } catch (e: any) {
+      const errorMessage = `Perspective initialization failed: ${e?.message || e}`;
+      console.error(errorMessage, e);
+      throw new Error(errorMessage);
+    }
+  }
+
+  private loadScript(url: string, module = false, renderer: Renderer2): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (document.head.querySelector(`script[src="${url}"]`)) {
+        resolve();
+        return;
+      }
+      const script = renderer.createElement('script');
+      script.src = url;
+      script.type = module ? 'module' : 'text/javascript';
+      script.async = false;
+      script.onload = () => resolve();
+      script.onerror = (err: any) => reject(new Error(`Script load error: ${url}`, { cause: err }));
+      renderer.appendChild(document.head, script);
+    });
   }
 
   async getConnection(): Promise<AsyncDuckDBConnection> {
@@ -84,54 +136,54 @@ export class DuckDbService {
     return this.conn;
   }
 
-  getSupportedDatasource(record: IndexRecord) {
-    const supportedLinks: Datasource[] = [];
-    if (!record) return supportedLinks;
+  getSupportedDatasource(record: IndexRecord): Datasource[] {
+    if (!record?.link) return [];
 
-    record.link?.forEach((link: Link) => {
+    return record.link.reduce((acc: Datasource[], link: Link) => {
       const url = link.urlObject?.['default'] || '';
       const protocol = link.protocol || '';
       const extension = url.split('.').pop()?.toLowerCase();
-      if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'arrow') {
-        supportedLinks.push({ url: url, format: 'arrow' });
-      } else if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'parquet') {
-        supportedLinks.push({ url: url, format: 'parquet' });
-      } else if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'csv') {
-        supportedLinks.push({ url: url, format: 'csv' });
-      } else if (
-        protocol.startsWith('WWW:DOWNLOAD') &&
-        (extension === 'json' || url.indexOf('f=pjson') != -1)
-      ) {
-        supportedLinks.push({ url: url, format: 'json' });
-      } else if (protocol.startsWith('WWW:DOWNLOAD') && extension === 'gml') {
-        supportedLinks.push({ url: url, format: 'gml' });
-      }
-    });
 
-    return supportedLinks;
+      if (protocol.startsWith('OGC:WFS')) {
+        const layerName = link.nameObject?.['default'] || '';
+        acc.push({ url, format: 'wfs', layer: layerName });
+      } else if (protocol.startsWith('WWW:DOWNLOAD')) {
+        const formatMapping: { [key: string]: Datasource['format'] } = {
+          arrow: 'arrow',
+          parquet: 'parquet',
+          csv: 'csv',
+          gml: 'gml',
+        };
+        if (extension && formatMapping[extension]) {
+          acc.push({ url, format: formatMapping[extension] });
+        } else if (extension === 'json' || url.includes('f=pjson')) {
+          acc.push({ url, format: 'json' });
+        }
+      }
+      return acc;
+    }, []);
   }
 
   async checkDatasourceSize(fileUrl: string, signal: AbortSignal): Promise<void> {
-    let totalBytes = 0;
     const headResponse = await fetch(fileUrl, { method: 'HEAD', signal });
     if (!headResponse.ok) {
-      throw new Error(`Erreur HTTP lors de la vérification HEAD: ${headResponse.status}`);
+      throw new Error(`HTTP HEAD check failed: ${headResponse.status}`);
     }
 
-    const contentLengthHeader = headResponse.headers.get('Content-Length');
+    const contentLength = headResponse.headers.get('Content-Length');
     const contentType = headResponse.headers.get('Content-Type');
-    totalBytes = contentLengthHeader ? parseInt(contentLengthHeader, 10) : 0;
+    const totalBytes = contentLength ? parseInt(contentLength, 10) : 0;
 
     this.progress.update((p) => ({
       ...p,
-      errorMessage:
-        totalBytes === 0
-          ? 'Warning: No idea about the datasource size (Content-Length missing).'
-          : `Downloading ${totalBytes} ...`,
       status: 'downloading',
       progress: 10,
-      totalBytes: totalBytes,
+      totalBytes,
       contentType: this.getFileType(contentType),
+      errorMessage:
+        totalBytes === 0
+          ? 'Warning: Datasource size is unknown (Content-Length missing).'
+          : undefined,
     }));
   }
 
@@ -140,40 +192,32 @@ export class DuckDbService {
     signal: AbortSignal,
   ): Promise<{ buffer: ArrayBuffer; contentType: string }> {
     this.progress.update((p) => ({ ...p, status: 'downloading', errorMessage: undefined }));
-
-    const totalBytes = this.progress().totalBytes;
     const response = await fetch(fileUrl, { signal });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    if (!response.ok || !response.body) {
+      const errorMsg = `HTTP error: ${response.status}`;
+      this.progress.update((p) => ({ ...p, status: 'error', errorMessage: errorMsg }));
+      throw new Error(errorMsg);
     }
 
-    const reader = response.body!.getReader();
-    let downloadedBytes = 0;
+    const totalBytes = this.progress().totalBytes;
+    const reader = response.body.getReader();
     const chunks: Uint8Array[] = [];
+    let downloadedBytes = 0;
 
     while (true) {
       const { done, value } = await reader.read();
-      if (done) {
-        break;
-      }
+      if (done) break;
 
-      chunks.push(value!);
-      downloadedBytes += value!.length;
-
-      let progress = totalBytes > 0 ? (downloadedBytes / totalBytes) * 50 : 0;
-
-      this.progress.update((p) => ({
-        ...p,
-        downloadedBytes,
-        progress: progress,
-      }));
+      chunks.push(value);
+      downloadedBytes += value.length;
+      const progress = totalBytes > 0 ? (downloadedBytes / totalBytes) * 50 : 0;
+      this.progress.update((p) => ({ ...p, downloadedBytes, progress }));
     }
 
     this.progress.update((p) => ({ ...p, status: 'completed' }));
-    const receivedSize = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
 
-    const finalBuffer = new Uint8Array(receivedSize);
+    const finalBuffer = new Uint8Array(downloadedBytes);
     let offset = 0;
 
     for (const chunk of chunks) {
@@ -184,27 +228,26 @@ export class DuckDbService {
   }
 
   cancelDownload(): void {
-    if (this.abortController) {
-      this.abortController.abort();
-    }
+    this.abortController?.abort();
   }
 
   getFileType(contentType: string | null): string | null {
     if (!contentType) return null;
-
-    let inferredExt: string | undefined;
-
-    if (contentType.includes('csv')) inferredExt = 'csv';
-    else if (contentType.includes('parquet')) inferredExt = 'parquet';
-    else if (contentType.includes('text/xml; subtype=gml/2.1.2')) inferredExt = 'gdal';
-    else if (contentType.includes('geo+json')) inferredExt = 'geojson';
-    else if (contentType.includes('application/vnd.apache.arrow.stream')) inferredExt = 'arrows';
-    else if (contentType.includes('json')) inferredExt = 'json';
-
-    return inferredExt || null;
+    const typeMap: { [key: string]: string } = {
+      csv: 'csv',
+      parquet: 'parquet',
+      'text/xml; subtype=gml/2.1.2': 'gdal',
+      'geo+json': 'geojson',
+      'application/vnd.apache.arrow.stream': 'arrows',
+      json: 'json',
+    };
+    for (const [key, value] of Object.entries(typeMap)) {
+      if (contentType.includes(key)) return value;
+    }
+    return null;
   }
 
-  async loadDatasource(fileUrl: string): Promise<void> {
+  async loadDatasource(ds: Datasource): Promise<void> {
     this.progress.set({
       status: 'connecting',
       progress: 0,
@@ -212,121 +255,113 @@ export class DuckDbService {
       totalBytes: 0,
       contentType: null,
     });
-
-    if (!fileUrl) return;
+    if (!ds.url) return;
 
     this.abortController = new AbortController();
     const signal = this.abortController.signal;
-    await this.checkDatasourceSize(fileUrl, signal);
+    await this.checkDatasourceSize(ds.url, signal);
 
+    const fileName = this.buildFileName(ds);
+
+    if (this.loadingMode === 'browser' || ds.format === 'wfs') {
+      await this.browserDownloadMode(ds, fileName, signal);
+    } else {
+      await this.loadData(fileName, undefined, ds);
+    }
+  }
+
+  private buildFileName(ds: Datasource): string {
+    const name = ds.url.split('/').pop() || 'data';
+    return `${name}.${ds.format}`;
+  }
+
+  private buildWfsGetFeatureUrl(ds: Datasource): string {
+    const url = new URL(ds.url);
+    url.searchParams.set('SERVICE', 'WFS');
+    url.searchParams.set('VERSION', '2.0.0');
+    url.searchParams.set('REQUEST', 'GetFeature');
+    if (ds.layer) {
+      url.searchParams.set('TYPENAME', ds.layer);
+    }
+    url.searchParams.set('OUTPUTFORMAT', 'application/json');
+    return url.toString();
+  }
+
+  /**
+   * Browser download mode: download the entire file into memory, then load into DuckDB.
+   * It also infers the file type if missing or unknown from data content.
+   */
+  private async browserDownloadMode(ds: Datasource, fileName: string, signal: AbortSignal) {
+    const fileUrl = ds.format === 'wfs' ? this.buildWfsGetFeatureUrl(ds) : ds.url;
     try {
-      const data = await this.downloadDatasource(fileUrl, signal);
-      let fileName = fileUrl.split('/').pop() || 'data';
-      const fileExt = (fileName.split('.').pop() || '').toLowerCase();
-      const supportedExts = ['csv', 'parquet', 'json', 'geojson', 'gml', 'arrows', 'arrow'];
+      const { buffer, contentType } = await this.downloadDatasource(fileUrl, signal);
+      let inferredExt = this.getFileType(contentType);
 
-      if (!supportedExts.includes(fileExt)) {
-        const contentType = data.contentType;
-        let inferredExt = this.getFileType(contentType);
-
-        if (!inferredExt) {
-          const uint8 = new Uint8Array(data.buffer, 0, 4);
-          if (uint8[0] === 80 && uint8[1] === 65 && uint8[2] === 82 && uint8[3] === 49) {
-            inferredExt = 'parquet';
-          } else {
-            const text = new TextDecoder().decode(data.buffer.slice(0, 1)).trim();
-            if (text === '{' || text === '[') {
-              inferredExt = 'json';
-            }
-          }
-        }
-
-        if (inferredExt) {
-          fileName = `${fileName}.${inferredExt}`;
+      if (!inferredExt) {
+        const uint8 = new Uint8Array(buffer, 0, 4);
+        if (uint8[0] === 80 && uint8[1] === 65 && uint8[2] === 82 && uint8[3] === 49) {
+          // 'PAR1'
+          inferredExt = 'parquet';
         } else {
-          fileName = `${fileName}.csv`;
+          const text = new TextDecoder().decode(buffer.slice(0, 1)).trim();
+          if (text === '{' || text === '[') {
+            inferredExt = 'json';
+          }
         }
       }
 
-      await this.loadData(fileName, data.buffer);
+      const finalFileName = inferredExt ? `${fileName}.${inferredExt}` : `${fileName}.csv`;
+      await this.loadData(finalFileName, buffer, ds);
     } catch (e: any) {
       console.warn(`Failed to load from URL: ${e?.message || e}`);
     }
   }
 
-  async loadData(fileName: string, data: ArrayBuffer): Promise<void> {
+  /**
+   * Load data into DuckDB from file URL or ArrayBuffer.
+   */
+  async loadData(fileName: string, data?: ArrayBuffer, datasource?: Datasource): Promise<void> {
     try {
-      this.progress.update((p) => ({
-        ...p,
-        status: 'db',
-      }));
-
+      this.progress.update((p) => ({ ...p, status: 'database' }));
       await this.init();
       if (!this.db || !this.conn) return;
 
-      this.progress.update((p) => ({
-        ...p,
-        status: 'format',
-        progress: p.progress + 10,
-      }));
+      this.progress.update((p) => ({ ...p, status: 'format', progress: p.progress + 10 }));
 
-      const ext = (fileName.split('.').pop() || '').toLowerCase();
-      let reader: string;
-      switch (ext) {
-        case 'csv':
-          reader = 'read_csv_auto';
-          break;
-        case 'parquet':
-          reader = 'parquet_scan';
-          break;
-        case 'arrows':
-          reader = 'read_arrow';
-          break;
-        case 'json':
-          reader = 'read_json_auto';
-          break;
-        case 'gdal':
-        case 'geojson':
-          reader = 'ST_Read';
-          break;
-        default:
-          throw new Error(`Unsupported file type: .${ext}`);
+      const ext = datasource?.format || fileName.split('.').pop()?.toLowerCase() || '';
+      const readerMap: { [key: string]: string } = {
+        csv: 'read_csv_auto',
+        parquet: 'parquet_scan',
+        arrows: 'read_arrow',
+        json: 'read_json_auto',
+        gdal: 'ST_Read',
+        wfs: 'ST_Read',
+        geojson: 'ST_Read',
+      };
+      const reader = readerMap[ext];
+      if (!reader) throw new Error(`Unsupported file type: .${ext}`);
+
+      this.progress.update((p) => ({ ...p, status: 'loading', progress: p.progress + 20 }));
+
+      if (data) {
+        await this.db.registerFileBuffer(fileName, new Uint8Array(data));
       }
 
-      this.progress.update((p) => ({
-        ...p,
-        status: 'loading',
-        progress: p.progress + 10,
-      }));
+      const fromClause = `${reader}('${datasource && !data ? datasource.url : fileName}')`;
+      await this.conn.query(`CREATE OR REPLACE TABLE data AS SELECT * FROM ${fromClause};`);
 
-      await this.db.registerFileBuffer(fileName, new Uint8Array(data));
+      const countResult = await this.conn.query('SELECT count(*) as count FROM data;');
+      console.log(`Loaded ${countResult.get(0)?.['count']} records into DuckDB.`);
 
-      this.progress.update((p) => ({
-        ...p,
-        progress: p.progress + 10,
-      }));
-
-      console.log(`CREATE OR REPLACE TABLE data AS SELECT * FROM ${reader}('${fileName}');`);
-      await this.conn.query(
-        `CREATE OR REPLACE TABLE data AS SELECT * FROM ${reader}('${fileName}');`,
-      );
-
-      this.progress.update((p) => ({
-        ...p,
-        status: 'completed',
-        progress: 100,
-      }));
+      this.progress.update((p) => ({ ...p, status: 'completed', progress: 100 }));
     } catch (error: any) {
-      if (error.name === 'AbortError') {
-        this.progress.update((p) => ({ ...p, status: 'canceled', errorMessage: undefined }));
-      } else {
-        this.progress.update((p) => ({
-          ...p,
-          status: 'error',
-          errorMessage: `Error: ${error.message}`,
-        }));
-        console.error('Download error:', error);
-      }
+      const isAbort = error.name === 'AbortError';
+      this.progress.update((p) => ({
+        ...p,
+        status: isAbort ? 'canceled' : 'error',
+        errorMessage: isAbort ? undefined : `Error: ${error.message}`,
+      }));
+      if (!isAbort) console.error('Load data error:', error);
     }
   }
 
@@ -335,96 +370,35 @@ export class DuckDbService {
     const result = await conn.query(query);
     const data = (await (result as any).toArray?.()) ?? [];
 
-    const processRow = (row: any): any => {
+    return data.map((row: any) => {
       const newRow: { [key: string]: any } = {};
-      for (const [key, value] of Object.entries(row)) {
+      for (const [key, value] of Object.entries(row.toJSON())) {
         newRow[key] = typeof value === 'bigint' ? Number(value) : value;
       }
       return newRow;
-    };
-
-    return Array.isArray(data) ? data.map(Object.fromEntries).map(processRow) : [];
+    });
   }
 
-  async runQuery2(sql: string, preferArrow = true): Promise<ArrayBuffer | any[]> {
-    if (!this.initialized) await this.init();
-    const conn = await this.getConnection();
-
-    const result = await conn.query(sql);
-    // const result = await conn.query(`FROM to_arrow_ipc((${sql}))`);
-    // const reader = await arrow.RecordBatchReader.from(
-    //   new arrow.ByteStream(result)
-    // );
-    // const arrowTable = await reader.readAll();
-
-    // If the result object exposes an Arrow export method, prefer it when requested.
-    if (preferArrow && result && typeof (result as any).toArrow === 'function') {
-      try {
-        const arrowLike = await (result as any).toArrow();
-        const ab = this.toArrayBufferCopy(arrowLike);
-        if (ab) return ab;
-      } catch (err) {
-        console.warn('Arrow export failed, falling back to rows:', err);
-      }
-    }
-
-    // If the result exposes toArray or similar
-    if (result && typeof result.toArray === 'function') {
-      return result.toArray();
-    }
-
-    // If query returned a raw JS array
-    if (Array.isArray(result)) return result;
-
-    // If result has .data or .rows, normalize
-    if (result && Array.isArray((result as any).rows)) return (result as any).rows;
-    if (result && Array.isArray((result as any).data)) return (result as any).data;
-
-    // As a last resort try to convert tabular object to rows
-    if (result && typeof result === 'object') {
-      const maybeRows = Object.values(result).filter((v) => typeof v === 'object');
-      if (maybeRows.length) return maybeRows as any[];
-    }
-
-    return [];
-  }
-
-  private toArrayBufferCopy(arrowLike: any): ArrayBuffer | null {
-    if (!arrowLike) return null;
-    if (arrowLike instanceof ArrayBuffer) return arrowLike;
-    if (ArrayBuffer.isView(arrowLike)) {
-      const view = arrowLike as ArrayBufferView;
-      return new Uint8Array(
-        view.buffer,
-        view.byteOffset || 0,
-        view.byteLength || view.buffer.byteLength,
-      ).slice().buffer;
-    }
-    if (typeof SharedArrayBuffer !== 'undefined' && arrowLike instanceof SharedArrayBuffer) {
-      return new Uint8Array(arrowLike as any).slice().buffer;
-    }
-    try {
-      const u8 = new Uint8Array(arrowLike);
-      return u8.slice().buffer;
-    } catch {
-      return null;
-    }
+  async getGeometryColumns(tableName: string): Promise<string[]> {
+    const describe = await this.runQuery(`DESCRIBE ${tableName}`);
+    const geometryTypes = new Set(['GEOMETRY', 'POINT', 'LINE', 'POLYGON']);
+    return describe
+      .filter((row) => geometryTypes.has(row.column_type))
+      .map((row) => row.column_name);
   }
 
   async getColumnType(query: string, columnName: string): Promise<string | undefined> {
     const conn = await this.getConnection();
-    const typeResult = await conn.query(
+    const result = await conn.query(
       `SELECT typeof("${columnName}") AS coltype FROM (${query}) LIMIT 1;`,
     );
-    return typeResult.get(0)?.[`coltype`];
+    return result.get(0)?.['coltype'];
   }
 
   async getHistogram(query: string, columnName: string): Promise<any> {
     const conn = await this.getConnection();
-    const histResult = await conn.query(
-      `SELECT histogram("${columnName}") AS data FROM (${query});`,
-    );
-    const histData = histResult.get(0)?.[`data`];
-    return histData && typeof histData.toJSON === 'function' ? histData.toJSON() : null;
+    const result = await conn.query(`SELECT histogram("${columnName}") AS data FROM (${query});`);
+    const data = result.get(0)?.['data'];
+    return data?.toJSON?.() ?? null;
   }
 }

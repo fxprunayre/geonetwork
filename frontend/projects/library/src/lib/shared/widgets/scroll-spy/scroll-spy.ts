@@ -1,13 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  HostListener,
-  inject,
-  input,
-  ViewChild,
-} from '@angular/core';
-import { Button } from 'primeng/button';
+import { AfterViewInit, Component, input, OnDestroy, OnInit } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 
 interface SectionItem {
@@ -17,7 +8,8 @@ interface SectionItem {
 
 @Component({
   selector: 'app-scroll-spy',
-  imports: [Button, NgTemplateOutlet],
+  standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './scroll-spy.html',
   styles: [
     `
@@ -53,40 +45,65 @@ interface SectionItem {
       .scroll-spy-tab-active {
         background: var(--p-tabs-tab-active-background);
         border-color: var(--p-tabs-tab-active-border-color);
+        border-width: 0 0 0 var(--p-tabs-active-bar-height);
         color: var(--p-tabs-tab-active-color);
       }
     `,
   ],
 })
-export class ScrollSpy implements AfterViewInit {
+export class ScrollSpy implements OnInit, OnDestroy, AfterViewInit {
   navPosition = input<'aside' | 'top'>('aside');
 
-  private elementRef = inject(ElementRef);
+  target = input<HTMLElement>();
+  section = input('section');
+  title = input('h1');
 
   sections: SectionItem[] = [];
-
   activeSectionId: string | null = null;
-
   private sectionElements: NodeListOf<HTMLElement> | undefined;
 
   ngAfterViewInit() {
     setTimeout(() => this.initializeScrollSpy());
   }
 
-  initializeScrollSpy(): void {
-    const hostElement: HTMLElement = this.elementRef.nativeElement;
-    this.sectionElements = hostElement.querySelectorAll('section[id]');
+  ngOnInit(): void {
+    window.addEventListener('scroll', this.onScroll);
+  }
 
-    this.sections = Array.from(this.sectionElements).map((section) => {
-      const h1 = section.querySelector('h1');
-      const title = h1?.textContent?.trim() || section.getAttribute('data-spy-title') || section.id;
-      return {
-        id: section.id,
-        title: title,
-      };
+  ngOnDestroy(): void {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+
+  initializeScrollSpy(): void {
+    const target = this.target();
+    if (!target) {
+      this.sections = [];
+      this.sectionElements = undefined;
+      this.activeSectionId = null;
+      return;
+    }
+    this.sectionElements = target.querySelectorAll(`${this.section()}`);
+
+    this.sections = Array.from(this.sectionElements).flatMap((section) => {
+      const h1 = section.querySelector(this.title());
+      const id = h1?.getAttribute('id');
+
+      if (!id) {
+        console.warn(
+          `Scroll spy is skipping a section because its heading is missing an ID.`,
+          section,
+        );
+        return []; // Skip this section
+      }
+
+      const title = h1?.textContent?.trim() || section.getAttribute('data-spy-title') || id;
+
+      return [{ id, title }];
     });
 
-    this.activeSectionId = this.sections.length > 0 ? this.sections[0].id : null;
+    if (this.sections.length > 0 && !this.activeSectionId) {
+      this.activeSectionId = this.sections[0].id;
+    }
   }
 
   scrollTo(id: string): void {
@@ -102,8 +119,7 @@ export class ScrollSpy implements AfterViewInit {
     }
   }
 
-  @HostListener('window:scroll')
-  onScroll(): void {
+  onScroll = (): void => {
     if (!this.sectionElements) return;
 
     let currentActive: string | null = null;
@@ -111,12 +127,12 @@ export class ScrollSpy implements AfterViewInit {
 
     const headerOffset = 60;
 
-    this.sectionElements.forEach((section) => {
+    this.sectionElements.forEach((section, idx) => {
       if (section.offsetTop <= scrollPosition + headerOffset) {
-        currentActive = section.id;
+        currentActive = this.sections[idx].id;
       }
     });
 
     this.activeSectionId = currentActive;
-  }
+  };
 }
