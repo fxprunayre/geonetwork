@@ -84,6 +84,9 @@ export class ThemeDesigner {
     this.primeng.setThemeConfig({
       theme: {
         preset: definePreset(Aura, t),
+        options: {
+          darkModeSelector: '.no-dark-mode',
+        },
       },
     });
 
