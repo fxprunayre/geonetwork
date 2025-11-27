@@ -1,25 +1,16 @@
-import { Component, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { TopNavigation } from './components/navigation/top-navigation/top-navigation';
-import { BottomNavigation } from './components/navigation/bottom-navigation/bottom-navigation';
-import { FormsModule } from '@angular/forms';
-import {
-  SearchContextDirective,
-  SearchService,
-  SearchApp,
-  APPLICATION_CONFIGURATION,
-  environment,
-} from 'gn-library';
-import { GnApiModule, Configuration } from 'gn-api-client';
-import { TranslateService } from '@ngx-translate/core';
-import { ScrollTop } from 'primeng/scrolltop';
+import {Component, inject, signal} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {TopNavigation} from './components/navigation/top-navigation/top-navigation';
+import {FormsModule} from '@angular/forms';
+import {APPLICATION_CONFIGURATION, SearchApp, SearchContextDirective, SearchService,} from 'gn-library';
+import {TranslateService} from '@ngx-translate/core';
+import {ScrollTop} from 'primeng/scrolltop';
 
 @Component({
   selector: 'app-root',
   providers: [SearchService],
   imports: [
     TopNavigation,
-    BottomNavigation,
     RouterOutlet,
     FormsModule,
     SearchContextDirective,
