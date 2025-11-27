@@ -8,7 +8,7 @@
   <ng-template #content>
     <div class="w-full has-[>section:empty]:hidden">
       @if (!isFullScreen) {
-        <div class="text-2xl">
+        <div class="text-2xl mb-4">
           {{ label }}
         </div>
       }
@@ -20,6 +20,7 @@
           [layout]="'grid'"
           [rows]="isFullScreen ? relations().length : pageSize"
           [paginator]="isFullScreen ? false : relations().length > pageSize"
+          [dt]="{paginator: {bottom: {border: {width: '0'}}}}"
         >
           <ng-template #grid let-items>
             <div class="grid grid-cols-3 gap-4">
