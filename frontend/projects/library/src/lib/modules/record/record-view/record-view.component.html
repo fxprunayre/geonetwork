@@ -129,7 +129,11 @@
   </ng-template>
 
   <ng-template #classificationContent>
-    <app-record-field-vocabulary [record]="record" [exclude]="mainVocabularies()" />
+    <app-record-field-vocabulary
+      [record]="record"
+      [exclude]="mainVocabularies()"
+      styleClass="md:columns-1 lg:columns-2 gap-4"
+    />
   </ng-template>
 
   <ng-template #relatedContent>
@@ -176,7 +180,7 @@
           ];
 
         <div class="flex flex-row gap-4">
-          <div class="w-3/4" #spyTarget>
+          <div class="md:w-3/4" #spyTarget>
             @let activatedSections = getSectionIds(sections);
             <p-accordion
               [multiple]="true"
@@ -207,7 +211,7 @@
               }
             </p-accordion>
           </div>
-          <div class="w-1/4 sticky top-10 self-start">
+          <div class="hidden md:block md:w-1/4 sticky top-10 self-start">
             <app-scroll-spy
               [target]="spyTarget"
               [section]="'p-accordion > p-accordion-panel'"
@@ -251,7 +255,6 @@
             ></app-citation-component>
           </div>
           <div class="w-1/4">
-            <p-card class="my-10" [header]="'Contact'"> Main contact content goes here.</p-card>
             <app-record-harvester-logo [record]="record" />
           </div>
         </div>

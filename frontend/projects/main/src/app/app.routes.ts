@@ -1,7 +1,6 @@
 import { Routes, UrlMatchResult, UrlSegment } from '@angular/router';
 import { HomeComponent } from './components/home-component/home-component';
 import { CatalogueComponent } from './components/catalogue-component/catalogue-component';
-import { MapComponent } from './components/map-component/map-component';
 import { ResultDetailComponent } from './components/result-detail/result-detail';
 import { MultisearchTest } from './components/multisearch-test/multisearch-test';
 
@@ -26,7 +25,7 @@ export const routes: Routes = [
     matcher: recordMatcher,
     component: ResultDetailComponent,
   },
-  { path: 'map', component: MapComponent },
+  // { path: 'map', component: MapComponent },
   { path: 'test', component: MultisearchTest },
   { path: '**', redirectTo: '' },
 ];

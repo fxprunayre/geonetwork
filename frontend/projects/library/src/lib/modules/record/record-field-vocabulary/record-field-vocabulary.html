@@ -1,6 +1,8 @@
-@for (vocabulary of vocabularies(); track $index) {
-  <app-keyword-list
-    [title]="vocabulary['multilingualTitle']?.['default']"
-    [keywords]="getKeywords(vocabulary)"
-  />
-}
+<div [class]="styleClass()">
+  @for (vocabulary of vocabularies(); track $index) {
+    <app-keyword-list
+      [title]="vocabulary['multilingualTitle']?.['default']"
+      [keywords]="getKeywords(vocabulary)"
+    />
+  }
+</div>

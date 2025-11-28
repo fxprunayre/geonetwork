@@ -6,7 +6,13 @@
 >
   <ng-template let-ds #item>
     <div class="flex items-center gap-2">
-      <div>{{ ds.url }} ({{ ds.format }})</div>
+      <div>
+        {{ ds.url }}
+        @if (ds.layer) {
+          / {{ ds.layer }}
+        }
+        ({{ ds.format }})
+      </div>
     </div>
   </ng-template>
 </p-select>

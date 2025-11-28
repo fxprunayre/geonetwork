@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { Chip } from 'primeng/chip';
+import { Card } from 'primeng/card';
 
 // TODO: Should be in the OpenApi model
 export type Keyword = {
@@ -9,7 +10,7 @@ export type Keyword = {
 
 @Component({
   selector: 'app-keyword-list',
-  imports: [Chip],
+  imports: [Chip, Card],
   templateUrl: './keyword-list.html',
 })
 export class KeywordList {

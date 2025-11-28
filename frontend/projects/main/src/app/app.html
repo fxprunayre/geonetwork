@@ -1,7 +1,10 @@
-<main class="min-h-screen flex flex-col justify-between">
-  <app-top-navigation />
+<main class="flex flex-row min-h-screen">
+  <app-navigation
+    class="sticky top-0 h-screen shrink-0 overflow-y-auto transition-all duration-300"
+  />
+
   <section
-    class="flex-grow"
+    class="flex-grow h-screen overflow-y-auto"
     appSearchContext="main"
     [aggregations]="searchConfig.aggregations"
     [filter]="searchConfig.filter"

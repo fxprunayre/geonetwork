@@ -1,21 +1,20 @@
-import {Component, inject, signal} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {TopNavigation} from './components/navigation/top-navigation/top-navigation';
-import {FormsModule} from '@angular/forms';
-import {APPLICATION_CONFIGURATION, SearchApp, SearchContextDirective, SearchService,} from 'gn-library';
-import {TranslateService} from '@ngx-translate/core';
-import {ScrollTop} from 'primeng/scrolltop';
+import { Component, inject, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import {
+  APPLICATION_CONFIGURATION,
+  SearchApp,
+  SearchContextDirective,
+  SearchService,
+} from 'gn-library';
+import { TranslateService } from '@ngx-translate/core';
+import { ScrollTop } from 'primeng/scrolltop';
+import { Navigation } from './components/menu/navigation';
 
 @Component({
   selector: 'app-root',
   providers: [SearchService],
-  imports: [
-    TopNavigation,
-    RouterOutlet,
-    FormsModule,
-    SearchContextDirective,
-    ScrollTop,
-  ],
+  imports: [RouterOutlet, FormsModule, SearchContextDirective, ScrollTop, Navigation],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   standalone: true,

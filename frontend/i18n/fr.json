@@ -98,10 +98,7 @@
   "home": {
     "title": "Retracer l'histoire des océans à travers les données",
     "subtitle": "Données géospatiales marines et côtières ouvertes et de haute qualité pour la science et les politiques publiques, fournies par l'Ifremer.",
-    "secondTitle": "Infrastructure de données géographiques marines et littorales",
-    "secondSubtitle": " Sextant vise à documenter, diffuser et promouvoir un catalogue de données marines. Destinée aux laboratoires, partenaires de l’Ifremer et acteurs marins nationaux et européens, cette infrastructure propose des outils pour archiver, consulter et partager les données.",
-    "button": "Notre mission",
-    "thirdTitle": "Découvrez des cartes interactives"
+    "discover": "Découvrez nos thèmes"
   },
   "citation": {
     "title": "Citer l'ensemble de données",
