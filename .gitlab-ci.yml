@@ -15,15 +15,21 @@ cache:
 build_gn5:
   stage: build
   script:
-    # 1. Installer Angular CLI
+    # 1. Build Maven complet (génère les libs Angular)
+    - mvn -DskipTests clean install
+
+    # 2. Installer Angular CLI
     - npm install -g @angular/cli
 
-    # 2. Build Angular main
+    # 3. Installer Angular CLI
+    - npm install -g @angular/cli
+
+    # 4. Build Angular main
     - cd frontend
     - npm install
     - ng build main --configuration=sextant --base-href "/geonetwork5/"
 
-    # 3. Déplacer le build Angular dans public/ pour GitLab Pages
+    # 5. Déplacer le build Angular dans public/ pour GitLab Pages
     - mkdir -p ../public
     - cp -r dist/main/browser/* ../public/
 
