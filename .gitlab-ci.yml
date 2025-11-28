@@ -1,4 +1,4 @@
-image: 22-trixie-slim
+image: node:22-trixie-slim
 
 stages:
   - build
