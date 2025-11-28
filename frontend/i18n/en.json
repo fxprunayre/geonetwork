@@ -117,10 +117,12 @@
   },
   "citation": {
     "title": "Cite Dataset",
-    "copy": "Copy",
-    "copy_title": "Copy success",
-    "copy_detail": "Succesfully copied to clipboard",
     "download": "Download",
     "loading": "Loading citation ..."
+  },
+  "copy": {
+    "title": "Copy",
+    "title_success": "Copy success",
+    "detail_success": "Succesfully copied to clipboard"
   }
 }

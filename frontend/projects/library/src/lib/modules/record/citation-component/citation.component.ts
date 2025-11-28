@@ -9,6 +9,7 @@ import { Button, ButtonDirective } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { faSolidQuoteRight } from '@ng-icons/font-awesome/solid';
 import { NgIcon, provideIcons } from '@ng-icons/core';
+import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
 
 interface FormatOption {
   id: string;
@@ -28,6 +29,7 @@ interface FormatOption {
     ButtonDirective,
     Card,
     NgIcon,
+    CopyInput,
   ],
   viewProviders: [provideIcons({ faSolidQuoteRight })],
   providers: [MessageService],
@@ -163,17 +165,6 @@ export class CitationComponent implements OnChanges {
       default:
         return 'text/plain';
     }
-  }
-
-  copyToClipboard() {
-    navigator.clipboard.writeText(this.citationText());
-
-    this.messageService.add({
-      severity: 'success',
-      summary: this.translateService.instant('citation.copy_title'),
-      detail: this.translateService.instant('citation.copy_detail'),
-      life: 1500,
-    });
   }
 
   protected readonly encodeURIComponent = encodeURIComponent;

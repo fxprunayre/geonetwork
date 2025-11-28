@@ -1,6 +1,4 @@
 @if (citationAvailable()) {
-  <p-toast></p-toast>
-
   <p-card class="my-10" [header]="'citation.title' | translate">
     <ng-template #title>
       <div class="flex flex-row">
@@ -24,15 +22,15 @@
     </ng-template>
     <div class="relative min-h-[160px]">
       <div class="flex gap-3 mb-4">
-        <p-button size="small" (click)="copyToClipboard()">
-          {{ 'citation.copy' | translate }}
-        </p-button>
+        <app-copy-input
+          [value]="citationText()"
+          layout="button">
+        </app-copy-input>
 
         <a
           pButton
           [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
           [download]="filename()"
-          size="small"
           class="p-button p-component"
         >
           {{ 'citation.download' | translate }}
