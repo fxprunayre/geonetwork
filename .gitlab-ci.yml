@@ -30,7 +30,7 @@ build_gn5:
     # 4. Build Angular main
     - cd frontend
     - npm install
-    - ng build main --configuration=sextant --base-href "/geonetwork5/"
+    - ng build main --configuration=sextant --base-href "/www/GN5/catalogue/branches/features_sextant/public/"
 
     # 5. Déplacer le build Angular dans public/ pour GitLab Pages
     - mkdir -p ../public
