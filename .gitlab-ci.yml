@@ -1,4 +1,4 @@
-image: maven:3.9.6-eclipse-temurin-21
+image: 22-trixie-slim
 
 stages:
   - build
@@ -15,24 +15,15 @@ cache:
 build_gn5:
   stage: build
   script:
-    # 1. Installer Node (Angular a besoin de Node 22 comme ton Dockerfile)
-    - apt-get update
-    - apt-get install -y curl
-    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-    - apt-get install -y nodejs
-
-    # 2. Build Maven complet (génère les libs Angular)
-    - mvn -DskipTests clean install
-
-    # 3. Installer Angular CLI
+    # 1. Installer Angular CLI
     - npm install -g @angular/cli
 
-    # 4. Build Angular main
+    # 2. Build Angular main
     - cd frontend
     - npm install
     - ng build main --configuration=sextant --base-href "/geonetwork5/"
 
-    # 5. Déplacer le build Angular dans public/ pour GitLab Pages
+    # 3. Déplacer le build Angular dans public/ pour GitLab Pages
     - mkdir -p ../public
     - cp -r dist/main/browser/* ../public/
 
