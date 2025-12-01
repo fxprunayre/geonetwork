@@ -40,6 +40,8 @@ Use the following command to watch for library changes and rebuild automatically
 npm run watch-lib
 ```
 
+
+
 ### Running tests
 
 ...
@@ -51,7 +53,7 @@ npm run watch-lib
 
 GeoNetwork 4 and 5 provides an Open API specification that can be used to generate API clients. See
 * http://localhost:8080/geonetwork/doc/api/ for GeoNetwork 4
-* https://apps.titellus.net/geonetwork/doc/api/swagger-ui/index.html for GeoNetwork 5
+* http://localhost:8080/geonetwork/doc/api/swagger-ui/index.html for GeoNetwork 5
 
 
 To build GeoNetwork API client, run:
