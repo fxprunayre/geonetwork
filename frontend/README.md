@@ -18,6 +18,7 @@ Different levels of theming are available:
 
 The current theme is based on PrimeUIX Aura preset. See https://github.com/primefaces/primeuix/tree/main/packages/themes/src/presets/aura
 
+Font family is set to "Inter" and can be customized with `--app-font-family-sans`.
 
 
 ## Development
