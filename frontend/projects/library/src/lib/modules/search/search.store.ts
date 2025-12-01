@@ -46,6 +46,7 @@ export const initialState: SearchState = {
   totalCount: 0,
   currentPage: 0,
   pageSize: DEFAULT_PAGE_SIZE,
+  isAppendMode: false,
 };
 
 export const SearchStore = signalStore(
@@ -194,9 +195,12 @@ export const SearchStore = signalStore(
                   tapResponse({
                     next: (response) =>
                       patchState(store, {
-                        results: response.results,
+                        results: store.isAppendMode()
+                          ? [...store.results(), ...response.results]
+                          : response.results,
                         aggregations: store.aggregations(),
                         totalCount: response.totalCount,
+                        isAppendMode: false,
                       }),
                     error: console.error,
                     finalize: () => patchState(store, { isLoading: false }),
@@ -266,6 +270,12 @@ export const SearchStore = signalStore(
         },
         more(pageSize: number) {
           patchState(store, { currentPage: store.currentPage() + store.pageSize() });
+        },
+        loadMore() {
+          patchState(store, {
+            isAppendMode: true,
+            currentPage: store.currentPage() + 1,
+          });
         },
         setPage(currentPage: number, pageSize: number) {
           let results = JSON.parse(JSON.stringify(store.results()));

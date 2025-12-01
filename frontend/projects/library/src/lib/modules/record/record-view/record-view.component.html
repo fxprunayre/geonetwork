@@ -202,7 +202,7 @@
                     | translate: { resourceType: record.resourceType };
                 @if (section.hidden !== true) {
                   <p-accordion-panel [value]="section.label">
-                    <p-accordion-header class="!text-xl">{{ sectionLabel }}</p-accordion-header>
+                    <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
                     <p-accordion-content>
                       <ng-container *ngTemplateOutlet="section.tpl; context: { record: record }" />
                     </p-accordion-content>

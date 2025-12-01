@@ -1,16 +1,19 @@
 import { Component, inject, input } from '@angular/core';
 import { SearchBase } from '../../search/search-base/search-base';
 import { Paginator } from 'primeng/paginator';
+import { Button } from 'primeng/button';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-results-paginator',
-  imports: [Paginator],
+  imports: [Paginator, Button, TranslateModule],
   standalone: true,
   templateUrl: './search-results-paginator.html',
 })
 export class SearchResultsPaginator extends SearchBase {
   resultsContainerRef = input<HTMLElement>();
+  layoutMode = input<'paginator' | 'loadMore'>('paginator');
   pageSizeOptions = inject(APPLICATION_CONFIGURATION).config?.apps.search?.hitsPerPageOptions;
 
   onPageChange(event: any) {
@@ -22,5 +25,9 @@ export class SearchResultsPaginator extends SearchBase {
       });
     }
     this.search.setPage(event.page, event.rows);
+  }
+
+  loadMore() {
+    this.search.loadMore();
   }
 }
