@@ -9,18 +9,10 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-copy-input',
   standalone: true,
-  imports: [
-    Button,
-    ButtonIcon,
-    TranslatePipe,
-    NgIcon,
-    Toast,
-    ButtonLabel
-  ],
+  imports: [Button, ButtonIcon, TranslatePipe, NgIcon, Toast, ButtonLabel],
   viewProviders: [provideIcons({ faSolidCopy })],
   templateUrl: './copy-input.html',
 })
-
 export class CopyInput {
   @Input({ required: true }) value!: string;
   @Input() layout: 'button' | 'buttonWithIcon' | 'icon' | 'text' = 'button';
