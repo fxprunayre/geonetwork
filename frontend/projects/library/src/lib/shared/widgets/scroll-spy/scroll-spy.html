@@ -7,8 +7,8 @@
         class="scroll-spy-tab"
         [class.scroll-spy-tab-top]="navPosition() == 'top'"
         [class.scroll-spy-tab-aside]="navPosition() == 'aside'"
-        [class.scroll-spy-tab-active]="activeSectionId === section.id"
-        [attr.aria-selected]="activeSectionId === section.id"
+        [class.scroll-spy-tab-active]="activeSectionId() === section.id"
+        [attr.aria-selected]="activeSectionId() === section.id"
         (click)="scrollTo(section.id)"
       >
         {{ section.title }}
