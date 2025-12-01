@@ -11,10 +11,7 @@
             @case ('list') {
               <div class="results-list grid gap-4">
                 @for (result of search.results(); track $index) {
-                  <app-result-item-list
-                    [result]="result"
-                    (onRecordClick)="handleRecordClick($event)"
-                  />
+                  <app-result-item-list [result]="result" />
                 }
               </div>
             }
@@ -23,10 +20,7 @@
                 class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
               >
                 @for (result of search.results(); track $index) {
-                  <app-result-item-grid
-                    [result]="result"
-                    (onRecordClick)="handleRecordClick($event)"
-                  />
+                  <app-result-item-grid [result]="result" />
                 }
               </div>
             }

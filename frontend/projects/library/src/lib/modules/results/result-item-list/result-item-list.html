@@ -1,5 +1,5 @@
-<div
-  (click)="handleRecordClick()"
+<a
+  [routerLink]="['/record', result().info?._id]"
   class="flex flex-col lg:flex-row items-center gap-4 cursor-pointer rounded-xl p-[27px] border border-surface-200"
 >
   <div class="w-full lg:w-[190px] lg:aspect-square lg:flex-shrink-0 lg:overflow-hidden rounded">
@@ -29,4 +29,4 @@
 
     <app-record-field-credit [record]="result()" class="line-clamp-1" />
   </div>
-</div>
+</a>

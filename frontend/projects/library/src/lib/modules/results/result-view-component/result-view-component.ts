@@ -23,8 +23,4 @@ export class ResultViewComponent extends SearchBase {
   resultsLayoutOptions =
     inject(APPLICATION_CONFIGURATION).config?.apps.search?.resultsLayoutOptions;
   layout = signal<SearchAppLayout>(this.resultsLayoutOptions?.[0] || 'list');
-
-  handleRecordClick(uuid: string) {
-    this.onRecordClick.emit(uuid);
-  }
 }

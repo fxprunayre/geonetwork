@@ -37,11 +37,4 @@ import { RouterLink } from '@angular/router';
 })
 export class ResultItemList {
   result = input.required<IndexRecord>();
-  onRecordClick = output<string>();
-
-  handleRecordClick() {
-    const id = this.result().info?._id;
-    if (!id) return;
-    this.onRecordClick.emit(id);
-  }
 }
