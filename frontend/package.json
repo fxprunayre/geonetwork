@@ -14,7 +14,8 @@
     "build-api-geonetwork-client": "openapi-generator-cli generate -i projects/gn-api-client/openapi.json  -g typescript-angular -o  projects/gn-api-client/src/lib  --skip-validate-spec --additional-properties=apiModulePrefix=Gn",
     "prettier": "prettier --write \"**/*.{ts,html,scss,css,json}\"",
     "test": "ng test library",
-    "test:ci": "ng test library --code-coverage --browsers=ChromeHeadless --watch=false"
+    "test:ci": "ng test library --code-coverage --browsers=ChromeHeadless --watch=false",
+    "prepare": "husky"
   },
   "prettier": {
     "printWidth": 100,
@@ -26,6 +27,11 @@
           "parser": "angular"
         }
       }
+    ]
+  },
+  "lint-staged": {
+    "**/*.{ts,html,scss,css,json}": [
+      "prettier --write"
     ]
   },
   "private": true,
@@ -69,12 +75,14 @@
     "@testing-library/dom": "^10.4.1",
     "@testing-library/user-event": "^14.6.1",
     "@types/jasmine": "~5.1.12",
+    "husky": "^9.1.7",
     "jasmine-core": "~5.12.1",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^16.2.7",
     "ng-mocks": "^14.14.0",
     "ng-packagr": "^20.3.0",
     "prettier": "^3.6.2",
