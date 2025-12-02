@@ -7,7 +7,12 @@
         [ngModel]="isActive()"
         (ngModelChange)="handleChange(bucket().key, $event)"
       ></p-checkbox>
-      <label class="ml-2 line-clamp-1" [for]="keyName() + '_' + bucket().key">
+      <label
+        class="ml-2 line-clamp-1"
+        [for]="keyName() + '_' + bucket().key"
+        [pTooltip]="label()"
+        tooltipPosition="right"
+      >
         <app-aggregation-bucket-decorator [bucket]="bucket()" [decorator]="decorator()" />
         {{ label() }}
       </label>
