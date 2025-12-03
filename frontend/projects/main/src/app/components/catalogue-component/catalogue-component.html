@@ -21,6 +21,7 @@
                 </div>
               </p-button>
             </p-inputgroup-addon>
+            @if (search.activeFilterCount() > 0) {
             <p-inputgroup-addon>
               <p-button
                 size="large"
@@ -33,6 +34,7 @@
                 <div pButtonLabel>&nbsp;</div>
               </p-button>
             </p-inputgroup-addon>
+            }
           </p-inputgroup>
         </div>
       }
