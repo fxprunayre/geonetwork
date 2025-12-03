@@ -9,6 +9,9 @@ import {
   faSolidMap,
   faSolidTable,
   faSolidCloud,
+  faSolidCode,
+  faSolidFileContract,
+  faSolidFolderClosed,
 } from '@ng-icons/font-awesome/solid';
 
 @Component({
@@ -17,7 +20,6 @@ import {
   templateUrl: './aggregation-bucket-decorator.html',
   standalone: true,
   viewProviders: [
-    // TODO: We can not all icons from font-awesome at once, so we need to list them here
     provideIcons({
       faSolidDatabase,
       faSolidMap,
@@ -26,6 +28,9 @@ import {
       faSolidChartColumn,
       faSolidBook,
       faSolidCloud,
+      faSolidCode,
+      faSolidFileContract,
+      faSolidFolderClosed,
     }),
   ],
 })
@@ -34,16 +39,41 @@ export class AggregationBucketDecorator {
   isActive = input<boolean>(false);
   decorator = input.required<Decorator | undefined>();
 
+  private readonly customIconMap: Record<string, string> = {
+    software: 'faSolidCode',
+    initiative: 'faSolidFileContract',
+    repository: 'faSolidFolderClosed',
+  };
+
   icon = computed(() => {
-    if (this.decorator() && this.decorator()?.type === 'icon') {
-      return this.decorator()?.map?.[this.bucket().key] || this.bucket().key;
+    const decorator = this.decorator();
+    const bucket = this.bucket();
+    const key = bucket?.key;
+
+    if (!key) return '';
+
+    if (decorator && decorator.type === 'icon') {
+      const mapped = decorator.map?.[key];
+      if (mapped) {
+        return mapped;
+      }
     }
-    return '';
+
+    const custom = this.customIconMap[key];
+    if (custom) {
+      return custom;
+    }
+
+    return key;
   });
 
   image = computed(() => {
-    if (this.decorator() && this.decorator()?.type === 'img') {
-      return this.decorator()?.map?.[this.bucket().key] || '';
+    const decorator = this.decorator();
+    const bucket = this.bucket();
+    const key = bucket?.key;
+
+    if (decorator && decorator.type === 'img') {
+      return decorator.map?.[key] || '';
     }
     return '';
   });

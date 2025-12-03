@@ -3,7 +3,6 @@
     class="py-4 px-[20px] xl:px-[400px] flex flex-col gap-4 bg-top-left bg-no-repeat bg-blend-overlay z-30 bg-primary/80 sticky top-0 bg-cover bg-image"
   >
     <div class="flex flex-col lg:flex-row items-center lg:gap-4">
-
       <app-search-input
         class="w-full grow"
         [autocompleteEnabled]="true"
@@ -22,18 +21,18 @@
               </p-button>
             </p-inputgroup-addon>
             @if (search.activeFilterCount() > 0) {
-            <p-inputgroup-addon>
-              <p-button
-                size="large"
-                (click)="search.reset()"
-                [badge]="
-                  search.activeFilterCount() === 0 ? undefined : search.activeFilterCount() + ''
-                "
-              >
-                <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
-                <div pButtonLabel>&nbsp;</div>
-              </p-button>
-            </p-inputgroup-addon>
+              <p-inputgroup-addon>
+                <p-button
+                  size="large"
+                  (click)="search.reset()"
+                  [badge]="
+                    search.activeFilterCount() === 0 ? undefined : search.activeFilterCount() + ''
+                  "
+                >
+                  <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
+                  <div pButtonLabel>&nbsp;</div>
+                </p-button>
+              </p-inputgroup-addon>
             }
           </p-inputgroup>
         </div>
