@@ -123,6 +123,6 @@
   "copy": {
     "title": "Copy",
     "title_success": "Copy success",
-    "detail_success": "Succesfully copied to clipboard"
+    "detail_success": "Successfully copied to clipboard"
   }
 }
