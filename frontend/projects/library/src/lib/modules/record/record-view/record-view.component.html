@@ -243,15 +243,15 @@
       </p-tabpanel>
 
       <p-tabpanel value="citation">
-        <div class="flex flex-row gap-4">
-          <div class="w-3/4">
+        <div class="flex flex-col lg:flex-row lg:gap-4">
+          <div class="w-full lg:w-3/4">
             <app-citation-component
               [uuid]="record.uuid!"
               [format]="'html'"
             ></app-citation-component>
           </div>
-          <div class="w-1/4">
-            <p-card class="my-10" [header]="'Contact'"> Main contact content goes here.</p-card>
+          <div class="w-full lg:w-1/4">
+            <p-card class="mb-4 lg:my-10" [header]="'Contact'"> Main contact content goes here.</p-card>
             <app-record-harvester-logo [record]="record" />
           </div>
         </div>
