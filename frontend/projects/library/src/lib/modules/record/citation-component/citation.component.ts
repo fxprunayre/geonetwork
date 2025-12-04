@@ -7,9 +7,10 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Button, ButtonDirective } from 'primeng/button';
 import { Card } from 'primeng/card';
-import { faSolidQuoteRight } from '@ng-icons/font-awesome/solid';
+import { faSolidQuoteRight, faSolidDownload } from '@ng-icons/font-awesome/solid';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
+import { TabsModule } from 'primeng/tabs';
 
 interface FormatOption {
   id: string;
@@ -30,8 +31,9 @@ interface FormatOption {
     Card,
     NgIcon,
     CopyInput,
+    TabsModule,
   ],
-  viewProviders: [provideIcons({ faSolidQuoteRight })],
+  viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
   providers: [MessageService],
 })
 export class CitationComponent implements OnChanges {
