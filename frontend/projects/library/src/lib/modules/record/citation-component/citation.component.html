@@ -1,11 +1,17 @@
 @if (citationAvailable()) {
   <p-toast></p-toast>
-  <p-card [header]="'citation.title' | translate">
-    <div class="flex gap-2 px-4 pt-4">
+  <p-card>
+    <ng-template pTemplate="header">
+      <div class="flex items-center gap-2 text-gray-800 px-6 pt-6">
+        <ng-icon name="faSolidQuoteRight" class="text-lg"></ng-icon>
+        {{ 'citation.title' | translate }}
+      </div>
+    </ng-template>
+    <div class="flex gap-2 px-4 items-center">
       <div class="bg-gray-100 p-2 rounded-lg">
         @for (f of formats(); track f.id) {
           <p-button
-            class="px-4 py-2 rounded-lg text-sm font-medium me-1 transition-colors"
+            class="me-1 rounded-lg text-sm font-medium transition-colors"
             [class.bg-white]="currentFormat() === f.id"
             [class.text-gray-900]="currentFormat() === f.id"
             [class.bg-gray-100]="currentFormat() !== f.id"

@@ -8,6 +8,7 @@ import { faSolidBars, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { FormsModule } from '@angular/forms';
 import { LanguageSwitcher, ThemeDesigner } from 'gn-library';
 import AppTheme from '../../../app.theme';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-top-navigation',
@@ -23,6 +24,7 @@ import AppTheme from '../../../app.theme';
     FormsModule,
     LanguageSwitcher,
     ThemeDesigner,
+    TranslatePipe,
   ],
 })
 export class TopNavigation {

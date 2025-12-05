@@ -1,8 +1,9 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { SearchBase } from '../../search/search-base/search-base';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { PrimeTemplate } from 'primeng/api';
 
 interface SortOption {
   label: string;
@@ -12,15 +13,13 @@ interface SortOption {
 @Component({
   selector: 'app-sort-results',
   standalone: true,
-  imports: [FormsModule, Select, TranslatePipe],
+  imports: [FormsModule, Select, TranslatePipe, PrimeTemplate],
   templateUrl: './sort-results.html',
 })
 export class SortResults extends SearchBase {
-  private readonly translateService = inject(TranslateService);
-
   sortOptions = computed<SortOption[]>(() =>
     this.search.sort().map((sort) => ({
-      label: this.translateService.instant(`search.sort.options.${sort}`),
+      label: `search.sort.options.${sort}`,
       value: sort,
     })),
   );

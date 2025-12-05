@@ -3,7 +3,7 @@
     <ng-template #header>
       <div class="flex items-center gap-2 px-2">
         <ng-icon name="faSolidDatabase" />
-        Available Datasources
+        {{ 'data.available_datasources' | translate }}
       </div>
     </ng-template>
     <app-datasource-select [datasources]="datasources()" [(datasource)]="datasource" />

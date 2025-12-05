@@ -48,7 +48,7 @@
         "content": "Content",
         "classification": "Classification",
         "citation": "Citation",
-        "usageAndAccess": "Use and access",
+        "usageAndAccess": "Usage and access",
         "relatedResources": "Related resources",
         "similarResources": "Similar resources"
       }
@@ -115,6 +115,11 @@
     "button": "Our mission",
     "thirdTitle": "Discover interactive maps"
   },
+  "menu": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "map": "Map"
+  },
   "citation": {
     "title": "Cite Dataset",
     "download": "Download",
@@ -124,5 +129,21 @@
     "title": "Copy",
     "title_success": "Copy success",
     "detail_success": "Successfully copied to clipboard"
-  }
+  },
+  "data": {
+    "available_datasources": "Available Data sources"
+  },
+  "discussions": "Discussions",
+  "relations": {
+    "seeAll": "See all"
+  },
+  "field": "Field",
+  "Label": "Label",
+  "Description": "Description",
+  "Type": "Type",
+  "addToMap": "Add to map",
+  "exploreData": "Explore data",
+  "useLimitation": "Use limitation",
+  "useConstraints": "Use constraints",
+  "otherConstraints": "Other constraints"
 }

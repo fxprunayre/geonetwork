@@ -1,12 +1,19 @@
 <div class="card flex justify-end">
   <p-select
     [options]="sortOptions()"
-    optionLabel="label"
     optionValue="value"
     [ngModel]="search.currentSort()"
     (onChange)="onSortChange($event.value)"
     [showClear]="false"
     [placeholder]="'search.sort.placeholder' | translate"
     class="w-full md:w-56"
-  />
+  >
+    <ng-template let-option pTemplate="item">
+      {{ option.label | translate }}
+    </ng-template>
+
+    <ng-template let-option pTemplate="selectedItem">
+      {{ option.label | translate }}
+    </ng-template>
+  </p-select>
 </div>

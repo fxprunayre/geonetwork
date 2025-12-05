@@ -59,13 +59,13 @@
 
   <ng-template #licenseContent>
     <app-record-field [label]="'Constraints'">
-      <span class="block text-[#3a75ab]"> Use limitation:</span>
+      <span class="block text-[#3a75ab]"> {{ 'useLimitation' | translate }}:</span>
       <a [href]="getConstraints().link" target="_blank" class="font-bold">{{
         getConstraints().default
       }}</a>
-      <span class="block text-[#3a75ab]"> Use constraints:</span>
+      <span class="block text-[#3a75ab]"> {{ 'useConstraints' | translate }}:</span>
       <a [href]="getUseConstraint().link" target="_blank">{{ getUseConstraint().default }}</a>
-      <span class="block text-[#3a75ab]"> Other constraints:</span>
+      <span class="block text-[#3a75ab]"> {{ 'otherConstraints' | translate }}:</span>
       <a [href]="getOtherConstraint().link" target="_blank">{{ getOtherConstraint().default }}</a>
     </app-record-field>
   </ng-template>

@@ -19,9 +19,11 @@
 
       <div class="hidden md:flex flex-1 justify-between items-center">
         <div class="flex items-center gap-6 ms-4">
-          <a routerLink="/" class="hover:text-surface-200">Home</a>
-          <a routerLink="/search" class="hover:text-surface-200">Catalog</a>
-          <a routerLink="/map" class="hover:text-surface-200">Map</a>
+          <a routerLink="/" class="hover:text-surface-200">{{ 'menu.home' | translate }}</a>
+          <a routerLink="/search" class="hover:text-surface-200">{{
+            'menu.catalog' | translate
+          }}</a>
+          <a routerLink="/map" class="hover:text-surface-200">{{ 'menu.map' | translate }}</a>
         </div>
 
         <div class="flex items-center gap-4">
@@ -41,9 +43,13 @@
 
   @if (menuOpen()) {
     <div class="md:hidden bg-primary border-t border-surface-400 px-4 pb-4 space-y-2">
-      <a routerLink="/" class="block py-2 hover:text-surface-200">Home</a>
-      <a routerLink="/search" class="block py-2 hover:text-surface-200">Catalog</a>
-      <a routerLink="/map" class="block py-2 hover:text-surface-200">Map</a>
+      <a routerLink="/" class="block py-2 hover:text-surface-200">{{ 'menu.home' | translate }}</a>
+      <a routerLink="/search" class="block py-2 hover:text-surface-200">{{
+        'menu.catalog' | translate
+      }}</a>
+      <a routerLink="/map" class="block py-2 hover:text-surface-200">{{
+        'menu.map' | translate
+      }}</a>
       <button
         type="button"
         class="cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-400 text-white"
