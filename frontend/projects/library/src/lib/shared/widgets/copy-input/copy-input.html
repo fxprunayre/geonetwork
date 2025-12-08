@@ -2,20 +2,20 @@
 
 @switch (layout) {
   @case ('button') {
-    <p-button (onClick)="copyToClipboard()">
+    <p-button (onClick)="copyToClipboard()" [class]="buttonClass">
       <div pButtonLabel>{{ 'copy.title' | translate }}</div>
     </p-button>
   }
 
   @case ('buttonWithIcon') {
-    <p-button (onClick)="copyToClipboard()">
+    <p-button (onClick)="copyToClipboard()" [class]="buttonClass">
       <ng-icon name="faSolidCopy" pButtonIcon></ng-icon>
       <div pButtonLabel>{{ 'copy.title' | translate }}</div>
     </p-button>
   }
 
   @case ('icon') {
-    <p-button (onClick)="copyToClipboard()">
+    <p-button (onClick)="copyToClipboard()" [styleClass]="buttonClass">
       <ng-icon name="faSolidCopy" pButtonIcon></ng-icon>
     </p-button>
   }

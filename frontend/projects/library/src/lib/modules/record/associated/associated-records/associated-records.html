@@ -23,7 +23,7 @@
           [dt]="{ paginator: { bottom: { border: { width: '0' } } } }"
         >
           <ng-template #grid let-items>
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
               @for (record of items; track $index) {
                 <ng-container
                   *ngTemplateOutlet="
@@ -41,7 +41,12 @@
 
   @if (!isFullScreen) {
     @if (relations().length > pageSize) {
-      <p-button (click)="isFullScreen = true" link styleClass="float-right" label="See all ..." />
+      <p-button
+        (click)="isFullScreen = true"
+        link
+        styleClass="float-right"
+        [label]="'relations.seeAll' | translate"
+      />
     }
     <ng-container *ngTemplateOutlet="content" />
   } @else {

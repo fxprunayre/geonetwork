@@ -19,6 +19,7 @@ import { SearchFilter, SearchFilterChange } from '../search.store.model';
 import { DecimalPipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-aggregation-bucket',
@@ -30,6 +31,7 @@ import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggr
     AggregationTranslatePipe,
     AggregationBucketDecorator,
     ButtonIcon,
+    Tooltip,
   ],
   templateUrl: './aggregation-bucket.html',
   providers: [AggregationTranslatePipe, DecimalPipe],

@@ -5,6 +5,7 @@ import { Button } from 'primeng/button';
 import { Link } from 'gn-api-client';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 interface Gn4MapCommand {
   url: string;
@@ -13,7 +14,7 @@ interface Gn4MapCommand {
 
 @Component({
   selector: 'app-record-distribution-panel',
-  imports: [KeyValuePipe, Badge, Button],
+  imports: [KeyValuePipe, Badge, Button, TranslatePipe],
   templateUrl: './record-distribution-panel.html',
 })
 export class RecordDistributionPanel extends RecordDistributionFieldBase {

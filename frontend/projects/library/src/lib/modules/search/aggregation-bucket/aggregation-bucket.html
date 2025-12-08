@@ -7,14 +7,19 @@
         [ngModel]="isActive()"
         (ngModelChange)="handleChange(bucket().key, $event)"
       ></p-checkbox>
-      <label class="ml-2 line-clamp-1" [for]="keyName() + '_' + bucket().key">
+      <label
+        class="ml-2 line-clamp-1"
+        [for]="keyName() + '_' + bucket().key"
+        [pTooltip]="label()"
+        tooltipPosition="right"
+      >
         <app-aggregation-bucket-decorator [bucket]="bucket()" [decorator]="decorator()" />
         {{ label() }}
       </label>
     </div>
   }
   @case ('button') {
-    <div class="flex flex-row gap-2">
+    <div class="flex flex-row items-center gap-2">
       <p-button
         [label]="label()"
         variant="outlined"
@@ -26,6 +31,7 @@
       >
         <app-aggregation-bucket-decorator
           pButtonIcon
+          class="pt-1"
           [bucket]="bucket()"
           [decorator]="decorator()"
         />

@@ -7,7 +7,6 @@ import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidFilter, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
@@ -44,9 +43,4 @@ export class CatalogueComponent extends SearchBase {
   get hasResults(): boolean {
     return this.search?.totalCount() > 0;
   }
-  router = inject(Router);
-
-  handleRecordClick = (uuid: string) => {
-    this.router.navigate(['/record/', uuid]);
-  };
 }

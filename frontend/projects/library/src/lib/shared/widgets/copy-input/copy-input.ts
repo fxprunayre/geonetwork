@@ -16,6 +16,7 @@ import { MessageService } from 'primeng/api';
 export class CopyInput {
   @Input({ required: true }) value!: string;
   @Input() layout: 'button' | 'buttonWithIcon' | 'icon' | 'text' = 'button';
+  @Input() buttonClass = '';
 
   private readonly translate = inject(TranslateService);
   private readonly messageService = inject(MessageService);
