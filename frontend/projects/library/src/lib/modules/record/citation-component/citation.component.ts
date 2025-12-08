@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
-import { Button, ButtonDirective } from 'primeng/button';
+import { ButtonDirective } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { faSolidQuoteRight, faSolidDownload } from '@ng-icons/font-awesome/solid';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -27,7 +26,6 @@ interface FormatOption {
     CommonModule,
     TranslatePipe,
     ToastModule,
-    Button,
     ButtonDirective,
     Card,
     NgIcon,
@@ -36,7 +34,6 @@ interface FormatOption {
     SelectButton,
   ],
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
-  providers: [MessageService],
   styleUrls: ['./citation.component.scss'],
 })
 export class CitationComponent implements OnChanges {
@@ -45,7 +42,6 @@ export class CitationComponent implements OnChanges {
 
   private readonly translateService = inject(TranslateService);
   private recordService = inject(RecordsService);
-  private messageService = inject(MessageService);
 
   constructor() {
     effect(() => {
