@@ -807,7 +807,8 @@ export interface RankEvalRankEvalMetricDiscountedCumulativeGain extends RankEval
 export interface RankEvalRankEvalMetricExpectedReciprocalRank extends RankEvalRankEvalMetricBase {
   maximum_relevance: integer;
 }
-export interface RankEvalRankEvalMetricMeanReciprocalRank extends RankEvalRankEvalMetricRatingTreshold {}
+export interface RankEvalRankEvalMetricMeanReciprocalRank
+  extends RankEvalRankEvalMetricRatingTreshold {}
 export interface RankEvalRankEvalMetricPrecision extends RankEvalRankEvalMetricRatingTreshold {
   ignore_unlabeled?: boolean;
 }
@@ -1729,10 +1730,8 @@ export interface TermvectorsToken {
   position: integer;
   start_offset?: integer;
 }
-export interface UpdateRequest<
-  TDocument = unknown,
-  TPartialDocument = unknown,
-> extends RequestBase {
+export interface UpdateRequest<TDocument = unknown, TPartialDocument = unknown>
+  extends RequestBase {
   id: Id;
   index: IndexName;
   if_primary_term?: long;
@@ -2510,7 +2509,8 @@ export type long = number;
 export type short = number;
 export type uint = number;
 export type ulong = number;
-export interface AggregationsAdjacencyMatrixAggregate extends AggregationsMultiBucketAggregateBase<AggregationsAdjacencyMatrixBucket> {}
+export interface AggregationsAdjacencyMatrixAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsAdjacencyMatrixBucket> {}
 export interface AggregationsAdjacencyMatrixAggregation extends AggregationsBucketAggregationBase {
   filters?: Record<string, QueryDslQueryContainer>;
   separator?: string;
@@ -2692,10 +2692,12 @@ export interface AggregationsArrayPercentilesItem {
   value: double | null;
   value_as_string?: string;
 }
-export interface AggregationsAutoDateHistogramAggregate extends AggregationsMultiBucketAggregateBase<AggregationsDateHistogramBucket> {
+export interface AggregationsAutoDateHistogramAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsDateHistogramBucket> {
   interval: DurationLarge;
 }
-export interface AggregationsAutoDateHistogramAggregation extends AggregationsBucketAggregationBase {
+export interface AggregationsAutoDateHistogramAggregation
+  extends AggregationsBucketAggregationBase {
   buckets?: integer;
   field?: Field;
   format?: string;
@@ -2729,7 +2731,8 @@ export interface AggregationsBoxplotAggregation extends AggregationsMetricAggreg
   compression?: double;
 }
 export interface AggregationsBucketAggregationBase {}
-export interface AggregationsBucketCorrelationAggregation extends AggregationsBucketPathAggregation {
+export interface AggregationsBucketCorrelationAggregation
+  extends AggregationsBucketPathAggregation {
   function: AggregationsBucketCorrelationFunction;
 }
 export interface AggregationsBucketCorrelationFunction {
@@ -2748,7 +2751,8 @@ export interface AggregationsBucketKsAggregation extends AggregationsBucketPathA
   fractions?: double[];
   sampling_method?: string;
 }
-export interface AggregationsBucketMetricValueAggregate extends AggregationsSingleMetricAggregateBase {
+export interface AggregationsBucketMetricValueAggregate
+  extends AggregationsSingleMetricAggregateBase {
   keys: string[];
 }
 export interface AggregationsBucketPathAggregation {
@@ -2823,7 +2827,8 @@ export type AggregationsChildrenAggregate = AggregationsChildrenAggregateKeys & 
 export interface AggregationsChildrenAggregation extends AggregationsBucketAggregationBase {
   type?: RelationName;
 }
-export interface AggregationsCompositeAggregate extends AggregationsMultiBucketAggregateBase<AggregationsCompositeBucket> {
+export interface AggregationsCompositeAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsCompositeBucket> {
   after_key?: AggregationsCompositeAggregateKey;
 }
 export type AggregationsCompositeAggregateKey = Record<Field, FieldValue>;
@@ -2852,33 +2857,39 @@ export interface AggregationsCompositeBucketKeys extends AggregationsMultiBucket
 export type AggregationsCompositeBucket = AggregationsCompositeBucketKeys & {
   [property: string]: AggregationsAggregate | AggregationsCompositeAggregateKey | long;
 };
-export interface AggregationsCompositeDateHistogramAggregation extends AggregationsCompositeAggregationBase {
+export interface AggregationsCompositeDateHistogramAggregation
+  extends AggregationsCompositeAggregationBase {
   format?: string;
   calendar_interval?: DurationLarge;
   fixed_interval?: DurationLarge;
   offset?: Duration;
   time_zone?: TimeZone;
 }
-export interface AggregationsCompositeGeoTileGridAggregation extends AggregationsCompositeAggregationBase {
+export interface AggregationsCompositeGeoTileGridAggregation
+  extends AggregationsCompositeAggregationBase {
   precision?: integer;
   bounds?: GeoBounds;
 }
-export interface AggregationsCompositeHistogramAggregation extends AggregationsCompositeAggregationBase {
+export interface AggregationsCompositeHistogramAggregation
+  extends AggregationsCompositeAggregationBase {
   interval: double;
 }
-export interface AggregationsCompositeTermsAggregation extends AggregationsCompositeAggregationBase {}
+export interface AggregationsCompositeTermsAggregation
+  extends AggregationsCompositeAggregationBase {}
 export interface AggregationsCumulativeCardinalityAggregate extends AggregationsAggregateBase {
   value: long;
   value_as_string?: string;
 }
-export interface AggregationsCumulativeCardinalityAggregation extends AggregationsPipelineAggregationBase {}
+export interface AggregationsCumulativeCardinalityAggregation
+  extends AggregationsPipelineAggregationBase {}
 export interface AggregationsCumulativeSumAggregation extends AggregationsPipelineAggregationBase {}
 export interface AggregationsCustomCategorizeTextAnalyzer {
   char_filter?: string[];
   tokenizer?: string;
   filter?: string[];
 }
-export interface AggregationsDateHistogramAggregate extends AggregationsMultiBucketAggregateBase<AggregationsDateHistogramBucket> {}
+export interface AggregationsDateHistogramAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsDateHistogramBucket> {}
 export interface AggregationsDateHistogramAggregation extends AggregationsBucketAggregationBase {
   calendar_interval?: AggregationsCalendarInterval;
   extended_bounds?: AggregationsExtendedBounds<AggregationsFieldDateMath>;
@@ -2922,14 +2933,16 @@ export interface AggregationsDerivativeAggregate extends AggregationsSingleMetri
   normalized_value_as_string?: string;
 }
 export interface AggregationsDerivativeAggregation extends AggregationsPipelineAggregationBase {}
-export interface AggregationsDiversifiedSamplerAggregation extends AggregationsBucketAggregationBase {
+export interface AggregationsDiversifiedSamplerAggregation
+  extends AggregationsBucketAggregationBase {
   execution_hint?: AggregationsSamplerAggregationExecutionHint;
   max_docs_per_value?: integer;
   script?: Script | string;
   shard_size?: integer;
   field?: Field;
 }
-export interface AggregationsDoubleTermsAggregate extends AggregationsTermsAggregateBase<AggregationsDoubleTermsBucket> {}
+export interface AggregationsDoubleTermsAggregate
+  extends AggregationsTermsAggregateBase<AggregationsDoubleTermsBucket> {}
 export interface AggregationsDoubleTermsBucketKeys extends AggregationsTermsBucketBase {
   key: double;
   key_as_string?: string;
@@ -2940,7 +2953,8 @@ export type AggregationsDoubleTermsBucket = AggregationsDoubleTermsBucketKeys & 
 export interface AggregationsEwmaModelSettings {
   alpha?: float;
 }
-export interface AggregationsEwmaMovingAverageAggregation extends AggregationsMovingAverageAggregationBase {
+export interface AggregationsEwmaMovingAverageAggregation
+  extends AggregationsMovingAverageAggregationBase {
   model: 'ewma';
   settings: AggregationsEwmaModelSettings;
 }
@@ -2964,11 +2978,14 @@ export interface AggregationsExtendedStatsAggregate extends AggregationsStatsAgg
   std_deviation_as_string?: string;
   std_deviation_bounds_as_string?: AggregationsStandardDeviationBoundsAsString;
 }
-export interface AggregationsExtendedStatsAggregation extends AggregationsFormatMetricAggregationBase {
+export interface AggregationsExtendedStatsAggregation
+  extends AggregationsFormatMetricAggregationBase {
   sigma?: double;
 }
-export interface AggregationsExtendedStatsBucketAggregate extends AggregationsExtendedStatsAggregate {}
-export interface AggregationsExtendedStatsBucketAggregation extends AggregationsPipelineAggregationBase {
+export interface AggregationsExtendedStatsBucketAggregate
+  extends AggregationsExtendedStatsAggregate {}
+export interface AggregationsExtendedStatsBucketAggregation
+  extends AggregationsPipelineAggregationBase {
   sigma?: double;
 }
 export type AggregationsFieldDateMath = DateMath | double;
@@ -2976,7 +2993,8 @@ export interface AggregationsFilterAggregateKeys extends AggregationsSingleBucke
 export type AggregationsFilterAggregate = AggregationsFilterAggregateKeys & {
   [property: string]: AggregationsAggregate | long | Metadata;
 };
-export interface AggregationsFiltersAggregate extends AggregationsMultiBucketAggregateBase<AggregationsFiltersBucket> {}
+export interface AggregationsFiltersAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsFiltersBucket> {}
 export interface AggregationsFiltersAggregation extends AggregationsBucketAggregationBase {
   filters?: AggregationsBuckets<QueryDslQueryContainer>;
   other_bucket?: boolean;
@@ -2990,10 +3008,12 @@ export type AggregationsFiltersBucket = AggregationsFiltersBucketKeys & {
 export interface AggregationsFormatMetricAggregationBase extends AggregationsMetricAggregationBase {
   format?: string;
 }
-export interface AggregationsFormattableMetricAggregation extends AggregationsMetricAggregationBase {
+export interface AggregationsFormattableMetricAggregation
+  extends AggregationsMetricAggregationBase {
   format?: string;
 }
-export interface AggregationsFrequentItemSetsAggregate extends AggregationsMultiBucketAggregateBase<AggregationsFrequentItemSetsBucket> {}
+export interface AggregationsFrequentItemSetsAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsFrequentItemSetsBucket> {}
 export interface AggregationsFrequentItemSetsAggregation {
   fields: AggregationsFrequentItemSetsField[];
   minimum_set_size?: integer;
@@ -3036,7 +3056,8 @@ export interface AggregationsGeoDistanceAggregation extends AggregationsBucketAg
   ranges?: AggregationsAggregationRange[];
   unit?: DistanceUnit;
 }
-export interface AggregationsGeoHashGridAggregate extends AggregationsMultiBucketAggregateBase<AggregationsGeoHashGridBucket> {}
+export interface AggregationsGeoHashGridAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsGeoHashGridBucket> {}
 export interface AggregationsGeoHashGridAggregation extends AggregationsBucketAggregationBase {
   bounds?: GeoBounds;
   field?: Field;
@@ -3050,7 +3071,8 @@ export interface AggregationsGeoHashGridBucketKeys extends AggregationsMultiBuck
 export type AggregationsGeoHashGridBucket = AggregationsGeoHashGridBucketKeys & {
   [property: string]: AggregationsAggregate | GeoHash | long;
 };
-export interface AggregationsGeoHexGridAggregate extends AggregationsMultiBucketAggregateBase<AggregationsGeoHexGridBucket> {}
+export interface AggregationsGeoHexGridAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsGeoHexGridBucket> {}
 export interface AggregationsGeoHexGridBucketKeys extends AggregationsMultiBucketBase {
   key: GeoHexCell;
 }
@@ -3075,7 +3097,8 @@ export interface AggregationsGeoLinePoint {
 export interface AggregationsGeoLineSort {
   field: Field;
 }
-export interface AggregationsGeoTileGridAggregate extends AggregationsMultiBucketAggregateBase<AggregationsGeoTileGridBucket> {}
+export interface AggregationsGeoTileGridAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsGeoTileGridBucket> {}
 export interface AggregationsGeoTileGridAggregation extends AggregationsBucketAggregationBase {
   field?: Field;
   precision?: GeoTilePrecision;
@@ -3107,9 +3130,11 @@ export interface AggregationsGoogleNormalizedDistanceHeuristic {
 export interface AggregationsHdrMethod {
   number_of_significant_value_digits?: integer;
 }
-export interface AggregationsHdrPercentileRanksAggregate extends AggregationsPercentilesAggregateBase {}
+export interface AggregationsHdrPercentileRanksAggregate
+  extends AggregationsPercentilesAggregateBase {}
 export interface AggregationsHdrPercentilesAggregate extends AggregationsPercentilesAggregateBase {}
-export interface AggregationsHistogramAggregate extends AggregationsMultiBucketAggregateBase<AggregationsHistogramBucket> {}
+export interface AggregationsHistogramAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsHistogramBucket> {}
 export interface AggregationsHistogramAggregation extends AggregationsBucketAggregationBase {
   extended_bounds?: AggregationsExtendedBounds<double>;
   hard_bounds?: AggregationsExtendedBounds<double>;
@@ -3134,7 +3159,8 @@ export interface AggregationsHoltLinearModelSettings {
   alpha?: float;
   beta?: float;
 }
-export interface AggregationsHoltMovingAverageAggregation extends AggregationsMovingAverageAggregationBase {
+export interface AggregationsHoltMovingAverageAggregation
+  extends AggregationsMovingAverageAggregationBase {
   model: 'holt';
   settings: AggregationsHoltLinearModelSettings;
 }
@@ -3146,7 +3172,8 @@ export interface AggregationsHoltWintersModelSettings {
   period?: integer;
   type?: AggregationsHoltWintersType;
 }
-export interface AggregationsHoltWintersMovingAverageAggregation extends AggregationsMovingAverageAggregationBase {
+export interface AggregationsHoltWintersMovingAverageAggregation
+  extends AggregationsMovingAverageAggregationBase {
   model: 'holt_winters';
   settings: AggregationsHoltWintersModelSettings;
 }
@@ -3182,7 +3209,8 @@ export interface AggregationsInferenceTopClassEntry {
   class_probability: double;
   class_score: double;
 }
-export interface AggregationsIpPrefixAggregate extends AggregationsMultiBucketAggregateBase<AggregationsIpPrefixBucket> {}
+export interface AggregationsIpPrefixAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsIpPrefixBucket> {}
 export interface AggregationsIpPrefixAggregation extends AggregationsBucketAggregationBase {
   field: Field;
   prefix_length: integer;
@@ -3200,7 +3228,8 @@ export interface AggregationsIpPrefixBucketKeys extends AggregationsMultiBucketB
 export type AggregationsIpPrefixBucket = AggregationsIpPrefixBucketKeys & {
   [property: string]: AggregationsAggregate | boolean | string | integer | long;
 };
-export interface AggregationsIpRangeAggregate extends AggregationsMultiBucketAggregateBase<AggregationsIpRangeBucket> {}
+export interface AggregationsIpRangeAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsIpRangeBucket> {}
 export interface AggregationsIpRangeAggregation extends AggregationsBucketAggregationBase {
   field?: Field;
   ranges?: AggregationsIpRangeAggregationRange[];
@@ -3219,11 +3248,13 @@ export type AggregationsIpRangeBucket = AggregationsIpRangeBucketKeys & {
   [property: string]: AggregationsAggregate | string | long;
 };
 export type AggregationsKeyedPercentiles = Record<string, string | long | null>;
-export interface AggregationsLinearMovingAverageAggregation extends AggregationsMovingAverageAggregationBase {
+export interface AggregationsLinearMovingAverageAggregation
+  extends AggregationsMovingAverageAggregationBase {
   model: 'linear';
   settings: EmptyObject;
 }
-export interface AggregationsLongRareTermsAggregate extends AggregationsMultiBucketAggregateBase<AggregationsLongRareTermsBucket> {}
+export interface AggregationsLongRareTermsAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsLongRareTermsBucket> {}
 export interface AggregationsLongRareTermsBucketKeys extends AggregationsMultiBucketBase {
   key: long;
   key_as_string?: string;
@@ -3231,7 +3262,8 @@ export interface AggregationsLongRareTermsBucketKeys extends AggregationsMultiBu
 export type AggregationsLongRareTermsBucket = AggregationsLongRareTermsBucketKeys & {
   [property: string]: AggregationsAggregate | long | string;
 };
-export interface AggregationsLongTermsAggregate extends AggregationsTermsAggregateBase<AggregationsLongTermsBucket> {}
+export interface AggregationsLongTermsAggregate
+  extends AggregationsTermsAggregateBase<AggregationsLongTermsBucket> {}
 export interface AggregationsLongTermsBucketKeys extends AggregationsTermsBucketBase {
   key: long;
   key_as_string?: string;
@@ -3263,8 +3295,10 @@ export interface AggregationsMatrixStatsFields {
 export interface AggregationsMaxAggregate extends AggregationsSingleMetricAggregateBase {}
 export interface AggregationsMaxAggregation extends AggregationsFormatMetricAggregationBase {}
 export interface AggregationsMaxBucketAggregation extends AggregationsPipelineAggregationBase {}
-export interface AggregationsMedianAbsoluteDeviationAggregate extends AggregationsSingleMetricAggregateBase {}
-export interface AggregationsMedianAbsoluteDeviationAggregation extends AggregationsFormatMetricAggregationBase {
+export interface AggregationsMedianAbsoluteDeviationAggregate
+  extends AggregationsSingleMetricAggregateBase {}
+export interface AggregationsMedianAbsoluteDeviationAggregation
+  extends AggregationsFormatMetricAggregationBase {
   compression?: double;
 }
 export interface AggregationsMetricAggregationBase {
@@ -3292,7 +3326,8 @@ export type AggregationsMovingAverageAggregation =
   | AggregationsEwmaMovingAverageAggregation
   | AggregationsHoltMovingAverageAggregation
   | AggregationsHoltWintersMovingAverageAggregation;
-export interface AggregationsMovingAverageAggregationBase extends AggregationsPipelineAggregationBase {
+export interface AggregationsMovingAverageAggregationBase
+  extends AggregationsPipelineAggregationBase {
   minimize?: boolean;
   predict?: integer;
   window?: integer;
@@ -3302,14 +3337,14 @@ export interface AggregationsMovingFunctionAggregation extends AggregationsPipel
   shift?: integer;
   window?: integer;
 }
-export interface AggregationsMovingPercentilesAggregation extends AggregationsPipelineAggregationBase {
+export interface AggregationsMovingPercentilesAggregation
+  extends AggregationsPipelineAggregationBase {
   window?: integer;
   shift?: integer;
   keyed?: boolean;
 }
-export interface AggregationsMultiBucketAggregateBase<
-  TBucket = unknown,
-> extends AggregationsAggregateBase {
+export interface AggregationsMultiBucketAggregateBase<TBucket = unknown>
+  extends AggregationsAggregateBase {
   buckets: AggregationsBuckets<TBucket>;
 }
 export interface AggregationsMultiBucketBase {
@@ -3319,7 +3354,8 @@ export interface AggregationsMultiTermLookup {
   field: Field;
   missing?: AggregationsMissing;
 }
-export interface AggregationsMultiTermsAggregate extends AggregationsTermsAggregateBase<AggregationsMultiTermsBucket> {}
+export interface AggregationsMultiTermsAggregate
+  extends AggregationsTermsAggregateBase<AggregationsMultiTermsBucket> {}
 export interface AggregationsMultiTermsAggregation extends AggregationsBucketAggregationBase {
   collect_mode?: AggregationsTermsAggregationCollectMode;
   order?: AggregationsAggregateOrder;
@@ -3367,7 +3403,8 @@ export interface AggregationsParentAggregation extends AggregationsBucketAggrega
   type?: RelationName;
 }
 export interface AggregationsPercentageScoreHeuristic {}
-export interface AggregationsPercentileRanksAggregation extends AggregationsFormatMetricAggregationBase {
+export interface AggregationsPercentileRanksAggregation
+  extends AggregationsFormatMetricAggregationBase {
   keyed?: boolean;
   values?: double[] | null;
   hdr?: AggregationsHdrMethod;
@@ -3379,14 +3416,17 @@ export type AggregationsPercentiles =
 export interface AggregationsPercentilesAggregateBase extends AggregationsAggregateBase {
   values: AggregationsPercentiles;
 }
-export interface AggregationsPercentilesAggregation extends AggregationsFormatMetricAggregationBase {
+export interface AggregationsPercentilesAggregation
+  extends AggregationsFormatMetricAggregationBase {
   keyed?: boolean;
   percents?: double[];
   hdr?: AggregationsHdrMethod;
   tdigest?: AggregationsTDigest;
 }
-export interface AggregationsPercentilesBucketAggregate extends AggregationsPercentilesAggregateBase {}
-export interface AggregationsPercentilesBucketAggregation extends AggregationsPipelineAggregationBase {
+export interface AggregationsPercentilesBucketAggregate
+  extends AggregationsPercentilesAggregateBase {}
+export interface AggregationsPercentilesBucketAggregation
+  extends AggregationsPipelineAggregationBase {
   percents?: double[];
 }
 export interface AggregationsPipelineAggregationBase extends AggregationsBucketPathAggregation {
@@ -3398,7 +3438,8 @@ export interface AggregationsRandomSamplerAggregation extends AggregationsBucket
   seed?: integer;
   shard_seed?: integer;
 }
-export interface AggregationsRangeAggregate extends AggregationsMultiBucketAggregateBase<AggregationsRangeBucket> {}
+export interface AggregationsRangeAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsRangeBucket> {}
 export interface AggregationsRangeAggregation extends AggregationsBucketAggregationBase {
   field?: Field;
   missing?: integer;
@@ -3435,7 +3476,8 @@ export interface AggregationsRateAggregation extends AggregationsFormatMetricAgg
   mode?: AggregationsRateMode;
 }
 export type AggregationsRateMode = 'sum' | 'value_count';
-export interface AggregationsReverseNestedAggregateKeys extends AggregationsSingleBucketAggregateBase {}
+export interface AggregationsReverseNestedAggregateKeys
+  extends AggregationsSingleBucketAggregateBase {}
 export type AggregationsReverseNestedAggregate = AggregationsReverseNestedAggregateKeys & {
   [property: string]: AggregationsAggregate | long | Metadata;
 };
@@ -3463,28 +3505,32 @@ export interface AggregationsScriptedMetricAggregation extends AggregationsMetri
   params?: Record<string, any>;
   reduce_script?: Script | string;
 }
-export interface AggregationsSerialDifferencingAggregation extends AggregationsPipelineAggregationBase {
+export interface AggregationsSerialDifferencingAggregation
+  extends AggregationsPipelineAggregationBase {
   lag?: integer;
 }
-export interface AggregationsSignificantLongTermsAggregate extends AggregationsSignificantTermsAggregateBase<AggregationsSignificantLongTermsBucket> {}
-export interface AggregationsSignificantLongTermsBucketKeys extends AggregationsSignificantTermsBucketBase {
+export interface AggregationsSignificantLongTermsAggregate
+  extends AggregationsSignificantTermsAggregateBase<AggregationsSignificantLongTermsBucket> {}
+export interface AggregationsSignificantLongTermsBucketKeys
+  extends AggregationsSignificantTermsBucketBase {
   key: long;
   key_as_string?: string;
 }
 export type AggregationsSignificantLongTermsBucket = AggregationsSignificantLongTermsBucketKeys & {
   [property: string]: AggregationsAggregate | long | string | double;
 };
-export interface AggregationsSignificantStringTermsAggregate extends AggregationsSignificantTermsAggregateBase<AggregationsSignificantStringTermsBucket> {}
-export interface AggregationsSignificantStringTermsBucketKeys extends AggregationsSignificantTermsBucketBase {
+export interface AggregationsSignificantStringTermsAggregate
+  extends AggregationsSignificantTermsAggregateBase<AggregationsSignificantStringTermsBucket> {}
+export interface AggregationsSignificantStringTermsBucketKeys
+  extends AggregationsSignificantTermsBucketBase {
   key: string;
 }
 export type AggregationsSignificantStringTermsBucket =
   AggregationsSignificantStringTermsBucketKeys & {
     [property: string]: AggregationsAggregate | string | double | long;
   };
-export interface AggregationsSignificantTermsAggregateBase<
-  T = unknown,
-> extends AggregationsMultiBucketAggregateBase<T> {
+export interface AggregationsSignificantTermsAggregateBase<T = unknown>
+  extends AggregationsMultiBucketAggregateBase<T> {
   bg_count?: long;
   doc_count?: long;
 }
@@ -3528,7 +3574,8 @@ export interface AggregationsSignificantTextAggregation extends AggregationsBuck
   size?: integer;
   source_fields?: Fields;
 }
-export interface AggregationsSimpleMovingAverageAggregation extends AggregationsMovingAverageAggregationBase {
+export interface AggregationsSimpleMovingAverageAggregation
+  extends AggregationsMovingAverageAggregationBase {
   model: 'simple';
   settings: EmptyObject;
 }
@@ -3570,7 +3617,8 @@ export interface AggregationsStatsAggregate extends AggregationsAggregateBase {
 export interface AggregationsStatsAggregation extends AggregationsFormatMetricAggregationBase {}
 export interface AggregationsStatsBucketAggregate extends AggregationsStatsAggregate {}
 export interface AggregationsStatsBucketAggregation extends AggregationsPipelineAggregationBase {}
-export interface AggregationsStringRareTermsAggregate extends AggregationsMultiBucketAggregateBase<AggregationsStringRareTermsBucket> {}
+export interface AggregationsStringRareTermsAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsStringRareTermsBucket> {}
 export interface AggregationsStringRareTermsBucketKeys extends AggregationsMultiBucketBase {
   key: string;
 }
@@ -3591,7 +3639,8 @@ export interface AggregationsStringStatsAggregate extends AggregationsAggregateB
 export interface AggregationsStringStatsAggregation extends AggregationsMetricAggregationBase {
   show_distribution?: boolean;
 }
-export interface AggregationsStringTermsAggregate extends AggregationsTermsAggregateBase<AggregationsStringTermsBucket> {}
+export interface AggregationsStringTermsAggregate
+  extends AggregationsTermsAggregateBase<AggregationsStringTermsBucket> {}
 export interface AggregationsStringTermsBucketKeys extends AggregationsTermsBucketBase {
   key: FieldValue;
 }
@@ -3604,8 +3653,10 @@ export interface AggregationsSumBucketAggregation extends AggregationsPipelineAg
 export interface AggregationsTDigest {
   compression?: integer;
 }
-export interface AggregationsTDigestPercentileRanksAggregate extends AggregationsPercentilesAggregateBase {}
-export interface AggregationsTDigestPercentilesAggregate extends AggregationsPercentilesAggregateBase {}
+export interface AggregationsTDigestPercentileRanksAggregate
+  extends AggregationsPercentilesAggregateBase {}
+export interface AggregationsTDigestPercentilesAggregate
+  extends AggregationsPercentilesAggregateBase {}
 export interface AggregationsTTestAggregate extends AggregationsAggregateBase {
   value: double | null;
   value_as_string?: string;
@@ -3616,9 +3667,8 @@ export interface AggregationsTTestAggregation {
   type?: AggregationsTTestType;
 }
 export type AggregationsTTestType = 'paired' | 'homoscedastic' | 'heteroscedastic';
-export interface AggregationsTermsAggregateBase<
-  TBucket = unknown,
-> extends AggregationsMultiBucketAggregateBase<TBucket> {
+export interface AggregationsTermsAggregateBase<TBucket = unknown>
+  extends AggregationsMultiBucketAggregateBase<TBucket> {
   doc_count_error_upper_bound?: long;
   sum_other_doc_count?: long;
 }
@@ -3661,7 +3711,8 @@ export interface AggregationsTestPopulation {
   script?: Script | string;
   filter?: QueryDslQueryContainer;
 }
-export interface AggregationsTimeSeriesAggregate extends AggregationsMultiBucketAggregateBase<AggregationsTimeSeriesBucket> {}
+export interface AggregationsTimeSeriesAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsTimeSeriesBucket> {}
 export interface AggregationsTimeSeriesAggregation extends AggregationsBucketAggregationBase {
   size?: integer;
   keyed?: boolean;
@@ -3705,15 +3756,19 @@ export interface AggregationsTopMetricsAggregation extends AggregationsMetricAgg
 export interface AggregationsTopMetricsValue {
   field: Field;
 }
-export interface AggregationsUnmappedRareTermsAggregate extends AggregationsMultiBucketAggregateBase<void> {}
-export interface AggregationsUnmappedSamplerAggregateKeys extends AggregationsSingleBucketAggregateBase {}
+export interface AggregationsUnmappedRareTermsAggregate
+  extends AggregationsMultiBucketAggregateBase<void> {}
+export interface AggregationsUnmappedSamplerAggregateKeys
+  extends AggregationsSingleBucketAggregateBase {}
 export type AggregationsUnmappedSamplerAggregate = AggregationsUnmappedSamplerAggregateKeys & {
   [property: string]: AggregationsAggregate | long | Metadata;
 };
-export interface AggregationsUnmappedSignificantTermsAggregate extends AggregationsSignificantTermsAggregateBase<void> {}
+export interface AggregationsUnmappedSignificantTermsAggregate
+  extends AggregationsSignificantTermsAggregateBase<void> {}
 export interface AggregationsUnmappedTermsAggregate extends AggregationsTermsAggregateBase<void> {}
 export interface AggregationsValueCountAggregate extends AggregationsSingleMetricAggregateBase {}
-export interface AggregationsValueCountAggregation extends AggregationsFormattableMetricAggregation {}
+export interface AggregationsValueCountAggregation
+  extends AggregationsFormattableMetricAggregation {}
 export type AggregationsValueType =
   | 'string'
   | 'long'
@@ -3725,7 +3780,8 @@ export type AggregationsValueType =
   | 'numeric'
   | 'geo_point'
   | 'boolean';
-export interface AggregationsVariableWidthHistogramAggregate extends AggregationsMultiBucketAggregateBase<AggregationsVariableWidthHistogramBucket> {}
+export interface AggregationsVariableWidthHistogramAggregate
+  extends AggregationsMultiBucketAggregateBase<AggregationsVariableWidthHistogramBucket> {}
 export interface AggregationsVariableWidthHistogramAggregation {
   field?: Field;
   buckets?: integer;
@@ -3933,7 +3989,8 @@ export interface AnalysisDelimitedPayloadTokenFilter extends AnalysisTokenFilter
   delimiter?: string;
   encoding?: AnalysisDelimitedPayloadEncoding;
 }
-export interface AnalysisDictionaryDecompounderTokenFilter extends AnalysisCompoundWordTokenFilterBase {
+export interface AnalysisDictionaryDecompounderTokenFilter
+  extends AnalysisCompoundWordTokenFilterBase {
   type: 'dictionary_decompounder';
 }
 export interface AnalysisDutchAnalyzer {
@@ -4040,7 +4097,8 @@ export interface AnalysisHunspellTokenFilter extends AnalysisTokenFilterBase {
   locale: string;
   longest_only?: boolean;
 }
-export interface AnalysisHyphenationDecompounderTokenFilter extends AnalysisCompoundWordTokenFilterBase {
+export interface AnalysisHyphenationDecompounderTokenFilter
+  extends AnalysisCompoundWordTokenFilterBase {
   type: 'hyphenation_decompounder';
 }
 export interface AnalysisIcuAnalyzer {
@@ -5331,17 +5389,13 @@ export interface QueryDslCommonTermsQuery extends QueryDslQueryBase {
 export interface QueryDslConstantScoreQuery extends QueryDslQueryBase {
   filter: QueryDslQueryContainer;
 }
-export interface QueryDslDateDecayFunctionKeys extends QueryDslDecayFunctionBase<
-  DateMath,
-  Duration
-> {}
+export interface QueryDslDateDecayFunctionKeys
+  extends QueryDslDecayFunctionBase<DateMath, Duration> {}
 export type QueryDslDateDecayFunction = QueryDslDateDecayFunctionKeys & {
   [property: string]: QueryDslDecayPlacement | QueryDslMultiValueMode;
 };
-export interface QueryDslDateDistanceFeatureQuery extends QueryDslDistanceFeatureQueryBase<
-  DateMath,
-  Duration
-> {}
+export interface QueryDslDateDistanceFeatureQuery
+  extends QueryDslDistanceFeatureQueryBase<DateMath, Duration> {}
 export interface QueryDslDateRangeQuery extends QueryDslRangeQueryBase<DateMath> {
   format?: DateFormat;
   time_zone?: TimeZone;
@@ -5368,10 +5422,8 @@ export type QueryDslDistanceFeatureQuery =
   | QueryDslUntypedDistanceFeatureQuery
   | QueryDslGeoDistanceFeatureQuery
   | QueryDslDateDistanceFeatureQuery;
-export interface QueryDslDistanceFeatureQueryBase<
-  TOrigin = unknown,
-  TDistance = unknown,
-> extends QueryDslQueryBase {
+export interface QueryDslDistanceFeatureQueryBase<TOrigin = unknown, TDistance = unknown>
+  extends QueryDslQueryBase {
   origin: TOrigin;
   pivot: TDistance;
   field: Field;
@@ -5449,17 +5501,13 @@ export type QueryDslGeoBoundingBoxQuery = QueryDslGeoBoundingBoxQueryKeys & {
     | float
     | string;
 };
-export interface QueryDslGeoDecayFunctionKeys extends QueryDslDecayFunctionBase<
-  GeoLocation,
-  Distance
-> {}
+export interface QueryDslGeoDecayFunctionKeys
+  extends QueryDslDecayFunctionBase<GeoLocation, Distance> {}
 export type QueryDslGeoDecayFunction = QueryDslGeoDecayFunctionKeys & {
   [property: string]: QueryDslDecayPlacement | QueryDslMultiValueMode;
 };
-export interface QueryDslGeoDistanceFeatureQuery extends QueryDslDistanceFeatureQueryBase<
-  GeoLocation,
-  Distance
-> {}
+export interface QueryDslGeoDistanceFeatureQuery
+  extends QueryDslDistanceFeatureQueryBase<GeoLocation, Distance> {}
 export interface QueryDslGeoDistanceQueryKeys extends QueryDslQueryBase {
   distance: Distance;
   distance_type?: GeoDistanceType;
@@ -5686,10 +5734,8 @@ export interface QueryDslNestedQuery extends QueryDslQueryBase {
   score_mode?: QueryDslChildScoreMode;
 }
 export interface QueryDslNumberRangeQuery extends QueryDslRangeQueryBase<double> {}
-export interface QueryDslNumericDecayFunctionKeys extends QueryDslDecayFunctionBase<
-  double,
-  double
-> {}
+export interface QueryDslNumericDecayFunctionKeys
+  extends QueryDslDecayFunctionBase<double, double> {}
 export type QueryDslNumericDecayFunction = QueryDslNumericDecayFunctionKeys & {
   [property: string]: QueryDslDecayPlacement | QueryDslMultiValueMode;
 };
@@ -6028,10 +6074,8 @@ export interface QueryDslUntypedDecayFunctionKeys extends QueryDslDecayFunctionB
 export type QueryDslUntypedDecayFunction = QueryDslUntypedDecayFunctionKeys & {
   [property: string]: QueryDslDecayPlacement | QueryDslMultiValueMode;
 };
-export interface QueryDslUntypedDistanceFeatureQuery extends QueryDslDistanceFeatureQueryBase<
-  any,
-  any
-> {}
+export interface QueryDslUntypedDistanceFeatureQuery
+  extends QueryDslDistanceFeatureQueryBase<any, any> {}
 export interface QueryDslUntypedRangeQuery extends QueryDslRangeQueryBase<any> {
   format?: DateFormat;
   time_zone?: TimeZone;
@@ -13626,10 +13670,12 @@ export interface MlEvaluateDataFrameDataframeClassificationSummaryRecall {
   classes: MlEvaluateDataFrameDataframeEvaluationClass[];
   avg_recall: double;
 }
-export interface MlEvaluateDataFrameDataframeEvaluationClass extends MlEvaluateDataFrameDataframeEvaluationValue {
+export interface MlEvaluateDataFrameDataframeEvaluationClass
+  extends MlEvaluateDataFrameDataframeEvaluationValue {
   class_name: Name;
 }
-export interface MlEvaluateDataFrameDataframeEvaluationSummaryAucRoc extends MlEvaluateDataFrameDataframeEvaluationValue {
+export interface MlEvaluateDataFrameDataframeEvaluationSummaryAucRoc
+  extends MlEvaluateDataFrameDataframeEvaluationValue {
   curve?: MlEvaluateDataFrameDataframeEvaluationSummaryAucRocCurveItem[];
 }
 export interface MlEvaluateDataFrameDataframeEvaluationSummaryAucRocCurveItem {
@@ -14532,10 +14578,8 @@ export interface MlValidateDetectorRequest extends RequestBase {
   detector?: MlDetector;
 }
 export type MlValidateDetectorResponse = AcknowledgedResponseBase;
-export interface MonitoringBulkRequest<
-  TDocument = unknown,
-  TPartialDocument = unknown,
-> extends RequestBase {
+export interface MonitoringBulkRequest<TDocument = unknown, TPartialDocument = unknown>
+  extends RequestBase {
   type?: string;
   system_id: string;
   system_api_version: string;
@@ -15689,7 +15733,8 @@ export interface SearchApplicationPutRequest extends RequestBase {
 export interface SearchApplicationPutResponse {
   result: Result;
 }
-export interface SearchApplicationPutBehavioralAnalyticsAnalyticsAcknowledgeResponseBase extends AcknowledgedResponseBase {
+export interface SearchApplicationPutBehavioralAnalyticsAnalyticsAcknowledgeResponseBase
+  extends AcknowledgedResponseBase {
   name: Name;
 }
 export interface SearchApplicationPutBehavioralAnalyticsRequest extends RequestBase {
@@ -16555,7 +16600,8 @@ export interface SecurityQueryApiKeysApiKeyAggregationContainer {
   terms?: AggregationsTermsAggregation;
   value_count?: AggregationsValueCountAggregation;
 }
-export interface SecurityQueryApiKeysApiKeyFiltersAggregation extends AggregationsBucketAggregationBase {
+export interface SecurityQueryApiKeysApiKeyFiltersAggregation
+  extends AggregationsBucketAggregationBase {
   filters?: AggregationsBuckets<SecurityQueryApiKeysApiKeyQueryContainer>;
   other_bucket?: boolean;
   other_bucket_key?: string;
