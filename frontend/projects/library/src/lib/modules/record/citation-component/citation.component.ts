@@ -11,6 +11,7 @@ import { faSolidQuoteRight, faSolidDownload } from '@ng-icons/font-awesome/solid
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
 import { TabsModule } from 'primeng/tabs';
+import { SelectButton } from 'primeng/selectbutton';
 
 interface FormatOption {
   id: string;
@@ -32,9 +33,11 @@ interface FormatOption {
     NgIcon,
     CopyInput,
     TabsModule,
+    SelectButton,
   ],
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
   providers: [MessageService],
+  styleUrls: ['./citation.component.scss'],
 })
 export class CitationComponent implements OnChanges {
   uuid = input.required<string>();
@@ -167,6 +170,11 @@ export class CitationComponent implements OnChanges {
       default:
         return 'text/plain';
     }
+  }
+
+  onFormatChange(fmt: string) {
+    this.currentFormat.set(fmt);
+    this.getCitation(fmt);
   }
 
   protected readonly encodeURIComponent = encodeURIComponent;
