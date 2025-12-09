@@ -8,21 +8,14 @@
       </div>
     </ng-template>
     <div class="flex gap-2 px-4 items-center">
-      <div class="bg-gray-100 p-2 rounded-lg">
-        @for (f of formats(); track f.id) {
-          <p-button
-            class="me-1 rounded-lg text-sm font-medium transition-colors"
-            [class.bg-white]="currentFormat() === f.id"
-            [class.text-gray-900]="currentFormat() === f.id"
-            [class.bg-gray-100]="currentFormat() !== f.id"
-            [class.text-gray-300]="currentFormat() !== f.id"
-            [disabled]="currentFormat() === f.id"
-            (click)="getCitation(f.id)"
-          >
-            {{ f.label }}
-          </p-button>
-        }
-      </div>
+      <p-selectButton
+        [options]="formats()"
+        optionLabel="label"
+        optionValue="id"
+        [ngModel]="currentFormat()"
+        (ngModelChange)="onFormatChange($event)"
+        class="text-sm font-medium"
+      />
 
       <div class="flex-1"></div>
 

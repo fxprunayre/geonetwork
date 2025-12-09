@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
-import { Button, ButtonDirective } from 'primeng/button';
+import { ButtonDirective } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { faSolidQuoteRight, faSolidDownload } from '@ng-icons/font-awesome/solid';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
 import { TabsModule } from 'primeng/tabs';
+import { SelectButton } from 'primeng/selectbutton';
 
 interface FormatOption {
   id: string;
@@ -26,15 +26,15 @@ interface FormatOption {
     CommonModule,
     TranslatePipe,
     ToastModule,
-    Button,
     ButtonDirective,
     Card,
     NgIcon,
     CopyInput,
     TabsModule,
+    SelectButton,
   ],
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
-  providers: [MessageService],
+  styleUrls: ['./citation.component.scss'],
 })
 export class CitationComponent implements OnChanges {
   uuid = input.required<string>();
@@ -42,7 +42,6 @@ export class CitationComponent implements OnChanges {
 
   private readonly translateService = inject(TranslateService);
   private recordService = inject(RecordsService);
-  private messageService = inject(MessageService);
 
   constructor() {
     effect(() => {
@@ -167,6 +166,11 @@ export class CitationComponent implements OnChanges {
       default:
         return 'text/plain';
     }
+  }
+
+  onFormatChange(fmt: string) {
+    this.currentFormat.set(fmt);
+    this.getCitation(fmt);
   }
 
   protected readonly encodeURIComponent = encodeURIComponent;
