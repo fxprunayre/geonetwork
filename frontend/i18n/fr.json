@@ -44,7 +44,7 @@
         "contact": "Contact",
         "coverage": "Couverture",
         "spatialInfo": "Informations spatiales",
-        "lineage": "Lignée",
+        "lineage": "Provenance",
         "content": "Contenu",
         "classification": "Classification",
         "citation": "Citation",
@@ -55,6 +55,17 @@
     },
     "field": {
       "abstract": "Aperçu",
+      "credit": "Source",
+      "lineage": "Généalogie",
+      "useLimitation": "Limitation d'utilisation",
+      "useConstraints": "Utiliser des contraintes",
+      "otherConstraints": "Autres contraintes",
+      "cl_accessConstraints": "Contraintes d'accès",
+      "coverage": {
+        "spatial": "Emprise géographique",
+        "temporal": "Étendue temporelle",
+        "vertical": "Étendue verticale"
+      },
       "overview": {
         "notAvailable": "Pas d'aperçu"
       },
@@ -141,8 +152,5 @@
     "seeAll": "Voir tout"
   },
   "addToMap": "Ajouter à la carte",
-  "exploreData": "Explorer les données",
-  "useLimitation": "Limitation d'utilisation",
-  "useConstraints": "Utiliser des contraintes",
-  "otherConstraints": "Autres contraintes"
+  "exploreData": "Explorer les données"
 }

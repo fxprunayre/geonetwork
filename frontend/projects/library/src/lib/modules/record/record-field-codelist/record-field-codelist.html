@@ -1,0 +1,9 @@
+@for (codelist of values(); track $index) {
+  <p>
+    @if (codelist.link) {
+      <a [href]="codelist.link" target="_blank">{{ codelist.default | translate }}</a>
+    } @else {
+      {{ codelist.default | translate }}
+    }
+  </p>
+}

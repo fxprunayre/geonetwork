@@ -1,12 +1,11 @@
 @let creds = credits();
 @if (creds) {
-  @for (c of creds; track $index) {
-    @if ((displayFirstOnly() && $index === 0) || !displayFirstOnly()) {
-      <span class="text-base text-primary-400" [title]="c['default']">
-        @if ($index < creds.length - 1 && !displayFirstOnly()) {
-          {{ c['default'] }},
-        } @else {
-          {{ c['default'] }}
+  @for (c of creds; track $index; let last = $last) {
+    @if (!displayFirstOnly() || $index === 0) {
+      <span [title]="c['default']">
+        {{ c['default'] }}
+        @if (!displayFirstOnly() && !last) {
+          ,
         }
       </span>
     }

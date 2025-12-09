@@ -47,6 +47,11 @@ import { CitationComponent } from '../citation-component/citation.component';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
+import { RecordFieldConstraints } from '../record-field-constraints/record-field-constraints';
+import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
+import { RecordFieldCoverageSpatial } from '../record-field-coverage-spatial/record-field-coverage-spatial';
+import { RecordFieldCoverageTemporal } from '../record-field-coverage-temporal/record-field-coverage-temporal';
+import { RecordFieldCoverageVertical } from '../record-field-coverage-vertical/record-field-coverage-vertical';
 
 export const DEFAULT_TAB = 'about';
 
@@ -61,9 +66,10 @@ export const DEFAULT_TAB = 'about';
     RecordField,
     RecordFieldContact,
     RecordFieldCredit,
-    TranslatePipe,
+    RecordFieldConstraints,
     RecordDistributionPanel,
     RecordViewHeader,
+    TranslatePipe,
     Tabs,
     Tab,
     TabPanels,
@@ -78,13 +84,16 @@ export const DEFAULT_TAB = 'about';
     RecordFieldDates,
     FormsModule,
     NgTemplateOutlet,
-    JsonPipe,
     AsyncPipe,
     Card,
     CitationComponent,
     ExplorePanel,
     ScrollSpy,
     RecordHarvesterLogo,
+    RecordFieldCodelist,
+    RecordFieldCoverageSpatial,
+    RecordFieldCoverageTemporal,
+    RecordFieldCoverageVertical,
   ],
   viewProviders: [
     provideIcons({
@@ -161,21 +170,6 @@ export class RecordViewComponent implements AfterViewInit {
 
   getLineage(): string {
     return (this.record()?.lineageObject as any)?.['default'] ?? '';
-  }
-
-  getConstraints(): { default: string; link: string } {
-    const constraint = this.record()?.['MD_LegalConstraintsUseLimitationObject']?.[0];
-    return { default: constraint?.default ?? '', link: constraint?.link ?? '' };
-  }
-
-  getUseConstraint(): { default: string; link: string } {
-    const constraint = this.record()?.['cl_useConstraints']?.[0];
-    return { default: constraint?.default ?? '', link: constraint?.link ?? '' };
-  }
-
-  getOtherConstraint(): { default: string; link: string } {
-    const constraint = this.record()?.['MD_LegalConstraintsOtherConstraintsObject']?.[0];
-    return { default: constraint?.default ?? '', link: constraint?.link ?? '' };
   }
 
   protected readonly RelatedItemType = RelatedItemType;

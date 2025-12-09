@@ -55,6 +55,17 @@
     },
     "field": {
       "abstract": "Overview",
+      "credit": "Credits",
+      "lineage": "Lineage",
+      "useLimitation": "Use limitation",
+      "useConstraints": "Use constraints",
+      "otherConstraints": "Other constraints",
+      "cl_accessConstraints": "Access constraints",
+      "coverage": {
+        "spatial": "Geospatial coverage",
+        "temporal": "Temporal coverage",
+        "vertical": "Vertical coverage"
+      },
       "overview": {
         "notAvailable": "No preview"
       },
@@ -141,8 +152,5 @@
     "seeAll": "See all"
   },
   "addToMap": "Add to map",
-  "exploreData": "Explore data",
-  "useLimitation": "Use limitation",
-  "useConstraints": "Use constraints",
-  "otherConstraints": "Other constraints"
+  "exploreData": "Explore data"
 }
