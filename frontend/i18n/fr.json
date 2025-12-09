@@ -1,7 +1,7 @@
 {
   "search": {
     "input": {
-      "placeholder": "Recherche ...",
+      "placeholder": "Rechercher ...",
       "popover": {
         "resourceType": {
           "title": "Type de ressource"
@@ -33,7 +33,7 @@
       "section": {
         "description": "Description",
         "dates": "Dates",
-        "about": "À propos de cet {{resourceType}}",
+        "about": "À propos",
         "contacts": "Contacts",
         "dataAccess": "Accès aux données",
         "explore": "Explorer",
@@ -61,10 +61,16 @@
       "resourceDate": "Dates",
       "catalogue": {
         "title": "Catalogue",
-        "help": "Origine du dossier",
+        "help": "Origine de la fiche",
         "logo": {
           "alt": "Logo du catalogue"
         }
+      },
+      "datamodel": {
+        "field": "Colonne",
+        "label": "Libellé",
+        "description": "Description",
+        "type": "Type"
       }
     },
     "association": {
@@ -87,13 +93,13 @@
   },
   "shared": {
     "show-more-toggle": {
-      "more": "En savoir plus",
-      "less": "Voir moins"
+      "more": "Lire la suite",
+      "less": "Réduire"
     }
   },
-  "groupPublishedId": "Groupes",
-  "th_sextant-theme_tree.key": "Thèmes Sextants",
-  "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
+  "groupPublishedId": "Catalogues",
+  "th_sextant-theme_tree.key": "Thèmes Sextant",
+  "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
   "tag.default": "Mots-clés",
   "creationYearForResource": "Année de création",
   "OrgForResource": "Organisation",
@@ -134,10 +140,6 @@
   "relations": {
     "seeAll": "Voir tout"
   },
-  "field": "Champ",
-  "Label": "Étiquette",
-  "Description": "Description",
-  "Type": "Taper",
   "addToMap": "Ajouter à la carte",
   "exploreData": "Explorer les données",
   "useLimitation": "Limitation d'utilisation",

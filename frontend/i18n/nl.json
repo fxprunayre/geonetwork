@@ -32,7 +32,7 @@
       "section": {
         "description": "Beschrijving",
         "dates": "Datums",
-        "about": "Over deze {{resourceType}}",
+        "about": "Over deze",
         "contacts": "Contacten",
         "dataAccess": "Data toegang",
         "explore": "Ontdek",
@@ -64,6 +64,12 @@
         "logo": {
           "alt": "Catalogue logo"
         }
+      },
+      "datamodel": {
+        "field": "Field",
+        "label": "Label",
+        "description": "Description",
+        "type": "Type"
       }
     },
     "association": {
