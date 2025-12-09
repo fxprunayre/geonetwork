@@ -2,7 +2,6 @@
 
 ## User interface configuration
 
-...   ...
 
 ## Theming
 
@@ -21,7 +20,22 @@ The current theme is based on PrimeUIX Aura preset. See https://github.com/prime
 Font family is set to "Inter" and can be customized with `--app-font-family-sans`.
 
 
-## Development
+## Embedding
+
+See [`test-wc.html`](test-wc.html)
+
+```html
+<script src="dist/main/browser/polyfills-5CFQRCPP.js" type="module"></script>
+<script src="dist/main/browser/main-FNWGVB2Y.js" type="module"></script>
+<link rel="stylesheet" href="dist/main/browser/styles-GMSYAROY.css" />
+<sextant-app></sextant-app>
+```
+
+
+
+# Development
+
+## Setup
 
 To set up the development environment and start the main app, run the following commands:
 
@@ -41,6 +55,9 @@ npm run watch-lib
 ```
 
 
+```sh
+git config core.hooksPath frontend/.husky
+```
 
 ### Running tests
 
