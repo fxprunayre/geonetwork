@@ -11,6 +11,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
 import { TabsModule } from 'primeng/tabs';
 import { SelectButton } from 'primeng/selectbutton';
+import { MessageService } from 'primeng/api';
 
 interface FormatOption {
   id: string;
@@ -33,8 +34,8 @@ interface FormatOption {
     TabsModule,
     SelectButton,
   ],
+  providers: [MessageService],
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
-  styleUrls: ['./citation.component.scss'],
 })
 export class CitationComponent implements OnChanges {
   uuid = input.required<string>();
