@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, input, OnDestroy, OnInit, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, Component, input, OnDestroy, signal } from '@angular/core';
 
 interface SectionItem {
   id: string;
@@ -26,12 +26,6 @@ interface SectionItem {
         color: var(--p-tabs-tab-color);
         padding: var(--p-tabs-tab-padding);
         font-weight: var(--p-tabs-tab-font-weight);
-        transition:
-          background var(--p-tabs-transition-duration),
-          border-color var(--p-tabs-transition-duration),
-          color var(--p-tabs-transition-duration),
-          outline-color var(--p-tabs-transition-duration),
-          box-shadow var(--p-tabs-transition-duration);
         margin: var(--p-tabs-tab-margin);
         outline-color: transparent;
       }
@@ -123,29 +117,36 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
   }
 
   scrollTo(id: string): void {
-    const targetElement = document.getElementById(id);
+    const isWindow = this.scrollContainer instanceof Window;
 
-    if (targetElement) {
-      if (this.scrollContainer instanceof Window) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 60,
-          behavior: 'smooth',
-        });
-      } else {
-        const container = this.scrollContainer as HTMLElement;
-        const top =
-          targetElement.getBoundingClientRect().top -
-          container.getBoundingClientRect().top +
-          container.scrollTop -
-          60;
-        container.scrollTo({
-          top,
-          behavior: 'smooth',
-        });
+    if (isWindow) {
+      const targetElement = document.getElementById(id);
+      if (!targetElement) {
+        return;
       }
+      window.scrollTo({
+        top: targetElement.offsetTop - 60,
+        behavior: 'smooth',
+      });
+    } else {
+      const container = this.scrollContainer as HTMLElement;
+      const targetElement = container.querySelector(`#${id}`);
 
-      this.activeSectionId.set(id);
+      if (!targetElement) {
+        return;
+      }
+      const top =
+        targetElement.getBoundingClientRect().top -
+        container.getBoundingClientRect().top +
+        container.scrollTop -
+        60;
+      container.scrollTo({
+        top,
+        behavior: 'smooth',
+      });
     }
+
+    this.activeSectionId.set(id);
   }
 
   onScroll = (): void => {

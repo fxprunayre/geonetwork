@@ -25,7 +25,6 @@ export const routes: Routes = [
     matcher: recordMatcher,
     component: ResultDetailComponent,
   },
-  // { path: 'map', component: MapComponent },
   { path: 'test', component: MultisearchTest },
   { path: '**', redirectTo: '' },
 ];

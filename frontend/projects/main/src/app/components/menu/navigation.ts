@@ -61,7 +61,7 @@ export class Navigation implements OnInit {
     return [
       {
         icon: 'faSolidBars',
-        label: 'Menu',
+        label: '',
         command: () => {
           this.toggleMenu();
         },

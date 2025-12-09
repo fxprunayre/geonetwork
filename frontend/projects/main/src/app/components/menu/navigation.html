@@ -4,7 +4,7 @@
       @if (item.icon) {
         <ng-icon [name]="item.icon" class="md:text-2xl"></ng-icon>
       }
-      <span
+      <div
         class="overflow-hidden transition-all duration-300 whitespace-nowrap"
         [class.max-w-0]="isIconMode()"
         [class.opacity-0]="isIconMode()"
@@ -12,8 +12,14 @@
         [class.max-w-40]="!isIconMode()"
         [class.opacity-100]="!isIconMode()"
         [class.ml-2]="!isIconMode()"
-        >{{ item.label }}</span
       >
+        <span>{{ item.label }}</span>
+        @if (item.label === '') {
+          <a routerLink="/">
+            <img [src]="logo" alt="Logo" class="h-[26px] md:h-[36px]" />
+          </a>
+        }
+      </div>
     </div>
   </ng-template>
 
@@ -23,13 +29,7 @@
     [pt]="{ root: '!min-w-fit h-full transition-all duration-300' }"
     [dt]="dt"
   >
-    <ng-template pTemplate="start">
-      <div class="flex w-full items-center p-2">
-        <a routerLink="/">
-          <img [src]="logo" alt="Logo" class="h-[26px] md:h-[36px]" />
-        </a>
-      </div>
-    </ng-template>
+    <ng-template pTemplate="start"> </ng-template>
 
     <ng-template pTemplate="item" let-item>
       @if (item.visible === undefined || item.visible) {
