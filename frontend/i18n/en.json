@@ -33,7 +33,7 @@
       "section": {
         "description": "Description",
         "dates": "Dates",
-        "about": "About this {{resourceType}}",
+        "about": "About",
         "contacts": "Contacts",
         "dataAccess": "Data access",
         "explore": "Explore",
@@ -48,7 +48,7 @@
         "content": "Content",
         "classification": "Classification",
         "citation": "Citation",
-        "usageAndAccess": "Use and access",
+        "usageAndAccess": "Usage and access",
         "relatedResources": "Related resources",
         "similarResources": "Similar resources"
       }
@@ -65,6 +65,12 @@
         "logo": {
           "alt": "Catalogue logo"
         }
+      },
+      "datamodel": {
+        "field": "Field",
+        "label": "Label",
+        "description": "Description",
+        "type": "Type"
       }
     },
     "association": {
@@ -110,17 +116,33 @@
   "home": {
     "title": "Charting the ocean's story through data",
     "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",
-    "secondTitle": "Marine and coastal geographic data infrastructure",
-    "secondSubtitle": "Sextant aims to document, disseminate, and promote a catalog of marine data. Intended for laboratories, Ifremer partners, and national and European marine stakeholders, this infrastructure offers tools for archiving, accessing, and sharing data.",
-    "button": "Our mission",
-    "thirdTitle": "Discover interactive maps"
+    "discover": "Discover our themes"
+  },
+  "menu": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "map": "Map"
   },
   "citation": {
     "title": "Cite Dataset",
-    "copy": "Copy",
-    "copy_title": "Copy success",
-    "copy_detail": "Succesfully copied to clipboard",
     "download": "Download",
     "loading": "Loading citation ..."
-  }
+  },
+  "copy": {
+    "title": "Copy",
+    "title_success": "Copy success",
+    "detail_success": "Successfully copied to clipboard"
+  },
+  "data": {
+    "available_datasources": "Available Data sources"
+  },
+  "discussions": "Discussions",
+  "relations": {
+    "seeAll": "See all"
+  },
+  "addToMap": "Add to map",
+  "exploreData": "Explore data",
+  "useLimitation": "Use limitation",
+  "useConstraints": "Use constraints",
+  "otherConstraints": "Other constraints"
 }

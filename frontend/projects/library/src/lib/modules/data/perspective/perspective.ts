@@ -13,7 +13,7 @@ import {
 import perspective from '@perspective-dev/client';
 import { Datasource, DuckDbService } from '../duck-db.service';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidExpand } from '@ng-icons/font-awesome/solid';
+import { faSolidExpand, faSolidCompress } from '@ng-icons/font-awesome/solid';
 import { Button, ButtonIcon } from 'primeng/button';
 import { NgClass } from '@angular/common';
 import { ProgressBar } from 'primeng/progressbar';
@@ -24,6 +24,7 @@ import { ProgressBar } from 'primeng/progressbar';
   viewProviders: [
     provideIcons({
       faSolidExpand,
+      faSolidCompress,
     }),
   ],
   template: `
@@ -43,7 +44,11 @@ import { ProgressBar } from 'primeng/progressbar';
       }"
     >
       <p-button (click)="toggleFullScreen()" styleClass="float-right">
-        <ng-icon name="faSolidExpand" pButtonIcon />
+        @if (isFullScreen()) {
+          <ng-icon name="faSolidCompress" pButtonIcon />
+        } @else {
+          <ng-icon name="faSolidExpand" pButtonIcon />
+        }
       </p-button>
       <perspective-viewer #perspectiveViewer class="w-full min-h-dvh h-full" />
     </div>

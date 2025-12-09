@@ -5,10 +5,11 @@ import { NgIcon } from '@ng-icons/core';
 import { Perspective } from '../perspective/perspective';
 import { Datasource, DuckDbService } from '../duck-db.service';
 import { IndexRecord } from 'gn-api-client';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-explore-panel',
-  imports: [DatasourceSelect, Fieldset, NgIcon, Perspective],
+  imports: [DatasourceSelect, Fieldset, NgIcon, Perspective, TranslatePipe],
   templateUrl: './explore-panel.html',
 })
 export class ExplorePanel {

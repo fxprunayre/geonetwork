@@ -7,10 +7,16 @@ import { Keyword, KeywordList } from '../../vocabularies/keyword-list/keyword-li
   selector: 'app-record-field-vocabulary',
   imports: [KeywordList, KeywordList],
   templateUrl: './record-field-vocabulary.html',
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
 })
 export class RecordFieldVocabulary extends RecordFieldBase {
   include = input<string[]>([]);
   exclude = input<string[]>([]);
+  styleClass = input<string>('');
 
   vocabularies = computed<Thesaurus[]>(() => {
     const allVocabularies: Record<string, Thesaurus> = this.record().allKeywords || {};

@@ -36,6 +36,7 @@ export * from './lib/modules/record/record-field-credit/record-field-credit';
 export * from './lib/shared/widgets/loading-mask/loading-mask.component';
 export * from './lib/shared/widgets/show-more-toggle/show-more-toggle';
 export * from './lib/shared/widgets/color-picker/color-picker';
+export * from './lib/shared/widgets/copy-input/copy-input';
 export * from './lib/shared/widgets/theme-designer/theme-designer';
 export * from './lib/shared/translate.service.mock.spec';
 export * from './lib/shared/theming.service';

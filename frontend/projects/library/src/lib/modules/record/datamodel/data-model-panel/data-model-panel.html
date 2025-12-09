@@ -6,10 +6,10 @@
     <p-table [value]="definition" stripedRows [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template #header>
         <tr class="font-bold">
-          <th>Field</th>
-          <th>Label</th>
-          <th>Description</th>
-          <th>Type</th>
+          <th>{{ 'record.field.datamodel.field' | translate }}</th>
+          <th>{{ 'record.field.datamodel.label' | translate }}</th>
+          <th>{{ 'record.field.datamodel.description' | translate }}</th>
+          <th>{{ 'record.field.datamodel.type' | translate }}</th>
         </tr>
       </ng-template>
       <ng-template #body let-field>

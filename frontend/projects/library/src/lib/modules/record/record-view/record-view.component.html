@@ -59,13 +59,13 @@
 
   <ng-template #licenseContent>
     <app-record-field [label]="'Constraints'">
-      <span class="block text-[#3a75ab]"> Use limitation:</span>
+      <span class="block text-[#3a75ab]"> {{ 'useLimitation' | translate }}:</span>
       <a [href]="getConstraints().link" target="_blank" class="font-bold">{{
         getConstraints().default
       }}</a>
-      <span class="block text-[#3a75ab]"> Use constraints:</span>
+      <span class="block text-[#3a75ab]"> {{ 'useConstraints' | translate }}:</span>
       <a [href]="getUseConstraint().link" target="_blank">{{ getUseConstraint().default }}</a>
-      <span class="block text-[#3a75ab]"> Other constraints:</span>
+      <span class="block text-[#3a75ab]"> {{ 'otherConstraints' | translate }}:</span>
       <a [href]="getOtherConstraint().link" target="_blank">{{ getOtherConstraint().default }}</a>
     </app-record-field>
   </ng-template>
@@ -129,7 +129,11 @@
   </ng-template>
 
   <ng-template #classificationContent>
-    <app-record-field-vocabulary [record]="record" [exclude]="mainVocabularies()" />
+    <app-record-field-vocabulary
+      [record]="record"
+      [exclude]="mainVocabularies()"
+      styleClass="md:columns-1 lg:columns-2 gap-4"
+    />
   </ng-template>
 
   <ng-template #relatedContent>
@@ -176,7 +180,7 @@
           ];
 
         <div class="flex flex-row gap-4">
-          <div class="w-3/4" #spyTarget>
+          <div class="md:w-3/4" #spyTarget>
             @let activatedSections = getSectionIds(sections);
             <p-accordion
               [multiple]="true"
@@ -198,7 +202,7 @@
                     | translate: { resourceType: record.resourceType };
                 @if (section.hidden !== true) {
                   <p-accordion-panel [value]="section.label">
-                    <p-accordion-header class="!text-xl">{{ sectionLabel }}</p-accordion-header>
+                    <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
                     <p-accordion-content>
                       <ng-container *ngTemplateOutlet="section.tpl; context: { record: record }" />
                     </p-accordion-content>
@@ -207,7 +211,7 @@
               }
             </p-accordion>
           </div>
-          <div class="w-1/4 sticky top-10 self-start">
+          <div class="hidden md:block md:w-1/4 sticky top-10 self-start">
             <app-scroll-spy
               [target]="spyTarget"
               [section]="'p-accordion > p-accordion-panel'"
@@ -243,15 +247,14 @@
       </p-tabpanel>
 
       <p-tabpanel value="citation">
-        <div class="flex flex-row gap-4">
-          <div class="w-3/4">
+        <div class="flex flex-col lg:flex-row lg:gap-4">
+          <div class="w-full lg:w-3/4">
             <app-citation-component
               [uuid]="record.uuid!"
               [format]="'html'"
             ></app-citation-component>
           </div>
-          <div class="w-1/4">
-            <p-card class="my-10" [header]="'Contact'"> Main contact content goes here.</p-card>
+          <div class="w-full lg:w-1/4">
             <app-record-harvester-logo [record]="record" />
           </div>
         </div>

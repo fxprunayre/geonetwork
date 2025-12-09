@@ -1,4 +1,4 @@
-import { Component, inject, output, signal } from '@angular/core';
+import { Component, ContentChild, inject, output, signal, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResultItemList } from '../result-item-list/result-item-list';
 import { ResultItemGrid } from '../result-item-grid/result-item-grid';
@@ -8,15 +8,27 @@ import { EmptyState } from '../empty-state/empty-state';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchAppLayout } from '../../config/model/gnConfig';
+import { Skeleton } from 'primeng/skeleton';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-result-view',
   standalone: true,
-  imports: [ResultItemGrid, ResultItemList, LoadingMask, SearchResultsPaginator, EmptyState],
+  imports: [
+    ResultItemGrid,
+    ResultItemList,
+    LoadingMask,
+    NgTemplateOutlet,
+    Skeleton,
+    SearchResultsPaginator,
+    EmptyState,
+  ],
   templateUrl: './result-view-component.html',
 })
 export class ResultViewComponent extends SearchBase {
   onRecordClick = output<string>();
+
+  @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<any> | undefined;
 
   private router = inject(Router);
 

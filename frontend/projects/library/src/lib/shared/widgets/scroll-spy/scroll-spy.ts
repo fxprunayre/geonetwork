@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, input, OnDestroy, OnInit } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, Component, input, OnDestroy, signal } from '@angular/core';
 
 interface SectionItem {
   id: string;
@@ -26,12 +26,6 @@ interface SectionItem {
         color: var(--p-tabs-tab-color);
         padding: var(--p-tabs-tab-padding);
         font-weight: var(--p-tabs-tab-font-weight);
-        transition:
-          background var(--p-tabs-transition-duration),
-          border-color var(--p-tabs-transition-duration),
-          color var(--p-tabs-transition-duration),
-          outline-color var(--p-tabs-transition-duration),
-          box-shadow var(--p-tabs-transition-duration);
         margin: var(--p-tabs-tab-margin);
         outline-color: transparent;
       }
@@ -51,7 +45,7 @@ interface SectionItem {
     `,
   ],
 })
-export class ScrollSpy implements OnInit, OnDestroy, AfterViewInit {
+export class ScrollSpy implements OnDestroy, AfterViewInit {
   navPosition = input<'aside' | 'top'>('aside');
 
   target = input<HTMLElement>();
@@ -59,27 +53,43 @@ export class ScrollSpy implements OnInit, OnDestroy, AfterViewInit {
   title = input('h1');
 
   sections: SectionItem[] = [];
-  activeSectionId: string | null = null;
+  activeSectionId = signal<string | null>(null);
   private sectionElements: NodeListOf<HTMLElement> | undefined;
+  private scrollContainer: HTMLElement | Window = window;
+  private ticking = false;
 
   ngAfterViewInit() {
     setTimeout(() => this.initializeScrollSpy());
   }
 
-  ngOnInit(): void {
-    window.addEventListener('scroll', this.onScroll);
+  ngOnDestroy(): void {
+    this.scrollContainer.removeEventListener('scroll', this.onScroll);
   }
 
-  ngOnDestroy(): void {
-    window.removeEventListener('scroll', this.onScroll);
+  private getScrollParent(node: HTMLElement | null): HTMLElement | Window {
+    if (!node || node === document.body) {
+      return window;
+    }
+
+    const style = window.getComputedStyle(node);
+    const overflowY = style.overflowY;
+    const isScrollable = overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay';
+
+    if (isScrollable && node.scrollHeight > node.clientHeight) {
+      return node;
+    }
+
+    return this.getScrollParent(node.parentElement);
   }
 
   initializeScrollSpy(): void {
+    this.scrollContainer = this.getScrollParent(this.target() || null);
+    this.scrollContainer.addEventListener('scroll', this.onScroll);
     const target = this.target();
     if (!target) {
       this.sections = [];
       this.sectionElements = undefined;
-      this.activeSectionId = null;
+      this.activeSectionId.set(null);
       return;
     }
     this.sectionElements = target.querySelectorAll(`${this.section()}`);
@@ -101,38 +111,74 @@ export class ScrollSpy implements OnInit, OnDestroy, AfterViewInit {
       return [{ id, title }];
     });
 
-    if (this.sections.length > 0 && !this.activeSectionId) {
-      this.activeSectionId = this.sections[0].id;
+    if (this.sections.length > 0 && !this.activeSectionId()) {
+      this.activeSectionId.set(this.sections[0].id);
     }
   }
 
   scrollTo(id: string): void {
-    const targetElement = document.getElementById(id);
+    const isWindow = this.scrollContainer instanceof Window;
 
-    if (targetElement) {
+    if (isWindow) {
+      const targetElement = document.getElementById(id);
+      if (!targetElement) {
+        return;
+      }
       window.scrollTo({
-        top: targetElement.offsetTop,
+        top: targetElement.offsetTop - 60,
         behavior: 'smooth',
       });
+    } else {
+      const container = this.scrollContainer as HTMLElement;
+      const targetElement = container.querySelector(`#${id}`);
 
-      this.activeSectionId = id;
+      if (!targetElement) {
+        return;
+      }
+      const top =
+        targetElement.getBoundingClientRect().top -
+        container.getBoundingClientRect().top +
+        container.scrollTop -
+        60;
+      container.scrollTo({
+        top,
+        behavior: 'smooth',
+      });
     }
+
+    this.activeSectionId.set(id);
   }
 
   onScroll = (): void => {
+    if (!this.ticking) {
+      window.requestAnimationFrame(() => {
+        this.checkActiveSection();
+        this.ticking = false;
+      });
+      this.ticking = true;
+    }
+  };
+
+  private checkActiveSection(): void {
     if (!this.sectionElements) return;
 
     let currentActive: string | null = null;
-    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-
-    const headerOffset = 60;
+    const headerOffset = 80;
 
     this.sectionElements.forEach((section, idx) => {
-      if (section.offsetTop <= scrollPosition + headerOffset) {
+      const rect = section.getBoundingClientRect();
+      let containerTop = 0;
+      if (this.scrollContainer instanceof HTMLElement) {
+        containerTop = this.scrollContainer.getBoundingClientRect().top;
+      }
+
+      if (rect.top <= containerTop + headerOffset) {
         currentActive = this.sections[idx].id;
       }
     });
 
-    this.activeSectionId = currentActive;
-  };
+    if (currentActive !== this.activeSectionId()) {
+      this.activeSectionId.set(currentActive);
+    }
+  }
 }

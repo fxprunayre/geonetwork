@@ -4,11 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
-import { Button, ButtonDirective } from 'primeng/button';
+import { ButtonDirective } from 'primeng/button';
 import { Card } from 'primeng/card';
-import { faSolidQuoteRight } from '@ng-icons/font-awesome/solid';
+import { faSolidQuoteRight, faSolidDownload } from '@ng-icons/font-awesome/solid';
 import { NgIcon, provideIcons } from '@ng-icons/core';
+import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
+import { TabsModule } from 'primeng/tabs';
+import { SelectButton } from 'primeng/selectbutton';
+import { MessageService } from 'primeng/api';
 
 interface FormatOption {
   id: string;
@@ -24,13 +27,15 @@ interface FormatOption {
     CommonModule,
     TranslatePipe,
     ToastModule,
-    Button,
     ButtonDirective,
     Card,
     NgIcon,
+    CopyInput,
+    TabsModule,
+    SelectButton,
   ],
-  viewProviders: [provideIcons({ faSolidQuoteRight })],
   providers: [MessageService],
+  viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
 })
 export class CitationComponent implements OnChanges {
   uuid = input.required<string>();
@@ -38,7 +43,6 @@ export class CitationComponent implements OnChanges {
 
   private readonly translateService = inject(TranslateService);
   private recordService = inject(RecordsService);
-  private messageService = inject(MessageService);
 
   constructor() {
     effect(() => {
@@ -165,15 +169,9 @@ export class CitationComponent implements OnChanges {
     }
   }
 
-  copyToClipboard() {
-    navigator.clipboard.writeText(this.citationText());
-
-    this.messageService.add({
-      severity: 'success',
-      summary: this.translateService.instant('citation.copy_title'),
-      detail: this.translateService.instant('citation.copy_detail'),
-      life: 1500,
-    });
+  onFormatChange(fmt: string) {
+    this.currentFormat.set(fmt);
+    this.getCitation(fmt);
   }
 
   protected readonly encodeURIComponent = encodeURIComponent;

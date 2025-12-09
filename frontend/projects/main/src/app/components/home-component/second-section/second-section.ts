@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Aggregation, SearchFilter, SearchRouteService } from 'gn-library';
-import { ButtonDirective, ButtonLabel } from 'primeng/button';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'second-section',
   standalone: true,
-  imports: [ButtonLabel, ButtonDirective, Aggregation, TranslatePipe],
+  imports: [Aggregation, TranslatePipe],
   templateUrl: './second-section.html',
   styleUrl: './second-section.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
