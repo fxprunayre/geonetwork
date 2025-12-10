@@ -88,12 +88,16 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase {
     );
   });
 
+  overviewUrl = computed(() => {
+    return `${this.catalogueUrl}/srv/api/regions/geom.png?geomsrs=EPSG:4326&geom=${this.geoms()[0]?.wkt}`;
+  });
+
   geometryCollection = computed(() => {
     const wktGeoms = this.geoms().map((g: any) => g.wkt);
     return `GEOMETRYCOLLECTION(${wktGeoms.join(',')})`;
   });
 
-  overviewUrl = computed(() => {
+  geometryCollectionUrl = computed(() => {
     return `${this.catalogueUrl}/srv/api/regions/geom.png?geomsrs=EPSG:4326&geom=${this.geometryCollection()}`;
   });
 
