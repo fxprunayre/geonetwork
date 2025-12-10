@@ -921,7 +921,8 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
         layout: '',
         sections: [
           {
-            filter: 'protocol:OGC:WMS|OGC:WMTS|ESRI:.*|atom.*|REST|OGC API Maps|OGC API Records',
+            filter:
+              'protocol:OGC:WMS|OGC:WMTS|ESRI:.*|atom.*|REST|OGC API Maps|OGC API Records|application/vnd.ogc.wms_xml',
             title: 'API',
           },
           {
@@ -940,7 +941,7 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
           },
           {
             filter:
-              '-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|FILE:.* AND -function:legend|featureCatalogue|dataQualityReport',
+              '-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|FILE:.*|application/vnd.ogc AND -function:legend|featureCatalogue|dataQualityReport',
             title: 'links',
           },
         ],

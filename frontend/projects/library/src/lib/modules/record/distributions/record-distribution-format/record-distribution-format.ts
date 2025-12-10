@@ -11,10 +11,15 @@ import { RecordDistributionFieldBase } from '../record-distribution-field-base/r
     @if (formats().length > 0) {
       <p-card
         [header]="'record.field.distribution.format' | translate"
-        [pt]="{ content: 'flex gap-2' }"
+        [pt]="{ content: 'flex flex-col items-center gap-2' }"
       >
         @for (format of formats(); track $index) {
-          <p-badge severity="success" [value]="format"></p-badge>
+          <p-badge
+            severity="success"
+            [value]="format"
+            class="line-clamp-1"
+            [title]="format"
+          ></p-badge>
         }
       </p-card>
     }
@@ -22,6 +27,11 @@ import { RecordDistributionFieldBase } from '../record-distribution-field-base/r
 })
 export class RecordDistributionFormat extends RecordDistributionFieldBase {
   formats = computed(() => {
-    return this.record()?.format?.filter((f: string) => f.trim() !== '') || [];
+    const serviceTypeValue = this.record()?.serviceType || [];
+    const serviceTypes: string[] =
+      serviceTypeValue instanceof Array ? serviceTypeValue : [serviceTypeValue || ''];
+
+    const formats = this.record()?.format || [];
+    return [...new Set([...serviceTypes, ...formats].filter((f: string) => f && f.trim() !== ''))];
   });
 }
