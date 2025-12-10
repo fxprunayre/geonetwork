@@ -63,9 +63,16 @@
       "cl_accessConstraints": "Contraintes d'accès",
       "coverage": {
         "spatial": "Emprise géographique",
+        "north": "Nord",
+        "south": "Sud",
+        "east": "Est",
+        "west": "Ouest",
         "temporal": "Étendue temporelle",
         "vertical": "Étendue verticale"
       },
+      "resourceType": "Type de resource",
+      "resolution": "Échelle",
+      "coordinateSystem": "Système de coordonnées",
       "overview": {
         "notAvailable": "Pas d'aperçu"
       },
@@ -76,6 +83,9 @@
         "logo": {
           "alt": "Logo du catalogue"
         }
+      },
+      "distribution": {
+        "format": "Format"
       },
       "datamodel": {
         "field": "Colonne",

@@ -52,6 +52,7 @@ import { RecordFieldCodelist } from '../record-field-codelist/record-field-codel
 import { RecordFieldCoverageSpatial } from '../record-field-coverage-spatial/record-field-coverage-spatial';
 import { RecordFieldCoverageTemporal } from '../record-field-coverage-temporal/record-field-coverage-temporal';
 import { RecordFieldCoverageVertical } from '../record-field-coverage-vertical/record-field-coverage-vertical';
+import { RecordDistributionFormat } from '../distributions/record-distribution-format/record-distribution-format';
 
 export const DEFAULT_TAB = 'about';
 
@@ -94,6 +95,7 @@ export const DEFAULT_TAB = 'about';
     RecordFieldCoverageSpatial,
     RecordFieldCoverageTemporal,
     RecordFieldCoverageVertical,
+    RecordDistributionFormat,
   ],
   viewProviders: [
     provideIcons({

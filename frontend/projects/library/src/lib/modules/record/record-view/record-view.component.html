@@ -103,10 +103,10 @@
   </ng-template>
 
   <ng-template #spatialInfoContent>
-    <app-record-field [label]="'Data type'">
+    <app-record-field [label]="'record.field.resourceType'">
       <app-record-field-type [record]="record" [withSpatialType]="true" />
     </app-record-field>
-    <app-record-field [label]="'Resolution'">
+    <app-record-field [label]="'record.field.resolution'">
       @for (res of record.resolutionDistance; track $index) {
         <p-chip [label]="res"></p-chip>
       }
@@ -114,7 +114,7 @@
         <p-chip [label]="'1:' + scale"></p-chip>
       }
     </app-record-field>
-    <app-record-field [label]="'Coordinate system'">
+    <app-record-field [label]="'record.field.coordinateSystem'">
       @for (crs of record.coordinateSystem; track $index) {
         <p-chip [label]="crs"></p-chip>
       }
@@ -222,9 +222,7 @@
             ></ng-container>
           </div>
           <div class="w-1/4">
-            <p-card class="my-10" [header]="'Format'"></p-card>
-
-            <p-card class="my-10" [header]="'Distributor'"></p-card>
+            <app-record-distribution-format [record]="record" />
           </div>
         </div>
       </p-tabpanel>

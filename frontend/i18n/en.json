@@ -63,9 +63,16 @@
       "cl_accessConstraints": "Access constraints",
       "coverage": {
         "spatial": "Geospatial coverage",
+        "north": "North",
+        "south": "South",
+        "east": "East",
+        "west": "West",
         "temporal": "Temporal coverage",
         "vertical": "Vertical coverage"
       },
+      "resourceType": "Resource type",
+      "resolution": "Resolution",
+      "coordinateSystem": "Coordinate system",
       "overview": {
         "notAvailable": "No preview"
       },
@@ -76,6 +83,9 @@
         "logo": {
           "alt": "Catalogue logo"
         }
+      },
+      "distribution": {
+        "format": "Format"
       },
       "datamodel": {
         "field": "Field",
