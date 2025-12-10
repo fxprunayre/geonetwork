@@ -117,6 +117,27 @@ export class RecordViewComponent implements AfterViewInit {
   recordStatus = signal<string | undefined>(undefined);
   mainVocabularies = signal(['th_sextant-theme']);
 
+  contactRoles = computed(() => {
+    const contacts = this.record()?.['contactForResource'] || [];
+    const roles = new Set(contacts.map((c: any) => c.role).filter((r: any) => !!r));
+    return Array.from(roles);
+  });
+
+  expandedSections = computed(() => {
+    const staticSections = [
+      'about',
+      'dates',
+      'usageAndAccess',
+      'dataModel',
+      'coverage',
+      'spatialInfo',
+      'lineage',
+      'classification',
+    ];
+    const contactSections = this.contactRoles().map((role: any) => 'contact-' + role);
+    return [...staticSections, ...contactSections];
+  });
+
   onRecordClick = output<string>();
 
   searchService = inject(SearchService);

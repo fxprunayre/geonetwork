@@ -14,14 +14,8 @@
     </app-record-field>
   </ng-template>
 
-  <ng-template #contactsContent>
-    <div class="flex flex-row gap-6">
-      <div class="w-3/4">
-        <app-record-field [label]="'Contacts'">
-          <app-record-field-contact [record]="record" />
-        </app-record-field>
-      </div>
-    </div>
+  <ng-template #contactsContent let-role="role">
+    <app-record-field-contact [record]="record" [role]="role" />
   </ng-template>
 
   <ng-template #aboutContent>
@@ -163,7 +157,6 @@
           [
             { label: 'about', tpl: aboutContent },
             { label: 'dates', tpl: datesContent },
-            { label: 'contacts', tpl: contactsContent },
             { label: 'usageAndAccess', tpl: licenseContent },
             { label: 'dataModel', tpl: dataModel, hidden: !hasDataModel() },
             { label: 'coverage', tpl: coverageContent },
@@ -174,32 +167,47 @@
 
         <div class="flex flex-row gap-4">
           <div class="md:w-3/4" #spyTarget>
-            @let activatedSections = getSectionIds(sections);
-            <p-accordion
-              [multiple]="true"
-              [value]="[
-                'about',
-                'dates',
-                'contacts',
-                'usageAndAccess',
-                'dataModel',
-                'coverage',
-                'spatialInfo',
-                'lineage',
-                'classification',
-              ]"
-            >
+            <p-accordion [multiple]="true" [value]="expandedSections()">
               @for (section of sections; track section.label; let i = $index) {
                 @let sectionLabel =
                   'record.view.section.' + section.label
                     | translate: { resourceType: record.resourceType };
                 @if (section.hidden !== true) {
-                  <p-accordion-panel [value]="section.label">
-                    <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
-                    <p-accordion-content>
-                      <ng-container *ngTemplateOutlet="section.tpl; context: { record: record }" />
-                    </p-accordion-content>
-                  </p-accordion-panel>
+                  @if (section.label === 'lineage') {
+                    <p-accordion-panel [value]="section.label">
+                      <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
+                      <p-accordion-content>
+                        <ng-container
+                          *ngTemplateOutlet="section.tpl; context: { record: record }"
+                        />
+                      </p-accordion-content>
+                    </p-accordion-panel>
+
+                    @for (role of contactRoles(); track role) {
+                      <p-accordion-panel [value]="'contact-' + role">
+                        <p-accordion-header class="text-xl!">{{
+                          role + '' | translate
+                        }}</p-accordion-header>
+                        <p-accordion-content>
+                          <ng-container
+                            *ngTemplateOutlet="
+                              contactsContent;
+                              context: { record: record, role: role }
+                            "
+                          />
+                        </p-accordion-content>
+                      </p-accordion-panel>
+                    }
+                  } @else {
+                    <p-accordion-panel [value]="section.label">
+                      <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
+                      <p-accordion-content>
+                        <ng-container
+                          *ngTemplateOutlet="section.tpl; context: { record: record }"
+                        />
+                      </p-accordion-content>
+                    </p-accordion-panel>
+                  }
                 }
               }
             </p-accordion>
