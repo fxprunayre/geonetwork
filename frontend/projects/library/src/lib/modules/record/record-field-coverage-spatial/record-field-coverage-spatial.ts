@@ -18,9 +18,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
             class="max-w-xs rounded border border-gray-200 shadow-sm"
           />
 
-          <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded shadow-md"
-          >
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <app-record-field-coverage-coordinate
               [value]="bbox.north"
               label="record.field.coverage.north"
@@ -28,9 +26,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
             ></app-record-field-coverage-coordinate>
           </div>
 
-          <div
-            class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 bg-white rounded shadow-md"
-          >
+          <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2">
             <app-record-field-coverage-coordinate
               [value]="bbox.west"
               label="record.field.coverage.west"
@@ -38,9 +34,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
             ></app-record-field-coverage-coordinate>
           </div>
 
-          <div
-            class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 bg-white rounded shadow-md"
-          >
+          <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2">
             <app-record-field-coverage-coordinate
               [value]="bbox.east"
               label="record.field.coverage.east"
@@ -48,9 +42,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
             ></app-record-field-coverage-coordinate>
           </div>
 
-          <div
-            class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white rounded shadow-md"
-          >
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
             <app-record-field-coverage-coordinate
               [value]="bbox.south"
               label="record.field.coverage.south"
