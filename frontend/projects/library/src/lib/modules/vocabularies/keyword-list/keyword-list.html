@@ -23,7 +23,7 @@
     </div>
 
     @if (activeKeyword()?.uri) {
-      <a [href]="activeKeyword()?.uri" target="_blank" class="text-primary">
+      <a [href]="activeKeyword()?.uri" target="_blank" class="text-primary break-words">
         {{ activeKeyword()?.uri }}
       </a>
     }
