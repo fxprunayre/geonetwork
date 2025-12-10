@@ -11,6 +11,6 @@ import { SearchBase } from '../../search/search-base/search-base';
 })
 export class SearchResultsNumber extends SearchBase {
   getResultTranslationKey() {
-    return this.search.totalCount() === 1 ? 'result' : 'results';
+    return this.search.totalCount() === 1 ? 'search.result' : 'search.results';
   }
 }

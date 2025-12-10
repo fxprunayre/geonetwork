@@ -10,9 +10,19 @@
     },
     "filter": {
       "title": "Focus",
+      "activeFilters": "Filtres actifs",
       "panel": {
         "open": "Focus"
       }
+    },
+    "aggregations": {
+      "groupPublishedId": "Catalogues",
+      "th_sextant-theme_tree.key": "Thèmes Sextant",
+      "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
+      "tag.default": "Mots-clés",
+      "creationYearForResource": "Année de création",
+      "OrgForResource": "Organisation",
+      "resourceType": "Type de ressource"
     },
     "sort": {
       "placeholder": "Trier par",
@@ -26,6 +36,9 @@
         "-popularity": "Popularité"
       }
     },
+    "result": "résultat",
+    "results": "résultats",
+    "backToResults": "Retour aux résultats",
     "welcome.text": "Explorez plus de {{count}} {{mainBuckets}}, ..."
   },
   "record": {
@@ -117,22 +130,6 @@
       "more": "Lire la suite",
       "less": "Réduire"
     }
-  },
-  "groupPublishedId": "Catalogues",
-  "th_sextant-theme_tree.key": "Thèmes Sextant",
-  "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
-  "tag.default": "Mots-clés",
-  "creationYearForResource": "Année de création",
-  "OrgForResource": "Organisation",
-  "resourceType": "Type de ressource",
-  "activeFilters": "Filtres actifs",
-  "result": "résultat",
-  "results": "résultats",
-  "backToResults": "Retour aux résultats",
-  "sort": {
-    "lastUpdate": "Dernière mise à jour",
-    "popularity": "Popularité",
-    "title": "Titre"
   },
   "home": {
     "title": "Retracer l'histoire des océans à travers les données",

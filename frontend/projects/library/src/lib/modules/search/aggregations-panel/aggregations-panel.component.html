@@ -1,5 +1,5 @@
 <ng-template #defaultLabelTemplate let-key>
-  {{ key | translate }}
+  {{ 'search.aggregations.' + key | translate }}
   @if (hasActiveFilter(key)) {
     *
   }

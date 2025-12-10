@@ -8,6 +8,22 @@
         }
       }
     },
+    "filter": {
+      "title": "Filter",
+      "activeFilters": "Active filters",
+      "panel": {
+        "open": "Filter"
+      }
+    },
+    "aggregations": {
+      "groupPublishedId": "Groups",
+      "th_sextant-theme_tree.key": "Sextant themes",
+      "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
+      "tag.default": "Keywords",
+      "creationYearForResource": "Creation year",
+      "OrgForResource": "Organisation",
+      "resourceType": "Resource type"
+    },
     "sort": {
       "placeholder": "Sorteer op",
       "options": {
@@ -20,12 +36,10 @@
         "-popularity": "Populariteit"
       }
     },
-    "welcome.text": "Zoek door {{count}} {{mainBuckets}}, ...",
-    "filter": {
-      "panel": {
-        "open": "Filter"
-      }
-    }
+    "result": "result",
+    "results": "results",
+    "backToResults": "Back to results",
+    "welcome.text": "Zoek door {{count}} {{mainBuckets}}, ..."
   },
   "record": {
     "view": {
@@ -61,13 +75,13 @@
       "otherConstraints": "Other constraints",
       "cl_accessConstraints": "Access constraints",
       "coverage": {
-        "spatial": "Geospatial coverage",
-        "north": "North",
-        "south": "South",
-        "east": "East",
+        "spatial": "Ruimtelijke dekking",
+        "north": "Noord",
+        "south": "Zuid",
+        "east": "Oost",
         "west": "West",
-        "temporal": "Temporal coverage",
-        "vertical": "Vertical coverage"
+        "temporal": "Temporele dekking",
+        "vertical": "Verticale dekking"
       },
       "resourceType": "Resource type",
       "resolution": "Resolution",
@@ -98,7 +112,8 @@
       "children": "Composed of {{count}} resource(s)",
       "hassources": "Used for {{count}} resource(s)",
       "sources": "Derived from {{count}} resource(s)",
-      "associated": "Associated with {{count}} resource(s)"
+      "associated": "Associated with {{count}} resource(s)",
+      "brothersAndSisters": "{{count}} Siblings"
     }
   },
   "i18n": {
@@ -107,9 +122,8 @@
     }
   },
   "languages": {
-    "EN": "English",
-    "FR": "Français",
-    "NL": "Nederlands"
+    "eng": "English",
+    "fre": "Français"
   },
   "shared": {
     "show-more-toggle": {
@@ -117,33 +131,33 @@
       "less": "View less"
     }
   },
-  "groupPublishedId": "Groups",
-  "th_sextant-theme_tree.key": "Sextant themes",
-  "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
-  "tag.default": "Keywords",
-  "creationYearForResource": "Creation year",
-  "OrgForResource": "Organisation",
-  "resourceType": "Resource type",
-  "activeFilters": "Active filters",
-  "result": "result",
-  "results": "results",
-  "backToResults": "Back to results",
-  "sort": {
-    "lastUpdate": "Last update",
-    "popularity": "Popularity",
-    "title": "Title"
-  },
   "home": {
     "title": "Charting the ocean's story through data",
     "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",
     "discover": "Discover our themes"
   },
+  "menu": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "map": "Map"
+  },
   "citation": {
     "title": "Cite dataset",
-    "copy": "Kopieer",
-    "copy_title": "Succesvol gekopieerd",
-    "copy_detail": "Succesvol gekopieerd naar klembord",
     "download": "Download",
-    "loading": "Laad citatie ..."
-  }
+    "loading": "Loading citation ..."
+  },
+  "copy": {
+    "title": "Copy",
+    "title_success": "Copy success",
+    "detail_success": "Successfully copied to clipboard"
+  },
+  "data": {
+    "available_datasources": "Available Data sources"
+  },
+  "discussions": "Discussions",
+  "relations": {
+    "seeAll": "See all"
+  },
+  "addToMap": "Add to map",
+  "exploreData": "Explore data"
 }
