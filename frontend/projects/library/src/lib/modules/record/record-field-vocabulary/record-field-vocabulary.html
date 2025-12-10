@@ -1,6 +1,4 @@
-@for (vocabulary of vocabularies(); track $index) {
-  <app-keyword-list
-    [title]="vocabulary['multilingualTitle']?.['default']"
-    [keywords]="getKeywords(vocabulary)"
-  />
-}
+<app-keyword-list
+  [title]="mode() === 'primary' ? 'Keywords' : 'Classification'"
+  [keywords]="displayKeywords()"
+/>

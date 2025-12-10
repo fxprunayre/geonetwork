@@ -5,7 +5,7 @@
     </div>
 
     <div class="flex flex-wrap mt-2">
-      @for (keyword of group.value; track keyword.uri) {
+      @for (keyword of keywords(); track keyword['_id']) {
         <p-chip
           [label]="keyword.default"
           class="mr-2 my-1 cursor-pointer"

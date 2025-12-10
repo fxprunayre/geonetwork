@@ -37,9 +37,13 @@ export class KeywordList {
     pop.toggle(event);
 
     try {
-      const res = await firstValueFrom(this.registries.searchKeywords(keyword.uri));
-      const def = (res as any)?.data?.[0]?.definition ?? null;
-      this.definition.set(def);
+      const res = (await firstValueFrom(this.registries.searchKeywords(keyword.uri))) as any;
+
+      const first = res?.values?.[0];
+
+      const def = first?.definitions?.eng?.trim() || first?.values?.eng?.trim() || null;
+
+      this.definition.set(def || null);
     } catch {
       this.definition.set(null);
     }
