@@ -57,6 +57,8 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 export class RecordFieldCoverageSpatial extends RecordFieldBase {
   translateService = inject(TranslateService);
 
+  catalogueUrl: string | undefined = inject(APPLICATION_CONFIGURATION).catalogueUrl;
+
   extentDescription = computed(() => {
     return this.record()?.['extentDescription'] || [];
   });
@@ -115,8 +117,6 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase {
   geometryCollectionUrl = computed(() => {
     return `${this.catalogueUrl}/srv/api/regions/geom.png?geomsrs=EPSG:4326&geom=${this.geometryCollection()}`;
   });
-
-  catalogueUrl: string | undefined = inject(APPLICATION_CONFIGURATION).catalogueUrl;
 
   convertGeomToWKT(ring: any[]): string {
     const points = ring.map((coord: any) => `${coord[0]} ${coord[1]}`);
