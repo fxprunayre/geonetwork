@@ -9,6 +9,8 @@ import { faSolidEye, faSolidArrowUpRightFromSquare } from '@ng-icons/font-awesom
 import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 import { RecordFieldType } from '../../record/record-field-type/record-field-type';
+import { RecordDistributionBadges } from '../../record/distributions/record-distribution-badges/record-distribution-badges';
+import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
 
 @Component({
   selector: 'app-result-item-grid',
@@ -17,10 +19,11 @@ import { RecordFieldType } from '../../record/record-field-type/record-field-typ
     ButtonModule,
     TooltipModule,
     RecordFieldOverviewComponent,
-    RecordFieldOverviewComponent,
     RecordFieldTitle,
     RecordFieldType,
     NgIcon,
+    RecordDistributionBadges,
+    RecordFieldCredit,
   ],
   templateUrl: './result-item-grid.html',
   viewProviders: [provideIcons({ faImage, faSolidEye, faSolidArrowUpRightFromSquare })],

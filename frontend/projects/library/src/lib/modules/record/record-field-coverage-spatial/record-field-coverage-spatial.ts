@@ -10,12 +10,12 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   template: `
     @for (bbox of geoms(); track $index) {
       @if (bbox) {
-        <div class="relative w-fit mx-auto m-12">
+        <div class="relative w-3/5 mx-auto m-12">
           <img
             [src]="overviewUrl()"
             [alt]="altText()"
             [title]="altText()"
-            class="max-w-xs rounded border border-gray-200 shadow-sm"
+            class="w-full rounded border border-gray-200 shadow-sm"
           />
 
           <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
