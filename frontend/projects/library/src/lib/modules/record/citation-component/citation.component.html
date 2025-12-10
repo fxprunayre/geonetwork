@@ -31,11 +31,11 @@
       </a>
     </div>
 
-    <p-panel class="m-4 p-4 leading-relaxed">
+    <p-panel class="m-4 p-4" [pt]="{ header: 'hidden!' }">
       @if (loading()) {
-        <div class="italic text-neutral-500 mb-4">
-          {{ 'citation.loading' | translate }}
-        </div>
+        <p-skeleton class="mb-2" />
+        <p-skeleton width="10rem" class="mb-2" />
+        <p-skeleton width="5rem" class="mb-2" />
       } @else {
         @if (!isCode()) {
           <div [innerHTML]="citationText()"></div>

@@ -13,6 +13,7 @@ import { TabsModule } from 'primeng/tabs';
 import { Panel } from 'primeng/panel';
 import { SelectButton } from 'primeng/selectbutton';
 import { MessageService } from 'primeng/api';
+import { Skeleton } from 'primeng/skeleton';
 
 interface FormatOption {
   id: string;
@@ -35,6 +36,7 @@ interface FormatOption {
     TabsModule,
     SelectButton,
     Panel,
+    Skeleton,
   ],
   providers: [MessageService],
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
