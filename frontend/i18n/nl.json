@@ -75,6 +75,7 @@
       "otherConstraints": "Other constraints",
       "cl_accessConstraints": "Access constraints",
       "coverage": {
+        "overviewAltText": "Overzichtsafbeelding van georuimtelijke dekking",
         "spatial": "Ruimtelijke dekking",
         "north": "Noord",
         "south": "Zuid",

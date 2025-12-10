@@ -2,6 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordinate/record-field-coverage-coordinate';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-record-field-coverage-spatial',
@@ -10,7 +11,12 @@ import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordina
     @for (bbox of geoms(); track $index) {
       @if (bbox) {
         <div class="relative w-fit mx-auto m-12">
-          <img [src]="overviewUrl()" class="max-w-xs rounded border border-gray-200 shadow-sm" />
+          <img
+            [src]="overviewUrl()"
+            [alt]="altText()"
+            [title]="altText()"
+            class="max-w-xs rounded border border-gray-200 shadow-sm"
+          />
 
           <div
             class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded shadow-md"
@@ -57,6 +63,23 @@ import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordina
   `,
 })
 export class RecordFieldCoverageSpatial extends RecordFieldBase {
+  translateService = inject(TranslateService);
+
+  extentDescription = computed(() => {
+    return this.record()?.['extentDescription'] || [];
+  });
+
+  altText = computed(() => {
+    if (this.extentDescription().length > 0) {
+      return this.extentDescription().join('; ');
+    }
+    return this.translateService.instant('record.field.coverage.overviewAltText');
+  });
+
+  extentIdentifier = computed(() => {
+    return this.record()?.['extentIdentifier'] || [];
+  });
+
   geoms = computed(() => {
     const geometries = this.record()?.geom;
     if (!geometries) {

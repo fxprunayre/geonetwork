@@ -75,6 +75,7 @@
       "otherConstraints": "Other constraints",
       "cl_accessConstraints": "Access constraints",
       "coverage": {
+        "overviewAltText": "Geospatial coverage overview image",
         "spatial": "Geospatial coverage",
         "north": "North",
         "south": "South",
