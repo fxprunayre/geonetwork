@@ -1,9 +1,11 @@
 <a
   [routerLink]="['/record', result().info?._id]"
   (click)="handleRecordClick()"
-  class="flex flex-col lg:flex-row items-center gap-4 cursor-pointer rounded-xl p-[27px] border border-surface-200"
+  class="flex flex-col lg:flex-row items-center gap-4 cursor-pointer rounded-(--p-border-radius-md) p-[27px] border border-surface-200"
 >
-  <div class="w-full lg:w-[190px] lg:aspect-square lg:flex-shrink-0 lg:overflow-hidden rounded">
+  <div
+    class="w-full lg:w-[190px] lg:aspect-square lg:flex-shrink-0 lg:overflow-hidden rounded-(--p-border-radius-md)"
+  >
     <app-record-field-overview [field]="result().overview?.[0]" [preview]="false" />
   </div>
 

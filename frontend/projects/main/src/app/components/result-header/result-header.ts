@@ -30,7 +30,7 @@ export class ResultHeader {
   @Input() layout: 'list' | 'grid' = 'list';
   @Output() layoutChange = new EventEmitter<'list' | 'grid'>();
 
-  topTabFilter = inject(APPLICATION_CONFIGURATION).config?.apps.search?.topTabFilter;
+  topTabFilter = inject(APPLICATION_CONFIGURATION)().config?.apps.search?.topTabFilter;
 
   layoutOptions: ('list' | 'grid')[] = ['list', 'grid'];
 

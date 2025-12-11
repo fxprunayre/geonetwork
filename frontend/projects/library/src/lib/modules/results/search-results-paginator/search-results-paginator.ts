@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { SearchBase } from '../../search/search-base/search-base';
 import { Paginator } from 'primeng/paginator';
 import { Button } from 'primeng/button';
@@ -14,7 +14,9 @@ import { TranslateModule } from '@ngx-translate/core';
 export class SearchResultsPaginator extends SearchBase {
   resultsContainerRef = input<HTMLElement>();
   layoutMode = input<'paginator' | 'loadMore'>('paginator');
-  pageSizeOptions = inject(APPLICATION_CONFIGURATION).config?.apps.search?.hitsPerPageOptions;
+
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+  pageSizeOptions = computed(() => this.appConfiguration().config?.apps.search?.hitsPerPageOptions);
 
   onPageChange(event: any) {
     const containerRef = this.resultsContainerRef();

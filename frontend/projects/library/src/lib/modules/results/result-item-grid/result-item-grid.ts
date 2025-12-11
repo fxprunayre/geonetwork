@@ -10,6 +10,7 @@ import { RecordDistributionBadges } from '../../record/distributions/record-dist
 import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 import { RecordFieldType } from '../../record/record-field-type/record-field-type';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-result-item-grid',
@@ -22,6 +23,7 @@ import { RecordFieldType } from '../../record/record-field-type/record-field-typ
     RecordFieldType,
     NgIcon,
     RecordDistributionBadges,
+    RouterLink,
   ],
   templateUrl: './result-item-grid.html',
   viewProviders: [provideIcons({ faImage, faSolidEye, faSolidArrowUpRightFromSquare })],

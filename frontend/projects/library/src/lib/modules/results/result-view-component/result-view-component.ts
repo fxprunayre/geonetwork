@@ -1,5 +1,14 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ContentChild, inject, output, signal, TemplateRef } from '@angular/core';
+import {
+  Component,
+  computed,
+  ContentChild,
+  effect,
+  inject,
+  output,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Skeleton } from 'primeng/skeleton';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
@@ -29,10 +38,20 @@ export class ResultViewComponent extends SearchBase {
   @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<any> | undefined;
 
   private router = inject(Router);
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
 
-  resultsLayoutOptions =
-    inject(APPLICATION_CONFIGURATION).config?.apps.search?.resultsLayoutOptions;
-  layout = signal<SearchAppLayout>(this.resultsLayoutOptions?.[0] || 'list');
+  resultsLayoutOptions = computed(() => {
+    return this.appConfiguration().config?.apps.search?.resultsLayoutOptions;
+  });
+
+  layout = signal<SearchAppLayout>(this.resultsLayoutOptions()?.[0] || 'list');
+
+  constructor() {
+    super();
+    effect(() => {
+      this.layout.set(this.resultsLayoutOptions()?.[0] || 'list');
+    });
+  }
 
   handleRecordClick(uuid: string) {
     this.onRecordClick.emit(uuid);

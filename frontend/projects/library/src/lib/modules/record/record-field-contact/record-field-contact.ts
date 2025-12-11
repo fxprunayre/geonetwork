@@ -58,7 +58,8 @@ export interface ContactInfo {
 export class RecordFieldContact extends RecordFieldBase {
   role = input<string>();
 
-  catalogueUrl: string | undefined = inject(APPLICATION_CONFIGURATION).catalogueUrl;
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+  catalogueUrl = computed(() => this.appConfiguration().catalogueUrl);
 
   contacts = computed<ContactInfo[]>(() => {
     return this.record()?.['contactForResource'];

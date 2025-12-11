@@ -3,6 +3,7 @@ import {
   importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
+  signal,
 } from '@angular/core';
 import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
 import { routes } from './app.routes';
@@ -78,6 +79,9 @@ registerLocaleData(localeFr);
 export function getAppConfig(config: any): ApplicationConfig {
   return {
     ...appConfig,
-    providers: [...appConfig.providers!, { provide: APPLICATION_CONFIGURATION, useValue: config }],
+    providers: [
+      ...appConfig.providers!,
+      { provide: APPLICATION_CONFIGURATION, useValue: signal(config) },
+    ],
   };
 }

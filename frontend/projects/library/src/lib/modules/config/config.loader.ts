@@ -1,5 +1,5 @@
 import { migrateGn4Config, UiConfiguration } from './model/gn4config';
-import { InjectionToken } from '@angular/core';
+import { InjectionToken, signal, WritableSignal } from '@angular/core';
 import { DEFAULT_UI_CONFIGURATION, SEXTANT_UI_CONFIGURATION } from './gn4constants';
 import { AppsConfiguration } from './model/gnConfig';
 import { environment } from '../../../environments/environment';
@@ -14,7 +14,9 @@ export const DEFAULT_SPACE = 'srv';
 
 export const DEFAULT_LANGUAGE = 'eng';
 
-export const APPLICATION_CONFIGURATION = new InjectionToken<ApplicationConfiguration>('app.config');
+export const APPLICATION_CONFIGURATION = new InjectionToken<
+  WritableSignal<ApplicationConfiguration>
+>('app.config');
 
 let appConfig: ApplicationConfiguration = {
   config: undefined,

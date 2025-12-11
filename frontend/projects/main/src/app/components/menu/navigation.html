@@ -29,9 +29,9 @@
     [pt]="{ root: '!min-w-fit h-full transition-all duration-500 ease-in-out' }"
     [dt]="dt"
   >
-    <ng-template pTemplate="start"> </ng-template>
+    <ng-template #start> </ng-template>
 
-    <ng-template pTemplate="item" let-item>
+    <ng-template #item let-item>
       @if (item.visible === undefined || item.visible) {
         @if (item.routerLink) {
           <a
@@ -78,6 +78,19 @@
 
     <p-fieldset legend="Theme">
       <app-theme-designer [theme]="theme" />
+    </p-fieldset>
+    <p-fieldset legend="Config">
+      <p-iftalabel>
+        <textarea
+          pTextarea
+          id="description"
+          [ngModel]="appConfigJson()"
+          (ngModelChange)="updateConfig($event)"
+          rows="10"
+          style="resize: none"
+        ></textarea>
+        <label for="description">Configuration</label>
+      </p-iftalabel>
     </p-fieldset>
   </p-drawer>
 </nav>

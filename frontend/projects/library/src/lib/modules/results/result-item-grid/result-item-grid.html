@@ -1,14 +1,16 @@
 @let description = result().resourceAbstractObject?.['default'] || '';
 
-<div
+<a
+  [routerLink]="['/record', result().info?._id]"
   (click)="handleRecordClick()"
-  class="cursor-pointer border border-surface-100 rounded flex flex-col h-full transition-shadow hover:shadow-md"
+  class="cursor-pointer border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full transition-shadow hover:shadow-md"
   [title]="description"
 >
   <app-record-field-overview
     [field]="result().overview?.[0] || []"
     [preview]="false"
-    class="max-h-48 h-1/2 object-cover"
+    styleClass="rounded-t-(--p-border-radius-md)"
+    class="min-h-48 max-h-48 h-1/2 object-cover"
   />
   <div class="p-4 flex-1 flex flex-col">
     <div class="flex flex-row justify-between items-start gap-2 mb-4">
@@ -31,4 +33,4 @@
       }
     </div>
   </div>
-</div>
+</a>
