@@ -1,9 +1,9 @@
 @if (citationAvailable()) {
   <p-toast></p-toast>
   <p-card>
-    <ng-template pTemplate="header">
-      <div class="flex items-center gap-2 text-gray-800 px-6 pt-6">
-        <ng-icon name="faSolidQuoteRight" class="text-lg"></ng-icon>
+    <ng-template #title>
+      <div class="flex items-center gap-2">
+        <ng-icon name="faSolidQuoteRight" class=""></ng-icon>
         {{ 'citation.title' | translate }}
       </div>
     </ng-template>
@@ -19,15 +19,11 @@
 
       <div class="flex-1"></div>
 
-      <app-copy-input
-        [value]="citationText()"
-        layout="icon"
-        buttonClass="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 text-gray-900 hover:bg-white hover:text-gray-400 transition"
-      ></app-copy-input>
+      <app-copy-input [value]="citationText()" layout="icon"></app-copy-input>
 
       <a
         pButton
-        class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 text-gray-900 hover:bg-white hover:text-gray-400 transition"
+        severity="secondary"
         [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
         [download]="filename()"
       >
@@ -35,11 +31,11 @@
       </a>
     </div>
 
-    <div class="m-4 p-4 bg-gray-100 rounded-lg text-gray-700 leading-relaxed">
+    <p-panel class="m-4 p-4" [pt]="{ header: 'hidden!' }">
       @if (loading()) {
-        <div class="italic text-neutral-500 mb-4">
-          {{ 'citation.loading' | translate }}
-        </div>
+        <p-skeleton class="mb-2" />
+        <p-skeleton width="10rem" class="mb-2" />
+        <p-skeleton width="5rem" class="mb-2" />
       } @else {
         @if (!isCode()) {
           <div [innerHTML]="citationText()"></div>
@@ -47,6 +43,6 @@
           <pre class="bg-neutral-900 text-neutral-200 p-4 rounded">{{ citationText() }}</pre>
         }
       }
-    </div>
+    </p-panel>
   </p-card>
 }

@@ -27,7 +27,7 @@
   <ng-template #aboutContent>
     <div class="flex flex-row gap-6">
       <div class="w-3/4">
-        <app-record-field [label]="'Credits'">
+        <app-record-field [label]="'record.field.credit'">
           <app-record-field-credit [record]="record" />
         </app-record-field>
       </div>
@@ -58,20 +58,27 @@
   </ng-template>
 
   <ng-template #licenseContent>
-    <app-record-field [label]="'Constraints'">
-      <span class="block text-[#3a75ab]"> {{ 'useLimitation' | translate }}:</span>
-      <a [href]="getConstraints().link" target="_blank" class="font-bold">{{
-        getConstraints().default
-      }}</a>
-      <span class="block text-[#3a75ab]"> {{ 'useConstraints' | translate }}:</span>
-      <a [href]="getUseConstraint().link" target="_blank">{{ getUseConstraint().default }}</a>
-      <span class="block text-[#3a75ab]"> {{ 'otherConstraints' | translate }}:</span>
-      <a [href]="getOtherConstraint().link" target="_blank">{{ getOtherConstraint().default }}</a>
+    <app-record-field [label]="'record.field.useLimitation'">
+      <app-record-field-constraints
+        [record]="record"
+        type="MD_LegalConstraintsUseLimitationObject"
+      />
+    </app-record-field>
+
+    <app-record-field [label]="'record.field.cl_accessConstraints'">
+      <app-record-field-codelist [record]="record" codelist="cl_accessConstraints" />
+    </app-record-field>
+
+    <app-record-field [label]="'record.field.otherConstraints'">
+      <app-record-field-constraints
+        [record]="record"
+        type="MD_LegalConstraintsOtherConstraintsObject"
+      />
     </app-record-field>
   </ng-template>
 
   <ng-template #lineageContent>
-    <app-record-field [label]="'Lineage'">
+    <app-record-field [label]="'record.field.lineage'">
       <app-show-more-toggle>
         <p [innerHTML]="getLineage() | markdown | async"></p>
       </app-show-more-toggle>
@@ -84,36 +91,22 @@
   </ng-template>
 
   <ng-template #coverageContent>
-    <app-record-field [label]="'Geospatial coverage'">
-      @if (record.geom) {
-        <pre>{{ record.geom[0]?.['coordinates'] | json }}</pre>
-      }
+    <app-record-field [label]="'record.field.coverage.spatial'">
+      <app-record-field-coverage-spatial [record]="record" />
     </app-record-field>
-    <app-record-field [label]="'Temporal coverage'">
-      @if (record.resourceTemporalExtentDetails) {
-        <p>
-          {{ record.resourceTemporalExtentDetails?.[0]?.start?.date }} -
-          {{ record.resourceTemporalExtentDetails?.[0]?.end?.date }}
-        </p>
-      }
+    <app-record-field [label]="'record.field.coverage.temporal'">
+      <app-record-field-coverage-temporal [record]="record" />
     </app-record-field>
-    <app-record-field [label]="'Vertical coverage'">
-      @if (record.resourceVerticalRange) {
-        <p>
-          {{ record.resourceVerticalRange?.[0]?.gte }} -
-          {{ record.resourceVerticalRange?.[0]?.lte }} ({{
-            record.resourceVerticalRange?.[0]?.unit
-          }})
-        </p>
-      }
+    <app-record-field [label]="'record.field.coverage.vertical'">
+      <app-record-field-coverage-vertical [record]="record" />
     </app-record-field>
   </ng-template>
 
   <ng-template #spatialInfoContent>
-    <app-record-field [label]="'Data type'">
+    <app-record-field [label]="'record.field.resourceType'">
       <app-record-field-type [record]="record" [withSpatialType]="true" />
     </app-record-field>
-    <app-record-field [label]="'Resolution'">
+    <app-record-field [label]="'record.field.resolution'">
       @for (res of record.resolutionDistance; track $index) {
         <p-chip [label]="res"></p-chip>
       }
@@ -121,7 +114,7 @@
         <p-chip [label]="'1:' + scale"></p-chip>
       }
     </app-record-field>
-    <app-record-field [label]="'Coordinate system'">
+    <app-record-field [label]="'record.field.coordinateSystem'">
       @for (crs of record.coordinateSystem; track $index) {
         <p-chip [label]="crs"></p-chip>
       }
@@ -229,9 +222,7 @@
             ></ng-container>
           </div>
           <div class="w-1/4">
-            <p-card class="my-10" [header]="'Format'"></p-card>
-
-            <p-card class="my-10" [header]="'Distributor'"></p-card>
+            <app-record-distribution-format [record]="record" />
           </div>
         </div>
       </p-tabpanel>

@@ -10,9 +10,19 @@
     },
     "filter": {
       "title": "Focus",
+      "activeFilters": "Filtres actifs",
       "panel": {
         "open": "Focus"
       }
+    },
+    "aggregations": {
+      "groupPublishedId": "Catalogues",
+      "th_sextant-theme_tree.key": "Thèmes Sextant",
+      "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
+      "tag.default": "Mots-clés",
+      "creationYearForResource": "Année de création",
+      "OrgForResource": "Organisation",
+      "resourceType": "Type de ressource"
     },
     "sort": {
       "placeholder": "Trier par",
@@ -26,6 +36,9 @@
         "-popularity": "Popularité"
       }
     },
+    "result": "résultat",
+    "results": "résultats",
+    "backToResults": "Retour aux résultats",
     "welcome.text": "Explorez plus de {{count}} {{mainBuckets}}, ..."
   },
   "record": {
@@ -44,7 +57,7 @@
         "contact": "Contact",
         "coverage": "Couverture",
         "spatialInfo": "Informations spatiales",
-        "lineage": "Lignée",
+        "lineage": "Provenance",
         "content": "Contenu",
         "classification": "Classification",
         "citation": "Citation",
@@ -55,6 +68,25 @@
     },
     "field": {
       "abstract": "Aperçu",
+      "credit": "Source",
+      "lineage": "Généalogie",
+      "useLimitation": "Limitation d'utilisation",
+      "useConstraints": "Utiliser des contraintes",
+      "otherConstraints": "Autres contraintes",
+      "cl_accessConstraints": "Contraintes d'accès",
+      "coverage": {
+        "overviewAltText": "Geospatial coverage overview image",
+        "spatial": "Emprise géographique",
+        "north": "Nord",
+        "south": "Sud",
+        "east": "Est",
+        "west": "Ouest",
+        "temporal": "Étendue temporelle",
+        "vertical": "Étendue verticale"
+      },
+      "resourceType": "Type de resource",
+      "resolution": "Échelle",
+      "coordinateSystem": "Système de coordonnées",
       "overview": {
         "notAvailable": "Pas d'aperçu"
       },
@@ -65,6 +97,9 @@
         "logo": {
           "alt": "Logo du catalogue"
         }
+      },
+      "distribution": {
+        "format": "Format"
       },
       "datamodel": {
         "field": "Colonne",
@@ -97,22 +132,6 @@
       "less": "Réduire"
     }
   },
-  "groupPublishedId": "Catalogues",
-  "th_sextant-theme_tree.key": "Thèmes Sextant",
-  "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
-  "tag.default": "Mots-clés",
-  "creationYearForResource": "Année de création",
-  "OrgForResource": "Organisation",
-  "resourceType": "Type de ressource",
-  "activeFilters": "Filtres actifs",
-  "result": "résultat",
-  "results": "résultats",
-  "backToResults": "Retour aux résultats",
-  "sort": {
-    "lastUpdate": "Dernière mise à jour",
-    "popularity": "Popularité",
-    "title": "Titre"
-  },
   "home": {
     "title": "Retracer l'histoire des océans à travers les données",
     "subtitle": "Données géospatiales marines et côtières ouvertes et de haute qualité pour la science et les politiques publiques, fournies par l'Ifremer.",
@@ -141,8 +160,5 @@
     "seeAll": "Voir tout"
   },
   "addToMap": "Ajouter à la carte",
-  "exploreData": "Explorer les données",
-  "useLimitation": "Limitation d'utilisation",
-  "useConstraints": "Utiliser des contraintes",
-  "otherConstraints": "Autres contraintes"
+  "exploreData": "Explorer les données"
 }

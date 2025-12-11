@@ -10,8 +10,10 @@ import { faSolidQuoteRight, faSolidDownload } from '@ng-icons/font-awesome/solid
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
 import { TabsModule } from 'primeng/tabs';
+import { Panel } from 'primeng/panel';
 import { SelectButton } from 'primeng/selectbutton';
 import { MessageService } from 'primeng/api';
+import { Skeleton } from 'primeng/skeleton';
 
 interface FormatOption {
   id: string;
@@ -33,6 +35,8 @@ interface FormatOption {
     CopyInput,
     TabsModule,
     SelectButton,
+    Panel,
+    Skeleton,
   ],
   providers: [MessageService],
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
@@ -59,8 +63,8 @@ export class CitationComponent implements OnChanges {
   loading = signal(false);
 
   ngOnChanges() {
-    if (!this.uuid()) return;
-    this.loadFormats();
+    //if (!this.uuid()) return;
+    //this.loadFormats();
   }
 
   private fetchCitation(
