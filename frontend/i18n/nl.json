@@ -74,6 +74,12 @@
       "useConstraints": "Use constraints",
       "otherConstraints": "Other constraints",
       "cl_accessConstraints": "Access constraints",
+      "contact": {
+        "address": "Adres",
+        "phone": "Telefoon",
+        "email": "E-mail",
+        "website": "Website"
+      },
       "coverage": {
         "overviewAltText": "Overzichtsafbeelding van georuimtelijke dekking",
         "spatial": "Ruimtelijke dekking",

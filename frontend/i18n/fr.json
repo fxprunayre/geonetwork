@@ -74,6 +74,12 @@
       "useConstraints": "Utiliser des contraintes",
       "otherConstraints": "Autres contraintes",
       "cl_accessConstraints": "Contraintes d'accès",
+      "contact": {
+        "address": "Adresse",
+        "phone": "Téléphone",
+        "email": "Email",
+        "website": "Site web"
+      },
       "coverage": {
         "overviewAltText": "Geospatial coverage overview image",
         "spatial": "Emprise géographique",
