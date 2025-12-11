@@ -21,13 +21,18 @@
       (keyup.enter)="searchOnClick()"
       [showClear]="true"
       (click)="handleInputClick($event)"
-      [pt]="{ root: 'w-full', pcInputText: { root: 'w-full !p-4 !text-xl' } }"
+      scrollHeight="400px"
+      [pt]="{
+        root: 'w-full',
+        pcInputText: { root: 'w-full !p-4 !text-xl' },
+        pcOverlay: { root: 'w-full' },
+      }"
       data-testid="search-input"
       name="search"
       class="w-full"
     >
       <ng-template let-item pTemplate="item">
-        <span>{{ item.title }}</span>
+        <span [title]="item.title">{{ item.title }}</span>
       </ng-template>
       <ng-template pTemplate="clearicon">
         <ng-icon name="faSolidXmark" />

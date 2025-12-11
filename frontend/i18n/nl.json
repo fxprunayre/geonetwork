@@ -39,7 +39,10 @@
     "result": "result",
     "results": "results",
     "backToResults": "Back to results",
-    "welcome.text": "Zoek door {{count}} {{mainBuckets}}, ..."
+    "welcome": {
+      "default": "Search ...",
+      "text": "Search over {{count}} {{mainBuckets}}, ..."
+    }
   },
   "record": {
     "view": {

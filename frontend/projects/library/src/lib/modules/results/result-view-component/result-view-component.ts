@@ -1,15 +1,14 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, ContentChild, inject, output, signal, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { ResultItemList } from '../result-item-list/result-item-list';
-import { ResultItemGrid } from '../result-item-grid/result-item-grid';
-import { LoadingMask } from '../../../shared/widgets/loading-mask/loading-mask.component';
-import { SearchResultsPaginator } from '../search-results-paginator/search-results-paginator';
-import { EmptyState } from '../empty-state/empty-state';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { SearchBase } from '../../search/search-base/search-base';
-import { SearchAppLayout } from '../../config/model/gnConfig';
 import { Skeleton } from 'primeng/skeleton';
-import { NgTemplateOutlet } from '@angular/common';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { SearchAppLayout } from '../../config/model/gnConfig';
+import { SearchBase } from '../../search/search-base/search-base';
+import { EmptyState } from '../empty-state/empty-state';
+import { ResultItemGrid } from '../result-item-grid/result-item-grid';
+import { ResultItemList } from '../result-item-list/result-item-list';
+import { SearchResultsPaginator } from '../search-results-paginator/search-results-paginator';
 
 @Component({
   selector: 'app-result-view',
@@ -17,7 +16,6 @@ import { NgTemplateOutlet } from '@angular/common';
   imports: [
     ResultItemGrid,
     ResultItemList,
-    LoadingMask,
     NgTemplateOutlet,
     Skeleton,
     SearchResultsPaginator,

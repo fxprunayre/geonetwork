@@ -1,16 +1,15 @@
-import { Component, EventEmitter, input, Input, output, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
-import { ButtonModule } from 'primeng/button';
-import { TooltipModule } from 'primeng/tooltip';
-import { IndexRecord } from 'gn-api-client';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
-import { faSolidEye, faSolidArrowUpRightFromSquare } from '@ng-icons/font-awesome/solid';
+import { faSolidArrowUpRightFromSquare, faSolidEye } from '@ng-icons/font-awesome/solid';
+import { IndexRecord } from 'gn-api-client';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { RecordDistributionBadges } from '../../record/distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 import { RecordFieldType } from '../../record/record-field-type/record-field-type';
-import { RecordDistributionBadges } from '../../record/distributions/record-distribution-badges/record-distribution-badges';
-import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
 
 @Component({
   selector: 'app-result-item-grid',
@@ -23,7 +22,6 @@ import { RecordFieldCredit } from '../../record/record-field-credit/record-field
     RecordFieldType,
     NgIcon,
     RecordDistributionBadges,
-    RecordFieldCredit,
   ],
   templateUrl: './result-item-grid.html',
   viewProviders: [provideIcons({ faImage, faSolidEye, faSolidArrowUpRightFromSquare })],
