@@ -8,9 +8,9 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
-      "gn-api-client": ["./dist/gn-api-client"],
-      "gn4-api-client": ["./dist/gn4-api-client"],
-      "gn-library": ["./dist/gn-library"]
+      "gn-api-client": ["./projects/gn-api-client/src/public-api.ts"],
+      "gn4-api-client": ["./projects/gn4-api-client/src/public-api.ts"],
+      "gn-library": ["./projects/library/src/public-api.ts"]
     },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
@@ -34,6 +34,12 @@
     },
     {
       "path": "./projects/main/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/library/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/library/tsconfig.spec.json"
     },
     {
       "path": "./projects/gn4-api-client/tsconfig.lib.json"
