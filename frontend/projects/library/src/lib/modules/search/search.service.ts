@@ -140,6 +140,7 @@ export class SearchService {
     // TODO: Handle multilingual fields
     const record = {
       ...hit._source,
+      ...hit.properties, // Related records
       info: {
         _id: hit._id,
         view: hit.view,

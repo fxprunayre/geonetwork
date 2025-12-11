@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faImage, faMap } from '@ng-icons/font-awesome/regular';
 import {
+  faSolidArrowUpRightFromSquare,
   faSolidCircleInfo,
   faSolidDownload,
   faSolidShareNodes,
@@ -29,14 +30,28 @@ import { RecordFieldType } from '../../record/record-field-type/record-field-typ
     RecordFieldTitle,
     RecordDistributionBadges,
     RouterLink,
+    NgIcon,
   ],
   viewProviders: [
-    provideIcons({ faImage, faMap, faSolidShareNodes, faSolidDownload, faSolidCircleInfo }),
+    provideIcons({
+      faImage,
+      faMap,
+      faSolidShareNodes,
+      faSolidDownload,
+      faSolidCircleInfo,
+      faSolidArrowUpRightFromSquare,
+    }),
   ],
 })
 export class ResultItemList {
   result = input.required<IndexRecord>();
   onRecordClick = output<string>();
+
+  externalUrl = computed(() => {
+    const result = this.result();
+    const isRemote = result.info?.['origin'] === 'remote';
+    return isRemote ? result['url'] : null;
+  });
 
   handleRecordClick() {
     const id = this.result().info?._id;

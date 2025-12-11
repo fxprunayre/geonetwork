@@ -27,6 +27,7 @@ export * from './lib/modules/search/search-welcome-text/search-welcome-text-pipe
 export * from './lib/modules/results/search-results-paginator/search-results-paginator';
 export * from './lib/modules/results/search-results-number/search-results-number.component';
 export * from './lib/modules/results/result-view-component/result-view-component';
+export * from './lib/modules/results/result-layout-switcher/result-layout-switcher';
 export * from './lib/modules/results/sort-results/sort-results';
 export * from './lib/modules/record/record-view/record-view.component';
 export * from './lib/modules/record/record-field-overview/record-field-overview.component';

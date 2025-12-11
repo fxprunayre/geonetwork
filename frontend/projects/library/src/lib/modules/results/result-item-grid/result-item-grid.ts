@@ -1,4 +1,5 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
@@ -24,6 +25,7 @@ import { RouterLink } from '@angular/router';
     NgIcon,
     RecordDistributionBadges,
     RouterLink,
+    NgTemplateOutlet,
   ],
   templateUrl: './result-item-grid.html',
   viewProviders: [provideIcons({ faImage, faSolidEye, faSolidArrowUpRightFromSquare })],
@@ -31,6 +33,11 @@ import { RouterLink } from '@angular/router';
 export class ResultItemGrid {
   result = input.required<IndexRecord>();
   onRecordClick = output<string>();
+
+  externalUrl = computed(() => {
+    const r = this.result();
+    return r.info?.['origin'] === 'remote' && r['url'] ? r['url'] : undefined;
+  });
 
   handleRecordClick() {
     const id = this.result().info?._id;

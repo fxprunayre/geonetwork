@@ -5,6 +5,7 @@ import {
   ContentChild,
   effect,
   inject,
+  input,
   output,
   signal,
   TemplateRef,
@@ -33,25 +34,12 @@ import { SearchResultsPaginator } from '../search-results-paginator/search-resul
   templateUrl: './result-view-component.html',
 })
 export class ResultViewComponent extends SearchBase {
+  layout = input.required<SearchAppLayout>();
   onRecordClick = output<string>();
 
   @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<any> | undefined;
 
   private router = inject(Router);
-  appConfiguration = inject(APPLICATION_CONFIGURATION);
-
-  resultsLayoutOptions = computed(() => {
-    return this.appConfiguration().config?.apps.search?.resultsLayoutOptions;
-  });
-
-  layout = signal<SearchAppLayout>(this.resultsLayoutOptions()?.[0] || 'list');
-
-  constructor() {
-    super();
-    effect(() => {
-      this.layout.set(this.resultsLayoutOptions()?.[0] || 'list');
-    });
-  }
 
   handleRecordClick(uuid: string) {
     this.onRecordClick.emit(uuid);

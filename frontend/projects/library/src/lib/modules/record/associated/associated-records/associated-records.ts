@@ -1,17 +1,27 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { Component, input, output, TemplateRef } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
-import { faSolidExpand } from '@ng-icons/font-awesome/solid';
+import { RecordFieldBase } from '../../record-field-base/record-field-base';
 import { TranslatePipe } from '@ngx-translate/core';
-import { IndexRecord } from 'gn-api-client';
-import { Button } from 'primeng/button';
-import { DataView } from 'primeng/dataview';
-import { Drawer } from 'primeng/drawer';
 import { ResultItemGrid } from '../../../results/result-item-grid/result-item-grid';
+import { NgTemplateOutlet } from '@angular/common';
+import { DataView } from 'primeng/dataview';
+import { Button, ButtonIcon } from 'primeng/button';
+import { Drawer } from 'primeng/drawer';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidExpand } from '@ng-icons/font-awesome/solid';
+import { IndexRecord, RelatedItemType } from 'gn-api-client';
 
 @Component({
   selector: 'app-associated-records',
-  imports: [TranslatePipe, ResultItemGrid, NgTemplateOutlet, DataView, Button, Drawer],
+  imports: [
+    TranslatePipe,
+    ResultItemGrid,
+    NgTemplateOutlet,
+    DataView,
+    Button,
+    ButtonIcon,
+    Drawer,
+    NgIcon,
+  ],
   providers: [provideIcons({ faSolidExpand })],
   templateUrl: './associated-records.html',
 })

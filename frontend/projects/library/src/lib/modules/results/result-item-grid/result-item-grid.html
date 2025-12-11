@@ -1,18 +1,13 @@
 @let description = result().resourceAbstractObject?.['default'] || '';
 
-<a
-  [routerLink]="['/record', result().info?._id]"
-  (click)="handleRecordClick()"
-  class="cursor-pointer border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full transition-shadow hover:shadow-md"
-  [title]="description"
->
+<ng-template #content>
   <app-record-field-overview
     [field]="result().overview?.[0] || []"
     [preview]="false"
     styleClass="rounded-t-(--p-border-radius-md)"
     class="min-h-48 max-h-48 h-1/2 object-cover"
   />
-  <div class="p-4 flex-1 flex flex-col">
+  <div class="p-4 flex-1 flex flex-col border-t border-surface-100">
     <div class="flex flex-row justify-between items-start gap-2 mb-4">
       <div class="flex-1">
         <app-record-field-type [record]="result()" />
@@ -28,9 +23,30 @@
         [types]="['API', 'download']"
         [layout]="'badge'"
       />
-      @if (result().info?.['origin'] === 'remote') {
+      @if (externalUrl()) {
         <ng-icon name="faSolidArrowUpRightFromSquare" />
       }
     </div>
   </div>
-</a>
+</ng-template>
+
+@if (externalUrl()) {
+  <a
+    [attr.href]="externalUrl()"
+    target="_blank"
+    (click)="handleRecordClick()"
+    class="cursor-pointer border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full transition-shadow hover:shadow-md"
+    [title]="description"
+  >
+    <ng-container *ngTemplateOutlet="content" />
+  </a>
+} @else {
+  <a
+    [routerLink]="['/record', result().info?._id]"
+    (click)="handleRecordClick()"
+    class="cursor-pointer border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full transition-shadow hover:shadow-md"
+    [title]="description"
+  >
+    <ng-container *ngTemplateOutlet="content" />
+  </a>
+}

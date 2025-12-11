@@ -1,4 +1,4 @@
-@if (distributionConfig) {
+@if (distributionConfig()) {
   @for (section of linksBySectionsSelected() | keyvalue; track $index) {
     <a [routerLink]="'/record/' + record().uuid + '/data-access'">
       <p-badge [value]="section.key" severity="success" class="mx-1" />
