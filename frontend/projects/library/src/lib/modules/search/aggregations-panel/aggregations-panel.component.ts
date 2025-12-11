@@ -14,6 +14,7 @@ import { SearchBase } from '../search-base/search-base';
 import { elasticsearch } from 'gn-api-client';
 import { AggregationService } from '../aggregation.service';
 import { NgTemplateOutlet } from '@angular/common';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
 
 @Component({
   selector: 'app-aggregations-panel',
@@ -25,6 +26,7 @@ import { NgTemplateOutlet } from '@angular/common';
     Aggregation,
     Accordion,
     NgTemplateOutlet,
+    OverlayBadgeModule,
   ],
   templateUrl: './aggregations-panel.component.html',
 })

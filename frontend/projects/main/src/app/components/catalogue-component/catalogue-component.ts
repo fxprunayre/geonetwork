@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
+import { NgClass } from '@angular/common';
 
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 
@@ -30,6 +32,8 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     FormsModule,
     TranslatePipe,
     SearchWelcomeTextPipe,
+    OverlayBadgeModule,
+    NgClass,
   ],
   standalone: true,
   templateUrl: './catalogue-component.html',
@@ -38,7 +42,7 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 })
 export class CatalogueComponent extends SearchBase {
   visible = false;
-  filterPanelMode = signal<FilterPanelLayout>('drawer');
+  filterPanelMode = signal<FilterPanelLayout>('side');
 
   get hasResults(): boolean {
     return this.search?.totalCount() > 0;

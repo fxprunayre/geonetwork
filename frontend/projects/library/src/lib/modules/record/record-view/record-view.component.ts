@@ -1,3 +1,4 @@
+import { AsyncPipe, NgTemplateOutlet, ViewportScroller } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -6,14 +7,12 @@ import {
   inject,
   input,
   output,
-  QueryList,
   signal,
   TemplateRef,
-  ViewChildren,
 } from '@angular/core';
-import { AsyncPipe, JsonPipe, NgTemplateOutlet, ViewportScroller } from '@angular/common';
-import { IndexRecord, RelatedItemType } from 'gn-api-client';
-import { SearchService } from '../../search/search.service';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { provideIcons } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import {
   faSolidCircleExclamation,
@@ -21,38 +20,36 @@ import {
   faSolidDownload,
   faSolidShareNodes,
 } from '@ng-icons/font-awesome/solid';
-import { provideIcons } from '@ng-icons/core';
-import { MarkdownPipe } from 'ngx-markdown';
-import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
-import { RecordField } from '../record-field/record-field';
-import { RecordFieldContact } from '../record-field-contact/record-field-contact';
-import { RecordFieldCredit } from '../record-field-credit/record-field-credit';
 import { TranslatePipe } from '@ngx-translate/core';
-import { RecordDistributionPanel } from '../distributions/record-distribution-panel/record-distribution-panel';
-import { RecordViewHeader } from '../record-view-header/record-view-header';
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
-import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
-import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
-import { RecordFieldType } from '../record-field-type/record-field-type';
-import { Chip } from 'primeng/chip';
-import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
-import { ActivatedRoute } from '@angular/router';
-import { filter, first } from 'rxjs';
-import { RecordFieldDates } from '../record-field-dates/record-field-dates';
-import { AssociatedPanel } from '../associated/associated-panel/associated-panel';
-import { FormsModule } from '@angular/forms';
+import { IndexRecord, RelatedItemType } from 'gn-api-client';
+import { MarkdownPipe } from 'ngx-markdown';
 import { AccordionModule } from 'primeng/accordion';
-import { Card } from 'primeng/card';
-import { CitationComponent } from '../citation-component/citation.component';
-import { ExplorePanel } from '../../data/explore-panel/explore-panel';
+import { Chip } from 'primeng/chip';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
+import { filter } from 'rxjs';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
-import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
-import { RecordFieldConstraints } from '../record-field-constraints/record-field-constraints';
+import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
+import { ExplorePanel } from '../../data/explore-panel/explore-panel';
+import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
+import { SearchService } from '../../search/search.service';
+import { AssociatedPanel } from '../associated/associated-panel/associated-panel';
+import { CitationComponent } from '../citation-component/citation.component';
+import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
+import { RecordDistributionFormat } from '../distributions/record-distribution-format/record-distribution-format';
+import { RecordDistributionPanel } from '../distributions/record-distribution-panel/record-distribution-panel';
 import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
+import { RecordFieldConstraints } from '../record-field-constraints/record-field-constraints';
+import { RecordFieldContact } from '../record-field-contact/record-field-contact';
 import { RecordFieldCoverageSpatial } from '../record-field-coverage-spatial/record-field-coverage-spatial';
 import { RecordFieldCoverageTemporal } from '../record-field-coverage-temporal/record-field-coverage-temporal';
 import { RecordFieldCoverageVertical } from '../record-field-coverage-vertical/record-field-coverage-vertical';
-import { RecordDistributionFormat } from '../distributions/record-distribution-format/record-distribution-format';
+import { RecordFieldCredit } from '../record-field-credit/record-field-credit';
+import { RecordFieldDates } from '../record-field-dates/record-field-dates';
+import { RecordFieldType } from '../record-field-type/record-field-type';
+import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
+import { RecordField } from '../record-field/record-field';
+import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
+import { RecordViewHeader } from '../record-view-header/record-view-header';
 
 export const DEFAULT_TAB = 'about';
 
@@ -86,7 +83,6 @@ export const DEFAULT_TAB = 'about';
     FormsModule,
     NgTemplateOutlet,
     AsyncPipe,
-    Card,
     CitationComponent,
     ExplorePanel,
     ScrollSpy,

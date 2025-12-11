@@ -39,7 +39,10 @@
     "result": "résultat",
     "results": "résultats",
     "backToResults": "Retour aux résultats",
-    "welcome.text": "Explorez plus de {{count}} {{mainBuckets}}, ..."
+    "welcome": {
+      "default": "Explorez ...",
+      "text": "Explorez plus de {{count}} {{mainBuckets}}, ..."
+    }
   },
   "record": {
     "view": {
