@@ -65,16 +65,20 @@ export class PrimeShadowdomstyleComponent implements OnInit, OnDestroy {
     const allStyles = [...primeNgDynamicStyles];
     if (mainThemeStyle) allStyles.push(mainThemeStyle);
 
-    allStyles.forEach((styleEl) => {
-      const styleId = styleEl.getAttribute('data-primeng-style-id') || '';
-      if (!styleEl.textContent || this.loadedStyles.includes(styleId)) return;
-      const clonedStyle = document.createElement('style');
-      clonedStyle.type = 'text/css';
-      clonedStyle.setAttribute('data-primeng-style-id', styleId);
-      clonedStyle.textContent = styleEl.textContent.replace(/:root/g, ':host');
-      shadowRoot.appendChild(clonedStyle);
+    allStyles
+      .filter((styleEl) => {
+        return styleEl.getAttribute('data-primeng-style-id')?.endsWith('-variables') === false;
+      })
+      .forEach((styleEl) => {
+        const styleId = styleEl.getAttribute('data-primeng-style-id') || '';
+        if (!styleEl.textContent || this.loadedStyles.includes(styleId)) return;
+        const clonedStyle = document.createElement('style');
+        clonedStyle.type = 'text/css';
+        clonedStyle.setAttribute('data-primeng-style-id', styleId);
+        clonedStyle.textContent = styleEl.textContent.replace(/:root/g, ':host');
+        shadowRoot.appendChild(clonedStyle);
 
-      this.loadedStyles.push(styleId);
-    });
+        this.loadedStyles.push(styleId);
+      });
   }
 }
