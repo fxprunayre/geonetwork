@@ -7,7 +7,6 @@ interface KeywordWithId extends Keyword {
   _id: string;
 }
 
-
 @Component({
   selector: 'app-record-field-vocabulary',
   imports: [KeywordList],
@@ -44,17 +43,15 @@ export class RecordFieldVocabulary extends RecordFieldBase {
       const arr = vocabObj.keywords || [];
 
       for (const item of arr as any[]) {
-
         const isVocabularyKeyword = !!item.link;
+        const label = (item.default ?? '').trim();
 
         const mapped: KeywordWithId = {
           ...item,
           default: item.default,
           uri: item.link ?? null,
           vocabulary: isVocabularyKeyword ? vocab : null,
-          _id: isVocabularyKeyword
-            ? item.link
-            : `free::${item.default}`
+          _id: isVocabularyKeyword ? item.link : `free::${label.toLowerCase()}`,
         };
 
         list.push(mapped);
@@ -65,11 +62,11 @@ export class RecordFieldVocabulary extends RecordFieldBase {
   });
 
   primaryKeywords = computed(() => {
-    return this.allKeywords().filter((k) => this.mainVocabularies().includes(k.vocabulary));
+    return this.allKeywords().filter((k) => this.mainVocabularies().includes(k.vocabulary ?? ''));
   });
 
   secondaryKeywords = computed(() => {
-    return this.allKeywords().filter((k) => !this.mainVocabularies().includes(k.vocabulary));
+    return this.allKeywords().filter((k) => !this.mainVocabularies().includes(k.vocabulary ?? ''));
   });
 
   displayKeywords = computed(() => {
