@@ -4,9 +4,9 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ResultItemGrid } from '../../../results/result-item-grid/result-item-grid';
 import { NgTemplateOutlet } from '@angular/common';
 import { DataView } from 'primeng/dataview';
-import { Button, ButtonIcon } from 'primeng/button';
+import { Button } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { provideIcons } from '@ng-icons/core';
 import { faSolidExpand } from '@ng-icons/font-awesome/solid';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
 
@@ -18,9 +18,7 @@ import { IndexRecord, RelatedItemType } from 'gn-api-client';
     NgTemplateOutlet,
     DataView,
     Button,
-    ButtonIcon,
-    Drawer,
-    NgIcon,
+    Drawer
   ],
   providers: [provideIcons({ faSolidExpand })],
   templateUrl: './associated-records.html',
