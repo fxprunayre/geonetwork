@@ -1,6 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { SidePanel } from '../side-panel/side-panel';
-import { ResultViewComponent, SearchBase, SearchInput, SearchWelcomeTextPipe } from 'gn-library';
+import {
+  APPLICATION_CONFIGURATION,
+  ResultViewComponent,
+  SearchAppLayout,
+  SearchBase,
+  SearchInput,
+  SearchWelcomeTextPipe,
+} from 'gn-library';
 import { ResultHeader } from '../result-header/result-header';
 import { Drawer } from 'primeng/drawer';
 import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
@@ -43,6 +50,14 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 export class CatalogueComponent extends SearchBase {
   visible = false;
   filterPanelMode = signal<FilterPanelLayout>('side');
+
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+
+  resultsLayoutOptions = computed(() => {
+    return this.appConfiguration().config?.apps.search?.resultsLayoutOptions || [];
+  });
+
+  layout = signal<SearchAppLayout>(this.resultsLayoutOptions()?.[0] || 'list');
 
   get hasResults(): boolean {
     return this.search?.totalCount() > 0;

@@ -11,6 +11,7 @@ import { routes } from '../../app.routes';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { fireEvent, render, screen } from '@testing-library/angular';
 import { userEvent } from '@testing-library/user-event';
+import { signal } from '@angular/core';
 
 describe('CatalogueComponent', () => {
   it('should provide a search box', async () => {
@@ -21,7 +22,7 @@ describe('CatalogueComponent', () => {
         provideMockSearchService(),
         provideRouter(routes),
         provideHttpClient(withInterceptorsFromDi()),
-        { provide: APPLICATION_CONFIGURATION, useValue: DEFAULT_TEST_CONFIG },
+        { provide: APPLICATION_CONFIGURATION, useValue: signal(DEFAULT_TEST_CONFIG) },
       ],
     });
     const user = userEvent.setup();

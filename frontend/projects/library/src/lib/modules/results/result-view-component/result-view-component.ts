@@ -1,5 +1,15 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ContentChild, inject, output, signal, TemplateRef } from '@angular/core';
+import {
+  Component,
+  computed,
+  ContentChild,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Skeleton } from 'primeng/skeleton';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
@@ -24,15 +34,12 @@ import { SearchResultsPaginator } from '../search-results-paginator/search-resul
   templateUrl: './result-view-component.html',
 })
 export class ResultViewComponent extends SearchBase {
+  layout = input.required<SearchAppLayout>();
   onRecordClick = output<string>();
 
   @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<any> | undefined;
 
   private router = inject(Router);
-
-  resultsLayoutOptions =
-    inject(APPLICATION_CONFIGURATION).config?.apps.search?.resultsLayoutOptions;
-  layout = signal<SearchAppLayout>(this.resultsLayoutOptions?.[0] || 'list');
 
   handleRecordClick(uuid: string) {
     this.onRecordClick.emit(uuid);

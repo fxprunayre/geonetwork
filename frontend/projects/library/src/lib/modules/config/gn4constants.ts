@@ -181,9 +181,9 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
     search: {
       enabled: true,
       appUrl: '../../{{node}}/{{lang}}/catalog.search#/search',
-      hitsperpageValues: [10, 20, 60],
+      hitsperpageValues: [20, 60, 100],
       paginationInfo: {
-        hitsPerPage: 10,
+        hitsPerPage: 20,
       },
       // Full text on all fields
       // 'queryBase': '${any}',

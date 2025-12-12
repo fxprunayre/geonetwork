@@ -42,9 +42,9 @@
     <div class="mx-auto max-w-7xl w-full px-6 py-6 flex flex-col md:flex-row min-h-screen gap-6">
       <div class="w-full" [class.xl:px-[200px]]="filterPanelMode() === 'drawer'">
         <div class="mb-6">
-          <app-result-header />
+          <app-result-header [(layout)]="layout" [layoutOptions]="resultsLayoutOptions()" />
         </div>
-        <app-result-view />
+        <app-result-view [layout]="layout()" />
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
     @case ('side') {
       <div
         class="w-full h-screen sticky top-0 self-start transition-all duration-500 ease-in-out overflow-hidden min-w-0 max-w-[400px] border-l-2 border-primary-200"
-        [ngClass]="visible ? 'md:w-1/3 md:opacity-100' : 'md:w-0 md:opacity-0'"
+        [ngClass]="visible ? 'sm:w-1/3 sm:opacity-100' : 'sm:w-0 sm:opacity-0'"
       >
         <div class="flex flex-row p-4 items-center text-primary border-b-2 border-primary-200">
           <div class="grow text-xl font-bold">

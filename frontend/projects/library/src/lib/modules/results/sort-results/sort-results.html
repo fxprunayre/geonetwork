@@ -5,8 +5,9 @@
     [ngModel]="search.currentSort()"
     (onChange)="onSortChange($event.value)"
     [showClear]="false"
+    size="small"
     [placeholder]="'search.sort.placeholder' | translate"
-    class="w-full md:w-56"
+    class="w-full md:w-32"
   >
     <ng-template let-option pTemplate="item">
       {{ option.label | translate }}

@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable } from '@angular/core';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { ConfigService } from '../../config/config.service';
 import { Link } from 'gn-api-client';
@@ -7,7 +7,8 @@ import { Link } from 'gn-api-client';
   providedIn: 'root',
 })
 export class DistributionService {
-  distributionConfig = inject(APPLICATION_CONFIGURATION).config?.apps.record?.distribution;
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+  distributionConfig = computed(() => this.appConfiguration().config?.apps.record?.distribution);
 
   configService = inject(ConfigService);
 
@@ -23,7 +24,7 @@ export class DistributionService {
       return linksBySections;
     }
 
-    this.distributionConfig?.sections.map((section) => {
+    this.distributionConfig()?.sections.map((section) => {
       let sectionFilter = this.configService.parseFilterExpression(section.filter);
 
       for (const link of links!) {

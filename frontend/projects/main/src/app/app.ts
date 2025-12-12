@@ -28,10 +28,10 @@ export class App extends PrimeShadowdomstyleComponent implements OnInit {
   protected readonly title = signal('main');
 
   searchConfig: SearchApp =
-    inject(APPLICATION_CONFIGURATION).config?.apps.search || ({} as SearchApp);
+    inject(APPLICATION_CONFIGURATION)().config?.apps.search || ({} as SearchApp);
 
   searchPageSize =
-    inject(APPLICATION_CONFIGURATION).config?.apps.search?.hitsPerPageOptions[0] || 10;
+    inject(APPLICATION_CONFIGURATION)().config?.apps.search?.hitsPerPageOptions[0] || 10;
 
   constructor() {
     super();

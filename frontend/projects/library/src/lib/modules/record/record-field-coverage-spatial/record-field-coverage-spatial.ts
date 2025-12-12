@@ -57,7 +57,12 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 export class RecordFieldCoverageSpatial extends RecordFieldBase {
   translateService = inject(TranslateService);
 
-  catalogueUrl: string | undefined = inject(APPLICATION_CONFIGURATION).catalogueUrl;
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+
+  overviewBaseUrl = computed(
+    () =>
+      this.appConfiguration().catalogueUrl + '/srv/api/regions/geom.png?geomsrs=EPSG:4326&geom=',
+  );
 
   extentDescription = computed(() => {
     return this.record()?.['extentDescription'] || [];
@@ -106,7 +111,7 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase {
   });
 
   overviewUrl = computed(() => {
-    return `${this.catalogueUrl}/srv/api/regions/geom.png?geomsrs=EPSG:4326&geom=${this.geoms()[0]?.wkt}`;
+    return `${this.overviewBaseUrl()}${this.geoms()[0]?.wkt}`;
   });
 
   geometryCollection = computed(() => {
@@ -115,7 +120,7 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase {
   });
 
   geometryCollectionUrl = computed(() => {
-    return `${this.catalogueUrl}/srv/api/regions/geom.png?geomsrs=EPSG:4326&geom=${this.geometryCollection()}`;
+    return `${this.overviewBaseUrl()}${this.geometryCollection()}`;
   });
 
   convertGeomToWKT(ring: any[]): string {

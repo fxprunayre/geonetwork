@@ -1,9 +1,9 @@
-import { Component, computed, OnInit, signal } from '@angular/core';
-import { MenuItem, SharedModule } from 'primeng/api';
-import { Avatar } from 'primeng/avatar';
-import { Menu } from 'primeng/menu';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { provideIcons, NgIcon } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faCompass, faMap } from '@ng-icons/font-awesome/regular';
 import {
   faSolidArrowRightFromBracket,
   faSolidArrowRightToBracket,
@@ -14,16 +14,15 @@ import {
   faSolidMagnifyingGlass,
   faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
-import { faMap } from '@ng-icons/font-awesome/regular';
-import { LanguageSwitcher, ThemeDesigner } from 'gn-library';
-import AppTheme from '../../app.theme';
-import { JsonPipe, NgTemplateOutlet } from '@angular/common';
-import { Button, ButtonIcon } from 'primeng/button';
-import { Popover } from 'primeng/popover';
+import { APPLICATION_CONFIGURATION, LanguageSwitcher, ThemeDesigner } from 'gn-library';
+import { MenuItem, SharedModule } from 'primeng/api';
 import { Drawer } from 'primeng/drawer';
 import { Fieldset } from 'primeng/fieldset';
+import { IftaLabel } from 'primeng/iftalabel';
+import { Menu } from 'primeng/menu';
+import { TextareaModule } from 'primeng/textarea';
+import AppTheme from '../../app.theme';
 
-// https://github.com/primefaces/primeng/blob/master/packages/primeng/src/menu/menu.ts
 @Component({
   selector: 'app-navigation',
   imports: [
@@ -37,6 +36,9 @@ import { Fieldset } from 'primeng/fieldset';
     SharedModule,
     Drawer,
     Fieldset,
+    IftaLabel,
+    FormsModule,
+    TextareaModule,
   ],
   standalone: true,
   viewProviders: [
@@ -47,6 +49,7 @@ import { Fieldset } from 'primeng/fieldset';
       faSolidGear,
       faSolidMagnifyingGlass,
       faMap,
+      faCompass,
       faSolidLanguage,
       faSolidArrowRightFromBracket,
       faSolidArrowRightToBracket,
@@ -56,6 +59,13 @@ import { Fieldset } from 'primeng/fieldset';
 })
 export class Navigation implements OnInit {
   logo = 'images/logo.svg';
+
+  appConfig = inject(APPLICATION_CONFIGURATION);
+  appConfigJson = computed(() => JSON.stringify(this.appConfig(), null, 2));
+
+  updateConfig(event: string) {
+    this.appConfig.set(JSON.parse(event));
+  }
 
   items = computed<MenuItem[] | undefined>(() => {
     return [
@@ -71,7 +81,7 @@ export class Navigation implements OnInit {
       },
       {
         label: 'Home',
-        icon: 'faSolidHouse',
+        icon: 'faCompass',
         routerLink: '/',
       },
       {
