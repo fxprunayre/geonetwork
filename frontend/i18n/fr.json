@@ -9,10 +9,10 @@
       }
     },
     "filter": {
-      "title": "Focus",
+      "title": "Tous les filtres",
       "activeFilters": "Filtres actifs",
       "panel": {
-        "open": "Focus"
+        "open": "Filtrer"
       }
     },
     "aggregations": {
@@ -108,7 +108,15 @@
         }
       },
       "distribution": {
-        "format": "Format"
+        "format": "Format",
+        "sections": {
+          "api": "Visualiser",
+          "download": "Télécharger",
+          "links": "Liens",
+          "mapLegend": "Légende",
+          "featureCatalog": "Modèle de données",
+          "quality": "Qualité"
+        }
       },
       "datamodel": {
         "field": "Colonne",
@@ -147,9 +155,13 @@
     "discover": "Découvrez nos thèmes"
   },
   "menu": {
-    "home": "Home",
-    "catalog": "Catalogue",
-    "map": "Map"
+    "home": "Accueil",
+    "map": "Carte",
+    "addrecord": "Ajouter",
+    "signin": "Se connecter",
+    "signout": "Se déconnecter",
+    "settings": "Configurer",
+    "search": "Recherche"
   },
   "citation": {
     "title": "Citer l'ensemble de données",

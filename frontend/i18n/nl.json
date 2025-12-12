@@ -9,8 +9,8 @@
       }
     },
     "filter": {
-      "title": "Filter",
-      "activeFilters": "Active filters",
+      "title": "Alle filters",
+      "activeFilters": "Actieve filters",
       "panel": {
         "open": "Filter"
       }
@@ -108,7 +108,15 @@
         }
       },
       "distribution": {
-        "format": "Format"
+        "format": "Format",
+        "sections": {
+          "api": "API",
+          "download": "Download",
+          "links": "Links",
+          "mapLegend": "Map legend",
+          "featureCatalog": "Data model",
+          "quality": "Quality"
+        }
       },
       "datamodel": {
         "field": "Field",
@@ -148,8 +156,12 @@
   },
   "menu": {
     "home": "Home",
-    "catalog": "Catalog",
-    "map": "Map"
+    "map": "Map",
+    "addrecord": "Add",
+    "signin": "Sign in",
+    "signout": "Sign out",
+    "settings": "Configure",
+    "search": "Search"
   },
   "citation": {
     "title": "Cite dataset",

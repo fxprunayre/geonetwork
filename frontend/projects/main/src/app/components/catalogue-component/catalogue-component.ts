@@ -1,5 +1,9 @@
+import { NgClass } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { SidePanel } from '../side-panel/side-panel';
+import { FormsModule } from '@angular/forms';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidFilter, faSolidXmark } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   APPLICATION_CONFIGURATION,
   ResultViewComponent,
@@ -8,17 +12,13 @@ import {
   SearchInput,
   SearchWelcomeTextPipe,
 } from 'gn-library';
-import { ResultHeader } from '../result-header/result-header';
-import { Drawer } from 'primeng/drawer';
 import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidFilter, faSolidXmark } from '@ng-icons/font-awesome/solid';
-import { FormsModule } from '@angular/forms';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Drawer } from 'primeng/drawer';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
-import { NgClass } from '@angular/common';
+import { ResultHeader } from '../result-header/result-header';
+import { SidePanel } from '../side-panel/side-panel';
 
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 
@@ -31,7 +31,6 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     ResultViewComponent,
     Drawer,
     Button,
-    ButtonLabel,
     NgIcon,
     ButtonIcon,
     InputGroup,

@@ -12,6 +12,12 @@ export class DistributionService {
 
   configService = inject(ConfigService);
 
+  iconsByType: Record<string, string> = {
+    download: 'faSolidCloudArrowDown',
+    api: 'faSolidNetworkWired',
+    link: 'faSolidLink',
+  };
+
   // sections: [
   //   {
   //     filter:

@@ -1,10 +1,20 @@
 @if (distributionConfig()) {
-  @for (section of linksBySectionsSelected() | keyvalue; track $index) {
-    <a [routerLink]="'/record/' + record().uuid + '/data-access'">
-      <p-badge [value]="section.key" severity="success" class="mx-1" />
-    </a>
-    @for (link of section.value; track link) {
-      @if (link) {}
+  <div class="flex flex-wrap gap-2">
+    @for (section of linksBySectionsSelected() | keyvalue; track $index) {
+      @let label = 'record.field.distribution.sections.' + section.key | translate;
+      <p-button
+        [title]="label"
+        [routerLink]="'/record/' + record().uuid + '/data-access'"
+        class=""
+        severity="success"
+        size="small"
+      >
+        <ng-icon [name]="iconsByType[section.key]" pButtonIcon />
+        <span pButtonLabel class="hidden 2xl:inline">{{ label }}</span>
+      </p-button>
+      @for (link of section.value; track link) {
+        @if (link) {}
+      }
     }
-  }
+  </div>
 }

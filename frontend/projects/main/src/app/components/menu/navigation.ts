@@ -22,6 +22,7 @@ import { IftaLabel } from 'primeng/iftalabel';
 import { Menu } from 'primeng/menu';
 import { TextareaModule } from 'primeng/textarea';
 import AppTheme from '../../app.theme';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navigation',
@@ -39,6 +40,7 @@ import AppTheme from '../../app.theme';
     IftaLabel,
     FormsModule,
     TextareaModule,
+    TranslatePipe,
   ],
   standalone: true,
   viewProviders: [
@@ -80,17 +82,17 @@ export class Navigation implements OnInit {
         separator: true,
       },
       {
-        label: 'Home',
+        label: 'home',
         icon: 'faCompass',
         routerLink: '/',
       },
       {
-        label: 'Search',
+        label: 'search',
         icon: 'faSolidMagnifyingGlass',
         routerLink: '/search',
       },
       {
-        label: 'Map',
+        label: 'map',
         icon: 'faMap',
         command: () => {
           window.open(`https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map`, 'map');
@@ -101,7 +103,7 @@ export class Navigation implements OnInit {
         styleClass: 'mb-10',
       },
       {
-        label: 'Sign in',
+        label: 'signin',
         visible: !this.isAuthenticated(),
         icon: 'faSolidArrowRightToBracket',
         command: () => {
@@ -109,13 +111,13 @@ export class Navigation implements OnInit {
         },
       },
       {
-        label: 'Add',
+        label: 'addrecord',
         icon: 'faSolidPlus',
         styleClass: 'font-bold',
         visible: this.isAuthenticated(),
       },
       {
-        label: 'Sign out',
+        label: 'signout',
         visible: this.isAuthenticated(),
         icon: 'faSolidArrowRightFromBracket',
         command: () => {
@@ -126,7 +128,7 @@ export class Navigation implements OnInit {
         separator: true,
       },
       {
-        label: 'Configure',
+        label: 'settings',
         icon: 'faSolidGear',
         command: () => {
           this.isConfigurationVisible.update((v) => !v);

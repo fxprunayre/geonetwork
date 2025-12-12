@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssociatedRecords } from './associated-records.component';
+import { AssociatedRecords } from './associated-records';
 
 describe('AssociatedRecordsPanel', () => {
   let component: AssociatedRecords;
@@ -13,7 +13,6 @@ describe('AssociatedRecordsPanel', () => {
 
     fixture = TestBed.createComponent(AssociatedRecords);
     component = fixture.componentInstance;
-    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 
