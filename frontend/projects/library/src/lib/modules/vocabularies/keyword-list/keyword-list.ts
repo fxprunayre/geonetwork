@@ -75,9 +75,11 @@ export class KeywordList extends SearchBase {
 
     this.search.search(this.search.searchFilterParameters());
 
+    const query = keyword.default.replace(/^\/+/, '');
+
     this.router.navigate(['/search'], {
       queryParams: {
-        q: keyword.default,
+        q: query,
       },
     });
   }
