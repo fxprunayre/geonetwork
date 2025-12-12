@@ -45,12 +45,16 @@ export class RecordFieldVocabulary extends RecordFieldBase {
 
       for (const item of arr as any[]) {
 
+        const isVocabularyKeyword = !!item.link;
+
         const mapped: KeywordWithId = {
           ...item,
           default: item.default,
-          uri: item.link || '',
-          vocabulary: vocab,
-          _id: `${vocab}::${item.default || ''}::${Math.random().toString(36).slice(2)}`
+          uri: item.link ?? null,
+          vocabulary: isVocabularyKeyword ? vocab : null,
+          _id: isVocabularyKeyword
+            ? item.link
+            : `free::${item.default}`
         };
 
         list.push(mapped);
