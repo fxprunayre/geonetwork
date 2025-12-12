@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,19 +11,17 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AutoComplete } from 'primeng/autocomplete';
-import { AutoFocus } from 'primeng/autofocus';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidMagnifyingGlass, faSolidXmark } from '@ng-icons/font-awesome/solid';
-import { NgTemplateOutlet } from '@angular/common';
-import { Popover } from 'primeng/popover';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
+import { PrimeTemplate } from 'primeng/api';
+import { AutoComplete } from 'primeng/autocomplete';
+import { Button, ButtonIcon } from 'primeng/button';
+import { InputText } from 'primeng/inputtext';
+import { Popover } from 'primeng/popover';
 import { SearchService } from '../../search/search.service';
 import { SearchBase } from '../search-base/search-base';
-import { PrimeTemplate } from 'primeng/api';
-import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
-import { InputText } from 'primeng/inputtext';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -37,14 +36,12 @@ interface AutoCompleteCompleteEvent {
     FormsModule,
     NgIcon,
     TranslatePipe,
-    AutoFocus,
     Popover,
     AutoComplete,
     PrimeTemplate,
     Button,
     ButtonIcon,
     InputText,
-    ButtonLabel,
   ],
   viewProviders: [provideIcons({ faSolidMagnifyingGlass, faSolidXmark })],
   templateUrl: './search-input.component.html',

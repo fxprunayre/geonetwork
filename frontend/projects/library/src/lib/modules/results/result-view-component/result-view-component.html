@@ -1,42 +1,66 @@
 <div #resultsContainer>
-  <app-loading-mask [loading]="search.isLoading()" />
+  @if (search.isLoading()) {
+    <!-- <app-loading-mask [loading]="search.isLoading()" /> -->
+    <ng-template #defaultSearchProgressTemplate>
+      <div class="results-list grid gap-4">
+        @for (i of [].constructor(search.pageSize()); track $index) {
+          <div class="flex flex-col lg:flex-row items-center gap-4 cursor-pointer rounded-xl p-6">
+            <div
+              class="w-full lg:w-[190px] lg:aspect-square lg:flex-shrink-0 lg:overflow-hidden rounded"
+            >
+              <p-skeleton
+                size="10rem"
+                class="flex-none w-48 h-48 relative rounded-lg border border-gray-300"
+              />
+            </div>
 
-  @if (!search.isLoading()) {
-    <div class="results-container">
-      @if (!search.hasResults()) {
-        <app-empty-state></app-empty-state>
-      } @else {
-        <div class="card">
-          @switch (layout()) {
-            @case ('list') {
-              <div class="results-list grid gap-4">
-                @for (result of search.results(); track $index) {
-                  <app-result-item-list
-                    [result]="result"
-                    (onRecordClick)="handleRecordClick($event)"
-                  />
-                }
-              </div>
-            }
-            @case ('grid') {
-              <div
-                class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-              >
-                @for (result of search.results(); track $index) {
-                  <app-result-item-grid
-                    [result]="result"
-                    (onRecordClick)="handleRecordClick($event)"
-                  />
-                }
-              </div>
-            }
+            <div class="flex flex-col justify-between items-start gap-2 w-full">
+              <p-skeleton class="mb-2" />
+              <p-skeleton width="10rem" class="mb-2" />
+              <p-skeleton width="5rem" class="mb-2" />
+            </div>
+          </div>
+        }
+      </div>
+    </ng-template>
+
+    <ng-container
+      *ngTemplateOutlet="
+        searchProgressTemplate || defaultSearchProgressTemplate;
+        context: { $implicit: search }
+      "
+    ></ng-container>
+  } @else {
+    @if (!search.hasResults()) {
+      <app-empty-state></app-empty-state>
+    } @else {
+      <div class="card">
+        @switch (layout()) {
+          @case ('list') {
+            <div class="results-list grid gap-4">
+              @for (result of search.results(); track $index) {
+                <app-result-item-list
+                  [result]="result"
+                  (onRecordClick)="handleRecordClick($event)"
+                />
+              }
+            </div>
           }
-          <app-search-results-paginator
-            [scope]="scope()"
-            [resultsContainerRef]="resultsContainer"
-          />
-        </div>
-      }
-    </div>
+          @case ('grid') {
+            <div
+              class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+            >
+              @for (result of search.results(); track $index) {
+                <app-result-item-grid
+                  [result]="result"
+                  (onRecordClick)="handleRecordClick($event)"
+                />
+              }
+            </div>
+          }
+        }
+        <app-search-results-paginator [scope]="scope()" [resultsContainerRef]="resultsContainer" />
+      </div>
+    }
   }
 </div>

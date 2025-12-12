@@ -1,0 +1,10 @@
+<p-selectButton
+  [options]="options()"
+  [ngModel]="layout()"
+  (ngModelChange)="setLayout($event)"
+  [allowEmpty]="false"
+>
+  <ng-template let-item #item>
+    <ng-icon [name]="item === 'list' ? 'faSolidList' : 'faSolidTableCellsLarge'" />
+  </ng-template>
+</p-selectButton>

@@ -1,51 +1,138 @@
-@for (role of contactsByRole() | keyvalue; track role.key) {
-  <span class="block text-[#3a75ab]">{{ role.key | translate }} ({{ role.value.length }})</span>
-
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-    @for (contact of role.value; track $index) {
-      <div class="mb-2">
-        <span>{{ contact.organisationObject?.default || contact.individual }}</span>
-
-        @if (contact.email) {
-          <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-        }
-
-        @if (contact.website) {
-          <div class="mt-2">
-            <a href="{{ contact.website }}" target="_blank" rel="noopener">
-              {{ contact.website }}
-            </a>
+<ng-template #contactList let-contacts="contacts">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    @for (contact of contacts; track $index) {
+      <p-card>
+        <ng-template #title>
+          <div class="flex items-start gap-3">
+            <div class="flex-1">
+              @if (contact.individual) {
+                <div class="font-bold text-primary-500 text-base">
+                  {{ contact.individual }}
+                </div>
+              }
+              @if (contact.position) {
+                <div class="text-xs text-primary-300 italic font-normal">
+                  {{ contact.position }}
+                </div>
+              }
+              @if (contact.organisationObject?.default) {
+                <div class="text-sm text-primary-500 font-bold">
+                  {{ contact.organisationObject?.default }}
+                </div>
+              }
+            </div>
+            @if (contact.logo) {
+              <img
+                [src]="contact.logo"
+                class="w-12 h-12 rounded-full object-contain bg-surface-100 border border-surface-200"
+                alt="Logo"
+              />
+            } @else {
+              @let harvestingLogo = getHarvestingLogoUrl(contact);
+              @if (harvestingLogo) {
+                <img
+                  [src]="harvestingLogo"
+                  class="w-12 h-12 rounded-full object-contain bg-surface-100 border border-surface-200"
+                  alt="Logo"
+                  (error)="hideImage($event)"
+                />
+              }
+            }
           </div>
-        }
-      </div>
+        </ng-template>
+        <ng-template #content>
+          <div class="flex flex-col gap-1 text-sm text-surface-300">
+            @if (contact.phone) {
+              <div
+                class="flex gap-2 items-center"
+                [title]="'record.field.contact.phone' | translate"
+              >
+                <ng-icon name="faSolidPhone" class="text-surface-500"></ng-icon>
+                <div class="w-full">{{ contact.phone }}</div>
+              </div>
+            }
 
-      <!--      <p-card (click)="op.toggle($event)" class="cursor-pointer">-->
-      <!--        <ng-template #title>-->
-      <!--          @let mainContact = contact.organisationObject?.default || contact.individual;-->
-      <!--          @let firstLetter = mainContact.charAt(0).toUpperCase();-->
-      <!--          <p-avatar [label]="firstLetter" class="mr-2" size="xlarge" shape="circle" />-->
-      <!--          {{ mainContact }}-->
-      <!--        </ng-template>-->
-      <!--        <ng-template #subtitle>-->
-      <!--          {{ contact.individual }}-->
-      <!--        </ng-template>-->
-      <!--      </p-card>-->
-      <!--      <p-popover #op>-->
-      <!--        <h4>More info</h4>-->
-      <!--        @if (contact.email) {-->
-      <!--          <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>-->
-      <!--        }-->
+            @if (contact.email) {
+              <div
+                class="flex gap-2 items-center"
+                [title]="'record.field.contact.email' | translate"
+              >
+                <ng-icon name="faSolidEnvelope" class="text-surface-500"></ng-icon>
+                <a
+                  href="mailto:{{ contact.email }}"
+                  class="text-primary-600 hover:underline truncate w-full"
+                  >{{ contact.email }}</a
+                >
+              </div>
+            }
 
-      <!--        @if (contact.website) {-->
-      <!--          <div class="mt-2">-->
-      <!--            <a href="{{ contact.website }}" target="_blank" rel="noopener">-->
-      <!--              {{ contact.website }}-->
-      <!--            </a>-->
-      <!--          </div>-->
-      <!--        }-->
+            @if (contact.website) {
+              <div
+                class="flex gap-2 items-center"
+                [title]="'record.field.contact.website' | translate"
+              >
+                <ng-icon name="faSolidGlobe" class="text-surface-500"></ng-icon>
+                <a
+                  href="{{ contact.website }}"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-primary-600 hover:underline truncate w-full"
+                  >{{ contact.website }}</a
+                >
+              </div>
+            }
 
-      <!--        &lt;!&ndash; TODO address, phone&ndash;&gt;-->
-      <!--      </p-popover>-->
+            @if (contact.identifiers) {
+              @for (id of contact.identifiers; track $index) {
+                @let code = id.code || id.link;
+                @if (code) {
+                  <div class="flex gap-2 items-center" [title]="id.codeSpace">
+                    <ng-icon
+                      [name]="
+                        id.codeSpace?.toLowerCase() === 'orcid' || code?.includes('orcid.org')
+                          ? 'faBrandOrcid'
+                          : 'faSolidFingerprint'
+                      "
+                      class="text-surface-500"
+                    ></ng-icon>
+                    <a
+                      href="{{ code }}"
+                      target="_blank"
+                      rel="noopener"
+                      class="text-primary-600 hover:underline truncate w-full"
+                      >{{ code }}</a
+                    >
+                  </div>
+                }
+              }
+            }
+
+            @if (contact.address) {
+              <div
+                class="flex gap-2 items-center"
+                [title]="'record.field.contact.address' | translate"
+              >
+                <ng-icon name="faSolidLocationDot" class="text-surface-500 mt-0.5"></ng-icon>
+                <div class="w-full">{{ contact.address }}</div>
+              </div>
+            }
+          </div>
+        </ng-template>
+      </p-card>
     }
-  </section>
+  </div>
+</ng-template>
+
+@for (roleGroup of contactsByRole() | keyvalue; track roleGroup.key) {
+  @if (role()) {
+    <ng-container
+      *ngTemplateOutlet="contactList; context: { contacts: roleGroup.value }"
+    ></ng-container>
+  } @else {
+    <app-record-field [label]="roleGroup.key">
+      <ng-container
+        *ngTemplateOutlet="contactList; context: { contacts: roleGroup.value }"
+      ></ng-container>
+    </app-record-field>
+  }
 }

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BottomNavigation } from './bottom-navigation';
+import { RecordHarvesterLogo } from './record-harvester-logo';
 
-describe('BottomNavigation', () => {
-  let component: BottomNavigation;
-  let fixture: ComponentFixture<BottomNavigation>;
+describe('RecordFieldDates', () => {
+  let component: RecordHarvesterLogo;
+  let fixture: ComponentFixture<RecordHarvesterLogo>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BottomNavigation],
+      imports: [RecordHarvesterLogo],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(BottomNavigation);
+    fixture = TestBed.createComponent(RecordHarvesterLogo);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

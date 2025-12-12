@@ -11,12 +11,18 @@ interface KeywordWithId extends Keyword {
   selector: 'app-record-field-vocabulary',
   imports: [KeywordList],
   templateUrl: './record-field-vocabulary.html',
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
 })
 export class RecordFieldVocabulary extends RecordFieldBase {
   include = input<string[]>([]);
   exclude = input<string[]>([]);
   mainVocabularies = signal(['th_sextant-theme']);
   mode = input<'primary' | 'secondary'>('secondary');
+  styleClass = input<string>('');
 
   vocabularies = computed<Thesaurus[]>(() => {
     const rec = this.record();

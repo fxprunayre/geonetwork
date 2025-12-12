@@ -7,30 +7,36 @@
         [ngModel]="isActive()"
         (ngModelChange)="handleChange(bucket().key, $event)"
       ></p-checkbox>
-      <label class="ml-2 line-clamp-1" [for]="keyName() + '_' + bucket().key">
+      <label
+        class="ml-2 line-clamp-1"
+        [for]="keyName() + '_' + bucket().key"
+        [pTooltip]="label()"
+        tooltipPosition="right"
+      >
         <app-aggregation-bucket-decorator [bucket]="bucket()" [decorator]="decorator()" />
         {{ label() }}
       </label>
     </div>
   }
   @case ('button') {
-    <div class="flex flex-row gap-2">
-      <p-button
-        [label]="label()"
-        variant="outlined"
-        [severity]="isActive() ? 'primary' : undefined"
-        (click)="handleChange(bucket().key, !isActive())"
-        [styleClass]="isActive() ? 'active' : ''"
-        [attr.aria-pressed]="isActive()"
-        size="small"
-      >
-        <app-aggregation-bucket-decorator
-          pButtonIcon
-          [bucket]="bucket()"
-          [decorator]="decorator()"
-        />
-      </p-button>
-    </div>
+    <p-button
+      [pt]="{ host: { class: 'w-full' }, root: { class: 'w-full' } }"
+      [title]="label()"
+      variant="outlined"
+      [severity]="isActive() ? 'primary' : undefined"
+      (click)="handleChange(bucket().key, !isActive())"
+      [styleClass]="isActive() ? 'active' : ''"
+      [attr.aria-pressed]="isActive()"
+      size="small"
+    >
+      <app-aggregation-bucket-decorator
+        pButtonIcon
+        class="pt-1"
+        [bucket]="bucket()"
+        [decorator]="decorator()"
+      />
+      <div class="text-left w-full line-clamp-1">{{ label() }}</div>
+    </p-button>
   }
   @case ('card') {
     <p-card

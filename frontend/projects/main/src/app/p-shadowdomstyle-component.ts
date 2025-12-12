@@ -1,0 +1,84 @@
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  signal,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
+
+/**
+ * Workaround https://github.com/primefaces/primeng/issues/16567
+ * Add missing CSS styles in shadow DOM but it still remains issues with popups and overlays
+ * Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element'.
+ */
+@Component({
+  selector: 'p-shadowdomstyle-component',
+  template: '<div></div>',
+})
+export class PrimeShadowdomstyleComponent implements OnInit, OnDestroy {
+  el = inject(ElementRef);
+
+  loadedStyles: string[] = [];
+
+  observer: MutationObserver | undefined;
+
+  ngOnInit(): void {
+    this.observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of Array.from(mutation.addedNodes)) {
+          if (
+            node instanceof HTMLStyleElement &&
+            (node.getAttribute('data-primeng-style-id') !== null ||
+              node.textContent?.includes('--p-primary-color'))
+          ) {
+            this.injectPrimeNGStyles();
+            return;
+          }
+        }
+      }
+    });
+    this.observer.observe(document.head, { childList: true });
+  }
+
+  ngOnDestroy() {
+    this.observer && this.observer.disconnect();
+  }
+
+  private injectPrimeNGStyles(): void {
+    const shadowRoot = this.el.nativeElement?.shadowRoot;
+    if (!shadowRoot) {
+      return;
+    }
+
+    const primeNgDynamicStyles = Array.from(
+      document.head.querySelectorAll('style[data-primeng-style-id]'),
+    );
+    const mainThemeStyle = Array.from(document.head.querySelectorAll('style')).find((style) =>
+      style.textContent?.includes('--p-primary-color'),
+    );
+    const allStyles = [...primeNgDynamicStyles];
+    if (mainThemeStyle) allStyles.push(mainThemeStyle);
+
+    allStyles
+      .filter((styleEl) => {
+        return styleEl.getAttribute('data-primeng-style-id')?.endsWith('-variables') === false;
+      })
+      .forEach((styleEl) => {
+        const styleId = styleEl.getAttribute('data-primeng-style-id') || '';
+        if (!styleEl.textContent || this.loadedStyles.includes(styleId)) return;
+        const clonedStyle = document.createElement('style');
+        clonedStyle.type = 'text/css';
+        clonedStyle.setAttribute('data-primeng-style-id', styleId);
+        clonedStyle.textContent = styleEl.textContent.replace(/:root/g, ':host');
+        shadowRoot.appendChild(clonedStyle);
+
+        this.loadedStyles.push(styleId);
+      });
+  }
+}

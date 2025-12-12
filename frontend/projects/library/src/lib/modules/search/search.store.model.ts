@@ -35,6 +35,7 @@ export type SearchState = {
   totalCount: number;
   currentPage: number;
   pageSize: number;
+  isAppendMode: boolean;
 };
 
 export interface SearchFilterParameters {

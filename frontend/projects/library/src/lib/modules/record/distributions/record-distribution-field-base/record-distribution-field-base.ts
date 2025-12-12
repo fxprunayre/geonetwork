@@ -9,9 +9,10 @@ import { DistributionService } from '../distribution.service';
   template: '',
 })
 export class RecordDistributionFieldBase extends RecordFieldBase {
-  distributionConfig = inject(APPLICATION_CONFIGURATION).config?.apps.record?.distribution;
-
   distributionService = inject(DistributionService);
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+
+  distributionConfig = computed(() => this.appConfiguration().config?.apps.record?.distribution);
 
   links = computed(() => {
     return this.record()?.link || [];

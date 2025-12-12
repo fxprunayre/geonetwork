@@ -1,4 +1,4 @@
-@if (distributionConfig) {
+@if (distributionConfig()) {
   @for (section of linksBySections() | keyvalue; track $index) {
     <h1 class="text-xl">{{ section.key }}</h1>
     <div class="grid gap-2">
@@ -29,13 +29,13 @@
                 <p-button
                   styleClass="block w-full"
                   (click)="addWmsLayers([link])"
-                  [label]="'Add to map'"
+                  [label]="'addToMap' | translate"
                 />
               } @else if (isExplorable(link)) {
                 <p-button
                   styleClass="block w-full"
                   (click)="exploreData(link)"
-                  [label]="'Explore data'"
+                  [label]="'exploreData' | translate"
                 />
               }
             </div>

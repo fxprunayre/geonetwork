@@ -8,6 +8,22 @@
         }
       }
     },
+    "filter": {
+      "title": "Filter",
+      "activeFilters": "Active filters",
+      "panel": {
+        "open": "Filter"
+      }
+    },
+    "aggregations": {
+      "groupPublishedId": "Groups",
+      "th_sextant-theme_tree.key": "Sextant themes",
+      "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
+      "tag.default": "Keywords",
+      "creationYearForResource": "Creation year",
+      "OrgForResource": "Organisation",
+      "resourceType": "Resource type"
+    },
     "sort": {
       "placeholder": "Sorteer op",
       "options": {
@@ -20,11 +36,12 @@
         "-popularity": "Populariteit"
       }
     },
-    "welcome.text": "Zoek door {{count}} {{mainBuckets}}, ...",
-    "filter": {
-      "panel": {
-        "open": "Filter"
-      }
+    "result": "result",
+    "results": "results",
+    "backToResults": "Back to results",
+    "welcome": {
+      "default": "Search ...",
+      "text": "Search over {{count}} {{mainBuckets}}, ..."
     }
   },
   "record": {
@@ -32,7 +49,7 @@
       "section": {
         "description": "Beschrijving",
         "dates": "Datums",
-        "about": "Over deze {{resourceType}}",
+        "about": "Over deze",
         "contacts": "Contacten",
         "dataAccess": "Data toegang",
         "explore": "Ontdek",
@@ -54,17 +71,59 @@
     },
     "field": {
       "abstract": "Overview",
+      "credit": "Credits",
+      "lineage": "Lineage",
+      "useLimitation": "Use limitation",
+      "useConstraints": "Use constraints",
+      "otherConstraints": "Other constraints",
+      "cl_accessConstraints": "Access constraints",
+      "contact": {
+        "address": "Adres",
+        "phone": "Telefoon",
+        "email": "E-mail",
+        "website": "Website"
+      },
+      "coverage": {
+        "overviewAltText": "Overzichtsafbeelding van georuimtelijke dekking",
+        "spatial": "Ruimtelijke dekking",
+        "north": "Noord",
+        "south": "Zuid",
+        "east": "Oost",
+        "west": "West",
+        "temporal": "Temporele dekking",
+        "vertical": "Verticale dekking"
+      },
+      "resourceType": "Resource type",
+      "resolution": "Resolution",
+      "coordinateSystem": "Coordinate system",
       "overview": {
         "notAvailable": "No preview"
       },
-      "resourceDate": "Dates"
+      "resourceDate": "Dates",
+      "catalogue": {
+        "title": "Catalogue",
+        "help": "Origin of the record",
+        "logo": {
+          "alt": "Catalogue logo"
+        }
+      },
+      "distribution": {
+        "format": "Format"
+      },
+      "datamodel": {
+        "field": "Field",
+        "label": "Label",
+        "description": "Description",
+        "type": "Type"
+      }
     },
     "association": {
       "parent": "Part of {{count}} resource(s)",
       "children": "Composed of {{count}} resource(s)",
       "hassources": "Used for {{count}} resource(s)",
       "sources": "Derived from {{count}} resource(s)",
-      "associated": "Associated with {{count}} resource(s)"
+      "associated": "Associated with {{count}} resource(s)",
+      "brothersAndSisters": "{{count}} Siblings"
     }
   },
   "i18n": {
@@ -73,9 +132,8 @@
     }
   },
   "languages": {
-    "EN": "English",
-    "FR": "Français",
-    "NL": "Nederlands"
+    "eng": "English",
+    "fre": "Français"
   },
   "shared": {
     "show-more-toggle": {
@@ -83,28 +141,33 @@
       "less": "View less"
     }
   },
-  "groupPublishedId": "Groups",
-  "th_sextant-theme_tree.key": "Sextant themes",
-  "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
-  "tag.default": "Keywords",
-  "creationYearForResource": "Creation year",
-  "OrgForResource": "Organisation",
-  "resourceType": "Resource type",
-  "activeFilters": "Active filters",
-  "result": "result",
-  "results": "results",
-  "backToResults": "Back to results",
-  "sort": {
-    "lastUpdate": "Last update",
-    "popularity": "Popularity",
-    "title": "Title"
-  },
   "home": {
     "title": "Charting the ocean's story through data",
     "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",
-    "secondTitle": "Marine and coastal geographic data infrastructure",
-    "secondSubtitle": "Sextant aims to document, disseminate, and promote a catalog of marine data. Intended for laboratories, Ifremer partners, and national and European marine stakeholders, this infrastructure offers tools for archiving, accessing, and sharing data.",
-    "button": "Our mission",
-    "thirdTitle": "Discover interactive maps"
-  }
+    "discover": "Discover our themes"
+  },
+  "menu": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "map": "Map"
+  },
+  "citation": {
+    "title": "Cite dataset",
+    "download": "Download",
+    "loading": "Loading citation ..."
+  },
+  "copy": {
+    "title": "Copy",
+    "title_success": "Copy success",
+    "detail_success": "Successfully copied to clipboard"
+  },
+  "data": {
+    "available_datasources": "Available Data sources"
+  },
+  "discussions": "Discussions",
+  "relations": {
+    "seeAll": "See all"
+  },
+  "addToMap": "Add to map",
+  "exploreData": "Explore data"
 }

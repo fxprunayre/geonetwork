@@ -34,7 +34,6 @@ build_gn5:
     - branch_transformed_name=`echo $CI_COMMIT_REF_NAME | sed 's/\//_/g'`
     - ng build main --configuration=sextant --base-href "/www/GN5/catalogue/branches/$branch_transformed_name/public/"
 
-
     # 5. Déplacer le build Angular dans public/ pour GitLab Pages
     - mkdir -p ../public
     - cp -r dist/main/browser/* ../public/

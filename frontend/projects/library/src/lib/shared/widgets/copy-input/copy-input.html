@@ -1,0 +1,34 @@
+<p-toast></p-toast>
+
+@switch (layout) {
+  @case ('button') {
+    <p-button (onClick)="copyToClipboard()" [class]="buttonClass" severity="secondary">
+      <div pButtonLabel>{{ 'copy.title' | translate }}</div>
+    </p-button>
+  }
+
+  @case ('buttonWithIcon') {
+    <p-button (onClick)="copyToClipboard()" [class]="buttonClass" severity="secondary">
+      <ng-icon name="faSolidCopy" pButtonIcon></ng-icon>
+      <div pButtonLabel>{{ 'copy.title' | translate }}</div>
+    </p-button>
+  }
+
+  @case ('icon') {
+    <p-button (onClick)="copyToClipboard()" [styleClass]="buttonClass" severity="secondary">
+      <ng-icon name="faSolidCopy" pButtonIcon></ng-icon>
+    </p-button>
+  }
+
+  @case ('text') {
+    <span class="cursor-pointer text-primary font-bold" (click)="copyToClipboard()">
+      {{ 'copy.title' | translate }}
+    </span>
+  }
+
+  @default {
+    <span class="cursor-pointer underline" (click)="copyToClipboard()">
+      {{ 'copy.title' | translate }}
+    </span>
+  }
+}

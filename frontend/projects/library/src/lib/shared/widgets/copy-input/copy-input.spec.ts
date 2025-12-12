@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapComponent } from './map-component';
+import { CopyInput } from './copy-input';
 
-describe('MapComponent', () => {
-  let component: MapComponent;
-  let fixture: ComponentFixture<MapComponent>;
+describe('CopyInput', () => {
+  let component: CopyInput;
+  let fixture: ComponentFixture<CopyInput>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MapComponent],
+      imports: [CopyInput],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MapComponent);
+    fixture = TestBed.createComponent(CopyInput);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

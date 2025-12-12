@@ -2,7 +2,6 @@
 
 ## User interface configuration
 
-...
 
 ## Theming
 
@@ -18,13 +17,30 @@ Different levels of theming are available:
 
 The current theme is based on PrimeUIX Aura preset. See https://github.com/primefaces/primeuix/tree/main/packages/themes/src/presets/aura
 
+Font family is set to "Inter" and can be customized with `--app-font-family-sans`.
 
 
-## Development
+## Embedding
+
+See [`test-wc.html`](test-wc.html)
+
+```html
+<script src="dist/main/browser/polyfills-5CFQRCPP.js" type="module"></script>
+<script src="dist/main/browser/main-FNWGVB2Y.js" type="module"></script>
+<link rel="stylesheet" href="dist/main/browser/styles-GMSYAROY.css" />
+<sextant-app></sextant-app>
+```
+
+
+
+# Development
+
+## Setup
 
 To set up the development environment and start the main app, run the following commands:
 
 ```sh
+nvm use v22.19.0
 npm install
 npm run build 
 npm run start
@@ -38,6 +54,11 @@ Use the following command to watch for library changes and rebuild automatically
 npm run watch-lib
 ```
 
+
+```sh
+git config core.hooksPath frontend/.husky
+```
+
 ### Running tests
 
 ...
@@ -49,7 +70,7 @@ npm run watch-lib
 
 GeoNetwork 4 and 5 provides an Open API specification that can be used to generate API clients. See
 * http://localhost:8080/geonetwork/doc/api/ for GeoNetwork 4
-* https://apps.titellus.net/geonetwork/doc/api/swagger-ui/index.html for GeoNetwork 5
+* http://localhost:8080/geonetwork/doc/api/swagger-ui/index.html for GeoNetwork 5
 
 
 To build GeoNetwork API client, run:

@@ -1,20 +1,21 @@
-import { Component, EventEmitter, input, Input, output, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
-import { elasticsearch, IndexRecord } from 'gn-api-client';
+import { Component, computed, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faImage, faMap } from '@ng-icons/font-awesome/regular';
 import {
+  faSolidArrowUpRightFromSquare,
   faSolidCircleInfo,
   faSolidDownload,
   faSolidShareNodes,
 } from '@ng-icons/font-awesome/solid';
-import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
-import { RecordFieldType } from '../../record/record-field-type/record-field-type';
-import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
-import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
+import { IndexRecord } from 'gn-api-client';
+import { ButtonModule } from 'primeng/button';
 import { RecordDistributionBadges } from '../../record/distributions/record-distribution-badges/record-distribution-badges';
-import { RouterLink } from '@angular/router';
+import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
+import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
+import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
+import { RecordFieldType } from '../../record/record-field-type/record-field-type';
 
 @Component({
   selector: 'app-result-item-list',
@@ -23,21 +24,34 @@ import { RouterLink } from '@angular/router';
   imports: [
     CommonModule,
     ButtonModule,
-    NgIcon,
     RecordFieldOverviewComponent,
     RecordFieldType,
     RecordFieldCredit,
     RecordFieldTitle,
     RecordDistributionBadges,
     RouterLink,
+    NgIcon,
   ],
   viewProviders: [
-    provideIcons({ faImage, faMap, faSolidShareNodes, faSolidDownload, faSolidCircleInfo }),
+    provideIcons({
+      faImage,
+      faMap,
+      faSolidShareNodes,
+      faSolidDownload,
+      faSolidCircleInfo,
+      faSolidArrowUpRightFromSquare,
+    }),
   ],
 })
 export class ResultItemList {
   result = input.required<IndexRecord>();
   onRecordClick = output<string>();
+
+  externalUrl = computed(() => {
+    const result = this.result();
+    const isRemote = result.info?.['origin'] === 'remote';
+    return isRemote ? result['url'] : null;
+  });
 
   handleRecordClick() {
     const id = this.result().info?._id;

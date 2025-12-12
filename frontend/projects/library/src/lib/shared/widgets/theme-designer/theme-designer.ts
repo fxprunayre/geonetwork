@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { PrimeNG } from 'primeng/config';
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
@@ -30,7 +30,7 @@ import { InputNumber } from 'primeng/inputnumber';
   ],
   templateUrl: './theme-designer.html',
 })
-export class ThemeDesigner {
+export class ThemeDesigner implements OnInit {
   theme = input.required<Preset>();
 
   primeng = inject(PrimeNG);
@@ -43,7 +43,7 @@ export class ThemeDesigner {
   warningColor = signal('#F59E0B');
   dangerColor = signal('#EF4444');
   backgroundColor = signal('#f1f5f9');
-  font = signal('Roboto, sans-serif');
+  font = signal('Inter');
   borderRadius = signal(0);
 
   themePropertiesByColor = {
@@ -54,6 +54,25 @@ export class ThemeDesigner {
     danger: 'red',
     surface: 'slate',
   };
+
+  ngOnInit() {
+    this.initFromCssVariables();
+  }
+
+  initFromCssVariables() {
+    Object.entries(this.themePropertiesByColor).forEach(([key, colorName]) => {
+      const cssVar = `--p-${colorName}-500`;
+      const color = this.themingService.getCssVariable(cssVar);
+      if (color) {
+        (this as any)[key + 'Color'].set(color);
+      }
+    });
+
+    this.font.set(this.themingService.getCssVariable('--app-font-family-sans'));
+    this.borderRadius.set(
+      parseInt(this.themingService.getCssVariable('--p-border-radius-md'), 10) || 0,
+    );
+  }
 
   setTheme() {
     const t = JSON.parse(JSON.stringify(this.theme())) as Preset;
@@ -66,11 +85,11 @@ export class ThemeDesigner {
 
     primitive['borderRadius'] = {
       none: '0',
-      xs: this.borderRadius() === 0 ? '0' : this.borderRadius() * 1 + 'px',
-      sm: this.borderRadius() === 0 ? '0' : this.borderRadius() * 2 + 'px',
-      md: this.borderRadius() === 0 ? '0' : this.borderRadius() * 3 + 'px',
-      lg: this.borderRadius() === 0 ? '0' : this.borderRadius() * 4 + 'px',
-      xl: this.borderRadius() === 0 ? '0' : this.borderRadius() * 5 + 'px',
+      xs: this.borderRadius() === 0 ? '0' : this.borderRadius() * 0.25 + 'px',
+      sm: this.borderRadius() === 0 ? '0' : this.borderRadius() * 0.5 + 'px',
+      md: this.borderRadius() === 0 ? '0' : this.borderRadius() * 1 + 'px',
+      lg: this.borderRadius() === 0 ? '0' : this.borderRadius() * 2 + 'px',
+      xl: this.borderRadius() === 0 ? '0' : this.borderRadius() * 3 + 'px',
     };
 
     const semantic = (t.semantic as Record<string, any>) || (t.semantic = {});
@@ -84,6 +103,9 @@ export class ThemeDesigner {
     this.primeng.setThemeConfig({
       theme: {
         preset: definePreset(Aura, t),
+        options: {
+          darkModeSelector: '.no-dark-mode',
+        },
       },
     });
 

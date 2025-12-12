@@ -181,9 +181,9 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
     search: {
       enabled: true,
       appUrl: '../../{{node}}/{{lang}}/catalog.search#/search',
-      hitsperpageValues: [10, 20, 60],
+      hitsperpageValues: [20, 60, 100],
       paginationInfo: {
-        hitsPerPage: 10,
+        hitsPerPage: 20,
       },
       // Full text on all fields
       // 'queryBase': '${any}',
@@ -921,7 +921,8 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
         layout: '',
         sections: [
           {
-            filter: 'protocol:OGC:WMS|OGC:WMTS|ESRI:.*|atom.*|REST|OGC API Maps|OGC API Records',
+            filter:
+              'protocol:OGC:WMS|OGC:WMTS|ESRI:.*|atom.*|REST|OGC API Maps|OGC API Records|application/vnd.ogc.wms_xml',
             title: 'API',
           },
           {
@@ -940,7 +941,7 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
           },
           {
             filter:
-              '-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|FILE:.* AND -function:legend|featureCatalogue|dataQualityReport',
+              '-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|FILE:.*|application/vnd.ogc AND -function:legend|featureCatalogue|dataQualityReport',
             title: 'links',
           },
         ],

@@ -1,8 +1,7 @@
-<div
-  (click)="handleRecordClick()"
-  class="flex flex-col lg:flex-row items-center gap-4 cursor-pointer rounded-xl p-[27px] border border-surface-200"
->
-  <div class="w-full lg:w-[190px] lg:aspect-square lg:flex-shrink-0 lg:overflow-hidden rounded">
+<ng-template #content>
+  <div
+    class="w-full lg:w-[190px] lg:aspect-square lg:shrink-0 lg:overflow-hidden rounded-(--p-border-radius-md)"
+  >
     <app-record-field-overview [field]="result().overview?.[0]" [preview]="false" />
   </div>
 
@@ -16,11 +15,17 @@
             [types]="['API', 'download']"
             [layout]="'badge'"
           />
+          @if (externalUrl()) {
+            <ng-icon name="faSolidArrowUpRightFromSquare" />
+          }
         </div>
       </div>
     </div>
 
-    <app-record-field-title [record]="result()" class="text-primary text-xl line-clamp-2" />
+    <app-record-field-title
+      [record]="result()"
+      class="text-primary font-bold text-xl line-clamp-2"
+    />
 
     @let description = result().resourceAbstractObject?.['default'] || '';
     <span class="text-base line-clamp-3" [title]="description">
@@ -29,4 +34,23 @@
 
     <app-record-field-credit [record]="result()" class="line-clamp-1" />
   </div>
-</div>
+</ng-template>
+
+@if (externalUrl()) {
+  <a
+    [attr.href]="externalUrl()"
+    target="_blank"
+    (click)="handleRecordClick()"
+    class="flex flex-col lg:flex-row items-start gap-4 cursor-pointer rounded-(--p-border-radius-md) p-6 border border-surface-100 transition-shadow hover:shadow-md"
+  >
+    <ng-container *ngTemplateOutlet="content" />
+  </a>
+} @else {
+  <a
+    [routerLink]="['/record', result().info?._id]"
+    (click)="handleRecordClick()"
+    class="flex flex-col lg:flex-row items-start gap-4 cursor-pointer rounded-(--p-border-radius-md) p-6 border border-surface-100 transition-shadow hover:shadow-md"
+  >
+    <ng-container *ngTemplateOutlet="content" />
+  </a>
+}

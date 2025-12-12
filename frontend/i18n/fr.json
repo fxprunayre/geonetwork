@@ -1,18 +1,47 @@
 {
   "search": {
     "input": {
-      "placeholder": "Rechercher des données, services, publications, ...",
+      "placeholder": "Rechercher ...",
       "popover": {
         "resourceType": {
           "title": "Type de ressource"
         }
       }
     },
-    "welcome.text": "Rechercher parmi {{count}} {{mainBuckets}}, ...",
     "filter": {
+      "title": "Focus",
+      "activeFilters": "Filtres actifs",
       "panel": {
         "open": "Focus"
       }
+    },
+    "aggregations": {
+      "groupPublishedId": "Catalogues",
+      "th_sextant-theme_tree.key": "Thèmes Sextant",
+      "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
+      "tag.default": "Mots-clés",
+      "creationYearForResource": "Année de création",
+      "OrgForResource": "Organisation",
+      "resourceType": "Type de ressource"
+    },
+    "sort": {
+      "placeholder": "Trier par",
+      "options": {
+        "_score": "Pertinence",
+        "-revisionDateForResource,-publicationDateForResource,-creationDateForResource": "Dernière mise à jour",
+        "-changeDate": "Dernier enregistrement",
+        "-createDate": "Nouveau record",
+        "resourceTitleObject.default.sort": "Titre",
+        "-rating": "Notation",
+        "-popularity": "Popularité"
+      }
+    },
+    "result": "résultat",
+    "results": "résultats",
+    "backToResults": "Retour aux résultats",
+    "welcome": {
+      "default": "Explorez ...",
+      "text": "Explorez plus de {{count}} {{mainBuckets}}, ..."
     }
   },
   "record": {
@@ -20,7 +49,7 @@
       "section": {
         "description": "Description",
         "dates": "Dates",
-        "about": "À propos de ça {{resourceType}}",
+        "about": "À propos",
         "contacts": "Contacts",
         "dataAccess": "Accès aux données",
         "explore": "Explorer",
@@ -31,7 +60,7 @@
         "contact": "Contact",
         "coverage": "Couverture",
         "spatialInfo": "Informations spatiales",
-        "lineage": "Lignée",
+        "lineage": "Provenance",
         "content": "Contenu",
         "classification": "Classification",
         "citation": "Citation",
@@ -42,27 +71,68 @@
     },
     "field": {
       "abstract": "Aperçu",
+      "credit": "Source",
+      "lineage": "Généalogie",
+      "useLimitation": "Limitation d'utilisation",
+      "useConstraints": "Utiliser des contraintes",
+      "otherConstraints": "Autres contraintes",
+      "cl_accessConstraints": "Contraintes d'accès",
+      "contact": {
+        "address": "Adresse",
+        "phone": "Téléphone",
+        "email": "Email",
+        "website": "Site web"
+      },
+      "coverage": {
+        "overviewAltText": "Geospatial coverage overview image",
+        "spatial": "Emprise géographique",
+        "north": "Nord",
+        "south": "Sud",
+        "east": "Est",
+        "west": "Ouest",
+        "temporal": "Étendue temporelle",
+        "vertical": "Étendue verticale"
+      },
+      "resourceType": "Type de resource",
+      "resolution": "Échelle",
+      "coordinateSystem": "Système de coordonnées",
       "overview": {
         "notAvailable": "Pas d'aperçu"
       },
-      "resourceDate": "Dates"
+      "resourceDate": "Dates",
+      "catalogue": {
+        "title": "Catalogue",
+        "help": "Origine de la fiche",
+        "logo": {
+          "alt": "Logo du catalogue"
+        }
+      },
+      "distribution": {
+        "format": "Format"
+      },
+      "datamodel": {
+        "field": "Colonne",
+        "label": "Libellé",
+        "description": "Description",
+        "type": "Type"
+      }
     },
     "association": {
-      "parent": "Une partie de {{count}} ressource(s)",
-      "children": "Composé de {{count}} ressource(s)",
+      "parent": "Faisant partie de {{ count }} ressources",
+      "children": "Composé de {{ count }} ressources",
       "hassources": "Utilisé pour {{count}} ressource(s)",
       "sources": "Dérivé de {{count}} ressource(s)",
-      "associated": "Associé à {{count}} ressource(s)"
+      "associated": "Associé à {{count}} ressource(s)",
+      "brothersAndSisters": "{{count}} frères et sœurs"
     }
   },
-  "record.field.overview.notAvailable": "Pas d'aperçu",
   "i18n": {
     "languageSwitcher": {
-      "select": "Sélectionner votre langue."
+      "select": "Choisissez votre langue."
     }
   },
   "languages": {
-    "eng": "English",
+    "eng": "Anglais",
     "fre": "Français"
   },
   "shared": {
@@ -71,28 +141,33 @@
       "less": "Réduire"
     }
   },
-  "groupPublishedId": "Catalogues",
-  "th_sextant-theme_tree.key": "Thèmes Sextant",
-  "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
-  "tag.default": "Mots-clés",
-  "creationYearForResource": "Années de création",
-  "OrgForResource": "Organisation",
-  "resourceType": "Type de ressource",
-  "activeFilters": "Filtres actifs",
-  "result": "résultat",
-  "results": "résultats",
-  "backToResults": "Retour aux résultats",
-  "sort": {
-    "lastUpdate": "Dernière mise à jour",
-    "popularity": "Popularité",
-    "title": "Titre"
-  },
   "home": {
     "title": "Retracer l'histoire des océans à travers les données",
     "subtitle": "Données géospatiales marines et côtières ouvertes et de haute qualité pour la science et les politiques publiques, fournies par l'Ifremer.",
-    "secondTitle": "Infrastructure de données géographiques marines et littorales",
-    "secondSubtitle": " Sextant vise à documenter, diffuser et promouvoir un catalogue de données marines. Destinée aux laboratoires, partenaires de l’Ifremer et acteurs marins nationaux et européens, cette infrastructure propose des outils pour archiver, consulter et partager les données.",
-    "button": "Notre mission",
-    "thirdTitle": "Découvrez des cartes interactives"
-  }
+    "discover": "Découvrez nos thèmes"
+  },
+  "menu": {
+    "home": "Home",
+    "catalog": "Catalogue",
+    "map": "Map"
+  },
+  "citation": {
+    "title": "Citer l'ensemble de données",
+    "download": "Télécharger",
+    "loading": "Chargement de la citation ..."
+  },
+  "copy": {
+    "title": "Copie",
+    "title_success": "Copie réussie",
+    "detail_success": "Copie réussie dans le presse-papiers"
+  },
+  "data": {
+    "available_datasources": "Sources de données disponibles"
+  },
+  "discussions": "Discussions",
+  "relations": {
+    "seeAll": "Voir tout"
+  },
+  "addToMap": "Ajouter à la carte",
+  "exploreData": "Explorer les données"
 }

@@ -3,8 +3,9 @@ import {
   importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
+  signal,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -49,7 +50,7 @@ export const appConfig: ApplicationConfig = {
     ]),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withDisabledInitialNavigation()),
     provideAnimationsAsync(),
     provideHttpClient(),
     provideTranslateService({
@@ -64,7 +65,9 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       theme: {
         preset: definePreset(Aura, AppTheme),
-        options: { darkModeSelector: '.p-dark' },
+        options: {
+          darkModeSelector: '.no-dark-mode',
+        },
       },
     }),
     provideMarkdown(),
@@ -76,6 +79,9 @@ registerLocaleData(localeFr);
 export function getAppConfig(config: any): ApplicationConfig {
   return {
     ...appConfig,
-    providers: [...appConfig.providers!, { provide: APPLICATION_CONFIGURATION, useValue: config }],
+    providers: [
+      ...appConfig.providers!,
+      { provide: APPLICATION_CONFIGURATION, useValue: signal(config) },
+    ],
   };
 }

@@ -23,6 +23,9 @@ export class SearchWelcomeTextPipe implements PipeTransform {
     if (!search) {
       return '';
     }
+    if (search.totalCount() === 0) {
+      return this.translateService.instant('search.welcome.default');
+    }
     let mainBuckets = '';
     const buckets = search.aggregations()[field || '']?.buckets as AggregationBucket[] | undefined;
     if (Array.isArray(buckets) && buckets.length > 0) {

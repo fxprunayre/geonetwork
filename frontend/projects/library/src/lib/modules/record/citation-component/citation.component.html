@@ -1,39 +1,48 @@
-<div *ngIf="citationAvailable()">
-  <div class="flex gap-2 mb-4">
-    <h2 class="text-xl font-semibold">Cite Dataset</h2>
+@if (citationAvailable()) {
+  <p-toast></p-toast>
+  <p-card>
+    <ng-template #title>
+      <div class="flex items-center gap-2">
+        <ng-icon name="faSolidQuoteRight" class=""></ng-icon>
+        {{ 'citation.title' | translate }}
+      </div>
+    </ng-template>
+    <div class="flex gap-2 px-4 items-center">
+      <p-selectButton
+        [options]="formats()"
+        optionLabel="label"
+        optionValue="id"
+        [ngModel]="currentFormat()"
+        (ngModelChange)="onFormatChange($event)"
+        class="text-sm font-medium"
+      />
 
-    <button
-      *ngFor="let f of formats()"
-      (click)="getCitation(f.id)"
-      class="px-3 py-1 rounded border"
-      [class.bg-neutral-600]="currentFormat() === f.id"
-      [class.text-white]="currentFormat() === f.id"
-    >
-      {{ f.label }}
-    </button>
-  </div>
+      <div class="flex-1"></div>
 
-  <div class="flex gap-3 mb-4">
-    <button
-      (click)="navigator.clipboard.writeText(citationText())"
-      class="px-3 py-1 bg-neutral-800 text-white rounded"
-    >
-      Copy
-    </button>
+      <app-copy-input [value]="citationText()" layout="icon"></app-copy-input>
 
-    <a
-      [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
-      [download]="getFilename()"
-      class="px-3 py-1 bg-neutral-200 rounded"
-    >
-      Download
-    </a>
-  </div>
+      <a
+        pButton
+        severity="secondary"
+        [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
+        [download]="filename()"
+      >
+        <ng-icon name="faSolidDownload"></ng-icon>
+      </a>
+    </div>
 
-  <div *ngIf="!isCode()" [innerHTML]="citationText()"></div>
-
-  <pre *ngIf="isCode()" class="bg-neutral-900 text-neutral-200 p-4 rounded"
-    >{{ citationText() }}
-</pre
-  >
-</div>
+    <p-panel class="m-4 p-4" [pt]="{ header: 'hidden!' }">
+      @if (loading()) {
+        <p-skeleton class="mb-2" />
+        <p-skeleton width="10rem" class="mb-2" />
+        <p-skeleton width="5rem" class="mb-2" />
+      } @else {
+        @if (!isCode()) {
+          <div [innerHTML]="citationText()"></div>
+        } @else {
+          <pre class="bg-neutral-900 text-neutral-200 p-4 rounded">{{ citationText() }}</pre>
+        }
+      }
+    </p-panel>
+  </p-card>
+}

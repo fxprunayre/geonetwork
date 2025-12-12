@@ -1,3 +1,6 @@
-<div class="flex flex-col gap-2 mb-10 has-[>section:empty]:hidden">
-  <ng-content />
+<div class="flex flex-col gap-2 mb-10" [class.hidden]="isEmpty()">
+  <label class="text-primary-400">{{ label() | translate }}</label>
+  <section class="">
+    <ng-content />
+  </section>
 </div>

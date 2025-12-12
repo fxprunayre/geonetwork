@@ -86,7 +86,7 @@ export class Aggregation extends SearchBase {
   });
 
   placeholder = computed(() => {
-    return `${this.translateService.instant(this.keyName())}`;
+    return `${this.translateService.instant('search.aggregations.' + this.keyName())}`;
   });
 
   handleChange(event: SelectChangeEvent) {

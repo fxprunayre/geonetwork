@@ -1,14 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  HostListener,
-  inject,
-  input,
-  ViewChild,
-} from '@angular/core';
-import { Button } from 'primeng/button';
 import { NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, Component, input, OnDestroy, signal } from '@angular/core';
 
 interface SectionItem {
   id: string;
@@ -17,7 +8,8 @@ interface SectionItem {
 
 @Component({
   selector: 'app-scroll-spy',
-  imports: [Button, NgTemplateOutlet],
+  standalone: true,
+  imports: [NgTemplateOutlet],
   templateUrl: './scroll-spy.html',
   styles: [
     `
@@ -34,12 +26,6 @@ interface SectionItem {
         color: var(--p-tabs-tab-color);
         padding: var(--p-tabs-tab-padding);
         font-weight: var(--p-tabs-tab-font-weight);
-        transition:
-          background var(--p-tabs-transition-duration),
-          border-color var(--p-tabs-transition-duration),
-          color var(--p-tabs-transition-duration),
-          outline-color var(--p-tabs-transition-duration),
-          box-shadow var(--p-tabs-transition-duration);
         margin: var(--p-tabs-tab-margin);
         outline-color: transparent;
       }
@@ -53,70 +39,146 @@ interface SectionItem {
       .scroll-spy-tab-active {
         background: var(--p-tabs-tab-active-background);
         border-color: var(--p-tabs-tab-active-border-color);
+        border-width: 0 0 0 var(--p-tabs-active-bar-height);
         color: var(--p-tabs-tab-active-color);
       }
     `,
   ],
 })
-export class ScrollSpy implements AfterViewInit {
+export class ScrollSpy implements OnDestroy, AfterViewInit {
   navPosition = input<'aside' | 'top'>('aside');
 
-  private elementRef = inject(ElementRef);
+  target = input<HTMLElement>();
+  section = input('section');
+  title = input('h1');
 
   sections: SectionItem[] = [];
-
-  activeSectionId: string | null = null;
-
+  activeSectionId = signal<string | null>(null);
   private sectionElements: NodeListOf<HTMLElement> | undefined;
+  private scrollContainer: HTMLElement | Window = window;
+  private ticking = false;
 
   ngAfterViewInit() {
     setTimeout(() => this.initializeScrollSpy());
   }
 
-  initializeScrollSpy(): void {
-    const hostElement: HTMLElement = this.elementRef.nativeElement;
-    this.sectionElements = hostElement.querySelectorAll('section[id]');
-
-    this.sections = Array.from(this.sectionElements).map((section) => {
-      const h1 = section.querySelector('h1');
-      const title = h1?.textContent?.trim() || section.getAttribute('data-spy-title') || section.id;
-      return {
-        id: section.id,
-        title: title,
-      };
-    });
-
-    this.activeSectionId = this.sections.length > 0 ? this.sections[0].id : null;
+  ngOnDestroy(): void {
+    this.scrollContainer.removeEventListener('scroll', this.onScroll);
   }
 
-  scrollTo(id: string): void {
-    const targetElement = document.getElementById(id);
+  private getScrollParent(node: HTMLElement | null): HTMLElement | Window {
+    if (!node || node === document.body) {
+      return window;
+    }
 
-    if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop,
-        behavior: 'smooth',
-      });
+    const style = window.getComputedStyle(node);
+    const overflowY = style.overflowY;
+    const isScrollable = overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay';
 
-      this.activeSectionId = id;
+    if (isScrollable && node.scrollHeight > node.clientHeight) {
+      return node;
+    }
+
+    return this.getScrollParent(node.parentElement);
+  }
+
+  initializeScrollSpy(): void {
+    this.scrollContainer = this.getScrollParent(this.target() || null);
+    this.scrollContainer.addEventListener('scroll', this.onScroll);
+    const target = this.target();
+    if (!target) {
+      this.sections = [];
+      this.sectionElements = undefined;
+      this.activeSectionId.set(null);
+      return;
+    }
+    this.sectionElements = target.querySelectorAll(`${this.section()}`);
+
+    this.sections = Array.from(this.sectionElements).flatMap((section) => {
+      const h1 = section.querySelector(this.title());
+      const id = h1?.getAttribute('id');
+
+      if (!id) {
+        console.warn(
+          `Scroll spy is skipping a section because its heading is missing an ID.`,
+          section,
+        );
+        return []; // Skip this section
+      }
+
+      const title = h1?.textContent?.trim() || section.getAttribute('data-spy-title') || id;
+
+      return [{ id, title }];
+    });
+
+    if (this.sections.length > 0 && !this.activeSectionId()) {
+      this.activeSectionId.set(this.sections[0].id);
     }
   }
 
-  @HostListener('window:scroll')
-  onScroll(): void {
+  scrollTo(id: string): void {
+    const isWindow = this.scrollContainer instanceof Window;
+
+    if (isWindow) {
+      const targetElement = document.getElementById(id);
+      if (!targetElement) {
+        return;
+      }
+      window.scrollTo({
+        top: targetElement.offsetTop - 60,
+        behavior: 'smooth',
+      });
+    } else {
+      const container = this.scrollContainer as HTMLElement;
+      const targetElement = container.querySelector(`#${id}`);
+
+      if (!targetElement) {
+        return;
+      }
+      const top =
+        targetElement.getBoundingClientRect().top -
+        container.getBoundingClientRect().top +
+        container.scrollTop -
+        60;
+      container.scrollTo({
+        top,
+        behavior: 'smooth',
+      });
+    }
+
+    this.activeSectionId.set(id);
+  }
+
+  onScroll = (): void => {
+    if (!this.ticking) {
+      window.requestAnimationFrame(() => {
+        this.checkActiveSection();
+        this.ticking = false;
+      });
+      this.ticking = true;
+    }
+  };
+
+  private checkActiveSection(): void {
     if (!this.sectionElements) return;
 
     let currentActive: string | null = null;
-    const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    const headerOffset = 80;
 
-    const headerOffset = 60;
+    this.sectionElements.forEach((section, idx) => {
+      const rect = section.getBoundingClientRect();
+      let containerTop = 0;
+      if (this.scrollContainer instanceof HTMLElement) {
+        containerTop = this.scrollContainer.getBoundingClientRect().top;
+      }
 
-    this.sectionElements.forEach((section) => {
-      if (section.offsetTop <= scrollPosition + headerOffset) {
-        currentActive = section.id;
+      if (rect.top <= containerTop + headerOffset) {
+        currentActive = this.sections[idx].id;
       }
     });
 
-    this.activeSectionId = currentActive;
+    if (currentActive !== this.activeSectionId()) {
+      this.activeSectionId.set(currentActive);
+    }
   }
 }

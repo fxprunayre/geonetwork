@@ -1,7 +1,11 @@
 <ng-template #defaultLabelTemplate let-key>
-  {{ key | translate }}
+  @let label = 'search.aggregations.' + key | translate;
   @if (hasActiveFilter(key)) {
-    *
+    <p-overlaybadge>
+      {{ label }}
+    </p-overlaybadge>
+  } @else {
+    {{ label }}
   }
 </ng-template>
 

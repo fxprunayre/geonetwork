@@ -8,6 +8,22 @@
         }
       }
     },
+    "filter": {
+      "title": "Filter",
+      "activeFilters": "Active filters",
+      "panel": {
+        "open": "Filter"
+      }
+    },
+    "aggregations": {
+      "groupPublishedId": "Groups",
+      "th_sextant-theme_tree.key": "Sextant themes",
+      "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
+      "tag.default": "Keywords",
+      "creationYearForResource": "Creation year",
+      "OrgForResource": "Organisation",
+      "resourceType": "Resource type"
+    },
     "sort": {
       "placeholder": "Sort by",
       "options": {
@@ -20,11 +36,12 @@
         "-popularity": "Popularity"
       }
     },
-    "welcome.text": "Search over {{count}} {{mainBuckets}}, ...",
-    "filter": {
-      "panel": {
-        "open": "Filter"
-      }
+    "result": "result",
+    "results": "results",
+    "backToResults": "Back to results",
+    "welcome": {
+      "default": "Search ...",
+      "text": "Search over {{count}} {{mainBuckets}}, ..."
     }
   },
   "record": {
@@ -32,7 +49,7 @@
       "section": {
         "description": "Description",
         "dates": "Dates",
-        "about": "About this {{resourceType}}",
+        "about": "About",
         "contacts": "Contacts",
         "dataAccess": "Data access",
         "explore": "Explore",
@@ -47,17 +64,58 @@
         "content": "Content",
         "classification": "Classification",
         "citation": "Citation",
-        "usageAndAccess": "Use and access",
+        "usageAndAccess": "Usage and access",
         "relatedResources": "Related resources",
         "similarResources": "Similar resources"
       }
     },
     "field": {
       "abstract": "Overview",
+      "credit": "Credits",
+      "lineage": "Lineage",
+      "useLimitation": "Use limitation",
+      "useConstraints": "Use constraints",
+      "otherConstraints": "Other constraints",
+      "cl_accessConstraints": "Access constraints",
+      "contact": {
+        "address": "Address",
+        "phone": "Phone",
+        "email": "Email",
+        "website": "Website"
+      },
+      "coverage": {
+        "overviewAltText": "Geospatial coverage overview image",
+        "spatial": "Geospatial coverage",
+        "north": "North",
+        "south": "South",
+        "east": "East",
+        "west": "West",
+        "temporal": "Temporal coverage",
+        "vertical": "Vertical coverage"
+      },
+      "resourceType": "Resource type",
+      "resolution": "Resolution",
+      "coordinateSystem": "Coordinate system",
       "overview": {
         "notAvailable": "No preview"
       },
-      "resourceDate": "Dates"
+      "resourceDate": "Dates",
+      "catalogue": {
+        "title": "Catalogue",
+        "help": "Origin of the record",
+        "logo": {
+          "alt": "Catalogue logo"
+        }
+      },
+      "distribution": {
+        "format": "Format"
+      },
+      "datamodel": {
+        "field": "Field",
+        "label": "Label",
+        "description": "Description",
+        "type": "Type"
+      }
     },
     "association": {
       "parent": "Part of {{count}} resource(s)",
@@ -83,28 +141,33 @@
       "less": "View less"
     }
   },
-  "groupPublishedId": "Groups",
-  "th_sextant-theme_tree.key": "Sextant themes",
-  "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
-  "tag.default": "Keywords",
-  "creationYearForResource": "Creation year",
-  "OrgForResource": "Organisation",
-  "resourceType": "Resource type",
-  "activeFilters": "Active filters",
-  "result": "result",
-  "results": "results",
-  "backToResults": "Back to results",
-  "sort": {
-    "lastUpdate": "Last update",
-    "popularity": "Popularity",
-    "title": "Title"
-  },
   "home": {
     "title": "Charting the ocean's story through data",
     "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",
-    "secondTitle": "Marine and coastal geographic data infrastructure",
-    "secondSubtitle": "Sextant aims to document, disseminate, and promote a catalog of marine data. Intended for laboratories, Ifremer partners, and national and European marine stakeholders, this infrastructure offers tools for archiving, accessing, and sharing data.",
-    "button": "Our mission",
-    "thirdTitle": "Discover interactive maps"
-  }
+    "discover": "Discover our themes"
+  },
+  "menu": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "map": "Map"
+  },
+  "citation": {
+    "title": "Cite dataset",
+    "download": "Download",
+    "loading": "Loading citation ..."
+  },
+  "copy": {
+    "title": "Copy",
+    "title_success": "Copy success",
+    "detail_success": "Successfully copied to clipboard"
+  },
+  "data": {
+    "available_datasources": "Available Data sources"
+  },
+  "discussions": "Discussions",
+  "relations": {
+    "seeAll": "See all"
+  },
+  "addToMap": "Add to map",
+  "exploreData": "Explore data"
 }
