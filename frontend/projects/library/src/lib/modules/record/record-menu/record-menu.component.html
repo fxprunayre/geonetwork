@@ -1,0 +1,6 @@
+<div>
+  <p-menu #menu [model]="items" [popup]="true" />
+  <p-button (click)="menu.toggle($event)" severity="primary">
+    <ng-icon name="faSolidEllipsisVertical"></ng-icon>
+  </p-button>
+</div>

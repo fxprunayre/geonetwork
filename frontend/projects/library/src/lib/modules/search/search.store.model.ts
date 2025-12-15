@@ -52,5 +52,4 @@ export interface SearchRequestPageParameters {
 }
 
 export interface SearchRequestParameters
-  extends SearchFilterParameters,
-    SearchRequestPageParameters {}
+  extends SearchFilterParameters, SearchRequestPageParameters {}
