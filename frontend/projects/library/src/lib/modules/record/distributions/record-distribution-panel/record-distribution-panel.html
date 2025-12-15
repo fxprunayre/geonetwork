@@ -4,7 +4,7 @@
       <p-accordion-panel [value]="$index">
         <p-accordion-header>
           <div class="flex items-center gap-2">
-            <ng-icon [name]="iconsByType[section.key]" />
+            <ng-icon [svg]="iconsByType[section.key]" />
             <span class="font-bold">{{
               'record.field.distribution.sections.' + section.key | translate
             }}</span>
@@ -17,10 +17,11 @@
                 <p-card styleClass="shadow-none border border-surface-200 dark:border-surface-700">
                   <ng-template #content>
                     <div class="flex flex-col md:flex-row gap-4 items-start">
-                      <div class="flex-none md:w-1/4">
-                        <p-badge [value]="link.protocol" severity="secondary"></p-badge>
+                      <div class="flex-none">
+                        <app-link-badge [link]="link" />
                       </div>
                       <div class="flex-1 min-w-0">
+                        @let label = link.nameObject?.['default'] || link.urlObject?.['default'];
                         <a
                           [attr.href]="link.urlObject?.['default']"
                           title="{{ link.descriptionObject?.['default'] }}"
@@ -28,7 +29,7 @@
                           rel="noopener noreferrer"
                           class="font-semibold text-primary hover:underline break-all block"
                         >
-                          {{ link.nameObject?.['default'] }}
+                          {{ label }}
                         </a>
                         @if (link.descriptionObject?.['default']) {
                           <p class="text-sm text-surface-600 dark:text-surface-400 mt-1">

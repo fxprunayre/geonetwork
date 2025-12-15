@@ -4,6 +4,7 @@ import { Badge } from 'primeng/badge';
 import { Button } from 'primeng/button';
 import { Link } from 'gn-api-client';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
+import { LinkBadge } from '../link-badge/link-badge';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
@@ -24,13 +25,13 @@ interface Gn4MapCommand {
   selector: 'app-record-distribution-panel',
   imports: [
     KeyValuePipe,
-    Badge,
     Button,
     TranslatePipe,
     Accordion,
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
+    LinkBadge,
     Card,
     NgIcon,
   ],

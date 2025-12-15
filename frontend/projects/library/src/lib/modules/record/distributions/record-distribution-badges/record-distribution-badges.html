@@ -9,7 +9,7 @@
         severity="success"
         size="small"
       >
-        <ng-icon [name]="iconsByType[section.key]" pButtonIcon />
+        <ng-icon [svg]="iconsByType[section.key]" pButtonIcon />
         <span pButtonLabel class="hidden 2xl:inline">{{ label }}</span>
       </p-button>
       @for (link of section.value; track link) {

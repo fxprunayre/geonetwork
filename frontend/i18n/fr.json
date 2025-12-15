@@ -131,7 +131,10 @@
       "hassources": "Utilisé pour {{count}} ressource(s)",
       "sources": "Dérivé de {{count}} ressource(s)",
       "associated": "Associé à {{count}} ressource(s)",
-      "brothersAndSisters": "{{count}} frères et sœurs"
+      "brothersAndSisters": "{{count}} frères et sœurs",
+      "siblings": "{{count}} frères et sœurs",
+      "fcats": "{{count}} modèles de données",
+      "hasfeaturecats": "{{count}} données associées"
     }
   },
   "i18n": {
