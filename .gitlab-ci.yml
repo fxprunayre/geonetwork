@@ -2,7 +2,6 @@ image: maven:3.9.6-eclipse-temurin-21
 
 stages:
   - build
-  - build_gn5_pages
   - pages
 
 variables:
@@ -33,35 +32,23 @@ build_gn5:
     - npm install
     # transforme le nom de la branche (remplace / par _)
     - branch_transformed_name=`echo $CI_COMMIT_REF_NAME | sed 's/\//_/g'`
-    - ng build main --configuration=sextant --base-href "/www/GN5/catalogue/branches/$branch_transformed_name/public/"
-
-    # 5. Déplacer le build Angular dans public/ pour GitLab Pages
-    - mkdir -p ../public2
-    - cp -r dist/main/browser/* ../public2/
-
-  artifacts:
-    paths:
-      - public2
-    expire_in: 1 week
-
-build_gn5_pages:
-  stage: build_gn5_pages
-  script:
-    # 4. Build Angular main
-    - cd frontend
-    - npm install
-    # transforme le nom de la branche (remplace / par _)
-    - branch_transformed_name=`echo $CI_COMMIT_REF_NAME | sed 's/\//_/g'`
     - ng build main --configuration=sextant --base-href "/geonetwork5/"
 
     # 5. Déplacer le build Angular dans public/ pour GitLab Pages
     - mkdir -p ../public
     - cp -r dist/main/browser/* ../public/
 
+    #6. Build pour sextant-test
+    - ng build main --configuration=sextant --base-href "/www/GN5/catalogue/branches/$branch_transformed_name/public_sextant-test/"
+    - mkdir -p ../public_sextant-test
+    - cp -r dist/main/browser/* ../public_sextant-test/
+
   artifacts:
     paths:
       - public
+      - public_sextant-test
     expire_in: 1 week
+
 
 
 pages:
