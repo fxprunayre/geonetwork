@@ -21,8 +21,6 @@ import { environment } from '../../../../environments/environment';
 export class RecordMenuComponent extends RecordFieldBase implements OnInit {
   private readonly baseUrl = environment.geonetworkApiUrl;
 
-  recordId = computed(() => this.record().uuid);
-
   items!: MenuItem[];
 
   ngOnInit() {
