@@ -1,11 +1,11 @@
 @for (group of vocabGroups() | keyvalue; track group.key) {
   <div class="mt-4">
     <div class="font-semibold text-sm text-gray-500">
-      {{ group.key }}
+      {{ group.multilingualTitle.default }}
     </div>
 
     <div class="flex flex-wrap mt-2">
-      @for (keyword of keywords(); track keyword['_id']) {
+      @for (keyword of vocabGroups()[group.key]; track $index) {
         <p-chip
           [label]="keyword.default"
           class="mr-2 my-1 cursor-pointer"

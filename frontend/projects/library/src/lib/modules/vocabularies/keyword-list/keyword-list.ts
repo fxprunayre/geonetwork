@@ -9,6 +9,7 @@ import { RegistriesService } from 'gn4-api-client';
 import { firstValueFrom } from 'rxjs';
 import { SearchBase } from '../../search/search-base/search-base';
 import { Router } from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 export interface Keyword {
   default: string;
@@ -29,7 +30,7 @@ export interface KeywordWithId extends Keyword {
 export class KeywordList extends SearchBase {
   private registries = inject(RegistriesService);
   private router = inject(Router);
-
+  private translate = inject(TranslateService);
   title = input<string | undefined>();
   keywords = input.required<KeywordWithId[]>();
   activeKeyword = signal<KeywordWithId | null>(null);
@@ -51,10 +52,25 @@ export class KeywordList extends SearchBase {
     pop.toggle(event);
 
     try {
-      const res = await firstValueFrom(this.registries.searchKeywords(keyword.uri));
+      const res = await firstValueFrom(
+        this.registries.searchKeywords(
+          undefined,
+          this.translate.getCurrentLang(),
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          keyword.uri,
+        ),
+      );
+
+
+
+
       const first = (res as any)?.values?.[0];
       const def = first?.definitions?.eng?.trim() || first?.values?.eng?.trim() || null;
-      this.definition.set(def || null);
+      this.definition.set(first?.definition || null);
     } catch {
       this.definition.set(null);
     }
