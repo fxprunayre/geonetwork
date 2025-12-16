@@ -12,14 +12,7 @@ import { IndexRecord, RelatedItemType } from 'gn-api-client';
 
 @Component({
   selector: 'app-associated-records',
-  imports: [
-    TranslatePipe,
-    ResultItemGrid,
-    NgTemplateOutlet,
-    DataView,
-    Button,
-    Drawer
-  ],
+  imports: [TranslatePipe, ResultItemGrid, NgTemplateOutlet, DataView, Button, Drawer],
   providers: [provideIcons({ faSolidExpand })],
   templateUrl: './associated-records.html',
 })

@@ -9,7 +9,7 @@ import { RegistriesService } from 'gn4-api-client';
 import { firstValueFrom } from 'rxjs';
 import { SearchBase } from '../../search/search-base/search-base';
 import { Router } from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface Keyword {
   default: string;
@@ -65,11 +65,7 @@ export class KeywordList extends SearchBase {
         ),
       );
 
-
-
-
       const first = (res as any)?.values?.[0];
-      const def = first?.definitions?.eng?.trim() || first?.values?.eng?.trim() || null;
       this.definition.set(first?.definition || null);
     } catch {
       this.definition.set(null);
