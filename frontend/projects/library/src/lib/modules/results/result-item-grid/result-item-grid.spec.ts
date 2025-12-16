@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultItemGrid } from './result-item-grid';
-import { provideMockSearchService } from '../../search/search.store.mock.spec';
+import { provideRouter } from '@angular/router';
 import { provideMockTranslateService } from '../../../shared/translate.service.mock.spec';
+import { provideMockSearchService } from '../../search/search.store.mock.spec';
+import { ResultItemGrid } from './result-item-grid';
 
 describe('ResultItemGrid', () => {
   let component: ResultItemGrid;
@@ -11,7 +12,7 @@ describe('ResultItemGrid', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ResultItemGrid],
-      providers: [provideMockSearchService(), provideMockTranslateService()],
+      providers: [provideMockSearchService(), provideMockTranslateService(), provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ResultItemGrid);

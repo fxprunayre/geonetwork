@@ -12,9 +12,11 @@
     <ng-template let-option pTemplate="item">
       {{ option.label | translate }}
     </ng-template>
-
     <ng-template let-option pTemplate="selectedItem">
       {{ option.label | translate }}
+    </ng-template>
+    <ng-template #dropdownicon>
+      <ng-icon name="faSolidArrowUpShortWide" />
     </ng-template>
   </p-select>
 </div>

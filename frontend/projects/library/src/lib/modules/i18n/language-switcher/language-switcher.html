@@ -3,7 +3,16 @@
     [title]="'i18n.languageSwitcher.select' | translate"
     [options]="languages()"
     optionValue="iso3code"
-    optionLabel="label"
     [(ngModel)]="currentLanguage"
-  />
+  >
+    <ng-template #selectedItem let-selectedOption>
+      {{ 'languages.' + selectedOption.iso3code | translate }}
+    </ng-template>
+    <ng-template let-language #item>
+      {{ 'languages.' + language.iso3code | translate }}
+    </ng-template>
+    <ng-template #dropdownicon>
+      <ng-icon name="faSolidLanguage" />
+    </ng-template>
+  </p-select>
 }

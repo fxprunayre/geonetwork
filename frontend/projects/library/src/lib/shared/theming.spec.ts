@@ -9,4 +9,7 @@ describe('Theming', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(ThemingService);
   });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 });
