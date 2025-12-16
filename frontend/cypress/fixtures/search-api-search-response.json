@@ -1,0 +1,3590 @@
+{
+  "took": 48,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 14821,
+      "relation": "eq"
+    },
+    "max_score": 0.0,
+    "hits": [
+      {
+        "_index": "geo-records",
+        "_id": "ad7e0259-2627-40c4-811f-b5a66a4a6dde",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Quality Information Document (CMEMS-OMI-QUID-GLO-SL)"
+          },
+          "dateStamp": "2021-04-19T12:54:29.000Z",
+          "resourceType": ["publication"],
+          "uuid": "ad7e0259-2627-40c4-811f-b5a66a4a6dde",
+          "draft": "n",
+          "id": "334238202",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "ac643c9c-7a56-480d-83c7-25fa155d4cbd",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "High Quality Figure (GLOBAL_OMI_OHC_anomalies-hq)"
+          },
+          "dateStamp": "2021-04-19T12:06:07.000Z",
+          "resourceType": ["publication"],
+          "uuid": "ac643c9c-7a56-480d-83c7-25fa155d4cbd",
+          "draft": "n",
+          "id": "334238149",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "8a8afc62-adee-4f49-bd6b-9247033769b3",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "High Quality Figure (ARCTIC_OMI_SI_extent_obs-hq)"
+          },
+          "dateStamp": "2024-07-26T15:34:55.618Z",
+          "resourceType": ["publication"],
+          "uuid": "8a8afc62-adee-4f49-bd6b-9247033769b3",
+          "draft": "n",
+          "id": "334238195",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "9c04daf8-d8f7-4e36-a05f-0d096c6da126",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Product User Manual (CMEMS-OMI-PUM-GLO-OHC)"
+          },
+          "dateStamp": "2024-07-26T14:54:22.758Z",
+          "resourceType": ["publication"],
+          "uuid": "9c04daf8-d8f7-4e36-a05f-0d096c6da126",
+          "draft": "n",
+          "id": "334238062",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "4d81b3a6-ea6b-4ab0-8f5a-c1337e1169b3",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Quality Information Document (CMEMS-OMI-QUID-ARC-SI-extent)"
+          },
+          "dateStamp": "2024-07-26T15:51:29.805Z",
+          "resourceType": ["publication"],
+          "uuid": "4d81b3a6-ea6b-4ab0-8f5a-c1337e1169b3",
+          "draft": "n",
+          "id": "334238157",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "4ec313ee-3fe4-4e1b-b9a4-6538e9383320",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Quality Information Document (CMEMS-OMI-QUID-ANT-SI-extent)"
+          },
+          "dateStamp": "2024-07-31T13:13:34.097Z",
+          "resourceType": ["publication"],
+          "uuid": "4ec313ee-3fe4-4e1b-b9a4-6538e9383320",
+          "draft": "n",
+          "id": "334238156",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "6163b2d8-a2bc-465a-a3d9-3af0ec4e8f0a",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Product User Manual (CMEMS-OMI-PUM-GLO-SL)"
+          },
+          "dateStamp": "2021-04-19T12:45:51.000Z",
+          "resourceType": ["publication"],
+          "uuid": "6163b2d8-a2bc-465a-a3d9-3af0ec4e8f0a",
+          "draft": "n",
+          "id": "334238200",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "98174dbd-1913-4679-8198-72bfde224e09",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-04-24T14:34:29.000Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Administrative units | Nationally designated Areas | European Commission. Directorate-General for Maritime Affairs and Fisheries | Nationally designated areas",
+            "langeng": "Administrative units | Nationally designated Areas | European Commission. Directorate-General for Maritime Affairs and Fisheries | Nationally designated areas"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-49.863274, 12.863215],
+                  [37.324226, 12.863215],
+                  [37.324226, 68.125756],
+                  [-49.863274, 68.125756],
+                  [-49.863274, 12.863215]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
+                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
+              },
+              "nameObject": {
+                "default": "EMODnet Human Activities: Protected Areas",
+                "langeng": "EMODnet Human Activities: Protected Areas"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/search-results.php?dataname=Nationally+Designated+Areas",
+                "langeng": "http://www.emodnet-humanactivities.eu/search-results.php?dataname=Nationally+Designated+Areas"
+              },
+              "nameObject": {
+                "default": "Nationally designated areas",
+                "langeng": "Nationally designated areas"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "98174dbd-1913-4679-8198-72bfde224e09",
+          "draft": "n",
+          "id": "334238545",
+          "owner": "113112277",
+          "groupOwner": "139596411",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["139596411", "1", "83566633"],
+          "op2": "139596411",
+          "op1": "139596411",
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596411",
+          "op5": ["139596411", "83566633"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "e0584083-36d2-4987-92c6-0b2c9a653726",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2017-05-04T13:44:23.000Z",
+          "resourceType": ["series"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Concentration of suspended particulate material in the water column | Mean turbidity over one year | British Oceanographic Data Centre | Decision support system for water quality management in the Tagus estuary, Portugal",
+            "langeng": "Concentration of suspended particulate material in the water column | Mean turbidity over one year | British Oceanographic Data Centre | Decision support system for water quality management in the Tagus estuary, Portugal"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-9.4, 38.5],
+                  [-8.9, 38.5],
+                  [-8.9, 39.0],
+                  [-9.4, 39.0],
+                  [-9.4, 38.5]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/",
+                "langeng": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/",
+                "langeng": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "e0584083-36d2-4987-92c6-0b2c9a653726",
+          "draft": "n",
+          "id": "158009709",
+          "owner": "113110382",
+          "groupOwner": "139596764",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["139596764", "1", "83566633"],
+          "op2": "139596764",
+          "op1": ["139596764", "83566633"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596764",
+          "op5": ["139596764", "83566633"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "e8251792-c363-424f-92c9-63cade162bac",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2016-11-17T12:36:59.000Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Zooplankton taxonomy-related abundance per unit volume of the water column | Abundance of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset",
+            "langeng": "Zooplankton taxonomy-related abundance per unit volume of the water column | Abundance of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [28.13, 41.0],
+                  [41.5, 41.0],
+                  [41.5, 43.4],
+                  [28.13, 43.4],
+                  [28.13, 41.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.ims.metu.edu.tr/IMS_Inventory/",
+                "langeng": "http://www.ims.metu.edu.tr/IMS_Inventory/"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "e8251792-c363-424f-92c9-63cade162bac",
+          "draft": "n",
+          "id": "153356653",
+          "owner": "141622272",
+          "groupOwner": "139608974",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "139608974", "83566259"],
+          "op2": "139608974",
+          "op1": "139608974",
+          "documentStandard": "iso19115-3.2018",
+          "op5": "139608974",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "http://emodnet-blacksea.eu/wp-content/uploads/2015/11/CH11_alien_species_n.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "e6df93bd-a0bc-42c4-85ec-bb5b81c198b3",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2025-01-28T08:38:19.056406Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "ATLANTIC_CH02_Product_4 / Qualitative analysis of MPA connectivity",
+            "langeng": "ATLANTIC_CH02_Product_4 / Qualitative analysis of MPA connectivity"
+          },
+          "resourceAbstractObject": {
+            "default": "It's a study of MPA connectivity with assessment of :\n\n-size \n-shape \n-spacing \n\nbetween each MPA",
+            "langeng": "It's a study of MPA connectivity with assessment of :\n\n-size \n-shape \n-spacing \n\nbetween each MPA"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-97.891111, 1.433029],
+                  [39.325331, 1.433029],
+                  [39.325331, 75.277728],
+                  [-97.891111, 75.277728],
+                  [-97.891111, 1.433029]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.12770/e6df93bd-a0bc-42c4-85ec-bb5b81c198b3",
+                "langeng": "https://doi.org/10.12770/e6df93bd-a0bc-42c4-85ec-bb5b81c198b3"
+              },
+              "nameObject": {
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "descriptionObject": {
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:OWS-C",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge2_product4.xml",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge2_product4.xml"
+              },
+              "nameObject": {
+                "default": "CH02_product_04",
+                "langeng": "CH02_product_04"
+              },
+              "descriptionObject": {
+                "default": "Product visualization",
+                "langeng": "Product visualization"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-atlantic.eu",
+                "langeng": "http://www.emodnet-atlantic.eu"
+              },
+              "descriptionObject": {
+                "default": "Access to the website",
+                "langeng": "Access to the website"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 2
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_2_product_4.zip",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_2_product_4.zip"
+              },
+              "nameObject": {
+                "default": "Download product",
+                "langeng": "Download product"
+              },
+              "descriptionObject": {
+                "default": "Download product",
+                "langeng": "Download product"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 3
+            }
+          ],
+          "uuid": "e6df93bd-a0bc-42c4-85ec-bb5b81c198b3",
+          "draft": "n",
+          "id": "334238457",
+          "owner": "135665118",
+          "groupOwner": "230734906",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["230734906", "83566633", "1"],
+          "op2": "230734906",
+          "op1": ["230734906", "83566633", "1"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "230734906",
+          "op5": ["230734906", "83566633", "1"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "3b9f73d5-6aae-4f75-aa1d-c90b6f314641",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-04-03T10:48:34.000Z",
+          "resourceType": ["series"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Industrial activity | Telecommunication Cables | European Commission. Directorate-General for Maritime Affairs and Fisheries | Telecommunication Cables (actual route locations)",
+            "langeng": "Industrial activity | Telecommunication Cables | European Commission. Directorate-General for Maritime Affairs and Fisheries | Telecommunication Cables (actual route locations)"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-23.144524, 32.220235],
+                  [21.503913, 32.220235],
+                  [21.503913, 63.058941],
+                  [-23.144524, 63.058941],
+                  [-23.144524, 32.220235]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
+                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
+              },
+              "nameObject": {
+                "default": "Telecommunication Cables (actual route locations)",
+                "langeng": "Telecommunication Cables (actual route locations)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
+                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
+              },
+              "nameObject": {
+                "default": "Telecommunication Cables (actual route locations)",
+                "langeng": "Telecommunication Cables (actual route locations)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "3b9f73d5-6aae-4f75-aa1d-c90b6f314641",
+          "draft": "n",
+          "id": "334238459",
+          "owner": "113112277",
+          "groupOwner": "139596411",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["139596411", "1", "83566633"],
+          "op2": "139596411",
+          "op1": "139596411",
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596411",
+          "op5": ["139596411", "83566633"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "212c67d3-1a29-48ce-bd1c-e11ed03c32a4",
+        "_score": 0.0,
+        "_ignored": ["dqSReport.keyword", "dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2025-01-28T08:38:09.250739Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "ATLANTIC_CH07_Product_1 / Area where bottom habitat has been disturbed by bottom trawling (number of disturbances per month)",
+            "langeng": "ATLANTIC_CH07_Product_1 / Area where bottom habitat has been disturbed by bottom trawling (number of disturbances per month)"
+          },
+          "resourceAbstractObject": {
+            "default": "Data from a number of different sources have been integrated to provide new perspectives on fishing activities. Vessel Monitoring Systems (VMS) record and transmit the position and speed of fishing vessels at intervals of two hours or less. Fishing time can be calculated from the VMS data and combining this parameter with vessel logbook data, maps of fishing effort and intensity at different spatial and temporal scales can be calculated. The statistical software package “R” is used to extract the required information then re-interrogated to produce maps of fishing effort or intensity per month and year. The use of Automatic Identification System (AIS) data was not considered as combining AIS data with fisheries logbook data would pose issues namely; the ability of the AIS system to be switched off, only mandatory on vessels > 15 meters in length, cost involved to purchase data, and confidentiality.",
+            "langeng": "Data from a number of different sources have been integrated to provide new perspectives on fishing activities. Vessel Monitoring Systems (VMS) record and transmit the position and speed of fishing vessels at intervals of two hours or less. Fishing time can be calculated from the VMS data and combining this parameter with vessel logbook data, maps of fishing effort and intensity at different spatial and temporal scales can be calculated. The statistical software package “R” is used to extract the required information then re-interrogated to produce maps of fishing effort or intensity per month and year. The use of Automatic Identification System (AIS) data was not considered as combining AIS data with fisheries logbook data would pose issues namely; the ability of the AIS system to be switched off, only mandatory on vessels > 15 meters in length, cost involved to purchase data, and confidentiality."
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-41.102, 24.584],
+                  [1.9309, 24.584],
+                  [1.9309, 63.709],
+                  [-41.102, 63.709],
+                  [-41.102, 24.584]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.12770/212c67d3-1a29-48ce-bd1c-e11ed03c32a4",
+                "langeng": "https://doi.org/10.12770/212c67d3-1a29-48ce-bd1c-e11ed03c32a4"
+              },
+              "nameObject": {
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "descriptionObject": {
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:OWS-C",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge7_product1.xml",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge7_product1.xml"
+              },
+              "nameObject": {
+                "default": "CH07_product_01",
+                "langeng": "CH07_product_01"
+              },
+              "descriptionObject": {
+                "default": "Product visualization",
+                "langeng": "Product visualization"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-atlantic.eu",
+                "langeng": "http://www.emodnet-atlantic.eu"
+              },
+              "descriptionObject": {
+                "default": "Access to the website",
+                "langeng": "Access to the website"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 2
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_7_product_1.zip",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_7_product_1.zip"
+              },
+              "nameObject": {
+                "default": "Download product",
+                "langeng": "Download product"
+              },
+              "descriptionObject": {
+                "default": "Download product",
+                "langeng": "Download product"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 3
+            }
+          ],
+          "uuid": "212c67d3-1a29-48ce-bd1c-e11ed03c32a4",
+          "draft": "n",
+          "id": "334238561",
+          "owner": "213606957",
+          "groupOwner": "139596738",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "139596738", "230734906"],
+          "op2": "139596738",
+          "op1": ["1", "139596738", "230734906"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596738",
+          "op5": ["1", "139596738", "230734906"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "f83328cb-f46e-4604-915e-704ad240902d",
+        "_score": 0.0,
+        "_ignored": [
+          "resourceAbstractObject.default.keyword",
+          "resourceAbstractObject.default.sort",
+          "resourceAbstractObject.langeng.keyword"
+        ],
+        "_source": {
+          "dateStamp": "2025-09-16T13:34:08.03883Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "Arctic Sea Ice Extent from Reanalysis",
+            "langeng": "Arctic Sea Ice Extent from Reanalysis"
+          },
+          "resourceAbstractObject": {
+            "default": "'''DEFINITION'''\n\nEstimates of Arctic sea ice extent are obtained from the surface of oceans grid cells that have at least 15% sea ice concentration. These values are cumulated in the entire Northern Hemisphere (excluding ice lakes) and from 1993 up to the year 2019 aiming to:\ni) obtain the Arctic sea ice extent as expressed in millions of km square (106 km2) to monitor both the large-scale variability and mean state and change.\nii) to monitor the change in sea ice extent as expressed in millions of km squared per decade (106 km2/decade), or in sea ice extent loss since the beginning of the time series as expressed in percent per decade (%/decade; reference period being the first date of the key figure b) dot-dashed trend line, Vaughan et al., 2013). These trends are calculated in three ways, i.e. (i) from the annual mean values; (ii) from the March values (winter ice loss); (iii) from September values (summer ice loss).\nThe Arctic sea ice extent used here is based on the “multi-product” (GLOBAL_MULTIYEAR_PHY_ENS_001_031) approach as introduced in the second issue of the Ocean State Report (CMEMS OSR, 2017). Five global products have been used to build the ensemble mean, and its associated ensemble spread.\n\n'''CONTEXT'''\n\nSea ice is frozen seawater that floats on the ocean surface. This large blanket of millions of square kilometers insulates the relatively warm ocean waters from the cold polar atmosphere. The seasonal cycle of the sea ice, forming and melting with the polar seasons, impacts both human activities and biological habitat. Knowing how and how much the sea ice cover is changing is essential for monitoring the health of the Earth as sea ice is one of the highest sensitive natural environments. Variations in sea ice cover can induce changes in ocean stratification, in global and regional sea level rates and modify the key rule played by the cold poles in the Earth engine (IPCC, 2019). \nThe sea ice cover is monitored here in terms of sea ice extent quantity. More details and full scientific evaluations can be found in the CMEMS Ocean State Report (Samuelsen et al., 2016; Samuelsen et al., 2018).\n\n'''CMEMS KEY FINDINGS'''\n\nSince the year 1993 to 2023 the Arctic sea ice extent has decreased significantly at an annual rate of -0.57*106 km2 per decade. This represents an amount of -4.8 % per decade of Arctic sea ice extent loss over the period 1993 to 2023. Over the period 1993 to 2018, summer (September) sea ice extent loss amounts to -1.18*106 km2/decade (September values), which corresponds to -14.85% per decade. Winter (March) sea ice extent loss amounts to -0.57*106 km2/decade, which corresponds to -3.42% per decade. These values slightly exceed the estimates given in the AR5 IPCC assessment report (estimate up to the year 2012) as a consequence of continuing Northern Hemisphere sea ice extent loss. Main change in the mean seasonal cycle is characterized by less and less presence of sea ice during summertime with time. \n\nNote: The key findings will be updated annually in November, in line with OMI evolutions.\n\n'''DOI (product):''' \nhttps://doi.org/10.48670/moi-00190",
+            "langeng": "'''DEFINITION'''\n\nEstimates of Arctic sea ice extent are obtained from the surface of oceans grid cells that have at least 15% sea ice concentration. These values are cumulated in the entire Northern Hemisphere (excluding ice lakes) and from 1993 up to the year 2019 aiming to:\ni) obtain the Arctic sea ice extent as expressed in millions of km square (106 km2) to monitor both the large-scale variability and mean state and change.\nii) to monitor the change in sea ice extent as expressed in millions of km squared per decade (106 km2/decade), or in sea ice extent loss since the beginning of the time series as expressed in percent per decade (%/decade; reference period being the first date of the key figure b) dot-dashed trend line, Vaughan et al., 2013). These trends are calculated in three ways, i.e. (i) from the annual mean values; (ii) from the March values (winter ice loss); (iii) from September values (summer ice loss).\nThe Arctic sea ice extent used here is based on the “multi-product” (GLOBAL_MULTIYEAR_PHY_ENS_001_031) approach as introduced in the second issue of the Ocean State Report (CMEMS OSR, 2017). Five global products have been used to build the ensemble mean, and its associated ensemble spread.\n\n'''CONTEXT'''\n\nSea ice is frozen seawater that floats on the ocean surface. This large blanket of millions of square kilometers insulates the relatively warm ocean waters from the cold polar atmosphere. The seasonal cycle of the sea ice, forming and melting with the polar seasons, impacts both human activities and biological habitat. Knowing how and how much the sea ice cover is changing is essential for monitoring the health of the Earth as sea ice is one of the highest sensitive natural environments. Variations in sea ice cover can induce changes in ocean stratification, in global and regional sea level rates and modify the key rule played by the cold poles in the Earth engine (IPCC, 2019). \nThe sea ice cover is monitored here in terms of sea ice extent quantity. More details and full scientific evaluations can be found in the CMEMS Ocean State Report (Samuelsen et al., 2016; Samuelsen et al., 2018).\n\n'''CMEMS KEY FINDINGS'''\n\nSince the year 1993 to 2023 the Arctic sea ice extent has decreased significantly at an annual rate of -0.57*106 km2 per decade. This represents an amount of -4.8 % per decade of Arctic sea ice extent loss over the period 1993 to 2023. Over the period 1993 to 2018, summer (September) sea ice extent loss amounts to -1.18*106 km2/decade (September values), which corresponds to -14.85% per decade. Winter (March) sea ice extent loss amounts to -0.57*106 km2/decade, which corresponds to -3.42% per decade. These values slightly exceed the estimates given in the AR5 IPCC assessment report (estimate up to the year 2012) as a consequence of continuing Northern Hemisphere sea ice extent loss. Main change in the mean seasonal cycle is characterized by less and less presence of sea ice during summertime with time. \n\nNote: The key findings will be updated annually in November, in line with OMI evolutions.\n\n'''DOI (product):''' \nhttps://doi.org/10.48670/moi-00190"
+          },
+          "resourceCreditObject": [
+            {
+              "default": "E.U. Copernicus Marine Service Information",
+              "langeng": "E.U. Copernicus Marine Service Information"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-180.0, 0.0],
+                  [180.0, 0.0],
+                  [180.0, 90.0],
+                  [-180.0, 90.0],
+                  [-180.0, 0.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "6354a4ea67ea50e5e01ed50f7871a566",
+              "idx": 1,
+              "protocol": "WWW:STAC",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://stac.marine.copernicus.eu/metadata/ARCTIC_OMI_SI_extent/arctic_omi_si_extent_202207/dataset.stac.json",
+                "langeng": "https://stac.marine.copernicus.eu/metadata/ARCTIC_OMI_SI_extent/arctic_omi_si_extent_202207/dataset.stac.json"
+              },
+              "nameObject": {
+                "default": "arctic_omi_si_extent",
+                "langeng": "arctic_omi_si_extent"
+              },
+              "descriptionObject": {
+                "default": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint",
+                "langeng": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "f83328cb-f46e-4604-915e-704ad240902d",
+          "draft": "n",
+          "id": "334238152",
+          "owner": "164187932",
+          "groupOwner": "334236504",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "334236504", "129", "103"],
+          "op2": ["334236504", "129", "103"],
+          "op1": ["1", "334236504", "129", "103"],
+          "documentStandard": "iso19139",
+          "op5": ["1", "334236504", "129", "103"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://documentation.marine.copernicus.eu/IMG/ARCTIC_OMI_SI_extent.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "19f013d5-721e-4835-b60c-26c1a02aa57a",
+        "_score": 0.0,
+        "_ignored": [
+          "resourceAbstractObject.default.keyword",
+          "resourceAbstractObject.default.sort",
+          "resourceAbstractObject.langeng.keyword"
+        ],
+        "_source": {
+          "dateStamp": "2022-06-29T09:07:26.153Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "[ARCHIVE] Mediterranean Sea Reprocessed Remote Sensing Reflectances and Attenuation Coefficient at 490nm from Multi Satellite observations",
+            "langeng": "[ARCHIVE] Mediterranean Sea Reprocessed Remote Sensing Reflectances and Attenuation Coefficient at 490nm from Multi Satellite observations"
+          },
+          "resourceAbstractObject": {
+            "default": "'''This product has been archived'''\n\nFor operationnal and online products, please visit https://marine.copernicus.eu\n\n'''Short description:'''\nThe Global Ocean Satellite monitoring and marine ecosystem study group (GOS) of the Italian National Research Council (CNR), in Rome operationally distributes Remote Sensing Reflectances (Rrs) and diffuse attenuation coefficient of light at 490 nm (kd490) data. These datasets derived from Rrs multi-sensor (MODIS-AQUA, NOAA20-VIIRS, NPP-VIIRS, Sentinel3A-OLCI) spectra at the state-of-the-art algorithms for multi-sensor merging. Single sensor Rrs fields are band-shifted, over the SeaWiFS native bands (using the QAAv6 model, Lee et al., 2002) and merged with a technique aimed at smoothing the differences among different sensors. Reprocessed (multi-year) products are consistent and homogeneous in terms of format, algorithms and processing software. Rrs is defined as the ratio of upwelling radiance and downwelling irradiance at any wavelength (412, 443, 490, 555, and 670 nm). Kd490 is defined as the diffuse attenuation coefficient of light at 490 nm, and is a measure of the turbidity of the water column, i.e., how visible light in the blue-green region of the spectrum penetrates within the water column. It is directly related to the presence of scattering particles in the water column and is estimated through the ratio between Rrs at 490 and 555 nm. Kd490 is achieved via Mediterranean regional algorithm developed by GOS on the basis of MedBiOp in situ dataset (Volpe et al., 2019). The current day data temporal consistency is evaluated as Quality Index (QI):\nQI=(CurrentDataPixel-ClimatologyDataPixel)/STDDataPixel\nwhere QI is the difference between current data and the relevant climatological field as a signed multiple of climatological standard deviations (STDDataPixel).\nInherent Optical Properties (aph443, adg443 and bbp443 at 443nm) are derived via QAAv6 model.\n\n'''Processing information:'''\n\nMulti-sensor product is constituted by MODIS-AQUA, NOAA20-VIIRS, NPP-VIIRS and Sentinel3A-OLCI. For consistency with NASA L2 dataset, BRDF correction was applied to Sentinel3A-OLCI prior to band shifting and multi sensor merging. Single sensor NASA Level-2 data are destriped and then all Level-2 data are remapped at 1 km spatial resolution using cylindrical equirectangular projection. Afterwards, single sensor Rrs fields are band-shifted, over the SeaWiFS native bands (using the QAAv6 model, Lee et al., 2002) and merged with a technique aimed at smoothing the differences among different sensors. This technique is developed by The Global Ocean Satellite monitoring and marine ecosystem study group (GOS) of the Italian National Research Council (CNR, Rome). Then geophysical fields (i.e. chlorophyll and kd490, bbp, aph and adg) are estimated via state-of-the-art algorithms for better product quality. The entire data set is consistent and processed in one-shot mode (with an unique software version and identical configurations).\n\n'''Description of observation methods/instruments:'''\n\nOcean colour technique exploits the emerging electromagnetic radiation from the sea surface in different wavelengths. The spectral variability of this signal defines the so-called ocean colour which is affected by the presence of phytoplankton.\n\n'''Quality / Accuracy / Calibration information:'''\n\nA detailed description of the calibration and validation activities performed over this product can be found on the CMEMS web portal.\n\n'''Suitability, Expected type of users / uses:'''\n\nThis product is meant for use for educational purposes and for the managing of the marine safety, marine resources, marine and coastal environment and for climate and seasonal studies.\n\n'''Dataset names:'''\n\n* dataset-oc-med-opt-multi-l3-rrs412_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs490_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs510_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs555_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs670_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-kd490_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-bbp443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-adg443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-aph443_1km_daily-rep-v02\n\n\n'''Files format:'''\n*CF-1.4\n*INSPIRE compliant\n\n'''DOI (product) :''' \nhttps://doi.org/10.48670/moi-00116",
+            "langeng": "'''This product has been archived'''\n\nFor operationnal and online products, please visit https://marine.copernicus.eu\n\n'''Short description:'''\nThe Global Ocean Satellite monitoring and marine ecosystem study group (GOS) of the Italian National Research Council (CNR), in Rome operationally distributes Remote Sensing Reflectances (Rrs) and diffuse attenuation coefficient of light at 490 nm (kd490) data. These datasets derived from Rrs multi-sensor (MODIS-AQUA, NOAA20-VIIRS, NPP-VIIRS, Sentinel3A-OLCI) spectra at the state-of-the-art algorithms for multi-sensor merging. Single sensor Rrs fields are band-shifted, over the SeaWiFS native bands (using the QAAv6 model, Lee et al., 2002) and merged with a technique aimed at smoothing the differences among different sensors. Reprocessed (multi-year) products are consistent and homogeneous in terms of format, algorithms and processing software. Rrs is defined as the ratio of upwelling radiance and downwelling irradiance at any wavelength (412, 443, 490, 555, and 670 nm). Kd490 is defined as the diffuse attenuation coefficient of light at 490 nm, and is a measure of the turbidity of the water column, i.e., how visible light in the blue-green region of the spectrum penetrates within the water column. It is directly related to the presence of scattering particles in the water column and is estimated through the ratio between Rrs at 490 and 555 nm. Kd490 is achieved via Mediterranean regional algorithm developed by GOS on the basis of MedBiOp in situ dataset (Volpe et al., 2019). The current day data temporal consistency is evaluated as Quality Index (QI):\nQI=(CurrentDataPixel-ClimatologyDataPixel)/STDDataPixel\nwhere QI is the difference between current data and the relevant climatological field as a signed multiple of climatological standard deviations (STDDataPixel).\nInherent Optical Properties (aph443, adg443 and bbp443 at 443nm) are derived via QAAv6 model.\n\n'''Processing information:'''\n\nMulti-sensor product is constituted by MODIS-AQUA, NOAA20-VIIRS, NPP-VIIRS and Sentinel3A-OLCI. For consistency with NASA L2 dataset, BRDF correction was applied to Sentinel3A-OLCI prior to band shifting and multi sensor merging. Single sensor NASA Level-2 data are destriped and then all Level-2 data are remapped at 1 km spatial resolution using cylindrical equirectangular projection. Afterwards, single sensor Rrs fields are band-shifted, over the SeaWiFS native bands (using the QAAv6 model, Lee et al., 2002) and merged with a technique aimed at smoothing the differences among different sensors. This technique is developed by The Global Ocean Satellite monitoring and marine ecosystem study group (GOS) of the Italian National Research Council (CNR, Rome). Then geophysical fields (i.e. chlorophyll and kd490, bbp, aph and adg) are estimated via state-of-the-art algorithms for better product quality. The entire data set is consistent and processed in one-shot mode (with an unique software version and identical configurations).\n\n'''Description of observation methods/instruments:'''\n\nOcean colour technique exploits the emerging electromagnetic radiation from the sea surface in different wavelengths. The spectral variability of this signal defines the so-called ocean colour which is affected by the presence of phytoplankton.\n\n'''Quality / Accuracy / Calibration information:'''\n\nA detailed description of the calibration and validation activities performed over this product can be found on the CMEMS web portal.\n\n'''Suitability, Expected type of users / uses:'''\n\nThis product is meant for use for educational purposes and for the managing of the marine safety, marine resources, marine and coastal environment and for climate and seasonal studies.\n\n'''Dataset names:'''\n\n* dataset-oc-med-opt-multi-l3-rrs412_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs490_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs510_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs555_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs670_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-kd490_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-bbp443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-adg443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-aph443_1km_daily-rep-v02\n\n\n'''Files format:'''\n*CF-1.4\n*INSPIRE compliant\n\n'''DOI (product) :''' \nhttps://doi.org/10.48670/moi-00116"
+          },
+          "resourceCreditObject": [
+            {
+              "default": "E.U. Copernicus Marine Service Information",
+              "langeng": "E.U. Copernicus Marine Service Information"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-6.0, 30.0],
+                  [36.5, 30.0],
+                  [36.5, 46.0],
+                  [-6.0, 46.0],
+                  [-6.0, 30.0]
+                ]
+              ]
+            }
+          ],
+          "uuid": "19f013d5-721e-4835-b60c-26c1a02aa57a",
+          "draft": "n",
+          "id": "124060948",
+          "owner": "122413398",
+          "groupOwner": "103",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["1", "129"],
+          "op1": ["1", "129"],
+          "documentStandard": "iso19139",
+          "op5": ["1", "129"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2022-06-29T09:07:40.891Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://catalogue.marine.copernicus.eu/documents/IMG/OCEANCOLOUR_MED_OPTICS_L3_REP_OBSERVATIONS_009_095.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "62d3054c-5046-41b5-825a-738ed2019c91",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Quality Information Document (CMEMS-SL-QUID-008-052)"
+          },
+          "dateStamp": "2021-04-19T12:58:40.000Z",
+          "resourceType": ["publication"],
+          "uuid": "62d3054c-5046-41b5-825a-738ed2019c91",
+          "draft": "n",
+          "id": "265948307",
+          "owner": "3680846",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "ed23d9ce-bb9a-4573-b9d6-fdf2bf818102",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-08-08T07:23:37.047605Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "North Sea DIVA 4D analysis of Water_body_dissolved_oxygen_concentration",
+            "langeng": "North Sea DIVA 4D analysis of Water_body_dissolved_oxygen_concentration"
+          },
+          "resourceAbstractObject": {
+            "default": "This gridded product visualizes 1960 - 2014 water body dissolved oxygen concentration (umol/l) in the North Sea domain, for each season (winter: December – February; spring: March – May; summer: June – August; autumn: September – November).\n\nIt is produced as a Diva 4D analysis, version 4.6.11: a reference field of all seasonal data between 1960-2014 was used; results were logit transformed to avoid negative/underestimated values in the interpolated results; error threshold masks L1 (0.3) and L2 (0.5) are included as well as the unmasked field.\n\nEvery step of the time dimension corresponds to a 10-year moving average for each season.\n\nThe depth dimension allows visualizing the gridded field at various depths.",
+            "langeng": "This gridded product visualizes 1960 - 2014 water body dissolved oxygen concentration (umol/l) in the North Sea domain, for each season (winter: December – February; spring: March – May; summer: June – August; autumn: September – November).\n\nIt is produced as a Diva 4D analysis, version 4.6.11: a reference field of all seasonal data between 1960-2014 was used; results were logit transformed to avoid negative/underestimated values in the interpolated results; error threshold masks L1 (0.3) and L2 (0.5) are included as well as the unmasked field.\n\nEvery step of the time dimension corresponds to a 10-year moving average for each season.\n\nThe depth dimension allows visualizing the gridded field at various depths."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Emodnet Chemistry",
+              "langeng": "Emodnet Chemistry"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-5.4, 47.0],
+                  [13.9, 47.0],
+                  [13.9, 62.9],
+                  [-5.4, 62.9],
+                  [-5.4, 47.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "6691d860a01a62ff0849bd617f23bd48",
+              "idx": 1,
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://dx.doi.org/10.6092/ECEC7683-3B30-4522-805E-4AD499EBDCE1",
+                "langeng": "http://dx.doi.org/10.6092/ECEC7683-3B30-4522-805E-4AD499EBDCE1"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langeng": "Digital Object Identifier (DOI)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "d66be2095454f998adbe6af06d558948",
+              "idx": 2,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Winter (December-February) - 10-years running averages/Water_body_dissolved_oxygen_concentration.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Winter (December-February) - 10-years running averages/Water_body_dissolved_oxygen_concentration.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "b214f4f5e6d551132953db306ec342a8",
+              "idx": 3,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Spring (March-May) - 10-years running averages/Water_body_dissolved_oxygen_concentration.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Spring (March-May) - 10-years running averages/Water_body_dissolved_oxygen_concentration.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "fcb00a5c71692e3822ab4d9731d81554",
+              "idx": 4,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Summer (June-August) - 10-years running averages/Water_body_dissolved_oxygen_concentration.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Summer (June-August) - 10-years running averages/Water_body_dissolved_oxygen_concentration.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "bfa34f71225e039fdda5bd6b69d5456f",
+              "idx": 5,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Autumn (September-November) - 10-years running averages/Water_body_dissolved_oxygen_concentration.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Autumn (September-November) - 10-years running averages/Water_body_dissolved_oxygen_concentration.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "1c4176bc3e33c9094ccbd52ca2ac3adf",
+              "idx": 6,
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ed23d9ce-bb9a-4573-b9d6-fdf2bf818102/attachments/oxygen_deepest_winter_20002010.png",
+                "langeng": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ed23d9ce-bb9a-4573-b9d6-fdf2bf818102/attachments/oxygen_deepest_winter_20002010.png"
+              },
+              "nameObject": {
+                "default": "oxygen_deepest_winter_20002010.png",
+                "langeng": "oxygen_deepest_winter_20002010.png"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "1c4176bc3e33c9094ccbd52ca2ac3adf",
+              "idx": 7,
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ed23d9ce-bb9a-4573-b9d6-fdf2bf818102/attachments/oxygen_deepest_winter_20002010.png",
+                "langeng": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ed23d9ce-bb9a-4573-b9d6-fdf2bf818102/attachments/oxygen_deepest_winter_20002010.png"
+              },
+              "nameObject": {
+                "default": "oxygen_deepest_winter_20002010.png",
+                "langeng": "oxygen_deepest_winter_20002010.png"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "ed23d9ce-bb9a-4573-b9d6-fdf2bf818102",
+          "draft": "n",
+          "id": "334237983",
+          "owner": "4",
+          "groupOwner": "92",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["92", "1"],
+          "op1": ["92", "1"],
+          "documentStandard": "iso19139",
+          "op3": "92",
+          "op5": ["92", "1"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2018-02-06T10:07:29Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "nameObject": {
+                "default": "oxygen_deepest_winter_20002010.png",
+                "langeng": "oxygen_deepest_winter_20002010.png"
+              },
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ed23d9ce-bb9a-4573-b9d6-fdf2bf818102/attachments/oxygen_deepest_winter_20002010.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "94cd2997-78be-47e6-b570-c51d51041118",
+        "_score": 0.0,
+        "_ignored": [
+          "resourceAbstractObject.default.keyword",
+          "resourceAbstractObject.default.sort",
+          "resourceAbstractObject.langeng.keyword"
+        ],
+        "_source": {
+          "dateStamp": "2025-07-29T14:39:33.483105Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "Mediterranean Sea DIVA 4D analysis of Water_body_nitrite",
+            "langeng": "Mediterranean Sea DIVA 4D analysis of Water_body_nitrite"
+          },
+          "resourceAbstractObject": {
+            "default": "Moving 10-years analysis of nitrite at Mediterranean Sea for each season :\n- winter (January-March),\n- spring (April-June),\n- summer (July-September),\n- autumn (October-December).\n\nEvery year of the time dimension corresponds to the 10-year centered average of each season.\nDecades span from 1965-1974 until 2004-2013.\nObservational data span from 1961 to 2013.\nDepth range (IODE standard depths): -1500.0, -1400.0, -1300.0, -1200.0, -1100.0, -1000.0, -900.0, -800.0, -700.0, -600.0, -500.0, -400.0, -300.0, -250.0, -200.0, -150.0, -125.0, -100.0, -75.0, -50.0, -30.0, -20.0, -10.0, -5.0, -0.0.\n\nData Sources: observational data from SeaDataNet/EMODNet Chemistry Data Network.\n\nDescription of DIVA analysis: Geostatistical data analysis by DIVA (Data-Interpolating Variational Analysis) tool. Profiles were interpolated at standard depths using weighted parabolic interpolation algorithm (Reiniger and Ross, 1968). GEBCO 1min topography is used for the contouring preparation. Analyzed filed masked using relative error threshold 0.3 and 0.5.\n\nDIVA settings: A constant value for signal-to-noise ratio was used equal to 3. Correlation length was optimized and filtered vertically and a seasonally-averaged profile was used.\n\nLogarithmic transformation applied to the data prior to the analysis.\nBackground field: the data mean value is subtracted from the data.\nDetrending of data: no.\nAdvection constraint applied: no.\n\nOriginators of Italian data sets-List of contributors:\no\tBrunetti Fabio (OGS)\no\tCardin Vanessa, Bensi Manuel doi:10.6092/36728450-4296-4e6a-967d-d5b6da55f306\no\tCardin Vanessa, Bensi Manuel, Ursella Laura, Siena Giuseppe doi:10.6092/f8e6d18e-f877-4aa5-a983-a03b06ccb987\no\tCataletto Bruno (OGS)\no\tCinzia Comici Cinzia (OGS)\no\tCivitarese Giuseppe (OGS)\no\tDeVittor Cinzia (OGS)\no\tGiani Michele (OGS)\no\tKovacevic Vedrana (OGS)\no\tMosetti Renzo (OGS)\no\tSolidoro C.,Beran A.,Cataletto B.,Celussi M.,Cibic T.,Comici C.,Del Negro P.,De Vittor C.,Minocci M.,Monti M.,Fabbro C.,Falconi C.,Franzo A.,Libralato S.,Lipizer M.,Negussanti J.S.,Russel H.,Valli G., doi:10.6092/e5518899-b914-43b0-8139-023718aa63f5\no\tCelio Massimo (ARPA FVG)\no\tMalaguti Antonella (ENEA)\no\tFonda Umani Serena (UNITS)\no\tBignami Francesco (ISAC/CNR)\no\tBoldrini Alfredo (ISMAR/CNR)\no\tMarini Mauro (ISMAR/CNR)\no\tMiserocchi Stefano (ISMAR/CNR)\no\tZaccone Renata (IAMC/CNR)\no\tLavezza, R., Dubroca, L. F. C., Ludicone, D., Kress, N., Herut, B., Civitarese, G., Cruzado, A., Lefèvre, D., Souvermezoglou, E., Yilmaz, A., Tugrul, S., and Ribera d'Alcala, M.: Compilation of quality controlled nutrient profiles from the Mediterranean Sea, doi:10.1594/PANGAEA.771907, 2011.",
+            "langeng": "Moving 10-years analysis of nitrite at Mediterranean Sea for each season :\n- winter (January-March),\n- spring (April-June),\n- summer (July-September),\n- autumn (October-December).\n\nEvery year of the time dimension corresponds to the 10-year centered average of each season.\nDecades span from 1965-1974 until 2004-2013.\nObservational data span from 1961 to 2013.\nDepth range (IODE standard depths): -1500.0, -1400.0, -1300.0, -1200.0, -1100.0, -1000.0, -900.0, -800.0, -700.0, -600.0, -500.0, -400.0, -300.0, -250.0, -200.0, -150.0, -125.0, -100.0, -75.0, -50.0, -30.0, -20.0, -10.0, -5.0, -0.0.\n\nData Sources: observational data from SeaDataNet/EMODNet Chemistry Data Network.\n\nDescription of DIVA analysis: Geostatistical data analysis by DIVA (Data-Interpolating Variational Analysis) tool. Profiles were interpolated at standard depths using weighted parabolic interpolation algorithm (Reiniger and Ross, 1968). GEBCO 1min topography is used for the contouring preparation. Analyzed filed masked using relative error threshold 0.3 and 0.5.\n\nDIVA settings: A constant value for signal-to-noise ratio was used equal to 3. Correlation length was optimized and filtered vertically and a seasonally-averaged profile was used.\n\nLogarithmic transformation applied to the data prior to the analysis.\nBackground field: the data mean value is subtracted from the data.\nDetrending of data: no.\nAdvection constraint applied: no.\n\nOriginators of Italian data sets-List of contributors:\no\tBrunetti Fabio (OGS)\no\tCardin Vanessa, Bensi Manuel doi:10.6092/36728450-4296-4e6a-967d-d5b6da55f306\no\tCardin Vanessa, Bensi Manuel, Ursella Laura, Siena Giuseppe doi:10.6092/f8e6d18e-f877-4aa5-a983-a03b06ccb987\no\tCataletto Bruno (OGS)\no\tCinzia Comici Cinzia (OGS)\no\tCivitarese Giuseppe (OGS)\no\tDeVittor Cinzia (OGS)\no\tGiani Michele (OGS)\no\tKovacevic Vedrana (OGS)\no\tMosetti Renzo (OGS)\no\tSolidoro C.,Beran A.,Cataletto B.,Celussi M.,Cibic T.,Comici C.,Del Negro P.,De Vittor C.,Minocci M.,Monti M.,Fabbro C.,Falconi C.,Franzo A.,Libralato S.,Lipizer M.,Negussanti J.S.,Russel H.,Valli G., doi:10.6092/e5518899-b914-43b0-8139-023718aa63f5\no\tCelio Massimo (ARPA FVG)\no\tMalaguti Antonella (ENEA)\no\tFonda Umani Serena (UNITS)\no\tBignami Francesco (ISAC/CNR)\no\tBoldrini Alfredo (ISMAR/CNR)\no\tMarini Mauro (ISMAR/CNR)\no\tMiserocchi Stefano (ISMAR/CNR)\no\tZaccone Renata (IAMC/CNR)\no\tLavezza, R., Dubroca, L. F. C., Ludicone, D., Kress, N., Herut, B., Civitarese, G., Cruzado, A., Lefèvre, D., Souvermezoglou, E., Yilmaz, A., Tugrul, S., and Ribera d'Alcala, M.: Compilation of quality controlled nutrient profiles from the Mediterranean Sea, doi:10.1594/PANGAEA.771907, 2011."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Emodnet Chemistry",
+              "langeng": "Emodnet Chemistry"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-6.25, 30.0],
+                  [36.375, 30.0],
+                  [36.375, 45.875],
+                  [-6.25, 45.875],
+                  [-6.25, 30.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "877d5b01eb420aa863b276c57a971887",
+              "idx": 1,
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://dx.doi.org/10.6092/18EEA631-EA55-4DCF-A9A2-27E9618491DC",
+                "langeng": "http://dx.doi.org/10.6092/18EEA631-EA55-4DCF-A9A2-27E9618491DC"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langeng": "Digital Object Identifier (DOI)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "41a76823bb374c7a6f120c8ebe801093",
+              "idx": 2,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Winter (January-March) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Winter (January-March) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "9c1482d04dc161db27fcb37b9768d115",
+              "idx": 3,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Spring (April-June) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Spring (April-June) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "853106407899b28c75eb7be33d4e2015",
+              "idx": 4,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Summer (July-September) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Summer (July-September) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "e81938d8ef011a12c6788581c68d5c2b",
+              "idx": 5,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Autumn (October-December) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Autumn (October-December) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "94cd2997-78be-47e6-b570-c51d51041118",
+          "draft": "n",
+          "id": "334237958",
+          "owner": "4",
+          "groupOwner": "92",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["92", "1"],
+          "op1": ["92", "1"],
+          "documentStandard": "iso19139",
+          "op3": "92",
+          "op5": ["92", "1"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2018-02-06T10:10:30Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "nameObject": {
+                "default": "win-ntri.png",
+                "langeng": "win-ntri.png"
+              },
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/94cd2997-78be-47e6-b570-c51d51041118/attachments/win-ntri.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "0e07855f-3aa4-4eab-bf25-740996a2bc71",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-10-28T14:08:34.272494Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "Mediterranean Sea - Seafloor litter aggregated datasets 2012/2022 v2025",
+            "langeng": "Mediterranean Sea - Seafloor litter aggregated datasets 2012/2022 v2025"
+          },
+          "resourceAbstractObject": {
+            "default": "EMODnet Chemistry aims to provide access to marine chemistry data sets and derived data products concerning eutrophication, ocean acidification, contaminants and litter. The chosen parameters are relevant for the Marine Strategy Framework Directive (MSFD), in particular for descriptors 5, 8, 9 and 10. The datasets contain standardized, harmonized and validated data collections from seafloor litter. \nDatasets concerning seafloor litter data are loaded in a central database after a semi-automated validation phase. Once loaded, a data assessment is performed in order to check data consistency and potential errors are corrected thanks to a feedback loop with data originators.\nEMODnet seafloor litter data and database are hosted and maintained by ‘Istituto Nazionale di Oceanografia e di Geofisica Sperimentale, Division of Oceanography (OGS/NODC)’ from Italy.\nFor seafloor litter, the harmonized datasets contain all unrestricted EMODnet Chemistry data on seafloor litter data.\nData are formatted following Guidelines and forms for gathering marine litter data, which can be found at: https://dx.doi.org/10.6092/15c0d34c-a01a-4091-91ac-7c4f561ab508\nThe updated vocabularies of admitted values are available at:\nhttps://vocab.seadatanet.org/search\nhttps://vocab.ices.dk/\nThe harmonized datasets can be downloaded as EMODnet Sea-floor litter data format version 1.0, which is a csv file, tab separated values.",
+            "langeng": "EMODnet Chemistry aims to provide access to marine chemistry data sets and derived data products concerning eutrophication, ocean acidification, contaminants and litter. The chosen parameters are relevant for the Marine Strategy Framework Directive (MSFD), in particular for descriptors 5, 8, 9 and 10. The datasets contain standardized, harmonized and validated data collections from seafloor litter. \nDatasets concerning seafloor litter data are loaded in a central database after a semi-automated validation phase. Once loaded, a data assessment is performed in order to check data consistency and potential errors are corrected thanks to a feedback loop with data originators.\nEMODnet seafloor litter data and database are hosted and maintained by ‘Istituto Nazionale di Oceanografia e di Geofisica Sperimentale, Division of Oceanography (OGS/NODC)’ from Italy.\nFor seafloor litter, the harmonized datasets contain all unrestricted EMODnet Chemistry data on seafloor litter data.\nData are formatted following Guidelines and forms for gathering marine litter data, which can be found at: https://dx.doi.org/10.6092/15c0d34c-a01a-4091-91ac-7c4f561ab508\nThe updated vocabularies of admitted values are available at:\nhttps://vocab.seadatanet.org/search\nhttps://vocab.ices.dk/\nThe harmonized datasets can be downloaded as EMODnet Sea-floor litter data format version 1.0, which is a csv file, tab separated values."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "EMODnet Chemistry",
+              "langeng": "EMODnet Chemistry"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [3.08, 38.01],
+                  [20.11, 38.01],
+                  [20.11, 45.61],
+                  [3.08, 45.61],
+                  [3.08, 38.01]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "cf169e810be207d7fbd2b1c76ff6fd57",
+              "idx": 1,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_SeafloorLitter_Mediterranean_2025_unrestricted.zip",
+                "langeng": "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_SeafloorLitter_Mediterranean_2025_unrestricted.zip"
+              },
+              "nameObject": {
+                "default": "EMD_SeafloorLitter_Mediterranean_2025_unrestricted",
+                "langeng": "EMD_SeafloorLitter_Mediterranean_2025_unrestricted"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "88d2ab98989af31ef79c7182f78d05ca",
+              "idx": 2,
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.13120/je91-sp43",
+                "langeng": "https://doi.org/10.13120/je91-sp43"
+              },
+              "nameObject": {
+                "default": "Harmonization and data validation on litter aggregated datasets",
+                "langeng": "Harmonization and data validation on litter aggregated datasets"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "184e81af914cc797a501327416b62b1d",
+              "idx": 3,
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.13120/0e07855f-3aa4-4eab-bf25-740996a2bc71",
+                "langeng": "https://doi.org/10.13120/0e07855f-3aa4-4eab-bf25-740996a2bc71"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langeng": "Digital Object Identifier (DOI)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "0e07855f-3aa4-4eab-bf25-740996a2bc71",
+          "draft": "n",
+          "id": "339875675",
+          "owner": "334250021",
+          "groupOwner": "92",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["1", "92"],
+          "op1": ["1", "92"],
+          "documentStandard": "iso19139",
+          "op3": "92",
+          "op5": ["1", "92"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2025-10-03T08:51:30.245545Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/0e07855f-3aa4-4eab-bf25-740996a2bc71/attachments/SL_med.jpeg"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "4f9f3a44-1ae3-4fc1-b59b-99645c00ab9a",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-08-08T07:18:58.99488Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "North Sea DIVA 4D analysis of Water_body_nitrate",
+            "langeng": "North Sea DIVA 4D analysis of Water_body_nitrate"
+          },
+          "resourceAbstractObject": {
+            "default": "This gridded product visualizes 1960 - 2014 water body nitrate concentration (umol/l) in the North Sea domain, for each season (winter: December – February; spring: March – May; summer: June – August; autumn: September – November). \n\nIt is produced as a Diva 4D analysis, version 4.6.9: a reference field of all seasonal data between 1960-2014 was used; results were logit transformed to avoid negative/underestimated values in the interpolated results; error threshold masks L1 (0.3) and L2 (0.5) are included as well as the unmasked field.\n\nEvery step of the time dimension corresponds to a 10-year moving average for each season.\n\nThe depth dimension allows visualizing the gridded field at various depths.",
+            "langeng": "This gridded product visualizes 1960 - 2014 water body nitrate concentration (umol/l) in the North Sea domain, for each season (winter: December – February; spring: March – May; summer: June – August; autumn: September – November). \n\nIt is produced as a Diva 4D analysis, version 4.6.9: a reference field of all seasonal data between 1960-2014 was used; results were logit transformed to avoid negative/underestimated values in the interpolated results; error threshold masks L1 (0.3) and L2 (0.5) are included as well as the unmasked field.\n\nEvery step of the time dimension corresponds to a 10-year moving average for each season.\n\nThe depth dimension allows visualizing the gridded field at various depths."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Emodnet Chemistry",
+              "langeng": "Emodnet Chemistry"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-5.4, 47.0],
+                  [13.9, 47.0],
+                  [13.9, 62.9],
+                  [-5.4, 62.9],
+                  [-5.4, 47.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "34cb113ff38d9730671e313c439b1094",
+              "idx": 1,
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://dx.doi.org/10.6092/CC9B9761-98AB-4522-B004-AD32D93973C3",
+                "langeng": "http://dx.doi.org/10.6092/CC9B9761-98AB-4522-B004-AD32D93973C3"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langeng": "Digital Object Identifier (DOI)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "2c554c781bc3cba9baa20f2ebf567bac",
+              "idx": 2,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Winter (December-February) - 10-years running averages/Water_body_nitrate.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Winter (December-February) - 10-years running averages/Water_body_nitrate.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "096ccf7b8c05a9a0a315e88c43c56f19",
+              "idx": 3,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Spring (March-May) - 10-years running averages/Water_body_nitrate.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Spring (March-May) - 10-years running averages/Water_body_nitrate.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "7c8ef462384d4378fd8104f2dc182242",
+              "idx": 4,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Summer (June-August) - 10-years running averages/Water_body_nitrate.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Summer (June-August) - 10-years running averages/Water_body_nitrate.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "c2cbf6f2a1298824e4ab018dd731595e",
+              "idx": 5,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Autumn (September-November) - 10-years running averages/Water_body_nitrate.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Autumn (September-November) - 10-years running averages/Water_body_nitrate.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "4f9f3a44-1ae3-4fc1-b59b-99645c00ab9a",
+          "draft": "n",
+          "id": "334237950",
+          "owner": "4",
+          "groupOwner": "92",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["92", "1"],
+          "op1": ["92", "1"],
+          "documentStandard": "iso19139",
+          "op3": "92",
+          "op5": ["92", "1"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2018-02-06T10:11:20Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "nameObject": {
+                "default": "nitrate_winter_2000.png",
+                "langeng": "nitrate_winter_2000.png"
+              },
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/4f9f3a44-1ae3-4fc1-b59b-99645c00ab9a/attachments/nitrate_winter_2000.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      }
+    ]
+  },
+  "aggregations": {
+    "groupPublishedId": {
+      "meta": {
+        "filterByTranslation": true,
+        "layout": "multiselect",
+        "displayFilter": true,
+        "field": "groupPublishedId",
+        "collapsed": false,
+        "orderByTranslation": true
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "82",
+          "doc_count": 3806
+        },
+        {
+          "key": "334291911",
+          "doc_count": 2013
+        },
+        {
+          "key": "174375699",
+          "doc_count": 1987
+        },
+        {
+          "key": "62",
+          "doc_count": 1331
+        },
+        {
+          "key": "335589474",
+          "doc_count": 1124
+        },
+        {
+          "key": "104",
+          "doc_count": 1018
+        },
+        {
+          "key": "4",
+          "doc_count": 812
+        },
+        {
+          "key": "83566633",
+          "doc_count": 756
+        },
+        {
+          "key": "83566259",
+          "doc_count": 589
+        },
+        {
+          "key": "92",
+          "doc_count": 546
+        },
+        {
+          "key": "334568939",
+          "doc_count": 541
+        },
+        {
+          "key": "21",
+          "doc_count": 531
+        },
+        {
+          "key": "129",
+          "doc_count": 479
+        },
+        {
+          "key": "334243827",
+          "doc_count": 453
+        },
+        {
+          "key": "101",
+          "doc_count": 425
+        },
+        {
+          "key": "334233983",
+          "doc_count": 381
+        },
+        {
+          "key": "334288365",
+          "doc_count": 373
+        },
+        {
+          "key": "192556831",
+          "doc_count": 366
+        },
+        {
+          "key": "58",
+          "doc_count": 363
+        },
+        {
+          "key": "181712109",
+          "doc_count": 361
+        },
+        {
+          "key": "127",
+          "doc_count": 352
+        },
+        {
+          "key": "334579404",
+          "doc_count": 352
+        },
+        {
+          "key": "41",
+          "doc_count": 341
+        },
+        {
+          "key": "334585654",
+          "doc_count": 336
+        },
+        {
+          "key": "71",
+          "doc_count": 334
+        },
+        {
+          "key": "103",
+          "doc_count": 304
+        },
+        {
+          "key": "74",
+          "doc_count": 302
+        },
+        {
+          "key": "89",
+          "doc_count": 301
+        },
+        {
+          "key": "334569090",
+          "doc_count": 282
+        },
+        {
+          "key": "115388015",
+          "doc_count": 260
+        },
+        {
+          "key": "335589472",
+          "doc_count": 250
+        },
+        {
+          "key": "334274722",
+          "doc_count": 238
+        },
+        {
+          "key": "15",
+          "doc_count": 230
+        },
+        {
+          "key": "64",
+          "doc_count": 221
+        },
+        {
+          "key": "61",
+          "doc_count": 216
+        },
+        {
+          "key": "75",
+          "doc_count": 215
+        },
+        {
+          "key": "139596691",
+          "doc_count": 177
+        },
+        {
+          "key": "48",
+          "doc_count": 175
+        },
+        {
+          "key": "5",
+          "doc_count": 163
+        },
+        {
+          "key": "334263998",
+          "doc_count": 145
+        },
+        {
+          "key": "181717787",
+          "doc_count": 133
+        },
+        {
+          "key": "81182765",
+          "doc_count": 133
+        },
+        {
+          "key": "230733018",
+          "doc_count": 123
+        },
+        {
+          "key": "6",
+          "doc_count": 123
+        },
+        {
+          "key": "139602534",
+          "doc_count": 122
+        },
+        {
+          "key": "20",
+          "doc_count": 118
+        },
+        {
+          "key": "334266184",
+          "doc_count": 113
+        },
+        {
+          "key": "73",
+          "doc_count": 112
+        },
+        {
+          "key": "87",
+          "doc_count": 107
+        },
+        {
+          "key": "230734906",
+          "doc_count": 106
+        },
+        {
+          "key": "334243878",
+          "doc_count": 106
+        },
+        {
+          "key": "334236504",
+          "doc_count": 104
+        },
+        {
+          "key": "139596764",
+          "doc_count": 103
+        },
+        {
+          "key": "85",
+          "doc_count": 102
+        },
+        {
+          "key": "139596411",
+          "doc_count": 97
+        },
+        {
+          "key": "60",
+          "doc_count": 93
+        },
+        {
+          "key": "335589512",
+          "doc_count": 90
+        },
+        {
+          "key": "85586207",
+          "doc_count": 90
+        },
+        {
+          "key": "334568945",
+          "doc_count": 86
+        },
+        {
+          "key": "100",
+          "doc_count": 84
+        },
+        {
+          "key": "126",
+          "doc_count": 81
+        },
+        {
+          "key": "250019890",
+          "doc_count": 81
+        },
+        {
+          "key": "191227451",
+          "doc_count": 80
+        },
+        {
+          "key": "335589484",
+          "doc_count": 78
+        },
+        {
+          "key": "120",
+          "doc_count": 74
+        },
+        {
+          "key": "14",
+          "doc_count": 72
+        },
+        {
+          "key": "139606189",
+          "doc_count": 71
+        },
+        {
+          "key": "57998569",
+          "doc_count": 71
+        },
+        {
+          "key": "335004805",
+          "doc_count": 70
+        },
+        {
+          "key": "53",
+          "doc_count": 69
+        },
+        {
+          "key": "109",
+          "doc_count": 68
+        },
+        {
+          "key": "334259620",
+          "doc_count": 68
+        },
+        {
+          "key": "113",
+          "doc_count": 67
+        },
+        {
+          "key": "12",
+          "doc_count": 66
+        },
+        {
+          "key": "57998570",
+          "doc_count": 66
+        },
+        {
+          "key": "136009538",
+          "doc_count": 65
+        },
+        {
+          "key": "16",
+          "doc_count": 65
+        },
+        {
+          "key": "45",
+          "doc_count": 65
+        },
+        {
+          "key": "335589483",
+          "doc_count": 61
+        },
+        {
+          "key": "80",
+          "doc_count": 61
+        },
+        {
+          "key": "29",
+          "doc_count": 60
+        },
+        {
+          "key": "128",
+          "doc_count": 59
+        },
+        {
+          "key": "335589499",
+          "doc_count": 59
+        },
+        {
+          "key": "335589485",
+          "doc_count": 58
+        },
+        {
+          "key": "119",
+          "doc_count": 57
+        },
+        {
+          "key": "334590726",
+          "doc_count": 56
+        },
+        {
+          "key": "335589498",
+          "doc_count": 56
+        },
+        {
+          "key": "139596710",
+          "doc_count": 53
+        },
+        {
+          "key": "214742408",
+          "doc_count": 53
+        },
+        {
+          "key": "131",
+          "doc_count": 52
+        },
+        {
+          "key": "334558047",
+          "doc_count": 51
+        },
+        {
+          "key": "163141952",
+          "doc_count": 50
+        },
+        {
+          "key": "37",
+          "doc_count": 50
+        },
+        {
+          "key": "8304386",
+          "doc_count": 50
+        },
+        {
+          "key": "139596731",
+          "doc_count": 48
+        },
+        {
+          "key": "139596745",
+          "doc_count": 47
+        },
+        {
+          "key": "139602541",
+          "doc_count": 46
+        },
+        {
+          "key": "139606182",
+          "doc_count": 46
+        },
+        {
+          "key": "45047740",
+          "doc_count": 46
+        },
+        {
+          "key": "68",
+          "doc_count": 46
+        },
+        {
+          "key": "139608753",
+          "doc_count": 45
+        },
+        {
+          "key": "7",
+          "doc_count": 45
+        },
+        {
+          "key": "139600414",
+          "doc_count": 44
+        },
+        {
+          "key": "139600461",
+          "doc_count": 43
+        },
+        {
+          "key": "334249059",
+          "doc_count": 43
+        },
+        {
+          "key": "122",
+          "doc_count": 42
+        },
+        {
+          "key": "334613272",
+          "doc_count": 42
+        },
+        {
+          "key": "57998568",
+          "doc_count": 42
+        },
+        {
+          "key": "117",
+          "doc_count": 41
+        },
+        {
+          "key": "118",
+          "doc_count": 40
+        },
+        {
+          "key": "133",
+          "doc_count": 40
+        },
+        {
+          "key": "139596794",
+          "doc_count": 40
+        },
+        {
+          "key": "334253087",
+          "doc_count": 40
+        },
+        {
+          "key": "335077961",
+          "doc_count": 40
+        },
+        {
+          "key": "57998574",
+          "doc_count": 40
+        },
+        {
+          "key": "108",
+          "doc_count": 39
+        },
+        {
+          "key": "139596777",
+          "doc_count": 38
+        },
+        {
+          "key": "335589487",
+          "doc_count": 37
+        },
+        {
+          "key": "139596738",
+          "doc_count": 36
+        },
+        {
+          "key": "14223220",
+          "doc_count": 36
+        },
+        {
+          "key": "95",
+          "doc_count": 36
+        },
+        {
+          "key": "217491618",
+          "doc_count": 35
+        },
+        {
+          "key": "218547707",
+          "doc_count": 34
+        },
+        {
+          "key": "334389952",
+          "doc_count": 34
+        },
+        {
+          "key": "334570489",
+          "doc_count": 34
+        },
+        {
+          "key": "125",
+          "doc_count": 33
+        },
+        {
+          "key": "31",
+          "doc_count": 33
+        },
+        {
+          "key": "335589476",
+          "doc_count": 32
+        },
+        {
+          "key": "81040752",
+          "doc_count": 32
+        },
+        {
+          "key": "78",
+          "doc_count": 31
+        },
+        {
+          "key": "142274806",
+          "doc_count": 30
+        },
+        {
+          "key": "335589479",
+          "doc_count": 29
+        },
+        {
+          "key": "59",
+          "doc_count": 29
+        },
+        {
+          "key": "334238469",
+          "doc_count": 28
+        },
+        {
+          "key": "98",
+          "doc_count": 28
+        },
+        {
+          "key": "139596724",
+          "doc_count": 26
+        },
+        {
+          "key": "334250000",
+          "doc_count": 26
+        },
+        {
+          "key": "58552020",
+          "doc_count": 25
+        },
+        {
+          "key": "139608974",
+          "doc_count": 24
+        },
+        {
+          "key": "28",
+          "doc_count": 24
+        },
+        {
+          "key": "83",
+          "doc_count": 24
+        },
+        {
+          "key": "334238460",
+          "doc_count": 23
+        },
+        {
+          "key": "335589500",
+          "doc_count": 23
+        },
+        {
+          "key": "335589511",
+          "doc_count": 23
+        },
+        {
+          "key": "139596717",
+          "doc_count": 22
+        },
+        {
+          "key": "30",
+          "doc_count": 22
+        },
+        {
+          "key": "80306629",
+          "doc_count": 22
+        },
+        {
+          "key": "1571242",
+          "doc_count": 21
+        },
+        {
+          "key": "139600468",
+          "doc_count": 19
+        },
+        {
+          "key": "32017965",
+          "doc_count": 19
+        },
+        {
+          "key": "334264477",
+          "doc_count": 19
+        },
+        {
+          "key": "39",
+          "doc_count": 19
+        },
+        {
+          "key": "57998573",
+          "doc_count": 19
+        },
+        {
+          "key": "112",
+          "doc_count": 18
+        },
+        {
+          "key": "335589489",
+          "doc_count": 18
+        },
+        {
+          "key": "335589492",
+          "doc_count": 18
+        },
+        {
+          "key": "57998572",
+          "doc_count": 18
+        },
+        {
+          "key": "19",
+          "doc_count": 17
+        },
+        {
+          "key": "334346689",
+          "doc_count": 17
+        },
+        {
+          "key": "18",
+          "doc_count": 16
+        },
+        {
+          "key": "77611318",
+          "doc_count": 16
+        },
+        {
+          "key": "99",
+          "doc_count": 16
+        },
+        {
+          "key": "335589473",
+          "doc_count": 15
+        },
+        {
+          "key": "81",
+          "doc_count": 15
+        },
+        {
+          "key": "334399225",
+          "doc_count": 14
+        },
+        {
+          "key": "335589477",
+          "doc_count": 14
+        },
+        {
+          "key": "76",
+          "doc_count": 14
+        },
+        {
+          "key": "67",
+          "doc_count": 13
+        },
+        {
+          "key": "17",
+          "doc_count": 12
+        },
+        {
+          "key": "174400883",
+          "doc_count": 12
+        },
+        {
+          "key": "334253426",
+          "doc_count": 12
+        },
+        {
+          "key": "335224701",
+          "doc_count": 12
+        },
+        {
+          "key": "42",
+          "doc_count": 12
+        },
+        {
+          "key": "134290417",
+          "doc_count": 11
+        },
+        {
+          "key": "253186911",
+          "doc_count": 11
+        },
+        {
+          "key": "43",
+          "doc_count": 10
+        },
+        {
+          "key": "111",
+          "doc_count": 9
+        },
+        {
+          "key": "114",
+          "doc_count": 9
+        },
+        {
+          "key": "334274527",
+          "doc_count": 9
+        },
+        {
+          "key": "334288366",
+          "doc_count": 9
+        },
+        {
+          "key": "57998571",
+          "doc_count": 9
+        },
+        {
+          "key": "334251576",
+          "doc_count": 8
+        },
+        {
+          "key": "334569091",
+          "doc_count": 8
+        },
+        {
+          "key": "335589482",
+          "doc_count": 8
+        },
+        {
+          "key": "335589497",
+          "doc_count": 8
+        },
+        {
+          "key": "145397760",
+          "doc_count": 7
+        },
+        {
+          "key": "146240896",
+          "doc_count": 7
+        },
+        {
+          "key": "334251812",
+          "doc_count": 7
+        },
+        {
+          "key": "334585986",
+          "doc_count": 7
+        },
+        {
+          "key": "335224697",
+          "doc_count": 7
+        },
+        {
+          "key": "139606132",
+          "doc_count": 6
+        },
+        {
+          "key": "163142381",
+          "doc_count": 6
+        },
+        {
+          "key": "63",
+          "doc_count": 6
+        },
+        {
+          "key": "334557352",
+          "doc_count": 5
+        },
+        {
+          "key": "334619702",
+          "doc_count": 5
+        },
+        {
+          "key": "335224699",
+          "doc_count": 5
+        },
+        {
+          "key": "335224700",
+          "doc_count": 5
+        },
+        {
+          "key": "335589467",
+          "doc_count": 5
+        },
+        {
+          "key": "335589493",
+          "doc_count": 5
+        },
+        {
+          "key": "335589510",
+          "doc_count": 5
+        },
+        {
+          "key": "41396570",
+          "doc_count": 5
+        },
+        {
+          "key": "86",
+          "doc_count": 5
+        },
+        {
+          "key": "88",
+          "doc_count": 5
+        },
+        {
+          "key": "132",
+          "doc_count": 4
+        },
+        {
+          "key": "334557346",
+          "doc_count": 4
+        },
+        {
+          "key": "335589494",
+          "doc_count": 4
+        },
+        {
+          "key": "8304393",
+          "doc_count": 4
+        },
+        {
+          "key": "84172386",
+          "doc_count": 4
+        },
+        {
+          "key": "139606125",
+          "doc_count": 3
+        },
+        {
+          "key": "334243541",
+          "doc_count": 3
+        },
+        {
+          "key": "334399915",
+          "doc_count": 3
+        },
+        {
+          "key": "335224696",
+          "doc_count": 3
+        },
+        {
+          "key": "335589514",
+          "doc_count": 3
+        },
+        {
+          "key": "335589515",
+          "doc_count": 3
+        },
+        {
+          "key": "68747410",
+          "doc_count": 3
+        },
+        {
+          "key": "90",
+          "doc_count": 3
+        },
+        {
+          "key": "123708945",
+          "doc_count": 2
+        },
+        {
+          "key": "334585987",
+          "doc_count": 2
+        },
+        {
+          "key": "335224695",
+          "doc_count": 2
+        },
+        {
+          "key": "335224698",
+          "doc_count": 2
+        },
+        {
+          "key": "335224702",
+          "doc_count": 2
+        },
+        {
+          "key": "335589480",
+          "doc_count": 2
+        },
+        {
+          "key": "335589486",
+          "doc_count": 2
+        },
+        {
+          "key": "335589488",
+          "doc_count": 2
+        },
+        {
+          "key": "335589495",
+          "doc_count": 2
+        },
+        {
+          "key": "36",
+          "doc_count": 2
+        },
+        {
+          "key": "54",
+          "doc_count": 2
+        },
+        {
+          "key": "72",
+          "doc_count": 2
+        },
+        {
+          "key": "113604264",
+          "doc_count": 1
+        },
+        {
+          "key": "123",
+          "doc_count": 1
+        },
+        {
+          "key": "286005990",
+          "doc_count": 1
+        },
+        {
+          "key": "335589471",
+          "doc_count": 1
+        },
+        {
+          "key": "335589491",
+          "doc_count": 1
+        },
+        {
+          "key": "335589508",
+          "doc_count": 1
+        }
+      ]
+    },
+    "th_sextant-theme_tree.key": {
+      "meta": {
+        "collapsed": true,
+        "orderByTranslation": true,
+        "translateOnLoad": true
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1",
+          "doc_count": 366
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca",
+          "doc_count": 155
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/657cb559-f758-497f-938c-fc505ad3c69c",
+          "doc_count": 22
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73cf1bad-b56b-4481-9461-9e7183c78a4c",
+          "doc_count": 27
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/77a14427-fcc7-4fa8-8c17-5762650a1704",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7f6edc70-0465-4da6-a1a1-1aa64fc8ba85",
+          "doc_count": 28
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/80f15c76-4901-40c6-be47-0e004ca50028",
+          "doc_count": 75
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b3946b91-cda0-4bee-a8a4-c6aba80d9382",
+          "doc_count": 122
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3c8deed-b81d-468b-b150-ff53b64a9d8f",
+          "doc_count": 85
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3c8deed-b81d-468b-b150-ff53b64a9d8f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/9ddab5a0-08aa-40e6-98f3-1b912a4d9f7d",
+          "doc_count": 25
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3c8deed-b81d-468b-b150-ff53b64a9d8f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ab437c77-f26c-49bb-879b-dde48c4f6fcd",
+          "doc_count": 12
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f",
+          "doc_count": 344
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/19bfa5ab-c624-4896-be75-e99fbd366031",
+          "doc_count": 12
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/a0889f3e-6ae4-4971-9488-5ddaa7bb9951",
+          "doc_count": 30
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d2094c45-2ee9-443f-a95b-8aaa94894905",
+          "doc_count": 95
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e0b31b99-3da4-4af5-80b3-837904b4129d",
+          "doc_count": 213
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b",
+          "doc_count": 587
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1188361d-ce72-449b-b7ab-89e73b764997",
+          "doc_count": 49
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/253c7dd3-c7d2-424d-8f2f-5877d5602c92",
+          "doc_count": 82
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/327741a3-e81f-47f6-87e7-2c0b8978785d",
+          "doc_count": 46
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/327741a3-e81f-47f6-87e7-2c0b8978785d^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44ba715a-5c8f-43e6-91cf-41a1fa0db69b",
+          "doc_count": 2
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/327741a3-e81f-47f6-87e7-2c0b8978785d^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4cfa5c0a-8919-42c7-aca1-85bb05b3f342",
+          "doc_count": 18
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/327741a3-e81f-47f6-87e7-2c0b8978785d^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b5278f34-acb4-4350-a2c4-9265b7cd3d3e",
+          "doc_count": 4
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/327741a3-e81f-47f6-87e7-2c0b8978785d^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bb92d1a4-35b2-406a-95ab-de5d40c2ab94",
+          "doc_count": 22
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12",
+          "doc_count": 311
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/346abc6c-bb24-4a02-8c89-1823c1d34f39",
+          "doc_count": 15
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/447319bf-3e3a-46a4-bfc3-22d790fdbe93",
+          "doc_count": 9
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/447319bf-3e3a-46a4-bfc3-22d790fdbe93^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0fc91d6-4ad2-45fd-90a6-1dd601db86a0",
+          "doc_count": 9
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/aab17d6b-d235-4cd0-b2eb-56883ffe00aa",
+          "doc_count": 18
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/aab17d6b-d235-4cd0-b2eb-56883ffe00aa^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8a9d5f09-b8bb-45fe-9921-ea6847ed1131",
+          "doc_count": 18
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/afb0f14a-54dc-41f1-89ec-68cee69c0b85",
+          "doc_count": 269
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/afb0f14a-54dc-41f1-89ec-68cee69c0b85^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/62e44243-f6c2-4f44-b968-fc1dbdc97e57",
+          "doc_count": 4
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/afb0f14a-54dc-41f1-89ec-68cee69c0b85^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6cbc7d12-1e2a-40ee-9525-6c0a1250b744",
+          "doc_count": 259
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/afb0f14a-54dc-41f1-89ec-68cee69c0b85^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b6d61b86-93ab-4a72-b8a8-7b4864ebf01a",
+          "doc_count": 3
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4d8e11c9-2852-491e-b163-f8b06e761714",
+          "doc_count": 35
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4d8e11c9-2852-491e-b163-f8b06e761714^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/2a432b3a-8fd5-452d-a307-930fb5b84eca",
+          "doc_count": 3
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4d8e11c9-2852-491e-b163-f8b06e761714^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8176a367-40e5-4271-8134-41734406b9f4",
+          "doc_count": 29
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4d8e11c9-2852-491e-b163-f8b06e761714^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ebbb070b-98db-44da-8305-2b5e1baa3ce8",
+          "doc_count": 3
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8404fcfd-4756-422e-adcd-4fad32d261c7",
+          "doc_count": 40
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e73980d8-03e8-49d1-b95a-2fcec63b3b52",
+          "doc_count": 18
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e73980d8-03e8-49d1-b95a-2fcec63b3b52^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/166c8193-f635-41b7-821c-4181cd5a6b2f",
+          "doc_count": 13
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e73980d8-03e8-49d1-b95a-2fcec63b3b52^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/166c8193-f635-41b7-821c-4181cd5a6b2f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5934d8c7-04f7-4624-a94e-d14990de5f0b",
+          "doc_count": 3
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e73980d8-03e8-49d1-b95a-2fcec63b3b52^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/166c8193-f635-41b7-821c-4181cd5a6b2f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b180e362-0fea-453d-ad3e-68038ada8819",
+          "doc_count": 9
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e73980d8-03e8-49d1-b95a-2fcec63b3b52^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/23bfa317-c0b6-4513-99f6-9e34a93b501a",
+          "doc_count": 3
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e73980d8-03e8-49d1-b95a-2fcec63b3b52^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/23bfa317-c0b6-4513-99f6-9e34a93b501a^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/12072aff-9017-4815-bca6-ee81a0aa7b7e",
+          "doc_count": 2
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e73980d8-03e8-49d1-b95a-2fcec63b3b52^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/23bfa317-c0b6-4513-99f6-9e34a93b501a^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8b744b55-1fa7-4cdb-8538-c34b803ff0e3",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
+          "doc_count": 1533
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0d2356f4-bcea-4eb1-a584-05def26f19a6",
+          "doc_count": 408
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/110a9a47-6af7-488d-a57a-6de268026512",
+          "doc_count": 148
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1b3449ab-b51c-4877-9649-2e9277713dc8",
+          "doc_count": 60
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/57aa6316-4d57-4083-b5fc-e0203e41c0c5",
+          "doc_count": 28
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/57aa6316-4d57-4083-b5fc-e0203e41c0c5^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/2ebbf441-af2a-42b6-aa94-0bdd1467d279",
+          "doc_count": 19
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/57aa6316-4d57-4083-b5fc-e0203e41c0c5^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/3f264afd-82b3-4e5e-a53f-91042d0284c4",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/57aa6316-4d57-4083-b5fc-e0203e41c0c5^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/de3eae82-5f27-4a4c-9e2a-827420204a59",
+          "doc_count": 4
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/734a87f0-3592-4609-a22a-5c3849d0c27d",
+          "doc_count": 38
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/753b1fe2-b56c-4158-a194-ba784099b57b",
+          "doc_count": 103
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/999b46af-009b-4c50-abd8-c211134f0f2b",
+          "doc_count": 296
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/a37b3eb2-f2c9-44fd-a942-bc3531eb9737",
+          "doc_count": 30
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/a387bf52-9857-4246-a600-93165ae26299",
+          "doc_count": 42
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ba57efdb-82bd-4c88-ac2c-075c42972413",
+          "doc_count": 167
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bc2a8ec0-ec4c-4d42-a66a-20372d1ac0b3",
+          "doc_count": 63
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bc2a8ec0-ec4c-4d42-a66a-20372d1ac0b3^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5a35d256-8822-4192-b17c-b2b545a82083",
+          "doc_count": 5
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bc2a8ec0-ec4c-4d42-a66a-20372d1ac0b3^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/606dd9e0-80d3-4043-a284-11fe71439801",
+          "doc_count": 28
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bc2a8ec0-ec4c-4d42-a66a-20372d1ac0b3^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/86b6f31c-b9bc-4815-9c9e-ca7b51416c0d",
+          "doc_count": 14
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bc2a8ec0-ec4c-4d42-a66a-20372d1ac0b3^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/86b6f31c-b9bc-4815-9c9e-ca7b51416c0d^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6196826c-0f57-4e80-b86f-350f3e1baad7",
+          "doc_count": 7
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bc2a8ec0-ec4c-4d42-a66a-20372d1ac0b3^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/86b6f31c-b9bc-4815-9c9e-ca7b51416c0d^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c7715b4f-9daf-4cdd-a780-7859de5c33ec",
+          "doc_count": 4
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bc2a8ec0-ec4c-4d42-a66a-20372d1ac0b3^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e8b27539-2900-435b-bf84-27816cd3a0c9",
+          "doc_count": 15
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3e513bd-53dd-4dcb-9de6-290e9e6cd130",
+          "doc_count": 10
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3e513bd-53dd-4dcb-9de6-290e9e6cd130^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/36c832d8-8599-4e74-bc77-c5cc38c7662f",
+          "doc_count": 4
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3e513bd-53dd-4dcb-9de6-290e9e6cd130^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/3ee68304-bb4f-4a8f-aa83-52fb89c18194",
+          "doc_count": 2
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3e513bd-53dd-4dcb-9de6-290e9e6cd130^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/de688da2-5fa4-4918-bee8-8cfe29b35f6c",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e037639f-adc4-4aa6-b5b8-c489dc1f8b70",
+          "doc_count": 21
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e07169d6-9cd6-4d5d-aeba-220a2b47ef11",
+          "doc_count": 112
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921",
+          "doc_count": 29
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/09864733-722c-450d-b6bd-00d14ac6308c",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/09864733-722c-450d-b6bd-00d14ac6308c^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d57aca9b-863b-46fb-8e2b-e7b3c836b2d5",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4a04775a-1067-4dcd-8360-860c6098e29e",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4a04775a-1067-4dcd-8360-860c6098e29e^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/39526b38-0bab-46b5-a3c2-6e3dfb73560b",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6262a22c-960a-4d66-8a16-1d4eec6017c0",
+          "doc_count": 2
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8466f1f8-68d0-474f-8c2e-c0423ffab068",
+          "doc_count": 22
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8466f1f8-68d0-474f-8c2e-c0423ffab068^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0f5ff382-62d1-4f0f-ac75-e48cab079c3b",
+          "doc_count": 22
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e8e43594-e30b-42cd-9946-086b90650b77",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e8e43594-e30b-42cd-9946-086b90650b77^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c5cad77c-25ca-4672-a189-1b3eaeb8e757",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947",
+          "doc_count": 2671
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8",
+          "doc_count": 58
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/493a8f9c-6792-422e-b534-0e7dacd4e55c",
+          "doc_count": 3
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/90fbc5b3-3b93-47a3-8d9c-833b8b370573",
+          "doc_count": 9
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/986b8fd9-2f22-4f63-838c-78a008ea5a89",
+          "doc_count": 3
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/986b8fd9-2f22-4f63-838c-78a008ea5a89^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4429526e-7ba7-4ec9-8c58-4b3a636b585a",
+          "doc_count": 3
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0c782d1-bd5c-436b-8318-900edb34aec0",
+          "doc_count": 36
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6ddaddc7-1f50-419a-b5af-6ea5177498de",
+          "doc_count": 441
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/a4af5404-83cf-4420-9803-9b838dd619f1",
+          "doc_count": 236
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb",
+          "doc_count": 1862
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0470b995-f8d8-4d18-9a33-bb537b91cfc5",
+          "doc_count": 38
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4be78aec-c1da-45e3-aed5-cc4472f36116",
+          "doc_count": 5
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/611c44d1-ee38-4fd8-a80e-e6145d59cbec",
+          "doc_count": 407
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6f550a25-d637-4cdf-8c11-1b88316e7a6c",
+          "doc_count": 59
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c4baffb4-928d-46f2-9f98-af9fd0e1e34e",
+          "doc_count": 124
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e5687e7d-5e37-4799-8240-4216b92b36d3",
+          "doc_count": 1218
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e95c79ce-707b-43a0-b1e5-6b84a0cbf46f",
+          "doc_count": 48
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463",
+          "doc_count": 1866
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/2a52c99c-e573-4afd-896b-6e8e1256d041",
+          "doc_count": 66
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4c03a9de-4ab3-44c4-a058-e2b23f76ec71",
+          "doc_count": 63
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4c03a9de-4ab3-44c4-a058-e2b23f76ec71^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/259a1c4b-50f0-4f58-adac-77ec08d0e122",
+          "doc_count": 19
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4c03a9de-4ab3-44c4-a058-e2b23f76ec71^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/65d04005-2718-4d5b-9e57-62bc5b58a5b5",
+          "doc_count": 26
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4c03a9de-4ab3-44c4-a058-e2b23f76ec71^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73834f27-c17f-4488-809c-8117dbd704c1",
+          "doc_count": 17
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5f8480c3-a031-4fc7-93f4-01960b971611",
+          "doc_count": 72
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5f8480c3-a031-4fc7-93f4-01960b971611^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5bb5ca1c-c6ee-4773-807d-717f11566257",
+          "doc_count": 67
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5f8480c3-a031-4fc7-93f4-01960b971611^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b2b3a773-328a-4308-9e76-27a1136863ee",
+          "doc_count": 5
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/65847821-1c53-43ce-b791-d9c57465b19d",
+          "doc_count": 2
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8e3044e6-9720-491b-ac10-42e9b8e74245",
+          "doc_count": 165
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8e3044e6-9720-491b-ac10-42e9b8e74245^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/16379831-6f19-4737-9d2d-4c438d4ede4e",
+          "doc_count": 49
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8e3044e6-9720-491b-ac10-42e9b8e74245^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/279dbbd0-3967-401c-a42b-ffce576c1482",
+          "doc_count": 40
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8e3044e6-9720-491b-ac10-42e9b8e74245^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c4b843dd-3a12-4ede-b23b-bd4964e7d343",
+          "doc_count": 69
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8e3044e6-9720-491b-ac10-42e9b8e74245^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c858954c-e113-4e10-9821-e0f7e7565502",
+          "doc_count": 2
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115",
+          "doc_count": 1090
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0b7d8274-e377-4fe6-8cd5-a712530a38a1",
+          "doc_count": 10
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ba12df3c-e19d-4b55-a7f2-b23d67a1df88",
+          "doc_count": 930
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/cc1c27f0-8120-470a-bf65-53ba05616108",
+          "doc_count": 14
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d0aee15b-7dd0-4992-a8c7-80e6f806d51c",
+          "doc_count": 103
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299",
+          "doc_count": 168
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1df98de9-e2c9-467b-b93d-37e9b866d8e9",
+          "doc_count": 10
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5f9afe9d-8608-43c2-a09b-d66f28698ec7",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/9469c943-fc77-41b4-95fb-e02537e87e03",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/9761094f-e6c3-48e6-830e-44d50f88cf7f",
+          "doc_count": 10
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/9ed0e8da-109f-4954-b97e-86cfe6b785f1",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bb4b5072-f7df-49ee-8331-5928e450e855",
+          "doc_count": 42
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ff685e30-68d9-4403-8770-e457048651fc",
+          "doc_count": 24
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f1876ff5-b5e0-4932-8779-c720bda5a8b8",
+          "doc_count": 104
+        }
+      ]
+    },
+    "th_httpinspireeceuropaeutheme-theme_tree.key": {
+      "meta": {
+        "collapsed": true,
+        "orderByTranslation": true,
+        "translateOnLoad": true
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "http://inspire.ec.europa.eu/theme/ac",
+          "doc_count": 32
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/af",
+          "doc_count": 124
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/am",
+          "doc_count": 565
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/au",
+          "doc_count": 79
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/br",
+          "doc_count": 13
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/bu",
+          "doc_count": 30
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/cp",
+          "doc_count": 16
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/ef",
+          "doc_count": 745
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/el",
+          "doc_count": 1188
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/er",
+          "doc_count": 38
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/ge",
+          "doc_count": 319
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/gg",
+          "doc_count": 18
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/gn",
+          "doc_count": 8
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/hb",
+          "doc_count": 1062
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/hh",
+          "doc_count": 65
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/hy",
+          "doc_count": 646
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/lc",
+          "doc_count": 42
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/lu",
+          "doc_count": 50
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/mf",
+          "doc_count": 80
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/mr",
+          "doc_count": 22
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/nz",
+          "doc_count": 65
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/of",
+          "doc_count": 2482
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/oi",
+          "doc_count": 217
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/pd",
+          "doc_count": 34
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/pf",
+          "doc_count": 80
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/ps",
+          "doc_count": 103
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/rs",
+          "doc_count": 2
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/sd",
+          "doc_count": 1359
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/so",
+          "doc_count": 4
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/sr",
+          "doc_count": 230
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/su",
+          "doc_count": 35
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/tn",
+          "doc_count": 89
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/us",
+          "doc_count": 202
+        }
+      ]
+    },
+    "tag.default": {
+      "meta": {
+        "collapsed": true,
+        "caseInsensitiveInclude": true
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 133368,
+      "buckets": [
+        {
+          "key": "Oceanographic geographical features",
+          "doc_count": 2240
+        },
+        {
+          "key": "Delayed",
+          "doc_count": 1540
+        },
+        {
+          "key": "Répartition des espèces",
+          "doc_count": 1514
+        },
+        {
+          "key": "Habitats et biotopes",
+          "doc_count": 1189
+        },
+        {
+          "key": "CHARM",
+          "doc_count": 1145
+        },
+        {
+          "key": "Species data set",
+          "doc_count": 1076
+        },
+        {
+          "key": "bounding box",
+          "doc_count": 1041
+        },
+        {
+          "key": "/Métropole/Golfe de Gascogne",
+          "doc_count": 1031
+        },
+        {
+          "key": "Eastern English Channel",
+          "doc_count": 1014
+        },
+        {
+          "key": "/Métropole/Méditerranée occidentale",
+          "doc_count": 981
+        }
+      ]
+    },
+    "creationYearForResource": {
+      "meta": {
+        "collapsed": false
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 2780,
+      "buckets": [
+        {
+          "key": 2025,
+          "doc_count": 162
+        },
+        {
+          "key": 2024,
+          "doc_count": 366
+        },
+        {
+          "key": 2023,
+          "doc_count": 385
+        },
+        {
+          "key": 2022,
+          "doc_count": 284
+        },
+        {
+          "key": 2021,
+          "doc_count": 655
+        },
+        {
+          "key": 2020,
+          "doc_count": 500
+        },
+        {
+          "key": 2019,
+          "doc_count": 388
+        },
+        {
+          "key": 2018,
+          "doc_count": 613
+        },
+        {
+          "key": 2017,
+          "doc_count": 548
+        },
+        {
+          "key": 2016,
+          "doc_count": 397
+        }
+      ]
+    },
+    "OrgForResource": {
+      "meta": {
+        "collapsed": true,
+        "caseInsensitiveInclude": true
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": []
+    },
+    "resourceType": {
+      "meta": {
+        "decorator": {
+          "type": "icon",
+          "map": {
+            "service": "faSolidCloud",
+            "series": "faSolidCopy",
+            "nonGeographicDataset": "faSolidChartColumn",
+            "document": "faSolidCopy",
+            "publication": "faSolidBook",
+            "featureCatalog": "faSolidTable",
+            "dataset": "faSolidDatabase",
+            "map": "faSolidMap"
+          }
+        },
+        "collapsed": true
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 71,
+      "buckets": [
+        {
+          "key": "dataset",
+          "doc_count": 10807
+        },
+        {
+          "key": "series",
+          "doc_count": 2215
+        },
+        {
+          "key": "publication",
+          "doc_count": 1017
+        },
+        {
+          "key": "nonGeographicDataset",
+          "doc_count": 317
+        },
+        {
+          "key": "map-static",
+          "doc_count": 100
+        },
+        {
+          "key": "service",
+          "doc_count": 85
+        },
+        {
+          "key": "initiative",
+          "doc_count": 80
+        },
+        {
+          "key": "map",
+          "doc_count": 55
+        },
+        {
+          "key": "software",
+          "doc_count": 53
+        },
+        {
+          "key": "repository",
+          "doc_count": 43
+        }
+      ]
+    }
+  }
+}

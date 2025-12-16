@@ -1,0 +1,651 @@
+{
+  "took": 8,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 14821,
+      "relation": "eq"
+    },
+    "max_score": null,
+    "hits": [
+      {
+        "_index": "geo-records",
+        "_id": "ad7e0259-2627-40c4-811f-b5a66a4a6dde",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Quality Information Document (CMEMS-OMI-QUID-GLO-SL)"
+          },
+          "dateStamp": "2021-04-19T12:54:29.000Z",
+          "resourceType": ["publication"],
+          "uuid": "ad7e0259-2627-40c4-811f-b5a66a4a6dde",
+          "draft": "n",
+          "id": "334238202",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "ac643c9c-7a56-480d-83c7-25fa155d4cbd",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "High Quality Figure (GLOBAL_OMI_OHC_anomalies-hq)"
+          },
+          "dateStamp": "2021-04-19T12:06:07.000Z",
+          "resourceType": ["publication"],
+          "uuid": "ac643c9c-7a56-480d-83c7-25fa155d4cbd",
+          "draft": "n",
+          "id": "334238149",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "8a8afc62-adee-4f49-bd6b-9247033769b3",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "High Quality Figure (ARCTIC_OMI_SI_extent_obs-hq)"
+          },
+          "dateStamp": "2024-07-26T15:34:55.618Z",
+          "resourceType": ["publication"],
+          "uuid": "8a8afc62-adee-4f49-bd6b-9247033769b3",
+          "draft": "n",
+          "id": "334238195",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "9c04daf8-d8f7-4e36-a05f-0d096c6da126",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Product User Manual (CMEMS-OMI-PUM-GLO-OHC)"
+          },
+          "dateStamp": "2024-07-26T14:54:22.758Z",
+          "resourceType": ["publication"],
+          "uuid": "9c04daf8-d8f7-4e36-a05f-0d096c6da126",
+          "draft": "n",
+          "id": "334238062",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "4d81b3a6-ea6b-4ab0-8f5a-c1337e1169b3",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Quality Information Document (CMEMS-OMI-QUID-ARC-SI-extent)"
+          },
+          "dateStamp": "2024-07-26T15:51:29.805Z",
+          "resourceType": ["publication"],
+          "uuid": "4d81b3a6-ea6b-4ab0-8f5a-c1337e1169b3",
+          "draft": "n",
+          "id": "334238157",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "4ec313ee-3fe4-4e1b-b9a4-6538e9383320",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Quality Information Document (CMEMS-OMI-QUID-ANT-SI-extent)"
+          },
+          "dateStamp": "2024-07-31T13:13:34.097Z",
+          "resourceType": ["publication"],
+          "uuid": "4ec313ee-3fe4-4e1b-b9a4-6538e9383320",
+          "draft": "n",
+          "id": "334238156",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "6163b2d8-a2bc-465a-a3d9-3af0ec4e8f0a",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Product User Manual (CMEMS-OMI-PUM-GLO-SL)"
+          },
+          "dateStamp": "2021-04-19T12:45:51.000Z",
+          "resourceType": ["publication"],
+          "uuid": "6163b2d8-a2bc-465a-a3d9-3af0ec4e8f0a",
+          "draft": "n",
+          "id": "334238200",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "98174dbd-1913-4679-8198-72bfde224e09",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-04-24T14:34:29.000Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Administrative units | Nationally designated Areas | European Commission. Directorate-General for Maritime Affairs and Fisheries | Nationally designated areas",
+            "langeng": "Administrative units | Nationally designated Areas | European Commission. Directorate-General for Maritime Affairs and Fisheries | Nationally designated areas"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-49.863274, 12.863215],
+                  [37.324226, 12.863215],
+                  [37.324226, 68.125756],
+                  [-49.863274, 68.125756],
+                  [-49.863274, 12.863215]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
+                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
+              },
+              "nameObject": {
+                "default": "EMODnet Human Activities: Protected Areas",
+                "langeng": "EMODnet Human Activities: Protected Areas"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/search-results.php?dataname=Nationally+Designated+Areas",
+                "langeng": "http://www.emodnet-humanactivities.eu/search-results.php?dataname=Nationally+Designated+Areas"
+              },
+              "nameObject": {
+                "default": "Nationally designated areas",
+                "langeng": "Nationally designated areas"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "98174dbd-1913-4679-8198-72bfde224e09",
+          "draft": "n",
+          "id": "334238545",
+          "owner": "113112277",
+          "groupOwner": "139596411",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["139596411", "1", "83566633"],
+          "op2": "139596411",
+          "op1": "139596411",
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596411",
+          "op5": ["139596411", "83566633"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "e0584083-36d2-4987-92c6-0b2c9a653726",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2017-05-04T13:44:23.000Z",
+          "resourceType": ["series"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Concentration of suspended particulate material in the water column | Mean turbidity over one year | British Oceanographic Data Centre | Decision support system for water quality management in the Tagus estuary, Portugal",
+            "langeng": "Concentration of suspended particulate material in the water column | Mean turbidity over one year | British Oceanographic Data Centre | Decision support system for water quality management in the Tagus estuary, Portugal"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-9.4, 38.5],
+                  [-8.9, 38.5],
+                  [-8.9, 39.0],
+                  [-9.4, 39.0],
+                  [-9.4, 38.5]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/",
+                "langeng": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/",
+                "langeng": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "e0584083-36d2-4987-92c6-0b2c9a653726",
+          "draft": "n",
+          "id": "158009709",
+          "owner": "113110382",
+          "groupOwner": "139596764",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["139596764", "1", "83566633"],
+          "op2": "139596764",
+          "op1": ["139596764", "83566633"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596764",
+          "op5": ["139596764", "83566633"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "e8251792-c363-424f-92c9-63cade162bac",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2016-11-17T12:36:59.000Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Zooplankton taxonomy-related abundance per unit volume of the water column | Abundance of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset",
+            "langeng": "Zooplankton taxonomy-related abundance per unit volume of the water column | Abundance of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [28.13, 41.0],
+                  [41.5, 41.0],
+                  [41.5, 43.4],
+                  [28.13, 43.4],
+                  [28.13, 41.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.ims.metu.edu.tr/IMS_Inventory/",
+                "langeng": "http://www.ims.metu.edu.tr/IMS_Inventory/"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "e8251792-c363-424f-92c9-63cade162bac",
+          "draft": "n",
+          "id": "153356653",
+          "owner": "141622272",
+          "groupOwner": "139608974",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "139608974", "83566259"],
+          "op2": "139608974",
+          "op1": "139608974",
+          "documentStandard": "iso19115-3.2018",
+          "op5": "139608974",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "http://emodnet-blacksea.eu/wp-content/uploads/2015/11/CH11_alien_species_n.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      }
+    ]
+  },
+  "aggregations": {
+    "resourceType": {
+      "meta": {
+        "decorator": {
+          "prefix": "text-6xl p-6",
+          "type": "icon",
+          "map": {
+            "service": "faSolidCloud",
+            "series": "faSolidCopy",
+            "nonGeographicDataset": "faSolidChartColumn",
+            "document": "faSolidCopy",
+            "publication": "faSolidBook",
+            "featureCatalog": "faSolidTable",
+            "dataset": "faSolidDatabase",
+            "map": "faSolidMap"
+          }
+        }
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 167,
+      "buckets": [
+        {
+          "key": "dataset",
+          "doc_count": 10807
+        },
+        {
+          "key": "series",
+          "doc_count": 2215
+        },
+        {
+          "key": "publication",
+          "doc_count": 1017
+        },
+        {
+          "key": "nonGeographicDataset",
+          "doc_count": 317
+        },
+        {
+          "key": "map-static",
+          "doc_count": 100
+        },
+        {
+          "key": "service",
+          "doc_count": 85
+        },
+        {
+          "key": "initiative",
+          "doc_count": 80
+        },
+        {
+          "key": "map",
+          "doc_count": 55
+        }
+      ]
+    },
+    "th_sextant-theme_tree.key": {
+      "meta": {
+        "decorator": {
+          "type": "img",
+          "map": {
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947": "https://sextant.ifremer.fr/geonetwork/srv/api/records/d90bc6fa-5416-4064-97b6-8f671de3e407/attachments/zfhi.jpg",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/images/2023/mlf_density_nb_l_other.png",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bathymetrie-emodnet/1595576-2-fre-FR/Bathymetrie-Emodnet.png",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/hyperspectrale-la-reunion/1603154-3-fre-FR/Hyperspectrale-La-Reunion.png",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b": "https://sextant.ifremer.fr/geonetwork/srv/api/records/d275ec6a-603b-4170-add2-9b52ce190793/attachments/165.JPG",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/habitats-physiques/1595588-2-fre-FR/Habitats-physiques.png",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bigood/1595612-3-fre-FR/BIGOOD.png"
+          }
+        },
+        "orderByTranslation": true,
+        "translateOnLoad": true
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 29,
+      "buckets": [
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947",
+          "doc_count": 2671
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463",
+          "doc_count": 1866
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
+          "doc_count": 1533
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b",
+          "doc_count": 587
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1",
+          "doc_count": 366
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f",
+          "doc_count": 344
+        }
+      ]
+    }
+  }
+}

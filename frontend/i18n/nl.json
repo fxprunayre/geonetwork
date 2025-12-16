@@ -8,6 +8,9 @@
         }
       }
     },
+    "button": {
+      "title": "Zoeken"
+    },
     "filter": {
       "title": "Alle filters",
       "activeFilters": "Actieve filters",
