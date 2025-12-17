@@ -1,15 +1,16 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
+import { KeyValuePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { Chip } from 'primeng/chip';
 import { PopoverModule } from 'primeng/popover';
 import { OverlayModule } from 'primeng/overlay';
-import { Button } from 'primeng/button';
 import { ProgressSpinner } from 'primeng/progressspinner';
-import { KeyValuePipe } from '@angular/common';
 import { RegistriesService } from 'gn4-api-client';
-import { firstValueFrom } from 'rxjs';
-import { SearchBase } from '../../search/search-base/search-base';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { SearchBase } from '../../search/search-base/search-base';
+import { faSolidMagnifyingGlass, faSolidTag } from '@ng-icons/font-awesome/solid';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 
 export interface Keyword {
   default: string;
@@ -17,28 +18,31 @@ export interface Keyword {
   uri?: string | null;
 }
 
-export interface KeywordWithId extends Keyword {
-  _id: string;
-}
 
 @Component({
   selector: 'app-keyword-list',
   standalone: true,
-  imports: [Chip, PopoverModule, OverlayModule, Button, ProgressSpinner, KeyValuePipe],
+  imports: [Chip, PopoverModule, OverlayModule, ProgressSpinner, KeyValuePipe, NgIcon],
   templateUrl: './keyword-list.html',
+  viewProviders: [
+    provideIcons({
+      faSolidTag,
+      faSolidMagnifyingGlass,
+    }),
+  ],
 })
 export class KeywordList extends SearchBase {
-  private registries = inject(RegistriesService);
-  private router = inject(Router);
-  private translate = inject(TranslateService);
-  title = input<string | undefined>();
-  keywords = input.required<KeywordWithId[]>();
-  activeKeyword = signal<KeywordWithId | null>(null);
+  private readonly registries = inject(RegistriesService);
+  private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
 
+  title = input<string | undefined>();
+  keywords = input.required<Keyword[]>();
+  activeKeyword = signal<Keyword | null>(null);
   definition = signal<string | null>(null);
   loading = signal(false);
 
-  async openPopover(event: MouseEvent, keyword: KeywordWithId, pop: any) {
+  async openPopover(event: MouseEvent, keyword: Keyword, pop: any) {
     this.activeKeyword.set(keyword);
     this.definition.set(null);
 
@@ -66,15 +70,15 @@ export class KeywordList extends SearchBase {
       );
 
       const first = (res as any)?.values?.[0];
-      this.definition.set(first?.definition || null);
+      this.definition.set(first?.definition ?? null);
     } catch {
       this.definition.set(null);
+    } finally {
+      this.loading.set(false);
     }
-
-    this.loading.set(false);
   }
 
-  onKeywordClick(keyword: KeywordWithId | null) {
+  onKeywordClick(keyword: Keyword | null) {
     if (!keyword) return;
 
     this.search.reset();
@@ -90,18 +94,16 @@ export class KeywordList extends SearchBase {
     const query = keyword.default.replace(/^\/+/, '');
 
     this.router.navigate(['/search'], {
-      queryParams: {
-        q: query,
-      },
+      queryParams: { q: query },
     });
   }
 
   vocabGroups = computed(() => {
     const groups: Record<string, Keyword[]> = {};
 
-    for (const k of this.keywords()) {
-      const vocabKey = k.vocabulary ?? 'free';
-      (groups[vocabKey] ??= []).push(k);
+    for (const keyword of this.keywords()) {
+      const key = keyword.vocabulary ?? 'free';
+      (groups[key] ??= []).push(keyword);
     }
 
     return groups;

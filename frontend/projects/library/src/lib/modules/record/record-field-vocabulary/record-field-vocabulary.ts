@@ -3,10 +3,6 @@ import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { Thesaurus } from 'gn-api-client';
 import { Keyword, KeywordList } from '../../vocabularies/keyword-list/keyword-list';
 
-interface KeywordWithId extends Keyword {
-  _id: string;
-}
-
 @Component({
   selector: 'app-record-field-vocabulary',
   imports: [KeywordList],
@@ -23,7 +19,6 @@ export class RecordFieldVocabulary extends RecordFieldBase {
   mainVocabularies = signal(['th_sextant-theme']);
   mode = input<'primary' | 'secondary'>('secondary');
   styleClass = input<string>('');
-
   vocabularies = computed<Thesaurus[]>(() => {
     const rec = this.record();
     const allVocabularies: Record<string, Thesaurus> = rec['allKeywords'] || {};
@@ -37,30 +32,26 @@ export class RecordFieldVocabulary extends RecordFieldBase {
       .map((key) => allVocabularies[key]);
   });
 
-  allKeywords = computed<KeywordWithId[]>(() => {
+  allKeywords = computed<Keyword[]>(() => {
     const rec = this.record();
     if (!rec) return [];
 
     const groups = rec['allKeywords'] || {};
-    const list: KeywordWithId[] = [];
+    const list: Keyword[] = [];
 
-    for (const vocab of Object.keys(groups)) {
-      const vocabObj = groups[vocab];
-      const arr = vocabObj.keywords || [];
+    for (const vocabKey of Object.keys(groups)) {
+      const vocabObj = groups[vocabKey];
+      const keywords = vocabObj.keywords || [];
 
-      for (const item of arr as any[]) {
-        const isVocabularyKeyword = !!item.link;
-        const label = (item.default ?? '').trim();
+      for (const item of keywords as any[]) {
+        const rawLink = item.link ?? item.uri ?? null;
+        const hasLink = typeof rawLink === 'string' && rawLink.length > 0;
 
-        const mapped: KeywordWithId = {
-          ...item,
-          default: item.default,
-          uri: item.link ?? null,
-          vocabulary: isVocabularyKeyword ? vocab : null,
-          _id: isVocabularyKeyword ? item.link : `free::${label.toLowerCase()}`,
-        };
-
-        list.push(mapped);
+        list.push({
+          default: (item.default ?? '').trim(),
+          uri: rawLink,
+          vocabulary: hasLink ? vocabKey : null,
+        });
       }
     }
 
