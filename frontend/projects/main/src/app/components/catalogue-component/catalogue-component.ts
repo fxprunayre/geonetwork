@@ -11,6 +11,7 @@ import {
   SearchBase,
   SearchInput,
   SearchWelcomeTextPipe,
+  SearchActiveFiltersButton,
 } from 'gn-library';
 import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
@@ -33,13 +34,12 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     Button,
     NgIcon,
     ButtonIcon,
-    InputGroup,
-    InputGroupAddon,
     FormsModule,
     TranslatePipe,
     SearchWelcomeTextPipe,
     OverlayBadgeModule,
     NgClass,
+    SearchActiveFiltersButton,
   ],
   standalone: true,
   templateUrl: './catalogue-component.html',

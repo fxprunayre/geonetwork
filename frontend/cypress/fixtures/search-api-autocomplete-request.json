@@ -1,0 +1,29 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "multi_match": {
+            "query": "surval",
+            "type": "bool_prefix",
+            "fields": [
+              "resourceTitleObject.*^6",
+              "resourceAbstractObject.*^5",
+              "tag",
+              "uuid",
+              "resourceIdentifier"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "isTemplate": ["n"]
+          }
+        }
+      ]
+    }
+  },
+  "size": 20,
+  "sort": ["_score"],
+  "_source": ["resourceTitleObject.*", "resourceType"]
+}

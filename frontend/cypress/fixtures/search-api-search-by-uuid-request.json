@@ -4,7 +4,15 @@
   "track_total_hits": true,
   "query": {
     "bool": {
-      "must": [],
+      "must": [
+        {
+          "query_string": {
+            "query": "cf5048f6\\-5bbf\\-4e44\\-ba74\\-e6f429af51ea",
+            "default_operator": "AND",
+            "fields": ["resourceTitleObject.*^5", "any.*", "uuid"]
+          }
+        }
+      ],
       "must_not": [],
       "should": [],
       "filter": [

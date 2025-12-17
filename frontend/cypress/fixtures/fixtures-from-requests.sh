@@ -29,3 +29,28 @@ curl "$SERVER/srv/api/search/records/_search" \
   -X 'POST' \
   -d @search-api-search-request.json | jq . > search-api-search-response.json
   
+curl "$SERVER/srv/api/search/records/_search" \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -X 'POST' \
+  -d @search-api-search-by-uuid-request.json | jq . > search-api-search-by-uuid-response.json
+  
+  
+curl "$SERVER/srv/api/search/records/_search" \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -X 'POST' \
+  -d @search-api-search-by-uuid-sort-title-request.json | jq . > search-api-search-by-uuid-sort-title-response.json
+  
+curl "$SERVER/srv/api/search/records/_search" \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -X 'POST' \
+  -d @search-api-search-by-q-request.json | jq . > search-api-search-by-q-response.json
+
+curl "$SERVER/srv/api/search/records/_search" \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -X 'POST' \
+  -d @search-api-autocomplete-request.json | jq . > search-api-autocomplete-response.json
+  

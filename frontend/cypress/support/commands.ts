@@ -4,25 +4,60 @@ Cypress.Commands.add('initApp', () => {
     'apiI18nGnui',
   );
 
-  cy.fixture('home-api-search-request.json').then((homeRequestBody) => {
-    cy.fixture('search-api-search-request.json').then((searchRequestBody) => {
+  const mockMap = [
+    {
+      req: 'home-api-search-request.json',
+      res: 'home-api-search-response.json',
+      alias: 'apiHomeSearch',
+    },
+    {
+      req: 'search-api-search-request.json',
+      res: 'search-api-search-response.json',
+      alias: 'apiMainSearch',
+    },
+    {
+      req: 'search-api-search-by-uuid-request.json',
+      res: 'search-api-search-by-uuid-response.json',
+      alias: 'apiMainSearchByUuid',
+    },
+    {
+      req: 'search-api-search-by-uuid-sort-title-request.json',
+      res: 'search-api-search-by-uuid-sort-title-response.json',
+      alias: 'apiMainSearchByUuidSortTitle',
+    },
+    {
+      req: 'search-api-search-by-q-request.json',
+      res: 'search-api-search-by-q-response.json',
+      alias: 'apiMainSearchByQ',
+    },
+    {
+      req: 'search-api-autocomplete-request.json',
+      res: 'search-api-autocomplete-response.json',
+      alias: 'apiMainSearchAutocomplete',
+    },
+  ];
+
+  const loadedMocks: any[] = [];
+  cy.wrap(mockMap)
+    .each((mock: any) => {
+      cy.fixture(mock.req).then((body) => {
+        loadedMocks.push({ ...mock, body });
+      });
+    })
+    .then(() => {
       cy.intercept('POST', '**/search/records/_search*', (req) => {
         // Ensure body is an object to ignore JSON formatting differences (whitespace, etc.)
         const body = Cypress._.isString(req.body) ? JSON.parse(req.body) : req.body;
 
-        // Check if the request body matches the home search fixture
-        if (Cypress._.isEqual(body, homeRequestBody)) {
-          req.alias = 'apiSearchRecords';
-          req.reply({ fixture: 'home-api-search-response.json' });
-        }
-        // Check if the request body matches the search page search fixture
-        else if (Cypress._.isEqual(body, searchRequestBody)) {
-          req.alias = 'apiSearchPageRecords';
-          req.reply({ fixture: 'search-api-search-response.json' });
-        }
-      }).as('apiSearchRecords');
-    });
-  });
+        const match = loadedMocks.find((m) => Cypress._.isEqual(body, m.body));
 
-  cy.visit('/');
+        if (match) {
+          req.alias = match.alias;
+          req.reply({ fixture: match.res });
+        } else {
+          req.alias = 'unmatchedSearchRequest';
+          console.warn('No matching fixture for unmatched search request body:', body);
+        }
+      });
+    });
 });

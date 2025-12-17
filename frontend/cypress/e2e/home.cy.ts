@@ -11,12 +11,12 @@ describe('Home Page', () => {
     cy.get('@apiI18nGnui.all').should('have.length', 1);
     cy.wait('@apiUiConfig');
     cy.get('@apiUiConfig.all').should('have.length', 1);
-    cy.wait('@apiSearchRecords');
-    cy.get('@apiSearchRecords.all').should('have.length', 1);
+    cy.wait('@apiHomeSearch');
+    cy.get('@apiHomeSearch.all').should('have.length', 1);
   });
 
   it('should load the catalogue general info', () => {
-    cy.wait('@apiSearchRecords').then((interception) => {
+    cy.wait('@apiHomeSearch').then((interception) => {
       const total = interception.response?.body.hits.total.value;
 
       cy.get('app-aggregation').as('homeAggregation');
@@ -59,7 +59,7 @@ describe('Home Page', () => {
   });
 
   it('should navigate to Search page when clicking on Search button', () => {
-    cy.wait('@apiSearchRecords');
+    cy.wait('@apiHomeSearch');
     cy.get('app-search-input').find('[data-testid="search-button"]').as('searchButton');
     cy.get('@searchButton').should('have.attr', 'title', 'Search');
     cy.get('@searchButton').click();

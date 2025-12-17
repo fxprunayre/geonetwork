@@ -1,5 +1,5 @@
 {
-  "took": 8,
+  "took": 141,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,49 +9,11 @@
   },
   "hits": {
     "total": {
-      "value": 14821,
+      "value": 14819,
       "relation": "eq"
     },
     "max_score": null,
     "hits": [
-      {
-        "_index": "geo-records",
-        "_id": "ad7e0259-2627-40c4-811f-b5a66a4a6dde",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "Quality Information Document (CMEMS-OMI-QUID-GLO-SL)"
-          },
-          "dateStamp": "2021-04-19T12:54:29.000Z",
-          "resourceType": ["publication"],
-          "uuid": "ad7e0259-2627-40c4-811f-b5a66a4a6dde",
-          "draft": "n",
-          "id": "334238202",
-          "owner": "164187932",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
       {
         "_index": "geo-records",
         "_id": "ac643c9c-7a56-480d-83c7-25fa155d4cbd",
@@ -378,93 +340,6 @@
       },
       {
         "_index": "geo-records",
-        "_id": "e0584083-36d2-4987-92c6-0b2c9a653726",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2017-05-04T13:44:23.000Z",
-          "resourceType": ["series"],
-          "cl_status": [
-            {
-              "key": "onGoing",
-              "default": "On going",
-              "langeng": "On going",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
-          "resourceTitleObject": {
-            "default": "Concentration of suspended particulate material in the water column | Mean turbidity over one year | British Oceanographic Data Centre | Decision support system for water quality management in the Tagus estuary, Portugal",
-            "langeng": "Concentration of suspended particulate material in the water column | Mean turbidity over one year | British Oceanographic Data Centre | Decision support system for water quality management in the Tagus estuary, Portugal"
-          },
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-9.4, 38.5],
-                  [-8.9, 38.5],
-                  [-8.9, 39.0],
-                  [-9.4, 39.0],
-                  [-9.4, 38.5]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/",
-                "langeng": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/",
-                "langeng": "https://www.bodc.ac.uk/data/information_and_inventories/edmed/report/2163/"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "e0584083-36d2-4987-92c6-0b2c9a653726",
-          "draft": "n",
-          "id": "158009709",
-          "owner": "113110382",
-          "groupOwner": "139596764",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["139596764", "1", "83566633"],
-          "op2": "139596764",
-          "op1": ["139596764", "83566633"],
-          "documentStandard": "iso19115-3.2018",
-          "op3": "139596764",
-          "op5": ["139596764", "83566633"],
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": false,
-        "dynamic": false,
-        "featured": false,
-        "guestdownload": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
         "_id": "e8251792-c363-424f-92c9-63cade162bac",
         "_score": 0.0,
         "_source": {
@@ -543,6 +418,235 @@
         "featured": false,
         "guestdownload": false,
         "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "e6df93bd-a0bc-42c4-85ec-bb5b81c198b3",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2025-01-28T08:38:19.056406Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "ATLANTIC_CH02_Product_4 / Qualitative analysis of MPA connectivity",
+            "langeng": "ATLANTIC_CH02_Product_4 / Qualitative analysis of MPA connectivity"
+          },
+          "resourceAbstractObject": {
+            "default": "It's a study of MPA connectivity with assessment of :\n\n-size \n-shape \n-spacing \n\nbetween each MPA",
+            "langeng": "It's a study of MPA connectivity with assessment of :\n\n-size \n-shape \n-spacing \n\nbetween each MPA"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-97.891111, 1.433029],
+                  [39.325331, 1.433029],
+                  [39.325331, 75.277728],
+                  [-97.891111, 75.277728],
+                  [-97.891111, 1.433029]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.12770/e6df93bd-a0bc-42c4-85ec-bb5b81c198b3",
+                "langeng": "https://doi.org/10.12770/e6df93bd-a0bc-42c4-85ec-bb5b81c198b3"
+              },
+              "nameObject": {
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "descriptionObject": {
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:OWS-C",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge2_product4.xml",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge2_product4.xml"
+              },
+              "nameObject": {
+                "default": "CH02_product_04",
+                "langeng": "CH02_product_04"
+              },
+              "descriptionObject": {
+                "default": "Product visualization",
+                "langeng": "Product visualization"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-atlantic.eu",
+                "langeng": "http://www.emodnet-atlantic.eu"
+              },
+              "descriptionObject": {
+                "default": "Access to the website",
+                "langeng": "Access to the website"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 2
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_2_product_4.zip",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_2_product_4.zip"
+              },
+              "nameObject": {
+                "default": "Download product",
+                "langeng": "Download product"
+              },
+              "descriptionObject": {
+                "default": "Download product",
+                "langeng": "Download product"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 3
+            }
+          ],
+          "uuid": "e6df93bd-a0bc-42c4-85ec-bb5b81c198b3",
+          "draft": "n",
+          "id": "334238457",
+          "owner": "135665118",
+          "groupOwner": "230734906",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["230734906", "83566633", "1"],
+          "op2": "230734906",
+          "op1": ["230734906", "83566633", "1"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "230734906",
+          "op5": ["230734906", "83566633", "1"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "3b9f73d5-6aae-4f75-aa1d-c90b6f314641",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-04-03T10:48:34.000Z",
+          "resourceType": ["series"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Industrial activity | Telecommunication Cables | European Commission. Directorate-General for Maritime Affairs and Fisheries | Telecommunication Cables (actual route locations)",
+            "langeng": "Industrial activity | Telecommunication Cables | European Commission. Directorate-General for Maritime Affairs and Fisheries | Telecommunication Cables (actual route locations)"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-23.144524, 32.220235],
+                  [21.503913, 32.220235],
+                  [21.503913, 63.058941],
+                  [-23.144524, 63.058941],
+                  [-23.144524, 32.220235]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
+                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
+              },
+              "nameObject": {
+                "default": "Telecommunication Cables (actual route locations)",
+                "langeng": "Telecommunication Cables (actual route locations)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
+                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
+              },
+              "nameObject": {
+                "default": "Telecommunication Cables (actual route locations)",
+                "langeng": "Telecommunication Cables (actual route locations)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "3b9f73d5-6aae-4f75-aa1d-c90b6f314641",
+          "draft": "n",
+          "id": "334238459",
+          "owner": "113112277",
+          "groupOwner": "139596411",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["139596411", "1", "83566633"],
+          "op2": "139596411",
+          "op1": "139596411",
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596411",
+          "op5": ["139596411", "83566633"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
       }
     ]
   },
@@ -569,7 +673,7 @@
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 10807
+          "doc_count": 10804
         },
         {
           "key": "series",
@@ -581,7 +685,7 @@
         },
         {
           "key": "nonGeographicDataset",
-          "doc_count": 317
+          "doc_count": 318
         },
         {
           "key": "map-static",
@@ -623,11 +727,11 @@
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947",
-          "doc_count": 2671
+          "doc_count": 2672
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463",
-          "doc_count": 1866
+          "doc_count": 1867
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",

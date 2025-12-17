@@ -3,6 +3,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   effect,
+  ElementRef,
+  HostListener,
   inject,
   input,
   output,
@@ -49,6 +51,8 @@ interface AutoCompleteCompleteEvent {
 })
 export class SearchInput extends SearchBase {
   override searchService = inject(SearchService);
+  elementRef = inject(ElementRef);
+  autocomplete = viewChild(AutoComplete);
 
   autofocus = input<boolean>(true);
   searchOnInput = input<boolean>(false);
@@ -116,6 +120,7 @@ export class SearchInput extends SearchBase {
 
   onItemSelect(event: { value: { title: string } }) {
     this.queryString = event.value.title;
+    this.onModelChange(this.queryString);
   }
 
   onModelChange(queryString: string) {
@@ -132,5 +137,19 @@ export class SearchInput extends SearchBase {
   clearQuery() {
     this.queryString = '';
     this.search.setFullTextQuery('');
+  }
+
+  // Listen for clicks outside the component to close the autocomplete suggestions
+  // because when app is using Shadow DOM, p-auto-complete's do not close on outside clicks
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: PointerEvent) {
+    if (!this.autocompleteEnabled()) return;
+
+    const clickPath = event.composedPath();
+
+    // Check if click is inside the component
+    if (!clickPath.includes(this.elementRef.nativeElement)) {
+      this.autocomplete()?.hide();
+    }
   }
 }

@@ -320,7 +320,11 @@ export const SearchStore = signalStore(
           store.activeRoute.queryParams.subscribe((params) => {
             patchState(
               store,
-              searchRouteService.convertRouteParamsToSearch(params, store.pageSize()),
+              searchRouteService.convertRouteParamsToSearch(
+                params,
+                store.pageSize(),
+                store.currentSort(),
+              ),
             );
           });
         },
