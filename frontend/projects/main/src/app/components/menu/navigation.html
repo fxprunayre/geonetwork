@@ -13,7 +13,7 @@
         [class.opacity-100]="!isIconMode()"
         [class.ml-2]="!isIconMode()"
       >
-        <span>{{ item.label }}</span>
+        <span [class.hidden]="item.label === ''">{{ 'menu.' + item.label | translate }}</span>
         @if (item.label === '') {
           <a routerLink="/">
             <img [src]="logo" alt="Logo" class="h-[26px] md:h-[36px]" />

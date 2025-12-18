@@ -923,7 +923,7 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
           {
             filter:
               'protocol:OGC:WMS|OGC:WMTS|ESRI:.*|atom.*|REST|OGC API Maps|OGC API Records|application/vnd.ogc.wms_xml',
-            title: 'API',
+            title: 'api',
           },
           {
             filter:

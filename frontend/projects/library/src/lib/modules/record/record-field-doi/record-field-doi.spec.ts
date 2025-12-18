@@ -13,6 +13,7 @@ describe('RecordFieldDoi', () => {
 
     fixture = TestBed.createComponent(RecordFieldDoi);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 

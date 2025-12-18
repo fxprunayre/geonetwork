@@ -13,6 +13,7 @@ describe('RecordFieldDates', () => {
 
     fixture = TestBed.createComponent(RecordHarvesterLogo);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 

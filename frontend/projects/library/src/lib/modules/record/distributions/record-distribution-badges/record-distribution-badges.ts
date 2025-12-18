@@ -4,16 +4,45 @@ import { KeyValuePipe } from '@angular/common';
 import { Link } from 'gn-api-client';
 import { Badge } from 'primeng/badge';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import {
+  faSolidCloudArrowDown,
+  faSolidLink,
+  faSolidNetworkWired,
+} from '@ng-icons/font-awesome/solid';
+import { ButtonIcon, ButtonLabel, ButtonDirective, Button } from 'primeng/button';
 
 @Component({
   selector: 'app-record-distribution-badges',
-  imports: [KeyValuePipe, Badge, RouterLink],
+  imports: [
+    KeyValuePipe,
+    Badge,
+    RouterLink,
+    TranslatePipe,
+    NgIcon,
+    ButtonIcon,
+    ButtonLabel,
+    Button,
+  ],
+  viewProviders: [
+    provideIcons({
+      faSolidCloudArrowDown,
+      faSolidLink,
+      faSolidNetworkWired,
+    }),
+  ],
   templateUrl: './record-distribution-badges.html',
 })
 export class RecordDistributionBadges extends RecordDistributionFieldBase {
   types = input<string[]>([]);
   // TODO: check if we need a button mode
   layout = input<'badge' | 'button'>('badge');
+
+  get iconsByType() {
+    return this.distributionService.iconsByType;
+  }
+
   linksBySectionsSelected = computed(() => {
     const allLinksBySections = this.linksBySections();
     if (this.types().length === 0) {

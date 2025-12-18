@@ -5,17 +5,19 @@ import { Select } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { I18nApp } from '../../config/model/gnConfig';
 import { APPLICATION_CONFIGURATION, DEFAULT_LANGUAGE } from '../../config/config.loader';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidLanguage } from '@ng-icons/font-awesome/solid';
 
 interface Language {
   iso3code: string;
   iso2code: string;
-  label: string;
 }
 
 @Component({
   selector: 'app-language-switcher',
   templateUrl: './language-switcher.html',
-  imports: [TranslatePipe, Select, FormsModule],
+  viewProviders: [provideIcons({ faSolidLanguage })],
+  imports: [TranslatePipe, Select, NgIcon, FormsModule],
 })
 export class LanguageSwitcher {
   private translate = inject(TranslateService);
@@ -29,8 +31,12 @@ export class LanguageSwitcher {
         languages: { DEFAULT_LANGUAGE: DEFAULT_LANGUAGE.substring(0, 2) },
       },
   );
-
-  languages = signal<Language[]>([]);
+  languages = computed<Language[]>(() =>
+    Object.entries(this.i18nConfiguration().languages).map(([iso3code, iso2code]) => ({
+      iso3code,
+      iso2code,
+    })),
+  );
 
   currentLanguage = signal(localStorage.getItem('lang') || this.i18nConfiguration().language);
 
@@ -41,29 +47,6 @@ export class LanguageSwitcher {
 
       localStorage.setItem('lang', lang);
       this.translate.use(config.languages[lang]);
-
-      const languages = Object.entries(config.languages).map(([key, value]) => ({
-        iso3code: key,
-        iso2code: value,
-        label: key,
-      }));
-
-      this.translate
-        .get(languages.map((language) => 'languages.' + language.iso3code))
-        .subscribe((translations: { [key: string]: string }) => {
-          this.languages.set(
-            languages.map((language) => ({
-              ...language,
-              label: translations['languages.' + language.iso3code] || language.iso3code,
-            })),
-          );
-        });
-      this.appConfiguration.update((appConfig) => {
-        if (appConfig.config?.apps?.i18n) {
-          appConfig.config.apps.i18n.language = lang;
-        }
-        return { ...appConfig };
-      });
     });
   }
 }

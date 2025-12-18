@@ -46,6 +46,7 @@
     "@duckdb/duckdb-wasm": "^1.30.0",
     "@ng-icons/core": "^32.2.0",
     "@ng-icons/font-awesome": "^32.2.0",
+    "@ng-icons/simple-icons": "^32.2.0",
     "@ngrx/operators": "^20.1.0",
     "@ngrx/signals": "^20.1.0",
     "@ngrx/store": "^20.1.0",
