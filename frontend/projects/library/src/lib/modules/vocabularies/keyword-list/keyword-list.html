@@ -9,6 +9,8 @@
         <p-chip
           [label]="keyword.default"
           class="mr-2 my-1 cursor-pointer"
+          (mouseenter)="openPopover($event, keyword, popover)"
+          (mouseleave)="popover.hide()"
           (click)="openPopover($event, keyword, popover)"
         />
       }
