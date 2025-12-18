@@ -139,6 +139,7 @@ export class SearchInput extends SearchBase {
     this.search.setFullTextQuery('');
   }
 
+  // FIXME: ShadowDOM:
   // Listen for clicks outside the component to close the autocomplete suggestions
   // because when app is using Shadow DOM, p-auto-complete's do not close on outside clicks
   @HostListener('document:click', ['$event'])
