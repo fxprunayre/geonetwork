@@ -38,14 +38,13 @@ interface FormatOption {
     Panel,
     Skeleton,
   ],
-  providers: [MessageService],
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
 })
 export class CitationComponent implements OnChanges {
   uuid = input.required<string>();
   format = input('html');
-
-  private readonly translateService = inject(TranslateService);
+  private readonly messageService = inject(MessageService);
+  private readonly translate = inject(TranslateService);
   private recordService = inject(RecordsService);
 
   constructor() {
@@ -115,7 +114,15 @@ export class CitationComponent implements OnChanges {
         this.getCitation(initial);
       },
       error: (err: any) => {
-        console.error('Error loading citation formats', err);
+        console.log(err);
+
+        this.messageService.add({
+          severity: 'danger',
+          summary: this.translate.instant('citation.title_error'),
+          detail: this.translate.instant('citation.detail_error'),
+          life: 1500,
+        });
+
         this.citationAvailable.set(false);
       },
     });
@@ -137,7 +144,14 @@ export class CitationComponent implements OnChanges {
         this.loading.set(false);
       },
       error: (err: any) => {
-        console.error('Error loading citation for', fmt, err);
+        console.log(err);
+        this.messageService.add({
+          severity: 'danger',
+          summary: this.translate.instant('citation.title_error'),
+          detail: this.translate.instant('citation.detail_error_loading'),
+          life: 1500,
+        });
+
         this.citationText.set('');
         this.loading.set(false);
       },

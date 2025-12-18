@@ -11,20 +11,11 @@ import {
   faSolidLink,
   faSolidNetworkWired,
 } from '@ng-icons/font-awesome/solid';
-import { ButtonIcon, ButtonLabel, ButtonDirective, Button } from 'primeng/button';
+import { ButtonIcon, ButtonLabel, Button } from 'primeng/button';
 
 @Component({
   selector: 'app-record-distribution-badges',
-  imports: [
-    KeyValuePipe,
-    Badge,
-    RouterLink,
-    TranslatePipe,
-    NgIcon,
-    ButtonIcon,
-    ButtonLabel,
-    Button,
-  ],
+  imports: [KeyValuePipe, RouterLink, TranslatePipe, NgIcon, ButtonIcon, ButtonLabel, Button],
   viewProviders: [
     provideIcons({
       faSolidCloudArrowDown,

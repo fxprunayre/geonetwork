@@ -169,7 +169,9 @@
   "citation": {
     "title": "Cite dataset",
     "download": "Download",
-    "loading": "Loading citation ..."
+    "loading": "Loading citation ...",
+    "title_error": "Error",
+    "detail_error": "Error loading citation formats.."
   },
   "copy": {
     "title": "Copy",
@@ -184,5 +186,9 @@
     "seeAll": "See all"
   },
   "addToMap": "Add to map",
-  "exploreData": "Explore data"
+  "exploreData": "Explore data",
+  "share": {
+    "title_error": "Error",
+    "detail_error": "Failed to fetch permalink"
+  }
 }
