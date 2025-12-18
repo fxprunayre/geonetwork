@@ -39,6 +39,7 @@ interface FormatOption {
     Skeleton,
   ],
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
+  providers: [MessageService],
 })
 export class CitationComponent implements OnChanges {
   uuid = input.required<string>();
@@ -117,7 +118,7 @@ export class CitationComponent implements OnChanges {
         console.log(err);
 
         this.messageService.add({
-          severity: 'danger',
+          severity: 'error',
           summary: this.translate.instant('citation.title_error'),
           detail: this.translate.instant('citation.detail_error'),
           life: 1500,
@@ -146,7 +147,7 @@ export class CitationComponent implements OnChanges {
       error: (err: any) => {
         console.log(err);
         this.messageService.add({
-          severity: 'danger',
+          severity: 'error',
           summary: this.translate.instant('citation.title_error'),
           detail: this.translate.instant('citation.detail_error_loading'),
           life: 1500,
