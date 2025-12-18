@@ -14,19 +14,25 @@
           <div>
             <p-inputgroup
               class="mt-6 lg:mt-0"
-              [dt]="{ colorScheme: { light: { addon: { borderColor: 'none' } } } }"
+              [dt]="{
+                colorScheme: {
+                  light: { addon: { borderColor: 'none', background: 'bg-primary-500' } },
+                },
+              }"
             >
               <p-inputgroup-addon>
-                <p-button size="large" (click)="visible = !visible">
+                <p-button
+                  size="large"
+                  (click)="visible = !visible"
+                  [title]="'search.filter.panel.open' | translate"
+                  [pt]="{ root: 'h-14' }"
+                >
                   <ng-icon name="faSolidFilter" pButtonIcon></ng-icon>
-                  <div pButtonLabel>
-                    {{ 'search.filter.panel.open' | translate }}
-                  </div>
                 </p-button>
               </p-inputgroup-addon>
               @if (search.activeFilterCount() > 0) {
                 <p-inputgroup-addon>
-                  <p-button size="large" (click)="search.reset()">
+                  <p-button size="large" (click)="search.reset()" [pt]="{ root: 'h-14' }">
                     <p-overlaybadge [value]="search.activeFilterCount()">
                       <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
                     </p-overlaybadge>

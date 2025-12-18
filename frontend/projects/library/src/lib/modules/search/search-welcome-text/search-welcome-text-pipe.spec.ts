@@ -1,8 +1,8 @@
-import { SearchWelcomeTextPipePipe } from './search-welcome-text-pipe-pipe';
+import { SearchWelcomeTextPipe } from './search-welcome-text-pipe';
 
-describe('SearchWelcomeTextPipePipe', () => {
+describe('SearchWelcomeTextPipe', () => {
   it('create an instance', () => {
-    const pipe = new SearchWelcomeTextPipePipe();
+    const pipe = new SearchWelcomeTextPipe();
     expect(pipe).toBeTruthy();
   });
 });

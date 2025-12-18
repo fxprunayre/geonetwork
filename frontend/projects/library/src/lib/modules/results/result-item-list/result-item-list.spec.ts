@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { ResultItemList } from './result-item-list';
 import { provideMockSearchService } from '../../search/search.store.mock.spec';
@@ -11,7 +12,7 @@ describe('ResultItemList', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ResultItemList],
-      providers: [provideMockSearchService(), provideMockTranslateService()],
+      providers: [provideMockSearchService(), provideMockTranslateService(), provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ResultItemList);

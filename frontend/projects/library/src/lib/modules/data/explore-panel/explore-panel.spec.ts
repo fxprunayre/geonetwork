@@ -13,6 +13,7 @@ describe('ExplorePanel', () => {
 
     fixture = TestBed.createComponent(ExplorePanel);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 

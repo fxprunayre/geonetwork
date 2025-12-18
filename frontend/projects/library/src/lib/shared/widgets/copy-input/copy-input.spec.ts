@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideMockTranslateService } from '../../translate.service.mock.spec';
 import { CopyInput } from './copy-input';
 
 describe('CopyInput', () => {
@@ -8,6 +9,7 @@ describe('CopyInput', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideMockTranslateService()],
       imports: [CopyInput],
     }).compileComponents();
 

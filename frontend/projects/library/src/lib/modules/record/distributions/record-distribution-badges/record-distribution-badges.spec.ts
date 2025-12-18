@@ -13,6 +13,7 @@ describe('RecordDistributionBadges', () => {
 
     fixture = TestBed.createComponent(RecordDistributionBadges);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 
