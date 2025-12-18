@@ -142,8 +142,8 @@
   <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
   <!-- Main Layout with Tabs -->
-  <p-tabs [value]="tab()" lazy>
-    <p-tablist class="text-xl">
+  <p-tabs [value]="tab()" lazy class="mt-15">
+    <p-tablist>
       <p-tab value="about">{{ 'record.view.section.description' | translate }}</p-tab>
       <p-tab value="data-access">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
       <p-tab value="explore">{{ 'record.view.section.explore' | translate }}</p-tab>

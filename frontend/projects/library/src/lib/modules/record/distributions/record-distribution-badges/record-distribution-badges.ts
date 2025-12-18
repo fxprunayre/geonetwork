@@ -14,15 +14,7 @@ import { ButtonIcon, ButtonLabel, ButtonDirective, Button } from 'primeng/button
 
 @Component({
   selector: 'app-record-distribution-badges',
-  imports: [
-    KeyValuePipe,
-    RouterLink,
-    TranslatePipe,
-    NgIcon,
-    ButtonIcon,
-    ButtonLabel,
-    Button,
-  ],
+  imports: [KeyValuePipe, RouterLink, TranslatePipe, NgIcon, ButtonIcon, ButtonLabel, Button],
   viewProviders: [
     provideIcons({
       faSolidCloudArrowDown,
