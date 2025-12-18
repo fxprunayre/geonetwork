@@ -1,9 +1,8 @@
 @for (group of vocabGroups() | keyvalue; track group.key) {
   <div class="mt-4">
     <div class="font-semibold text-sm text-gray-500">
-     title of vocabulary
+      {{ title() }}
     </div>
-
 
     <div class="flex flex-wrap mt-2">
       @for (keyword of vocabGroups()[group.key]; track $index) {

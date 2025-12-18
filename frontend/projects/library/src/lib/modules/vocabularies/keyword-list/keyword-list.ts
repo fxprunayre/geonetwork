@@ -18,7 +18,6 @@ export interface Keyword {
   uri?: string | null;
 }
 
-
 @Component({
   selector: 'app-keyword-list',
   standalone: true,
