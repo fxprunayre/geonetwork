@@ -2,7 +2,6 @@ import { Component, computed, input } from '@angular/core';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 import { KeyValuePipe } from '@angular/common';
 import { Link } from 'gn-api-client';
-import { Badge } from 'primeng/badge';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -17,7 +16,6 @@ import { ButtonIcon, ButtonLabel, ButtonDirective, Button } from 'primeng/button
   selector: 'app-record-distribution-badges',
   imports: [
     KeyValuePipe,
-    Badge,
     RouterLink,
     TranslatePipe,
     NgIcon,
