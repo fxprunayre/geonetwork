@@ -9,7 +9,6 @@ import {
   faSolidNetworkWired,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Link } from 'gn-api-client';
 import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 
