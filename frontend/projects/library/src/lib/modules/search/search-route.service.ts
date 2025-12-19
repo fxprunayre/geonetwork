@@ -47,7 +47,7 @@ export class SearchRouteService {
     this.historyService.addUrlToHistory(`/search?${parameters}`);
   }
 
-  convertRouteParamsToSearch(params: Params, pageSize: number): any {
+  convertRouteParamsToSearch(params: Params, pageSize: number, currentSort: string): any {
     const filter: Record<string, SearchFilter> = {};
     const nonFilterParams = ['from', 'size', 'q', 'sort'];
 
@@ -66,7 +66,7 @@ export class SearchRouteService {
       pageSize: parseInt(params['size']) || pageSize,
       searchQuery: params['q'] || '',
       filters: filter,
-      currentSort: params['sort'] || '',
+      currentSort: params['sort'] || currentSort,
     };
   }
 }

@@ -1,5 +1,11 @@
 <ng-template #searchButton>
-  <p-button (click)="searchOnClick()" size="large" styleClass="!p-4 !text-xl">
+  <p-button
+    (click)="searchOnClick()"
+    [title]="'search.button.title' | translate"
+    size="large"
+    styleClass="!p-4 !text-xl"
+    data-testid="search-button"
+  >
     <ng-icon name="faSolidMagnifyingGlass" pButtonIcon />
   </p-button>
 </ng-template>
@@ -23,10 +29,10 @@
       (click)="handleInputClick($event)"
       scrollHeight="400px"
       [pt]="{
-        root: 'w-full',
-        pcInputText: { root: 'w-full !p-4 !text-xl' },
+        pcInputText: { root: '!p-4 !text-xl' },
         pcOverlay: { root: 'w-full' },
       }"
+      fluid
       data-testid="search-input"
       name="search"
       class="w-full"

@@ -1,16 +1,17 @@
-import { Component, computed, input } from '@angular/core';
-import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 import { KeyValuePipe } from '@angular/common';
+import { Component, computed, input } from '@angular/core';
 import { Link } from 'gn-api-client';
 import { RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidCloudArrowDown,
   faSolidLink,
   faSolidNetworkWired,
 } from '@ng-icons/font-awesome/solid';
-import { ButtonIcon, ButtonLabel, ButtonDirective, Button } from 'primeng/button';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Link } from 'gn-api-client';
+import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
+import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 
 @Component({
   selector: 'app-record-distribution-badges',

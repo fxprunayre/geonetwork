@@ -4,11 +4,12 @@ import { faSolidList, faSolidTableCellsLarge } from '@ng-icons/font-awesome/soli
 import { SelectButton } from 'primeng/selectbutton';
 import { SearchAppLayout } from '../../config/model/gnConfig';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-result-layout-switcher',
   standalone: true,
-  imports: [NgIcon, SelectButton, FormsModule],
+  imports: [NgIcon, SelectButton, FormsModule, TranslatePipe],
   templateUrl: './result-layout-switcher.html',
   viewProviders: [provideIcons({ faSolidList, faSolidTableCellsLarge })],
 })

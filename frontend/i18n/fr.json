@@ -8,6 +8,9 @@
         }
       }
     },
+    "button": {
+      "title": "Rechercher"
+    },
     "filter": {
       "title": "Tous les filtres",
       "activeFilters": "Filtres actifs",
@@ -169,7 +172,10 @@
   "citation": {
     "title": "Citer l'ensemble de données",
     "download": "Télécharger",
-    "loading": "Chargement de la citation ..."
+    "loading": "Chargement de la citation ...",
+    "title_error": "Erreur",
+    "detail_error": "Erreur lors du chargement des formats de citation",
+    "detail_error_loading": "Erreur lors du chargement de la citation pour"
   },
   "copy": {
     "title": "Copie",
@@ -184,5 +190,9 @@
     "seeAll": "Voir tout"
   },
   "addToMap": "Ajouter à la carte",
-  "exploreData": "Explorer les données"
+  "exploreData": "Explorer les données",
+  "share": {
+    "title_error": "Erreur",
+    "detail_error": "Impossible de récupérer le lien permanent"
+  }
 }

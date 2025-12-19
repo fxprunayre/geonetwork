@@ -1,3 +1,5 @@
+@let description = result().resourceAbstractObject?.['default'] || '';
+
 <ng-template #content>
   <div
     class="w-full lg:w-[190px] lg:aspect-square lg:shrink-0 lg:overflow-hidden rounded-(--p-border-radius-md)"
@@ -27,8 +29,7 @@
       class="text-primary font-bold text-xl line-clamp-2"
     />
 
-    @let description = result().resourceAbstractObject?.['default'] || '';
-    <span class="text-base line-clamp-3" [title]="description">
+    <span class="text-base line-clamp-3">
       {{ description }}
     </span>
 
@@ -39,6 +40,7 @@
 @if (externalUrl()) {
   <a
     [attr.href]="externalUrl()"
+    [title]="description"
     target="_blank"
     (click)="handleRecordClick()"
     class="flex flex-col lg:flex-row items-start gap-4 cursor-pointer rounded-(--p-border-radius-md) p-6 border border-surface-100 transition-shadow hover:shadow-md"
@@ -48,6 +50,7 @@
 } @else {
   <a
     [routerLink]="['/record', result().info?._id]"
+    [title]="description"
     (click)="handleRecordClick()"
     class="flex flex-col lg:flex-row items-start gap-4 cursor-pointer rounded-(--p-border-radius-md) p-6 border border-surface-100 transition-shadow hover:shadow-md"
   >

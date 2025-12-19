@@ -43,6 +43,7 @@ export class AggregationBucketDecorator {
     software: 'faSolidCode',
     initiative: 'faSolidFileContract',
     repository: 'faSolidFolderClosed',
+    'map-static': 'faSolidMap',
   };
 
   icon = computed(() => {

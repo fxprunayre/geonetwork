@@ -10,6 +10,7 @@ import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
 import { RecordFieldOverviewComponent } from '../record-field-overview/record-field-overview.component';
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
+import { RecordMenuComponent } from '../record-menu/record-menu.component';
 
 @Component({
   selector: 'app-record-view-header',
@@ -24,6 +25,7 @@ import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-v
     RecordFieldVocabulary,
     RecordFieldDoi,
     RecordDistributionBadges,
+    RecordMenuComponent,
   ],
   templateUrl: './record-view-header.html',
 })
