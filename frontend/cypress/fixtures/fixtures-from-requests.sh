@@ -52,5 +52,11 @@ curl "$SERVER/srv/api/search/records/_search" \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -X 'POST' \
+  -d @search-api-search-by-resourcetype-request.json | jq . > search-api-search-by-resourcetype-response.json
+
+curl "$SERVER/srv/api/search/records/_search" \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -X 'POST' \
   -d @search-api-autocomplete-request.json | jq . > search-api-autocomplete-response.json
   

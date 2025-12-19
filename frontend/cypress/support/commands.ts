@@ -31,6 +31,11 @@ Cypress.Commands.add('initApp', () => {
       alias: 'apiMainSearchByQ',
     },
     {
+      req: 'search-api-search-by-resourcetype-request.json',
+      res: 'search-api-search-by-resourcetype-response.json',
+      alias: 'apiMainSearchByResourceType',
+    },
+    {
       req: 'search-api-autocomplete-request.json',
       res: 'search-api-autocomplete-response.json',
       alias: 'apiMainSearchAutocomplete',

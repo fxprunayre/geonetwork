@@ -1,5 +1,5 @@
 {
-  "took": 141,
+  "took": 8,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,87 +9,11 @@
   },
   "hits": {
     "total": {
-      "value": 14819,
+      "value": 14800,
       "relation": "eq"
     },
     "max_score": null,
     "hits": [
-      {
-        "_index": "geo-records",
-        "_id": "ac643c9c-7a56-480d-83c7-25fa155d4cbd",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "High Quality Figure (GLOBAL_OMI_OHC_anomalies-hq)"
-          },
-          "dateStamp": "2021-04-19T12:06:07.000Z",
-          "resourceType": ["publication"],
-          "uuid": "ac643c9c-7a56-480d-83c7-25fa155d4cbd",
-          "draft": "n",
-          "id": "334238149",
-          "owner": "164187932",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "8a8afc62-adee-4f49-bd6b-9247033769b3",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "High Quality Figure (ARCTIC_OMI_SI_extent_obs-hq)"
-          },
-          "dateStamp": "2024-07-26T15:34:55.618Z",
-          "resourceType": ["publication"],
-          "uuid": "8a8afc62-adee-4f49-bd6b-9247033769b3",
-          "draft": "n",
-          "id": "334238195",
-          "owner": "164187932",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
       {
         "_index": "geo-records",
         "_id": "9c04daf8-d8f7-4e36-a05f-0d096c6da126",
@@ -103,44 +27,6 @@
           "uuid": "9c04daf8-d8f7-4e36-a05f-0d096c6da126",
           "draft": "n",
           "id": "334238062",
-          "owner": "164187932",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "4d81b3a6-ea6b-4ab0-8f5a-c1337e1169b3",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "Quality Information Document (CMEMS-OMI-QUID-ARC-SI-extent)"
-          },
-          "dateStamp": "2024-07-26T15:51:29.805Z",
-          "resourceType": ["publication"],
-          "uuid": "4d81b3a6-ea6b-4ab0-8f5a-c1337e1169b3",
-          "draft": "n",
-          "id": "334238157",
           "owner": "164187932",
           "groupOwner": "104",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
@@ -244,207 +130,30 @@
       },
       {
         "_index": "geo-records",
-        "_id": "98174dbd-1913-4679-8198-72bfde224e09",
+        "_id": "212c67d3-1a29-48ce-bd1c-e11ed03c32a4",
         "_score": 0.0,
-        "_ignored": ["dqValues.keyword"],
+        "_ignored": ["dqSReport.keyword", "dqValues.keyword"],
         "_source": {
-          "dateStamp": "2018-04-24T14:34:29.000Z",
-          "resourceType": ["dataset"],
-          "cl_status": [
-            {
-              "key": "onGoing",
-              "default": "On going",
-              "langeng": "On going",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
-          "resourceTitleObject": {
-            "default": "Administrative units | Nationally designated Areas | European Commission. Directorate-General for Maritime Affairs and Fisheries | Nationally designated areas",
-            "langeng": "Administrative units | Nationally designated Areas | European Commission. Directorate-General for Maritime Affairs and Fisheries | Nationally designated areas"
-          },
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-49.863274, 12.863215],
-                  [37.324226, 12.863215],
-                  [37.324226, 68.125756],
-                  [-49.863274, 68.125756],
-                  [-49.863274, 12.863215]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
-                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
-              },
-              "nameObject": {
-                "default": "EMODnet Human Activities: Protected Areas",
-                "langeng": "EMODnet Human Activities: Protected Areas"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://www.emodnet-humanactivities.eu/search-results.php?dataname=Nationally+Designated+Areas",
-                "langeng": "http://www.emodnet-humanactivities.eu/search-results.php?dataname=Nationally+Designated+Areas"
-              },
-              "nameObject": {
-                "default": "Nationally designated areas",
-                "langeng": "Nationally designated areas"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "98174dbd-1913-4679-8198-72bfde224e09",
-          "draft": "n",
-          "id": "334238545",
-          "owner": "113112277",
-          "groupOwner": "139596411",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["139596411", "1", "83566633"],
-          "op2": "139596411",
-          "op1": "139596411",
-          "documentStandard": "iso19115-3.2018",
-          "op3": "139596411",
-          "op5": ["139596411", "83566633"],
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": false,
-        "dynamic": false,
-        "featured": false,
-        "guestdownload": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "e8251792-c363-424f-92c9-63cade162bac",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2016-11-17T12:36:59.000Z",
-          "resourceType": ["dataset"],
-          "cl_status": [
-            {
-              "key": "onGoing",
-              "default": "On going",
-              "langeng": "On going",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
-          "resourceTitleObject": {
-            "default": "Zooplankton taxonomy-related abundance per unit volume of the water column | Abundance of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset",
-            "langeng": "Zooplankton taxonomy-related abundance per unit volume of the water column | Abundance of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset"
-          },
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [28.13, 41.0],
-                  [41.5, 41.0],
-                  [41.5, 43.4],
-                  [28.13, 43.4],
-                  [28.13, 41.0]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://www.ims.metu.edu.tr/IMS_Inventory/",
-                "langeng": "http://www.ims.metu.edu.tr/IMS_Inventory/"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "e8251792-c363-424f-92c9-63cade162bac",
-          "draft": "n",
-          "id": "153356653",
-          "owner": "141622272",
-          "groupOwner": "139608974",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "139608974", "83566259"],
-          "op2": "139608974",
-          "op1": "139608974",
-          "documentStandard": "iso19115-3.2018",
-          "op5": "139608974",
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "http://emodnet-blacksea.eu/wp-content/uploads/2015/11/CH11_alien_species_n.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": false,
-        "dynamic": false,
-        "featured": false,
-        "guestdownload": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "e6df93bd-a0bc-42c4-85ec-bb5b81c198b3",
-        "_score": 0.0,
-        "_ignored": ["dqValues.keyword"],
-        "_source": {
-          "dateStamp": "2025-01-28T08:38:19.056406Z",
+          "dateStamp": "2025-01-28T08:38:09.250739Z",
           "resourceType": ["dataset"],
           "resourceTitleObject": {
-            "default": "ATLANTIC_CH02_Product_4 / Qualitative analysis of MPA connectivity",
-            "langeng": "ATLANTIC_CH02_Product_4 / Qualitative analysis of MPA connectivity"
+            "default": "ATLANTIC_CH07_Product_1 / Area where bottom habitat has been disturbed by bottom trawling (number of disturbances per month)",
+            "langeng": "ATLANTIC_CH07_Product_1 / Area where bottom habitat has been disturbed by bottom trawling (number of disturbances per month)"
           },
           "resourceAbstractObject": {
-            "default": "It's a study of MPA connectivity with assessment of :\n\n-size \n-shape \n-spacing \n\nbetween each MPA",
-            "langeng": "It's a study of MPA connectivity with assessment of :\n\n-size \n-shape \n-spacing \n\nbetween each MPA"
+            "default": "Data from a number of different sources have been integrated to provide new perspectives on fishing activities. Vessel Monitoring Systems (VMS) record and transmit the position and speed of fishing vessels at intervals of two hours or less. Fishing time can be calculated from the VMS data and combining this parameter with vessel logbook data, maps of fishing effort and intensity at different spatial and temporal scales can be calculated. The statistical software package “R” is used to extract the required information then re-interrogated to produce maps of fishing effort or intensity per month and year. The use of Automatic Identification System (AIS) data was not considered as combining AIS data with fisheries logbook data would pose issues namely; the ability of the AIS system to be switched off, only mandatory on vessels > 15 meters in length, cost involved to purchase data, and confidentiality.",
+            "langeng": "Data from a number of different sources have been integrated to provide new perspectives on fishing activities. Vessel Monitoring Systems (VMS) record and transmit the position and speed of fishing vessels at intervals of two hours or less. Fishing time can be calculated from the VMS data and combining this parameter with vessel logbook data, maps of fishing effort and intensity at different spatial and temporal scales can be calculated. The statistical software package “R” is used to extract the required information then re-interrogated to produce maps of fishing effort or intensity per month and year. The use of Automatic Identification System (AIS) data was not considered as combining AIS data with fisheries logbook data would pose issues namely; the ability of the AIS system to be switched off, only mandatory on vessels > 15 meters in length, cost involved to purchase data, and confidentiality."
           },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-97.891111, 1.433029],
-                  [39.325331, 1.433029],
-                  [39.325331, 75.277728],
-                  [-97.891111, 75.277728],
-                  [-97.891111, 1.433029]
+                  [-41.102, 24.584],
+                  [1.9309, 24.584],
+                  [1.9309, 63.709],
+                  [-41.102, 63.709],
+                  [-41.102, 24.584]
                 ]
               ]
             }
@@ -454,8 +163,8 @@
               "protocol": "DOI",
               "mimeType": "",
               "urlObject": {
-                "default": "https://doi.org/10.12770/e6df93bd-a0bc-42c4-85ec-bb5b81c198b3",
-                "langeng": "https://doi.org/10.12770/e6df93bd-a0bc-42c4-85ec-bb5b81c198b3"
+                "default": "https://doi.org/10.12770/212c67d3-1a29-48ce-bd1c-e11ed03c32a4",
+                "langeng": "https://doi.org/10.12770/212c67d3-1a29-48ce-bd1c-e11ed03c32a4"
               },
               "nameObject": {
                 "default": "DOI of the product",
@@ -473,12 +182,12 @@
               "protocol": "OGC:OWS-C",
               "mimeType": "",
               "urlObject": {
-                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge2_product4.xml",
-                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge2_product4.xml"
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge7_product1.xml",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge7_product1.xml"
               },
               "nameObject": {
-                "default": "CH02_product_04",
-                "langeng": "CH02_product_04"
+                "default": "CH07_product_01",
+                "langeng": "CH07_product_01"
               },
               "descriptionObject": {
                 "default": "Product visualization",
@@ -507,8 +216,8 @@
               "protocol": "WWW:DOWNLOAD",
               "mimeType": "",
               "urlObject": {
-                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_2_product_4.zip",
-                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_2_product_4.zip"
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_7_product_1.zip",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_7_product_1.zip"
               },
               "nameObject": {
                 "default": "Download product",
@@ -523,18 +232,18 @@
               "group": 3
             }
           ],
-          "uuid": "e6df93bd-a0bc-42c4-85ec-bb5b81c198b3",
+          "uuid": "212c67d3-1a29-48ce-bd1c-e11ed03c32a4",
           "draft": "n",
-          "id": "334238457",
-          "owner": "135665118",
-          "groupOwner": "230734906",
+          "id": "334238561",
+          "owner": "213606957",
+          "groupOwner": "139596738",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["230734906", "83566633", "1"],
-          "op2": "230734906",
-          "op1": ["230734906", "83566633", "1"],
+          "op0": ["1", "139596738", "230734906"],
+          "op2": "139596738",
+          "op1": ["1", "139596738", "230734906"],
           "documentStandard": "iso19115-3.2018",
-          "op3": "230734906",
-          "op5": ["230734906", "83566633", "1"],
+          "op3": "139596738",
+          "op5": ["1", "139596738", "230734906"],
           "valid": "-1",
           "isTemplate": "n",
           "rating": "0",
@@ -554,83 +263,101 @@
       },
       {
         "_index": "geo-records",
-        "_id": "3b9f73d5-6aae-4f75-aa1d-c90b6f314641",
+        "_id": "19f013d5-721e-4835-b60c-26c1a02aa57a",
         "_score": 0.0,
-        "_ignored": ["dqValues.keyword"],
+        "_ignored": [
+          "resourceAbstractObject.default.keyword",
+          "resourceAbstractObject.default.sort",
+          "resourceAbstractObject.langeng.keyword"
+        ],
         "_source": {
-          "dateStamp": "2018-04-03T10:48:34.000Z",
+          "dateStamp": "2022-06-29T09:07:26.153Z",
           "resourceType": ["series"],
-          "cl_status": [
+          "resourceTitleObject": {
+            "default": "[ARCHIVE] Mediterranean Sea Reprocessed Remote Sensing Reflectances and Attenuation Coefficient at 490nm from Multi Satellite observations",
+            "langeng": "[ARCHIVE] Mediterranean Sea Reprocessed Remote Sensing Reflectances and Attenuation Coefficient at 490nm from Multi Satellite observations"
+          },
+          "resourceAbstractObject": {
+            "default": "'''This product has been archived'''\n\nFor operationnal and online products, please visit https://marine.copernicus.eu\n\n'''Short description:'''\nThe Global Ocean Satellite monitoring and marine ecosystem study group (GOS) of the Italian National Research Council (CNR), in Rome operationally distributes Remote Sensing Reflectances (Rrs) and diffuse attenuation coefficient of light at 490 nm (kd490) data. These datasets derived from Rrs multi-sensor (MODIS-AQUA, NOAA20-VIIRS, NPP-VIIRS, Sentinel3A-OLCI) spectra at the state-of-the-art algorithms for multi-sensor merging. Single sensor Rrs fields are band-shifted, over the SeaWiFS native bands (using the QAAv6 model, Lee et al., 2002) and merged with a technique aimed at smoothing the differences among different sensors. Reprocessed (multi-year) products are consistent and homogeneous in terms of format, algorithms and processing software. Rrs is defined as the ratio of upwelling radiance and downwelling irradiance at any wavelength (412, 443, 490, 555, and 670 nm). Kd490 is defined as the diffuse attenuation coefficient of light at 490 nm, and is a measure of the turbidity of the water column, i.e., how visible light in the blue-green region of the spectrum penetrates within the water column. It is directly related to the presence of scattering particles in the water column and is estimated through the ratio between Rrs at 490 and 555 nm. Kd490 is achieved via Mediterranean regional algorithm developed by GOS on the basis of MedBiOp in situ dataset (Volpe et al., 2019). The current day data temporal consistency is evaluated as Quality Index (QI):\nQI=(CurrentDataPixel-ClimatologyDataPixel)/STDDataPixel\nwhere QI is the difference between current data and the relevant climatological field as a signed multiple of climatological standard deviations (STDDataPixel).\nInherent Optical Properties (aph443, adg443 and bbp443 at 443nm) are derived via QAAv6 model.\n\n'''Processing information:'''\n\nMulti-sensor product is constituted by MODIS-AQUA, NOAA20-VIIRS, NPP-VIIRS and Sentinel3A-OLCI. For consistency with NASA L2 dataset, BRDF correction was applied to Sentinel3A-OLCI prior to band shifting and multi sensor merging. Single sensor NASA Level-2 data are destriped and then all Level-2 data are remapped at 1 km spatial resolution using cylindrical equirectangular projection. Afterwards, single sensor Rrs fields are band-shifted, over the SeaWiFS native bands (using the QAAv6 model, Lee et al., 2002) and merged with a technique aimed at smoothing the differences among different sensors. This technique is developed by The Global Ocean Satellite monitoring and marine ecosystem study group (GOS) of the Italian National Research Council (CNR, Rome). Then geophysical fields (i.e. chlorophyll and kd490, bbp, aph and adg) are estimated via state-of-the-art algorithms for better product quality. The entire data set is consistent and processed in one-shot mode (with an unique software version and identical configurations).\n\n'''Description of observation methods/instruments:'''\n\nOcean colour technique exploits the emerging electromagnetic radiation from the sea surface in different wavelengths. The spectral variability of this signal defines the so-called ocean colour which is affected by the presence of phytoplankton.\n\n'''Quality / Accuracy / Calibration information:'''\n\nA detailed description of the calibration and validation activities performed over this product can be found on the CMEMS web portal.\n\n'''Suitability, Expected type of users / uses:'''\n\nThis product is meant for use for educational purposes and for the managing of the marine safety, marine resources, marine and coastal environment and for climate and seasonal studies.\n\n'''Dataset names:'''\n\n* dataset-oc-med-opt-multi-l3-rrs412_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs490_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs510_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs555_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs670_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-kd490_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-bbp443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-adg443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-aph443_1km_daily-rep-v02\n\n\n'''Files format:'''\n*CF-1.4\n*INSPIRE compliant\n\n'''DOI (product) :''' \nhttps://doi.org/10.48670/moi-00116",
+            "langeng": "'''This product has been archived'''\n\nFor operationnal and online products, please visit https://marine.copernicus.eu\n\n'''Short description:'''\nThe Global Ocean Satellite monitoring and marine ecosystem study group (GOS) of the Italian National Research Council (CNR), in Rome operationally distributes Remote Sensing Reflectances (Rrs) and diffuse attenuation coefficient of light at 490 nm (kd490) data. These datasets derived from Rrs multi-sensor (MODIS-AQUA, NOAA20-VIIRS, NPP-VIIRS, Sentinel3A-OLCI) spectra at the state-of-the-art algorithms for multi-sensor merging. Single sensor Rrs fields are band-shifted, over the SeaWiFS native bands (using the QAAv6 model, Lee et al., 2002) and merged with a technique aimed at smoothing the differences among different sensors. Reprocessed (multi-year) products are consistent and homogeneous in terms of format, algorithms and processing software. Rrs is defined as the ratio of upwelling radiance and downwelling irradiance at any wavelength (412, 443, 490, 555, and 670 nm). Kd490 is defined as the diffuse attenuation coefficient of light at 490 nm, and is a measure of the turbidity of the water column, i.e., how visible light in the blue-green region of the spectrum penetrates within the water column. It is directly related to the presence of scattering particles in the water column and is estimated through the ratio between Rrs at 490 and 555 nm. Kd490 is achieved via Mediterranean regional algorithm developed by GOS on the basis of MedBiOp in situ dataset (Volpe et al., 2019). The current day data temporal consistency is evaluated as Quality Index (QI):\nQI=(CurrentDataPixel-ClimatologyDataPixel)/STDDataPixel\nwhere QI is the difference between current data and the relevant climatological field as a signed multiple of climatological standard deviations (STDDataPixel).\nInherent Optical Properties (aph443, adg443 and bbp443 at 443nm) are derived via QAAv6 model.\n\n'''Processing information:'''\n\nMulti-sensor product is constituted by MODIS-AQUA, NOAA20-VIIRS, NPP-VIIRS and Sentinel3A-OLCI. For consistency with NASA L2 dataset, BRDF correction was applied to Sentinel3A-OLCI prior to band shifting and multi sensor merging. Single sensor NASA Level-2 data are destriped and then all Level-2 data are remapped at 1 km spatial resolution using cylindrical equirectangular projection. Afterwards, single sensor Rrs fields are band-shifted, over the SeaWiFS native bands (using the QAAv6 model, Lee et al., 2002) and merged with a technique aimed at smoothing the differences among different sensors. This technique is developed by The Global Ocean Satellite monitoring and marine ecosystem study group (GOS) of the Italian National Research Council (CNR, Rome). Then geophysical fields (i.e. chlorophyll and kd490, bbp, aph and adg) are estimated via state-of-the-art algorithms for better product quality. The entire data set is consistent and processed in one-shot mode (with an unique software version and identical configurations).\n\n'''Description of observation methods/instruments:'''\n\nOcean colour technique exploits the emerging electromagnetic radiation from the sea surface in different wavelengths. The spectral variability of this signal defines the so-called ocean colour which is affected by the presence of phytoplankton.\n\n'''Quality / Accuracy / Calibration information:'''\n\nA detailed description of the calibration and validation activities performed over this product can be found on the CMEMS web portal.\n\n'''Suitability, Expected type of users / uses:'''\n\nThis product is meant for use for educational purposes and for the managing of the marine safety, marine resources, marine and coastal environment and for climate and seasonal studies.\n\n'''Dataset names:'''\n\n* dataset-oc-med-opt-multi-l3-rrs412_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs490_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs510_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs555_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-rrs670_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-kd490_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-bbp443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-adg443_1km_daily-rep-v02\n* dataset-oc-med-opt-multi-l3-aph443_1km_daily-rep-v02\n\n\n'''Files format:'''\n*CF-1.4\n*INSPIRE compliant\n\n'''DOI (product) :''' \nhttps://doi.org/10.48670/moi-00116"
+          },
+          "resourceCreditObject": [
             {
-              "key": "onGoing",
-              "default": "On going",
-              "langeng": "On going",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+              "default": "E.U. Copernicus Marine Service Information",
+              "langeng": "E.U. Copernicus Marine Service Information"
             }
           ],
-          "resourceTitleObject": {
-            "default": "Industrial activity | Telecommunication Cables | European Commission. Directorate-General for Maritime Affairs and Fisheries | Telecommunication Cables (actual route locations)",
-            "langeng": "Industrial activity | Telecommunication Cables | European Commission. Directorate-General for Maritime Affairs and Fisheries | Telecommunication Cables (actual route locations)"
-          },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-23.144524, 32.220235],
-                  [21.503913, 32.220235],
-                  [21.503913, 63.058941],
-                  [-23.144524, 63.058941],
-                  [-23.144524, 32.220235]
+                  [-6.0, 30.0],
+                  [36.5, 30.0],
+                  [36.5, 46.0],
+                  [-6.0, 46.0],
+                  [-6.0, 30.0]
                 ]
               ]
             }
           ],
-          "link": [
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
-                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
-              },
-              "nameObject": {
-                "default": "Telecommunication Cables (actual route locations)",
-                "langeng": "Telecommunication Cables (actual route locations)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
-                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
-              },
-              "nameObject": {
-                "default": "Telecommunication Cables (actual route locations)",
-                "langeng": "Telecommunication Cables (actual route locations)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "3b9f73d5-6aae-4f75-aa1d-c90b6f314641",
+          "uuid": "19f013d5-721e-4835-b60c-26c1a02aa57a",
           "draft": "n",
-          "id": "334238459",
-          "owner": "113112277",
-          "groupOwner": "139596411",
+          "id": "124060948",
+          "owner": "122413398",
+          "groupOwner": "103",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["139596411", "1", "83566633"],
-          "op2": "139596411",
-          "op1": "139596411",
-          "documentStandard": "iso19115-3.2018",
-          "op3": "139596411",
-          "op5": ["139596411", "83566633"],
-          "valid": "-1",
+          "mdStatus": "2",
+          "op0": ["1", "129"],
+          "op1": ["1", "129"],
+          "documentStandard": "iso19139",
+          "op5": ["1", "129"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2022-06-29T09:07:40.891Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://catalogue.marine.copernicus.eu/documents/IMG/OCEANCOLOUR_MED_OPTICS_L3_REP_OBSERVATIONS_009_095.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "62d3054c-5046-41b5-825a-738ed2019c91",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Quality Information Document (CMEMS-SL-QUID-008-052)"
+          },
+          "dateStamp": "2021-04-19T12:58:40.000Z",
+          "resourceType": ["publication"],
+          "uuid": "62d3054c-5046-41b5-825a-738ed2019c91",
+          "draft": "n",
+          "id": "265948307",
+          "owner": "3680846",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
           "isTemplate": "n",
           "rating": "0",
           "isHarvested": "false"
@@ -642,10 +369,618 @@
         "isPublishedToAll": true,
         "view": true,
         "notify": false,
-        "download": false,
-        "dynamic": false,
+        "download": true,
+        "dynamic": true,
         "featured": false,
-        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "94cd2997-78be-47e6-b570-c51d51041118",
+        "_score": 0.0,
+        "_ignored": [
+          "resourceAbstractObject.default.keyword",
+          "resourceAbstractObject.default.sort",
+          "resourceAbstractObject.langeng.keyword"
+        ],
+        "_source": {
+          "dateStamp": "2025-07-29T14:39:33.483105Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "Mediterranean Sea DIVA 4D analysis of Water_body_nitrite",
+            "langeng": "Mediterranean Sea DIVA 4D analysis of Water_body_nitrite"
+          },
+          "resourceAbstractObject": {
+            "default": "Moving 10-years analysis of nitrite at Mediterranean Sea for each season :\n- winter (January-March),\n- spring (April-June),\n- summer (July-September),\n- autumn (October-December).\n\nEvery year of the time dimension corresponds to the 10-year centered average of each season.\nDecades span from 1965-1974 until 2004-2013.\nObservational data span from 1961 to 2013.\nDepth range (IODE standard depths): -1500.0, -1400.0, -1300.0, -1200.0, -1100.0, -1000.0, -900.0, -800.0, -700.0, -600.0, -500.0, -400.0, -300.0, -250.0, -200.0, -150.0, -125.0, -100.0, -75.0, -50.0, -30.0, -20.0, -10.0, -5.0, -0.0.\n\nData Sources: observational data from SeaDataNet/EMODNet Chemistry Data Network.\n\nDescription of DIVA analysis: Geostatistical data analysis by DIVA (Data-Interpolating Variational Analysis) tool. Profiles were interpolated at standard depths using weighted parabolic interpolation algorithm (Reiniger and Ross, 1968). GEBCO 1min topography is used for the contouring preparation. Analyzed filed masked using relative error threshold 0.3 and 0.5.\n\nDIVA settings: A constant value for signal-to-noise ratio was used equal to 3. Correlation length was optimized and filtered vertically and a seasonally-averaged profile was used.\n\nLogarithmic transformation applied to the data prior to the analysis.\nBackground field: the data mean value is subtracted from the data.\nDetrending of data: no.\nAdvection constraint applied: no.\n\nOriginators of Italian data sets-List of contributors:\no\tBrunetti Fabio (OGS)\no\tCardin Vanessa, Bensi Manuel doi:10.6092/36728450-4296-4e6a-967d-d5b6da55f306\no\tCardin Vanessa, Bensi Manuel, Ursella Laura, Siena Giuseppe doi:10.6092/f8e6d18e-f877-4aa5-a983-a03b06ccb987\no\tCataletto Bruno (OGS)\no\tCinzia Comici Cinzia (OGS)\no\tCivitarese Giuseppe (OGS)\no\tDeVittor Cinzia (OGS)\no\tGiani Michele (OGS)\no\tKovacevic Vedrana (OGS)\no\tMosetti Renzo (OGS)\no\tSolidoro C.,Beran A.,Cataletto B.,Celussi M.,Cibic T.,Comici C.,Del Negro P.,De Vittor C.,Minocci M.,Monti M.,Fabbro C.,Falconi C.,Franzo A.,Libralato S.,Lipizer M.,Negussanti J.S.,Russel H.,Valli G., doi:10.6092/e5518899-b914-43b0-8139-023718aa63f5\no\tCelio Massimo (ARPA FVG)\no\tMalaguti Antonella (ENEA)\no\tFonda Umani Serena (UNITS)\no\tBignami Francesco (ISAC/CNR)\no\tBoldrini Alfredo (ISMAR/CNR)\no\tMarini Mauro (ISMAR/CNR)\no\tMiserocchi Stefano (ISMAR/CNR)\no\tZaccone Renata (IAMC/CNR)\no\tLavezza, R., Dubroca, L. F. C., Ludicone, D., Kress, N., Herut, B., Civitarese, G., Cruzado, A., Lefèvre, D., Souvermezoglou, E., Yilmaz, A., Tugrul, S., and Ribera d'Alcala, M.: Compilation of quality controlled nutrient profiles from the Mediterranean Sea, doi:10.1594/PANGAEA.771907, 2011.",
+            "langeng": "Moving 10-years analysis of nitrite at Mediterranean Sea for each season :\n- winter (January-March),\n- spring (April-June),\n- summer (July-September),\n- autumn (October-December).\n\nEvery year of the time dimension corresponds to the 10-year centered average of each season.\nDecades span from 1965-1974 until 2004-2013.\nObservational data span from 1961 to 2013.\nDepth range (IODE standard depths): -1500.0, -1400.0, -1300.0, -1200.0, -1100.0, -1000.0, -900.0, -800.0, -700.0, -600.0, -500.0, -400.0, -300.0, -250.0, -200.0, -150.0, -125.0, -100.0, -75.0, -50.0, -30.0, -20.0, -10.0, -5.0, -0.0.\n\nData Sources: observational data from SeaDataNet/EMODNet Chemistry Data Network.\n\nDescription of DIVA analysis: Geostatistical data analysis by DIVA (Data-Interpolating Variational Analysis) tool. Profiles were interpolated at standard depths using weighted parabolic interpolation algorithm (Reiniger and Ross, 1968). GEBCO 1min topography is used for the contouring preparation. Analyzed filed masked using relative error threshold 0.3 and 0.5.\n\nDIVA settings: A constant value for signal-to-noise ratio was used equal to 3. Correlation length was optimized and filtered vertically and a seasonally-averaged profile was used.\n\nLogarithmic transformation applied to the data prior to the analysis.\nBackground field: the data mean value is subtracted from the data.\nDetrending of data: no.\nAdvection constraint applied: no.\n\nOriginators of Italian data sets-List of contributors:\no\tBrunetti Fabio (OGS)\no\tCardin Vanessa, Bensi Manuel doi:10.6092/36728450-4296-4e6a-967d-d5b6da55f306\no\tCardin Vanessa, Bensi Manuel, Ursella Laura, Siena Giuseppe doi:10.6092/f8e6d18e-f877-4aa5-a983-a03b06ccb987\no\tCataletto Bruno (OGS)\no\tCinzia Comici Cinzia (OGS)\no\tCivitarese Giuseppe (OGS)\no\tDeVittor Cinzia (OGS)\no\tGiani Michele (OGS)\no\tKovacevic Vedrana (OGS)\no\tMosetti Renzo (OGS)\no\tSolidoro C.,Beran A.,Cataletto B.,Celussi M.,Cibic T.,Comici C.,Del Negro P.,De Vittor C.,Minocci M.,Monti M.,Fabbro C.,Falconi C.,Franzo A.,Libralato S.,Lipizer M.,Negussanti J.S.,Russel H.,Valli G., doi:10.6092/e5518899-b914-43b0-8139-023718aa63f5\no\tCelio Massimo (ARPA FVG)\no\tMalaguti Antonella (ENEA)\no\tFonda Umani Serena (UNITS)\no\tBignami Francesco (ISAC/CNR)\no\tBoldrini Alfredo (ISMAR/CNR)\no\tMarini Mauro (ISMAR/CNR)\no\tMiserocchi Stefano (ISMAR/CNR)\no\tZaccone Renata (IAMC/CNR)\no\tLavezza, R., Dubroca, L. F. C., Ludicone, D., Kress, N., Herut, B., Civitarese, G., Cruzado, A., Lefèvre, D., Souvermezoglou, E., Yilmaz, A., Tugrul, S., and Ribera d'Alcala, M.: Compilation of quality controlled nutrient profiles from the Mediterranean Sea, doi:10.1594/PANGAEA.771907, 2011."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Emodnet Chemistry",
+              "langeng": "Emodnet Chemistry"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-6.25, 30.0],
+                  [36.375, 30.0],
+                  [36.375, 45.875],
+                  [-6.25, 45.875],
+                  [-6.25, 30.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "877d5b01eb420aa863b276c57a971887",
+              "idx": 1,
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://dx.doi.org/10.6092/18EEA631-EA55-4DCF-A9A2-27E9618491DC",
+                "langeng": "http://dx.doi.org/10.6092/18EEA631-EA55-4DCF-A9A2-27E9618491DC"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langeng": "Digital Object Identifier (DOI)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "41a76823bb374c7a6f120c8ebe801093",
+              "idx": 2,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Winter (January-March) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Winter (January-March) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "9c1482d04dc161db27fcb37b9768d115",
+              "idx": 3,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Spring (April-June) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Spring (April-June) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "853106407899b28c75eb7be33d4e2015",
+              "idx": 4,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Summer (July-September) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Summer (July-September) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "e81938d8ef011a12c6788581c68d5c2b",
+              "idx": 5,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Autumn (October-December) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Autumn (October-December) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "94cd2997-78be-47e6-b570-c51d51041118",
+          "draft": "n",
+          "id": "334237958",
+          "owner": "4",
+          "groupOwner": "92",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["92", "1"],
+          "op1": ["92", "1"],
+          "documentStandard": "iso19139",
+          "op3": "92",
+          "op5": ["92", "1"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2018-02-06T10:10:30Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "nameObject": {
+                "default": "win-ntri.png",
+                "langeng": "win-ntri.png"
+              },
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/94cd2997-78be-47e6-b570-c51d51041118/attachments/win-ntri.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "59a8b0c1-3334-487a-9211-c7b8973288b6",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-10-28T14:08:01.039145Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "Black Sea - Seafloor litter aggregated datasets 2011/2014 v2025",
+            "langeng": "Black Sea - Seafloor litter aggregated datasets 2011/2014 v2025"
+          },
+          "resourceAbstractObject": {
+            "default": "EMODnet Chemistry aims to provide access to marine chemistry data sets and derived data products concerning eutrophication, ocean acidification, contaminants and litter. The chosen parameters are relevant for the Marine Strategy Framework Directive (MSFD), in particular for descriptors 5, 8, 9 and 10. The datasets contain standardized, harmonized and validated data collections from seafloor litter. \nDatasets concerning seafloor litter data are loaded in a central database after a semi-automated validation phase. Once loaded, a data assessment is performed in order to check data consistency and potential errors are corrected thanks to a feedback loop with data originators.\nEMODnet seafloor litter data and database are hosted and maintained by ‘Istituto Nazionale di Oceanografia e di Geofisica Sperimentale, Division of Oceanography (OGS/NODC)’ from Italy.\nFor seafloor litter, the harmonized datasets contain all unrestricted EMODnet Chemistry data on seafloor litter data.\nData are formatted following Guidelines and forms for gathering marine litter data, which can be found at: https://dx.doi.org/10.6092/15c0d34c-a01a-4091-91ac-7c4f561ab508\nThe updated vocabularies of admitted values are available at:\nhttps://vocab.seadatanet.org/search\nhttps://vocab.ices.dk/ .\nThe harmonized datasets can be downloaded as EMODnet Sea-floor litter data format version 1.0, which is a csv file, tab separated values.",
+            "langeng": "EMODnet Chemistry aims to provide access to marine chemistry data sets and derived data products concerning eutrophication, ocean acidification, contaminants and litter. The chosen parameters are relevant for the Marine Strategy Framework Directive (MSFD), in particular for descriptors 5, 8, 9 and 10. The datasets contain standardized, harmonized and validated data collections from seafloor litter. \nDatasets concerning seafloor litter data are loaded in a central database after a semi-automated validation phase. Once loaded, a data assessment is performed in order to check data consistency and potential errors are corrected thanks to a feedback loop with data originators.\nEMODnet seafloor litter data and database are hosted and maintained by ‘Istituto Nazionale di Oceanografia e di Geofisica Sperimentale, Division of Oceanography (OGS/NODC)’ from Italy.\nFor seafloor litter, the harmonized datasets contain all unrestricted EMODnet Chemistry data on seafloor litter data.\nData are formatted following Guidelines and forms for gathering marine litter data, which can be found at: https://dx.doi.org/10.6092/15c0d34c-a01a-4091-91ac-7c4f561ab508\nThe updated vocabularies of admitted values are available at:\nhttps://vocab.seadatanet.org/search\nhttps://vocab.ices.dk/ .\nThe harmonized datasets can be downloaded as EMODnet Sea-floor litter data format version 1.0, which is a csv file, tab separated values."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "EMODnet Chemistry",
+              "langeng": "EMODnet Chemistry"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [28.65, 43.75],
+                  [30.17, 43.75],
+                  [30.17, 44.81],
+                  [28.65, 44.81],
+                  [28.65, 43.75]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "ef15a491e14f74155b0d08eaf46aaa6f",
+              "idx": 1,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_SeafloorLitter_BlackSea_2025_unrestricted.zip",
+                "langeng": "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_SeafloorLitter_BlackSea_2025_unrestricted.zip"
+              },
+              "nameObject": {
+                "default": "EMD_SeafloorLitter_BlackSea_2025_unrestricted",
+                "langeng": "EMD_SeafloorLitter_BlackSea_2025_unrestricted"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "88d2ab98989af31ef79c7182f78d05ca",
+              "idx": 2,
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.13120/je91-sp43",
+                "langeng": "https://doi.org/10.13120/je91-sp43"
+              },
+              "nameObject": {
+                "default": "Harmonization and data validation on litter aggregated datasets",
+                "langeng": "Harmonization and data validation on litter aggregated datasets"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "8f334f859dc7cd30e384dd66779fa181",
+              "idx": 3,
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.13120/59a8b0c1-3334-487a-9211-c7b8973288b6",
+                "langeng": "https://doi.org/10.13120/59a8b0c1-3334-487a-9211-c7b8973288b6"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langeng": "Digital Object Identifier (DOI)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "59a8b0c1-3334-487a-9211-c7b8973288b6",
+          "draft": "n",
+          "id": "339875674",
+          "owner": "334250021",
+          "groupOwner": "92",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["1", "92"],
+          "op1": ["1", "92"],
+          "documentStandard": "iso19139",
+          "op3": "92",
+          "op5": ["1", "92"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2025-10-03T08:51:09.935209Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/59a8b0c1-3334-487a-9211-c7b8973288b6/attachments/SL_BlackSea.jpeg"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "5380d422-cdcf-4343-8ee4-154cb34da1e3",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-10-28T14:07:35.092259Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "Baltic Sea - Seafloor litter aggregated datasets 2011/2024 v2025",
+            "langeng": "Baltic Sea - Seafloor litter aggregated datasets 2011/2024 v2025"
+          },
+          "resourceAbstractObject": {
+            "default": "EMODnet Chemistry aims to provide access to marine chemistry data sets and derived data products concerning eutrophication, ocean acidification, contaminants and litter. The chosen parameters are relevant for the Marine Strategy Framework Directive (MSFD), in particular for descriptors 5, 8, 9 and 10. The datasets contain standardized, harmonized and validated data collections from seafloor litter. \nDatasets concerning seafloor litter data are loaded in a central database after a semi-automated validation phase. Once loaded, a data assessment is performed in order to check data consistency and potential errors are corrected thanks to a feedback loop with data originators.\nEMODnet seafloor litter data and database are hosted and maintained by ‘Istituto Nazionale di Oceanografia e di Geofisica Sperimentale, Division of Oceanography (OGS/NODC)’ from Italy.\nFor seafloor litter, the harmonized datasets contain all unrestricted EMODnet Chemistry data on seafloor litter data.\nData are formatted following Guidelines and forms for gathering marine litter data, which can be found at: https://dx.doi.org/10.6092/15c0d34c-a01a-4091-91ac-7c4f561ab508\nThe updated vocabularies of admitted values are available at:\nhttps://vocab.seadatanet.org/search\nhttps://vocab.ices.dk/\nThe harmonized datasets can be downloaded as EMODnet Sea-floor litter data format version 1.0, which is a csv file, tab separated values.",
+            "langeng": "EMODnet Chemistry aims to provide access to marine chemistry data sets and derived data products concerning eutrophication, ocean acidification, contaminants and litter. The chosen parameters are relevant for the Marine Strategy Framework Directive (MSFD), in particular for descriptors 5, 8, 9 and 10. The datasets contain standardized, harmonized and validated data collections from seafloor litter. \nDatasets concerning seafloor litter data are loaded in a central database after a semi-automated validation phase. Once loaded, a data assessment is performed in order to check data consistency and potential errors are corrected thanks to a feedback loop with data originators.\nEMODnet seafloor litter data and database are hosted and maintained by ‘Istituto Nazionale di Oceanografia e di Geofisica Sperimentale, Division of Oceanography (OGS/NODC)’ from Italy.\nFor seafloor litter, the harmonized datasets contain all unrestricted EMODnet Chemistry data on seafloor litter data.\nData are formatted following Guidelines and forms for gathering marine litter data, which can be found at: https://dx.doi.org/10.6092/15c0d34c-a01a-4091-91ac-7c4f561ab508\nThe updated vocabularies of admitted values are available at:\nhttps://vocab.seadatanet.org/search\nhttps://vocab.ices.dk/\nThe harmonized datasets can be downloaded as EMODnet Sea-floor litter data format version 1.0, which is a csv file, tab separated values."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "EMODnet Chemistry",
+              "langeng": "EMODnet Chemistry"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [9.58, 54.09],
+                  [22.03, 54.09],
+                  [22.03, 58.65],
+                  [9.58, 58.65],
+                  [9.58, 54.09]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "f0a241886777f762d696674bdd5e635a",
+              "idx": 1,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_SeafloorLitter_Baltic_2025_unrestricted.zip",
+                "langeng": "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_SeafloorLitter_Baltic_2025_unrestricted.zip"
+              },
+              "nameObject": {
+                "default": "EMD_SeafloorLitter_Baltic_2025_unrestricted",
+                "langeng": "EMD_SeafloorLitter_Baltic_2025_unrestricted"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "88d2ab98989af31ef79c7182f78d05ca",
+              "idx": 2,
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.13120/je91-sp43",
+                "langeng": "https://doi.org/10.13120/je91-sp43"
+              },
+              "nameObject": {
+                "default": "Harmonization and data validation on litter aggregated datasets",
+                "langeng": "Harmonization and data validation on litter aggregated datasets"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "3e9bcdc74a70f2d519c5889f5998fc5c",
+              "idx": 3,
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.13120/5380d422-cdcf-4343-8ee4-154cb34da1e3",
+                "langeng": "https://doi.org/10.13120/5380d422-cdcf-4343-8ee4-154cb34da1e3"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langeng": "Digital Object Identifier (DOI)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "5380d422-cdcf-4343-8ee4-154cb34da1e3",
+          "draft": "n",
+          "id": "339875673",
+          "owner": "334250021",
+          "groupOwner": "92",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["1", "92"],
+          "op1": ["1", "92"],
+          "documentStandard": "iso19139",
+          "op3": "92",
+          "op5": ["1", "92"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2025-10-03T07:33:44.4112Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/5380d422-cdcf-4343-8ee4-154cb34da1e3/attachments/SL_baltic.jpeg"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "9c877fc1-73ec-488b-87a6-fae14c935f83",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-08-08T07:13:46.04743Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "North Sea DIVA 4D analysis of Water_body_total_nitrogen",
+            "langeng": "North Sea DIVA 4D analysis of Water_body_total_nitrogen"
+          },
+          "resourceAbstractObject": {
+            "default": "This gridded product visualizes 1960 - 2014 water body total nitrogen concentration (umol/l) in the North Sea domain, for each season (winter: December – February; spring: March – May; summer: June – August; autumn: September – November).\n\nIt is produced as a Diva 4D analysis, version 4.6.11: a reference field of all seasonal data between 1960-2014 was used; results were logit transformed to avoid negative/underestimated values in the interpolated results; error threshold masks L1 (0.3) and L2 (0.5) are included as well as the unmasked field.\n\nEvery step of the time dimension corresponds to a 10-year moving average for each season.\n\nThe depth dimension allows visualizing the gridded field at various depths.",
+            "langeng": "This gridded product visualizes 1960 - 2014 water body total nitrogen concentration (umol/l) in the North Sea domain, for each season (winter: December – February; spring: March – May; summer: June – August; autumn: September – November).\n\nIt is produced as a Diva 4D analysis, version 4.6.11: a reference field of all seasonal data between 1960-2014 was used; results were logit transformed to avoid negative/underestimated values in the interpolated results; error threshold masks L1 (0.3) and L2 (0.5) are included as well as the unmasked field.\n\nEvery step of the time dimension corresponds to a 10-year moving average for each season.\n\nThe depth dimension allows visualizing the gridded field at various depths."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Emodnet chemistry",
+              "langeng": "Emodnet chemistry"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-5.4, 47.0],
+                  [13.9, 47.0],
+                  [13.9, 62.9],
+                  [-5.4, 62.9],
+                  [-5.4, 47.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "d9ea4cac5666487b104eca9671af16c6",
+              "idx": 1,
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://dx.doi.org/10.6092/83DD1E37-96E5-4DAD-84ED-AB0D870ECEAD",
+                "langeng": "http://dx.doi.org/10.6092/83DD1E37-96E5-4DAD-84ED-AB0D870ECEAD"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langeng": "Digital Object Identifier (DOI)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "f99ffc0eec4ce9e99590c95f445a8bb1",
+              "idx": 2,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Winter (December-February) - 10-years running averages/Water_body_total_nitrogen.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Winter (December-February) - 10-years running averages/Water_body_total_nitrogen.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (winter)",
+                "langeng": "OPeNDAP (winter)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "b28f4627fcf9fcedf45c67e17685a6d2",
+              "idx": 3,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Spring (March-May) - 10-years running averages/Water_body_total_nitrogen.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Spring (March-May) - 10-years running averages/Water_body_total_nitrogen.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (spring)",
+                "langeng": "OPeNDAP (spring)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "1398b4ea92837636b8fa3669ea019237",
+              "idx": 4,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Summer (June-August) - 10-years running averages/Water_body_total_nitrogen.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Summer (June-August) - 10-years running averages/Water_body_total_nitrogen.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (summer)",
+                "langeng": "OPeNDAP (summer)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "f13cafb1f46d68894b4ef07c7c5cd148",
+              "idx": 5,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Autumn (September-November) - 10-years running averages/Water_body_total_nitrogen.4Danl.nc.html",
+                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/North Sea/Autumn (September-November) - 10-years running averages/Water_body_total_nitrogen.4Danl.nc.html"
+              },
+              "nameObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "descriptionObject": {
+                "default": "OPeNDAP (autumn)",
+                "langeng": "OPeNDAP (autumn)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "9c877fc1-73ec-488b-87a6-fae14c935f83",
+          "draft": "n",
+          "id": "334237953",
+          "owner": "4",
+          "groupOwner": "92",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["92", "1"],
+          "op1": ["92", "1"],
+          "documentStandard": "iso19139",
+          "op3": "92",
+          "op5": ["92", "1"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2018-02-06T10:10:57Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "nameObject": {
+                "default": "tn_winter_2000_0.png",
+                "langeng": "tn_winter_2000_0.png"
+              },
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/9c877fc1-73ec-488b-87a6-fae14c935f83/attachments/tn_winter_2000_0.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
         "selected": false
       }
     ]
@@ -669,11 +1004,11 @@
         }
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 167,
+      "sum_other_doc_count": 165,
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 10804
+          "doc_count": 10786
         },
         {
           "key": "series",
@@ -697,7 +1032,7 @@
         },
         {
           "key": "initiative",
-          "doc_count": 80
+          "doc_count": 81
         },
         {
           "key": "map",
@@ -731,7 +1066,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463",
-          "doc_count": 1867
+          "doc_count": 1868
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
@@ -743,7 +1078,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1",
-          "doc_count": 366
+          "doc_count": 365
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f",

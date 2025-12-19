@@ -47,7 +47,7 @@ describe('Search', () => {
       .first()
       .then((button) => {
         cy.wrap(button).click();
-        cy.wait('@unmatchedSearchRequest');
+        cy.wait('@apiMainSearchByResourceType');
         cy.get('app-search-active-filters-button p-button').should('have.length', 2);
         cy.get('app-search-active-filters-button p-button p-badge').click();
         cy.wait('@apiMainSearch');
@@ -83,7 +83,7 @@ describe('Search', () => {
         const match = bucketText.match(/\(([\d,]+)\)/);
         const bucketCount = match ? parseInt(match[1].replace(/,/g, ''), 10) : 0;
         cy.wrap(button).click();
-        cy.wait('@unmatchedSearchRequest').then((search) => {
+        cy.wait('@apiMainSearchByResourceType').then((search) => {
           const count = search.response?.body.hits.total.value;
           expect(count).to.eq(bucketCount);
           cy.get('app-search-active-filters-button p-button p-badge').should('contain.text', '1');

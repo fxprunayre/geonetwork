@@ -1,5 +1,5 @@
 {
-  "took": 19,
+  "took": 18,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -261,7 +261,7 @@
             }
           ]
         },
-        "sort": [19430],
+        "sort": [19510],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -396,7 +396,7 @@
             }
           ]
         },
-        "sort": [485],
+        "sort": [488],
         "edit": false,
         "canReview": false,
         "owner": false,
