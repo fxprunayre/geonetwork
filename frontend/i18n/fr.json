@@ -8,6 +8,9 @@
         }
       }
     },
+    "button": {
+      "title": "Rechercher"
+    },
     "filter": {
       "title": "Tous les filtres",
       "activeFilters": "Filtres actifs",

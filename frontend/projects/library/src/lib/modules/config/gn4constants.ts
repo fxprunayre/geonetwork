@@ -680,11 +680,11 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
         //   sortOrder: 'desc',
         // },
         {
-          sortBy: 'popularity',
-          sortOrder: 'desc',
+          sortBy: '-popularity',
+          sortOrder: '',
         },
       ],
-      sortBy: 'relevance',
+      sortBy: '-popularity',
       resultViewTpls: [
         {
           tplUrl:

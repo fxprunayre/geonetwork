@@ -7,6 +7,9 @@ import {
   input,
   Output,
   signal,
+  ElementRef,
+  HostListener,
+  viewChild,
 } from '@angular/core';
 import { Select, SelectChangeEvent } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
@@ -45,6 +48,8 @@ export class Aggregation extends SearchBase {
   translateService = inject(TranslateService);
   aggregationTranslatePipe = inject(AggregationTranslatePipe);
   decimalPipe = inject(DecimalPipe);
+  elementRef = inject(ElementRef);
+  multiSelect = viewChild(MultiSelect);
 
   selectedDropdownOptions = signal<AggregationBucketType[]>([]);
 
@@ -136,6 +141,23 @@ export class Aggregation extends SearchBase {
       this.search.addFilter(this.keyName(), event.values[0]);
     } else if (!event.add) {
       this.search.removeFilter(this.keyName(), event.values[0]);
+    }
+  }
+
+  // FIXME: ShadowDOM:
+  // Listen for clicks outside the component to close the overlay
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: PointerEvent) {
+    const multiSelect = this.multiSelect();
+    if (!multiSelect?.overlayVisible) {
+      return;
+    }
+
+    const clickPath = event.composedPath();
+
+    // Check if click is inside the component
+    if (!clickPath.includes(this.elementRef.nativeElement)) {
+      multiSelect.hide();
     }
   }
 }

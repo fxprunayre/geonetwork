@@ -55,13 +55,26 @@ npm run watch-lib
 ```
 
 
-```sh
-git config core.hooksPath frontend/.husky
-```
 
 ### Running tests
 
-...
+Unit tests:
+
+```sh
+npm run test
+```
+
+End-to-end tests:
+
+```sh
+# Run tests in interactive mode (opens Cypress UI)
+npm run e2e:start
+
+# Run tests in headless mode (CI)
+npm run e2e:ci
+```
+
+
 
 
 ## GeoNetwork API

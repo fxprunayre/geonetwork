@@ -1,4 +1,5 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchStoreType } from '../search.store';
 
@@ -23,7 +24,7 @@ export class SearchWelcomeTextPipe implements PipeTransform {
     if (!search) {
       return '';
     }
-    if (search.totalCount() === 0) {
+    if (search.totalCount() < 2) {
       return this.translateService.instant('search.welcome.default');
     }
     let mainBuckets = '';
@@ -35,7 +36,9 @@ export class SearchWelcomeTextPipe implements PipeTransform {
         .join(', ');
     }
     return this.translateService.instant('search.welcome.text', {
-      count: search.totalCount(),
+      count: new DecimalPipe(this.translateService.currentLang || 'en-US').transform(
+        search.totalCount(),
+      ),
       mainBuckets: mainBuckets,
     });
   }

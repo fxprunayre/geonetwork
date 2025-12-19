@@ -8,6 +8,9 @@
         }
       }
     },
+    "button": {
+      "title": "Search"
+    },
     "filter": {
       "title": "All filters",
       "activeFilters": "Active filters",
@@ -42,6 +45,12 @@
     "welcome": {
       "default": "Search ...",
       "text": "Search over {{count}} {{mainBuckets}}, ..."
+    }
+  },
+  "results": {
+    "layout": {
+      "list": "List view",
+      "grid": "Grid view"
     }
   },
   "record": {
