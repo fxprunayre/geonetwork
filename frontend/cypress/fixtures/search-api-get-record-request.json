@@ -1,0 +1,8 @@
+{
+  "query": {
+    "term": {
+      "_id": "cf5048f6-5bbf-4e44-ba74-e6f429af51ea"
+    }
+  },
+  "size": 1
+}
