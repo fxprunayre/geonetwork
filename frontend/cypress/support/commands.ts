@@ -40,6 +40,11 @@ Cypress.Commands.add('initApp', () => {
       res: 'search-api-autocomplete-response.json',
       alias: 'apiMainSearchAutocomplete',
     },
+    {
+      req: 'search-api-get-record-request.json',
+      res: 'search-api-get-record-response.json',
+      alias: 'apiMainSearchGetRecord',
+    },
   ];
 
   const loadedMocks: any[] = [];

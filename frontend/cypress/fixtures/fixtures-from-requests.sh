@@ -60,3 +60,9 @@ curl "$SERVER/srv/api/search/records/_search" \
   -X 'POST' \
   -d @search-api-autocomplete-request.json | jq . > search-api-autocomplete-response.json
   
+curl "$SERVER/srv/api/search/records/_search?relatedType=parent&relatedType=children&relatedType=services&relatedType=sources&relatedType=hassources&relatedType=brothersAndSisters&relatedType=datasets&relatedType=siblings&relatedType=fcats&relatedType=hasfeaturecats&relatedType=associated" \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -X 'POST' \
+  -d @search-api-get-record-request.json | jq . > search-api-get-record-response.json
+  

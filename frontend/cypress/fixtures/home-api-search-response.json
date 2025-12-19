@@ -1,5 +1,5 @@
 {
-  "took": 8,
+  "took": 12,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,49 +9,11 @@
   },
   "hits": {
     "total": {
-      "value": 14800,
+      "value": 14839,
       "relation": "eq"
     },
     "max_score": null,
     "hits": [
-      {
-        "_index": "geo-records",
-        "_id": "9c04daf8-d8f7-4e36-a05f-0d096c6da126",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "Product User Manual (CMEMS-OMI-PUM-GLO-OHC)"
-          },
-          "dateStamp": "2024-07-26T14:54:22.758Z",
-          "resourceType": ["publication"],
-          "uuid": "9c04daf8-d8f7-4e36-a05f-0d096c6da126",
-          "draft": "n",
-          "id": "334238062",
-          "owner": "164187932",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
       {
         "_index": "geo-records",
         "_id": "4ec313ee-3fe4-4e1b-b9a4-6538e9383320",
@@ -982,6 +944,130 @@
         "dynamic": true,
         "featured": false,
         "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "3994c5df-a846-42da-be67-5c1f1c06f518",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-10-28T14:09:50.369113Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "European floating micro-litter standardized, harmonized and validated datasets 2011/2023 v2025",
+            "langeng": "European floating micro-litter standardized, harmonized and validated datasets 2011/2023 v2025"
+          },
+          "resourceAbstractObject": {
+            "default": "EMODnet Chemistry aims to provide access to marine chemistry datasets and derived data products concerning eutrophication, acidity, contaminants and marine litter. The importance of the selected substances and other parameters relates to the Marine Strategy Framework Directive (MSFD). This aggregated dataset contains all unrestricted EMODnet Chemistry data on floating micro-litter.\n\nThis dataset is the result of a validation and harmonisation process of the datasets concerning floating micro-litter present in EMODnet Chemistry. The datasets concerning micro-litter are automatically harvested and the resulting collections are harmonised and validated using ODV Software and following a common methodology for all sea regions. Parameter names are based on P01 vocabulary, which relates to BODC Parameter Usage Vocabulary and is available at: https://vocab.nerc.ac.uk/search_nvs/P01/\nThis process was performed by ‘Istituto Nazionale di Oceanografia e di Geofisica Sperimentale, Division of Oceanography (OGS/NODC)’ from Italy.\n\nHarmonisation means that: (1) unit conversion is carried out to express variables with a limited set of measurement units and (2) merging of variables described by different “local names”, but corresponding exactly to the same concepts in BODC P01 vocabulary.\nThe harmonised dataset can be downloaded as ODV collection that can be opened with ODV software for visualization (More information can be found at: https://www.seadatanet.org/Software/ODV ). The same dataset is offered as spreadsheet (txt format, tab separated values) where the values of the categories for the following reported parameters (type, shape, size, color, transparency and material) have been uniformed as labelled in the SeaDataNet H01, H02, H03, H04, H05, H06 vocabularies (https://vocab.seadatanet.org/search ). This format is more adapted to worksheet applications (e.g. LibreOffice Calc).",
+            "langeng": "EMODnet Chemistry aims to provide access to marine chemistry datasets and derived data products concerning eutrophication, acidity, contaminants and marine litter. The importance of the selected substances and other parameters relates to the Marine Strategy Framework Directive (MSFD). This aggregated dataset contains all unrestricted EMODnet Chemistry data on floating micro-litter.\n\nThis dataset is the result of a validation and harmonisation process of the datasets concerning floating micro-litter present in EMODnet Chemistry. The datasets concerning micro-litter are automatically harvested and the resulting collections are harmonised and validated using ODV Software and following a common methodology for all sea regions. Parameter names are based on P01 vocabulary, which relates to BODC Parameter Usage Vocabulary and is available at: https://vocab.nerc.ac.uk/search_nvs/P01/\nThis process was performed by ‘Istituto Nazionale di Oceanografia e di Geofisica Sperimentale, Division of Oceanography (OGS/NODC)’ from Italy.\n\nHarmonisation means that: (1) unit conversion is carried out to express variables with a limited set of measurement units and (2) merging of variables described by different “local names”, but corresponding exactly to the same concepts in BODC P01 vocabulary.\nThe harmonised dataset can be downloaded as ODV collection that can be opened with ODV software for visualization (More information can be found at: https://www.seadatanet.org/Software/ODV ). The same dataset is offered as spreadsheet (txt format, tab separated values) where the values of the categories for the following reported parameters (type, shape, size, color, transparency and material) have been uniformed as labelled in the SeaDataNet H01, H02, H03, H04, H05, H06 vocabularies (https://vocab.seadatanet.org/search ). This format is more adapted to worksheet applications (e.g. LibreOffice Calc)."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "EMODnet Chemistry",
+              "langeng": "EMODnet Chemistry"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-179.5, -55.5],
+                  [179.9, -55.5],
+                  [179.9, 79.0],
+                  [-179.5, 79.0],
+                  [-179.5, -55.5]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "f1b3053e6db7efb4522a528ad9990403",
+              "idx": 1,
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_floating_microlitter_2025_unrestricted.zip",
+                "langeng": "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_floating_microlitter_2025_unrestricted.zip"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "88d2ab98989af31ef79c7182f78d05ca",
+              "idx": 2,
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.13120/je91-sp43",
+                "langeng": "https://doi.org/10.13120/je91-sp43"
+              },
+              "nameObject": {
+                "default": "Harmonization and data validation on litter aggregated datasets",
+                "langeng": "Harmonization and data validation on litter aggregated datasets"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "hash": "f8c5521d3c4e898983656f12b31f5d7b",
+              "idx": 3,
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.13120/3994c5df-a846-42da-be67-5c1f1c06f518",
+                "langeng": "https://doi.org/10.13120/3994c5df-a846-42da-be67-5c1f1c06f518"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langeng": "Digital Object Identifier (DOI)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "3994c5df-a846-42da-be67-5c1f1c06f518",
+          "draft": "n",
+          "id": "339875677",
+          "owner": "334250021",
+          "groupOwner": "92",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["1", "92"],
+          "op1": ["1", "92"],
+          "documentStandard": "iso19139",
+          "op3": "92",
+          "op5": ["1", "92"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2025-10-03T08:52:03.828893Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "nameObject": {
+                "default": "floating_microlitter",
+                "langeng": "floating_microlitter"
+              },
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/3994c5df-a846-42da-be67-5c1f1c06f518/attachments/microlitter_water.jpg"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
       }
     ]
   },
@@ -1008,7 +1094,7 @@
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 10786
+          "doc_count": 10825
         },
         {
           "key": "series",

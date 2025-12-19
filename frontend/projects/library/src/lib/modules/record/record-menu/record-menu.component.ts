@@ -1,95 +1,109 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { Menu } from 'primeng/menu';
-import { ButtonModule } from 'primeng/button';
+import { Component, computed, effect, inject, signal, ElementRef, OnInit } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidEllipsisVertical } from '@ng-icons/font-awesome/solid';
+import {
+  faSolidEllipsisVertical,
+  faSolidShareNodes,
+  faSolidUpRightFromSquare,
+} from '@ng-icons/font-awesome/solid';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { MenuItem } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { Menu } from 'primeng/menu';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
-import { environment } from '../../../../environments/environment.sextant';
-import { MessageService } from 'primeng/api';
-import { TranslateService } from '@ngx-translate/core';
+import { RecordsService } from 'gn4-api-client';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { IconStyleService } from '../../../shared/icon-style.service';
 
 @Component({
   selector: 'app-record-menu',
   templateUrl: './record-menu.component.html',
   standalone: true,
-  imports: [Menu, ButtonModule, NgIcon],
+  imports: [Menu, ButtonModule, NgIcon, TranslatePipe],
   viewProviders: [
     provideIcons({
       faSolidEllipsisVertical,
     }),
   ],
-  providers: [MessageService],
 })
 export class RecordMenuComponent extends RecordFieldBase implements OnInit {
-  private readonly baseUrl = environment.geonetworkApiUrl;
+  private readonly recordsService = inject(RecordsService);
   private readonly translate = inject(TranslateService);
-  private readonly messageService = inject(MessageService);
-  items!: MenuItem[];
+  private readonly elementRef = inject(ElementRef);
+  private readonly iconStyleService = inject(IconStyleService);
 
-  ngOnInit() {
-    this.items = [
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+  catalogueUrl = computed(() => this.appConfiguration().catalogueUrl);
+
+  shareUrl = signal('');
+  currentLang = signal(this.translate.getCurrentLang());
+
+  constructor() {
+    super();
+    effect((onCleanup) => {
+      const uuid = this.record().uuid;
+      if (!uuid) {
+        this.shareUrl.set('');
+        return;
+      }
+
+      const sub = this.recordsService.getRecordPermalink(uuid).subscribe({
+        next: (url) => this.shareUrl.set(url),
+        error: () => this.shareUrl.set(''),
+      });
+
+      onCleanup(() => {
+        sub.unsubscribe();
+      });
+    });
+  }
+
+  downloadUrl = computed(() => {
+    const uuid = this.record().uuid;
+    if (!uuid) {
+      return '';
+    }
+    return `${this.catalogueUrl()}/srv/api/records/${uuid}/formatters/xml`;
+  });
+
+  items = computed<MenuItem[]>(() => {
+    this.currentLang();
+    return [
       {
-        label: 'Options',
-        items: [
-          {
-            label: 'Share',
-            icon: 'pi pi-share',
-            command: () => this.shareRecord(),
-          },
-          {
-            label: 'Export (XML)',
-            icon: 'pi pi-external-link',
-            command: () => this.exportXml(),
-          },
-        ],
+        label: this.translate.instant('record.action.share'),
+        title: this.translate.instant('record.action.shareHelp'),
+        icon: 'icon-share-nodes',
+        url: this.shareUrl(),
+        target: '_blank',
+        visible: !!this.shareUrl(),
+      },
+      {
+        label: this.translate.instant('record.action.metadataDownload'),
+        title: this.translate.instant('record.action.metadataDownloadHelp'),
+        icon: 'icon-external-link',
+        url: this.downloadUrl(),
+        target: '_blank',
       },
     ];
-  }
+  });
 
-  private getPermalinkUrl(uuid: string) {
-    return `${this.baseUrl}/srv/api/records/${uuid}/permalink`;
-  }
+  ngOnInit() {
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang.set(event.lang);
+    });
 
-  private recordApiUrl(path: string) {
-    return `${this.baseUrl}/srv/api/records/${this.record().uuid}/${path}`;
-  }
-
-  async shareRecord() {
-    const uuid = this.record()?.uuid;
-
-    if (!uuid) {
-      console.warn('No record UUID available for sharing');
-      return;
-    }
-
-    try {
-      const response = await fetch(this.getPermalinkUrl(uuid));
-
-      if (!response.ok) {
-        throw new Error(`Permalink request failed (${response.status})`);
-      }
-
-      const data: { url?: string } = await response.json();
-
-      if (!data.url) {
-        throw new Error('Permalink response missing url');
-      }
-
-      window.open(data.url, '_blank');
-    } catch (err) {
-      console.error('Failed to fetch permalink', err);
-
-      this.messageService.add({
-        severity: 'error',
-        summary: this.translate.instant('share.title_error'),
-        detail: this.translate.instant('share.detail_error'),
-        life: 3000,
-      });
-    }
-  }
-
-  exportXml() {
-    window.open(this.recordApiUrl('formatters/xml'), '_blank');
+    this.iconStyleService.ensureIconsStyle(
+      'gn-share-icon-style',
+      [
+        {
+          className: 'icon-share-nodes',
+          svgContent: faSolidShareNodes,
+        },
+        {
+          className: 'icon-external-link',
+          svgContent: faSolidUpRightFromSquare,
+        },
+      ],
+      this.elementRef.nativeElement.getRootNode(),
+    );
   }
 }
