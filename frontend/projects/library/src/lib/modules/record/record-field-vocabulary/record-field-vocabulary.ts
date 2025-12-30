@@ -18,12 +18,7 @@ export class RecordFieldVocabulary extends RecordFieldBase {
   exclude = input<string[]>([]);
   mainVocabularies = signal(['th_sextant-theme']);
   mode = input<'primary' | 'secondary'>('secondary');
-
   columns = input<1 | 2>(1);
-
-  styleClass = computed(() => {
-    return this.columns() === 2 ? 'columns-1 lg:columns-2 gap-4' : 'columns-1';
-  });
 
   vocabularies = computed<Thesaurus[]>(() => {
     const rec = this.record();
@@ -37,6 +32,18 @@ export class RecordFieldVocabulary extends RecordFieldBase {
       )
       .map((key) => allVocabularies[key]);
   });
+
+  vocabularyColumns = computed<[Thesaurus[], Thesaurus[]]>(() => {
+    const vocabs = this.vocabularies();
+
+    if (this.columns() === 1) {
+      return [vocabs, []];
+    }
+
+    const mid = Math.ceil(vocabs.length / 2);
+    return [vocabs.slice(0, mid), vocabs.slice(mid)];
+  });
+
 
   allKeywords = computed<Keyword[]>(() => {
     const rec = this.record();
@@ -63,6 +70,18 @@ export class RecordFieldVocabulary extends RecordFieldBase {
 
     return list;
   });
+
+  keywordColumns = computed<[Keyword[], Keyword[]]>(() => {
+    const keywords = this.displayKeywords();
+
+    if (this.columns() === 1) {
+      return [keywords, []];
+    }
+
+    const mid = Math.ceil(keywords.length / 2);
+    return [keywords.slice(0, mid), keywords.slice(mid)];
+  });
+
 
   primaryKeywords = computed(() => {
     return this.allKeywords().filter((k) => this.mainVocabularies().includes(k.vocabulary ?? ''));
