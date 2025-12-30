@@ -33,18 +33,6 @@ export class RecordFieldVocabulary extends RecordFieldBase {
       .map((key) => allVocabularies[key]);
   });
 
-  vocabularyColumns = computed<[Thesaurus[], Thesaurus[]]>(() => {
-    const vocabs = this.vocabularies();
-
-    if (this.columns() === 1) {
-      return [vocabs, []];
-    }
-
-    const mid = Math.ceil(vocabs.length / 2);
-    return [vocabs.slice(0, mid), vocabs.slice(mid)];
-  });
-
-
   allKeywords = computed<Keyword[]>(() => {
     const rec = this.record();
     if (!rec) return [];
@@ -81,7 +69,6 @@ export class RecordFieldVocabulary extends RecordFieldBase {
     const mid = Math.ceil(keywords.length / 2);
     return [keywords.slice(0, mid), keywords.slice(mid)];
   });
-
 
   primaryKeywords = computed(() => {
     return this.allKeywords().filter((k) => this.mainVocabularies().includes(k.vocabulary ?? ''));
