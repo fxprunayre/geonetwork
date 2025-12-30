@@ -1,6 +1,7 @@
 <div [class]="styleClass()">
   @for (vocabulary of vocabularies(); track $index) {
     <app-keyword-list
+      class="break-inside-avoid mb-4"
       [title]="vocabulary['multilingualTitle']?.['default']"
       [keywords]="displayKeywords()"
     />

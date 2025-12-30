@@ -18,7 +18,13 @@ export class RecordFieldVocabulary extends RecordFieldBase {
   exclude = input<string[]>([]);
   mainVocabularies = signal(['th_sextant-theme']);
   mode = input<'primary' | 'secondary'>('secondary');
-  styleClass = input<string>('');
+
+  columns = input<1 | 2>(1);
+
+  styleClass = computed(() => {
+    return this.columns() === 2 ? 'columns-1 lg:columns-2 gap-4' : 'columns-1';
+  });
+
   vocabularies = computed<Thesaurus[]>(() => {
     const rec = this.record();
     const allVocabularies: Record<string, Thesaurus> = rec['allKeywords'] || {};
