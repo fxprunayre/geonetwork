@@ -14,7 +14,7 @@ import {
 } from '@ng-icons/font-awesome/solid';
 import { faBrandOrcid } from '@ng-icons/font-awesome/brands';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { SearchLink } from 'gn-library';
+import { SearchLink } from '../../search/search-link/search-link';
 
 // TODO: to add to IndexRecord in gn-api-client
 export interface OrganisationObject {
