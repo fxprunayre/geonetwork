@@ -1,6 +1,7 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
+  Injectable,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
   signal,
@@ -13,7 +14,7 @@ import { HttpBackend, provideHttpClient } from '@angular/common/http';
 import { APPLICATION_CONFIGURATION, TranslationsLoader } from 'gn-library';
 import AppTheme from './app.theme';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
-import { registerLocaleData } from '@angular/common';
+import { LocationStrategy, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { provideMarkdown } from 'ngx-markdown';
 import { environment } from '../../../library/src/environments/environment';
@@ -34,6 +35,53 @@ export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   ]);
 }
 
+/**
+ * Custom implementation of LocationStrategy that keeps navigation in memory.
+ * This prevents the Angular Web Component from interfering with the host page's URL.
+ * But it will not support browser navigation buttons (back/forward).
+ */
+@Injectable()
+export class InMemoryLocationStrategy extends LocationStrategy {
+  private _path = '';
+  private _baseHref = '';
+
+  override getState(): unknown {
+    return null;
+  }
+
+  override path(includeHash?: boolean): string {
+    return this._path;
+  }
+
+  override prepareExternalUrl(internal: string): string {
+    return this._baseHref + internal;
+  }
+
+  override pushState(state: any, title: string, url: string, queryParams: string): void {
+    this._path = url + (queryParams ? '?' + queryParams : '');
+  }
+
+  override replaceState(state: any, title: string, url: string, queryParams: string): void {
+    this._path = url + (queryParams ? '?' + queryParams : '');
+  }
+
+  override forward(): void {
+    // No-op: no history to navigate
+  }
+
+  override back(): void {
+    // No-op: no history to navigate
+  }
+
+  override onPopState(fn: (value: any) => void): void {
+    // No-op: the browser back/forward buttons won't affect this strategy
+  }
+
+  override getBaseHref(): string {
+    return this._baseHref;
+  }
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom([
@@ -51,6 +99,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withDisabledInitialNavigation()),
+    //{ provide: LocationStrategy, useClass: InMemoryLocationStrategy },
     provideAnimationsAsync(),
     provideHttpClient(),
     provideTranslateService({
