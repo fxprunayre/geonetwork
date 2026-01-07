@@ -14,7 +14,12 @@ import {
   faSolidMagnifyingGlass,
   faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
-import { APPLICATION_CONFIGURATION, LanguageSwitcher, ThemeDesigner } from 'gn-library';
+import {
+  APPLICATION_CONFIGURATION,
+  LanguageSwitcher,
+  SEARCH_ROUTE_PATH,
+  ThemeDesigner,
+} from 'gn-library';
 import { MenuItem, SharedModule } from 'primeng/api';
 import { Drawer } from 'primeng/drawer';
 import { Fieldset } from 'primeng/fieldset';
@@ -89,7 +94,7 @@ export class Navigation implements OnInit {
       {
         label: 'search',
         icon: 'faSolidMagnifyingGlass',
-        routerLink: '/search',
+        routerLink: SEARCH_ROUTE_PATH,
       },
       {
         label: 'map',

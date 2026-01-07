@@ -12,6 +12,7 @@ import { RecordFieldOverviewComponent } from '../../record/record-field-overview
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 import { RecordFieldType } from '../../record/record-field-type/record-field-type';
 import { RouterLink } from '@angular/router';
+import { RECORD_ROUTE_PATH } from '../../search/search.constant';
 
 @Component({
   selector: 'app-result-item-grid',
@@ -28,9 +29,16 @@ import { RouterLink } from '@angular/router';
     NgTemplateOutlet,
   ],
   templateUrl: './result-item-grid.html',
-  viewProviders: [provideIcons({ faImage, faSolidEye, faSolidArrowUpRightFromSquare })],
+  viewProviders: [
+    provideIcons({
+      faImage,
+      faSolidEye,
+      faSolidArrowUpRightFromSquare,
+    }),
+  ],
 })
 export class ResultItemGrid {
+  protected readonly RECORD_ROUTE_PATH = RECORD_ROUTE_PATH;
   result = input.required<IndexRecord>();
   onRecordClick = output<string>();
 

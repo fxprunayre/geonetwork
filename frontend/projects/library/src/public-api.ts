@@ -18,6 +18,7 @@ export * from './lib/modules/search/search-route.service';
 export * from './lib/modules/search/search-context.directive';
 export * from './lib/modules/search/search-base/search-base';
 export * from './lib/modules/search/search-input/search-input.component';
+export * from './lib/modules/search/search.constant';
 export * from './lib/modules/search/search-active-filters/search-active-filters.component';
 export * from './lib/modules/search/search-active-filters-button/search-active-filters-button';
 export * from './lib/modules/search/aggregation-translate-pipe';

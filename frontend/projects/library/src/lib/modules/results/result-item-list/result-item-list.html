@@ -49,7 +49,7 @@
   </a>
 } @else {
   <a
-    [routerLink]="['/record', result().info?._id]"
+    [routerLink]="[RECORD_ROUTE_PATH, result().info?._id]"
     [title]="description"
     (click)="handleRecordClick()"
     class="flex flex-col lg:flex-row items-start gap-4 cursor-pointer rounded-(--p-border-radius-md) p-6 border border-surface-100 transition-shadow hover:shadow-md"

@@ -9,7 +9,7 @@ import { RecordViewComponent } from 'gn-library';
 import { TranslatePipe } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DEFAULT_TAB } from 'gn-library';
-import { HistoryService } from 'gn-library';
+import { HistoryService, RECORD_ROUTE_PATH, SEARCH_ROUTE_PATH } from 'gn-library';
 
 @Component({
   selector: 'app-result-detail',
@@ -51,10 +51,10 @@ export class ResultDetailComponent {
   }
 
   handleRecordClick = (uuid: string) => {
-    this.router.navigate(['/record/', uuid]);
+    this.router.navigate([RECORD_ROUTE_PATH, uuid]);
   };
 
   goBack() {
-    this.historyService.goBackToLastMatching('/search');
+    this.historyService.goBackToLastMatching(SEARCH_ROUTE_PATH);
   }
 }

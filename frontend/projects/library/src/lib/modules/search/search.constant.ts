@@ -27,3 +27,9 @@ export const SEARCH_SOURCE = [
   'logo',
   'overview',
 ];
+
+export const SEARCH_SLUG = 'search';
+export const RECORD_SLUG = 'record';
+
+export const SEARCH_ROUTE_PATH = '/' + SEARCH_SLUG;
+export const RECORD_ROUTE_PATH = '/' + RECORD_SLUG;

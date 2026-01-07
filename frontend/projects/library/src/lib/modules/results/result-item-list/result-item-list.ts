@@ -16,6 +16,7 @@ import { RecordFieldCredit } from '../../record/record-field-credit/record-field
 import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 import { RecordFieldType } from '../../record/record-field-type/record-field-type';
+import { RECORD_ROUTE_PATH } from '../../search/search.constant';
 
 @Component({
   selector: 'app-result-item-list',
@@ -44,6 +45,7 @@ import { RecordFieldType } from '../../record/record-field-type/record-field-typ
   ],
 })
 export class ResultItemList {
+  protected readonly RECORD_ROUTE_PATH = RECORD_ROUTE_PATH;
   result = input.required<IndexRecord>();
   onRecordClick = output<string>();
 

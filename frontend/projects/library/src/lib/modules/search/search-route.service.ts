@@ -3,6 +3,7 @@ import { Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SearchFilter, SearchRequestParameters } from './search.store.model';
 import { HistoryService } from '../../shared/history.service';
+import { SEARCH_ROUTE_PATH } from './search.constant';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +20,7 @@ export class SearchRouteService {
   setRoute(store: SearchRequestParameters, pageSize: number) {
     let urlParams = this.convertSearchToRouteParams(store);
 
-    //this.location.go('/search', parameters);
-    this.router.navigate(['/search'], { queryParams: urlParams });
-    // this.historyService.addUrlToHistory(`/search?${parameters}`);
+    this.router.navigate([SEARCH_ROUTE_PATH], { queryParams: urlParams });
   }
 
   convertSearchToRouteParams(store: SearchRequestParameters): Params {
