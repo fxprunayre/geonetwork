@@ -449,6 +449,7 @@ export interface QueryDslQueryContainer {
   match_phrase_prefix?: Partial<Record<Field, QueryDslMatchPhrasePrefixQuery | string>>;
   more_like_this?: QueryDslMoreLikeThisQuery;
   multi_match?: QueryDslMultiMatchQuery;
+  nested?: QueryDslNestedQuery;
   query_string?: QueryDslQueryStringQuery;
   range?: Partial<Record<Field, QueryDslRangeQuery>>;
   regexp?: Partial<Record<Field, QueryDslRegexpQuery | string>>;
@@ -541,6 +542,14 @@ export interface QueryDslMultiMatchQuery extends QueryDslQueryBase {
 }
 export type QueryDslLike = string | QueryDslLikeDocument;
 
+export type QueryDslChildScoreMode = 'none' | 'avg' | 'sum' | 'max' | 'min';
+export interface QueryDslNestedQuery extends QueryDslQueryBase {
+  ignore_unmapped?: boolean;
+  inner_hits?: SearchInnerHits;
+  path: Field;
+  query: QueryDslQueryContainer;
+  score_mode?: QueryDslChildScoreMode;
+}
 export type VersionNumber = long;
 export type VersionString = string;
 export type VersionType = 'internal' | 'external' | 'external_gte' | 'force';

@@ -41,6 +41,7 @@
     },
     "result": "result",
     "results": "results",
+    "searchLink": "Search for {{value}}",
     "backToResults": "Back to results",
     "welcome": {
       "default": "Search ...",
@@ -186,7 +187,8 @@
     "moreInfoOnKeyword": "Read more information about this keyword",
     "searchByKeyword": "Search by keyword",
     "searchByKeywordHelp": "More records with this keyword",
-    "noDefinitionAvailable": "No definition available"
+    "noDefinitionAvailable": "No definition available",
+    "otherKeywords": "Other keywords"
   },
   "copy": {
     "title": "Copy",

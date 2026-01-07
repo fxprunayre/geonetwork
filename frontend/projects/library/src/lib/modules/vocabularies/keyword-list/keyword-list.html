@@ -35,7 +35,7 @@
         }
       </div>
 
-      <div class="mt-2 min-h-[20px]">
+      <div class="mt-2 min-h-5">
         @if (keywordDefinitionFetcher.isLoading()) {
           <p-skeleton width="100%" height="1.5rem" />
         } @else {
@@ -43,17 +43,13 @@
         }
       </div>
 
-      <div
-        (click)="onKeywordClick(keyword)"
-        class="mt-2 text-primary cursor-pointer underline group flex items-center gap-2"
+      <app-search-link
+        [value]="keyword.default"
         [title]="'vocabulary.searchByKeywordHelp' | translate"
+        class="mt-2 block"
       >
         {{ 'vocabulary.searchByKeyword' | translate }}
-        <ng-icon
-          name="faSolidMagnifyingGlass"
-          class="text-surface-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-        ></ng-icon>
-      </div>
+      </app-search-link>
     </div>
   }
 </p-popover>

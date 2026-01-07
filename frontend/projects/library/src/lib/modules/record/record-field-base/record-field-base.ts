@@ -8,5 +8,6 @@ import { IndexRecord } from 'gn-api-client';
 })
 export class RecordFieldBase {
   record = input.required<IndexRecord>();
+  withSearchLink = input<boolean>(false);
   class = input<string>();
 }

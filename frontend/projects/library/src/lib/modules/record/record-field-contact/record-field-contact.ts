@@ -14,6 +14,7 @@ import {
 } from '@ng-icons/font-awesome/solid';
 import { faBrandOrcid } from '@ng-icons/font-awesome/brands';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { SearchLink } from 'gn-library';
 
 // TODO: to add to IndexRecord in gn-api-client
 export interface OrganisationObject {
@@ -42,7 +43,7 @@ export interface ContactInfo {
 
 @Component({
   selector: 'app-record-field-contact',
-  imports: [TranslatePipe, KeyValuePipe, RecordField, NgTemplateOutlet, Card, NgIcon],
+  imports: [TranslatePipe, KeyValuePipe, RecordField, NgTemplateOutlet, Card, NgIcon, SearchLink],
   viewProviders: [
     provideIcons({
       faSolidEnvelope,

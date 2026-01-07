@@ -61,11 +61,12 @@ export class SearchService {
       });
     }
     for (const field of Object.keys(filters)) {
-      must.push({
+      const termQuery = {
         terms: {
           [field]: filters[field].values,
         },
-      });
+      };
+      must.push(termQuery);
     }
     const must_not: elasticsearch.QueryDslQueryContainer[] = [];
     const should: elasticsearch.QueryDslQueryContainer[] = [];

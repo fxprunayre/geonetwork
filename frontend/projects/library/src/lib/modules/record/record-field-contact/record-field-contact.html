@@ -3,11 +3,13 @@
     @for (contact of contacts; track $index) {
       <p-card>
         <ng-template #title>
-          <div class="flex items-start gap-3">
-            <div class="flex-1">
+          <div class="flex flex-col items-start gap-2">
+            <div class="flex-1 flex flex-col gap-2">
               @if (contact.individual) {
                 <div class="font-bold text-primary-500 text-base">
-                  {{ contact.individual }}
+                  <app-search-link [value]="contact.individual">
+                    {{ contact.individual }}
+                  </app-search-link>
                 </div>
               }
               @if (contact.position) {
@@ -17,7 +19,9 @@
               }
               @if (contact.organisationObject?.default) {
                 <div class="text-sm text-primary-500 font-bold">
-                  {{ contact.organisationObject?.default }}
+                  <app-search-link [value]="contact.organisationObject?.default">
+                    {{ contact.organisationObject?.default }}
+                  </app-search-link>
                 </div>
               }
             </div>
@@ -41,7 +45,7 @@
           </div>
         </ng-template>
         <ng-template #content>
-          <div class="flex flex-col gap-1 text-sm text-surface-300">
+          <div class="flex flex-col gap-2 text-sm text-surface-300">
             @if (contact.phone) {
               <div
                 class="flex gap-2 items-center"

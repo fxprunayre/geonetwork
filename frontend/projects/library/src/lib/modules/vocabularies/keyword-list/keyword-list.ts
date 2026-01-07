@@ -1,5 +1,5 @@
 import { Component, computed, inject, input, resource, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidMagnifyingGlass, faSolidTag } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -11,11 +11,13 @@ import { PopoverModule } from 'primeng/popover';
 import { Skeleton } from 'primeng/skeleton';
 import { firstValueFrom } from 'rxjs';
 import { SearchBase } from '../../search/search-base/search-base';
+import { SearchLink } from '../../search/search-link/search-link';
+import { SEARCH_ROUTE_PATH } from '../../search/search.constant';
 
 @Component({
   selector: 'app-keyword-list',
   standalone: true,
-  imports: [Chip, PopoverModule, OverlayModule, NgIcon, TranslatePipe, Skeleton],
+  imports: [Chip, PopoverModule, OverlayModule, NgIcon, TranslatePipe, Skeleton, SearchLink],
   templateUrl: './keyword-list.html',
   viewProviders: [
     provideIcons({
@@ -49,7 +51,7 @@ export class KeywordList extends SearchBase {
         return this.translate.instant(type);
       }
     }
-    return '';
+    return this.translate.instant('vocabulary.otherKeywords');
   });
 
   activeKeyword = signal<Keyword | null>(null);
@@ -84,21 +86,5 @@ export class KeywordList extends SearchBase {
   async openPopover(event: MouseEvent, keyword: Keyword, pop: any) {
     this.activeKeyword.set(keyword);
     pop.toggle(event);
-  }
-
-  onKeywordClick(keyword: Keyword | null) {
-    if (!keyword) return;
-
-    this.search.reset();
-
-    const vocabularyField = this.vocabulary().field;
-    // TODO: Discuss if we want to search by link or by full text
-    // if (vocabularyField && keyword.link) {
-    //   this.search.addFilter(`${vocabularyField}.link`, keyword.link);
-    // } else {
-    this.search.setFullTextQuery(`"${keyword.default}"`);
-    // }
-
-    this.search.search(this.search.searchFilterParameters());
   }
 }

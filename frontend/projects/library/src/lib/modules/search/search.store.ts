@@ -100,6 +100,11 @@ export const SearchStore = signalStore(
           return;
         }
 
+        const baseUrl = store.router.url.split('?')[0];
+        if (baseUrl === '/') {
+          return;
+        }
+
         searchRouteService.setRoute(
           {
             currentPage: store.currentPage() || 0,
@@ -226,7 +231,10 @@ export const SearchStore = signalStore(
           pipe(
             filter(() => store.totalCount() > 0),
             distinctUntilChanged(),
-            tap(() => patchState(store, { isLoading: true })),
+            tap(() => {
+              patchState(store, { isLoading: true });
+              setRouting();
+            }),
             switchMap((searchRequestPageParameters) => {
               patchState(store, {
                 currentPage: searchRequestPageParameters.currentPage,

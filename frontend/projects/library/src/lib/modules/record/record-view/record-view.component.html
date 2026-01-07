@@ -22,7 +22,7 @@
     <div class="flex flex-row gap-6">
       <div class="w-3/4">
         <app-record-field [label]="'record.field.credit'">
-          <app-record-field-credit [record]="record" />
+          <app-record-field-credit [record]="record" [withSearchLink]="true" />
         </app-record-field>
       </div>
     </div>
@@ -226,7 +226,7 @@
             ></ng-container>
           </div>
           <div class="w-1/4">
-            <app-record-distribution-format [record]="record" />
+            <app-record-distribution-format [record]="record" [withSearchLink]="true" />
           </div>
         </div>
       </p-tabpanel>

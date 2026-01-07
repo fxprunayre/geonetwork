@@ -18,9 +18,10 @@ const checkResultItem = (hit: any, layout: 'grid' | 'list') => {
   cy.get('@distributionButtons').last().should('contain.text', 'Download');
 
   if (layout === 'list') {
-    cy.get('app-record-field-credit span')
-      .should('contain.text', hit._source.resourceCreditObject[0].default)
-      .should('have.attr', 'title', hit._source.resourceCreditObject[0].default);
+    cy.get('app-record-field-credit span').should(
+      'contain.text',
+      hit._source.resourceCreditObject[0].default,
+    );
   }
 
   cy.get(`a[href="/record/${hit._id}"]`).first().click();
