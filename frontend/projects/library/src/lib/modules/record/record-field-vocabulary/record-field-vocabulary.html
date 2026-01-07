@@ -1,18 +1,5 @@
-@if (columns() === 1) {
-  <app-keyword-list
-    [title]="vocabularies()[0]?.['multilingualTitle']?.['default']"
-    [keywords]="keywordColumns()[0]"
-  />
-} @else {
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <app-keyword-list
-      [title]="vocabularies()[0]?.['multilingualTitle']?.['default']"
-      [keywords]="keywordColumns()[0]"
-    />
-
-    <app-keyword-list
-      [title]="vocabularies()[0]?.['multilingualTitle']?.['default']"
-      [keywords]="keywordColumns()[1]"
-    />
-  </div>
-}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  @for (vocabulary of vocabularies(); track $index) {
+    <app-keyword-list [vocabulary]="vocabulary" />
+  }
+</div>

@@ -8,11 +8,18 @@
  * Do not edit the class manually.
  */
 
+export interface Keyword {
+  default: string;
+  link?: string | null;
+  [key: string]: string | null | undefined;
+}
+
 export interface Thesaurus {
   id?: string;
   title?: string;
   multilingualTitle?: { [key: string]: string };
   theme?: string;
   link?: string;
-  keywords?: Array<object>;
+  keywords?: Array<Keyword>;
+  field?: string;
 }

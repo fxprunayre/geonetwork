@@ -348,17 +348,17 @@ export interface Geocoder {
 }
 
 export interface Recordview {
-  isSocialbarEnabled: boolean;
-  showStatusWatermarkFor: string;
-  showStatusTopBarFor: string;
-  showCitation: ShowCitation;
-  sortKeywordsAlphabetically: boolean;
-  mainThesaurus: string[];
-  locationThesaurus: string[];
-  internalThesaurus: any[];
-  collectionTableConfig: CollectionTableConfig;
-  distributionConfig: DistributionConfig;
-  relatedFacetConfig: Record<string, elasticsearch.AggregationsAggregationContainer>;
+  isSocialbarEnabled?: boolean;
+  showStatusWatermarkFor?: string;
+  showStatusTopBarFor?: string;
+  showCitation?: ShowCitation;
+  sortKeywordsAlphabetically?: boolean;
+  mainThesaurus?: string[];
+  locationThesaurus?: string[];
+  internalThesaurus?: any[];
+  collectionTableConfig?: CollectionTableConfig;
+  distributionConfig?: DistributionConfig;
+  relatedFacetConfig?: Record<string, elasticsearch.AggregationsAggregationContainer>;
 }
 
 export interface ShowCitation {
@@ -480,6 +480,7 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
     } else if (modKey === 'recordview') {
       conf.apps.record = {
         enabled: true,
+        mainThesaurus: (module as Recordview).mainThesaurus || [],
         distribution:
           (module as Recordview).distributionConfig ||
           DEFAULT_UI_CONFIGURATION.mods.recordview.distributionConfig,

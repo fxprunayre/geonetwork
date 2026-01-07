@@ -1,7 +1,8 @@
-import { Component, computed, input, signal } from '@angular/core';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { Component, computed, inject, input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Thesaurus } from 'gn-api-client';
-import { Keyword, KeywordList } from '../../vocabularies/keyword-list/keyword-list';
+import { KeywordList } from '../../vocabularies/keyword-list/keyword-list';
+import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
   selector: 'app-record-field-vocabulary',
@@ -16,9 +17,8 @@ import { Keyword, KeywordList } from '../../vocabularies/keyword-list/keyword-li
 export class RecordFieldVocabulary extends RecordFieldBase {
   include = input<string[]>([]);
   exclude = input<string[]>([]);
-  mainVocabularies = signal(['th_sextant-theme']);
-  mode = input<'primary' | 'secondary'>('secondary');
-  columns = input<1 | 2>(1);
+
+  translateService = inject(TranslateService);
 
   vocabularies = computed<Thesaurus[]>(() => {
     const rec = this.record();
@@ -30,55 +30,23 @@ export class RecordFieldVocabulary extends RecordFieldBase {
           (this.include().length === 0 || this.include().includes(key)) &&
           (this.exclude().length === 0 || !this.exclude().includes(key)),
       )
-      .map((key) => allVocabularies[key]);
+      .map((key) => {
+        return {
+          ...allVocabularies[key],
+          field: key,
+        };
+      })
+      .sort(this.sortControlledBeforeFreeText);
   });
 
-  allKeywords = computed<Keyword[]>(() => {
-    const rec = this.record();
-    if (!rec) return [];
-
-    const groups = rec['allKeywords'] || {};
-    const list: Keyword[] = [];
-
-    for (const vocabKey of Object.keys(groups)) {
-      const vocabObj = groups[vocabKey];
-      const keywords = vocabObj.keywords || [];
-
-      for (const item of keywords as any[]) {
-        const rawLink = item.link ?? item.uri ?? null;
-        const hasLink = typeof rawLink === 'string' && rawLink.length > 0;
-
-        list.push({
-          default: (item.default ?? '').trim(),
-          uri: rawLink,
-          vocabulary: hasLink ? vocabKey : null,
-        });
-      }
+  // Order vocabularies by those having an id (from a vocabulary) before others (which are free text)
+  private sortControlledBeforeFreeText(a: any, b: any) {
+    if (a.id && !b.id) {
+      return -1;
     }
-
-    return list;
-  });
-
-  keywordColumns = computed<[Keyword[], Keyword[]]>(() => {
-    const keywords = this.displayKeywords();
-
-    if (this.columns() === 1) {
-      return [keywords, []];
+    if (!a.id && b.id) {
+      return 1;
     }
-
-    const mid = Math.ceil(keywords.length / 2);
-    return [keywords.slice(0, mid), keywords.slice(mid)];
-  });
-
-  primaryKeywords = computed(() => {
-    return this.allKeywords().filter((k) => this.mainVocabularies().includes(k.vocabulary ?? ''));
-  });
-
-  secondaryKeywords = computed(() => {
-    return this.allKeywords().filter((k) => !this.mainVocabularies().includes(k.vocabulary ?? ''));
-  });
-
-  displayKeywords = computed(() => {
-    return this.mode() === 'primary' ? this.primaryKeywords() : this.secondaryKeywords();
-  });
+    return 0;
+  }
 }

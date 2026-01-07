@@ -177,6 +177,12 @@
     "detail_error": "Erreur lors du chargement des formats de citation",
     "detail_error_loading": "Erreur lors du chargement de la citation pour"
   },
+  "vocabulary": {
+    "moreInfoOnKeyword": "En savoir plus sur ce mot-clé",
+    "searchByKeyword": "Rechercher",
+    "searchByKeywordHelp": "Plus de fiches avec ce mot-clé",
+    "noDefinitionAvailable": "Aucune définition disponible"
+  },
   "copy": {
     "title": "Copie",
     "title_success": "Copie réussie",

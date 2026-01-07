@@ -41,5 +41,6 @@ export interface SearchAppAdvanced {
 }
 
 export interface RecordDetailsApp extends App {
-  distribution: DistributionConfig;
+  distribution?: DistributionConfig;
+  mainThesaurus?: string[];
 }

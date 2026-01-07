@@ -116,12 +116,7 @@
   </ng-template>
 
   <ng-template #classificationContent>
-    <app-record-field-vocabulary
-      [record]="record"
-      [include]="mainVocabularies()"
-      mode="secondary"
-      [columns]="2"
-    />
+    <app-record-field-vocabulary [record]="record" [exclude]="mainVocabularies()" />
   </ng-template>
 
   <ng-template #relatedContent>

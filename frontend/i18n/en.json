@@ -182,6 +182,12 @@
     "title_error": "Error",
     "detail_error": "Error loading citation formats.."
   },
+  "vocabulary": {
+    "moreInfoOnKeyword": "Read more information about this keyword",
+    "searchByKeyword": "Search by keyword",
+    "searchByKeywordHelp": "More records with this keyword",
+    "noDefinitionAvailable": "No definition available"
+  },
   "copy": {
     "title": "Copy",
     "title_success": "Copy success",

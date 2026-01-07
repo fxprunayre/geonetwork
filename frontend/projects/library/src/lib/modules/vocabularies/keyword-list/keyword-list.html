@@ -1,43 +1,59 @@
-@for (group of vocabGroups() | keyvalue; track group.key) {
-  <div class="mt-4">
-    <div class="font-semibold text-sm text-gray-500">
-      {{ title() }}
-    </div>
-
-    <div class="flex flex-wrap mt-2">
-      @for (keyword of vocabGroups()[group.key]; track $index) {
-        <p-chip
-          [label]="keyword.default"
-          class="mr-2 my-1 cursor-pointer"
-          (mouseenter)="openPopover($event, keyword, popover)"
-          (click)="openPopover($event, keyword, popover)"
-        />
-      }
-    </div>
+<div class="mt-4">
+  <div class="text-primary-400">
+    {{ title() }}
   </div>
-}
+
+  <div class="flex flex-wrap mt-2">
+    @for (keyword of keywords(); track $index) {
+      <p-chip
+        [label]="keyword.default"
+        class="mr-2 my-1 cursor-pointer"
+        (click)="openPopover($event, keyword, popover)"
+      />
+    }
+  </div>
+</div>
 
 <p-popover #popover>
-  <div class="p-3 text-sm">
-    <div class="font-semibold mb-1 flex items-center gap-1 group">
-      <ng-icon name="faSolidTag"></ng-icon>
+  @let keyword = activeKeyword();
+  @if (keyword) {
+    <div class="p-3 text-sm">
+      <div class="font-semibold mb-1 flex items-center gap-1 group">
+        <ng-icon name="faSolidTag"></ng-icon>
 
-      <span (click)="onKeywordClick(activeKeyword())" class="text-primary cursor-pointer underline">
-        {{ activeKeyword()?.default }}
-      </span>
+        @if (keyword.link) {
+          <a
+            [attr.href]="keyword.link"
+            [title]="'vocabulary.moreInfoOnKeyword' | translate"
+            target="_blank"
+            class="text-primary underline cursor-pointer"
+          >
+            {{ keyword.default }}
+          </a>
+        } @else {
+          {{ keyword.default }}
+        }
+      </div>
 
-      <ng-icon
-        name="faSolidMagnifyingGlass"
-        class="text-surface-500 inline-flex opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
-      ></ng-icon>
+      <div class="mt-2 min-h-[20px]">
+        @if (keywordDefinitionFetcher.isLoading()) {
+          <p-skeleton width="100%" height="1.5rem" />
+        } @else {
+          {{ keywordDefinitionFetcher.value() || 'vocabulary.noDefinitionAvailable' | translate }}
+        }
+      </div>
+
+      <div
+        (click)="onKeywordClick(keyword)"
+        class="mt-2 text-primary cursor-pointer underline group flex items-center gap-2"
+        [title]="'vocabulary.searchByKeywordHelp' | translate"
+      >
+        {{ 'vocabulary.searchByKeyword' | translate }}
+        <ng-icon
+          name="faSolidMagnifyingGlass"
+          class="text-surface-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        ></ng-icon>
+      </div>
     </div>
-
-    <div class="mt-2">
-      @if (loading()) {
-        <p-progressSpinner class="w-1 h-1"></p-progressSpinner>
-      } @else {
-        {{ definition() || 'No definition available' }}
-      }
-    </div>
-  </div>
+  }
 </p-popover>
