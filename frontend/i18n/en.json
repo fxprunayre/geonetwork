@@ -135,6 +135,13 @@
         "type": "Type"
       }
     },
+    "action": {
+      "menu": "Quick actions",
+      "share": "Share",
+      "shareHelp": "Permalink to the record",
+      "metadataDownload": "Metadata (XML)",
+      "metadataDownloadHelp": "Download the record in XML format"
+    },
     "association": {
       "parent": "Part of {{count}} resource(s)",
       "children": "Composed of {{count}} resource(s)",

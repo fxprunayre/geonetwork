@@ -17,12 +17,12 @@ describe('Navigation menu', () => {
 
     // Expand
     cy.get('@toggleBtn').click();
-    cy.get('@toggleBtn').find('img[alt="Logo"]').should('be.visible');
-    cy.get('@toggleBtn').find('a[href="/"]').should('exist');
+    cy.get('@toggleBtn').parent().find('img[alt="Logo"]').should('be.visible');
+    cy.get('@toggleBtn').parent().find('a[href="/"]').should('exist');
 
     // Collapse
     cy.get('@toggleBtn').click();
-    cy.get('@toggleBtn').find('img[alt="Logo"]').should('not.be.visible');
+    cy.get('@toggleBtn').parent().find('img[alt="Logo"]').should('not.be.visible');
   });
 
   it('should navigate to Home', () => {

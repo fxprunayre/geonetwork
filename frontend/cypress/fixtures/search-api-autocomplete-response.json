@@ -1,5 +1,5 @@
 {
-  "took": 13,
+  "took": 46,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -155,37 +155,6 @@
             "langfre": "Mollusques (REPHY) - extraction \"Surval données par paramètre (point)\""
           },
           "id": "337395854",
-          "owner": "215",
-          "groupOwner": "335589483",
-          "op0": ["1", "335589483"],
-          "op2": "335589483",
-          "op1": ["1", "335589483"],
-          "documentStandard": "iso19115-3.2018",
-          "op3": "335589483",
-          "op5": ["1", "335589483"]
-        },
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "e26c66f1-fbf3-4418-89f3-b0846999f5f2",
-        "_score": 23.0,
-        "_source": {
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Bivalves (REPHY) - catégorisation de la couche \"Mollusques (REPHY) - extraction \"Surval données par paramètre (point)\"\"",
-            "langfre": "Bivalves (REPHY) - catégorisation de la couche \"Mollusques (REPHY) - extraction \"Surval données par paramètre (point)\"\""
-          },
-          "id": "337395855",
           "owner": "215",
           "groupOwner": "335589483",
           "op0": ["1", "335589483"],
@@ -620,6 +589,37 @@
             "langfre": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Rhône-Méditerranée"
           },
           "id": "337399238",
+          "owner": "215",
+          "groupOwner": "335589483",
+          "op0": ["1", "335589483"],
+          "op2": "335589483",
+          "op1": ["1", "335589483"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "335589483",
+          "op5": ["1", "335589483"]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "445557d1-e1d9-4647-95e4-fbe455ee0fcc",
+        "_score": 23.0,
+        "_source": {
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Bivalves (ROCCH) - catégorisation de la couche \"Mollusques (ROCCH) - extraction \"Surval données par paramètre (point)\"\"",
+            "langfre": "Bivalves (ROCCH) - catégorisation de la couche \"Mollusques (ROCCH) - extraction \"Surval données par paramètre (point)\"\""
+          },
+          "id": "337389170",
           "owner": "215",
           "groupOwner": "335589483",
           "op0": ["1", "335589483"],

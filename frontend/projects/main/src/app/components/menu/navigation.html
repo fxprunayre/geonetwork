@@ -1,69 +1,40 @@
 <nav class="h-full">
-  <ng-template #itemContent let-item>
-    <div class="flex flex-row items-center py-2">
-      @if (item.icon) {
-        <ng-icon [name]="item.icon" class="md:text-2xl"></ng-icon>
-      }
-      <div
-        class="overflow-hidden transition-all duration-500 ease-in-out whitespace-nowrap"
-        [class.max-w-0]="isIconMode()"
-        [class.opacity-0]="isIconMode()"
-        [class.ml-0]="isIconMode()"
-        [class.max-w-40]="!isIconMode()"
-        [class.opacity-100]="!isIconMode()"
-        [class.ml-2]="!isIconMode()"
-      >
-        <span [class.hidden]="item.label === ''">{{ 'menu.' + item.label | translate }}</span>
-        @if (item.label === '') {
-          <a routerLink="/">
-            <img [src]="logo" alt="Logo" class="h-[26px] md:h-[36px]" />
-          </a>
-        }
-      </div>
-    </div>
-  </ng-template>
-
   <p-menu
     [model]="items()"
     class="h-full"
-    [pt]="{ root: '!min-w-fit h-full transition-all duration-500 ease-in-out' }"
+    [pt]="{
+      root: '!min-w-fit h-full transition-all duration-500 ease-in-out',
+      itemContent: 'text-2xl',
+      itemLabel: {
+        class: {
+          'overflow-hidden': true,
+          'whitespace-nowrap': true,
+          'transition-all': true,
+          'duration-500': true,
+          'ease-in-out': true,
+          'max-w-0': isIconMode(),
+          'opacity-0': isIconMode(),
+          'ml-0': isIconMode(),
+          'max-w-40': !isIconMode(),
+          'opacity-100': !isIconMode(),
+          'ml-2': !isIconMode(),
+        },
+      },
+    }"
     [dt]="dt"
   >
-    <ng-template #start> </ng-template>
-
-    <ng-template #item let-item>
-      @if (item.visible === undefined || item.visible) {
-        @if (item.routerLink) {
-          <a
-            [routerLink]="item.routerLink"
-            class="p-menu-item-link flex items-center"
-            [routerLinkActive]="'p-menuitem-link-active'"
-            [routerLinkActiveOptions]="item.routerLinkActiveOptions || { exact: false }"
-            [fragment]="item.fragment"
-            [queryParams]="item.queryParams"
-            [queryParamsHandling]="item.queryParamsHandling"
-            [preserveFragment]="item.preserveFragment"
-            [skipLocationChange]="item.skipLocationChange"
-            [replaceUrl]="item.replaceUrl"
-            [state]="item.state"
-          >
-            <ng-container
-              *ngTemplateOutlet="itemContent; context: { $implicit: item }"
-            ></ng-container>
-          </a>
-        } @else {
-          <a
-            [attr.href]="item.url"
-            class="p-menu-item-link flex items-center cursor-pointer"
-            [target]="item.target"
-            [attr.tabindex]="item.url ? null : '0'"
-          >
-            <ng-container
-              *ngTemplateOutlet="itemContent; context: { $implicit: item }"
-            ></ng-container>
-          </a>
-        }
-      }
+    <ng-template #start>
+      <div class="p-menu-list flex flex-row!">
+        <a class="p-menu-item-link" role="menuitem" (click)="toggleMenu()">
+          <ng-icon
+            [name]="isIconMode() ? 'faSolidBars' : 'faSolidEllipsisVertical'"
+            class="md:text-2xl"
+          ></ng-icon>
+        </a>
+        <a routerLink="/" [class.hidden]="isIconMode()">
+          <img [src]="logo" alt="Logo" class="h-[26px] md:h-[36px]" />
+        </a>
+      </div>
     </ng-template>
 
     <ng-template pTemplate="end">

@@ -1,5 +1,5 @@
 {
-  "took": 38,
+  "took": 60,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,7 +9,7 @@
   },
   "hits": {
     "total": {
-      "value": 14800,
+      "value": 14839,
       "relation": "eq"
     },
     "max_score": null,
@@ -261,7 +261,7 @@
             }
           ]
         },
-        "sort": [19510],
+        "sort": [19605],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -1303,7 +1303,7 @@
             }
           ]
         },
-        "sort": [6813],
+        "sort": [6814],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -2301,7 +2301,7 @@
             }
           ]
         },
-        "sort": [6235],
+        "sort": [6237],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -2690,7 +2690,7 @@
             }
           ]
         },
-        "sort": [5694],
+        "sort": [5695],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -3652,7 +3652,7 @@
             }
           ]
         },
-        "sort": [5016],
+        "sort": [5017],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -3914,7 +3914,7 @@
             }
           ]
         },
-        "sort": [4984],
+        "sort": [4990],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -4068,7 +4068,7 @@
             }
           ]
         },
-        "sort": [4929],
+        "sort": [4936],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -4137,7 +4137,7 @@
             }
           ]
         },
-        "sort": [4727],
+        "sort": [4728],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -4479,7 +4479,7 @@
             }
           ]
         },
-        "sort": [4667],
+        "sort": [4673],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -4512,7 +4512,7 @@
         },
         {
           "key": "174375699",
-          "doc_count": 2564
+          "doc_count": 2603
         },
         {
           "key": "334291911",
@@ -4524,7 +4524,7 @@
         },
         {
           "key": "335589474",
-          "doc_count": 1124
+          "doc_count": 1140
         },
         {
           "key": "104",
@@ -4636,7 +4636,7 @@
         },
         {
           "key": "15",
-          "doc_count": 230
+          "doc_count": 231
         },
         {
           "key": "64",
@@ -6066,7 +6066,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/of",
-          "doc_count": 2463
+          "doc_count": 2483
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/oi",
@@ -6120,11 +6120,11 @@
         "caseInsensitiveInclude": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 133269,
+      "sum_other_doc_count": 133525,
       "buckets": [
         {
           "key": "Oceanographic geographical features",
-          "doc_count": 2219
+          "doc_count": 2241
         },
         {
           "key": "Delayed",
@@ -6152,7 +6152,7 @@
         },
         {
           "key": "/Métropole/Golfe de Gascogne",
-          "doc_count": 1030
+          "doc_count": 1031
         },
         {
           "key": "Eastern English Channel",
@@ -6160,7 +6160,7 @@
         },
         {
           "key": "/Métropole/Méditerranée occidentale",
-          "doc_count": 980
+          "doc_count": 981
         }
       ]
     },
@@ -6197,7 +6197,7 @@
         },
         {
           "key": 2019,
-          "doc_count": 388
+          "doc_count": 389
         },
         {
           "key": 2018,
@@ -6244,7 +6244,7 @@
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 10786
+          "doc_count": 10825
         },
         {
           "key": "series",

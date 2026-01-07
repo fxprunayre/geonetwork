@@ -1,6 +1,12 @@
 <div>
-  <p-menu #menu [model]="items" [popup]="true"></p-menu>
-  <p-button (click)="menu.toggle($event)" severity="primary">
+  <p-menu #menu [model]="items()" [popup]="true"></p-menu>
+  <p-button
+    [title]="'record.action.menu' | translate"
+    (click)="menu.toggle($event)"
+    variant="outlined"
+    size="small"
+    severity="secondary"
+  >
     <ng-icon name="faSolidEllipsisVertical"></ng-icon>
   </p-button>
 </div>
