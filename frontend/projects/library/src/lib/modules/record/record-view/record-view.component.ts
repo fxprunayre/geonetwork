@@ -50,6 +50,7 @@ import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-v
 import { RecordField } from '../record-field/record-field';
 import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
 import { RecordViewHeader } from '../record-view-header/record-view-header';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 
 export const DEFAULT_TAB = 'about';
 
@@ -111,7 +112,12 @@ export class RecordViewComponent implements AfterViewInit {
 
   record = signal<IndexRecord | undefined>(undefined);
   recordStatus = signal<string | undefined>(undefined);
-  mainVocabularies = signal(['th_sextant-theme']);
+
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+
+  mainVocabularies = computed(
+    () => this.appConfiguration().config?.apps.record?.mainThesaurus || [],
+  );
 
   contactRoles = computed(() => {
     const contacts = this.record()?.['contactForResource'] || [];

@@ -13,6 +13,7 @@ import {
   SearchService,
   SearchStoreType,
   SearchWelcomeTextPipe,
+  SEARCH_ROUTE_PATH,
 } from 'gn-library';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -103,11 +104,11 @@ export class FirstSection implements AfterViewInit {
   }
 
   setRouteToSearch() {
-    this.router.navigate(['/search']);
+    this.router.navigate([SEARCH_ROUTE_PATH]);
   }
 
   setRouteForAggregation(filter: SearchFilter) {
-    this.router.navigate(['/search'], {
+    this.router.navigate([SEARCH_ROUTE_PATH], {
       queryParams: {
         [filter.field]: this.searchRouteService.buildFilterQueryParams(filter),
       },

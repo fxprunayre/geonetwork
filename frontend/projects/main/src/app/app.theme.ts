@@ -148,11 +148,7 @@ const AppTheme: Preset = {
       //   borderRadius: '4px'
       // }
     },
-    tabs: {
-      activeBar: {
-        height: '8px',
-      },
-    },
+    tabs: {},
     accordion: {
       header: {},
     },

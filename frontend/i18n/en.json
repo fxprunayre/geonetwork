@@ -41,6 +41,7 @@
     },
     "result": "result",
     "results": "results",
+    "searchLink": "Search for {{value}}",
     "backToResults": "Back to results",
     "welcome": {
       "default": "Search ...",
@@ -188,6 +189,13 @@
     "loading": "Loading citation ...",
     "title_error": "Error",
     "detail_error": "Error loading citation formats.."
+  },
+  "vocabulary": {
+    "moreInfoOnKeyword": "Read more information about this keyword",
+    "searchByKeyword": "Search by keyword",
+    "searchByKeywordHelp": "More records with this keyword",
+    "noDefinitionAvailable": "No definition available",
+    "otherKeywords": "Other keywords"
   },
   "copy": {
     "title": "Copy",

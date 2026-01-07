@@ -2,12 +2,22 @@
 @if (creds) {
   @for (c of creds; track $index; let last = $last) {
     @if (!displayFirstOnly() || $index === 0) {
-      <span [title]="c['default']">
-        {{ c['default'] }}
-        @if (!displayFirstOnly() && !last) {
-          ,
-        }
-      </span>
+      <ng-template #credit>
+        <span>
+          {{ c['default'] }}
+        </span>
+      </ng-template>
+
+      @if (withSearchLink()) {
+        <app-search-link field="resourceCreditObject.default.keyword" [value]="c['default']">
+          <ng-container *ngTemplateOutlet="credit"></ng-container>
+        </app-search-link>
+      } @else {
+        <ng-container *ngTemplateOutlet="credit"></ng-container>
+      }
+      @if (!displayFirstOnly() && !last) {
+        ,
+      }
     }
   }
 }

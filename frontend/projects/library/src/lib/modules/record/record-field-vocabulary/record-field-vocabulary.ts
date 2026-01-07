@@ -1,11 +1,12 @@
-import { Component, computed, input } from '@angular/core';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { Component, computed, inject, input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Thesaurus } from 'gn-api-client';
-import { Keyword, KeywordList } from '../../vocabularies/keyword-list/keyword-list';
+import { KeywordList } from '../../vocabularies/keyword-list/keyword-list';
+import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
   selector: 'app-record-field-vocabulary',
-  imports: [KeywordList, KeywordList],
+  imports: [KeywordList],
   templateUrl: './record-field-vocabulary.html',
   styles: `
     :host {
@@ -16,23 +17,36 @@ import { Keyword, KeywordList } from '../../vocabularies/keyword-list/keyword-li
 export class RecordFieldVocabulary extends RecordFieldBase {
   include = input<string[]>([]);
   exclude = input<string[]>([]);
-  styleClass = input<string>('');
+
+  translateService = inject(TranslateService);
 
   vocabularies = computed<Thesaurus[]>(() => {
-    const allVocabularies: Record<string, Thesaurus> = this.record().allKeywords || {};
-    const filteredVocabularies: Thesaurus[] = [];
-    for (const key of Object.keys(allVocabularies)) {
-      if (
-        (this.include().length === 0 || this.include().includes(key)) &&
-        (this.exclude().length === 0 || !this.exclude().includes(key))
-      ) {
-        filteredVocabularies.push(allVocabularies[key]);
-      }
-    }
-    return filteredVocabularies;
+    const rec = this.record();
+    const allVocabularies: Record<string, Thesaurus> = rec['allKeywords'] || {};
+
+    return Object.keys(allVocabularies)
+      .filter(
+        (key) =>
+          (this.include().length === 0 || this.include().includes(key)) &&
+          (this.exclude().length === 0 || !this.exclude().includes(key)),
+      )
+      .map((key) => {
+        return {
+          ...allVocabularies[key],
+          field: key,
+        };
+      })
+      .sort(this.sortControlledBeforeFreeText);
   });
 
-  getKeywords(vocabulary: Thesaurus) {
-    return (vocabulary.keywords || []) as Keyword[];
+  // Order vocabularies by those having an id (from a vocabulary) before others (which are free text)
+  private sortControlledBeforeFreeText(a: any, b: any) {
+    if (a.id && !b.id) {
+      return -1;
+    }
+    if (!a.id && b.id) {
+      return 1;
+    }
+    return 0;
   }
 }

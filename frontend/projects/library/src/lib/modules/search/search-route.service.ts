@@ -3,6 +3,7 @@ import { Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SearchFilter, SearchRequestParameters } from './search.store.model';
 import { HistoryService } from '../../shared/history.service';
+import { SEARCH_ROUTE_PATH } from './search.constant';
 
 @Injectable({
   providedIn: 'root',
@@ -17,34 +18,39 @@ export class SearchRouteService {
   }
 
   setRoute(store: SearchRequestParameters, pageSize: number) {
-    let urlParams = [];
+    let urlParams = this.convertSearchToRouteParams(store);
+
+    this.router.navigate([SEARCH_ROUTE_PATH], { queryParams: urlParams });
+  }
+
+  convertSearchToRouteParams(store: SearchRequestParameters): Params {
+    const params: Params = {};
 
     if (store.searchQuery) {
-      urlParams.push(`q=${store.searchQuery}`);
+      params['q'] = store.searchQuery;
     }
 
     if (store.filters) {
-      urlParams = urlParams.concat(
-        Object.entries(store.filters)
-          .filter(([field, filter]) => filter.values.length > 0)
-          .map(([field, filter]) => `${field}=${this.buildFilterQueryParams(filter)}`),
-      );
+      Object.entries(store.filters).forEach(([field, filter]) => {
+        if (filter.values.length > 0) {
+          params[field] = this.buildFilterQueryParams(filter);
+        }
+      });
     }
 
-    if (store.currentPage !== 0) {
-      urlParams.push(`from=${store.currentPage}`);
+    if (store.currentPage && store.currentPage !== 0) {
+      params['from'] = store.currentPage.toString();
     }
 
-    if (store.pageSize !== pageSize) {
-      urlParams.push(`size=${store.pageSize}`);
+    if (store.pageSize) {
+      params['size'] = store.pageSize.toString();
     }
 
     if (store.currentSort) {
-      urlParams.push(`sort=${store.currentSort}`);
+      params['sort'] = store.currentSort;
     }
-    const parameters = urlParams.filter((v) => v !== '').join('&');
-    this.location.go('/search', parameters);
-    this.historyService.addUrlToHistory(`/search?${parameters}`);
+
+    return params;
   }
 
   convertRouteParamsToSearch(params: Params, pageSize: number, currentSort: string): any {

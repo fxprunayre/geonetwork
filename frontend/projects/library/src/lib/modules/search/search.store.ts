@@ -23,6 +23,7 @@ import {
   SearchRequestParameters,
   SearchState,
 } from './search.store.model';
+import { RECORD_ROUTE_PATH } from './search.constant';
 import { SearchRouteService } from './search-route.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -94,7 +95,61 @@ export const SearchStore = signalStore(
       searchService = inject(SearchService),
       searchRouteService = inject(SearchRouteService),
     ) => {
-      const injector = inject(Injector);
+      const setRouting = () => {
+        if (!store.routing()) {
+          return;
+        }
+
+        const baseUrl = store.router.url.split('?')[0];
+        if (baseUrl === '/') {
+          return;
+        }
+
+        searchRouteService.setRoute(
+          {
+            currentPage: store.currentPage() || 0,
+            pageSize: store.pageSize(),
+            currentSort: store.currentSort(),
+            searchQuery: store.searchQuery(),
+            filter: store.filter(),
+            filters: store.filters(),
+          } as SearchRequestParameters,
+          store.pageSize(),
+        );
+      };
+
+      const subscribeToRouteChange = () => {
+        if (!store.routing()) {
+          return;
+        }
+
+        store.activeRoute.queryParams.subscribe((params) => {
+          const baseUrl = store.router.url.split('?')[0];
+          if (baseUrl === '/' || baseUrl.startsWith(RECORD_ROUTE_PATH)) {
+            return;
+          }
+
+          const newState = searchRouteService.convertRouteParamsToSearch(
+            params,
+            store.pageSize(),
+            store.currentSort(),
+          );
+
+          const currentState = {
+            currentPage: store.currentPage(),
+            pageSize: store.pageSize(),
+            searchQuery: store.searchQuery(),
+            filters: store.filters(),
+            currentSort: store.currentSort(),
+          };
+
+          if (JSON.stringify(newState) === JSON.stringify(currentState)) {
+            return;
+          }
+
+          patchState(store, newState);
+        });
+      };
 
       return {
         init(
@@ -120,21 +175,18 @@ export const SearchStore = signalStore(
             currentSort: currentSort || DEFAULT_SORT,
           });
 
-          store.results$.subscribe(() => {
-            if (store.results().length > 0) {
-              this.setRouting();
-            }
-          });
-
           if (store.routing()) {
-            this.subscribeToRouteChange();
+            subscribeToRouteChange();
           }
         },
         search: rxMethod<SearchFilterParameters>(
           pipe(
             debounceTime(300),
             distinctUntilChanged(),
-            tap(() => patchState(store, { isLoading: true })),
+            tap(() => {
+              patchState(store, { isLoading: true });
+              setRouting();
+            }),
             switchMap((searchFilterParameters) => {
               patchState(store, {
                 currentPage: 0,
@@ -179,7 +231,10 @@ export const SearchStore = signalStore(
           pipe(
             filter(() => store.totalCount() > 0),
             distinctUntilChanged(),
-            tap(() => patchState(store, { isLoading: true })),
+            tap(() => {
+              patchState(store, { isLoading: true });
+              setRouting();
+            }),
             switchMap((searchRequestPageParameters) => {
               patchState(store, {
                 currentPage: searchRequestPageParameters.currentPage,
@@ -290,44 +345,8 @@ export const SearchStore = signalStore(
         previous() {
           patchState(store, { currentPage: store.currentPage() - store.pageSize() });
         },
-        setRouting() {
-          if (!store.routing()) {
-            return;
-          }
-
-          const baseUrl = store.router.url.split('?')[0];
-          if (baseUrl !== '/search') {
-            return;
-          }
-
-          searchRouteService.setRoute(
-            {
-              currentPage: store.currentPage() || 0,
-              pageSize: store.pageSize(),
-              currentSort: store.currentSort(),
-              searchQuery: store.searchQuery(),
-              filter: store.filter(),
-              filters: store.filters(),
-            } as SearchRequestParameters,
-            store.pageSize(),
-          );
-        },
-        subscribeToRouteChange() {
-          if (!store.routing()) {
-            return;
-          }
-
-          store.activeRoute.queryParams.subscribe((params) => {
-            patchState(
-              store,
-              searchRouteService.convertRouteParamsToSearch(
-                params,
-                store.pageSize(),
-                store.currentSort(),
-              ),
-            );
-          });
-        },
+        setRouting,
+        subscribeToRouteChange,
         setSort(currentSort: string) {
           patchState(store, { currentSort });
         },

@@ -41,6 +41,7 @@
     },
     "result": "résultat",
     "results": "résultats",
+    "searchLink": "Rechercher {{value}}",
     "backToResults": "Retour aux résultats",
     "welcome": {
       "default": "Explorez ...",
@@ -176,6 +177,13 @@
     "title_error": "Erreur",
     "detail_error": "Erreur lors du chargement des formats de citation",
     "detail_error_loading": "Erreur lors du chargement de la citation pour"
+  },
+  "vocabulary": {
+    "moreInfoOnKeyword": "En savoir plus sur ce mot-clé",
+    "searchByKeyword": "Rechercher",
+    "searchByKeywordHelp": "D'autres fiches avec ce mot-clé",
+    "noDefinitionAvailable": "Aucune définition disponible",
+    "otherKeywords": "Autres mots-clés"
   },
   "copy": {
     "title": "Copie",

@@ -22,7 +22,7 @@
     <div class="flex flex-row gap-6">
       <div class="w-3/4">
         <app-record-field [label]="'record.field.credit'">
-          <app-record-field-credit [record]="record" />
+          <app-record-field-credit [record]="record" [withSearchLink]="true" />
         </app-record-field>
       </div>
     </div>
@@ -116,11 +116,7 @@
   </ng-template>
 
   <ng-template #classificationContent>
-    <app-record-field-vocabulary
-      [record]="record"
-      [exclude]="mainVocabularies()"
-      styleClass="md:columns-1 lg:columns-2 gap-4"
-    />
+    <app-record-field-vocabulary [record]="record" [exclude]="mainVocabularies()" />
   </ng-template>
 
   <ng-template #relatedContent>
@@ -141,8 +137,8 @@
   <ng-template #similarContent> Similar resources content goes here.</ng-template>
 
   <!-- Main Layout with Tabs -->
-  <p-tabs [value]="tab()" lazy>
-    <p-tablist class="text-xl">
+  <p-tabs [value]="tab()" lazy class="mt-15">
+    <p-tablist>
       <p-tab value="about">{{ 'record.view.section.description' | translate }}</p-tab>
       <p-tab value="data-access">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
       <p-tab value="explore">{{ 'record.view.section.explore' | translate }}</p-tab>
@@ -230,7 +226,7 @@
             ></ng-container>
           </div>
           <div class="w-1/4">
-            <app-record-distribution-format [record]="record" />
+            <app-record-distribution-format [record]="record" [withSearchLink]="true" />
           </div>
         </div>
       </p-tabpanel>

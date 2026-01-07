@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Aggregation, SearchFilter, SearchRouteService } from 'gn-library';
+import { Aggregation, SearchFilter, SearchRouteService, SEARCH_ROUTE_PATH } from 'gn-library';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -17,7 +17,7 @@ export class SecondSection {
   island = 'images/island.jpg';
 
   setRouteForAggregation(filter: SearchFilter) {
-    this.router.navigate(['/search'], {
+    this.router.navigate([SEARCH_ROUTE_PATH], {
       queryParams: {
         [filter.field]: this.searchRouteService.buildFilterQueryParams(filter),
       },

@@ -7,7 +7,7 @@
     "watch-lib": "ng build library --watch",
     "watch-gn-api-client": "ng build gn-api-client --watch",
     "watch-gn4-api-client": "ng build gn4-api-client --watch",
-    "build": "ng build gn-api-client && ng build gn4-api-client && ng build library && ng build --project=main",
+    "build": "ng build  gn-api-client && ng build gn4-api-client && ng build library && ng build --project=main",
     "download-api-geonetwork4-client": "curl -H 'Accept: application/json' http://localhost:8080/geonetwork/srv/api/doc -o projects/gn4-api-client/openapi.json",
     "build-api-geonetwork4-client": "openapi-generator-cli generate -i projects/gn4-api-client/openapi.json  -g typescript-angular -o  projects/gn4-api-client/src/lib  --skip-validate-spec  --additional-properties=apiModulePrefix=Gn4",
     "download-api-geonetwork-client": "curl http://localhost:7979/v3/api-docs -o projects/gn-api-client/openapi.json",

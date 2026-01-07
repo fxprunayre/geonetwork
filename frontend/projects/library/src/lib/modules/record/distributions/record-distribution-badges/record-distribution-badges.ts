@@ -1,5 +1,6 @@
 import { KeyValuePipe } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
+import { Link } from 'gn-api-client';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -8,7 +9,6 @@ import {
   faSolidNetworkWired,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Link } from 'gn-api-client';
 import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 

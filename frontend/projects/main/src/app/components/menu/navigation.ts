@@ -15,11 +15,11 @@ import {
   faSolidMagnifyingGlass,
   faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import {
   APPLICATION_CONFIGURATION,
   IconStyleService,
   LanguageSwitcher,
+  SEARCH_ROUTE_PATH,
   ThemeDesigner,
 } from 'gn-library';
 import { MenuItem, SharedModule } from 'primeng/api';
@@ -29,6 +29,7 @@ import { IftaLabel } from 'primeng/iftalabel';
 import { Menu } from 'primeng/menu';
 import { TextareaModule } from 'primeng/textarea';
 import AppTheme from '../../app.theme';
+import { TranslateService } from '@ngx-translate/core';
 
 const ICONS = {
   faSolidHouse,
@@ -94,7 +95,7 @@ export class Navigation implements OnInit {
       {
         label: this.translateService.instant('menu.search'),
         icon: 'faSolidMagnifyingGlass',
-        routerLink: '/search',
+        routerLink: SEARCH_ROUTE_PATH,
         ...this.itemConfig(),
       },
       {
