@@ -151,19 +151,23 @@ export class DuckDbService {
     let isDirect = true;
 
     try {
+      if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
       // First try direct access
       response = await fetch(fileUrl, { method: 'HEAD', signal });
       if (!response.ok) {
         throw new Error(`Direct fetch failed: ${response.status}`);
       }
-    } catch (e) {
+    } catch (e: any) {
+      if (e.name === 'AbortError' || signal.aborted) throw e;
       console.warn('Direct HEAD request failed. Switching to browser loading mode.', e);
       isDirect = false;
 
       // Now try to get metadata via proxy
       try {
+        if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
         response = await this.tryFetch(fileUrl, { method: 'HEAD', signal });
-      } catch (proxyError) {
+      } catch (proxyError: any) {
+        if (proxyError.name === 'AbortError' || signal.aborted) throw proxyError;
         // Even proxy failed. We can't determine size.
         console.warn('Proxy HEAD also failed', proxyError);
         return false;
@@ -234,6 +238,7 @@ export class DuckDbService {
 
   cancelDownload(): void {
     this.abortController?.abort();
+    this.progress.update((p) => ({ ...p, status: 'canceled' }));
   }
 
   getFileType(contentType: string | null): string | null {
@@ -265,7 +270,15 @@ export class DuckDbService {
 
     this.abortController = new AbortController();
     const signal = this.abortController.signal;
-    const isHeadOk = await this.checkDatasourceSize(ds.url, signal);
+    let isHeadOk = false;
+    try {
+      isHeadOk = await this.checkDatasourceSize(ds.url, signal);
+    } catch (e: any) {
+      if (e.name === 'AbortError') {
+        this.progress.update((p) => ({ ...p, status: 'canceled' }));
+        return;
+      }
+    }
 
     if (!isHeadOk) {
       this.loadingMode = 'browser';
@@ -276,7 +289,7 @@ export class DuckDbService {
     if (this.loadingMode === 'browser' || ds.format === 'wfs') {
       await this.browserDownloadMode(ds, fileName, signal);
     } else {
-      await this.loadData(fileName, undefined, ds);
+      await this.loadData(fileName, undefined, ds, signal);
     }
   }
 
@@ -305,6 +318,8 @@ export class DuckDbService {
     const fileUrl = ds.format === 'wfs' ? this.buildWfsGetFeatureUrl(ds) : ds.url;
     try {
       const { buffer, contentType } = await this.downloadDatasource(fileUrl, signal);
+      if (signal.aborted) return;
+
       let inferredExt = this.getFileType(contentType);
 
       if (!inferredExt) {
@@ -321,21 +336,32 @@ export class DuckDbService {
       }
 
       const finalFileName = inferredExt ? `${fileName}.${inferredExt}` : `${fileName}.csv`;
-      await this.loadData(finalFileName, buffer, ds);
+      await this.loadData(finalFileName, buffer, ds, signal);
     } catch (e: any) {
-      console.warn(`Failed to load from URL: ${e?.message || e}`);
+      if (e.name === 'AbortError' || signal.aborted) {
+        this.progress.update((p) => ({ ...p, status: 'canceled' }));
+      } else {
+        console.warn(`Failed to load from URL: ${e?.message || e}`);
+      }
     }
   }
 
   /**
    * Load data into DuckDB from file URL or ArrayBuffer.
    */
-  async loadData(fileName: string, data?: ArrayBuffer, datasource?: Datasource): Promise<void> {
+  async loadData(
+    fileName: string,
+    data?: ArrayBuffer,
+    datasource?: Datasource,
+    signal?: AbortSignal,
+  ): Promise<void> {
     try {
+      if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
       this.progress.update((p) => ({ ...p, status: 'database' }));
       await this.init();
       if (!this.db || !this.conn) return;
 
+      if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
       this.progress.update((p) => ({ ...p, status: 'format', progress: p.progress + 10 }));
 
       const ext = datasource?.format || fileName.split('.').pop()?.toLowerCase() || '';
@@ -351,21 +377,27 @@ export class DuckDbService {
       const reader = readerMap[ext];
       if (!reader) throw new Error(`Unsupported file type: .${ext}`);
 
+      if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
       this.progress.update((p) => ({ ...p, status: 'loading', progress: p.progress + 20 }));
 
       if (data) {
         await this.db.registerFileBuffer(fileName, new Uint8Array(data));
       }
 
+      if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
       const fromClause = `${reader}('${datasource && !data ? datasource.url : fileName}')`;
+
+      // If signal is aborted while query is running, we can't really stop the query easily on duckdb-wasm side
+      // without closing connection, but we can check before keeping result.
       await this.conn.query(`CREATE OR REPLACE TABLE data AS SELECT * FROM ${fromClause};`);
 
+      if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
       const countResult = await this.conn.query('SELECT count(*) as count FROM data;');
       console.log(`Loaded ${countResult.get(0)?.['count']} records into DuckDB.`);
 
       this.progress.update((p) => ({ ...p, status: 'completed', progress: 100 }));
     } catch (error: any) {
-      const isAbort = error.name === 'AbortError';
+      const isAbort = error.name === 'AbortError' || signal?.aborted;
       this.progress.update((p) => ({
         ...p,
         status: isAbort ? 'canceled' : 'error',

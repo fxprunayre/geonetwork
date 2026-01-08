@@ -207,7 +207,7 @@ perspective-viewer[theme='Main'] {
   --select-arrow--background-image: var(--select-arrow-dark--background-image);
   --select-arrow--hover--background-image: var(--select-arrow-light--background-image);
   --overflow-hint-icon--color: #fdfffd;
-  font-family: 'Inter', sans-serif;
+  --font-family: var(--app-font-family-sans);
   --interface-monospace--font-family: 'Inter', sans-serif;
   --d3fc-y1-label--content: 'arrow_upward';
   --d3fc-y2-label--content: 'arrow_downward';
