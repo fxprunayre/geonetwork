@@ -24,7 +24,6 @@ import {
   SearchRequestParameters,
   SearchState,
 } from './search.store.model';
-import { RECORD_ROUTE_PATH } from './search.constant';
 import { SearchRouteService } from './search-route.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -102,8 +101,7 @@ export const SearchStore = signalStore(
           return;
         }
 
-        const baseUrl = store.router.url.split('?')[0];
-        if (baseUrl === '/') {
+        if (!searchRouteService.shouldUpdateStateFromRoute(store.router.url)) {
           return;
         }
 
@@ -127,8 +125,7 @@ export const SearchStore = signalStore(
         }
 
         store.activeRoute.queryParams.subscribe((params) => {
-          const baseUrl = store.router.url.split('?')[0];
-          if (baseUrl === '/' || baseUrl.startsWith(RECORD_ROUTE_PATH)) {
+          if (!searchRouteService.shouldUpdateStateFromRoute(store.router.url)) {
             return;
           }
 
