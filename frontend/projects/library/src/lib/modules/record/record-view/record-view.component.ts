@@ -4,14 +4,16 @@ import {
   Component,
   computed,
   effect,
+  ElementRef,
   inject,
   input,
+  OnInit,
   output,
   signal,
   TemplateRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import {
@@ -51,6 +53,7 @@ import { RecordField } from '../record-field/record-field';
 import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
 import { RecordViewHeader } from '../record-view-header/record-view-header';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { RECORD_ROUTE_PATH } from 'gn-library';
 
 export const DEFAULT_TAB = 'about';
 
@@ -114,6 +117,8 @@ export class RecordViewComponent implements AfterViewInit {
   recordStatus = signal<string | undefined>(undefined);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
+  el = inject(ElementRef);
+  router = inject(Router);
 
   mainVocabularies = computed(
     () => this.appConfiguration().config?.apps.record?.mainThesaurus || [],
@@ -183,9 +188,22 @@ export class RecordViewComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.route.fragment.pipe(filter(Boolean)).subscribe((fragment) => {
-      setTimeout(() => this.scroller.scrollToAnchor(fragment), 100);
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        if (event.urlAfterRedirects.includes(RECORD_ROUTE_PATH)) {
+          this.handleScrollOnNavigation();
+        }
+      });
+  }
+
+  private handleScrollOnNavigation() {
+    if (this.el.nativeElement.isConnected) {
+      setTimeout(
+        () => this.el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+        100,
+      );
+    }
   }
 
   getLineage(): string {
