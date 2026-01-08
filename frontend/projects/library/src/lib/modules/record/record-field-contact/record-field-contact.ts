@@ -71,7 +71,7 @@ export class RecordFieldContact extends RecordFieldBase {
     const emailParts = contact.email.split('@');
     if (emailParts.length !== 2) return undefined;
     const domain = emailParts[1];
-    return `${this.catalogueUrl}/images/harvesting/${domain}.png`;
+    return `${this.catalogueUrl()}/images/harvesting/${domain}.png`;
   }
 
   hideImage(event: Event) {
