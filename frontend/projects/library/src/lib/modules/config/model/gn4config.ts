@@ -434,7 +434,7 @@ export interface WorkflowAssistApp {
 }
 
 export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration {
-  const conf: AppsConfiguration = { apps: {} };
+  const conf: AppsConfiguration = { apps: {}, proxyUrl: '/geonetwork/proxy?url=' };
 
   for (const modKey of Object.keys(gn4config.mods)) {
     const module = gn4config.mods[modKey as keyof UiConfiguration['mods']];

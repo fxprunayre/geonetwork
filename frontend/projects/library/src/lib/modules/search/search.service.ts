@@ -1,11 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { elasticsearch, IndexRecord, RelatedItemType } from 'gn-api-client';
+import { elasticsearch, IndexRecord, Link, RelatedItemType } from 'gn-api-client';
 import { SearchService as ApiSearchService } from 'gn4-api-client';
 import { SearchRegistry, SearchStoreType } from './search.store';
 import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './search.store.model';
 import { SEARCH_SOURCE } from './search.constant';
 import { AggregationService } from './aggregation.service';
+import { Datasource } from '../data/duck-db.service';
 
 @Injectable({
   providedIn: 'root',
@@ -148,6 +149,9 @@ export class SearchService {
         edit: hit.edit,
         selected: hit.selected,
         origin: hit.origin,
+        hasDataModel:
+          hit._source?.featureTypes !== undefined && hit._source.featureTypes.length > 0,
+        hasDatasource: this.checkHasDatasource(hit._source),
       },
     } as IndexRecord;
 
@@ -160,6 +164,39 @@ export class SearchService {
       record.overview = [{ url: overview }];
     }
     return record;
+  }
+
+  getSupportedDatasource(record: IndexRecord): Datasource[] {
+    if (!record?.link) return [];
+
+    return record.link.reduce((acc: Datasource[], link: Link) => {
+      const url = link.urlObject?.['default'] || '';
+      const protocol = link.protocol || '';
+      const extension = url.split('.').pop()?.toLowerCase();
+
+      if (protocol.startsWith('OGC:WFS')) {
+        const layerName = link.nameObject?.['default'] || '';
+        acc.push({ url, format: 'wfs', layer: layerName });
+      } else if (protocol.startsWith('WWW:DOWNLOAD')) {
+        const formatMapping: { [key: string]: Datasource['format'] } = {
+          arrow: 'arrow',
+          parquet: 'parquet',
+          csv: 'csv',
+          gml: 'gml',
+        };
+        if (extension && formatMapping[extension]) {
+          acc.push({ url, format: formatMapping[extension] });
+        } else if (extension === 'json' || url.includes('f=pjson')) {
+          acc.push({ url, format: 'json' });
+        }
+      }
+      return acc;
+    }, []);
+  }
+
+  private checkHasDatasource(record: IndexRecord | undefined): boolean {
+    if (!record) return false;
+    return this.getSupportedDatasource(record).length > 0;
   }
 
   search(searchRequestParameters: SearchRequestParameters): Observable<{

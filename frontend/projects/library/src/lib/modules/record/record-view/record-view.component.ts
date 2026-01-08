@@ -178,11 +178,6 @@ export class RecordViewComponent implements AfterViewInit {
     return sections.map((s) => s.label);
   }
 
-  hasDataModel(): boolean {
-    const record = this.record();
-    return record?.featureTypes !== undefined && record?.featureTypes.length > 0;
-  }
-
   handleRecordClick(uuid: string) {
     this.onRecordClick.emit(uuid);
   }

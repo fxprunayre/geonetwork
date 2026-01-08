@@ -13,7 +13,7 @@ import {
 import perspective from '@perspective-dev/client';
 import { Datasource, DuckDbService } from '../duck-db.service';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidExpand, faSolidCompress } from '@ng-icons/font-awesome/solid';
+import { faSolidExpand, faSolidCompress, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { Button, ButtonIcon } from 'primeng/button';
 import { NgClass } from '@angular/common';
 import { ProgressBar } from 'primeng/progressbar';
@@ -25,31 +25,66 @@ import { ProgressBar } from 'primeng/progressbar';
     provideIcons({
       faSolidExpand,
       faSolidCompress,
+      faSolidXmark,
     }),
   ],
   template: `
-    @if (progress().status !== 'completed' && progress().status !== 'idle') {
-      <p-progressbar [value]="progress().progress" class="my-4">
-        <ng-template #content let-value>
-          <span>{{ progress().status }}</span>
-        </ng-template>
-      </p-progressbar>
-    }
     <div
       #viewerContainer
       class="transition-all duration-300"
       [ngClass]="{
-        'fixed inset-0 z-[100] h-screen w-screen bg-white p-4': isFullScreen(),
+        'fixed inset-0 z-100 h-screen w-screen bg-white p-4': isFullScreen(),
         'relative min-h-dvh h-full': !isFullScreen(),
       }"
     >
-      <p-button (click)="toggleFullScreen()" styleClass="float-right">
-        @if (isFullScreen()) {
-          <ng-icon name="faSolidCompress" pButtonIcon />
-        } @else {
-          <ng-icon name="faSolidExpand" pButtonIcon />
-        }
-      </p-button>
+      <div
+        class="flex flex-row items-center justify-items-end w-full gap-4"
+        [ngClass]="{
+          'float-right': isFullScreen(),
+          'h-full mt-2': !isFullScreen(),
+        }"
+      >
+        <div class="flex flex-row items-center gap-4 grow">
+          @if (progress().status !== 'completed' && progress().status !== 'idle') {
+            @let errorOrCancel = progress().status === 'error' || progress().status === 'canceled';
+            <p-progressbar
+              [mode]="errorOrCancel ? 'determinate' : 'indeterminate'"
+              [style]="{ height: '6px' }"
+              class="basis-1/3"
+            />
+            <div class="basis-2/3 flex items-center gap-2">
+              {{ progress().status }}
+
+              @if (progress().downloadedBytes) {
+                - {{ (progress().downloadedBytes / (1024 * 1024)).toFixed(2) }} MB
+                @if (progress().totalBytes > 0) {
+                  / {{ (progress().totalBytes / (1024 * 1024)).toFixed(2) }} MB
+                }
+              }
+              @if (!errorOrCancel) {
+                <p-button
+                  (click)="cancel()"
+                  [rounded]="true"
+                  [text]="true"
+                  severity="danger"
+                  size="small"
+                  title="Cancel download"
+                >
+                  <ng-icon name="faSolidXmark" pButtonIcon />
+                </p-button>
+              }
+            </div>
+          }
+        </div>
+
+        <p-button (click)="toggleFullScreen()">
+          @if (isFullScreen()) {
+            <ng-icon name="faSolidCompress" pButtonIcon />
+          } @else {
+            <ng-icon name="faSolidExpand" pButtonIcon />
+          }
+        </p-button>
+      </div>
       <perspective-viewer #perspectiveViewer class="w-full min-h-dvh h-full" />
     </div>
   `,
@@ -80,6 +115,10 @@ export class Perspective implements OnDestroy {
         this.loadDataIntoPerspective();
       }
     });
+  }
+
+  cancel(): void {
+    this.duckDbService.cancelDownload();
   }
 
   toggleFullScreen(): void {
@@ -134,7 +173,7 @@ export class Perspective implements OnDestroy {
 
     const table = this.worker.table(this.sanitizeData(result));
     this.perspectiveViewer.nativeElement.load(table);
-    this.perspectiveViewer.nativeElement.restore({ settings: true });
+    this.perspectiveViewer.nativeElement.restore();
   }
 
   ngOnDestroy() {
