@@ -4,6 +4,7 @@ import { AsyncDuckDB, AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
 import { IndexRecord, Link } from 'gn-api-client';
 import perspective from '@perspective-dev/client';
 import perspective_viewer from '@perspective-dev/viewer';
+import { SearchService } from '../search/search.service';
 
 export interface Datasource {
   url: string;
@@ -40,6 +41,8 @@ export class DuckDbService {
   private perspectiveInitialized = false;
   private abortController: AbortController | null = null;
   private loadingMode: 'duckdb' | 'browser' = 'duckdb';
+
+  private searchService = inject(SearchService);
 
   public progress = signal<DatasourceLoadingProgress>({
     status: 'idle',
@@ -137,31 +140,7 @@ export class DuckDbService {
   }
 
   getSupportedDatasource(record: IndexRecord): Datasource[] {
-    if (!record?.link) return [];
-
-    return record.link.reduce((acc: Datasource[], link: Link) => {
-      const url = link.urlObject?.['default'] || '';
-      const protocol = link.protocol || '';
-      const extension = url.split('.').pop()?.toLowerCase();
-
-      if (protocol.startsWith('OGC:WFS')) {
-        const layerName = link.nameObject?.['default'] || '';
-        acc.push({ url, format: 'wfs', layer: layerName });
-      } else if (protocol.startsWith('WWW:DOWNLOAD')) {
-        const formatMapping: { [key: string]: Datasource['format'] } = {
-          arrow: 'arrow',
-          parquet: 'parquet',
-          csv: 'csv',
-          gml: 'gml',
-        };
-        if (extension && formatMapping[extension]) {
-          acc.push({ url, format: formatMapping[extension] });
-        } else if (extension === 'json' || url.includes('f=pjson')) {
-          acc.push({ url, format: 'json' });
-        }
-      }
-      return acc;
-    }, []);
+    return this.searchService.getSupportedDatasource(record);
   }
 
   async checkDatasourceSize(fileUrl: string, signal: AbortSignal): Promise<void> {

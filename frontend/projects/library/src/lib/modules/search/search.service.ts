@@ -6,6 +6,7 @@ import { SearchRegistry, SearchStoreType } from './search.store';
 import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './search.store.model';
 import { SEARCH_SOURCE } from './search.constant';
 import { AggregationService } from './aggregation.service';
+import { Datasource } from '../data/duck-db.service';
 
 @Injectable({
   providedIn: 'root',
@@ -165,31 +166,37 @@ export class SearchService {
     return record;
   }
 
-  private checkHasDatasource(record: IndexRecord | undefined): boolean {
-    if (!record?.link) return false;
+  getSupportedDatasource(record: IndexRecord): Datasource[] {
+    if (!record?.link) return [];
 
-    return record.link.some((link: Link) => {
+    return record.link.reduce((acc: Datasource[], link: Link) => {
       const url = link.urlObject?.['default'] || '';
       const protocol = link.protocol || '';
       const extension = url.split('.').pop()?.toLowerCase();
 
       if (protocol.startsWith('OGC:WFS')) {
-        return true;
+        const layerName = link.nameObject?.['default'] || '';
+        acc.push({ url, format: 'wfs', layer: layerName });
       } else if (protocol.startsWith('WWW:DOWNLOAD')) {
-        const formatMapping: { [key: string]: string } = {
+        const formatMapping: { [key: string]: Datasource['format'] } = {
           arrow: 'arrow',
           parquet: 'parquet',
           csv: 'csv',
           gml: 'gml',
         };
         if (extension && formatMapping[extension]) {
-          return true;
+          acc.push({ url, format: formatMapping[extension] });
         } else if (extension === 'json' || url.includes('f=pjson')) {
-          return true;
+          acc.push({ url, format: 'json' });
         }
       }
-      return false;
-    });
+      return acc;
+    }, []);
+  }
+
+  private checkHasDatasource(record: IndexRecord | undefined): boolean {
+    if (!record) return false;
+    return this.getSupportedDatasource(record).length > 0;
   }
 
   search(searchRequestParameters: SearchRequestParameters): Observable<{
