@@ -30,7 +30,8 @@
                 "glob": "*",
                 "input": "i18n",
                 "output": "i18n"
-              }
+              },
+              "projects/main/src/.htaccess"
             ],
             "styles": ["projects/main/src/styles.scss"]
           },

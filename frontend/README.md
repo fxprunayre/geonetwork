@@ -122,3 +122,21 @@ Ongoing PR to improve GeoNetwork Open API documentation:
 
 
 
+# Deployment guide
+
+For Apache, you need to activate the rewrite module:
+
+```bash
+a2enmod rewrite
+systemctl restart apache2
+```
+
+Then add the following lines in an `.htaccess` file alongside the application `index.html` file:
+
+```apache2
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^ ./index.html
+```
