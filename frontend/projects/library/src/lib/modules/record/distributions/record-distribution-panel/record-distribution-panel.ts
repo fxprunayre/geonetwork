@@ -64,6 +64,8 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
         url.endsWith('.parquet') ||
         url.endsWith('.json') ||
         url.endsWith('.csv') ||
+        url.endsWith('.xls') ||
+        url.endsWith('.xlsx') ||
         link.protocol === 'OGC:WFS'
       );
     }

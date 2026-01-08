@@ -9,7 +9,17 @@ import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 
 export interface Datasource {
   url: string;
-  format: 'csv' | 'parquet' | 'json' | 'geojson' | 'gml' | 'wfs' | 'arrow' | 'gdal';
+  format:
+    | 'csv'
+    | 'parquet'
+    | 'json'
+    | 'geojson'
+    | 'gml'
+    | 'wfs'
+    | 'arrow'
+    | 'gdal'
+    | 'xlsx'
+    | 'xls';
   layer?: string;
 }
 
@@ -249,6 +259,8 @@ export class DuckDbService {
       'text/xml; subtype=gml/2.1.2': 'gdal',
       'geo+json': 'geojson',
       'application/vnd.apache.arrow.stream': 'arrows',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+      'application/vnd.ms-excel': 'xls',
       json: 'json',
     };
     for (const [key, value] of Object.entries(typeMap)) {
@@ -431,6 +443,8 @@ export class DuckDbService {
         gdal: 'ST_Read',
         wfs: 'ST_Read',
         geojson: 'ST_Read',
+        xlsx: 'ST_Read',
+        xls: 'ST_Read',
       };
       const reader = readerMap[ext];
       if (!reader) throw new Error(`Unsupported file type: .${ext}`);

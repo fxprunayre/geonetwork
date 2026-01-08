@@ -183,6 +183,8 @@ export class SearchService {
           parquet: 'parquet',
           csv: 'csv',
           gml: 'gml',
+          xlsx: 'xlsx',
+          xls: 'xls',
         };
         if (extension && formatMapping[extension]) {
           acc.push({ url, format: formatMapping[extension] });
