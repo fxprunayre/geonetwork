@@ -56,8 +56,6 @@ export class CatalogueComponent extends SearchBase {
     return this.appConfiguration().config?.apps.search?.resultsLayoutOptions || [];
   });
 
-  layout = signal<SearchAppLayout>(this.resultsLayoutOptions()?.[0] || 'list');
-
   get hasResults(): boolean {
     return this.search?.totalCount() > 0;
   }

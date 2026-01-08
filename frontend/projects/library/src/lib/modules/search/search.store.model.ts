@@ -1,4 +1,5 @@
 import { elasticsearch, IndexRecord } from 'gn-api-client';
+import { SearchAppLayout } from '../config/model/gnConfig';
 
 export const DEFAULT_PAGE_SIZE = 10;
 export const TRACK_TOTAL_HITS = true;
@@ -36,6 +37,7 @@ export type SearchState = {
   currentPage: number;
   pageSize: number;
   isAppendMode: boolean;
+  layout: SearchAppLayout;
 };
 
 export interface SearchFilterParameters {
@@ -53,4 +55,6 @@ export interface SearchRequestPageParameters {
 
 export interface SearchRequestParameters
   extends SearchFilterParameters,
-    SearchRequestPageParameters {}
+    SearchRequestPageParameters {
+  layout: SearchAppLayout;
+}

@@ -11,7 +11,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Skeleton } from 'primeng/skeleton';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { SearchAppLayout } from '../../config/model/gnConfig';
 import { SearchBase } from '../../search/search-base/search-base';
@@ -23,14 +22,7 @@ import { SearchResultsPaginator } from '../search-results-paginator/search-resul
 @Component({
   selector: 'app-result-view',
   standalone: true,
-  imports: [
-    ResultItemGrid,
-    ResultItemList,
-    NgTemplateOutlet,
-    Skeleton,
-    SearchResultsPaginator,
-    EmptyState,
-  ],
+  imports: [ResultItemGrid, ResultItemList, NgTemplateOutlet, SearchResultsPaginator, EmptyState],
   templateUrl: './result-view-component.html',
 })
 export class ResultViewComponent extends SearchBase {

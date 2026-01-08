@@ -11,6 +11,7 @@ import {
 } from '@ng-icons/font-awesome/solid';
 import { IndexRecord } from 'gn-api-client';
 import { ButtonModule } from 'primeng/button';
+import { SkeletonModule } from 'primeng/skeleton';
 import { RecordDistributionBadges } from '../../record/distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
 import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
@@ -32,6 +33,7 @@ import { RECORD_ROUTE_PATH } from '../../search/search.constant';
     RecordDistributionBadges,
     RouterLink,
     NgIcon,
+    SkeletonModule,
   ],
   viewProviders: [
     provideIcons({
@@ -46,17 +48,20 @@ import { RECORD_ROUTE_PATH } from '../../search/search.constant';
 })
 export class ResultItemList {
   protected readonly RECORD_ROUTE_PATH = RECORD_ROUTE_PATH;
-  result = input.required<IndexRecord>();
+  result = input<IndexRecord>();
   onRecordClick = output<string>();
 
   externalUrl = computed(() => {
     const result = this.result();
+    if (!result) return null;
     const isRemote = result.info?.['origin'] === 'remote';
     return isRemote ? result['url'] : null;
   });
 
   handleRecordClick() {
-    const id = this.result().info?._id;
+    const result = this.result();
+    if (!result) return;
+    const id = result.info?._id;
     if (!id) return;
     this.onRecordClick.emit(id);
   }

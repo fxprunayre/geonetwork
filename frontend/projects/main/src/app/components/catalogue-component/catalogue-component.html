@@ -18,10 +18,16 @@
 
     <div class="mx-auto max-w-7xl w-full px-6 py-6 flex flex-col md:flex-row min-h-screen gap-6">
       <div class="w-full" [class.xl:px-[200px]]="filterPanelMode() === 'drawer'">
-        <div class="mb-6">
-          <app-result-header [(layout)]="layout" [layoutOptions]="resultsLayoutOptions()" />
-        </div>
-        <app-result-view [layout]="layout()" />
+        @if (search.layout()) {
+          <div class="mb-6">
+            <app-result-header
+              [layout]="search.layout()"
+              (layoutChange)="search.setLayout($event)"
+              [layoutOptions]="resultsLayoutOptions()"
+            />
+          </div>
+          <app-result-view [layout]="search.layout()" />
+        }
       </div>
     </div>
   </div>
