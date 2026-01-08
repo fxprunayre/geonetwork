@@ -141,7 +141,9 @@
     <p-tablist>
       <p-tab value="about">{{ 'record.view.section.description' | translate }}</p-tab>
       <p-tab value="data-access">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
-      <p-tab value="explore">{{ 'record.view.section.explore' | translate }}</p-tab>
+      @if (record.info?.hasDatasource) {
+        <p-tab value="explore">{{ 'record.view.section.explore' | translate }}</p-tab>
+      }
       <p-tab value="publications">{{ 'record.view.section.publications' | translate }}</p-tab>
       <p-tab value="citation">{{ 'record.view.section.citation' | translate }}</p-tab>
       <p-tab value="discussions">{{ 'record.view.section.discussions' | translate }}</p-tab>
@@ -154,7 +156,7 @@
             { label: 'about', tpl: aboutContent },
             { label: 'dates', tpl: datesContent },
             { label: 'usageAndAccess', tpl: licenseContent },
-            { label: 'dataModel', tpl: dataModel, hidden: !hasDataModel() },
+            { label: 'dataModel', tpl: dataModel, hidden: !record.info?.hasDataModel },
             { label: 'coverage', tpl: coverageContent },
             { label: 'spatialInfo', tpl: spatialInfoContent },
             { label: 'lineage', tpl: lineageContent },
@@ -231,9 +233,11 @@
         </div>
       </p-tabpanel>
 
-      <p-tabpanel value="explore">
-        <app-explore-panel [record]="record" />
-      </p-tabpanel>
+      @if (record.info?.hasDatasource) {
+        <p-tabpanel value="explore">
+          <app-explore-panel [record]="record" />
+        </p-tabpanel>
+      }
 
       <p-tabpanel value="publications">
         <ng-container

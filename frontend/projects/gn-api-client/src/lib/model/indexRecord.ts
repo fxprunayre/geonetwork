@@ -28,6 +28,12 @@ export interface IndexRecord {
   [key: string]: any;
   info?: {
     _id: string;
+    view: boolean;
+    edit: boolean;
+    selected: boolean;
+    origin: string;
+    hasDataModel: boolean;
+    hasDatasource: boolean;
     [key: string]: any;
   };
   related?: Record<string, IndexRecord[]>;

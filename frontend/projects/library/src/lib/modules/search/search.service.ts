@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { elasticsearch, IndexRecord, RelatedItemType } from 'gn-api-client';
+import { elasticsearch, IndexRecord, Link, RelatedItemType } from 'gn-api-client';
 import { SearchService as ApiSearchService } from 'gn4-api-client';
 import { SearchRegistry, SearchStoreType } from './search.store';
 import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './search.store.model';
@@ -148,6 +148,9 @@ export class SearchService {
         edit: hit.edit,
         selected: hit.selected,
         origin: hit.origin,
+        hasDataModel:
+          hit._source?.featureTypes !== undefined && hit._source.featureTypes.length > 0,
+        hasDatasource: this.checkHasDatasource(hit._source),
       },
     } as IndexRecord;
 
@@ -160,6 +163,33 @@ export class SearchService {
       record.overview = [{ url: overview }];
     }
     return record;
+  }
+
+  private checkHasDatasource(record: IndexRecord | undefined): boolean {
+    if (!record?.link) return false;
+
+    return record.link.some((link: Link) => {
+      const url = link.urlObject?.['default'] || '';
+      const protocol = link.protocol || '';
+      const extension = url.split('.').pop()?.toLowerCase();
+
+      if (protocol.startsWith('OGC:WFS')) {
+        return true;
+      } else if (protocol.startsWith('WWW:DOWNLOAD')) {
+        const formatMapping: { [key: string]: string } = {
+          arrow: 'arrow',
+          parquet: 'parquet',
+          csv: 'csv',
+          gml: 'gml',
+        };
+        if (extension && formatMapping[extension]) {
+          return true;
+        } else if (extension === 'json' || url.includes('f=pjson')) {
+          return true;
+        }
+      }
+      return false;
+    });
   }
 
   search(searchRequestParameters: SearchRequestParameters): Observable<{
