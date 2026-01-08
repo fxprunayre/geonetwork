@@ -3,6 +3,7 @@ import { DistributionConfig } from './gn4config';
 
 export interface AppsConfiguration {
   apps: Apps;
+  proxyUrl?: string;
 }
 
 export interface Apps {

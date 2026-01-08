@@ -28,28 +28,36 @@ import { ProgressBar } from 'primeng/progressbar';
     }),
   ],
   template: `
-    @if (progress().status !== 'completed' && progress().status !== 'idle') {
-      <p-progressbar [value]="progress().progress" class="my-4">
-        <ng-template #content let-value>
-          <span>{{ progress().status }}</span>
-        </ng-template>
-      </p-progressbar>
-    }
     <div
       #viewerContainer
       class="transition-all duration-300"
       [ngClass]="{
-        'fixed inset-0 z-[100] h-screen w-screen bg-white p-4': isFullScreen(),
+        'fixed inset-0 z-100 h-screen w-screen bg-white p-4': isFullScreen(),
         'relative min-h-dvh h-full': !isFullScreen(),
       }"
     >
-      <p-button (click)="toggleFullScreen()" styleClass="float-right">
-        @if (isFullScreen()) {
-          <ng-icon name="faSolidCompress" pButtonIcon />
-        } @else {
-          <ng-icon name="faSolidExpand" pButtonIcon />
+      <div class="flex flex-row items-center justify-items-end h-full w-full gap-4 mt-2">
+        @if (progress().status !== 'completed' && progress().status !== 'idle') {
+          <p-progressbar mode="indeterminate" [style]="{ height: '6px' }" class="basis-1/3">
+          </p-progressbar>
+          <div class="basis-2/3">
+            {{ progress().status }}
+
+            @if (progress().downloadedBytes) {
+              - {{ (progress().downloadedBytes / (1024 * 1024)).toFixed(2) }} MB /
+              {{ (progress().totalBytes / (1024 * 1024)).toFixed(2) }} MB
+            }
+          </div>
         }
-      </p-button>
+
+        <p-button (click)="toggleFullScreen()">
+          @if (isFullScreen()) {
+            <ng-icon name="faSolidCompress" pButtonIcon />
+          } @else {
+            <ng-icon name="faSolidExpand" pButtonIcon />
+          }
+        </p-button>
+      </div>
       <perspective-viewer #perspectiveViewer class="w-full min-h-dvh h-full" />
     </div>
   `,

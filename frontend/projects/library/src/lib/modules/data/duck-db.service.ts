@@ -5,6 +5,7 @@ import { IndexRecord, Link } from 'gn-api-client';
 import perspective from '@perspective-dev/client';
 import perspective_viewer from '@perspective-dev/viewer';
 import { SearchService } from '../search/search.service';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 
 export interface Datasource {
   url: string;
@@ -43,6 +44,7 @@ export class DuckDbService {
   private loadingMode: 'duckdb' | 'browser' = 'duckdb';
 
   private searchService = inject(SearchService);
+  private appConfig = inject(APPLICATION_CONFIGURATION);
 
   public progress = signal<DatasourceLoadingProgress>({
     status: 'idle',
@@ -92,6 +94,7 @@ export class DuckDbService {
 
     try {
       const scriptUrls = [
+        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer/dist/cdn/perspective-viewer.js',
         'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-datagrid/dist/cdn/perspective-viewer-datagrid.js',
         'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-d3fc/dist/cdn/perspective-viewer-d3fc.js',
         'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers/dist/cdn/perspective-viewer-openlayers.js',
@@ -143,14 +146,36 @@ export class DuckDbService {
     return this.searchService.getSupportedDatasource(record);
   }
 
-  async checkDatasourceSize(fileUrl: string, signal: AbortSignal): Promise<void> {
-    const headResponse = await fetch(fileUrl, { method: 'HEAD', signal });
-    if (!headResponse.ok) {
-      throw new Error(`HTTP HEAD check failed: ${headResponse.status}`);
+  async checkDatasourceSize(fileUrl: string, signal: AbortSignal): Promise<boolean> {
+    let response: Response;
+    let isDirect = true;
+
+    try {
+      // First try direct access
+      response = await fetch(fileUrl, { method: 'HEAD', signal });
+      if (!response.ok) {
+        throw new Error(`Direct fetch failed: ${response.status}`);
+      }
+    } catch (e) {
+      console.warn('Direct HEAD request failed. Switching to browser loading mode.', e);
+      isDirect = false;
+
+      // Now try to get metadata via proxy
+      try {
+        response = await this.tryFetch(fileUrl, { method: 'HEAD', signal });
+      } catch (proxyError) {
+        // Even proxy failed. We can't determine size.
+        console.warn('Proxy HEAD also failed', proxyError);
+        return false;
+      }
     }
 
-    const contentLength = headResponse.headers.get('Content-Length');
-    const contentType = headResponse.headers.get('Content-Type');
+    if (!response.ok) {
+      return false;
+    }
+
+    const contentLength = response.headers.get('Content-Length');
+    const contentType = response.headers.get('Content-Type');
     const totalBytes = contentLength ? parseInt(contentLength, 10) : 0;
 
     this.progress.update((p) => ({
@@ -164,6 +189,7 @@ export class DuckDbService {
           ? 'Warning: Datasource size is unknown (Content-Length missing).'
           : undefined,
     }));
+    return isDirect;
   }
 
   async downloadDatasource(
@@ -171,7 +197,7 @@ export class DuckDbService {
     signal: AbortSignal,
   ): Promise<{ buffer: ArrayBuffer; contentType: string }> {
     this.progress.update((p) => ({ ...p, status: 'downloading', errorMessage: undefined }));
-    const response = await fetch(fileUrl, { signal });
+    const response = await this.tryFetch(fileUrl, { signal });
 
     if (!response.ok || !response.body) {
       const errorMsg = `HTTP error: ${response.status}`;
@@ -227,6 +253,7 @@ export class DuckDbService {
   }
 
   async loadDatasource(ds: Datasource): Promise<void> {
+    this.loadingMode = 'duckdb';
     this.progress.set({
       status: 'connecting',
       progress: 0,
@@ -238,7 +265,11 @@ export class DuckDbService {
 
     this.abortController = new AbortController();
     const signal = this.abortController.signal;
-    await this.checkDatasourceSize(ds.url, signal);
+    const isHeadOk = await this.checkDatasourceSize(ds.url, signal);
+
+    if (!isHeadOk) {
+      this.loadingMode = 'browser';
+    }
 
     const fileName = this.buildFileName(ds);
 
@@ -379,5 +410,22 @@ export class DuckDbService {
     const result = await conn.query(`SELECT histogram("${columnName}") AS data FROM (${query});`);
     const data = result.get(0)?.['data'];
     return data?.toJSON?.() ?? null;
+  }
+
+  private async tryFetch(url: string, init?: RequestInit): Promise<Response> {
+    try {
+      return await fetch(url, init);
+    } catch (e) {
+      // Assuming a network error which might be CORS related.
+      // Retry with proxy if configured.
+      const proxyUrl = this.appConfig().config?.proxyUrl;
+      if (proxyUrl) {
+        console.warn(`Fetch failed for ${url}, retrying with proxy...`, e);
+        // Encode the target URL component
+        const proxiedUrl = `${proxyUrl}${encodeURIComponent(url)}`;
+        return await fetch(proxiedUrl, init);
+      }
+      throw e;
+    }
   }
 }
