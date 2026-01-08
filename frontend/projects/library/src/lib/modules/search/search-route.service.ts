@@ -3,7 +3,7 @@ import { Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SearchFilter, SearchRequestParameters } from './search.store.model';
 import { HistoryService } from '../../shared/history.service';
-import { SEARCH_ROUTE_PATH } from './search.constant';
+import { RECORD_ROUTE_PATH, SEARCH_ROUTE_PATH } from './search.constant';
 
 @Injectable({
   providedIn: 'root',
@@ -50,12 +50,21 @@ export class SearchRouteService {
       params['sort'] = store.currentSort;
     }
 
+    if (store.layout) {
+      params['layout'] = store.layout;
+    }
+
     return params;
   }
 
-  convertRouteParamsToSearch(params: Params, pageSize: number, currentSort: string): any {
+  convertRouteParamsToSearch(
+    params: Params,
+    pageSize: number,
+    currentSort: string,
+    currentLayout: string,
+  ): any {
     const filter: Record<string, SearchFilter> = {};
-    const nonFilterParams = ['from', 'size', 'q', 'sort'];
+    const nonFilterParams = ['from', 'size', 'q', 'sort', 'layout'];
 
     Object.entries(params).forEach(([key, value]) => {
       if (!nonFilterParams.includes(key)) {
@@ -73,6 +82,12 @@ export class SearchRouteService {
       searchQuery: params['q'] || '',
       filters: filter,
       currentSort: params['sort'] || currentSort,
+      layout: params['layout'] || currentLayout,
     };
+  }
+
+  shouldUpdateStateFromRoute(url: string): boolean {
+    const baseUrl = url.split('?')[0];
+    return !(baseUrl === '/' || baseUrl.startsWith(RECORD_ROUTE_PATH));
   }
 }

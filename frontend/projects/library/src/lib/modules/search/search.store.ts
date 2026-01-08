@@ -13,6 +13,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 import { SearchService } from './search.service';
 import { elasticsearch } from 'gn-api-client';
+import { SearchAppLayout } from '../config/model/gnConfig';
 import {
   DEFAULT_PAGE_SIZE,
   DEFAULT_SORT,
@@ -23,7 +24,6 @@ import {
   SearchRequestParameters,
   SearchState,
 } from './search.store.model';
-import { RECORD_ROUTE_PATH } from './search.constant';
 import { SearchRouteService } from './search-route.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -48,6 +48,7 @@ export const initialState: SearchState = {
   currentPage: 0,
   pageSize: DEFAULT_PAGE_SIZE,
   isAppendMode: false,
+  layout: 'list',
 };
 
 export const SearchStore = signalStore(
@@ -100,8 +101,7 @@ export const SearchStore = signalStore(
           return;
         }
 
-        const baseUrl = store.router.url.split('?')[0];
-        if (baseUrl === '/') {
+        if (!searchRouteService.shouldUpdateStateFromRoute(store.router.url)) {
           return;
         }
 
@@ -113,6 +113,7 @@ export const SearchStore = signalStore(
             searchQuery: store.searchQuery(),
             filter: store.filter(),
             filters: store.filters(),
+            layout: store.layout(),
           } as SearchRequestParameters,
           store.pageSize(),
         );
@@ -124,8 +125,7 @@ export const SearchStore = signalStore(
         }
 
         store.activeRoute.queryParams.subscribe((params) => {
-          const baseUrl = store.router.url.split('?')[0];
-          if (baseUrl === '/' || baseUrl.startsWith(RECORD_ROUTE_PATH)) {
+          if (!searchRouteService.shouldUpdateStateFromRoute(store.router.url)) {
             return;
           }
 
@@ -133,6 +133,7 @@ export const SearchStore = signalStore(
             params,
             store.pageSize(),
             store.currentSort(),
+            store.layout(),
           );
 
           const currentState = {
@@ -141,6 +142,7 @@ export const SearchStore = signalStore(
             searchQuery: store.searchQuery(),
             filters: store.filters(),
             currentSort: store.currentSort(),
+            layout: store.layout(),
           };
 
           if (JSON.stringify(newState) === JSON.stringify(currentState)) {
@@ -177,6 +179,12 @@ export const SearchStore = signalStore(
 
           if (store.routing()) {
             subscribeToRouteChange();
+          }
+        },
+        setLayout(layout: SearchAppLayout) {
+          patchState(store, { layout });
+          if (store.routing()) {
+            setRouting();
           }
         },
         search: rxMethod<SearchFilterParameters>(

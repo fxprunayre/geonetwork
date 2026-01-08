@@ -1,52 +1,67 @@
-@let description = result().resourceAbstractObject?.['default'] || '';
-
-<ng-template #content>
-  <app-record-field-overview
-    [field]="result().overview?.[0] || []"
-    [preview]="false"
-    styleClass="rounded-t-(--p-border-radius-md)"
-    class="min-h-48 max-h-48 h-1/2 object-cover"
-  />
-  <div class="p-4 flex-1 flex flex-col border-t border-surface-100">
-    <div class="flex flex-row justify-between items-start gap-2 mb-4">
-      <div class="flex-1">
-        <app-record-field-type [record]="result()" />
-        <app-record-field-title
-          [record]="result()"
-          class="pt-2 text-primary font-bold line-clamp-3"
+@if (result(); as result) {
+  @let description = result.resourceAbstractObject?.['default'] || '';
+  <ng-template #content>
+    <app-record-field-overview
+      [field]="result.overview?.[0] || []"
+      [preview]="false"
+      styleClass="rounded-t-(--p-border-radius-md)"
+      class="min-h-48 max-h-48 h-1/2 object-cover"
+    />
+    <div class="p-4 flex-1 flex flex-col border-t border-surface-100">
+      <div class="flex flex-row justify-between items-start gap-2 mb-4">
+        <div class="flex-1">
+          <app-record-field-type [record]="result" />
+          <app-record-field-title
+            [record]="result"
+            class="pt-2 text-primary font-bold line-clamp-3"
+          />
+        </div>
+      </div>
+      <div class="flex flex-col gap-4 mt-auto">
+        <app-record-distribution-badges
+          [record]="result"
+          [types]="['api', 'download']"
+          [layout]="'badge'"
         />
+        @if (externalUrl()) {
+          <ng-icon name="faSolidArrowUpRightFromSquare" />
+        }
       </div>
     </div>
-    <div class="flex flex-col gap-4 mt-auto">
-      <app-record-distribution-badges
-        [record]="result()"
-        [types]="['api', 'download']"
-        [layout]="'badge'"
+  </ng-template>
+
+  @if (externalUrl()) {
+    <a
+      [attr.href]="externalUrl()"
+      target="_blank"
+      (click)="handleRecordClick()"
+      class="cursor-pointer border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full transition-shadow hover:shadow-md"
+      [title]="description"
+    >
+      <ng-container *ngTemplateOutlet="content" />
+    </a>
+  } @else {
+    <a
+      [routerLink]="[RECORD_ROUTE_PATH, result.info?._id]"
+      (click)="handleRecordClick()"
+      class="cursor-pointer border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full transition-shadow hover:shadow-md"
+      [title]="description"
+    >
+      <ng-container *ngTemplateOutlet="content" />
+    </a>
+  }
+} @else {
+  <div class="border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full">
+    <div class="mb-4 relative">
+      <p-skeleton
+        height="12rem"
+        borderRadius="border-radius: var(--p-border-radius-md) var(--p-border-radius-md) 0 0"
+        styleClass="w-full"
       />
-      @if (externalUrl()) {
-        <ng-icon name="faSolidArrowUpRightFromSquare" />
-      }
+    </div>
+    <div class="flex flex-col gap-2 p-4">
+      <p-skeleton width="100%" styleClass="mb-2" />
+      <p-skeleton width="75%" />
     </div>
   </div>
-</ng-template>
-
-@if (externalUrl()) {
-  <a
-    [attr.href]="externalUrl()"
-    target="_blank"
-    (click)="handleRecordClick()"
-    class="cursor-pointer border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full transition-shadow hover:shadow-md"
-    [title]="description"
-  >
-    <ng-container *ngTemplateOutlet="content" />
-  </a>
-} @else {
-  <a
-    [routerLink]="[RECORD_ROUTE_PATH, result().info?._id]"
-    (click)="handleRecordClick()"
-    class="cursor-pointer border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full transition-shadow hover:shadow-md"
-    [title]="description"
-  >
-    <ng-container *ngTemplateOutlet="content" />
-  </a>
 }
