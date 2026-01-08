@@ -53,7 +53,7 @@ import { RecordField } from '../record-field/record-field';
 import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
 import { RecordViewHeader } from '../record-view-header/record-view-header';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { RECORD_ROUTE_PATH } from 'gn-library';
+import { RECORD_ROUTE_PATH } from '../../search/search.constant';
 
 export const DEFAULT_TAB = 'about';
 
