@@ -298,15 +298,73 @@ export class DuckDbService {
     return `${name}.${ds.format}`;
   }
 
-  private buildWfsGetFeatureUrl(ds: Datasource): string {
+  private async resolveWfsGetFeatureUrl(ds: Datasource, signal: AbortSignal): Promise<string> {
     const url = new URL(ds.url);
+
+    // Check capabilities to see if JSON is supported
+    let outputFormat = 'application/json';
+    try {
+      const capsUrl = new URL(ds.url);
+      capsUrl.searchParams.set('SERVICE', 'WFS');
+      capsUrl.searchParams.set('VERSION', '2.0.0');
+      capsUrl.searchParams.set('REQUEST', 'GetCapabilities');
+
+      const response = await this.tryFetch(capsUrl.toString(), { signal });
+      if (response.ok) {
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/xml');
+
+        const getElements = (el: Element | Document, tagName: string) =>
+          Array.from(el.getElementsByTagNameNS('*', tagName));
+
+        const operations = getElements(doc, 'Operation');
+        const getFeatureOp = operations.find((op) => op.getAttribute('name') === 'GetFeature');
+
+        if (getFeatureOp) {
+          const parameters = getElements(getFeatureOp, 'Parameter');
+          const outputFormatParam = parameters.find(
+            (p) => p.getAttribute('name') === 'outputFormat',
+          );
+
+          if (outputFormatParam) {
+            const values = getElements(outputFormatParam, 'Value').map((v) =>
+              v.textContent?.trim().toLowerCase(),
+            );
+
+            // Preferred JSON formats in order
+            const preferredJsonFormats = [
+              'application/json',
+              'application/geo+json',
+              'application/vnd.geo+json',
+              'json',
+            ];
+
+            const supportedJson = preferredJsonFormats.find((fmt) => values.includes(fmt));
+
+            if (supportedJson) {
+              outputFormat = supportedJson;
+            } else {
+              // If no standard JSON format found, check for any including 'json'
+              const fuzzyJson = values.find((v) => v && v.includes('json'));
+              outputFormat = fuzzyJson || ''; // Fallback to GML (default) if no JSON found
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to check WFS capabilities, defaulting to JSON', e);
+    }
+
     url.searchParams.set('SERVICE', 'WFS');
     url.searchParams.set('VERSION', '2.0.0');
     url.searchParams.set('REQUEST', 'GetFeature');
     if (ds.layer) {
       url.searchParams.set('TYPENAME', ds.layer);
     }
-    url.searchParams.set('OUTPUTFORMAT', 'application/json');
+    if (outputFormat) {
+      url.searchParams.set('OUTPUTFORMAT', outputFormat);
+    }
     return url.toString();
   }
 
@@ -315,7 +373,7 @@ export class DuckDbService {
    * It also infers the file type if missing or unknown from data content.
    */
   private async browserDownloadMode(ds: Datasource, fileName: string, signal: AbortSignal) {
-    const fileUrl = ds.format === 'wfs' ? this.buildWfsGetFeatureUrl(ds) : ds.url;
+    const fileUrl = ds.format === 'wfs' ? await this.resolveWfsGetFeatureUrl(ds, signal) : ds.url;
     try {
       const { buffer, contentType } = await this.downloadDatasource(fileUrl, signal);
       if (signal.aborted) return;
