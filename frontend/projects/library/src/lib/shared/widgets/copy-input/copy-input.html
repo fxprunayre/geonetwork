@@ -15,7 +15,12 @@
   }
 
   @case ('icon') {
-    <p-button (onClick)="copyToClipboard()" [styleClass]="buttonClass" severity="secondary">
+    <p-button
+      (onClick)="copyToClipboard()"
+      [title]="'copy.title' | translate"
+      [styleClass]="buttonClass"
+      severity="secondary"
+    >
       <ng-icon name="faSolidCopy" pButtonIcon></ng-icon>
     </p-button>
   }

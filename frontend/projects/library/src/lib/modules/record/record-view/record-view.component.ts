@@ -179,10 +179,6 @@ export class RecordViewComponent implements AfterViewInit {
     });
   }
 
-  getSectionIds(sections: any[]): string[] {
-    return sections.map((s) => s.label);
-  }
-
   handleRecordClick(uuid: string) {
     this.onRecordClick.emit(uuid);
   }

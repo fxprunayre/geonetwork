@@ -4,6 +4,27 @@ Cypress.Commands.add('initApp', () => {
     'apiI18nGnui',
   );
 
+  cy.intercept(
+    'GET',
+    '**/srv/api/records/cf5048f6-5bbf-4e44-ba74-e6f429af51ea/formatters/citation?output=json&approved=true&format=%3F',
+    { fixture: 'record-api-citation-formats.json' },
+  ).as('apiCitationFormats');
+  cy.intercept(
+    'GET',
+    '**/srv/api/records/cf5048f6-5bbf-4e44-ba74-e6f429af51ea/formatters/citation?output=txt&approved=true&format=text',
+    { fixture: 'record-api-citation-format.txt' },
+  ).as('apiCitationFormatTxt');
+  cy.intercept(
+    'GET',
+    '**/srv/api/records/cf5048f6-5bbf-4e44-ba74-e6f429af51ea/formatters/citation?output=html&approved=true',
+    { fixture: 'record-api-citation-format.html' },
+  ).as('apiCitationFormatHtml');
+  cy.intercept(
+    'GET',
+    '**/srv/api/records/cf5048f6-5bbf-4e44-ba74-e6f429af51ea/formatters/citation?output=txt&approved=true&format=ris',
+    { fixture: 'record-api-citation-format.ris' },
+  ).as('apiCitationFormatRis');
+
   const mockMap = [
     {
       req: 'home-api-search-request.json',

@@ -170,9 +170,13 @@
                 @let sectionLabel =
                   'record.view.section.' + section.label
                     | translate: { resourceType: record.resourceType };
+
                 @if (section.hidden !== true) {
                   @if (section.label === 'lineage') {
-                    <p-accordion-panel [value]="section.label">
+                    <p-accordion-panel
+                      [value]="section.label"
+                      [attr.data-testid]="'accordion-panel-' + section.label"
+                    >
                       <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
                       <p-accordion-content>
                         <ng-container
@@ -182,7 +186,10 @@
                     </p-accordion-panel>
 
                     @for (role of contactRoles(); track role) {
-                      <p-accordion-panel [value]="'contact-' + role">
+                      <p-accordion-panel
+                        [value]="'contact-' + role"
+                        [attr.data-testid]="'accordion-panel-contact-' + role"
+                      >
                         <p-accordion-header class="text-xl!">{{
                           role + '' | translate
                         }}</p-accordion-header>
@@ -197,7 +204,10 @@
                       </p-accordion-panel>
                     }
                   } @else {
-                    <p-accordion-panel [value]="section.label">
+                    <p-accordion-panel
+                      [value]="section.label"
+                      [attr.data-testid]="'accordion-panel-' + section.label"
+                    >
                       <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
                       <p-accordion-content>
                         <ng-container

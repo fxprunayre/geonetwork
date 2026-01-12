@@ -10,7 +10,15 @@ const checkResultItem = (hit: any, layout: 'grid' | 'list') => {
   cy.get('app-record-field-title span')
     .should('contain.text', hit._source.resourceTitleObject.default)
     .should('have.attr', 'title', hit._source.resourceTitleObject.default);
-  cy.get('app-record-field-type').should('contain.text', hit._source.resourceType);
+  const resourceTypeTranslations = {
+    dataset: 'Dataset',
+    series: 'Series',
+    service: 'Service',
+  };
+  cy.get('app-record-field-type').should(
+    'contain.text',
+    resourceTypeTranslations[hit._source.resourceType as keyof typeof resourceTypeTranslations],
+  );
 
   cy.get('app-record-distribution-badges').as('distributionBadges').should('exist');
   cy.get('@distributionBadges').find('p-button').as('distributionButtons').should('have.length', 2);

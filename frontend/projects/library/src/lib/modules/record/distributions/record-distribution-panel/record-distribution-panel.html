@@ -1,7 +1,7 @@
 @if (distributionConfig()) {
   <p-accordion [value]="activePanels()" [multiple]="true">
     @for (section of linksBySections() | keyvalue; track $index) {
-      <p-accordion-panel [value]="$index">
+      <p-accordion-panel [value]="$index" [attr.data-testid]="'distribution-panel-' + section.key">
         <p-accordion-header>
           <div class="flex items-center gap-2">
             <ng-icon [svg]="iconsByType[section.key]" />
@@ -31,7 +31,10 @@
                         >
                           {{ label }}
                         </a>
-                        @if (link.descriptionObject?.['default']) {
+                        @if (
+                          link.descriptionObject?.['default'] &&
+                          link.descriptionObject?.['default'] !== label
+                        ) {
                           <p class="text-sm text-surface-600 dark:text-surface-400 mt-1">
                             {{ link.descriptionObject?.['default'] }}
                           </p>

@@ -79,7 +79,12 @@ export class RecordFieldCoverageTemporal extends RecordFieldBase {
 
     if (dateInfo.indeterminatePosition) {
       if (dateInfo.indeterminatePosition === 'now') {
-        return { label: 'Now', isYearly: false, isDate: false, hasTime: false };
+        return {
+          label: this.translate.instant('now'),
+          isYearly: false,
+          isDate: false,
+          hasTime: false,
+        };
       }
       return {
         label: dateInfo.indeterminatePosition,
