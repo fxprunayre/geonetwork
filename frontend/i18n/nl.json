@@ -169,7 +169,11 @@
     "signin": "Sign in",
     "signout": "Sign out",
     "settings": "Configure",
-    "search": "Search"
+    "search": "Search",
+    "my": {
+      "record": "My records",
+      "favorites": "My favorites"
+    }
   },
   "citation": {
     "title": "Cite dataset",

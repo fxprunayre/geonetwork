@@ -164,12 +164,16 @@
   },
   "menu": {
     "home": "Accueil",
-    "map": "Carte",
+    "map": "Visualiser",
     "addrecord": "Ajouter",
     "signin": "Se connecter",
     "signout": "Se déconnecter",
     "settings": "Configurer",
-    "search": "Recherche"
+    "search": "Rechercher",
+    "my": {
+      "record": "Mes données",
+      "favorites": "Mes favoris"
+    }
   },
   "citation": {
     "title": "Citer l'ensemble de données",
