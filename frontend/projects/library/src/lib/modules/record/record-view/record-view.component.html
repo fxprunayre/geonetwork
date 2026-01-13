@@ -1,8 +1,34 @@
 <ng-template #defaultBackButton></ng-template>
 
-@if (recordStatus(); as status) {
-  <p>{{ status }}</p>
+@if (recordResource.isLoading()) {
+  <p-card>
+    <ng-template pTemplate="header">
+      <div class="p-4 bg-surface-50 flex flex-col">
+        <div class="grow mb-4">
+          <p-skeleton width="100%" height="2rem" />
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="p-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-1 items-center">
+          <p-skeleton width="8rem" height="8rem" class="rounded" />
+        </div>
+        <div class="md:col-span-2 flex gap-4 flex-col">
+          <p-skeleton width="100%" height="1rem" />
+          <p-skeleton width="100%" height="1rem" />
+          <p-skeleton width="80%" height="1rem" />
+        </div>
+      </div>
+    </div>
+  </p-card>
 }
+
+@if (recordStatus(); as status) {
+  <p-message severity="warn">{{ status | translate: { uuid: uuid() } }}</p-message>
+}
+
 @if (record(); as record) {
   <ng-container *ngTemplateOutlet="backButtonTplRef() || defaultBackButton"></ng-container>
   <app-record-view-header [record]="record" [vocabularies]="mainVocabularies()" />
@@ -122,14 +148,7 @@
   <ng-template #relatedContent>
     <app-associated-panel
       [record]="record"
-      [exclude]="[
-        RelatedItemType.Sources,
-        RelatedItemType.Hassources,
-        RelatedItemType.Services,
-        RelatedItemType.Datasets,
-        RelatedItemType.Children,
-        RelatedItemType.Parent,
-      ]"
+      [exclude]="excludedTypesForAssociatedTab"
       (onRecordClick)="handleRecordClick($event)"
     />
   </ng-template>
@@ -144,7 +163,11 @@
       @if (record.info?.hasDatasource) {
         <p-tab value="explore">{{ 'record.view.section.explore' | translate }}</p-tab>
       }
-      <p-tab value="publications">{{ 'record.view.section.publications' | translate }}</p-tab>
+      @if (recordHasAssociatedRecords()) {
+        <p-tab value="associatedResources">{{
+          'record.view.section.associatedResources' | translate
+        }}</p-tab>
+      }
       <p-tab value="citation">{{ 'record.view.section.citation' | translate }}</p-tab>
       <p-tab value="discussions">{{ 'record.view.section.discussions' | translate }}</p-tab>
     </p-tablist>
@@ -170,9 +193,13 @@
                 @let sectionLabel =
                   'record.view.section.' + section.label
                     | translate: { resourceType: record.resourceType };
+
                 @if (section.hidden !== true) {
                   @if (section.label === 'lineage') {
-                    <p-accordion-panel [value]="section.label">
+                    <p-accordion-panel
+                      [value]="section.label"
+                      [attr.data-testid]="'accordion-panel-' + section.label"
+                    >
                       <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
                       <p-accordion-content>
                         <ng-container
@@ -182,7 +209,10 @@
                     </p-accordion-panel>
 
                     @for (role of contactRoles(); track role) {
-                      <p-accordion-panel [value]="'contact-' + role">
+                      <p-accordion-panel
+                        [value]="'contact-' + role"
+                        [attr.data-testid]="'accordion-panel-contact-' + role"
+                      >
                         <p-accordion-header class="text-xl!">{{
                           role + '' | translate
                         }}</p-accordion-header>
@@ -197,7 +227,10 @@
                       </p-accordion-panel>
                     }
                   } @else {
-                    <p-accordion-panel [value]="section.label">
+                    <p-accordion-panel
+                      [value]="section.label"
+                      [attr.data-testid]="'accordion-panel-' + section.label"
+                    >
                       <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
                       <p-accordion-content>
                         <ng-container
@@ -239,11 +272,13 @@
         </p-tabpanel>
       }
 
-      <p-tabpanel value="publications">
-        <ng-container
-          *ngTemplateOutlet="relatedContent; context: { record: record }"
-        ></ng-container>
-      </p-tabpanel>
+      @if (recordHasAssociatedRecords()) {
+        <p-tabpanel value="associatedResources">
+          <ng-container
+            *ngTemplateOutlet="relatedContent; context: { record: record }"
+          ></ng-container>
+        </p-tabpanel>
+      }
 
       <p-tabpanel value="citation">
         <div class="flex flex-col lg:flex-row lg:gap-4">

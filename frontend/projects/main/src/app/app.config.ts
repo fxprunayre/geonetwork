@@ -6,7 +6,11 @@ import {
   provideZoneChangeDetection,
   signal,
 } from '@angular/core';
-import { provideRouter, withDisabledInitialNavigation } from '@angular/router';
+import {
+  provideRouter,
+  withDisabledInitialNavigation,
+  withInMemoryScrolling,
+} from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -98,7 +102,14 @@ export const appConfig: ApplicationConfig = {
     ]),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withDisabledInitialNavigation()),
+    provideRouter(
+      routes,
+      withDisabledInitialNavigation(),
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'enabled',
+        anchorScrolling: 'enabled',
+      }),
+    ),
     //{ provide: LocationStrategy, useClass: InMemoryLocationStrategy },
     provideAnimationsAsync(),
     provideHttpClient(),

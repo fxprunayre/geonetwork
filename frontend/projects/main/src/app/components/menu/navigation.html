@@ -1,4 +1,4 @@
-<nav class="h-full">
+<nav class="h-full" (mouseenter)="expandMenu()" (mouseleave)="collapseMenu()">
   <p-menu
     [model]="items()"
     class="h-full"
@@ -65,3 +65,5 @@
     </p-fieldset>
   </p-drawer>
 </nav>
+
+<p-toast />

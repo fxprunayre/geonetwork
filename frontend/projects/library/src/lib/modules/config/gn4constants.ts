@@ -927,7 +927,7 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
           },
           {
             filter:
-              'protocol:OGC:WFS|OGC:WCS|.*DOWNLOAD.*|DB:.*|FILE:.*|OGC API Features|OGC API Coverages',
+              'protocol:OGC:WFS|OGC:WCS|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE:.*|OGC API Features|OGC API Coverages',
             title: 'download',
           },
           { filter: 'function:legend', title: 'mapLegend' },
@@ -941,7 +941,7 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
           },
           {
             filter:
-              '-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|FILE:.*|application/vnd.ogc AND -function:legend|featureCatalogue|dataQualityReport',
+              '-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE:.*|application/vnd.ogc AND -function:legend|featureCatalogue|dataQualityReport',
             title: 'links',
           },
         ],

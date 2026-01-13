@@ -3,10 +3,11 @@ import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { Chip } from 'primeng/chip';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidChevronRight } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-record-field-type',
-  imports: [Chip, NgIcon],
+  imports: [Chip, NgIcon, TranslatePipe],
   viewProviders: [provideIcons({ faSolidChevronRight })],
   standalone: true,
   templateUrl: './record-field-type.html',

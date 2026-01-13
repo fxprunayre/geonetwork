@@ -26,6 +26,7 @@
         severity="secondary"
         [href]="'data:text/plain;charset=utf-8,' + encodeURIComponent(citationText())"
         [download]="filename()"
+        [title]="'citation.download' | translate"
       >
         <ng-icon name="faSolidDownload"></ng-icon>
       </a>

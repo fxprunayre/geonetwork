@@ -1,7 +1,7 @@
 @if (distributionConfig()) {
   <p-accordion [value]="activePanels()" [multiple]="true">
     @for (section of linksBySections() | keyvalue; track $index) {
-      <p-accordion-panel [value]="$index">
+      <p-accordion-panel [value]="$index" [attr.data-testid]="'distribution-panel-' + section.key">
         <p-accordion-header>
           <div class="flex items-center gap-2">
             <ng-icon [svg]="iconsByType[section.key]" />
@@ -22,16 +22,35 @@
                       </div>
                       <div class="flex-1 min-w-0">
                         @let label = link.nameObject?.['default'] || link.urlObject?.['default'];
-                        <a
-                          [attr.href]="link.urlObject?.['default']"
-                          title="{{ link.descriptionObject?.['default'] }}"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="font-semibold text-primary hover:underline break-all block"
-                        >
-                          {{ label }}
-                        </a>
-                        @if (link.descriptionObject?.['default']) {
+                        @let isNetworkLink =
+                          ['NETWORK:LINK', 'COPYFILE'].includes(link.protocol || '');
+
+                        @if (isNetworkLink) {
+                          <p-iftalabel>
+                            <label>{{ label }}</label>
+                            <input
+                              pInputText
+                              class="w-full"
+                              [value]="link.urlObject?.['default']"
+                              readonly
+                            />
+                          </p-iftalabel>
+                        } @else {
+                          <a
+                            [attr.href]="link.urlObject?.['default']"
+                            title="{{ link.descriptionObject?.['default'] }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="font-semibold text-primary hover:underline break-all block"
+                          >
+                            {{ label }}
+                          </a>
+                        }
+
+                        @if (
+                          link.descriptionObject?.['default'] &&
+                          link.descriptionObject?.['default'] !== label
+                        ) {
                           <p class="text-sm text-surface-600 dark:text-surface-400 mt-1">
                             {{ link.descriptionObject?.['default'] }}
                           </p>

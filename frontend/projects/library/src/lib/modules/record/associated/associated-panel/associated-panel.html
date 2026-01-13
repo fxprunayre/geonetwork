@@ -3,5 +3,6 @@
     [type]="type"
     [relations]="relations()[type]"
     (onRecordClick)="handleRecordClick($event)"
+    [attr.data-testid]="'associated-records-' + type"
   />
 }

@@ -15,6 +15,9 @@ import {
   faSolidLink,
   faSolidNetworkWired,
 } from '@ng-icons/font-awesome/solid';
+import { RECORD_ROUTE_PATH } from '../../../search/search.constant';
+import { InputText } from 'primeng/inputtext';
+import { IftaLabel } from 'primeng/iftalabel';
 
 interface Gn4MapCommand {
   url: string;
@@ -31,6 +34,8 @@ interface Gn4MapCommand {
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
+    InputText,
+    IftaLabel,
     LinkBadge,
     Card,
     NgIcon,
@@ -73,7 +78,7 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
   };
   exploreData = (link: Link) => {
     // TODO: Not sure how to link actions to routing which is app specific
-    this.router.navigate(['record', this.record().uuid, 'explore'], {
+    this.router.navigate([RECORD_ROUTE_PATH, this.record().uuid, 'explore'], {
       queryParams: { datasource: link.urlObject?.['default'] },
     });
   };
