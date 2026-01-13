@@ -4,6 +4,24 @@
       <p-card>
         <ng-template #title>
           <div class="flex flex-col items-start gap-2">
+            @if (contact.logo) {
+              <img
+                [src]="contact.logo"
+                class="w-12 h-12 rounded-full object-contain bg-surface-100 border border-surface-200"
+                alt="Logo"
+              />
+            } @else {
+              @let harvestingLogo = getHarvestingLogoUrl(contact);
+              @if (harvestingLogo) {
+                <img
+                  [src]="harvestingLogo"
+                  class="w-12 h-12 rounded-full object-contain bg-surface-100 border border-surface-200"
+                  alt="Logo"
+                  (error)="hideImage($event)"
+                />
+              }
+            }
+
             <div class="flex-1 flex flex-col gap-2">
               @if (contact.individual) {
                 <div class="font-bold text-primary-500 text-base">
@@ -25,23 +43,6 @@
                 </div>
               }
             </div>
-            @if (contact.logo) {
-              <img
-                [src]="contact.logo"
-                class="w-12 h-12 rounded-full object-contain bg-surface-100 border border-surface-200"
-                alt="Logo"
-              />
-            } @else {
-              @let harvestingLogo = getHarvestingLogoUrl(contact);
-              @if (harvestingLogo) {
-                <img
-                  [src]="harvestingLogo"
-                  class="w-12 h-12 rounded-full object-contain bg-surface-100 border border-surface-200"
-                  alt="Logo"
-                  (error)="hideImage($event)"
-                />
-              }
-            }
           </div>
         </ng-template>
         <ng-template #content>

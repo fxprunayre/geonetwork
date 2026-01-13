@@ -53,13 +53,23 @@ export class SearchService {
     const filter = queryFilter;
     const must: elasticsearch.QueryDslQueryContainer[] = [];
     if (query) {
-      must.push({
-        query_string: {
-          query: this.escapeSpecialCharacters(query),
-          default_operator: 'AND',
-          fields: ['resourceTitleObject.*^5', 'any.*', 'uuid'],
-        },
-      });
+      const elasticQueryRegexTemplate = /q\((.*)\)/;
+      const isElasticQuery = query.match(elasticQueryRegexTemplate);
+      if (isElasticQuery) {
+        must.push({
+          query_string: {
+            query: query.replace(elasticQueryRegexTemplate, '$1').trim(),
+          },
+        });
+      } else {
+        must.push({
+          query_string: {
+            query: this.escapeSpecialCharacters(query),
+            default_operator: 'AND',
+            fields: ['resourceTitleObject.*^5', 'any.*', 'uuid'],
+          },
+        });
+      }
     }
     for (const field of Object.keys(filters)) {
       const termQuery = {
@@ -134,6 +144,24 @@ export class SearchService {
           return item as IndexRecord;
         }
       });
+
+      if (key === 'siblings') {
+        const remainingSiblings: IndexRecord[] = [];
+        parsedRelated[key].forEach((record) => {
+          // properties are merged in the record in buildIndexRecord
+          const r = record as any;
+          if (r.associationType && r.initiativeType) {
+            const siblingKey = `siblings_${r.associationType}_${r.initiativeType}`;
+            if (!parsedRelated[siblingKey]) {
+              parsedRelated[siblingKey] = [];
+            }
+            parsedRelated[siblingKey].push(record);
+          } else {
+            remainingSiblings.push(record);
+          }
+        });
+        parsedRelated[key] = remainingSiblings;
+      }
     }
     return parsedRelated;
   }

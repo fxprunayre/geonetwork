@@ -3,14 +3,20 @@
 </ng-template>
 
 @if (relations().length > 0) {
-  @let label = 'record.association.' + type() | translate: { count: relations().length };
+  <ng-template #title>
+    <div class="text-2xl my-4 flex items-center gap-2">
+      @let svg = icon();
+      @if (svg) {
+        <ng-icon [svg]="svg"></ng-icon>
+      }
+      {{ label() }}
+    </div>
+  </ng-template>
 
   <ng-template #content>
     <div class="w-full has-[>section:empty]:hidden">
       @if (!isFullScreen) {
-        <div class="text-2xl mb-4">
-          {{ label }}
-        </div>
+        <ng-container *ngTemplateOutlet="title" />
       }
 
       <section [class]="styleClass()">
@@ -50,7 +56,10 @@
     }
     <ng-container *ngTemplateOutlet="content" />
   } @else {
-    <p-drawer [header]="label" [(visible)]="isFullScreen" position="full">
+    <p-drawer [(visible)]="isFullScreen" position="full">
+      <ng-template #header>
+        <ng-container *ngTemplateOutlet="title" />
+      </ng-template>
       <ng-container *ngTemplateOutlet="content" />
     </p-drawer>
   }

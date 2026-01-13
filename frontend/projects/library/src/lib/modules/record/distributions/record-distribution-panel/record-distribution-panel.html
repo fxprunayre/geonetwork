@@ -22,15 +22,31 @@
                       </div>
                       <div class="flex-1 min-w-0">
                         @let label = link.nameObject?.['default'] || link.urlObject?.['default'];
-                        <a
-                          [attr.href]="link.urlObject?.['default']"
-                          title="{{ link.descriptionObject?.['default'] }}"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="font-semibold text-primary hover:underline break-all block"
-                        >
-                          {{ label }}
-                        </a>
+                        @let isNetworkLink =
+                          ['NETWORK:LINK', 'COPYFILE'].includes(link.protocol || '');
+
+                        @if (isNetworkLink) {
+                          <p-iftalabel>
+                            <label>{{ label }}</label>
+                            <input
+                              pInputText
+                              class="w-full"
+                              [value]="link.urlObject?.['default']"
+                              readonly
+                            />
+                          </p-iftalabel>
+                        } @else {
+                          <a
+                            [attr.href]="link.urlObject?.['default']"
+                            title="{{ link.descriptionObject?.['default'] }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="font-semibold text-primary hover:underline break-all block"
+                          >
+                            {{ label }}
+                          </a>
+                        }
+
                         @if (
                           link.descriptionObject?.['default'] &&
                           link.descriptionObject?.['default'] !== label

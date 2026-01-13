@@ -16,6 +16,8 @@ import {
   faSolidNetworkWired,
 } from '@ng-icons/font-awesome/solid';
 import { RECORD_ROUTE_PATH } from '../../../search/search.constant';
+import { InputText } from 'primeng/inputtext';
+import { IftaLabel } from 'primeng/iftalabel';
 
 interface Gn4MapCommand {
   url: string;
@@ -32,6 +34,8 @@ interface Gn4MapCommand {
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
+    InputText,
+    IftaLabel,
     LinkBadge,
     Card,
     NgIcon,

@@ -3,15 +3,13 @@ import {
   AfterViewInit,
   Component,
   computed,
-  effect,
   ElementRef,
   inject,
   input,
-  OnInit,
   output,
-  signal,
   TemplateRef,
 } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
@@ -27,12 +25,16 @@ import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { MarkdownPipe } from 'ngx-markdown';
 import { AccordionModule } from 'primeng/accordion';
 import { Chip } from 'primeng/chip';
+import { Message } from 'primeng/message';
+import { Skeleton } from 'primeng/skeleton';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
-import { filter } from 'rxjs';
+import { filter, map, of } from 'rxjs';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
+import { RECORD_ROUTE_PATH } from '../../search/search.constant';
 import { SearchService } from '../../search/search.service';
 import { AssociatedPanel } from '../associated/associated-panel/associated-panel';
 import { CitationComponent } from '../citation-component/citation.component';
@@ -52,8 +54,7 @@ import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-v
 import { RecordField } from '../record-field/record-field';
 import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
 import { RecordViewHeader } from '../record-view-header/record-view-header';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { RECORD_ROUTE_PATH } from '../../search/search.constant';
+import { Card } from 'primeng/card';
 
 export const DEFAULT_TAB = 'about';
 
@@ -71,12 +72,14 @@ export const DEFAULT_TAB = 'about';
     RecordFieldConstraints,
     RecordDistributionPanel,
     RecordViewHeader,
+    Card,
     TranslatePipe,
     Tabs,
     Tab,
     TabPanels,
     TabPanel,
     TabList,
+    Message,
     FeedbackPanel,
     RecordFieldVocabulary,
     RecordFieldType,
@@ -96,6 +99,7 @@ export const DEFAULT_TAB = 'about';
     RecordFieldCoverageTemporal,
     RecordFieldCoverageVertical,
     RecordDistributionFormat,
+    Skeleton,
   ],
   viewProviders: [
     provideIcons({
@@ -113,8 +117,46 @@ export class RecordViewComponent implements AfterViewInit {
   layout = input<'fieldset' | 'panel' | ''>('');
   backButtonTplRef = input<TemplateRef<unknown>>();
 
-  record = signal<IndexRecord | undefined>(undefined);
-  recordStatus = signal<string | undefined>(undefined);
+  searchService = inject(SearchService);
+  scroller = inject(ViewportScroller);
+  route = inject(ActivatedRoute);
+
+  recordResource = rxResource({
+    params: () => ({ uuid: this.uuid() }),
+    stream: ({ params }) => {
+      const uuid = params.uuid;
+      if (!uuid) return of(undefined);
+      return this.searchService
+        .getById(uuid, [
+          RelatedItemType.Parent,
+          RelatedItemType.Children,
+          RelatedItemType.Services,
+          RelatedItemType.Sources,
+          RelatedItemType.Hassources,
+          RelatedItemType.BrothersAndSisters,
+          RelatedItemType.Datasets,
+          RelatedItemType.Siblings,
+          RelatedItemType.Fcats,
+          RelatedItemType.Hasfeaturecats,
+          RelatedItemType.Associated,
+        ])
+        .pipe(
+          map((result) => {
+            if (result == null) {
+              throw new Error('record.view.notFoundOrNotShared');
+            }
+            return result;
+          }),
+        );
+    },
+  });
+
+  record = computed(() => this.recordResource.value());
+  recordStatus = computed(
+    () =>
+      (this.recordResource.error() as Error)?.message ??
+      (this.recordResource.error() ? 'record.view.notFoundOrNotShared' : undefined),
+  );
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   el = inject(ElementRef);
@@ -128,6 +170,27 @@ export class RecordViewComponent implements AfterViewInit {
     const contacts = this.record()?.['contactForResource'] || [];
     const roles = new Set(contacts.map((c: any) => c.role).filter((r: any) => !!r));
     return Array.from(roles);
+  });
+
+  excludedTypesForAssociatedTab: RelatedItemType[] = [
+    RelatedItemType.Sources,
+    RelatedItemType.Hassources,
+  ];
+
+  recordHasAssociatedRecords = computed(() => {
+    const record = this.record();
+    if (!record) {
+      return false;
+    }
+    const related = record.related;
+    if (!related) {
+      return false;
+    }
+
+    const nonExcludedTypes = Object.keys(related)
+      .filter((type) => related[type].length > 0)
+      .filter((type) => !this.excludedTypesForAssociatedTab.includes(type as RelatedItemType));
+    return nonExcludedTypes.length > 0;
   });
 
   expandedSections = computed(() => {
@@ -146,38 +209,6 @@ export class RecordViewComponent implements AfterViewInit {
   });
 
   onRecordClick = output<string>();
-
-  searchService = inject(SearchService);
-  scroller = inject(ViewportScroller);
-  route = inject(ActivatedRoute);
-
-  constructor() {
-    effect(() => {
-      const uuid = this.uuid();
-      if (!uuid) {
-        this.record.set(undefined);
-        return;
-      }
-      this.searchService
-        .getById(uuid, [
-          RelatedItemType.Parent,
-          RelatedItemType.Children,
-          RelatedItemType.Services,
-          RelatedItemType.Sources,
-          RelatedItemType.Hassources,
-          RelatedItemType.BrothersAndSisters,
-          RelatedItemType.Datasets,
-          RelatedItemType.Siblings,
-          RelatedItemType.Fcats,
-          RelatedItemType.Hasfeaturecats,
-          RelatedItemType.Associated,
-        ])
-        .subscribe({
-          next: (result) => this.record.set(result ?? undefined),
-          error: () => this.recordStatus.set('not-found-or-not-shared-with-you'),
-        });
-    });
-  }
 
   handleRecordClick(uuid: string) {
     this.onRecordClick.emit(uuid);
