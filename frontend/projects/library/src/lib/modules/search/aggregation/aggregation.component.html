@@ -21,6 +21,14 @@
       </div>
     }
   }
+  @case ('tree') {
+    <app-aggregation-tree
+      [scope]="scope()"
+      [keyName]="keyName()"
+      [buckets]="buckets()"
+      (onSelected)="filter($event, true)"
+    ></app-aggregation-tree>
+  }
   @case ('button') {
     @for (bucket of buckets(); track bucket.key) {
       <app-aggregation-bucket

@@ -1307,10 +1307,11 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
               order: { _key: 'asc' },
             },
             meta: {
-              collapsed: true,
+              collapsed: false,
               orderByTranslation: true,
               translateOnLoad: true,
-              // 'treeKeySeparator': '^'
+              layout: 'tree',
+              refreshPolicy: 'none',
             },
           },
           'th_httpinspireeceuropaeutheme-theme_tree.key': {

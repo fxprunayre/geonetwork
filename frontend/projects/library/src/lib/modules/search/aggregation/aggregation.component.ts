@@ -16,6 +16,7 @@ import { ButtonModule } from 'primeng/button';
 import { SearchBase } from '../search-base/search-base';
 import { FormsModule } from '@angular/forms';
 import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
+import { AggregationTree } from '../aggregation-tree/aggregation-tree';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationLayout } from 'gn-api-client';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,7 +33,15 @@ export type AggregationBucketType = {
 @Component({
   selector: 'app-aggregation',
   standalone: true,
-  imports: [Select, ButtonModule, FormsModule, AggregationBucket, MultiSelect, NgTemplateOutlet],
+  imports: [
+    Select,
+    ButtonModule,
+    FormsModule,
+    AggregationBucket,
+    AggregationTree,
+    MultiSelect,
+    NgTemplateOutlet,
+  ],
   providers: [AggregationTranslatePipe, DecimalPipe],
   templateUrl: './aggregation.component.html',
 })
@@ -129,7 +138,7 @@ export class Aggregation extends SearchBase {
     this.search.clearFilter(this.keyName());
   }
 
-  filter(event: SearchFilterChange) {
+  filter(event: SearchFilterChange, clear: boolean = false) {
     if (this.onSelected.observed) {
       this.onSelected.emit(event);
       return;
@@ -138,7 +147,7 @@ export class Aggregation extends SearchBase {
     if (event.values.length === 0) {
       this.search.clearFilter(this.keyName());
     } else if (event.add) {
-      this.search.addFilter(this.keyName(), event.values[0]);
+      this.search.addFilter(this.keyName(), event.values, true);
     } else if (!event.add) {
       this.search.removeFilter(this.keyName(), event.values[0]);
     }
