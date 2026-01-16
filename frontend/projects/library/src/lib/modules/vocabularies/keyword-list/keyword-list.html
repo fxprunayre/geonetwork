@@ -33,6 +33,10 @@
         } @else {
           {{ keyword.default }}
         }
+        <app-search-link
+          [value]="keyword.default"
+          [title]="'vocabulary.searchByKeywordHelp' | translate"
+        />
       </div>
 
       <div class="mt-2 min-h-5">
@@ -42,14 +46,6 @@
           {{ keywordDefinitionFetcher.value() || 'vocabulary.noDefinitionAvailable' | translate }}
         }
       </div>
-
-      <app-search-link
-        [value]="keyword.default"
-        [title]="'vocabulary.searchByKeywordHelp' | translate"
-        class="mt-2 block"
-      >
-        {{ 'vocabulary.searchByKeyword' | translate }}
-      </app-search-link>
     </div>
   }
 </p-popover>
