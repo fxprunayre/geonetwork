@@ -75,6 +75,26 @@ npm run e2e:ci
 ```
 
 
+### Configuring catalogue API endpoint
+
+In [`proxy.config.js`](proxy.config.js), update or change API endpoint eg.
+
+```js
+  '/catalogue': {
+    target: 'https://demo.geocat.live',
+    secure: true,
+    logLevel: 'debug',
+    changeOrigin: true,
+  }
+```
+
+If not using `geonetwork` base path, also update the [`environments.ts`](projects/library/src/environments/environment.ts) eg.
+
+```js
+export const environment = {
+  production: false,
+  geonetworkApiUrl: '/catalogue',
+```
 
 
 ## GeoNetwork API
