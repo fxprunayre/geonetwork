@@ -49,11 +49,11 @@ import { DatePipe } from '@angular/common';
 export class RecordFieldDates extends RecordFieldBase implements OnInit {
   currentLocale = '';
 
+  translateService = inject(TranslateService);
+
   ngOnInit(): void {
     this.currentLocale = this.translateService.getCurrentLang();
   }
-
-  translateService = inject(TranslateService);
 
   icons: { [key: string]: any } = {
     creation: faLightbulb,

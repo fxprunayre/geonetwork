@@ -2,7 +2,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
     @for (event of events(); track $index) {
       <div class="mb-2">
-        <span class="block text-[#3a75ab]">{{ event.label }}</span>
+        <span class="block text-primary-400">{{ event.label }}</span>
         {{ event.date | date: 'longDate' : undefined : currentLocale }}
       </div>
     }

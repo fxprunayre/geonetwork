@@ -1,5 +1,5 @@
 <p-card>
-  <ng-template pTemplate="header">
+  <ng-template #header>
     <div class="p-4 bg-surface-50 flex flex-col">
       <div class="grow mb-4">
         <h1 class="text-2xl font-bold">
@@ -8,8 +8,6 @@
       </div>
       <div class="flex flex-row gap-3 items-center">
         <app-record-field-type [record]="record()" [withSpatialType]="true" class="text-xl grow" />
-
-        <app-record-field-doi [record]="record()" />
 
         <app-record-distribution-badges
           [record]="record()"
@@ -41,4 +39,12 @@
       </div>
     </div>
   </div>
+
+  <ng-template #footer>
+    <div class="flex flex-row gap-3 items-center border-t-2 border-surface-50 p-4">
+      <app-record-field-resource-last-update [record]="record()" class="grow" />
+
+      <app-record-field-doi [record]="record()" />
+    </div>
+  </ng-template>
 </p-card>
