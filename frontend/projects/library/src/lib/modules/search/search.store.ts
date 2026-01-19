@@ -277,16 +277,23 @@ export const SearchStore = signalStore(
         },
         isFilterActive(field: string, value: string | number) {
           const filter = store.filters()[field];
-          return filter?.values.includes(value);
+          return filter?.values.includes(value) || false;
         },
-        addFilter(field: string, value: string | number): void {
-          const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
+        addFilter(
+          field: string,
+          value: string | number | (string | number)[],
+          clear: boolean = false,
+        ): void {
+          const currentFilters = clear ? {} : JSON.parse(JSON.stringify(store.filters())) || {};
           let targetFilter = currentFilters[field];
 
+          const valuesToAdd = Array.isArray(value) ? value : [value];
+
           if (targetFilter) {
-            targetFilter.values.push(value);
+            targetFilter.values.push(...valuesToAdd);
+            targetFilter.values = [...new Set(targetFilter.values)];
           } else {
-            currentFilters[field] = { field: field, values: [value] };
+            currentFilters[field] = { field: field, values: valuesToAdd };
           }
 
           patchState(store, {
