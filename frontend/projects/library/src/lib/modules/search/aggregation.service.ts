@@ -78,7 +78,7 @@ export class AggregationService {
   ) {
     const currentLang = this.translateService.getCurrentLang();
 
-    if (aggregation.meta && aggregation.meta['translateOnLoad']) {
+    if (aggregation && aggregation.meta && aggregation.meta['translateOnLoad']) {
       const thesaurus =
         aggregation.meta['thesaurus'] ||
         this.getAggregationConfig(key, aggregationsConfig)?.['terms']?.field?.replace(

@@ -1,14 +1,7 @@
-import { computed, inject, Injector } from '@angular/core';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  pipe,
-  switchMap,
-  tap,
-  map,
-  startWith,
-} from 'rxjs';
+import { computed, inject } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
+import { tapResponse } from '@ngrx/operators';
 import {
   patchState,
   signalStore,
@@ -19,24 +12,25 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { tapResponse } from '@ngrx/operators';
-import { SearchService } from './search.service';
-import { elasticsearch } from 'gn-api-client';
+import {
+  AggregationsAggregationContainer,
+  AggregationsStringTermsAggregate,
+  elasticsearch,
+} from 'gn-api-client';
+import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
+import { DEFAULT_LANGUAGE } from '../config/config.loader';
 import { SearchAppLayout } from '../config/model/gnConfig';
+import { SearchRouteService } from './search-route.service';
+import { SearchService } from './search.service';
 import {
   DEFAULT_PAGE_SIZE,
   DEFAULT_SORT,
   DEFAULT_SORT_OPTIONS,
-  SearchFilter,
   SearchFilterParameters,
   SearchRequestPageParameters,
   SearchRequestParameters,
   SearchState,
 } from './search.store.model';
-import { SearchRouteService } from './search-route.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { DEFAULT_LANGUAGE } from '../config/config.loader';
 
 export const initialState: SearchState = {
   id: 'default',
@@ -362,6 +356,40 @@ export const SearchStore = signalStore(
           patchState(store, {
             isAppendMode: true,
             currentPage: store.currentPage() + 1,
+          });
+        },
+        hasMoreTerms(field: string): boolean {
+          const aggregationValues = store.aggregations()[field];
+
+          if (!aggregationValues) {
+            return false;
+          }
+
+          return (aggregationValues as AggregationsStringTermsAggregate).sum_other_doc_count! > 0;
+        },
+        loadMoreTerms(field: string, size: number = 10) {
+          let aggregationConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as (
+            | string
+            | Record<string, AggregationsAggregationContainer>
+          )[];
+          const aggregation = aggregationConfig.find((agg) => {
+            if (typeof agg === 'string') {
+              return agg === field;
+            } else {
+              return Object.keys(agg)[0] === field;
+            }
+          }) as Record<string, AggregationsAggregationContainer>;
+
+          if (!aggregation || !aggregation[field].terms) {
+            return;
+          }
+
+          const aggregationValues = store.aggregations()[field];
+          aggregation[field].terms.size = (aggregation[field].terms.size || 10) + size;
+          // Trigger a search
+          // TODO: Could only call search service to get only this new aggregation values
+          patchState(store, {
+            aggregationsConfig: aggregationConfig,
           });
         },
         setPage(currentPage: number, pageSize: number) {

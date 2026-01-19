@@ -110,3 +110,13 @@
     </p-select>
   }
 }
+
+@if (search.hasMoreTerms(keyName())) {
+  <div class="mt-4 text-center">
+    <p-button
+      variant="text"
+      (click)="search.loadMoreTerms(keyName(), 10)"
+      [label]="'search.aggregations.more' | translate"
+    ></p-button>
+  </div>
+}
