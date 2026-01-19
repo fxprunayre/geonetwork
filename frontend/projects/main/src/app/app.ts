@@ -3,6 +3,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {
   APPLICATION_CONFIGURATION,
+  DEFAULT_LANGUAGE,
   SearchApp,
   SearchContextDirective,
   SearchService,
@@ -24,6 +25,7 @@ import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
 export class App extends PrimeShadowdomstyleComponent implements OnInit {
   private translate = inject(TranslateService);
   private router = inject(Router);
+  private searchService = inject(SearchService);
 
   protected readonly title = signal('main');
 
@@ -33,9 +35,14 @@ export class App extends PrimeShadowdomstyleComponent implements OnInit {
   searchPageSize =
     inject(APPLICATION_CONFIGURATION)().config?.apps.search?.hitsPerPageOptions[0] || 10;
 
+  language = signal<string | undefined>(DEFAULT_LANGUAGE);
+
   constructor() {
     super();
     this.translate.addLangs(['en']);
+    this.translate.onLangChange.subscribe((event) => {
+      this.searchService.getSearch('main').setLanguage(event.lang);
+    });
   }
 
   override ngOnInit() {

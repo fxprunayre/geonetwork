@@ -3,6 +3,7 @@
   appSearchContext="home"
   [aggregations]="homeAggregationConfig"
   [filter]="[{ query_string: { query: '+isTemplate:n' } }]"
+  [language]="language()"
 >
   <div class="relative mx-auto max-w-screen-xl w-full px-5 py-12 text-center md:text-left">
     <h1

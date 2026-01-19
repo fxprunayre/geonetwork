@@ -13,6 +13,7 @@
     [filter]="[{ query_string: { query: '+isTemplate:n' } }]"
     [sort]="searchConfig.sort"
     [currentSort]="searchConfig.currentSort"
+    [language]="language()"
   >
     <router-outlet></router-outlet>
     <p-scroll-top target="parent" />

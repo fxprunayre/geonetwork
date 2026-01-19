@@ -1,25 +1,23 @@
+import { DecimalPipe } from '@angular/common';
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   EventEmitter,
   inject,
   input,
   Output,
   signal,
 } from '@angular/core';
-import { Tree } from 'primeng/tree';
-import { AggregationBucketType } from '../aggregation/aggregation.component';
-import { TreeNode } from 'primeng/api';
-import { SearchFilterChange } from '../search.store.model';
-import { SearchBase } from '../search-base/search-base';
-import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
-import { TranslateService } from '@ngx-translate/core';
-import { DecimalPipe } from '@angular/common';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { TranslateService } from '@ngx-translate/core';
+import { TreeNode } from 'primeng/api';
+import { Tree } from 'primeng/tree';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
+import { AggregationBucketType } from '../aggregation/aggregation.component';
+import { SearchBase } from '../search-base/search-base';
+import { SearchFilterChange } from '../search.store.model';
 
 @Component({
   selector: 'app-aggregation-tree',
