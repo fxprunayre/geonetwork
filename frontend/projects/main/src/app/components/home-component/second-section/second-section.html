@@ -6,12 +6,17 @@
       {{ 'home.discover' | translate }}
     </h2>
 
-    <app-aggregation
-      scope="home"
-      keyName="th_sextant-theme_tree.key"
-      displayType="card"
-      class="my-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
-      (onSelected)="setRouteForAggregation($event)"
-    ></app-aggregation>
+    @for (aggregation of aggregations(); track $index) {
+      <h3 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
+        {{ 'search.aggregations.' + aggregation | translate }}
+      </h3>
+      <app-aggregation
+        scope="home"
+        [keyName]="aggregation"
+        displayType="card"
+        class="my-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+        (onSelected)="setRouteForAggregation($event)"
+      ></app-aggregation>
+    }
   </div>
 </section>

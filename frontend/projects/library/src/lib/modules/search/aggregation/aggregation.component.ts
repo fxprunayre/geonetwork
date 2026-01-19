@@ -23,6 +23,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SearchFilterChange } from '../search.store.model';
 import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
+import { AggregationService } from '../aggregation.service';
 
 export type AggregationBucketType = {
   key: string | number;
@@ -55,6 +56,7 @@ export class Aggregation extends SearchBase {
   DISPLAY_FILTER_THRESHOLD = 10;
 
   translateService = inject(TranslateService);
+  aggregationService = inject(AggregationService);
   aggregationTranslatePipe = inject(AggregationTranslatePipe);
   decimalPipe = inject(DecimalPipe);
   elementRef = inject(ElementRef);
@@ -67,6 +69,11 @@ export class Aggregation extends SearchBase {
     effect(() => {
       this.selectedDropdownOptions.set(
         this.buckets().filter((bucket) => this.search.isFilterActive(this.keyName(), bucket.key)),
+      );
+      this.aggregationService.loadAggregationTranslation(
+        this.keyName(),
+        this.search.aggregations()[this.keyName()],
+        this.search.aggregationsConfig(),
       );
     });
   }

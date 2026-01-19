@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   inject,
+  signal,
 } from '@angular/core';
 import {
   SearchContextDirective,
@@ -14,9 +15,11 @@ import {
   SearchStoreType,
   SearchWelcomeTextPipe,
   SEARCH_ROUTE_PATH,
+  DEFAULT_LANGUAGE,
 } from 'gn-library';
 import { Router } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'first-section',
@@ -31,6 +34,10 @@ export class FirstSection implements AfterViewInit {
   cdr = inject(ChangeDetectorRef);
   searchRouteService = inject(SearchRouteService);
   searchService = inject(SearchService);
+  translate = inject(TranslateService);
+
+  language = signal<string | undefined>(DEFAULT_LANGUAGE);
+
   search: SearchStoreType | undefined = undefined;
 
   homeAggregationConfig = [
@@ -41,6 +48,7 @@ export class FirstSection implements AfterViewInit {
           size: 8,
         },
         meta: {
+          layout: 'card',
           decorator: {
             type: 'icon',
             prefix: 'text-6xl p-6',
@@ -68,6 +76,7 @@ export class FirstSection implements AfterViewInit {
         meta: {
           orderByTranslation: true,
           translateOnLoad: true,
+          layout: 'card',
           decorator: {
             type: 'img',
             map: {
@@ -95,8 +104,67 @@ export class FirstSection implements AfterViewInit {
           },
         },
       },
+      'th_simm-reglementaire_tree.key': {
+        terms: {
+          field: 'th_simm-reglementaire_tree.key',
+          size: 10,
+        },
+        meta: {
+          thesaurus: 'simm.reglementaire',
+          translateOnLoad: true,
+          layout: 'card',
+        },
+      },
+      'th_dcsmm-area_tree.key': {
+        terms: {
+          field: 'th_dcsmm-area_tree.key',
+          size: 30,
+        },
+        meta: {
+          thesaurus: 'dcsmm.area',
+          translateOnLoad: true,
+          layout: 'card',
+        },
+      },
+      'th_dcsmm-descripteur_tree.key': {
+        terms: {
+          field: 'th_dcsmm-descripteur_tree.key',
+          size: 30,
+        },
+        meta: {
+          translateOnLoad: true,
+          layout: 'card',
+        },
+      },
+      'th_odatis_centre_donnees_tree.key': {
+        terms: {
+          field: 'th_odatis_centre_donnees_tree.key',
+          size: 30,
+        },
+        meta: {
+          translateOnLoad: true,
+          layout: 'card',
+        },
+      },
+      'th_NVS-OD1_tree.key': {
+        terms: {
+          field: 'th_NVS-OD1_tree.key',
+          size: 30,
+        },
+        meta: {
+          thesaurus: 'NVS.OD1',
+          translateOnLoad: true,
+          layout: 'card',
+        },
+      },
     },
   ];
+
+  constructor() {
+    this.translate.onLangChange.subscribe((event) => {
+      this.language.set(event.lang);
+    });
+  }
 
   ngAfterViewInit() {
     this.search = this.searchService.getSearch('home');

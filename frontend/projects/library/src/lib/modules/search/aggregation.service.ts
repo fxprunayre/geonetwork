@@ -66,64 +66,73 @@ export class AggregationService {
     aggregations: Record<string, elasticsearch.AggregationsAggregate>,
     aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
   ) {
-    const currentLang = this.translateService.getCurrentLang();
     for (const [key, aggregation] of Object.entries(aggregations)) {
-      if (aggregation.meta && aggregation.meta['translateOnLoad']) {
-        const thesaurus =
-          aggregation.meta['thesaurus'] ||
-          this.getAggregationConfig(key, aggregationsConfig)?.['terms']?.field?.replace(
-            /th_(.*)_tree.*/,
-            '$1',
-          );
-        if (!thesaurus) {
-          continue;
-        }
+      this.loadAggregationTranslation(key, aggregation, aggregationsConfig);
+    }
+  }
 
-        const buckets = aggregation.buckets;
-        if (!Array.isArray(buckets) || buckets.length === 0) {
-          continue;
-        }
+  loadAggregationTranslation(
+    key: string,
+    aggregation: elasticsearch.AggregationsAggregate,
+    aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
+  ) {
+    const currentLang = this.translateService.getCurrentLang();
 
-        const bucketKeySet = new Set<string>();
-        for (const bucket of buckets) {
-          const rawKey = String(bucket.key ?? '');
-          for (const part of rawKey.split('^')) {
-            if (!this.alreadyLoadedTranslations.has(`${currentLang}-${part}`)) {
-              bucketKeySet.add(part);
-            }
+    if (aggregation.meta && aggregation.meta['translateOnLoad']) {
+      const thesaurus =
+        aggregation.meta['thesaurus'] ||
+        this.getAggregationConfig(key, aggregationsConfig)?.['terms']?.field?.replace(
+          /th_(.*)_tree.*/,
+          '$1',
+        );
+      if (!thesaurus) {
+        return;
+      }
+
+      const buckets = aggregation.buckets;
+      if (!Array.isArray(buckets) || buckets.length === 0) {
+        return;
+      }
+
+      const bucketKeySet = new Set<string>();
+      for (const bucket of buckets) {
+        const rawKey = String(bucket.key ?? '');
+        for (const part of rawKey.split('^')) {
+          if (!this.alreadyLoadedTranslations.has(`${currentLang}-${part}`)) {
+            bucketKeySet.add(part);
           }
         }
+      }
 
-        if (bucketKeySet.size === 0) {
-          continue;
-        }
+      if (bucketKeySet.size === 0) {
+        return;
+      }
 
-        // TODO: OpenApi is not using inBody, so passing large number of ids may hit URL length limits.
-        // TODO: Modify OpenApi spec to use POST with body for this endpoint.
-        // Loop on batches of 50 ids
-        const idsArray = Array.from(bucketKeySet);
-        const BATCH_SIZE = 60;
+      // TODO: OpenApi is not using inBody, so passing large number of ids may hit URL length limits.
+      // TODO: Modify OpenApi spec to use POST with body for this endpoint.
+      // Loop on batches of 50 ids
+      const idsArray = Array.from(bucketKeySet);
+      const BATCH_SIZE = 60;
 
-        for (let i = 0; i < idsArray.length; i += BATCH_SIZE) {
-          const batch = idsArray.slice(i, i + BATCH_SIZE);
-          // Call service per batch; type the response to avoid implicit any
-          this.registriesService
-            .getKeywordByIds(Array.from(batch).join(','), thesaurus, [currentLang])
-            .subscribe((keywords) => {
-              const newTranslations: Record<string, string> = {};
-              Object.entries(keywords).forEach(
-                ([key, value]: [string, { label?: string; definition?: string }]) => {
-                  newTranslations[key] = value.label || key;
-                  if (value.definition) {
-                    newTranslations[`${key}-definition`] = value.definition;
-                  }
-                  this.alreadyLoadedTranslations.add(`${currentLang}-${key}`);
-                },
-              );
+      for (let i = 0; i < idsArray.length; i += BATCH_SIZE) {
+        const batch = idsArray.slice(i, i + BATCH_SIZE);
+        // Call service per batch; type the response to avoid implicit any
+        this.registriesService
+          .getKeywordByIds(Array.from(batch).join(','), thesaurus, [currentLang])
+          .subscribe((keywords) => {
+            const newTranslations: Record<string, string> = {};
+            Object.entries(keywords).forEach(
+              ([key, value]: [string, { label?: string; definition?: string }]) => {
+                newTranslations[key] = value.label || key;
+                if (value.definition) {
+                  newTranslations[`${key}-definition`] = value.definition;
+                }
+                this.alreadyLoadedTranslations.add(`${currentLang}-${key}`);
+              },
+            );
 
-              this.translateService.setTranslation(currentLang, newTranslations, true);
-            });
-        }
+            this.translateService.setTranslation(currentLang, newTranslations, true);
+          });
       }
     }
   }

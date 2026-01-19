@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 import { elasticsearch, IndexRecord, Link, RelatedItemType } from 'gn-api-client';
 import { SearchService as ApiSearchService } from 'gn4-api-client';
 import { SearchRegistry, SearchStoreType } from './search.store';
@@ -7,6 +8,7 @@ import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './searc
 import { SEARCH_SOURCE } from './search.constant';
 import { AggregationService } from './aggregation.service';
 import { Datasource } from '../data/duck-db.service';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +19,9 @@ export class SearchService {
   store: SearchRegistry = {};
 
   searchService: ApiSearchService = inject(ApiSearchService);
+
+  translateService = inject(TranslateService);
+  appConfig = inject(APPLICATION_CONFIGURATION);
 
   aggregationService = inject(AggregationService);
 
@@ -166,8 +171,75 @@ export class SearchService {
     return parsedRelated;
   }
 
+  isMultiLingualField(obj: any, fieldName: string): boolean {
+    const keys = Object.keys(obj);
+    const isMultiLingualField =
+      fieldName.endsWith('Object') ||
+      fieldName.startsWith('cl_') ||
+      fieldName.startsWith('th_') ||
+      fieldName.startsWith('multilingual') ||
+      fieldName === 'keywords' ||
+      fieldName === 'allKeywords' ||
+      fieldName === 'link';
+
+    return isMultiLingualField;
+  }
+
+  /**
+   * GeoNetwork store multilingual fields as objects with language codes as keys (eg. langeng, langfre)
+   * and default property storing the default record language.
+   * This method parses those fields recursively and set the default value with the current UI language if available.
+   */
+  parseTranslations(record: IndexRecord) {
+    if (!record) return;
+
+    // Get 3 char language code from current 2 char code
+    const currentLang = this.translateService.getCurrentLang();
+    let iso3Lang = 'eng'; // Default
+    const languages = this.appConfig().config?.apps?.i18n?.languages;
+
+    // languages is { "eng": "en", "fre": "fr" }
+    if (languages) {
+      const found = Object.keys(languages).find((key) => languages[key] === currentLang);
+      if (found) {
+        iso3Lang = found;
+      }
+    }
+
+    const traverse = (obj: any, fieldName: string) => {
+      if (!obj || typeof obj !== 'object') return;
+
+      const keys = Object.keys(obj);
+
+      if (this.isMultiLingualField(obj, fieldName)) {
+        if (keys.includes('default')) {
+          const targetKey = 'lang' + iso3Lang;
+          if (obj[targetKey]) {
+            obj['default'] = obj[targetKey];
+            return;
+          }
+        }
+      }
+
+      if (Array.isArray(obj)) {
+        obj.forEach((item) => traverse(item, fieldName));
+        return;
+      }
+
+      keys.forEach((key) => {
+        const value = obj[key];
+        if (Array.isArray(value)) {
+          value.forEach((item) => traverse(item, key));
+        } else if (typeof value === 'object') {
+          traverse(value, key);
+        }
+      });
+    };
+
+    traverse(record, '');
+  }
+
   buildIndexRecord(hit: elasticsearch.SearchHit<IndexRecord>): IndexRecord {
-    // TODO: Handle multilingual fields
     const record = {
       ...hit._source,
       ...hit.properties, // Related records
@@ -182,6 +254,8 @@ export class SearchService {
         hasDatasource: this.checkHasDatasource(hit._source),
       },
     } as IndexRecord;
+
+    this.parseTranslations(record);
 
     if (hit.related) {
       record.related = this.parseRelated(hit.related);

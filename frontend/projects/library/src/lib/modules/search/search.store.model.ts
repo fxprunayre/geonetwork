@@ -38,6 +38,7 @@ export type SearchState = {
   pageSize: number;
   isAppendMode: boolean;
   layout: SearchAppLayout;
+  language: string;
 };
 
 export interface SearchFilterParameters {
@@ -46,6 +47,7 @@ export interface SearchFilterParameters {
   filters: Record<string, SearchFilter>;
   aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
   currentSort: string;
+  language?: string;
 }
 
 export interface SearchRequestPageParameters {

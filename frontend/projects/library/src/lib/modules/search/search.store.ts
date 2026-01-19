@@ -1,5 +1,14 @@
 import { computed, inject, Injector } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  pipe,
+  switchMap,
+  tap,
+  map,
+  startWith,
+} from 'rxjs';
 import {
   patchState,
   signalStore,
@@ -27,6 +36,7 @@ import {
 import { SearchRouteService } from './search-route.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { DEFAULT_LANGUAGE } from '../config/config.loader';
 
 export const initialState: SearchState = {
   id: 'default',
@@ -47,6 +57,7 @@ export const initialState: SearchState = {
   totalCount: 0,
   currentPage: 0,
   pageSize: DEFAULT_PAGE_SIZE,
+  language: DEFAULT_LANGUAGE,
   isAppendMode: false,
   layout: 'list',
 };
@@ -66,6 +77,7 @@ export const SearchStore = signalStore(
         filters: store.filters(),
         currentSort: store.currentSort(),
         aggregationsConfig: store.aggregationsConfig(),
+        language: store.language(),
       } as SearchFilterParameters;
     }),
     searchRequestPageParameters: computed(() => {
@@ -165,6 +177,7 @@ export const SearchStore = signalStore(
           filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
           sort: string[],
           currentSort: string,
+          language: string,
         ) {
           console.log(`Initializing search store with id: ${searchId}`, aggregationsConfig);
           patchState(store, {
@@ -175,6 +188,7 @@ export const SearchStore = signalStore(
             filter,
             sort: sort || DEFAULT_SORT_OPTIONS,
             currentSort: currentSort || DEFAULT_SORT,
+            language: language || DEFAULT_LANGUAGE,
           });
 
           if (store.routing()) {
@@ -186,6 +200,9 @@ export const SearchStore = signalStore(
           if (store.routing()) {
             setRouting();
           }
+        },
+        setLanguage(language: string) {
+          patchState(store, { language: language });
         },
         search: rxMethod<SearchFilterParameters>(
           pipe(

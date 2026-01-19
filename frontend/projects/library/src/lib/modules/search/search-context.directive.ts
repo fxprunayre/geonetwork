@@ -3,6 +3,7 @@ import { SearchService } from './search.service';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
 import { DEFAULT_PAGE_SIZE, DEFAULT_SORT } from './search.store.model';
 import { SearchStore } from './search.store';
+import { DEFAULT_LANGUAGE } from '../config/config.loader';
 
 @Directive({
   selector: '[appSearchContext]',
@@ -17,6 +18,7 @@ export class SearchContextDirective implements OnInit {
   size = input<number>(DEFAULT_PAGE_SIZE);
   sort = input<string[] | undefined>([DEFAULT_SORT]);
   currentSort = input<string | undefined>(DEFAULT_SORT);
+  language = input<string | undefined>(DEFAULT_LANGUAGE);
   response = model<elasticsearch.SearchResponse<IndexRecord> | null>();
 
   searchStore = inject(SearchStore);
@@ -33,6 +35,7 @@ export class SearchContextDirective implements OnInit {
       this.filter(),
       this.sort() || [DEFAULT_SORT],
       this.currentSort() || DEFAULT_SORT,
+      this.language() || DEFAULT_LANGUAGE,
     );
     this.searchService.register(this.scope(), this.searchStore);
   }
