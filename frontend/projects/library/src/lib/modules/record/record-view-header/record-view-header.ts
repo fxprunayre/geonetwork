@@ -11,6 +11,7 @@ import { RecordFieldOverviewComponent } from '../record-field-overview/record-fi
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
 import { RecordMenuComponent } from '../record-menu/record-menu.component';
+import { RecordFieldResourceLastUpdate } from '../record-field-resource-last-update/record-field-resource-last-update';
 
 @Component({
   selector: 'app-record-view-header',
@@ -18,8 +19,8 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
     AsyncPipe,
     Card,
     MarkdownPipe,
-    PrimeTemplate,
     RecordFieldOverviewComponent,
+    RecordFieldResourceLastUpdate,
     RecordFieldType,
     ShowMoreToggle,
     RecordFieldVocabulary,

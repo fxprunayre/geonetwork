@@ -93,6 +93,7 @@
         "email": "E-mail",
         "website": "Website"
       },
+      "lastUpdated": "Last updated on ",
       "coverage": {
         "overviewAltText": "Overzichtsafbeelding van georuimtelijke dekking",
         "spatial": "Ruimtelijke dekking",

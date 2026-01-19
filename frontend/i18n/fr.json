@@ -93,6 +93,7 @@
         "email": "Email",
         "website": "Site web"
       },
+      "lastUpdated": "Mis à jour le",
       "coverage": {
         "overviewAltText": "Geospatial coverage overview image",
         "spatial": "Emprise géographique",
