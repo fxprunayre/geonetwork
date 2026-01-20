@@ -25,7 +25,12 @@
     }
   }
   @case ('accordion') {
-    <p-accordion [multiple]="true" [value]="activePanels()">
+    <p-accordion
+      [multiple]="true"
+      [value]="activePanels()"
+      (onOpen)="setPanelExpanded($event)"
+      (onClose)="setPanelCollapsed($event)"
+    >
       @for (key of aggregationKeys(); track $index) {
         @if (hasBuckets(key)) {
           <p-accordion-panel [value]="key">
