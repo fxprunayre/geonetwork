@@ -9,6 +9,7 @@ build:
   script:
     - cd frontend
     - npm install
+    - npm install -g @angular/cli
     - npm run build
     - ng build main --configuration=sextant --base-href "/geonetwork5/" --output-path public
     #- ng build main --configuration=sextant --base-href "/geonetwork5/"
