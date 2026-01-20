@@ -37,6 +37,8 @@ build_gn5:
     # 5. Déplacer le build Angular dans public/ pour GitLab Pages
     - mkdir -p ../public
     - cp -r dist/main/browser/. ../public/.
+    # pour la gestion gitlab-pages / nginx
+    - cp dist/main/browser/index.html ../public/404.html
 
     #6. Build pour sextant-test
     - ng build main --configuration=sextant --base-href "/www/GN5/catalogue/branches/$branch_transformed_name/public_sextant-test/"
