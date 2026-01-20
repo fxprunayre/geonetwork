@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { elasticsearch, IndexRecord, Link, RelatedItemType } from 'gn-api-client';
 import { SearchService as ApiSearchService } from 'gn4-api-client';
@@ -100,7 +100,6 @@ export class SearchService {
     searchRequestParameters: SearchRequestParameters,
     withAggregation: boolean = true,
   ) {
-    // TODO: add sorting
     let request: elasticsearch.SearchRequest = {
       from: searchRequestParameters.currentPage * searchRequestParameters.pageSize,
       size: searchRequestParameters.pageSize,
@@ -119,6 +118,30 @@ export class SearchService {
         searchRequestParameters.aggregationsConfig ?? [],
       );
     }
+    return request;
+  }
+
+  buildAggregationRequest(
+    aggregationName: string,
+    searchRequestParameters: SearchRequestParameters,
+  ) {
+    let request: elasticsearch.SearchRequest = {
+      from: 0,
+      size: 0,
+      track_total_hits: TRACK_TOTAL_HITS,
+      query: this.buildQuery(
+        searchRequestParameters.searchQuery,
+        searchRequestParameters.filter,
+        searchRequestParameters.filters,
+      ),
+    };
+
+    request.aggregations = {
+      [aggregationName]: this.aggregationService.buildAggregationQuery(
+        searchRequestParameters.aggregationsConfig ?? [],
+      )[aggregationName],
+    };
+
     return request;
   }
 
@@ -349,6 +372,30 @@ export class SearchService {
         },
       ),
     );
+  }
+
+  updateAggregation(
+    aggregationName: string,
+    searchRequestParameters: SearchRequestParameters,
+  ): Observable<{
+    aggregations: Record<string, elasticsearch.AggregationsAggregate> | {};
+  }> {
+    return this.searchService
+      .search(this.buildAggregationRequest(aggregationName, searchRequestParameters))
+      .pipe(
+        map(
+          (
+            response: elasticsearch.SearchResponse<
+              IndexRecord,
+              Record<string, elasticsearch.AggregationsAggregate>
+            >,
+          ) => {
+            return {
+              aggregations: response.aggregations ?? {},
+            };
+          },
+        ),
+      );
   }
 
   private getTotalHits(

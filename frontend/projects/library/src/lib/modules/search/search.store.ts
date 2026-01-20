@@ -1,4 +1,4 @@
-import { computed, inject } from '@angular/core';
+import { computed, inject, untracked } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tapResponse } from '@ngrx/operators';
@@ -44,6 +44,7 @@ export const initialState: SearchState = {
   filters: {},
   results: [],
   aggregationsConfig: [],
+  aggregationsConfigTrigger: 0,
   aggregations: {},
   sort: DEFAULT_SORT_OPTIONS,
   currentSort: DEFAULT_SORT,
@@ -65,12 +66,14 @@ export const SearchStore = signalStore(
   })),
   withComputed((store) => ({
     searchFilterParameters: computed(() => {
+      // Trigger update when aggregationsConfigTrigger changes
+      store.aggregationsConfigTrigger();
       return {
         searchQuery: store.searchQuery(),
         filter: store.filter(),
         filters: store.filters(),
         currentSort: store.currentSort(),
-        aggregationsConfig: store.aggregationsConfig(),
+        aggregationsConfig: untracked(store.aggregationsConfig),
         language: store.language(),
       } as SearchFilterParameters;
     }),
@@ -177,6 +180,7 @@ export const SearchStore = signalStore(
           patchState(store, {
             id: searchId,
             aggregationsConfig,
+            aggregationsConfigTrigger: store.aggregationsConfigTrigger() + 1,
             pageSize: size,
             routing,
             filter,
@@ -288,7 +292,8 @@ export const SearchStore = signalStore(
         },
         isFilterActive(field: string, value: string | number) {
           const filter = store.filters()[field];
-          return filter?.values.includes(value) || false;
+          // TODO: Handle number/string comparison properly. Integer values may be stored as strings in filters.
+          return filter?.values.includes(value) || filter?.values.includes(value + '') || false;
         },
         addFilter(
           field: string,
@@ -368,11 +373,11 @@ export const SearchStore = signalStore(
           return (aggregationValues as AggregationsStringTermsAggregate).sum_other_doc_count! > 0;
         },
         loadMoreTerms(field: string, size: number = 10) {
-          let aggregationConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as (
+          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as (
             | string
-            | Record<string, AggregationsAggregationContainer>
+            | Record<string, elasticsearch.AggregationsAggregationContainer>
           )[];
-          const aggregation = aggregationConfig.find((agg) => {
+          const aggregation = aggregationsConfig.find((agg) => {
             if (typeof agg === 'string') {
               return agg === field;
             } else {
@@ -386,11 +391,26 @@ export const SearchStore = signalStore(
 
           const aggregationValues = store.aggregations()[field];
           aggregation[field].terms.size = (aggregation[field].terms.size || 10) + size;
-          // Trigger a search
-          // TODO: Could only call search service to get only this new aggregation values
-          patchState(store, {
-            aggregationsConfig: aggregationConfig,
-          });
+
+          searchService
+            .updateAggregation(field, {
+              ...store.searchFilterParameters(),
+              aggregationsConfig,
+            } as SearchRequestParameters)
+            .subscribe({
+              next: (response) => {
+                const aggregations = {
+                  ...store.aggregations(),
+                  ...response.aggregations,
+                };
+
+                patchState(store, {
+                  aggregationsConfig: aggregationsConfig,
+                  aggregations: aggregations,
+                });
+              },
+              error: console.error,
+            });
         },
         setPage(currentPage: number, pageSize: number) {
           let results = JSON.parse(JSON.stringify(store.results()));
@@ -409,6 +429,20 @@ export const SearchStore = signalStore(
         subscribeToRouteChange,
         setSort(currentSort: string) {
           patchState(store, { currentSort });
+        },
+        setAggregationsConfig(
+          aggregationsConfig: (
+            | string
+            | Record<string, elasticsearch.AggregationsAggregationContainer>
+          )[],
+          silent: boolean = false,
+        ) {
+          patchState(store, {
+            aggregationsConfig,
+            aggregationsConfigTrigger: silent
+              ? store.aggregationsConfigTrigger()
+              : store.aggregationsConfigTrigger() + 1,
+          });
         },
       };
     },
