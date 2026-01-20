@@ -11,7 +11,11 @@ build:
     - npm install
     - npm install -g @angular/cli
     - npm run build
-    - ng build main --configuration=sextant --base-href "/geonetwork5/" --output-path public
+    - ng build main --configuration=sextant --base-href "/geonetwork5/"
+    # 5. Déplacer le build Angular dans public/ pour GitLab Pages
+    - mkdir -p ../public
+    - cp -r dist/main/browser/. ../public/.
+
     #- ng build main --configuration=sextant --base-href "/geonetwork5/"
 
     # Déplacer le build Angular dans public/ pour GitLab Pages
@@ -29,7 +33,7 @@ build:
 
   artifacts:
     paths:
-      - frontend/public/browser
+      - public
     #  - public_sextant-test
     expire_in: 1 week
 
