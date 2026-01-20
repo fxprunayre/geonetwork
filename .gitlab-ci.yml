@@ -12,30 +12,24 @@ build:
     - npm install -g @angular/cli
     - npm run build
     - ng build main --configuration=sextant --base-href "/geonetwork5/"
-    # 5. Déplacer le build Angular dans public/ pour GitLab Pages
+    # Déplacer le build Angular dans public/ pour GitLab Pages
     - mkdir -p ../public
     - cp -r dist/main/browser/. ../public/.
-
-    #- ng build main --configuration=sextant --base-href "/geonetwork5/"
-
-    # Déplacer le build Angular dans public/ pour GitLab Pages
-    #- mkdir -p ../public
-    #- cp -r dist/main/browser/. ../public/.
     # pour la gestion gitlab-pages / nginx
-    #- cp dist/main/browser/index.html ../public/404.html
+    - cp dist/main/browser/index.html ../public/404.html
 
-    #6. Build pour sextant-test
+    # Build pour sextant-test
     # transforme le nom de la branche (remplace / par _)
-    #- branch_transformed_name=`echo $CI_COMMIT_REF_NAME | sed 's/\//_/g'`
-    #- ng build main --configuration=sextant --base-href "/www/GN5/catalogue/branches/$branch_transformed_name/public_sextant-test/"
-    #- mkdir -p ../public_sextant-test
-    #- cp -r dist/main/browser/. ../public_sextant-test/.
+    - branch_transformed_name=`echo $CI_COMMIT_REF_NAME | sed 's/\//_/g'`
+    - ng build main --configuration=sextant --base-href "/www/GN5/catalogue/branches/$branch_transformed_name/public_sextant-test/"
+    - mkdir -p ../public_sextant-test
+    - cp -r dist/main/browser/. ../public_sextant-test/.
 
   artifacts:
     paths:
       - public
-    #  - public_sextant-test
-    expire_in: 1 week
+      - public_sextant-test
+    expire_in: 4 weeks
 
 
 
