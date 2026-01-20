@@ -29,7 +29,7 @@ build:
 
   artifacts:
     paths:
-      - public
+      - frontend/public
     #  - public_sextant-test
     expire_in: 1 week
 
