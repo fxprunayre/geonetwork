@@ -1,54 +1,33 @@
-image: maven:3.9.6-eclipse-temurin-21
+image: node:lts-trixie
 
 stages:
   - build
   - pages
 
-variables:
-  MAVEN_OPTS: "-Dmaven.test.skip=true"
-
-cache:
-  paths:
-    - .m2/repository
-    - frontend/node_modules/
-
-build_gn5:
+build:
   stage: build
   script:
-    # 1. Installer Node (Angular a besoin de Node 22 comme ton Dockerfile)
-    - apt-get update
-    - apt-get install -y curl
-    - curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-    - apt-get install -y nodejs
-
-    # 2. Build Maven complet (génère les libs Angular)
-    - mvn -DskipTests clean install
-
-    # 3. Installer Angular CLI
-    - npm install -g @angular/cli
-
-    # 4. Build Angular main
-    - cd frontend
     - npm install
-    # transforme le nom de la branche (remplace / par _)
-    - branch_transformed_name=`echo $CI_COMMIT_REF_NAME | sed 's/\//_/g'`
-    - ng build main --configuration=sextant --base-href "/geonetwork5/"
+    - npm run build-only -- --base "/geonetwork5/" --outDir public
+    #- ng build main --configuration=sextant --base-href "/geonetwork5/"
 
-    # 5. Déplacer le build Angular dans public/ pour GitLab Pages
-    - mkdir -p ../public
-    - cp -r dist/main/browser/. ../public/.
+    # Déplacer le build Angular dans public/ pour GitLab Pages
+    #- mkdir -p ../public
+    #- cp -r dist/main/browser/. ../public/.
     # pour la gestion gitlab-pages / nginx
     - cp dist/main/browser/index.html ../public/404.html
 
     #6. Build pour sextant-test
-    - ng build main --configuration=sextant --base-href "/www/GN5/catalogue/branches/$branch_transformed_name/public_sextant-test/"
-    - mkdir -p ../public_sextant-test
-    - cp -r dist/main/browser/. ../public_sextant-test/.
+    # transforme le nom de la branche (remplace / par _)
+    #- branch_transformed_name=`echo $CI_COMMIT_REF_NAME | sed 's/\//_/g'`
+    #- ng build main --configuration=sextant --base-href "/www/GN5/catalogue/branches/$branch_transformed_name/public_sextant-test/"
+    #- mkdir -p ../public_sextant-test
+    #- cp -r dist/main/browser/. ../public_sextant-test/.
 
   artifacts:
     paths:
       - public
-      - public_sextant-test
+    #  - public_sextant-test
     expire_in: 1 week
 
 
