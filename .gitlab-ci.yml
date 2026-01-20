@@ -9,7 +9,7 @@ build:
   script:
     - cd frontend
     - npm install
-    - npm run build-only -- --base "/geonetwork5/" --outDir public
+    - npm run build -- --base "/geonetwork5/" --outDir public
     #- ng build main --configuration=sextant --base-href "/geonetwork5/"
 
     # Déplacer le build Angular dans public/ pour GitLab Pages
