@@ -155,7 +155,8 @@ export class Aggregation extends SearchBase {
     if (event.values.length === 0) {
       this.search.clearFilter(this.keyName());
     } else if (event.add) {
-      this.search.addFilter(this.keyName(), event.values, true);
+      const clearFilters = this.layout() === 'tree';
+      this.search.addFilter(this.keyName(), event.values, clearFilters);
     } else if (!event.add) {
       this.search.removeFilter(this.keyName(), event.values[0]);
     }

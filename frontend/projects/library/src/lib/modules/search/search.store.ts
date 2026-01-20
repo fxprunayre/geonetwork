@@ -315,7 +315,6 @@ export const SearchStore = signalStore(
           } else {
             currentFilters[field] = { field: field, values: valuesToAdd };
           }
-
           patchState(store, {
             currentPage: 0,
             filters: currentFilters,
