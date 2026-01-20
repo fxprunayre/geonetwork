@@ -304,12 +304,15 @@ export const SearchStore = signalStore(
           value: string | number | (string | number)[],
           clear: boolean = false,
         ): void {
-          const currentFilters = clear ? {} : JSON.parse(JSON.stringify(store.filters())) || {};
+          const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
           let targetFilter = currentFilters[field];
 
           const valuesToAdd = Array.isArray(value) ? value : [value];
 
           if (targetFilter) {
+            if (clear) {
+              targetFilter.values = [];
+            }
             targetFilter.values.push(...valuesToAdd);
             targetFilter.values = [...new Set(targetFilter.values)];
           } else {
