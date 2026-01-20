@@ -26,6 +26,7 @@ import {
   DEFAULT_PAGE_SIZE,
   DEFAULT_SORT,
   DEFAULT_SORT_OPTIONS,
+  DEFAULT_AGGREGATION_SIZE,
   SearchFilterParameters,
   SearchRequestPageParameters,
   SearchRequestParameters,
@@ -292,8 +293,11 @@ export const SearchStore = signalStore(
         },
         isFilterActive(field: string, value: string | number) {
           const filter = store.filters()[field];
-          // TODO: Handle number/string comparison properly. Integer values may be stored as strings in filters.
-          return filter?.values.includes(value) || filter?.values.includes(value + '') || false;
+          if (!filter) {
+            return false;
+          }
+          // Handle number/string comparison properly. Integer values may be stored as strings in filters from URL.
+          return filter.values.some((v) => v == value);
         },
         addFilter(
           field: string,
@@ -331,7 +335,8 @@ export const SearchStore = signalStore(
 
           if (targetFilter) {
             let currentValues = targetFilter.values;
-            let clickedFilterIndex = currentValues.indexOf(value);
+            // Handle number/string comparison properly. Integer values may be stored as strings in filters from URL.
+            let clickedFilterIndex = currentValues.findIndex((v: string | number) => v == value);
 
             if (clickedFilterIndex > -1) {
               currentValues.splice(clickedFilterIndex, 1);
@@ -389,8 +394,77 @@ export const SearchStore = signalStore(
             return;
           }
 
-          const aggregationValues = store.aggregations()[field];
           aggregation[field].terms.size = (aggregation[field].terms.size || 10) + size;
+
+          searchService
+            .updateAggregation(field, {
+              ...store.searchFilterParameters(),
+              aggregationsConfig,
+            } as SearchRequestParameters)
+            .subscribe({
+              next: (response) => {
+                const aggregations = {
+                  ...store.aggregations(),
+                  ...response.aggregations,
+                };
+
+                patchState(store, {
+                  aggregationsConfig: aggregationsConfig,
+                  aggregations: aggregations,
+                });
+              },
+              error: console.error,
+            });
+        },
+        hasExpandedTerms(field: string): boolean {
+          const aggregationsConfig = store.aggregationsConfig() as (
+            | string
+            | Record<string, elasticsearch.AggregationsAggregationContainer>
+          )[];
+          const aggregation = aggregationsConfig.find((agg) => {
+            if (typeof agg === 'string') {
+              return agg === field;
+            } else {
+              return Object.keys(agg)[0] === field;
+            }
+          }) as Record<string, AggregationsAggregationContainer>;
+
+          if (
+            !aggregation ||
+            !aggregation[field] ||
+            !aggregation[field].terms ||
+            aggregation[field].meta?.layout != 'checkbox' // tree, select, card do not support load more/less
+          ) {
+            return false;
+          }
+
+          return (
+            (aggregation[field].terms.size || DEFAULT_AGGREGATION_SIZE) > DEFAULT_AGGREGATION_SIZE
+          );
+        },
+        loadLessTerms(field: string, size: number = 10) {
+          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as (
+            | string
+            | Record<string, elasticsearch.AggregationsAggregationContainer>
+          )[];
+          const aggregation = aggregationsConfig.find((agg) => {
+            if (typeof agg === 'string') {
+              return agg === field;
+            } else {
+              return Object.keys(agg)[0] === field;
+            }
+          }) as Record<string, AggregationsAggregationContainer>;
+
+          if (!aggregation || !aggregation[field].terms) {
+            return;
+          }
+
+          const currentSize = aggregation[field].terms.size || DEFAULT_AGGREGATION_SIZE;
+          let newSize = currentSize - size;
+          if (newSize < DEFAULT_AGGREGATION_SIZE) {
+            newSize = DEFAULT_AGGREGATION_SIZE;
+          }
+          aggregation[field].terms.size = newSize;
 
           searchService
             .updateAggregation(field, {

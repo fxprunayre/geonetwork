@@ -151,6 +151,7 @@ export class AggregationService {
   setActive(key: string, active: boolean, aggregationsConfig: (string | Record<string, any>)[]) {
     return aggregationsConfig.map((aggregation) => {
       if (typeof aggregation === 'string') {
+        // TODO: handle string case if needed
         return aggregation;
       }
       const aggKey = Object.keys(aggregation)[0];
