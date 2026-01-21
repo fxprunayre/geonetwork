@@ -1,47 +1,5 @@
-@use 'tailwind.css';
+@use 'tailwind';
 
 :root {
   --app-font-family-sans: 'Inter', sans-serif;
-}
-
-html {
-  font-size: 14px;
-}
-
-* {
-  font-family: var(--app-font-family-sans);
-  color: var(--text-color);
-  background: var(--surface-ground);
-}
-
-@layer base {
-  button,
-  input,
-  select,
-  textarea,
-  ::file-selector-button {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-  }
-}
-
-@layer base {
-  ul {
-    margin-bottom: 1rem;
-    margin-left: 2.5rem;
-    list-style: disc;
-  }
-
-  li {
-    color: var(--text-color);
-  }
-
-  p {
-    margin-bottom: 1rem;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
 }

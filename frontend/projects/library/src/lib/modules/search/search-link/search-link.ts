@@ -2,7 +2,7 @@ import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidMagnifyingGlass } from '@ng-icons/font-awesome/solid';
-import { SEARCH_ROUTE_PATH } from '../search.constant';
+import { SEARCH_ROUTE_PATH } from '../search-constant';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

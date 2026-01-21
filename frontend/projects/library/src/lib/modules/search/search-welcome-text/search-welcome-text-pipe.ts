@@ -1,7 +1,7 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
-import { SearchStoreType } from '../search.store';
+import { SearchStoreType } from '../search-store';
 
 interface AggregationBucket {
   key: string;

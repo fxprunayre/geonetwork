@@ -1,5 +1,5 @@
 {
-  "took": 31,
+  "took": 23,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -26,7 +26,7 @@
           "link.applicationProfile.keyword"
         ],
         "_source": {
-          "dateStamp": "2025-12-15T09:58:56.521203Z",
+          "dateStamp": "2026-01-14T15:57:34.39791Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
@@ -69,10 +69,14 @@
               "protocol": "WWW:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "https://wwz.ifremer.fr/envlit/Quadrige-la-base-de-donnees",
-                "langfre": "https://wwz.ifremer.fr/envlit/Quadrige-la-base-de-donnees"
+                "default": "https://envlit.ifremer.fr/Quadrige-la-base-de-donnees",
+                "langfre": "https://envlit.ifremer.fr/Quadrige-la-base-de-donnees"
               },
               "nameObject": {
+                "default": "La base de données Quadrige",
+                "langfre": "La base de données Quadrige"
+              },
+              "descriptionObject": {
                 "default": "La base de données Quadrige",
                 "langfre": "La base de données Quadrige"
               },
@@ -84,10 +88,14 @@
               "protocol": "WWW:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "https://wwz.ifremer.fr/envlit/Surveillance-du-littoral",
-                "langfre": "https://wwz.ifremer.fr/envlit/Surveillance-du-littoral"
+                "default": "https://envlit.ifremer.fr/Surveillance-du-littoral",
+                "langfre": "https://envlit.ifremer.fr/Surveillance-du-littoral"
               },
               "nameObject": {
+                "default": "La surveillance du milieu marin et côtier",
+                "langfre": "La surveillance du milieu marin et côtier"
+              },
+              "descriptionObject": {
                 "default": "La surveillance du milieu marin et côtier",
                 "langfre": "La surveillance du milieu marin et côtier"
               },
@@ -106,6 +114,10 @@
                 "default": "Surval, Manuel utilisateur",
                 "langfre": "Surval, Manuel utilisateur"
               },
+              "descriptionObject": {
+                "default": "Surval, Manuel utilisateur",
+                "langfre": "Surval, Manuel utilisateur"
+              },
               "function": "information",
               "applicationProfile": "",
               "group": 0
@@ -118,6 +130,10 @@
                 "langfre": "https://doi.org/10.13155/89133"
               },
               "nameObject": {
+                "default": "Surval, Plaquette explicative",
+                "langfre": "Surval, Plaquette explicative"
+              },
+              "descriptionObject": {
                 "default": "Surval, Plaquette explicative",
                 "langfre": "Surval, Plaquette explicative"
               },
@@ -261,7 +277,7 @@
             }
           ]
         },
-        "sort": [19605],
+        "sort": [21287],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -396,7 +412,7 @@
             }
           ]
         },
-        "sort": [489],
+        "sort": [516],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -471,7 +487,9 @@
     },
     "th_sextant-theme_tree.key": {
       "meta": {
-        "collapsed": true,
+        "layout": "tree",
+        "collapsed": false,
+        "refreshPolicy": "none",
         "orderByTranslation": true,
         "translateOnLoad": true
       },

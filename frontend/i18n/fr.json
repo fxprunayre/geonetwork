@@ -147,6 +147,8 @@
       "brothersAndSisters": "{{count}} frères et sœurs",
       "siblings": "{{count}} frères et sœurs",
       "fcats": "{{count}} modèles de données",
+      "services": "{{count}} services",
+      "datasets": "{{count}} données",
       "hasfeaturecats": "{{count}} données associées"
     }
   },

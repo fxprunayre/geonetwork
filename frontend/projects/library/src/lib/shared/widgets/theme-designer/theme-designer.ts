@@ -2,7 +2,7 @@ import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { PrimeNG } from 'primeng/config';
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
-import { ThemingService } from '../../theming.service';
+import { ThemingService } from '../../theming-service';
 import { ColorPicker } from '../color-picker/color-picker';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidPaintRoller } from '@ng-icons/font-awesome/solid';

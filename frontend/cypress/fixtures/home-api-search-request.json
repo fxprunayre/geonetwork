@@ -53,6 +53,7 @@
         "size": 8
       },
       "meta": {
+        "layout": "card",
         "decorator": {
           "type": "icon",
           "prefix": "text-6xl p-6",
@@ -78,6 +79,7 @@
       "meta": {
         "orderByTranslation": true,
         "translateOnLoad": true,
+        "layout": "card",
         "decorator": {
           "type": "img",
           "map": {
@@ -90,6 +92,59 @@
             "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bigood/1595612-3-fre-FR/BIGOOD.png"
           }
         }
+      }
+    },
+    "th_simm-reglementaire_tree.key": {
+      "terms": {
+        "field": "th_simm-reglementaire_tree.key",
+        "size": 10
+      },
+      "meta": {
+        "thesaurus": "simm.reglementaire",
+        "translateOnLoad": true,
+        "layout": "card"
+      }
+    },
+    "th_dcsmm-area_tree.key": {
+      "terms": {
+        "field": "th_dcsmm-area_tree.key",
+        "size": 30
+      },
+      "meta": {
+        "thesaurus": "dcsmm.area",
+        "translateOnLoad": true,
+        "layout": "card"
+      }
+    },
+    "th_dcsmm-descripteur_tree.key": {
+      "terms": {
+        "field": "th_dcsmm-descripteur_tree.key",
+        "size": 30
+      },
+      "meta": {
+        "translateOnLoad": true,
+        "layout": "card"
+      }
+    },
+    "th_odatis_centre_donnees_tree.key": {
+      "terms": {
+        "field": "th_odatis_centre_donnees_tree.key",
+        "size": 30
+      },
+      "meta": {
+        "translateOnLoad": true,
+        "layout": "card"
+      }
+    },
+    "th_NVS-OD1_tree.key": {
+      "terms": {
+        "field": "th_NVS-OD1_tree.key",
+        "size": 30
+      },
+      "meta": {
+        "thesaurus": "NVS.OD1",
+        "translateOnLoad": true,
+        "layout": "card"
       }
     }
   }

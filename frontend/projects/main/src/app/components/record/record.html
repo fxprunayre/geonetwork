@@ -1,0 +1,15 @@
+<div class="mx-auto max-w-7xl w-full p-4">
+  <app-record-view
+    [uuid]="uuid()"
+    [tab]="tab()"
+    [backButtonTplRef]="backButton"
+    (onRecordClick)="handleRecordClick($event)"
+  >
+    <ng-template #backButton>
+      <button pButton (click)="goBack()" [text]="true" class="mb-4 !p-0">
+        <ng-icon name="faSolidArrowLeft" pButtonIcon></ng-icon>
+        <span pButtonLabel class="ml-2">{{ 'search.backToResults' | translate }}</span>
+      </button>
+    </ng-template>
+  </app-record-view>
+</div>

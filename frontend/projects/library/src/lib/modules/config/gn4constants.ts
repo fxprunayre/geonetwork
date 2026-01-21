@@ -1407,7 +1407,7 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
             terms: {
               field: 'resourceType',
               size: 10,
-              exclude: 'map/.*',
+              exclude: 'map/.*|publication-.*',
             },
             meta: {
               collapsed: true,

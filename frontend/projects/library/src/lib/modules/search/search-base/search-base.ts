@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit } from '@angular/core';
-import { SearchService } from '../search.service';
-import { SearchStoreType } from '../search.store';
+import { SearchService } from '../search-service';
+import { SearchStoreType } from '../search-store';
 
 @Component({
   selector: 'app-search-base',

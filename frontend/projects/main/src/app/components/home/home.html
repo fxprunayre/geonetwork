@@ -1,0 +1,9 @@
+<section
+  appSearchContext="home"
+  [aggregations]="homeAggregationConfig"
+  [filter]="[{ query_string: { query: '+isTemplate:n' } }]"
+  [language]="language()"
+>
+  <app-home-header [scope]="'home'"></app-home-header>
+  <app-home-highlights [scope]="'home'"></app-home-highlights>
+</section>

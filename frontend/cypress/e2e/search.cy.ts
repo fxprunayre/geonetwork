@@ -23,7 +23,7 @@ describe('Search', () => {
       const keyname = 'resourceType';
       const buckets = search.response?.body.aggregations[keyname].buckets;
 
-      cy.get('app-result-header app-aggregation').as('searchAggregation');
+      cy.get('app-results app-aggregation').as('searchAggregation');
       cy.get('@searchAggregation')
         .find('app-aggregation-bucket')
         .should('have.length', buckets.length);
@@ -60,7 +60,7 @@ describe('Search', () => {
   it('should have the sort by with default sort option', () => {
     cy.visit(`/search?q=${SURVAL_UUID}`);
     cy.wait('@apiMainSearchByUuid').then((search) => {
-      cy.get('app-sort-results').as('sortBy').should('exist');
+      cy.get('app-results-sorter').as('sortBy').should('exist');
       cy.get('@sortBy').find('p-select > span').should('contain.text', 'Popularity');
       cy.get('@sortBy')
         .click()

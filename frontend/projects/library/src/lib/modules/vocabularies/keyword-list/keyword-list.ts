@@ -12,7 +12,7 @@ import { Skeleton } from 'primeng/skeleton';
 import { firstValueFrom } from 'rxjs';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchLink } from '../../search/search-link/search-link';
-import { SEARCH_ROUTE_PATH } from '../../search/search.constant';
+import { SEARCH_ROUTE_PATH } from '../../search/search-constant';
 
 @Component({
   selector: 'app-keyword-list',

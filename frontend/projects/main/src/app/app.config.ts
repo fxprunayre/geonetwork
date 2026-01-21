@@ -20,12 +20,13 @@ import AppTheme from './app.theme';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { LocationStrategy, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
-import { provideMarkdown } from 'ngx-markdown';
+import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 import { environment } from '../../../library/src/environments/environment';
 import { Configuration, GnApiModule } from 'gn-api-client';
 import { Gn4ApiModule, Configuration as Gn4Configuration } from 'gn4-api-client';
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
+import { MessageService } from 'primeng/api';
 
 export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   return new TranslationsLoader(_httpBackend, [
@@ -101,6 +102,7 @@ export const appConfig: ApplicationConfig = {
       }),
     ]),
     provideBrowserGlobalErrorListeners(),
+    MessageService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
       routes,
