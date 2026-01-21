@@ -7,7 +7,14 @@ import {
   ContentChild,
   TemplateRef,
 } from '@angular/core';
-import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionHeader,
+  AccordionPanel,
+  AccordionTabCloseEvent,
+  AccordionTabOpenEvent,
+} from 'primeng/accordion';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Aggregation } from '.././aggregation/aggregation.component';
 import { SearchBase } from '../search-base/search-base';
@@ -76,4 +83,19 @@ export class AggregationsPanel extends SearchBase {
     }
     return false;
   };
+
+  setPanelExpanded(event: AccordionTabOpenEvent) {
+    this.updatePanelState(event.index + '', false);
+  }
+
+  setPanelCollapsed(event: AccordionTabCloseEvent) {
+    this.updatePanelState(event.index + '', true);
+  }
+
+  private updatePanelState(index: string, isCollapsed: boolean) {
+    this.search.setAggregationsConfig(
+      this.aggregationService.setActive(index, !isCollapsed, this.search.aggregationsConfig()),
+      true,
+    );
+  }
 }

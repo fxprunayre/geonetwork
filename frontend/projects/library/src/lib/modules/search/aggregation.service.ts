@@ -78,7 +78,7 @@ export class AggregationService {
   ) {
     const currentLang = this.translateService.getCurrentLang();
 
-    if (aggregation.meta && aggregation.meta['translateOnLoad']) {
+    if (aggregation && aggregation.meta && aggregation.meta['translateOnLoad']) {
       const thesaurus =
         aggregation.meta['thesaurus'] ||
         this.getAggregationConfig(key, aggregationsConfig)?.['terms']?.field?.replace(
@@ -146,5 +146,28 @@ export class AggregationService {
       .map((aggregation) => {
         return Object.keys(aggregation)[0];
       });
+  }
+
+  setActive(key: string, active: boolean, aggregationsConfig: (string | Record<string, any>)[]) {
+    return aggregationsConfig.map((aggregation) => {
+      if (typeof aggregation === 'string') {
+        // TODO: handle string case if needed
+        return aggregation;
+      }
+      const aggKey = Object.keys(aggregation)[0];
+      if (aggKey === key) {
+        return {
+          ...aggregation,
+          [aggKey]: {
+            ...aggregation[aggKey],
+            meta: {
+              ...aggregation[aggKey].meta,
+              collapsed: !active,
+            },
+          },
+        };
+      }
+      return aggregation;
+    });
   }
 }

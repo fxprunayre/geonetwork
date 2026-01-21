@@ -30,7 +30,9 @@
       "tag.default": "Mots-clés",
       "creationYearForResource": "Année de création",
       "OrgForResource": "Organisation",
-      "resourceType": "Type de ressource"
+      "resourceType": "Type de ressource",
+      "more": "plus",
+      "less": "moins"
     },
     "sort": {
       "placeholder": "Trier par",

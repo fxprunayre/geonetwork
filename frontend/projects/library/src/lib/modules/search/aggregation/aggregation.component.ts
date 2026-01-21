@@ -19,7 +19,7 @@ import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
 import { AggregationTree } from '../aggregation-tree/aggregation-tree';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationLayout } from 'gn-api-client';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { SearchFilterChange } from '../search.store.model';
 import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
@@ -42,6 +42,7 @@ export type AggregationBucketType = {
     AggregationTree,
     MultiSelect,
     NgTemplateOutlet,
+    TranslatePipe,
   ],
   providers: [AggregationTranslatePipe, DecimalPipe],
   templateUrl: './aggregation.component.html',
@@ -154,7 +155,8 @@ export class Aggregation extends SearchBase {
     if (event.values.length === 0) {
       this.search.clearFilter(this.keyName());
     } else if (event.add) {
-      this.search.addFilter(this.keyName(), event.values, true);
+      const clearFilters = this.layout() === 'tree';
+      this.search.addFilter(this.keyName(), event.values, clearFilters);
     } else if (!event.add) {
       this.search.removeFilter(this.keyName(), event.values[0]);
     }

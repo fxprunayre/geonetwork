@@ -1,14 +1,7 @@
-import { computed, inject, Injector } from '@angular/core';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  pipe,
-  switchMap,
-  tap,
-  map,
-  startWith,
-} from 'rxjs';
+import { computed, inject, untracked } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
+import { tapResponse } from '@ngrx/operators';
 import {
   patchState,
   signalStore,
@@ -19,24 +12,26 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { tapResponse } from '@ngrx/operators';
-import { SearchService } from './search.service';
-import { elasticsearch } from 'gn-api-client';
+import {
+  AggregationsAggregationContainer,
+  AggregationsStringTermsAggregate,
+  elasticsearch,
+} from 'gn-api-client';
+import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
+import { DEFAULT_LANGUAGE } from '../config/config.loader';
 import { SearchAppLayout } from '../config/model/gnConfig';
+import { SearchRouteService } from './search-route.service';
+import { SearchService } from './search.service';
 import {
   DEFAULT_PAGE_SIZE,
   DEFAULT_SORT,
   DEFAULT_SORT_OPTIONS,
-  SearchFilter,
+  DEFAULT_AGGREGATION_SIZE,
   SearchFilterParameters,
   SearchRequestPageParameters,
   SearchRequestParameters,
   SearchState,
 } from './search.store.model';
-import { SearchRouteService } from './search-route.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { DEFAULT_LANGUAGE } from '../config/config.loader';
 
 export const initialState: SearchState = {
   id: 'default',
@@ -50,6 +45,7 @@ export const initialState: SearchState = {
   filters: {},
   results: [],
   aggregationsConfig: [],
+  aggregationsConfigTrigger: 0,
   aggregations: {},
   sort: DEFAULT_SORT_OPTIONS,
   currentSort: DEFAULT_SORT,
@@ -71,12 +67,14 @@ export const SearchStore = signalStore(
   })),
   withComputed((store) => ({
     searchFilterParameters: computed(() => {
+      // Trigger update when aggregationsConfigTrigger changes
+      store.aggregationsConfigTrigger();
       return {
         searchQuery: store.searchQuery(),
         filter: store.filter(),
         filters: store.filters(),
         currentSort: store.currentSort(),
-        aggregationsConfig: store.aggregationsConfig(),
+        aggregationsConfig: untracked(store.aggregationsConfig),
         language: store.language(),
       } as SearchFilterParameters;
     }),
@@ -183,6 +181,7 @@ export const SearchStore = signalStore(
           patchState(store, {
             id: searchId,
             aggregationsConfig,
+            aggregationsConfigTrigger: store.aggregationsConfigTrigger() + 1,
             pageSize: size,
             routing,
             filter,
@@ -294,25 +293,31 @@ export const SearchStore = signalStore(
         },
         isFilterActive(field: string, value: string | number) {
           const filter = store.filters()[field];
-          return filter?.values.includes(value) || false;
+          if (!filter) {
+            return false;
+          }
+          // Handle number/string comparison properly. Integer values may be stored as strings in filters from URL.
+          return filter.values.some((v) => v == value);
         },
         addFilter(
           field: string,
           value: string | number | (string | number)[],
           clear: boolean = false,
         ): void {
-          const currentFilters = clear ? {} : JSON.parse(JSON.stringify(store.filters())) || {};
+          const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
           let targetFilter = currentFilters[field];
 
           const valuesToAdd = Array.isArray(value) ? value : [value];
 
           if (targetFilter) {
+            if (clear) {
+              targetFilter.values = [];
+            }
             targetFilter.values.push(...valuesToAdd);
             targetFilter.values = [...new Set(targetFilter.values)];
           } else {
             currentFilters[field] = { field: field, values: valuesToAdd };
           }
-
           patchState(store, {
             currentPage: 0,
             filters: currentFilters,
@@ -332,7 +337,8 @@ export const SearchStore = signalStore(
 
           if (targetFilter) {
             let currentValues = targetFilter.values;
-            let clickedFilterIndex = currentValues.indexOf(value);
+            // Handle number/string comparison properly. Integer values may be stored as strings in filters from URL.
+            let clickedFilterIndex = currentValues.findIndex((v: string | number) => v == value);
 
             if (clickedFilterIndex > -1) {
               currentValues.splice(clickedFilterIndex, 1);
@@ -364,6 +370,124 @@ export const SearchStore = signalStore(
             currentPage: store.currentPage() + 1,
           });
         },
+        hasMoreTerms(field: string): boolean {
+          const aggregationValues = store.aggregations()[field];
+
+          if (!aggregationValues) {
+            return false;
+          }
+
+          return (aggregationValues as AggregationsStringTermsAggregate).sum_other_doc_count! > 0;
+        },
+        loadMoreTerms(field: string, size: number = 10) {
+          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as (
+            | string
+            | Record<string, elasticsearch.AggregationsAggregationContainer>
+          )[];
+          const aggregation = aggregationsConfig.find((agg) => {
+            if (typeof agg === 'string') {
+              return agg === field;
+            } else {
+              return Object.keys(agg)[0] === field;
+            }
+          }) as Record<string, AggregationsAggregationContainer>;
+
+          if (!aggregation || !aggregation[field].terms) {
+            return;
+          }
+
+          aggregation[field].terms.size = (aggregation[field].terms.size || 10) + size;
+
+          searchService
+            .updateAggregation(field, {
+              ...store.searchFilterParameters(),
+              aggregationsConfig,
+            } as SearchRequestParameters)
+            .subscribe({
+              next: (response) => {
+                const aggregations = {
+                  ...store.aggregations(),
+                  ...response.aggregations,
+                };
+
+                patchState(store, {
+                  aggregationsConfig: aggregationsConfig,
+                  aggregations: aggregations,
+                });
+              },
+              error: console.error,
+            });
+        },
+        hasExpandedTerms(field: string): boolean {
+          const aggregationsConfig = store.aggregationsConfig() as (
+            | string
+            | Record<string, elasticsearch.AggregationsAggregationContainer>
+          )[];
+          const aggregation = aggregationsConfig.find((agg) => {
+            if (typeof agg === 'string') {
+              return agg === field;
+            } else {
+              return Object.keys(agg)[0] === field;
+            }
+          }) as Record<string, AggregationsAggregationContainer>;
+
+          if (
+            !aggregation ||
+            !aggregation[field] ||
+            !aggregation[field].terms ||
+            aggregation[field].meta?.layout != 'checkbox' // tree, select, card do not support load more/less
+          ) {
+            return false;
+          }
+
+          return (
+            (aggregation[field].terms.size || DEFAULT_AGGREGATION_SIZE) > DEFAULT_AGGREGATION_SIZE
+          );
+        },
+        loadLessTerms(field: string, size: number = 10) {
+          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as (
+            | string
+            | Record<string, elasticsearch.AggregationsAggregationContainer>
+          )[];
+          const aggregation = aggregationsConfig.find((agg) => {
+            if (typeof agg === 'string') {
+              return agg === field;
+            } else {
+              return Object.keys(agg)[0] === field;
+            }
+          }) as Record<string, AggregationsAggregationContainer>;
+
+          if (!aggregation || !aggregation[field].terms) {
+            return;
+          }
+
+          const currentSize = aggregation[field].terms.size || DEFAULT_AGGREGATION_SIZE;
+          let newSize = currentSize - size;
+          if (newSize < DEFAULT_AGGREGATION_SIZE) {
+            newSize = DEFAULT_AGGREGATION_SIZE;
+          }
+          aggregation[field].terms.size = newSize;
+
+          searchService
+            .updateAggregation(field, {
+              ...store.searchFilterParameters(),
+              aggregationsConfig,
+            } as SearchRequestParameters)
+            .subscribe({
+              next: (response) => {
+                const aggregations = {
+                  ...store.aggregations(),
+                  ...response.aggregations,
+                };
+
+                patchState(store, {
+                  aggregationsConfig: aggregationsConfig,
+                  aggregations: aggregations,
+                });
+              },
+              error: console.error,
+            });
+        },
         setPage(currentPage: number, pageSize: number) {
           let results = JSON.parse(JSON.stringify(store.results()));
           if (results) {
@@ -381,6 +505,20 @@ export const SearchStore = signalStore(
         subscribeToRouteChange,
         setSort(currentSort: string) {
           patchState(store, { currentSort });
+        },
+        setAggregationsConfig(
+          aggregationsConfig: (
+            | string
+            | Record<string, elasticsearch.AggregationsAggregationContainer>
+          )[],
+          silent: boolean = false,
+        ) {
+          patchState(store, {
+            aggregationsConfig,
+            aggregationsConfigTrigger: silent
+              ? store.aggregationsConfigTrigger()
+              : store.aggregationsConfigTrigger() + 1,
+          });
         },
       };
     },

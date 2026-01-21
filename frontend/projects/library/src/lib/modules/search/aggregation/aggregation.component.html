@@ -110,3 +110,22 @@
     </p-select>
   }
 }
+
+@if (search.hasMoreTerms(keyName()) || search.hasExpandedTerms(keyName())) {
+  <div class="mt-4 text-center">
+    @if (search.hasMoreTerms(keyName())) {
+      <p-button
+        variant="text"
+        (click)="search.loadMoreTerms(keyName(), 10)"
+        [label]="'search.aggregations.more' | translate"
+      ></p-button>
+    }
+    @if (search.hasExpandedTerms(keyName())) {
+      <p-button
+        variant="text"
+        (click)="search.loadLessTerms(keyName(), 10)"
+        [label]="'search.aggregations.less' | translate"
+      ></p-button>
+    }
+  </div>
+}

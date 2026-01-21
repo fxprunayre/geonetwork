@@ -1431,7 +1431,8 @@ export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
       },
     },
     recordview: {
-      mainThesaurus: ['th_sextant-theme'],
+      // mainThesaurus: ['th_sextant-theme'],
+      mainThesaurus: [],
     },
   },
 };

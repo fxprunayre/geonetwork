@@ -29,6 +29,7 @@ export type SearchState = {
   filters: Record<string, SearchFilter>;
   results: IndexRecord[];
   aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
+  aggregationsConfigTrigger: number;
   aggregations: Record<string, elasticsearch.AggregationsAggregate>;
   sort: string[];
   currentSort: string;
