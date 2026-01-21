@@ -100,7 +100,10 @@
   <ng-template #lineageContent>
     <app-record-field [label]="'record.field.lineage'">
       <app-show-more-toggle>
-        <p class="leading-relaxed" [innerHTML]="getLineage() | markdown | async"></p>
+        <p
+          class="leading-relaxed markdown-content"
+          [innerHTML]="getLineage() | markdown | async"
+        ></p>
       </app-show-more-toggle>
     </app-record-field>
     <app-associated-panel

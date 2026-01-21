@@ -30,12 +30,14 @@
       <div class="md:col-span-2">
         <app-show-more-toggle>
           <p
-            class="text-surface-700 leading-relaxed mb-6"
+            class="text-surface-700 leading-relaxed mb-6 markdown-content"
             [innerHTML]="record().resourceAbstractObject?.['default'] || '' | markdown | async"
           ></p>
         </app-show-more-toggle>
 
-        <app-record-field-vocabulary [record]="record()" [include]="vocabularies()" />
+        @if (vocabularies().length > 0) {
+          <app-record-field-vocabulary [record]="record()" [include]="vocabularies()" />
+        }
       </div>
     </div>
   </div>

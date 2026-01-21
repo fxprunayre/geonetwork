@@ -24,7 +24,7 @@ import { SidePanel } from '../side-panel/side-panel';
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 
 @Component({
-  selector: 'app-catalogue-component',
+  selector: 'app-search',
   imports: [
     SidePanel,
     SearchInput,
@@ -42,11 +42,11 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     SearchActiveFiltersButton,
   ],
   standalone: true,
-  templateUrl: './catalogue-component.html',
-  styleUrl: './catalogue-component.scss',
+  templateUrl: './search.html',
+  styleUrl: './search.scss',
   viewProviders: [provideIcons({ faSolidFilter, faSolidXmark })],
 })
-export class CatalogueComponent extends SearchBase {
+export class Search extends SearchBase {
   visible = false;
   filterPanelMode = signal<FilterPanelLayout>('side');
 

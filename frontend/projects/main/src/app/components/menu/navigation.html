@@ -3,14 +3,14 @@
     [model]="items()"
     class="h-full"
     [pt]="{
-      root: '!min-w-fit h-full transition-all duration-500 ease-in-out',
+      root: '!min-w-fit h-full transition-all duration-300 ease-in-out',
       itemContent: 'text-2xl',
       itemLabel: {
         class: {
           'overflow-hidden': true,
           'whitespace-nowrap': true,
           'transition-all': true,
-          'duration-500': true,
+          'duration-300': true,
           'ease-in-out': true,
           'max-w-0': isIconMode(),
           'opacity-0': isIconMode(),
@@ -24,15 +24,15 @@
     [dt]="dt"
   >
     <ng-template #start>
-      <div class="p-menu-list flex flex-row!">
+      <div class="p-menu-list flex flex-row! header-row">
         <a class="p-menu-item-link" role="menuitem" (click)="toggleMenu()">
           <ng-icon
             [name]="isIconMode() ? 'faSolidBars' : 'faSolidEllipsisVertical'"
             class="md:text-2xl"
           ></ng-icon>
         </a>
-        <a routerLink="/" [class.hidden]="isIconMode()">
-          <img [src]="logo" alt="Logo" class="h-[26px] md:h-[36px]" />
+        <a routerLink="/" [class.hidden]="isIconMode()" class="transition-all">
+          <img [src]="logo" alt="Logo" class="h-12 md:h-16" />
         </a>
       </div>
     </ng-template>
@@ -42,7 +42,19 @@
     </ng-template>
   </p-menu>
 
-  <p-drawer [(visible)]="isConfigurationVisible" header="Configure" position="right">
+  <p-tieredmenu
+    #addRecordMenu
+    [model]="addRecordItems()"
+    [popup]="true"
+    appendTo="body"
+  ></p-tieredmenu>
+
+  <p-drawer
+    [(visible)]="isConfigurationVisible"
+    [header]="'menu.settings' | translate"
+    position="right"
+    [pt]="{ header: 'header-row' }"
+  >
     <p-fieldset legend="Language">
       <app-language-switcher />
     </p-fieldset>
@@ -50,6 +62,7 @@
     <p-fieldset legend="Theme">
       <app-theme-designer [theme]="theme" />
     </p-fieldset>
+
     <p-fieldset legend="Config">
       <p-iftalabel>
         <textarea

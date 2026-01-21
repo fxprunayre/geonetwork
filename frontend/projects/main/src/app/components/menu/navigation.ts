@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, ElementRef, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -29,8 +29,9 @@ import { Fieldset } from 'primeng/fieldset';
 import { IftaLabel } from 'primeng/iftalabel';
 import { Menu } from 'primeng/menu';
 import { TextareaModule } from 'primeng/textarea';
+import { TieredMenu } from 'primeng/tieredmenu';
 import AppTheme from '../../app.theme';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MenuDesignTokens } from '@primeuix/themes/types/menu';
 import { Toast } from 'primeng/toast';
 
@@ -53,8 +54,10 @@ const ICONS = {
   selector: 'app-navigation',
   imports: [
     Menu,
+    TieredMenu,
     RouterLink,
     LanguageSwitcher,
+    TranslatePipe,
     ThemeDesigner,
     NgIcon,
     SharedModule,
@@ -147,6 +150,9 @@ export class Navigation implements OnInit {
         icon: 'faSolidPlus',
         visible: this.isAuthenticated(),
         ...this.itemConfig(),
+        command: (event: any) => {
+          this.addRecordMenu?.toggle(event.originalEvent);
+        },
       },
       {
         label: this.translateService.instant('menu.my.record'),
@@ -226,13 +232,54 @@ export class Navigation implements OnInit {
     },
   };
 
+  @ViewChild('addRecordMenu') addRecordMenu: TieredMenu | undefined;
+
+  addRecordItems = computed<MenuItem[]>(() => {
+    this.currentLang();
+    return [
+      {
+        label: this.translateService.instant('New dataset'),
+        icon: 'faSolidFile',
+        command: () => {
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Add record',
+            detail: 'From template',
+          });
+        },
+      },
+      {
+        label: this.translateService.instant('New Software'),
+        icon: 'faSolidCloudArrowUp',
+        command: () => {
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Add record',
+            detail: 'From software template',
+          });
+        },
+      },
+      {
+        label: this.translateService.instant('Import from file or URL'),
+        icon: 'faSolidArrowRightToBracket',
+        command: () => {
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Add record',
+            detail: 'Import from file or URL',
+          });
+        },
+      },
+    ];
+  });
+
   isIconMode = signal(true);
 
   isConfigurationVisible = signal(false);
 
   isAuthenticated = signal(false);
 
-  currentLang = signal(this.translateService.getCurrentLang());
+  currentLang = signal(this.translateService.getCurrentLang(), { equal: () => false });
 
   ngOnInit() {
     this.translateService.onLangChange.subscribe((event) => {

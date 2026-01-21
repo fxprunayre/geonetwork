@@ -1,9 +1,9 @@
-<div class="flex flex-row">
-  <div class="grow w-full">
+<div class="flex flex-row w-full">
+  <div class="flex flex-col w-full">
     <div
-      class="py-4 px-5 flex flex-col gap-4 bg-top-left bg-no-repeat bg-blend-overlay z-30 bg-primary/80 sticky top-0 bg-cover bg-image"
+      class="sticky top-0 z-10 w-full bg-top-left bg-no-repeat bg-blend-overlay bg-primary/80 bg-cover bg-image header-row"
     >
-      <div class="flex flex-col lg:flex-row items-center lg:gap-4">
+      <div class="mx-auto max-w-7xl px-6 py-6 flex flex-col lg:flex-row items-center lg:gap-4">
         <app-search-input
           class="w-full grow"
           [autocompleteEnabled]="true"
@@ -39,31 +39,28 @@
         [header]="'search.filter.title' | translate"
         [modal]="false"
         position="right"
+        [pt]="{ header: 'header-row' }"
       >
         <app-side-panel />
       </p-drawer>
     }
     @case ('side') {
       <div
-        class="w-full h-screen sticky top-0 self-start transition-all duration-500 ease-in-out overflow-hidden min-w-0 max-w-[400px] border-l-2 border-primary-200"
-        [ngClass]="visible ? 'sm:w-1/3 sm:opacity-100' : 'sm:w-0 sm:opacity-0'"
+        class="w-full h-screen sticky top-0 self-start transition-all duration-300 ease-in-out min-w-0 max-w-[400px] border-primary-50 overflow-x-hidden"
+        [ngClass]="
+          visible
+            ? 'sm:w-1/3 sm:opacity-100 border-l-2 shadow overflow-y-auto'
+            : 'sm:w-0! sm:opacity-0 border-none shadow-none'
+        "
       >
-        <div class="flex flex-row p-4 items-center text-primary border-b-2 border-primary-200">
-          <div class="grow text-xl font-bold">
+        <div class="p-drawer-header header-row">
+          <div class="p-drawer-title">
             <ng-icon name="faSolidFilter"></ng-icon>
             {{ 'search.filter.title' | translate }}
           </div>
-          <div>
-            <p-button
-              class="mb-4"
-              (click)="visible = !visible"
-              size="small"
-              variant="text"
-              rounded="true"
-            >
-              <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
-            </p-button>
-          </div>
+          <p-button (click)="visible = !visible" variant="text" rounded="true">
+            <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
+          </p-button>
         </div>
         <app-side-panel />
       </div>

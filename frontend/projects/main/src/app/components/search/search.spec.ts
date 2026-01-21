@@ -5,7 +5,7 @@ import {
   provideMockTranslateService,
   SearchStore,
 } from 'gn-library';
-import { CatalogueComponent } from './catalogue-component';
+import { Search } from './search';
 import { provideRouter } from '@angular/router';
 import { routes } from '../../app.routes';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -13,9 +13,9 @@ import { fireEvent, render, screen } from '@testing-library/angular';
 import { userEvent } from '@testing-library/user-event';
 import { signal } from '@angular/core';
 
-describe('CatalogueComponent', () => {
+describe('Search', () => {
   it('should provide a search box', async () => {
-    await render(CatalogueComponent, {
+    await render(Search, {
       providers: [
         SearchStore,
         provideMockTranslateService(),

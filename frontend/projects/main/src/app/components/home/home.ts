@@ -6,6 +6,6 @@ import { SecondSection } from './second-section/second-section';
   selector: 'app-home',
   standalone: true,
   imports: [FirstSection, SecondSection],
-  templateUrl: './home-component.html',
+  templateUrl: './home.html',
 })
-export class HomeComponent {}
+export class Home {}
