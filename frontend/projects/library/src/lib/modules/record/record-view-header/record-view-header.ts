@@ -5,7 +5,7 @@ import { MarkdownPipe } from 'ngx-markdown';
 import { PrimeTemplate } from 'primeng/api';
 import { Card } from 'primeng/card';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
-import { RecordDistributionBadges } from '../distributions/record-distribution-badges/record-distribution-badges';
+import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
 import { RecordFieldOverviewComponent } from '../record-field-overview/record-field-overview.component';
 import { RecordFieldType } from '../record-field-type/record-field-type';

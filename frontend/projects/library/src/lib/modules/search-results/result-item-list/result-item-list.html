@@ -2,12 +2,16 @@
   @let description = result.resourceAbstractObject?.['default'] || '';
   <ng-template #content>
     <div
-      class="w-full lg:w-[190px] lg:aspect-square lg:shrink-0 lg:overflow-hidden rounded-(--p-border-radius-md)"
+      class="md:max-w-1/4 rounded-t-(--p-border-radius-md) md:rounded-l-(--p-border-radius-md) border-b md:border-r border-surface-100"
     >
-      <app-record-field-overview [field]="result.overview?.[0]" [preview]="false" />
+      <app-record-field-overview
+        [field]="result.overview?.[0]"
+        [preview]="false"
+        styleClass="rounded-t-(--p-border-radius-md) md:rounded-l-(--p-border-radius-md)"
+      />
     </div>
 
-    <div class="flex flex-col justify-between items-start gap-2 w-full">
+    <div class="flex flex-col p-6 justify-between items-start gap-2 w-full">
       <div class="flex justify-between items-center w-full">
         <app-record-field-type [record]="result" />
         <div>
@@ -29,7 +33,7 @@
         class="text-primary font-bold text-xl line-clamp-2"
       />
 
-      <span class="text-base line-clamp-3">
+      <span class="text-base line-clamp-3 break-all">
         {{ description }}
       </span>
 
@@ -43,7 +47,7 @@
       [title]="description"
       target="_blank"
       (click)="handleRecordClick()"
-      class="flex flex-col lg:flex-row items-start gap-4 cursor-pointer rounded-(--p-border-radius-md) p-6 border border-surface-100 transition-shadow hover:shadow-md"
+      class="flex flex-col lg:flex-row items-stretch gap-0 cursor-pointer rounded-(--p-border-radius-md) border border-surface-100 transition-shadow hover:shadow-md"
     >
       <ng-container *ngTemplateOutlet="content" />
     </a>
@@ -52,7 +56,7 @@
       [routerLink]="[RECORD_ROUTE_PATH, result.info?._id]"
       [title]="description"
       (click)="handleRecordClick()"
-      class="flex flex-col lg:flex-row items-start gap-4 cursor-pointer rounded-(--p-border-radius-md) p-6 border border-surface-100 transition-shadow hover:shadow-md"
+      class="flex flex-col lg:flex-row items-stretch gap-0 cursor-pointer rounded-(--p-border-radius-md) border border-surface-100 transition-shadow hover:shadow-md"
     >
       <ng-container *ngTemplateOutlet="content" />
     </a>

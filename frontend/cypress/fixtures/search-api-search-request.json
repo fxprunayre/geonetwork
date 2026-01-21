@@ -72,9 +72,11 @@
         }
       },
       "meta": {
-        "collapsed": true,
+        "collapsed": false,
         "orderByTranslation": true,
-        "translateOnLoad": true
+        "translateOnLoad": true,
+        "layout": "tree",
+        "refreshPolicy": "none"
       }
     },
     "th_httpinspireeceuropaeutheme-theme_tree.key": {
@@ -129,7 +131,7 @@
       "terms": {
         "field": "resourceType",
         "size": 10,
-        "exclude": "map/.*"
+        "exclude": "map/.*|publication-.*"
       },
       "meta": {
         "collapsed": true,

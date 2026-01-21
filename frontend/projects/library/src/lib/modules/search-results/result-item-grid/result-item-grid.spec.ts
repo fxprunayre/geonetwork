@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { provideRouter } from '@angular/router';
-import { provideMockTranslateService } from '../../../shared/translate.service.mock.spec';
-import { provideMockSearchService } from '../../search/search.store.mock.spec';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
+import { provideMockSearchService } from '../../search/search-store.mock.spec';
 import { ResultItemGrid } from './result-item-grid';
 
 describe('ResultItemGrid', () => {

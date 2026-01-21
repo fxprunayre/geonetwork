@@ -215,7 +215,11 @@ export class MenuComponent implements OnInit {
     },
     list: {
       gap: '6px',
-      padding: '16px',
+      padding: '0px',
+    },
+    item: {
+      padding: '12px 16px',
+      borderRadius: '0',
     },
     colorScheme: {
       light: {

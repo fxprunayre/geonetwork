@@ -4,7 +4,7 @@ import { SearchActiveFilters } from './search-active-filters.component';
 import { MockProvider } from 'ng-mocks';
 import { TranslateService } from '@ngx-translate/core';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideMockSearchService } from '../../search/search.store.mock.spec';
+import { provideMockSearchService } from '../../search/search-store.mock.spec';
 
 describe('ActiveFilters', () => {
   let component: SearchActiveFilters;

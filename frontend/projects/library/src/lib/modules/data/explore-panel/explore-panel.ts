@@ -3,7 +3,7 @@ import { DatasourceSelect } from '../datasource-select/datasource-select';
 import { Fieldset } from 'primeng/fieldset';
 import { NgIcon } from '@ng-icons/core';
 import { Perspective } from '../perspective/perspective';
-import { Datasource, DuckDbService } from '../duck-db.service';
+import { Datasource, DuckDbService } from '../duck-db-service';
 import { IndexRecord } from 'gn-api-client';
 import { TranslatePipe } from '@ngx-translate/core';
 

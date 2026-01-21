@@ -1,0 +1,64 @@
+<div #resultsContainer>
+  @if (search.isLoading()) {
+    <!-- <app-loading-mask [loading]="search.isLoading()" /> -->
+    <ng-template #defaultSearchProgressTemplate>
+      @switch (layout()) {
+        @case ('list') {
+          <div class="results-list grid gap-4">
+            @for (i of [].constructor(search.pageSize()); track $index) {
+              <app-result-item-list />
+            }
+          </div>
+        }
+        @case ('grid') {
+          <div
+            class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          >
+            @for (i of [].constructor(search.pageSize()); track $index) {
+              <app-result-item-grid />
+            }
+          </div>
+        }
+      }
+    </ng-template>
+
+    <ng-container
+      *ngTemplateOutlet="
+        searchProgressTemplate || defaultSearchProgressTemplate;
+        context: { $implicit: search }
+      "
+    ></ng-container>
+  } @else {
+    @if (!search.hasResults()) {
+      <app-no-result-found></app-no-result-found>
+    } @else {
+      <div class="card">
+        @switch (layout()) {
+          @case ('list') {
+            <div class="results-list grid gap-4">
+              @for (result of search.results(); track $index) {
+                <app-result-item-list
+                  [result]="result"
+                  (onRecordClick)="handleRecordClick($event)"
+                />
+              }
+            </div>
+          }
+          @case ('grid') {
+            <div
+              class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+            >
+              @for (result of search.results(); track $index) {
+                <app-result-item-grid
+                  [result]="result"
+                  (onRecordClick)="handleRecordClick($event)"
+                />
+              }
+            </div>
+          }
+        }
+        <app-results-paginator [scope]="scope()" [resultsContainerRef]="resultsContainer" />
+      </div>
+    }
+  }
+</div>

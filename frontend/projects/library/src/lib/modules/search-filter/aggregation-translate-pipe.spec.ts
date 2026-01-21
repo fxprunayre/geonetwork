@@ -1,7 +1,7 @@
 import { AggregationTranslatePipe } from './aggregation-translate-pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { TestBed } from '@angular/core/testing';
-import { provideMockTranslateService } from '../../shared/translate.service.mock.spec';
+import { provideMockTranslateService } from '../../shared/translate-service.mock.spec';
 
 describe('AggregationTranslatePipe', () => {
   let pipe: AggregationTranslatePipe;

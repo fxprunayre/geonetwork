@@ -1,8 +1,8 @@
 import { Directive, inject, input, model, OnInit } from '@angular/core';
-import { SearchService } from './search.service';
+import { SearchService } from './search-service';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
-import { DEFAULT_PAGE_SIZE, DEFAULT_SORT } from './search.store.model';
-import { SearchStore } from './search.store';
+import { DEFAULT_PAGE_SIZE, DEFAULT_SORT } from './search-store.model';
+import { SearchStore } from './search-store';
 import { DEFAULT_LANGUAGE } from '../config/config.loader';
 
 @Directive({

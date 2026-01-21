@@ -7,8 +7,8 @@ import {
   APPLICATION_CONFIGURATION,
   ResultLayoutSwitcher,
   SearchAppLayout,
-  SearchResultsNumber,
-  SortResults,
+  ResultsNumberComponent,
+  ResultsSorterComponent,
 } from 'gn-library';
 import { Card } from 'primeng/card';
 
@@ -19,9 +19,9 @@ import { Card } from 'primeng/card';
     CommonModule,
     FormsModule,
     ButtonModule,
-    SortResults,
+    ResultsSorterComponent,
     Aggregation,
-    SearchResultsNumber,
+    ResultsNumberComponent,
     Card,
     ResultLayoutSwitcher,
   ],

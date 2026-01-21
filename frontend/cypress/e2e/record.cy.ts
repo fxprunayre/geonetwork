@@ -98,7 +98,7 @@ describe('Record page', () => {
       .should('contain', 'January 1, 2012');
     cy.get('app-record-field-dates')
       .contains('div', 'Publication')
-      .should('contain', 'January 1, 2025');
+      .should('contain', 'January 1, 2026');
 
     // Usage and Access
     cy.get('[data-testid="accordion-panel-usageAndAccess"] .p-accordionheader').contains(
@@ -150,7 +150,7 @@ describe('Record page', () => {
     cy.get('[data-testid="accordion-panel-coverage"]')
       .contains('div', 'Temporal coverage')
       .should('contain', '1973')
-      .should('contain', 'Now');
+      .should('contain', 'On going');
 
     // Spatial Information
     cy.get('[data-testid="accordion-panel-spatialInfo"] .p-accordionheader').contains(
@@ -199,7 +199,7 @@ describe('Record page', () => {
     );
     cy.get('[data-testid="accordion-panel-classification"] app-keyword-list').should(
       'have.length',
-      11,
+      12,
     );
     cy.get('[data-testid="accordion-panel-classification"]')
       .contains('app-keyword-list', 'Cadre Réglementaire - SIMM')
@@ -258,7 +258,7 @@ describe('Record page', () => {
       .should('have.attr', 'title', 'WWW:LINK');
     cy.get('[data-testid="distribution-panel-links"]')
       .contains('a', ' La base de données Quadrige ')
-      .should('have.attr', 'href', 'https://wwz.ifremer.fr/envlit/Quadrige-la-base-de-donnees');
+      .should('have.attr', 'href', 'https://envlit.ifremer.fr/Quadrige-la-base-de-donnees');
   });
 
   it('should display the explore tab content', () => {
@@ -275,22 +275,19 @@ describe('Record page', () => {
     cy.get('p-tablist p-tab[value="citation"]').contains('Citation').click();
 
     cy.wait('@apiCitationFormats');
-    cy.get('app-citation-component p-togglebutton').should('have.length', 4);
+    cy.get('app-record-citation p-togglebutton').should('have.length', 4);
     cy.wait('@apiCitationFormatHtml');
-    cy.get('app-citation-component p-togglebutton.p-togglebutton-checked').should(
-      'contain',
-      'HTML',
-    );
-    cy.get('app-citation-component p-panel div blockquote span').should('contain', 'Quadrige');
+    cy.get('app-record-citation p-togglebutton.p-togglebutton-checked').should('contain', 'HTML');
+    cy.get('app-record-citation p-panel div blockquote span').should('contain', 'Quadrige');
 
-    cy.get('app-citation-component p-togglebutton').contains('TEXT').click();
+    cy.get('app-record-citation p-togglebutton').contains('TEXT').click();
     cy.wait('@apiCitationFormatTxt');
-    cy.get('app-citation-component p-panel div').should(
+    cy.get('app-record-citation p-panel div').should(
       'contain',
       'Quadrige (2026). Données par paramètre. Quadrige. https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea',
     );
 
-    cy.get('app-citation-component app-copy-input p-button')
+    cy.get('app-record-citation app-copy-input p-button')
       .should('have.attr', 'title', 'Copy')
       .find('button')
       .click();
@@ -302,7 +299,7 @@ describe('Record page', () => {
       });
     });
 
-    cy.get('app-citation-component a[download]')
+    cy.get('app-record-citation a[download]')
       .should('have.attr', 'title', 'Download')
       .should(
         'have.attr',
@@ -310,9 +307,9 @@ describe('Record page', () => {
         'data:text/plain;charset=utf-8,Quadrige%20(2026).%20Donn%C3%A9es%20par%20param%C3%A8tre.%20Quadrige.%20https%3A%2F%2Fdoi.org%2F10.12770%2Fcf5048f6-5bbf-4e44-ba74-e6f429af51ea',
       );
 
-    cy.get('app-citation-component p-togglebutton').contains('RIS').click();
+    cy.get('app-record-citation p-togglebutton').contains('RIS').click();
     cy.wait('@apiCitationFormatRis');
-    cy.get('app-citation-component p-panel pre').should('contain', 'TI  - Données par paramètre');
+    cy.get('app-record-citation p-panel pre').should('contain', 'TI  - Données par paramètre');
 
     cy.get('app-record-harvester-logo img')
       .should('have.attr', 'alt', 'Catalogue logo')

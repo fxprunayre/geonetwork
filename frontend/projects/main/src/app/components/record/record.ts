@@ -5,7 +5,7 @@ import { ButtonIcon, ButtonLabel, ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidArrowLeft } from '@ng-icons/font-awesome/solid';
-import { RecordViewComponent } from 'gn-library';
+import { RecordView } from 'gn-library';
 import { TranslatePipe } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DEFAULT_TAB } from 'gn-library';
@@ -15,7 +15,7 @@ import { HistoryService, RECORD_ROUTE_PATH, SEARCH_ROUTE_PATH } from 'gn-library
   selector: 'app-record',
   standalone: true,
   imports: [
-    RecordViewComponent,
+    RecordView,
     CommonModule,
     ButtonModule,
     ButtonLabel,

@@ -12,12 +12,12 @@ import {
 import { IndexRecord } from 'gn-api-client';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
-import { RecordDistributionBadges } from '../../record/distributions/record-distribution-badges/record-distribution-badges';
+import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
 import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 import { RecordFieldType } from '../../record/record-field-type/record-field-type';
-import { RECORD_ROUTE_PATH } from '../../search/search.constant';
+import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 
 @Component({
   selector: 'app-result-item-list',

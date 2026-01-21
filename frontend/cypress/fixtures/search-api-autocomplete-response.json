@@ -1,5 +1,5 @@
 {
-  "took": 46,
+  "took": 16,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -53,6 +53,68 @@
       },
       {
         "_index": "geo-records",
+        "_id": "7c3e1e5c-89d4-46c3-8d39-5a02fe4f3c18",
+        "_score": 23.0,
+        "_source": {
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Rhône-Méditerranée",
+            "langfre": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Rhône-Méditerranée"
+          },
+          "id": "337399239",
+          "owner": "215",
+          "groupOwner": "335589483",
+          "op0": ["1", "335589483"],
+          "op2": "335589483",
+          "op1": ["1", "335589483"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "335589483",
+          "op5": ["1", "335589483"]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "a26f1c1f-fe8d-4943-a621-b2d282cc2b5c",
+        "_score": 23.0,
+        "_source": {
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Rhône-Méditerranée",
+            "langfre": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Rhône-Méditerranée"
+          },
+          "id": "337399238",
+          "owner": "215",
+          "groupOwner": "335589483",
+          "op0": ["1", "335589483"],
+          "op2": "335589483",
+          "op1": ["1", "335589483"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "335589483",
+          "op5": ["1", "335589483"]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
         "_id": "ec7df5e6-37b8-4692-aad0-84e16b742bea",
         "_score": 23.0,
         "_source": {
@@ -62,6 +124,37 @@
             "langfre": "Sediments (ROCCH) - extraction \"Surval données par paramètre (point)\""
           },
           "id": "337389171",
+          "owner": "215",
+          "groupOwner": "335589483",
+          "op0": ["1", "335589483"],
+          "op2": "335589483",
+          "op1": ["1", "335589483"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "335589483",
+          "op5": ["1", "335589483"]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "0fcdf5e2-0dcc-4f05-bb35-48af07a6a896",
+        "_score": 23.0,
+        "_source": {
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Mollusques (REMI) - extraction \"Surval données par paramètre (point)\"",
+            "langfre": "Mollusques (REMI) - extraction \"Surval données par paramètre (point)\""
+          },
+          "id": "337395851",
           "owner": "215",
           "groupOwner": "335589483",
           "op0": ["1", "335589483"],
@@ -115,15 +208,46 @@
       },
       {
         "_index": "geo-records",
-        "_id": "138ae1da-392b-4cde-9a07-b7c781cba48a",
+        "_id": "792b3e07-80b0-4324-8578-4a8b9646c421",
         "_score": 23.0,
         "_source": {
           "resourceType": ["dataset"],
           "resourceTitleObject": {
-            "default": "Mollusques (ROCCH) - extraction \"Surval données par paramètre (point)\"",
-            "langfre": "Mollusques (ROCCH) - extraction \"Surval données par paramètre (point)\""
+            "default": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Artois-Picardie",
+            "langfre": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Artois-Picardie"
           },
-          "id": "337389168",
+          "id": "337399222",
+          "owner": "215",
+          "groupOwner": "335589483",
+          "op0": ["1", "335589483"],
+          "op2": "335589483",
+          "op1": ["1", "335589483"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "335589483",
+          "op5": ["1", "335589483"]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "75ba67e0-b1db-4d0d-b707-9440b211bdea",
+        "_score": 23.0,
+        "_source": {
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Mollusques (REPHYTOX) - extraction \"Surval données par paramètre (point)\"",
+            "langfre": "Mollusques (REPHYTOX) - extraction \"Surval données par paramètre (point)\""
+          },
+          "id": "337395856",
           "owner": "215",
           "groupOwner": "335589483",
           "op0": ["1", "335589483"],
@@ -177,6 +301,37 @@
       },
       {
         "_index": "geo-records",
+        "_id": "78ad4196-9dc5-4334-8b48-9fc44cad6778",
+        "_score": 23.0,
+        "_source": {
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Bivalves (REPHYTOX) - catégorisation de la couche \"Mollusques (REPHYTOX) - extraction \"Surval données par paramètre (point)\"\"",
+            "langfre": "Bivalves (REPHYTOX) - catégorisation de la couche \"Mollusques (REPHYTOX) - extraction \"Surval données par paramètre (point)\"\""
+          },
+          "id": "337395857",
+          "owner": "215",
+          "groupOwner": "335589483",
+          "op0": ["1", "335589483"],
+          "op2": "335589483",
+          "op1": ["1", "335589483"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "335589483",
+          "op5": ["1", "335589483"]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
         "_id": "abd1ead2-0e48-4d49-b02b-4969393b96b0",
         "_score": 23.0,
         "_source": {
@@ -208,15 +363,46 @@
       },
       {
         "_index": "geo-records",
-        "_id": "0fcdf5e2-0dcc-4f05-bb35-48af07a6a896",
+        "_id": "cd20ed8b-8088-42b4-8e0f-a91e40675032",
         "_score": 23.0,
         "_source": {
           "resourceType": ["dataset"],
           "resourceTitleObject": {
-            "default": "Mollusques (REMI) - extraction \"Surval données par paramètre (point)\"",
-            "langfre": "Mollusques (REMI) - extraction \"Surval données par paramètre (point)\""
+            "default": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Artois-Picardie",
+            "langfre": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Artois-Picardie"
           },
-          "id": "337395851",
+          "id": "337399219",
+          "owner": "215",
+          "groupOwner": "335589483",
+          "op0": ["1", "335589483"],
+          "op2": "335589483",
+          "op1": ["1", "335589483"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "335589483",
+          "op5": ["1", "335589483"]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "289b4caa-a382-4022-a070-7c697646bde7",
+        "_score": 23.0,
+        "_source": {
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Seine-Normandie",
+            "langfre": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Seine-Normandie"
+          },
+          "id": "337399226",
           "owner": "215",
           "groupOwner": "335589483",
           "op0": ["1", "335589483"],
@@ -301,15 +487,15 @@
       },
       {
         "_index": "geo-records",
-        "_id": "792b3e07-80b0-4324-8578-4a8b9646c421",
+        "_id": "e26c66f1-fbf3-4418-89f3-b0846999f5f2",
         "_score": 23.0,
         "_source": {
           "resourceType": ["dataset"],
           "resourceTitleObject": {
-            "default": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Artois-Picardie",
-            "langfre": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Artois-Picardie"
+            "default": "Bivalves (REPHY) - catégorisation de la couche \"Mollusques (REPHY) - extraction \"Surval données par paramètre (point)\"\"",
+            "langfre": "Bivalves (REPHY) - catégorisation de la couche \"Mollusques (REPHY) - extraction \"Surval données par paramètre (point)\"\""
           },
-          "id": "337399222",
+          "id": "337395855",
           "owner": "215",
           "groupOwner": "335589483",
           "op0": ["1", "335589483"],
@@ -363,15 +549,15 @@
       },
       {
         "_index": "geo-records",
-        "_id": "0a1f5468-fad3-4528-b43a-bdde4f726d68",
+        "_id": "ae37c62f-447d-4e3a-8cf8-8b6f935d6a7e",
         "_score": 23.0,
         "_source": {
           "resourceType": ["dataset"],
           "resourceTitleObject": {
-            "default": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Seine-Normandie",
-            "langfre": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Seine-Normandie"
+            "default": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Loire-Bretagne",
+            "langfre": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Loire-Bretagne"
           },
-          "id": "337399225",
+          "id": "337399228",
           "owner": "215",
           "groupOwner": "335589483",
           "op0": ["1", "335589483"],
@@ -394,201 +580,15 @@
       },
       {
         "_index": "geo-records",
-        "_id": "289b4caa-a382-4022-a070-7c697646bde7",
+        "_id": "138ae1da-392b-4cde-9a07-b7c781cba48a",
         "_score": 23.0,
         "_source": {
           "resourceType": ["dataset"],
           "resourceTitleObject": {
-            "default": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Seine-Normandie",
-            "langfre": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Seine-Normandie"
+            "default": "Mollusques (ROCCH) - extraction \"Surval données par paramètre (point)\"",
+            "langfre": "Mollusques (ROCCH) - extraction \"Surval données par paramètre (point)\""
           },
-          "id": "337399226",
-          "owner": "215",
-          "groupOwner": "335589483",
-          "op0": ["1", "335589483"],
-          "op2": "335589483",
-          "op1": ["1", "335589483"],
-          "documentStandard": "iso19115-3.2018",
-          "op3": "335589483",
-          "op5": ["1", "335589483"]
-        },
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "78ad4196-9dc5-4334-8b48-9fc44cad6778",
-        "_score": 23.0,
-        "_source": {
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Bivalves (REPHYTOX) - catégorisation de la couche \"Mollusques (REPHYTOX) - extraction \"Surval données par paramètre (point)\"\"",
-            "langfre": "Bivalves (REPHYTOX) - catégorisation de la couche \"Mollusques (REPHYTOX) - extraction \"Surval données par paramètre (point)\"\""
-          },
-          "id": "337395857",
-          "owner": "215",
-          "groupOwner": "335589483",
-          "op0": ["1", "335589483"],
-          "op2": "335589483",
-          "op1": ["1", "335589483"],
-          "documentStandard": "iso19115-3.2018",
-          "op3": "335589483",
-          "op5": ["1", "335589483"]
-        },
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "75ba67e0-b1db-4d0d-b707-9440b211bdea",
-        "_score": 23.0,
-        "_source": {
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Mollusques (REPHYTOX) - extraction \"Surval données par paramètre (point)\"",
-            "langfre": "Mollusques (REPHYTOX) - extraction \"Surval données par paramètre (point)\""
-          },
-          "id": "337395856",
-          "owner": "215",
-          "groupOwner": "335589483",
-          "op0": ["1", "335589483"],
-          "op2": "335589483",
-          "op1": ["1", "335589483"],
-          "documentStandard": "iso19115-3.2018",
-          "op3": "335589483",
-          "op5": ["1", "335589483"]
-        },
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "7c3e1e5c-89d4-46c3-8d39-5a02fe4f3c18",
-        "_score": 23.0,
-        "_source": {
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Rhône-Méditerranée",
-            "langfre": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Rhône-Méditerranée"
-          },
-          "id": "337399239",
-          "owner": "215",
-          "groupOwner": "335589483",
-          "op0": ["1", "335589483"],
-          "op2": "335589483",
-          "op1": ["1", "335589483"],
-          "documentStandard": "iso19115-3.2018",
-          "op3": "335589483",
-          "op5": ["1", "335589483"]
-        },
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "48790f81-2f79-42c4-81ce-3aea31a7117b",
-        "_score": 23.0,
-        "_source": {
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Adour-Garonne",
-            "langfre": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Adour-Garonne"
-          },
-          "id": "337399235",
-          "owner": "215",
-          "groupOwner": "335589483",
-          "op0": ["1", "335589483"],
-          "op2": "335589483",
-          "op1": ["1", "335589483"],
-          "documentStandard": "iso19115-3.2018",
-          "op3": "335589483",
-          "op5": ["1", "335589483"]
-        },
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "b5e64943-91cf-4aec-ac09-4db8a9f0b9cf",
-        "_score": 23.0,
-        "_source": {
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Adour-Garonne",
-            "langfre": "Mollusques (REMI) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Adour-Garonne"
-          },
-          "id": "337399236",
-          "owner": "215",
-          "groupOwner": "335589483",
-          "op0": ["1", "335589483"],
-          "op2": "335589483",
-          "op1": ["1", "335589483"],
-          "documentStandard": "iso19115-3.2018",
-          "op3": "335589483",
-          "op5": ["1", "335589483"]
-        },
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "a26f1c1f-fe8d-4943-a621-b2d282cc2b5c",
-        "_score": 23.0,
-        "_source": {
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Rhône-Méditerranée",
-            "langfre": "Mollusques (ROCCH) - extraction de \"Surval données par paramètre (point)\" - bassin hydrographique Rhône-Méditerranée"
-          },
-          "id": "337399238",
+          "id": "337389168",
           "owner": "215",
           "groupOwner": "335589483",
           "op0": ["1", "335589483"],

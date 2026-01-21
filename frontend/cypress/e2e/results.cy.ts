@@ -46,9 +46,9 @@ describe('Results', () => {
     cy.wait('@apiMainSearchByUuid').then((search) => {
       const hits = search.response?.body.hits.hits;
 
-      cy.get('app-result-view').find('app-result-item-list').should('have.length', hits.length);
+      cy.get('app-results-view').find('app-result-item-list').should('have.length', hits.length);
 
-      cy.get('app-result-view')
+      cy.get('app-results-view')
         .find('app-result-item-list')
         .first()
         .within(() => {
@@ -63,9 +63,9 @@ describe('Results', () => {
       const hits = search.response?.body.hits.hits;
 
       cy.get('app-result-layout-switcher [title="Grid view"]').click();
-      cy.get('app-result-view').find('app-result-item-grid').should('have.length', hits.length);
+      cy.get('app-results-view').find('app-result-item-grid').should('have.length', hits.length);
 
-      cy.get('app-result-view')
+      cy.get('app-results-view')
         .find('app-result-item-grid')
         .first()
         .within(() => {
@@ -79,7 +79,7 @@ describe('Results', () => {
     cy.wait('@apiMainSearchByUuid');
 
     cy.viewport(1024, 768);
-    cy.get('app-result-view app-result-item-list')
+    cy.get('app-results-view app-result-item-list')
       .first()
       .within(() => {
         cy.get('app-record-distribution-badges p-button').each(($btn) => {
@@ -88,7 +88,7 @@ describe('Results', () => {
       });
 
     cy.viewport(1600, 960); // Tailwind 2xl is 1536px
-    cy.get('app-result-view app-result-item-list')
+    cy.get('app-results-view app-result-item-list')
       .first()
       .within(() => {
         cy.get('app-record-distribution-badges p-button').each(($btn) => {

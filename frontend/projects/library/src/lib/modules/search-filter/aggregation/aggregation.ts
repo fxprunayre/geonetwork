@@ -1,0 +1,181 @@
+import {
+  Component,
+  computed,
+  effect,
+  EventEmitter,
+  inject,
+  input,
+  Output,
+  signal,
+  ElementRef,
+  HostListener,
+  viewChild,
+} from '@angular/core';
+import { Select, SelectChangeEvent } from 'primeng/select';
+import { ButtonModule } from 'primeng/button';
+import { SearchBase } from '../../search/search-base/search-base';
+import { FormsModule } from '@angular/forms';
+import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
+import { AggregationTree } from '../aggregation-tree/aggregation-tree';
+import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
+import { AggregationLayout } from 'gn-api-client';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { SearchFilterChange } from '../../search/search-store.model';
+import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
+import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
+import { AggregationService } from '../aggregation-service';
+
+export type AggregationBucketType = {
+  key: string | number;
+  label: string;
+  doc_count: number;
+};
+
+@Component({
+  selector: 'app-aggregation',
+  standalone: true,
+  imports: [
+    Select,
+    ButtonModule,
+    FormsModule,
+    AggregationBucket,
+    AggregationTree,
+    MultiSelect,
+    NgTemplateOutlet,
+    TranslatePipe,
+  ],
+  providers: [AggregationTranslatePipe, DecimalPipe],
+  templateUrl: './aggregation.html',
+})
+export class Aggregation extends SearchBase {
+  keyName = input.required<string>();
+  displayType = input<AggregationLayout | undefined>();
+
+  @Output()
+  onSelected = new EventEmitter<SearchFilterChange>();
+
+  DISPLAY_FILTER_THRESHOLD = 10;
+
+  translateService = inject(TranslateService);
+  aggregationService = inject(AggregationService);
+  aggregationTranslatePipe = inject(AggregationTranslatePipe);
+  decimalPipe = inject(DecimalPipe);
+  elementRef = inject(ElementRef);
+  multiSelect = viewChild(MultiSelect);
+
+  selectedDropdownOptions = signal<AggregationBucketType[]>([]);
+
+  constructor() {
+    super();
+    effect(() => {
+      this.selectedDropdownOptions.set(
+        this.buckets().filter((bucket) => this.search.isFilterActive(this.keyName(), bucket.key)),
+      );
+      this.aggregationService.loadAggregationTranslation(
+        this.keyName(),
+        this.search.aggregations()[this.keyName()],
+        this.search.aggregationsConfig(),
+      );
+    });
+  }
+
+  displayFilter = computed(() => {
+    return this.buckets().length > this.DISPLAY_FILTER_THRESHOLD;
+  });
+
+  isInputFilter = computed(() => {
+    return this.displayFilter() && ['checkbox', 'button', 'card'].includes(this.layout());
+  });
+
+  buckets = computed(() => {
+    let buckets = this.search.aggregations()[this.keyName()]?.buckets || [];
+    if (Array.isArray(buckets)) {
+      return buckets.map((bucket) => {
+        return {
+          key: bucket.key,
+          label: `${this.aggregationTranslatePipe.transform(bucket.key, this.keyName())} (${this.decimalPipe.transform(bucket.doc_count, undefined, this.translateService.getCurrentLang())})`,
+          doc_count: bucket.doc_count,
+        } as AggregationBucketType;
+      });
+    }
+    return [];
+  });
+
+  layout = computed(() => {
+    return (
+      this.displayType() || this.search.aggregations()[this.keyName()].meta?.layout || 'checkbox'
+    );
+  });
+
+  placeholder = computed(() => {
+    return `${this.translateService.instant('search.aggregations.' + this.keyName())}`;
+  });
+
+  handleChange(event: SelectChangeEvent) {
+    this.filter({
+      field: this.keyName(),
+      values: event.value === null ? [] : [event.value.key],
+      add: true,
+    });
+  }
+
+  handleMultiSelectChange(event: MultiSelectChangeEvent) {
+    const isSelected =
+      event.itemValue &&
+      event.value.find((item: any) => {
+        return item.key === event.itemValue.key;
+      }) !== undefined;
+
+    const values = [];
+    if (event.itemValue) {
+      values.push(event.itemValue.key);
+    } else if (event.value.length > 0) {
+      event.value.forEach((item: any) => {
+        values.push(item.key);
+      });
+    }
+
+    this.filter({
+      field: this.keyName(),
+      values: values,
+      add: isSelected,
+    });
+  }
+
+  handleMultiSelectClear() {
+    this.search.clearFilter(this.keyName());
+  }
+
+  filter(event: SearchFilterChange, clear: boolean = false) {
+    if (this.onSelected.observed) {
+      this.onSelected.emit(event);
+      return;
+    }
+
+    if (event.values.length === 0) {
+      this.search.clearFilter(this.keyName());
+    } else if (event.add) {
+      const clearFilters = this.layout() === 'tree';
+      this.search.addFilter(this.keyName(), event.values, clearFilters);
+    } else if (!event.add) {
+      this.search.removeFilter(this.keyName(), event.values[0]);
+    }
+  }
+
+  // FIXME: ShadowDOM:
+  // Listen for clicks outside the component to close the overlay
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: PointerEvent) {
+    const multiSelect = this.multiSelect();
+    if (!multiSelect?.overlayVisible) {
+      return;
+    }
+
+    const clickPath = event.composedPath();
+
+    // Check if click is inside the component
+    if (!clickPath.includes(this.elementRef.nativeElement)) {
+      multiSelect.hide();
+    }
+  }
+}

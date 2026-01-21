@@ -6,12 +6,9 @@
   >
     <h1>Search 1</h1>
     <app-search-input [scope]="'search1'" class="w-full"></app-search-input>
-    <app-search-results-number
-      [scope]="'search1'"
-      class="font-semibold text-primary me-4 text-base"
-    />
-    <app-sort-results [scope]="'search1'" />
-    <app-result-view [scope]="'search1'" layout="grid" />
+    <app-results-number [scope]="'search1'" class="font-semibold text-primary me-4 text-base" />
+    <app-results-sorter [scope]="'search1'" />
+    <app-results-view [scope]="'search1'" layout="grid" />
   </div>
   <div
     appSearchContext="search2"
@@ -20,11 +17,8 @@
   >
     <h1>Search 2</h1>
     <app-search-input [scope]="'search2'" class="w-full"></app-search-input>
-    <app-search-results-number
-      [scope]="'search2'"
-      class="font-semibold text-primary me-4 text-base"
-    />
-    <app-sort-results [scope]="'search2'" />
-    <app-result-view [scope]="'search2'" layout="grid" />
+    <app-results-number [scope]="'search2'" class="font-semibold text-primary me-4 text-base" />
+    <app-results-sorter [scope]="'search2'" />
+    <app-results-view [scope]="'search2'" layout="grid" />
   </div>
 </div>

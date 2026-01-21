@@ -16,10 +16,10 @@ import {
   AccordionTabOpenEvent,
 } from 'primeng/accordion';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Aggregation } from '../aggregation/aggregation.component';
+import { Aggregation } from '../aggregation/aggregation';
 import { SearchBase } from '../../search/search-base/search-base';
 import { elasticsearch } from 'gn-api-client';
-import { AggregationService } from '../aggregation.service';
+import { AggregationService } from '../aggregation-service';
 import { NgTemplateOutlet } from '@angular/common';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 

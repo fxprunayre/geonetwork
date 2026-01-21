@@ -12,7 +12,7 @@ import { Menu } from 'primeng/menu';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordsService } from 'gn4-api-client';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { IconStyleService } from '../../../shared/icon-style.service';
+import { IconStyleService } from '../../../shared/icon-style-service';
 
 @Component({
   selector: 'app-record-menu',

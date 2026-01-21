@@ -3,7 +3,7 @@
     <div
       class="sticky top-0 z-10 w-full bg-top-left bg-no-repeat bg-blend-overlay bg-primary/80 bg-cover bg-image header-row"
     >
-      <div class="mx-auto max-w-7xl px-6 py-6 flex flex-col lg:flex-row items-center lg:gap-4">
+      <div class="mx-auto max-w-7xl px-6 py-6 flex flex-row items-center lg:gap-2">
         <app-search-input
           class="w-full grow"
           [autocompleteEnabled]="true"
@@ -26,7 +26,7 @@
               [layoutOptions]="resultsLayoutOptions()"
             />
           </div>
-          <app-result-view [layout]="search.layout()" />
+          <app-results-view [layout]="search.layout()" />
         }
       </div>
     </div>

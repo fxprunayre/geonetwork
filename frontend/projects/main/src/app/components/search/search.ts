@@ -6,17 +6,14 @@ import { faSolidFilter, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
   APPLICATION_CONFIGURATION,
-  ResultViewComponent,
-  SearchAppLayout,
+  ResultsView,
+  SearchActiveFiltersButton,
   SearchBase,
   SearchInput,
   SearchWelcomeTextPipe,
-  SearchActiveFiltersButton,
 } from 'gn-library';
-import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
+import { Button, ButtonIcon } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
-import { InputGroup } from 'primeng/inputgroup';
-import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { Results } from '../results/results';
 import { SidePanel } from '../side-panel/side-panel';
@@ -29,7 +26,7 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
     SidePanel,
     SearchInput,
     Results,
-    ResultViewComponent,
+    ResultsView,
     Drawer,
     Button,
     NgIcon,

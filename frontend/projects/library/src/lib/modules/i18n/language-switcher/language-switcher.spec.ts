@@ -5,7 +5,7 @@ import { MockProvider } from 'ng-mocks';
 import { TranslateService } from '@ngx-translate/core';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
-import { provideMockTranslateService } from '../../../shared/translate.service.mock.spec';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
 import { signal } from '@angular/core';
 
 describe('LanguageSwitcher', () => {

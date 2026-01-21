@@ -15,9 +15,9 @@ import { TreeNode } from 'primeng/api';
 import { Tree } from 'primeng/tree';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
-import { AggregationBucketType } from '../aggregation/aggregation.component';
+import { AggregationBucketType } from '../aggregation/aggregation';
 import { SearchBase } from '../../search/search-base/search-base';
-import { SearchFilterChange } from '../../search/search.store.model';
+import { SearchFilterChange } from '../../search/search-store.model';
 
 @Component({
   selector: 'app-aggregation-tree',
@@ -27,6 +27,7 @@ import { SearchFilterChange } from '../../search/search.store.model';
     selectionMode="checkbox"
     [(selection)]="selectedBuckets"
     (selectionChange)="onNodeSelectionChange($event)"
+    [propagateSelectionUp]="false"
     class="w-full p-0!"
     appendTo="body"
     [filter]="isFilterEnabled()"

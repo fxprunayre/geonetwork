@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 import {
   SearchContextDirective,
-  SearchResultsNumber,
+  ResultsNumberComponent,
   SearchInput,
-  ResultViewComponent,
-  SortResults,
+  ResultsView,
+  ResultsSorterComponent,
 } from 'gn-library';
 
 @Component({
   selector: 'app-multisearch-test',
   imports: [
     SearchContextDirective,
-    SearchResultsNumber,
-    SortResults,
-    ResultViewComponent,
+    ResultsNumberComponent,
+    ResultsSorterComponent,
+    ResultsView,
     SearchInput,
-    SearchResultsNumber,
+    ResultsNumberComponent,
   ],
   templateUrl: './multisearch-test.html',
 })
