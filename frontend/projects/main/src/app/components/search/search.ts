@@ -16,14 +16,14 @@ import { Button, ButtonIcon } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { Results } from '../results/results';
-import { SidePanel } from '../side-panel/side-panel';
+import { SearchFilters } from '../search-filters/search-filters';
 
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 
 @Component({
   selector: 'app-search',
   imports: [
-    SidePanel,
+    SearchFilters,
     SearchInput,
     Results,
     ResultsView,

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidePanel } from './side-panel';
+import { SearchFilters } from './search-filters';
 import { MockProvider } from 'ng-mocks';
 import { TranslateService } from '@ngx-translate/core';
 
-describe('SidePanel', () => {
-  let component: SidePanel;
-  let fixture: ComponentFixture<SidePanel>;
+describe('SearchFilters', () => {
+  let component: SearchFilters;
+  let fixture: ComponentFixture<SearchFilters>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SidePanel],
+      imports: [SearchFilters],
       providers: [
         MockProvider(TranslateService, {
           instant: (key: string) => key.toUpperCase(),
@@ -18,7 +18,7 @@ describe('SidePanel', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SidePanel);
+    fixture = TestBed.createComponent(SearchFilters);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

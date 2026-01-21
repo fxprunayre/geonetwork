@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-side-panel',
-  templateUrl: './side-panel.html',
+  selector: 'app-search-filters',
+  templateUrl: './search-filters.html',
   standalone: true,
   imports: [FormsModule, CommonModule, AggregationsPanel],
 })
-export class SidePanel {}
+export class SearchFilters {}

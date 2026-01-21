@@ -41,7 +41,7 @@
         position="right"
         [pt]="{ header: 'header-row' }"
       >
-        <app-side-panel />
+        <app-search-filters />
       </p-drawer>
     }
     @case ('side') {
@@ -54,7 +54,7 @@
         "
       >
         <div class="p-drawer-header header-row">
-          <div class="p-drawer-title">
+          <div class="p-drawer-title text-primary-500">
             <ng-icon name="faSolidFilter"></ng-icon>
             {{ 'search.filter.title' | translate }}
           </div>
@@ -62,7 +62,7 @@
             <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
           </p-button>
         </div>
-        <app-side-panel />
+        <app-search-filters />
       </div>
     }
   }
