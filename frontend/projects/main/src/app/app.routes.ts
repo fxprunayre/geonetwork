@@ -1,7 +1,7 @@
 import { Routes, UrlMatchResult, UrlSegment } from '@angular/router';
 import { Home } from './components/home/home';
 import { Search } from './components/search/search';
-import { ResultDetailComponent } from './components/result-detail/result-detail';
+import { RecordComponent } from './components/record/record';
 import { MultisearchTest } from './components/multisearch-test/multisearch-test';
 import { RECORD_SLUG, SEARCH_SLUG } from 'gn-library';
 
@@ -21,10 +21,10 @@ export function recordMatcher(url: UrlSegment[]): UrlMatchResult | null {
 export const routes: Routes = [
   { path: '', component: Home },
   { path: SEARCH_SLUG, component: Search },
-  // { path: 'catalogue/record/:uuid', component: ResultDetailComponent },
+  // { path: 'catalogue/record/:uuid', component: RecordComponent },
   {
     matcher: recordMatcher,
-    component: ResultDetailComponent,
+    component: RecordComponent,
   },
   { path: 'test', component: MultisearchTest },
   { path: '**', redirectTo: '' },

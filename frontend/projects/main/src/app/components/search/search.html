@@ -20,7 +20,7 @@
       <div class="w-full" [class.xl:px-[200px]]="filterPanelMode() === 'drawer'">
         @if (search.layout()) {
           <div class="mb-6">
-            <app-result-header
+            <app-results
               [layout]="search.layout()"
               (layoutChange)="search.setLayout($event)"
               [layoutOptions]="resultsLayoutOptions()"

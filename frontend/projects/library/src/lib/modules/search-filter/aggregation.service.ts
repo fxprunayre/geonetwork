@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { DEFAULT_AGGREGATION_SIZE } from './search.store.model';
+import { DEFAULT_AGGREGATION_SIZE } from '../search/search.store.model';
 import { elasticsearch } from 'gn-api-client';
 import { RegistriesService } from 'gn4-api-client';
 import { TranslateService } from '@ngx-translate/core';

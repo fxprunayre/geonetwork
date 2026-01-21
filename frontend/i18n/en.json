@@ -161,6 +161,8 @@
       "brothersAndSisters": "{{count}} siblings",
       "siblings": "{{count}} siblings",
       "fcats": "{{count}}  data models",
+      "services": "{{count}} services",
+      "datasets": "{{count}} datasets",
       "hasfeaturecats": "{{count}} associated data"
     }
   },

@@ -32,7 +32,7 @@ import { IndexRecord } from 'gn-api-client';
 import { Button } from 'primeng/button';
 import { DataView } from 'primeng/dataview';
 import { Drawer } from 'primeng/drawer';
-import { ResultItemGrid } from '../../../results/result-item-grid/result-item-grid';
+import { ResultItemGrid } from '../../../search-results/result-item-grid/result-item-grid';
 
 @Component({
   selector: 'app-associated-records',

@@ -370,6 +370,16 @@ export const SearchStore = signalStore(
             currentPage: store.currentPage() + 1,
           });
         },
+        hasAggregationBuckets(field: string): boolean {
+          const aggregationValues = store.aggregations()[field];
+
+          if (!aggregationValues) {
+            return false;
+          }
+
+          const buckets = (aggregationValues as any).buckets;
+          return buckets !== undefined && buckets.length > 0;
+        },
         hasMoreTerms(field: string): boolean {
           const aggregationValues = store.aggregations()[field];
 

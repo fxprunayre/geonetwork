@@ -16,8 +16,8 @@ import {
   AccordionTabOpenEvent,
 } from 'primeng/accordion';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Aggregation } from '.././aggregation/aggregation.component';
-import { SearchBase } from '../search-base/search-base';
+import { Aggregation } from '../aggregation/aggregation.component';
+import { SearchBase } from '../../search/search-base/search-base';
 import { elasticsearch } from 'gn-api-client';
 import { AggregationService } from '../aggregation.service';
 import { NgTemplateOutlet } from '@angular/common';

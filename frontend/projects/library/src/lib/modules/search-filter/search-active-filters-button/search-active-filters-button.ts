@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, model } from '@angular/core';
-import { SearchBase } from '../search-base/search-base';
+import { SearchBase } from '../../search/search-base/search-base';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { NgIcon } from '@ng-icons/core';

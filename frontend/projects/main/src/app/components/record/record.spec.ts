@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultHeader } from './result-header';
+import { RecordComponent as Record } from './record';
 
-describe('ResultHeader', () => {
-  let component: ResultHeader;
-  let fixture: ComponentFixture<ResultHeader>;
+describe('Record', () => {
+  let component: Record;
+  let fixture: ComponentFixture<Record>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ResultHeader],
+      imports: [Record],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ResultHeader);
+    fixture = TestBed.createComponent(Record);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

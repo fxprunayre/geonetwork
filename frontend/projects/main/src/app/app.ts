@@ -11,13 +11,13 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { ScrollTop } from 'primeng/scrolltop';
 import { Toast } from 'primeng/toast';
-import { Navigation } from './components/menu/navigation';
+import { MenuComponent } from './components/menu/menu';
 import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
 
 @Component({
   selector: 'app-root',
   providers: [SearchService],
-  imports: [RouterOutlet, FormsModule, SearchContextDirective, ScrollTop, Navigation, Toast],
+  imports: [RouterOutlet, FormsModule, SearchContextDirective, ScrollTop, MenuComponent, Toast],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   standalone: true,

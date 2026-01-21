@@ -13,14 +13,14 @@ import {
 } from '@angular/core';
 import { Select, SelectChangeEvent } from 'primeng/select';
 import { ButtonModule } from 'primeng/button';
-import { SearchBase } from '../search-base/search-base';
+import { SearchBase } from '../../search/search-base/search-base';
 import { FormsModule } from '@angular/forms';
 import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
 import { AggregationTree } from '../aggregation-tree/aggregation-tree';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationLayout } from 'gn-api-client';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { SearchFilterChange } from '../search.store.model';
+import { SearchFilterChange } from '../../search/search.store.model';
 import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
 import { AggregationService } from '../aggregation.service';

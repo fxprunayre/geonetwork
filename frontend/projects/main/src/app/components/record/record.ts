@@ -12,7 +12,7 @@ import { DEFAULT_TAB } from 'gn-library';
 import { HistoryService, RECORD_ROUTE_PATH, SEARCH_ROUTE_PATH } from 'gn-library';
 
 @Component({
-  selector: 'app-result-detail',
+  selector: 'app-record',
   standalone: true,
   imports: [
     RecordViewComponent,
@@ -29,9 +29,9 @@ import { HistoryService, RECORD_ROUTE_PATH, SEARCH_ROUTE_PATH } from 'gn-library
       faSolidArrowLeft,
     }),
   ],
-  templateUrl: './result-detail.html',
+  templateUrl: './record.html',
 })
-export class ResultDetailComponent {
+export class RecordComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private historyService = inject(HistoryService);

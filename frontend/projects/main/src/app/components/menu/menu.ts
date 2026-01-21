@@ -51,7 +51,7 @@ const ICONS = {
 };
 
 @Component({
-  selector: 'app-navigation',
+  selector: 'app-menu',
   imports: [
     Menu,
     TieredMenu,
@@ -71,7 +71,7 @@ const ICONS = {
   providers: [MessageService],
   standalone: true,
   viewProviders: [provideIcons(ICONS)],
-  templateUrl: './navigation.html',
+  templateUrl: './menu.html',
   styles: [
     `
       :host ::ng-deep .p-menu-item-link-active {
@@ -80,7 +80,7 @@ const ICONS = {
     `,
   ],
 })
-export class Navigation implements OnInit {
+export class MenuComponent implements OnInit {
   logo = 'images/logo.svg';
 
   styleService = inject(IconStyleService);
@@ -304,7 +304,7 @@ export class Navigation implements OnInit {
     }
 
     this.styleService.ensureIconsStyle(
-      'navigation-icon-style',
+      'menu-icon-style',
       Array.from(usedIcons)
         .map((icon) => ({
           className: icon,

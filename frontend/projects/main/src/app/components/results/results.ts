@@ -13,7 +13,7 @@ import {
 import { Card } from 'primeng/card';
 
 @Component({
-  selector: 'app-result-header',
+  selector: 'app-results',
   standalone: true,
   imports: [
     CommonModule,
@@ -25,10 +25,10 @@ import { Card } from 'primeng/card';
     Card,
     ResultLayoutSwitcher,
   ],
-  templateUrl: './result-header.html',
-  styleUrl: './result-header.scss',
+  templateUrl: './results.html',
+  styleUrl: './results.scss',
 })
-export class ResultHeader {
+export class Results {
   layout = model<SearchAppLayout>('list');
   @Input() layoutOptions: SearchAppLayout[] = [];
 

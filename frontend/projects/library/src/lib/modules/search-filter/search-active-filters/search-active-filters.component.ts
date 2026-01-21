@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { SearchBase } from '../search-base/search-base';
+import { SearchBase } from '../../search/search-base/search-base';
 import { Button } from 'primeng/button';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidXmark } from '@ng-icons/font-awesome/solid';

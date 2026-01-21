@@ -4,27 +4,25 @@ import { TranslatePipe } from '@ngx-translate/core';
 import {
   Aggregation,
   SEARCH_ROUTE_PATH,
+  SearchBase,
   SearchFilter,
   SearchRouteService,
-  SearchService,
 } from 'gn-library';
 
 @Component({
-  selector: 'second-section',
+  selector: 'app-home-highlights',
   standalone: true,
   imports: [Aggregation, TranslatePipe],
-  templateUrl: './second-section.html',
-  styleUrl: './second-section.scss',
+  templateUrl: './home-highlights.html',
+  styleUrl: './home-highlights.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SecondSection {
+export class HomeHighlights extends SearchBase {
   router = inject(Router);
   searchRouteService = inject(SearchRouteService);
-  searchService = inject(SearchService);
-  island = 'images/island.jpg';
 
   aggregations = computed(() => {
-    return Object.keys(this.searchService.getSearch('home').aggregations());
+    return Object.keys(this.search.aggregations());
   });
 
   setRouteForAggregation(filter: SearchFilter) {

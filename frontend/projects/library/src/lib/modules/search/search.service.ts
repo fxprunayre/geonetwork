@@ -6,7 +6,7 @@ import { SearchService as ApiSearchService } from 'gn4-api-client';
 import { SearchRegistry, SearchStoreType } from './search.store';
 import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './search.store.model';
 import { SEARCH_SOURCE } from './search.constant';
-import { AggregationService } from './aggregation.service';
+import { AggregationService } from '../search-filter/aggregation.service';
 import { Datasource } from '../data/duck-db.service';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 

@@ -18,7 +18,7 @@ import { Drawer } from 'primeng/drawer';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
-import { ResultHeader } from '../result-header/result-header';
+import { Results } from '../results/results';
 import { SidePanel } from '../side-panel/side-panel';
 
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
@@ -28,7 +28,7 @@ export type FilterPanelLayout = 'drawer' | 'side' | 'top';
   imports: [
     SidePanel,
     SearchInput,
-    ResultHeader,
+    Results,
     ResultViewComponent,
     Drawer,
     Button,
