@@ -47,6 +47,7 @@ export function loadAppConfig() {
     .then((conf) => {
       appConfig.config = migrateGn4Config(SEXTANT_UI_CONFIGURATION);
       appConfig.catalogueUrl = environment.geonetworkApiUrl;
+      appConfig.config.proxyUrl = environment.geonetworkApiUrl + '/proxy?url=';
       // TODO: parseGn4Config(conf);
       console.log(appConfig);
       appConfigLoading = false;
