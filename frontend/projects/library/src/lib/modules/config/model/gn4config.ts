@@ -1,7 +1,6 @@
 import { elasticsearch } from 'gn-api-client';
-import { environment } from '../../../../environments/environment';
-import { DEFAULT_UI_CONFIGURATION, SEXTANT_UI_CONFIGURATION } from '../gn4constants';
 import { DEFAULT_LANGUAGE } from '../config.loader';
+import { DEFAULT_UI_CONFIGURATION } from '../gn4constants';
 import { AppsConfiguration } from './gnConfig';
 
 export interface UiConfiguration {
