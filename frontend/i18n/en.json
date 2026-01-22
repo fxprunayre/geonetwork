@@ -219,7 +219,7 @@
     "detail_success": "Successfully copied to clipboard"
   },
   "data": {
-    "available_datasources": "Available Data sources"
+    "available_datasources": "{{count}} data sources available"
   },
   "discussions": "Discussions",
   "relations": {

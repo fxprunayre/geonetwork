@@ -206,7 +206,7 @@
     "detail_success": "Copie réussie dans le presse-papiers"
   },
   "data": {
-    "available_datasources": "Sources de données disponibles"
+    "available_datasources": "{{count}} sources de données disponibles"
   },
   "discussions": "Discussions",
   "relations": {
