@@ -29,6 +29,9 @@ interface SectionItem {
         margin: var(--p-tabs-tab-margin);
         outline-color: transparent;
       }
+      .scroll-spy-tab:hover {
+        color: var(--p-tabs-tab-hover-color);
+      }
       .scroll-spy-tab-top {
         border-width: 0 0 1px 0;
       }

@@ -49,9 +49,11 @@ export class Search extends SearchBase {
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
 
-  resultsLayoutOptions = computed(() => {
-    return this.appConfiguration().config?.apps.search?.resultsLayoutOptions || [];
-  });
+  backgroundImageUrl = computed(() => this.appConfiguration().config?.backgroundImageUrl || '');
+
+  resultsLayoutOptions = computed(
+    () => this.appConfiguration().config?.apps.search?.resultsLayoutOptions || [],
+  );
 
   get hasResults(): boolean {
     return this.search?.totalCount() > 0;

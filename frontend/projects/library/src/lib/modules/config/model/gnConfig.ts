@@ -4,6 +4,7 @@ import { DistributionConfig } from './gn4config';
 export interface AppsConfiguration {
   apps: Apps;
   proxyUrl?: string;
+  backgroundImageUrl?: string;
 }
 
 export interface Apps {

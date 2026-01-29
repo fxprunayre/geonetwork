@@ -16,13 +16,14 @@ export class Home {
       resourceType: {
         terms: {
           field: 'resourceType',
-          size: 8,
+          size: 9,
+          exclude: 'publication-.*',
         },
         meta: {
           layout: 'card',
           decorator: {
             type: 'icon',
-            prefix: 'text-6xl p-6',
+            prefix: 'p-2 text-4xl',
             map: {
               dataset: 'faSolidDatabase',
               map: 'faSolidMap',
@@ -41,7 +42,7 @@ export class Home {
       'th_sextant-theme_tree.key': {
         terms: {
           field: 'th_sextant-theme_tree.key',
-          size: 6,
+          size: 9,
           include: '[^^]+',
         },
         meta: {
@@ -78,7 +79,7 @@ export class Home {
       'th_simm-reglementaire_tree.key': {
         terms: {
           field: 'th_simm-reglementaire_tree.key',
-          size: 10,
+          size: 9,
         },
         meta: {
           thesaurus: 'simm.reglementaire',

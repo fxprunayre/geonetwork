@@ -161,18 +161,28 @@
   <!-- Main Layout with Tabs -->
   <p-tabs [value]="tab()" lazy class="mt-15">
     <p-tablist>
-      <p-tab value="about">{{ 'record.view.section.description' | translate }}</p-tab>
-      <p-tab value="data-access">{{ 'record.view.section.dataAccess' | translate }}</p-tab>
+      <p-tab value="about" class="text-lg">{{
+        'record.view.section.description' | translate
+      }}</p-tab>
+      <p-tab value="data-access" class="text-lg">{{
+        'record.view.section.dataAccess' | translate
+      }}</p-tab>
       @if (record.info?.hasDatasource) {
-        <p-tab value="explore">{{ 'record.view.section.explore' | translate }}</p-tab>
+        <p-tab value="explore" class="text-lg">{{
+          'record.view.section.explore' | translate
+        }}</p-tab>
       }
       @if (recordHasAssociatedRecords()) {
-        <p-tab value="associatedResources">{{
+        <p-tab value="associatedResources" class="text-lg">{{
           'record.view.section.associatedResources' | translate
         }}</p-tab>
       }
-      <p-tab value="citation">{{ 'record.view.section.citation' | translate }}</p-tab>
-      <p-tab value="discussions">{{ 'record.view.section.discussions' | translate }}</p-tab>
+      <p-tab value="citation" class="text-lg">{{
+        'record.view.section.citation' | translate
+      }}</p-tab>
+      <p-tab value="discussions" class="text-lg">{{
+        'record.view.section.discussions' | translate
+      }}</p-tab>
     </p-tablist>
 
     <p-tabpanels>
@@ -203,7 +213,9 @@
                       [value]="section.label"
                       [attr.data-testid]="'accordion-panel-' + section.label"
                     >
-                      <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
+                      <p-accordion-header class="text-primary! text-2xl!">{{
+                        sectionLabel
+                      }}</p-accordion-header>
                       <p-accordion-content>
                         <ng-container
                           *ngTemplateOutlet="section.tpl; context: { record: record }"
@@ -216,7 +228,7 @@
                         [value]="'contact-' + role"
                         [attr.data-testid]="'accordion-panel-contact-' + role"
                       >
-                        <p-accordion-header class="text-xl!">{{
+                        <p-accordion-header class="text-primary! text-2xl!">{{
                           role + '' | translate
                         }}</p-accordion-header>
                         <p-accordion-content>
@@ -234,7 +246,9 @@
                       [value]="section.label"
                       [attr.data-testid]="'accordion-panel-' + section.label"
                     >
-                      <p-accordion-header class="text-xl!">{{ sectionLabel }}</p-accordion-header>
+                      <p-accordion-header class="text-primary! text-2xl!">{{
+                        sectionLabel
+                      }}</p-accordion-header>
                       <p-accordion-content>
                         <ng-container
                           *ngTemplateOutlet="section.tpl; context: { record: record }"

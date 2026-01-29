@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  // geonetworkApiUrl: '/catalogue',
   geonetworkApiUrl: '/geonetwork',
+  backgroundUrl: 'https://www.odatis-ocean.fr/fileadmin/user_upload/images/odatis_bandeau_web.jpg',
 };

@@ -1,5 +1,7 @@
 <section
-  class="relative flex flex-col justify-center items-center bg-top-left bg-cover bg-blend-overlay bg-no-repeat bg-primary/80 bg-image"
+  class="relative flex flex-col justify-center items-center bg-top-left bg-cover bg-no-repeat"
+  [class.bg-primary-400]="!backgroundImageUrl()"
+  [style.background-image]="backgroundImageUrl() ? 'url(' + backgroundImageUrl() + ')' : null"
 >
   <div class="relative mx-auto max-w-screen-xl w-full px-5 py-12 text-center md:text-left">
     <h1

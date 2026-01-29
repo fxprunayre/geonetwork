@@ -51,9 +51,13 @@ export class AggregationBucketDecorator {
     const bucket = this.bucket();
     const key = bucket?.key;
 
+    if (!decorator || decorator.type !== 'icon') {
+      return '';
+    }
+
     if (!key) return '';
 
-    if (decorator && decorator.type === 'icon') {
+    if (decorator.type === 'icon') {
       const mapped = decorator.map?.[key];
       if (mapped) {
         return mapped;

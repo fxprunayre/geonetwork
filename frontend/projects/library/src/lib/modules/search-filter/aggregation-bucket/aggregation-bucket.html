@@ -22,7 +22,7 @@
     <p-button
       [pt]="{ host: { class: 'w-full' }, root: { class: 'w-full' } }"
       [title]="label()"
-      variant="outlined"
+      [variant]="isActive() ? undefined : 'outlined'"
       [severity]="isActive() ? 'primary' : undefined"
       (click)="handleChange(bucket().key, !isActive())"
       [styleClass]="isActive() ? 'active' : ''"
@@ -43,10 +43,11 @@
       class="w-full"
       (click)="handleChange(bucket().key, !isActive())"
       [title]="bucket().key | aggregationTranslate: keyName()"
+      [pt]="{ header: 'bg-primary text-white', root: 'overflow-hidden' }"
     >
       <ng-template #header>
         <app-aggregation-bucket-decorator
-          class="bg-primary/90 text-white w-full flex justify-center"
+          class="w-full flex justify-center"
           [bucket]="bucket()"
           [decorator]="decorator()"
         />
