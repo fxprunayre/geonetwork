@@ -29,7 +29,9 @@ export const SEARCH_SOURCE = [
 ];
 
 export const SEARCH_SLUG = 'search';
+export const MAP_SLUG = 'map';
 export const RECORD_SLUG = 'record';
 
 export const SEARCH_ROUTE_PATH = '/' + SEARCH_SLUG;
 export const RECORD_ROUTE_PATH = '/' + RECORD_SLUG;
+export const MAP_ROUTE_PATH = '/' + MAP_SLUG;

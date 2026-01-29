@@ -46,3 +46,4 @@ export * from './lib/shared/translate-service.mock.spec';
 export * from './lib/shared/theming-service';
 export * from './lib/shared/history-service';
 export * from './lib/shared/icon-style-service';
+export * from './lib/shared/widgets/scroll-spy/scroll-spy';
