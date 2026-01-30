@@ -13,6 +13,7 @@
     [currentSort]="searchConfig.currentSort"
     [language]="language()"
   >
+    <app-map [class.hidden]="!isMapActive()" class="h-full w-full block"></app-map>
     <router-outlet></router-outlet>
     <p-scroll-top target="window" class="print:hidden" />
   </section>

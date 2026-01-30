@@ -71,9 +71,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
             const commands = JSON.parse(params['add']) as Gn4MapCommand[];
             if (this.viewer) {
               console.log('Adding layers to map viewer', commands);
-              // commands.forEach((cmd) => {
-              //   viewer.dispatchEvent(new CustomEvent('addLayer', { detail: cmd }));
-              // });
               commands.forEach((cmd) => {
                 this.viewer.addLayer({
                   type: 'wms',
