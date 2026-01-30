@@ -6,6 +6,7 @@ import {
   APPLICATION_CONFIGURATION,
   DEFAULT_LANGUAGE,
   MAP_SLUG,
+  SEARCH_SLUG,
   SearchApp,
   SearchContextDirective,
   SearchService,
@@ -15,6 +16,7 @@ import { ScrollTop } from 'primeng/scrolltop';
 import { Toast } from 'primeng/toast';
 import { MenuComponent } from './components/menu/menu';
 import { MapComponent } from './components/map/map';
+import { Search } from './components/search/search';
 import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
 
 @Component({
@@ -28,6 +30,7 @@ import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
     MenuComponent,
     Toast,
     MapComponent,
+    Search,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -41,6 +44,7 @@ export class App extends PrimeShadowdomstyleComponent implements OnInit {
 
   protected readonly title = signal('main');
   isMapActive = signal(false);
+  isSearchActive = signal(false);
 
   searchConfig: SearchApp =
     inject(APPLICATION_CONFIGURATION)().config?.apps.search || ({} as SearchApp);
@@ -59,7 +63,9 @@ export class App extends PrimeShadowdomstyleComponent implements OnInit {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
-        this.isMapActive.set(event.urlAfterRedirects.startsWith('/' + MAP_SLUG));
+        const url = event.urlAfterRedirects;
+        this.isMapActive.set(url.startsWith('/' + MAP_SLUG));
+        this.isSearchActive.set(url.startsWith('/' + SEARCH_SLUG));
       });
   }
 

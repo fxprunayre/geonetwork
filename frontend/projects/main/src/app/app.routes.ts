@@ -22,7 +22,7 @@ export function recordMatcher(url: UrlSegment[]): UrlMatchResult | null {
 
 export const routes: Routes = [
   { path: '', component: Home },
-  { path: SEARCH_SLUG, component: Search },
+  { path: SEARCH_SLUG, component: EmptyComponent },
   { path: MAP_SLUG, component: EmptyComponent },
   // { path: 'catalogue/record/:uuid', component: RecordComponent },
   {

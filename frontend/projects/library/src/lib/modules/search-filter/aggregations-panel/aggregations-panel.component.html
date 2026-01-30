@@ -14,7 +14,7 @@
     @for (key of aggregationKeys(); track $index) {
       @if (hasBuckets(key)) {
         <div class="grid grid-cols-1 gap-4 mb-12">
-          <label class="w-full">
+          <label class="w-full text-primary">
             <ng-container
               *ngTemplateOutlet="labelTemplate || defaultLabelTemplate; context: { $implicit: key }"
             ></ng-container>
@@ -34,7 +34,7 @@
       @for (key of aggregationKeys(); track $index) {
         @if (hasBuckets(key)) {
           <p-accordion-panel [value]="key">
-            <p-accordion-header>
+            <p-accordion-header class="text-primary!">
               <ng-container
                 *ngTemplateOutlet="
                   labelTemplate || defaultLabelTemplate;

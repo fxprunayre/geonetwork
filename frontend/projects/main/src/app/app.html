@@ -14,6 +14,7 @@
     [language]="language()"
   >
     <app-map [class.hidden]="!isMapActive()" class="h-full w-full block"></app-map>
+    <app-search [class.hidden]="!isSearchActive()" class="h-full w-full block"></app-search>
     <router-outlet></router-outlet>
     <p-scroll-top target="window" class="print:hidden" />
   </section>
