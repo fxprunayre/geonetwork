@@ -150,7 +150,15 @@
       "share": "Share",
       "shareHelp": "Permalink to the record",
       "metadataDownload": "Metadata (XML)",
-      "metadataDownloadHelp": "Download the record in XML format"
+      "metadataDownloadHelp": "Download the record in XML format",
+      "addWms": {
+        "addToMap": "Add to map",
+        "checking": "Checking WMS service...",
+        "allLayersFound": "All layers found in the endpoint: {{layerNames}}",
+        "unreachable": "The WMS service is unreachable.",
+        "chooseServiceLayer": "Choose a layer from the service.",
+        "layerNotFoundButChooseAnother": "Layer '{{layerName}}' not found in the WMS service. Choose another layer from the service."
+      }
     },
     "association": {
       "parent": "Part of {{count}} resource(s)",
@@ -225,7 +233,6 @@
   "relations": {
     "seeAll": "See all"
   },
-  "addToMap": "Add to map",
   "exploreData": "Explore data",
   "share": {
     "title_error": "Error",

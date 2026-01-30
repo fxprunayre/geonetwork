@@ -138,6 +138,21 @@
         "type": "Type"
       }
     },
+    "action": {
+      "menu": "Quick actions",
+      "share": "Share",
+      "shareHelp": "Permalink to the record",
+      "metadataDownload": "Metadata (XML)",
+      "metadataDownloadHelp": "Download the record in XML format",
+      "addWms": {
+        "addToMap": "Ajouter à la carte",
+        "checking": "Vérification du service WMS...",
+        "allLayersFound": "Toutes les couches disponibles dans le service : {{layerNames}}",
+        "unreachable": "Le service WMS est inaccessible.",
+        "chooseServiceLayer": "Choisir une couche dans le service.",
+        "layerNotFoundButChooseAnother": "La couche '{{layerName}}' n'a pas été trouvée dans le service WMS. Choisir une autre couche dans le service."
+      }
+    },
     "association": {
       "parent": "Faisant partie de {{ count }} ressources",
       "children": "Composé de {{ count }} ressources",

@@ -55,14 +55,8 @@
                         }
                       </div>
                       <div class="flex-none w-full md:w-auto">
-                        @if (link.protocol?.startsWith('OGC:WMS')) {
-                          <p-button
-                            styleClass="w-full md:w-auto"
-                            (click)="addWmsLayers([link])"
-                            [label]="'addToMap' | translate"
-                            size="small"
-                            [outlined]="true"
-                          />
+                        @if (link.protocol?.match('OGC:WMS|application/vnd.ogc.wms_xml')) {
+                          <app-add-layer-to-map [record]="record()" [link]="link" />
                         } @else if (isExplorable(link)) {
                           <p-button
                             styleClass="w-full md:w-auto"

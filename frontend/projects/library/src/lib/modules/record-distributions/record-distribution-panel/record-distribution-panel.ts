@@ -16,13 +16,8 @@ import { IftaLabel } from 'primeng/iftalabel';
 import { InputText } from 'primeng/inputtext';
 import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../../search/search-constant';
 import { LinkBadge } from '../link-badge/link-badge';
+import { AddLayerToMap } from '../add-layer-to-map/add-layer-to-map';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
-
-interface Gn4MapCommand {
-  uuid?: string;
-  url: string;
-  name?: string;
-}
 
 @Component({
   selector: 'app-record-distribution-panel',
@@ -34,6 +29,7 @@ interface Gn4MapCommand {
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
+    AddLayerToMap,
     InputText,
     IftaLabel,
     LinkBadge,
@@ -81,30 +77,5 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
     this.router.navigate([RECORD_ROUTE_PATH, this.record().uuid, 'explore'], {
       queryParams: { datasource: link.urlObject?.['default'] },
     });
-  };
-  addWmsLayers = (links: Link[]) => {
-    const command = links
-      .filter((link) => link.urlObject)
-      .map((link) => {
-        const cmd: Gn4MapCommand = {
-          url: encodeURIComponent(link.urlObject!['default']),
-          uuid: this.record().uuid,
-        };
-        if (link.nameObject) {
-          cmd.name = link.nameObject['default'];
-        }
-        return cmd;
-      });
-    if (command.length > 0) {
-      this.router.navigate([MAP_ROUTE_PATH], {
-        queryParams: { add: JSON.stringify(command) },
-      });
-      // const commandParameter = 'add=' + JSON.stringify(command);
-
-      //   window.open(
-      //     `https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map?${commandParameter}`,
-      //     'map',
-      //   );
-    }
   };
 }
