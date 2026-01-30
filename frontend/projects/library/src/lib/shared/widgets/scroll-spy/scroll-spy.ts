@@ -59,6 +59,7 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
   activeSectionId = signal<string | null>(null);
   private sectionElements: NodeListOf<HTMLElement> | undefined;
   private scrollContainer: HTMLElement | Window = window;
+  private shadowDomContainer: HTMLElement | undefined;
   private ticking = false;
 
   ngAfterViewInit() {
@@ -72,6 +73,10 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
   private getScrollParent(node: HTMLElement | null): HTMLElement | Window {
     if (!node || node === document.body) {
       return window;
+    }
+
+    if (node.parentNode instanceof ShadowRoot) {
+      this.shadowDomContainer = node;
     }
 
     const style = window.getComputedStyle(node);
@@ -122,7 +127,7 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
   scrollTo(id: string): void {
     const isWindow = this.scrollContainer instanceof Window;
 
-    if (isWindow) {
+    if (isWindow && !this.shadowDomContainer) {
       const targetElement = document.getElementById(id);
       if (!targetElement) {
         return;
@@ -132,7 +137,7 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
         behavior: 'smooth',
       });
     } else {
-      const container = this.scrollContainer as HTMLElement;
+      const container = this.shadowDomContainer || (this.scrollContainer as HTMLElement);
       const targetElement = container.querySelector(`#${id}`);
 
       if (!targetElement) {
@@ -143,7 +148,7 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
         container.getBoundingClientRect().top +
         container.scrollTop -
         60;
-      container.scrollTo({
+      this.scrollContainer.scrollTo({
         top,
         behavior: 'smooth',
       });
