@@ -10,6 +10,7 @@ export interface AppsConfiguration {
 export interface Apps {
   search?: SearchApp;
   record?: RecordDetailsApp;
+  map?: MapApp;
   i18n?: I18nApp;
 }
 
@@ -40,6 +41,10 @@ export interface SearchApp extends App {
 
 export interface SearchAppAdvanced {
   score: string;
+}
+
+export interface MapApp extends App {
+  context: any;
 }
 
 export interface RecordDetailsApp extends App {
