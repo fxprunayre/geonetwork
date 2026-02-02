@@ -1,13 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DEFAULT_LANGUAGE, SearchContextDirective } from 'gn-library';
-import { HomeHeader } from './home-header/home-header';
+import { SearchHeader } from '../search-header/search-header';
 import { HomeHighlights } from './home-highlights/home-highlights';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HomeHeader, HomeHighlights, SearchContextDirective],
+  imports: [HomeHighlights, SearchContextDirective, SearchHeader],
   templateUrl: './home.html',
 })
 export class Home {

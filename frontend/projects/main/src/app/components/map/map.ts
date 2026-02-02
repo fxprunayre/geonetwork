@@ -23,7 +23,7 @@ interface Gn4MapCommand {
   selector: 'app-map',
   imports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: ` <sxt-viewer class="block w-full h-full"></sxt-viewer> `,
+  template: ` <sxt-viewer id="viewer" class="block w-full h-full"></sxt-viewer> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -48,14 +48,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       script.crossOrigin = 'anonymous';
       document.body.appendChild(script);
     }
-
-    this.monitorRoute();
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
+    await customElements.whenDefined('sxt-viewer');
     this.viewer = this.elementRef.nativeElement.querySelector('sxt-viewer');
     if (this.viewer) {
       this.viewer.setContext(this.mapContext());
+      this.monitorRoute();
     }
   }
 

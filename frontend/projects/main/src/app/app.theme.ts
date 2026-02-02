@@ -4,7 +4,6 @@ import { Preset } from '@primeuix/themes/types';
 
 const AppTheme: Preset = {
   primitive: {
-    backgroundImage: '/images/bgFirst-desktop.webp',
     myprimary: {
       '50': '#f3f5f7',
       '100': '#c4cfda',
