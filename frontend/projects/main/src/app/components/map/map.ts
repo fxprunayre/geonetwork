@@ -12,12 +12,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { APPLICATION_CONFIGURATION, DEFAULT_MAP_CONTEXT } from 'gn-library';
 import { Subscription } from 'rxjs';
-
-interface Gn4MapCommand {
-  uuid?: string;
-  url: string;
-  name?: string;
-}
+import { Gn4MapCommand } from 'gn-library';
 
 @Component({
   selector: 'app-map',
@@ -26,7 +21,7 @@ interface Gn4MapCommand {
   template: ` <sxt-viewer id="viewer" class="block w-full h-full"></sxt-viewer> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MapComponent implements OnInit, OnDestroy {
   private elementRef = inject(ElementRef);
   private route = inject(ActivatedRoute);
   private subs: Subscription = new Subscription();
@@ -46,12 +41,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       script.type = 'module';
       script.src = scriptUrl;
       script.crossOrigin = 'anonymous';
+      script.onload = () => {
+        this.initMap();
+      };
       document.body.appendChild(script);
     }
   }
 
-  async ngAfterViewInit() {
+  async initMap() {
     await customElements.whenDefined('sxt-viewer');
+    if (this.viewer) return;
+
     this.viewer = this.elementRef.nativeElement.querySelector('sxt-viewer');
     if (this.viewer) {
       this.viewer.setContext(this.mapContext());
@@ -70,14 +70,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
           try {
             const commands = JSON.parse(params['add']) as Gn4MapCommand[];
             if (this.viewer) {
-              console.log('Adding layers to map viewer', commands);
               commands.forEach((cmd) => {
                 this.viewer.addLayer({
                   type: 'wms',
-                  id: cmd.url + '_' + cmd.name,
-                  url: cmd.url,
-                  name: cmd.name,
-                  label: cmd.name,
+                  id: cmd.url + '#' + cmd.name,
+                  url: decodeURIComponent(cmd.url),
+                  name: decodeURIComponent(cmd.name || ''),
+                  label: decodeURIComponent(cmd.label || ''),
                   visibility: true,
                   attributions: '',
                 });

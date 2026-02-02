@@ -448,8 +448,8 @@ export const DEFAULT_MAP_CONTEXT = {
     },
   ],
   view: {
-    center: [-4.56243, 48.36143],
-    zoom: 15,
+    center: [-4.56243, 0],
+    zoom: 1,
   },
 };
 

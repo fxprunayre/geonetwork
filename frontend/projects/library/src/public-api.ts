@@ -37,6 +37,7 @@ export * from './lib/modules/record/record-field-overview/record-field-overview.
 export * from './lib/modules/record/record-field-type/record-field-type';
 export * from './lib/modules/record/record-field-title/record-field-title';
 export * from './lib/modules/record/record-field-credit/record-field-credit';
+export * from './lib/modules/record-distributions/add-layer-to-map/add-layer-to-map';
 export * from './lib/shared/widgets/loading-mask/loading-mask.component';
 export * from './lib/shared/widgets/show-more-toggle/show-more-toggle';
 export * from './lib/shared/widgets/color-picker/color-picker';

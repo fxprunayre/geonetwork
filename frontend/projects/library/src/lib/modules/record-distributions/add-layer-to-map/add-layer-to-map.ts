@@ -16,23 +16,37 @@ import { Skeleton } from 'primeng/skeleton';
 import { SplitButton } from 'primeng/splitbutton';
 import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
 import { MAP_ROUTE_PATH } from '../../search/search-constant';
+import { Badge } from 'primeng/badge';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidExclamation } from '@ng-icons/font-awesome/solid';
 
-interface Gn4MapCommand {
+export interface Gn4MapCommand {
   uuid?: string;
   url: string;
   name?: string;
+  label?: string;
 }
 
 @Component({
   selector: 'app-add-layer-to-map',
-  imports: [TranslatePipe, Button, SplitButton, Skeleton],
+  imports: [TranslatePipe, Button, SplitButton, Skeleton, NgIcon],
+  viewProviders: [
+    provideIcons({
+      faSolidExclamation,
+    }),
+  ],
   template: `
     @if (status() === 'loading') {
       <p-skeleton [title]="'record.action.addWms.checking' | translate" size="2rem" class="mr-2" />
     } @else if (status() === 'error') {
-      <p class="text-sm text-red-600">
-        {{ 'record.action.addWms.unreachable' | translate }}
-      </p>
+      <p-button
+        severity="warn"
+        [rounded]="true"
+        size="small"
+        [title]="'record.action.addWms.unreachable' | translate"
+      >
+        <ng-icon name="faSolidExclamation" />
+      </p-button>
     } @else if (status() === 'not-found') {
       @if (layerList().length > 0) {
         <p-splitbutton
@@ -49,7 +63,7 @@ interface Gn4MapCommand {
     } @else if (status() === 'found') {
       <p-button
         styleClass="w-full md:w-auto"
-        (click)="addWmsLayers([link()])"
+        (click)="addWmsLayers([link()], matchingLayersLabel())"
         [title]="
           'record.action.addWms.allLayersFound' | translate: { layerNames: matchingLayersLabel() }
         "
@@ -84,7 +98,7 @@ export class AddLayerToMap extends RecordFieldBase {
       command: () => {
         const linkCopy = { ...this.link() };
         linkCopy.nameObject = { default: layer.name };
-        this.addWmsLayers([linkCopy]);
+        this.addWmsLayers([linkCopy], layer.title || layer.name);
       },
     }));
   });
@@ -119,7 +133,6 @@ export class AddLayerToMap extends RecordFieldBase {
         .isReady()
         .then((endpoint: any) => {
           const layers = endpoint.getFlattenedLayers();
-          console.log(layers);
           this.serviceLayers.set(layers);
 
           if (!layers) {
@@ -150,7 +163,7 @@ export class AddLayerToMap extends RecordFieldBase {
     });
   }
 
-  addWmsLayers = (links: Link[]) => {
+  addWmsLayers = (links: Link[], label?: string) => {
     const command = links
       .filter((link) => link.urlObject)
       .map((link) => {
@@ -159,8 +172,9 @@ export class AddLayerToMap extends RecordFieldBase {
           uuid: this.record().uuid,
         };
         if (link.nameObject) {
-          cmd.name = link.nameObject['default'];
+          cmd.name = encodeURIComponent(link.nameObject['default']);
         }
+        cmd.label = encodeURIComponent(label || cmd.name || '');
         return cmd;
       });
     if (command.length > 0) {
