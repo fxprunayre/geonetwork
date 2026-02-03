@@ -12,7 +12,7 @@
     "test": "ng test library",
     "test:ci": "ng test library --code-coverage --browsers=ChromeHeadless --watch=false",
     "e2e": "cypress open",
-    "e2e:start": "start-server-and-test start http://localhost:4200 e2e",
+    "e2e:start": "start-server-and-test start http://0.0.0.0:4200 e2e",
     "e2e:ci": "start-server-and-test start http://0.0.0.0:4200 'cypress run'",
     "prepare": "husky",
     "download-api-geonetwork4-client": "curl -H 'Accept: application/json' http://localhost:8080/geonetwork/srv/api/doc -o projects/gn4-api-client/openapi.json",
