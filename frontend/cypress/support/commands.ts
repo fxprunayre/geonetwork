@@ -1,3 +1,14 @@
+Cypress.Commands.add('clearBrowserCache', () => {
+  cy.window().then(async (window) => {
+    window.sessionStorage.clear();
+    window.localStorage.clear();
+    if ('caches' in window) {
+      const keys = await window.caches.keys();
+      await Promise.all(keys.map((key) => window.caches.delete(key)));
+    }
+  });
+});
+
 Cypress.Commands.add('initApp', () => {
   cy.intercept('GET', '**/srv/api/ui/srv', { fixture: 'home-api-ui-srv.json' }).as('apiUiConfig');
   cy.intercept('GET', '**/srv/api/i18n/packages/gnui*', { fixture: 'home-api-i18n-gnui.json' }).as(

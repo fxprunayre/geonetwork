@@ -1,0 +1,1909 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WMS_Capabilities version="1.3.0" xmlns:qgs="http://www.qgis.org/wms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sld="http://www.opengis.net/sld" xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd http://www.qgis.org/wms https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;REQUEST=GetSchemaExtension" xmlns="http://www.opengis.net/wms">
+ <Service>
+  <Name>WMS</Name>
+  <Title>Server OWS Surval</Title>
+  <KeywordList>
+   <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+  </KeywordList>
+  <OnlineResource xlink:type="simple" xlink:href="https://surval.ifremer.fr" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+  <ContactInformation>
+   <ContactElectronicMailAddress>sextant@ifremer.fr</ContactElectronicMailAddress>
+  </ContactInformation>
+  <Fees>conditions unknown</Fees>
+  <AccessConstraints>None</AccessConstraints>
+ </Service>
+ <Capability>
+  <Request>
+   <GetCapabilities>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetCapabilities>
+   <GetMap>
+    <Format>image/jpeg</Format>
+    <Format>image/png</Format>
+    <Format>image/png; mode=16bit</Format>
+    <Format>image/png; mode=8bit</Format>
+    <Format>image/png; mode=1bit</Format>
+    <Format>application/dxf</Format>
+    <Format>application/pdf</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetMap>
+   <GetFeatureInfo>
+    <Format>text/plain</Format>
+    <Format>text/html</Format>
+    <Format>text/xml</Format>
+    <Format>application/vnd.ogc.gml</Format>
+    <Format>application/vnd.ogc.gml/3.1.1</Format>
+    <Format>application/json</Format>
+    <Format>application/geo+json</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </GetFeatureInfo>
+   <sld:GetLegendGraphic>
+    <Format>image/jpeg</Format>
+    <Format>image/png</Format>
+    <Format>application/json</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </sld:GetLegendGraphic>
+   <sld:DescribeLayer>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </sld:DescribeLayer>
+   <qgs:GetStyles>
+    <Format>text/xml</Format>
+    <DCPType>
+     <HTTP>
+      <Get>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </Get>
+     </HTTP>
+    </DCPType>
+   </qgs:GetStyles>
+  </Request>
+  <Exception>
+   <Format>XML</Format>
+  </Exception>
+  <sld:UserDefinedSymbolization UserStyle="1" InlineFeature="0" SupportSLD="1" UserLayer="0" RemoteWFS="0" RemoteWCS="0"/>
+  <Layer queryable="1">
+   <Name>surval</Name>
+   <Title>Server OWS Surval</Title>
+   <KeywordList>
+    <Keyword vocabulary="ISO">infoMapAccessService</Keyword>
+   </KeywordList>
+   <CRS>CRS:84</CRS>
+   <CRS>EPSG:4326</CRS>
+   <CRS>EPSG:3857</CRS>
+   <CRS>EPSG:2154</CRS>
+   <EX_GeographicBoundingBox>
+    <westBoundLongitude>-180</westBoundLongitude>
+    <eastBoundLongitude>180</eastBoundLongitude>
+    <southBoundLatitude>-90</southBoundLatitude>
+    <northBoundLatitude>90</northBoundLatitude>
+   </EX_GeographicBoundingBox>
+   <BoundingBox miny="-66597986.728" maxy="61954688.841" maxx="79915344.576" CRS="EPSG:2154" minx="-78592596.736"/>
+   <BoundingBox miny="-44927335.428" maxy="44927335.428" maxx="20037508.343" CRS="EPSG:3857" minx="-20037508.343"/>
+   <BoundingBox miny="-180" maxy="180" maxx="90" CRS="EPSG:4326" minx="-90"/>
+   <Layer queryable="1">
+    <Name>Réseaux d'observation et de surveillance</Name>
+    <Title>Réseaux d'observation et de surveillance</Title>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <CRS>EPSG:2154</CRS>
+    <EX_GeographicBoundingBox>
+     <westBoundLongitude>-180</westBoundLongitude>
+     <eastBoundLongitude>180</eastBoundLongitude>
+     <southBoundLatitude>-90</southBoundLatitude>
+     <northBoundLatitude>90</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox miny="-66597986.728" maxy="61954688.841" maxx="79915344.576" CRS="EPSG:2154" minx="-78592596.736"/>
+    <BoundingBox miny="-44927335.428" maxy="44927335.428" maxx="20037508.343" CRS="EPSG:3857" minx="-20037508.343"/>
+    <BoundingBox miny="-180" maxy="180" maxx="90" CRS="EPSG:4326" minx="-90"/>
+    <Layer queryable="1">
+     <Name>Référentiels</Name>
+     <Title>Référentiels</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <CRS>EPSG:2154</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>-73.466671</westBoundLongitude>
+      <eastBoundLongitude>168.256884</eastBoundLongitude>
+      <southBoundLatitude>-71.14001</southBoundLatitude>
+      <northBoundLatitude>74.504833</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="-30389527.666" maxy="33545525.586" maxx="43741466.778" CRS="EPSG:2154" minx="-34768283.631"/>
+     <BoundingBox miny="-11450315.299" maxy="12722628.573" maxx="18730270.588" CRS="EPSG:3857" minx="-8178272.347"/>
+     <BoundingBox miny="-73.466671" maxy="168.256884" maxx="74.504833" CRS="EPSG:4326" minx="-71.14001"/>
+     <Layer queryable="0">
+      <Name>Masse_DEau_Transition</Name>
+      <Title>Masses d'Eau de Transition</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-60.876423</westBoundLongitude>
+       <eastBoundLongitude>55.393493</eastBoundLongitude>
+       <southBoundLatitude>-21.292632</southBoundLatitude>
+       <northBoundLatitude>51.061275</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-2806720.23" maxy="8825826.384" maxx="10224434.737" CRS="EPSG:2154" minx="-10489378.821"/>
+      <BoundingBox miny="-2426806.229" maxy="6632139.717" maxx="6166375.435" CRS="EPSG:3857" minx="-6776732.409"/>
+      <BoundingBox miny="-60.876423" maxy="55.393493" maxx="51.061275" CRS="EPSG:4326" minx="-21.292632"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=Masse_DEau_Transition&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <MinScaleDenominator>0</MinScaleDenominator>
+      <MaxScaleDenominator>2850000</MaxScaleDenominator>
+      <Attribution>
+       <Title>Sandre</Title>
+      </Attribution>
+     </Layer>
+     <Layer queryable="0">
+      <Name>Masse_DEau_Cotiere</Name>
+      <Title>Masses d'Eau Côtière</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-63.171087</westBoundLongitude>
+       <eastBoundLongitude>55.854504</eastBoundLongitude>
+       <southBoundLatitude>-21.406371</southBoundLatitude>
+       <northBoundLatitude>51.122044</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-2831893.559" maxy="8948623.241" maxx="10310166.669" CRS="EPSG:2154" minx="-10812499.008"/>
+      <BoundingBox miny="-2440400.402" maxy="6642910.283" maxx="6217694.923" CRS="EPSG:3857" minx="-7032173.235"/>
+      <BoundingBox miny="-63.171087" maxy="55.854504" maxx="51.122044" CRS="EPSG:4326" minx="-21.406371"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=Masse_DEau_Cotiere&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <MinScaleDenominator>0</MinScaleDenominator>
+      <MaxScaleDenominator>2850000</MaxScaleDenominator>
+      <Attribution>
+       <Title>Sandre</Title>
+      </Attribution>
+     </Layer>
+     <Layer queryable="0">
+      <Name>Zones_Marines_Quadrige</Name>
+      <Title>Référentiel Quadrige - Zones marines</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-63.225658</westBoundLongitude>
+       <eastBoundLongitude>168.256884</eastBoundLongitude>
+       <southBoundLatitude>-25.750943</southBoundLatitude>
+       <northBoundLatitude>74.504833</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-3779183.68" maxy="20854237.666" maxx="17136793.377" CRS="EPSG:2154" minx="-11528503.621"/>
+      <BoundingBox miny="-2968266.605" maxy="12722628.573" maxx="18730270.588" CRS="EPSG:3857" minx="-7038247.959"/>
+      <BoundingBox miny="-63.225658" maxy="168.256884" maxx="74.504833" CRS="EPSG:4326" minx="-25.750943"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=Zones_Marines_Quadrige&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <Attribution>
+       <Title>Ifremer - Quadrige</Title>
+      </Attribution>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=214c3766-58f8-45c4-8c15-17de5aed3d9a&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+     <Layer queryable="1">
+      <Name>referentiel_lieux_quadrige_point</Name>
+      <Title>Référentiel Quadrige - Lieux ponctuels</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-63.1158</westBoundLongitude>
+       <eastBoundLongitude>167.168167</eastBoundLongitude>
+       <southBoundLatitude>-22.469723</southBoundLatitude>
+       <northBoundLatitude>51.21249</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-3056730.532" maxy="20302748.866" maxx="16409513.725" CRS="EPSG:2154" minx="-10972517.344"/>
+      <BoundingBox miny="-2568015.257" maxy="6658967" maxx="18609075.157" CRS="EPSG:3857" minx="-7026018.677"/>
+      <BoundingBox miny="-63.1158" maxy="167.168167" maxx="51.21249" CRS="EPSG:4326" minx="-22.469723"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=referentiel_lieux_quadrige_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <Attribution>
+       <Title>Ifremer - Quadrige</Title>
+      </Attribution>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=0e90c96f-6a93-428b-9fa8-0636632266d2&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+     <Layer queryable="1">
+      <Name>referentiel_lieux_quadrige_ligne</Name>
+      <Title>Référentiel Quadrige - Lieux linéaires</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-4.937078</westBoundLongitude>
+       <eastBoundLongitude>163.088659</eastBoundLongitude>
+       <southBoundLatitude>-22.393667</southBoundLatitude>
+       <northBoundLatitude>51.07022</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-3037498.613" maxy="19576498.597" maxx="16394922.032" CRS="EPSG:2154" minx="-10677195.245"/>
+      <BoundingBox miny="-2558855.716" maxy="6633724.141" maxx="18154946.387" CRS="EPSG:3857" minx="-6792517.427"/>
+      <BoundingBox miny="-61.018223" maxy="163.088659" maxx="51.07022" CRS="EPSG:4326" minx="-22.393667"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=referentiel_lieux_quadrige_ligne&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <Attribution>
+       <Title>Ifremer - Quadrige</Title>
+      </Attribution>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=0e90c96f-6a93-428b-9fa8-0636632266d2&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+     <Layer queryable="1">
+      <Name>referentiel_lieux_quadrige_polygone</Name>
+      <Title>Référentiel Quadrige - Lieux surfaciques</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-73.466671</westBoundLongitude>
+       <eastBoundLongitude>167.044804</eastBoundLongitude>
+       <southBoundLatitude>-71.14001</southBoundLatitude>
+       <northBoundLatitude>66.666594</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-30389527.666" maxy="33545525.586" maxx="43741466.778" CRS="EPSG:2154" minx="-34768283.631"/>
+      <BoundingBox miny="-11450315.299" maxy="10061715.755" maxx="18595342.506" CRS="EPSG:3857" minx="-8178272.347"/>
+      <BoundingBox miny="-73.466671" maxy="167.044804" maxx="66.666594" CRS="EPSG:4326" minx="-71.14001"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=referentiel_lieux_quadrige_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <Attribution>
+       <Title>Ifremer - Quadrige</Title>
+      </Attribution>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=0e90c96f-6a93-428b-9fa8-0636632266d2&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+    </Layer>
+    <Layer queryable="1">
+     <Name>Lieux actifs</Name>
+     <Title>Lieux actifs</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <CRS>EPSG:2154</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>-63.057067</westBoundLongitude>
+      <eastBoundLongitude>55.813333</eastBoundLongitude>
+      <southBoundLatitude>-21.39193</southBoundLatitude>
+      <northBoundLatitude>51.151319</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="-2828741.606" maxy="8944866.601" maxx="10274490.881" CRS="EPSG:2154" minx="-10795281.403"/>
+     <BoundingBox miny="-2438673.883" maxy="6648103.951" maxx="6193256.531" CRS="EPSG:3857" minx="-7019480.59"/>
+     <BoundingBox miny="-63.057067" maxy="55.63497" maxx="51.151319" CRS="EPSG:4326" minx="-21.39193"/>
+     <Layer queryable="1">
+      <Name>surval_lieux_actifs_point</Name>
+      <Title>Surval lieux actifs (point)</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-63.057067</westBoundLongitude>
+       <eastBoundLongitude>55.813333</eastBoundLongitude>
+       <southBoundLatitude>-21.39193</southBoundLatitude>
+       <northBoundLatitude>51.151319</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-2828741.606" maxy="8944866.601" maxx="10274490.881" CRS="EPSG:2154" minx="-10795281.403"/>
+      <BoundingBox miny="-2438673.883" maxy="6648103.951" maxx="6193256.531" CRS="EPSG:3857" minx="-7019480.59"/>
+      <BoundingBox miny="-63.057067" maxy="55.63497" maxx="51.151319" CRS="EPSG:4326" minx="-21.39193"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <Attribution>
+       <Title>Ifremer - Quadrige</Title>
+      </Attribution>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=08d2834a-28ed-43d5-8f2c-4bcafdbc445d&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+     <Layer queryable="1">
+      <Name>surval_lieux_actifs_ligne</Name>
+      <Title>Surval lieux actifs (ligne)</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>3.0696</westBoundLongitude>
+       <eastBoundLongitude>9.492802</eastBoundLongitude>
+       <southBoundLatitude>41.364517</southBoundLatitude>
+       <northBoundLatitude>43.784943</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="6029182.346" maxy="6319915.027" maxx="1244254.039" CRS="EPSG:2154" minx="705603.468"/>
+      <BoundingBox miny="5066257.458" maxy="5432221.659" maxx="1056733.802" CRS="EPSG:3857" minx="341706.385"/>
+      <BoundingBox miny="3.0696" maxy="9.492802" maxx="43.784943" CRS="EPSG:4326" minx="41.364517"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_ligne&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <Attribution>
+       <Title>Ifremer - Quadrige</Title>
+      </Attribution>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=08d2834a-28ed-43d5-8f2c-4bcafdbc445d&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+     <Layer queryable="1">
+      <Name>surval_lieux_actifs_polygone</Name>
+      <Title>Surval lieux actifs (polygone)</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-5.452101</westBoundLongitude>
+       <eastBoundLongitude>55.2855</eastBoundLongitude>
+       <southBoundLatitude>-21.169044</southBoundLatitude>
+       <northBoundLatitude>51.000027</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-2782918.297" maxy="8274445.71" maxx="10191904.961" CRS="EPSG:2154" minx="-949378.885"/>
+      <BoundingBox miny="-2412046.666" maxy="6621298.439" maxx="6154353.698" CRS="EPSG:3857" minx="-606924.996"/>
+      <BoundingBox miny="-5.452101" maxy="55.2855" maxx="51.000027" CRS="EPSG:4326" minx="-21.169044"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <Attribution>
+       <Title>Ifremer - Quadrige</Title>
+      </Attribution>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=08d2834a-28ed-43d5-8f2c-4bcafdbc445d&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+     <Layer queryable="1">
+      <Name>Lieux actifs par groupe de programmes</Name>
+      <Title>Lieux actifs par groupe de programmes</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-63.057067</westBoundLongitude>
+       <eastBoundLongitude>55.809001</eastBoundLongitude>
+       <southBoundLatitude>-21.39193</southBoundLatitude>
+       <northBoundLatitude>51.068651</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-2827683.509" maxy="8938690.03" maxx="10274490.881" CRS="EPSG:2154" minx="-10523953.445"/>
+      <BoundingBox miny="-2438673.883" maxy="6633446.138" maxx="6193256.531" CRS="EPSG:3857" minx="-7019480.59"/>
+      <BoundingBox miny="-63.057067" maxy="55.63497" maxx="51.068651" CRS="EPSG:4326" minx="-21.39193"/>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_BENTHOS_point</Name>
+       <Title>Surval lieux actifs BENTHOS (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-5.141721</westBoundLongitude>
+        <eastBoundLongitude>55.809001</eastBoundLongitude>
+        <southBoundLatitude>-21.387133</southBoundLatitude>
+        <northBoundLatitude>51.023337</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6031951.407" maxy="7132556.025" maxx="1251600.09" CRS="EPSG:2154" minx="18252.148"/>
+       <BoundingBox miny="5069948.785" maxy="6625422.692" maxx="1066819.177" CRS="EPSG:3857" minx="-572373.762"/>
+       <BoundingBox miny="-5.141721" maxy="9.5834" maxx="51.023337" CRS="EPSG:4326" minx="41.389399"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_BENTHOS_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=dc54e90c-0991-4792-92b9-f0c140c2b2d8&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_BENTHOS_ligne</Name>
+       <Title>Surval lieux actifs BENTHOS (ligne)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>3.0696</westBoundLongitude>
+        <eastBoundLongitude>9.492802</eastBoundLongitude>
+        <southBoundLatitude>41.364517</southBoundLatitude>
+        <northBoundLatitude>43.784943</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6029182.346" maxy="6319915.027" maxx="1244254.039" CRS="EPSG:2154" minx="705603.468"/>
+       <BoundingBox miny="5066257.458" maxy="5432221.659" maxx="1056733.802" CRS="EPSG:3857" minx="341706.385"/>
+       <BoundingBox miny="3.0696" maxy="9.492802" maxx="43.784943" CRS="EPSG:4326" minx="41.364517"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_BENTHOS_ligne&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="">
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=dc54e90c-0991-4792-92b9-f0c140c2b2d8&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_BENTHOS_polygone</Name>
+       <Title>Surval lieux actifs BENTHOS (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-5.175813</westBoundLongitude>
+        <eastBoundLongitude>0.902118</eastBoundLongitude>
+        <southBoundLatitude>43.317386</southBoundLatitude>
+        <northBoundLatitude>49.920829</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6248731.709" maxy="7010635.723" maxx="549233.964" CRS="EPSG:2154" minx="37579.389"/>
+       <BoundingBox miny="5360406.715" maxy="6432576.089" maxx="100423.31" CRS="EPSG:3857" minx="-576168.77"/>
+       <BoundingBox miny="-5.175813" maxy="0.902118" maxx="49.920829" CRS="EPSG:4326" minx="43.317386"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_BENTHOS_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="">
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=dc54e90c-0991-4792-92b9-f0c140c2b2d8&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_REPHY_REPHYTOX_point</Name>
+       <Title>Surval lieux actifs REPHY et REPHYTOX (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-63.057067</westBoundLongitude>
+        <eastBoundLongitude>45.278701</eastBoundLongitude>
+        <southBoundLatitude>-13.038301</southBoundLatitude>
+        <northBoundLatitude>51.068651</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-1212526.89" maxy="8938690.03" maxx="7776281.867" CRS="EPSG:2154" minx="-9595857.471"/>
+       <BoundingBox miny="-1464108.311" maxy="6633446.138" maxx="5040401.88" CRS="EPSG:3857" minx="-7019480.59"/>
+       <BoundingBox miny="-63.057067" maxy="45.278701" maxx="51.068651" CRS="EPSG:4326" minx="-13.038301"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_REPHY_REPHYTOX_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_REPHY_REPHYTOX_polygone</Name>
+       <Title>Surval lieux actifs REPHY et REPHYTOX (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-5.452101</westBoundLongitude>
+        <eastBoundLongitude>4.786811</eastBoundLongitude>
+        <southBoundLatitude>42.858427</southBoundLatitude>
+        <northBoundLatitude>51.000027</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6195441.486" maxy="7132261.07" maxx="846172.199" CRS="EPSG:2154" minx="9826.467"/>
+       <BoundingBox miny="5290447.789" maxy="6621298.439" maxx="532865.326" CRS="EPSG:3857" minx="-606924.996"/>
+       <BoundingBox miny="-5.452101" maxy="4.786811" maxx="51.000027" CRS="EPSG:4326" minx="42.858427"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_REPHY_REPHYTOX_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_ROCCH_point</Name>
+       <Title>Surval lieux actifs ROCCH (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-61.020952</westBoundLongitude>
+        <eastBoundLongitude>55.63497</eastBoundLongitude>
+        <southBoundLatitude>-21.39193</southBoundLatitude>
+        <northBoundLatitude>51.063334</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2827683.509" maxy="8833338.91" maxx="10274490.881" CRS="EPSG:2154" minx="-10523953.445"/>
+       <BoundingBox miny="-2438673.883" maxy="6632504.312" maxx="6193256.531" CRS="EPSG:3857" minx="-6792821.244"/>
+       <BoundingBox miny="-61.020952" maxy="55.63497" maxx="51.063334" CRS="EPSG:4326" minx="-21.39193"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_ROCCH_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=eddc7b90-5b1b-499f-83a9-411a887c5b17&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_ROCCH_polygone</Name>
+       <Title>Surval lieux actifs ROCCH (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.290336</westBoundLongitude>
+        <eastBoundLongitude>55.2855</eastBoundLongitude>
+        <southBoundLatitude>-21.169044</southBoundLatitude>
+        <northBoundLatitude>50.146366</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2781906.235" maxy="8199430.946" maxx="10191904.961" CRS="EPSG:2154" minx="-723363.301"/>
+       <BoundingBox miny="-2412046.666" maxy="6471662.449" maxx="6154353.698" CRS="EPSG:3857" minx="-477597.942"/>
+       <BoundingBox miny="-4.290336" maxy="55.2855" maxx="50.146366" CRS="EPSG:4326" minx="-21.169044"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_ROCCH_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=eddc7b90-5b1b-499f-83a9-411a887c5b17&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+     </Layer>
+     <Layer queryable="1">
+      <Name>Lieux actifs par programme</Name>
+      <Title>Lieux actifs par programme</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-63.057067</westBoundLongitude>
+       <eastBoundLongitude>55.63497</eastBoundLongitude>
+       <southBoundLatitude>-21.39193</southBoundLatitude>
+       <northBoundLatitude>51.09583</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-2828531.864" maxy="8938690.03" maxx="10274490.881" CRS="EPSG:2154" minx="-9595857.471"/>
+      <BoundingBox miny="-2438673.883" maxy="6638262.479" maxx="6193256.531" CRS="EPSG:3857" minx="-7019480.59"/>
+      <BoundingBox miny="-63.057067" maxy="55.63497" maxx="51.09583" CRS="EPSG:4326" minx="-21.39193"/>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_REMI_point</Name>
+       <Title>Surval lieux actifs REMI (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.863892</westBoundLongitude>
+        <eastBoundLongitude>9.524738</eastBoundLongitude>
+        <southBoundLatitude>42.128462</southBoundLatitude>
+        <northBoundLatitude>51.09583</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6114242.837" maxy="7138622.604" maxx="1239904.777" CRS="EPSG:2154" minx="49619.061"/>
+       <BoundingBox miny="5180241.894" maxy="6638262.479" maxx="1060288.985" CRS="EPSG:3857" minx="-541445.949"/>
+       <BoundingBox miny="-4.863892" maxy="9.524738" maxx="51.09583" CRS="EPSG:4326" minx="42.128462"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_REMI_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=fa6e13d4-5700-4391-a472-dd29b82ba3db&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_REMI_polygone</Name>
+       <Title>Surval lieux actifs REMI (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.771789</westBoundLongitude>
+        <eastBoundLongitude>4.786811</eastBoundLongitude>
+        <southBoundLatitude>42.858427</southBoundLatitude>
+        <northBoundLatitude>50.318901</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6195449.053" maxy="7051819.193" maxx="846172.199" CRS="EPSG:2154" minx="65191.315"/>
+       <BoundingBox miny="5290447.789" maxy="6501688.12" maxx="532865.326" CRS="EPSG:3857" minx="-531193.049"/>
+       <BoundingBox miny="-4.771789" maxy="4.786811" maxx="50.318901" CRS="EPSG:4326" minx="42.858427"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_REMI_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=fa6e13d4-5700-4391-a472-dd29b82ba3db&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_REPHY_point</Name>
+       <Title>Surval lieux actifs REPHY Phytoplancton et Physico-chimie (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-63.057067</westBoundLongitude>
+        <eastBoundLongitude>45.278701</eastBoundLongitude>
+        <southBoundLatitude>-13.038301</southBoundLatitude>
+        <northBoundLatitude>51.068651</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-1212526.89" maxy="8938690.03" maxx="7776281.867" CRS="EPSG:2154" minx="-9595857.471"/>
+       <BoundingBox miny="-1464108.311" maxy="6633446.138" maxx="5040401.88" CRS="EPSG:3857" minx="-7019480.59"/>
+       <BoundingBox miny="-63.057067" maxy="45.278701" maxx="51.068651" CRS="EPSG:4326" minx="-13.038301"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_REPHY_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_REPHY_polygone</Name>
+       <Title>Surval lieux actifs REPHY Phytoplancton et Physico-chimie (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.563032</westBoundLongitude>
+        <eastBoundLongitude>4.786811</eastBoundLongitude>
+        <southBoundLatitude>42.858427</southBoundLatitude>
+        <northBoundLatitude>48.259212</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6195441.701" maxy="6822289.904" maxx="846172.199" CRS="EPSG:2154" minx="82189.938"/>
+       <BoundingBox miny="5290447.789" maxy="6150087.287" maxx="532865.326" CRS="EPSG:3857" minx="-507954.316"/>
+       <BoundingBox miny="-4.563032" maxy="4.786811" maxx="48.259212" CRS="EPSG:4326" minx="42.858427"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_REPHY_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_REPHYTOX_point</Name>
+       <Title>Surval lieux actifs REPHYTOX Phycotoxines (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.863892</westBoundLongitude>
+        <eastBoundLongitude>9.57447</eastBoundLongitude>
+        <southBoundLatitude>42.128462</southBoundLatitude>
+        <northBoundLatitude>51.00285</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6114238.885" maxy="7128306.584" maxx="1244010.424" CRS="EPSG:2154" minx="49619.061"/>
+       <BoundingBox miny="5180241.894" maxy="6621797.871" maxx="1065825.036" CRS="EPSG:3857" minx="-541445.949"/>
+       <BoundingBox miny="-4.863892" maxy="9.57447" maxx="51.00285" CRS="EPSG:4326" minx="42.128462"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_REPHYTOX_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_REPHYTOX_polygone</Name>
+       <Title>Surval lieux actifs REPHYTOX Phycotoxines (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-5.452101</westBoundLongitude>
+        <eastBoundLongitude>4.786811</eastBoundLongitude>
+        <southBoundLatitude>42.858427</southBoundLatitude>
+        <northBoundLatitude>51.000027</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6195441.486" maxy="7132261.07" maxx="846172.199" CRS="EPSG:2154" minx="9826.467"/>
+       <BoundingBox miny="5290447.789" maxy="6621298.439" maxx="532865.326" CRS="EPSG:3857" minx="-606924.996"/>
+       <BoundingBox miny="-5.452101" maxy="4.786811" maxx="51.000027" CRS="EPSG:4326" minx="42.858427"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_REPHYTOX_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_ROCCH_biote_point</Name>
+       <Title>Surval lieux actifs ROCCH Chimie dans le biote (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-61.020952</westBoundLongitude>
+        <eastBoundLongitude>9.535679</eastBoundLongitude>
+        <southBoundLatitude>14.44854</southBoundLatitude>
+        <northBoundLatitude>51.002767</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="2874268.698" maxy="8828686.497" maxx="1508672.141" CRS="EPSG:2154" minx="-6389740.01"/>
+       <BoundingBox miny="1625727.26" maxy="6621783.188" maxx="1061506.826" CRS="EPSG:3857" minx="-6792821.244"/>
+       <BoundingBox miny="-61.020952" maxy="9.535679" maxx="51.002767" CRS="EPSG:4326" minx="14.44854"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_ROCCH_biote_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=eddc7b90-5b1b-499f-83a9-411a887c5b17&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_ROCCH_biote_polygone</Name>
+       <Title>Surval lieux actifs ROCCH Chimie dans le biote (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.290336</westBoundLongitude>
+        <eastBoundLongitude>55.2855</eastBoundLongitude>
+        <southBoundLatitude>-21.169044</southBoundLatitude>
+        <northBoundLatitude>50.146366</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2781906.235" maxy="8199430.946" maxx="10191904.961" CRS="EPSG:2154" minx="-723363.301"/>
+       <BoundingBox miny="-2412046.666" maxy="6471662.449" maxx="6154353.698" CRS="EPSG:3857" minx="-477597.942"/>
+       <BoundingBox miny="-4.290336" maxy="55.2855" maxx="50.146366" CRS="EPSG:4326" minx="-21.169044"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_ROCCH_biote_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=eddc7b90-5b1b-499f-83a9-411a887c5b17&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_lieux_actifs_ROCCH_sediment_point</Name>
+       <Title>Surval lieux actifs ROCCH Chimie dans le sédiment (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.747568</westBoundLongitude>
+        <eastBoundLongitude>55.63497</eastBoundLongitude>
+        <southBoundLatitude>-21.39193</southBoundLatitude>
+        <northBoundLatitude>51.063334</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2828531.864" maxy="8295152.008" maxx="10274490.881" CRS="EPSG:2154" minx="-816916.641"/>
+       <BoundingBox miny="-2438673.883" maxy="6632504.312" maxx="6193256.531" CRS="EPSG:3857" minx="-528496.849"/>
+       <BoundingBox miny="-4.747568" maxy="55.63497" maxx="51.063334" CRS="EPSG:4326" minx="-21.39193"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_lieux_actifs_ROCCH_sediment_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=eddc7b90-5b1b-499f-83a9-411a887c5b17&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+     </Layer>
+    </Layer>
+    <Layer queryable="1">
+     <Name>Résultats</Name>
+     <Title>Résultats</Title>
+     <CRS>CRS:84</CRS>
+     <CRS>EPSG:4326</CRS>
+     <CRS>EPSG:3857</CRS>
+     <CRS>EPSG:2154</CRS>
+     <EX_GeographicBoundingBox>
+      <westBoundLongitude>-180</westBoundLongitude>
+      <eastBoundLongitude>180</eastBoundLongitude>
+      <southBoundLatitude>-90</southBoundLatitude>
+      <northBoundLatitude>90</northBoundLatitude>
+     </EX_GeographicBoundingBox>
+     <BoundingBox miny="-66597986.728" maxy="61954688.841" maxx="79915344.576" CRS="EPSG:2154" minx="-78592596.736"/>
+     <BoundingBox miny="-44927335.428" maxy="44927335.428" maxx="20037508.343" CRS="EPSG:3857" minx="-20037508.343"/>
+     <BoundingBox miny="-180" maxy="180" maxx="90" CRS="EPSG:4326" minx="-90"/>
+     <Layer queryable="1">
+      <Name>surval_parametre_point</Name>
+      <Title>Surval données par paramètre (point)</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-63.1158</westBoundLongitude>
+       <eastBoundLongitude>164.675868</eastBoundLongitude>
+       <southBoundLatitude>-22.404029</southBoundLatitude>
+       <northBoundLatitude>51.21249</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-3041250.293" maxy="19859296.946" maxx="16399121.331" CRS="EPSG:2154" minx="-10962075.702"/>
+      <BoundingBox miny="-2560103.3" maxy="6658967" maxx="18331633.664" CRS="EPSG:3857" minx="-7026018.677"/>
+      <BoundingBox miny="-63.1158" maxy="164.675868" maxx="51.21249" CRS="EPSG:4326" minx="-22.404029"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=cf5048f6-5bbf-4e44-ba74-e6f429af51ea&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+     <Layer queryable="1">
+      <Name>surval_parametre_polygone</Name>
+      <Title>Surval données par paramètre (polygone)</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-73.466671</westBoundLongitude>
+       <eastBoundLongitude>55.847392</eastBoundLongitude>
+       <southBoundLatitude>-71.14001</southBoundLatitude>
+       <northBoundLatitude>66.666594</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-30385331.861" maxy="10525964.769" maxx="27405960.417" CRS="EPSG:2154" minx="-34768283.631"/>
+      <BoundingBox miny="-11450315.299" maxy="10061715.755" maxx="6216903.157" CRS="EPSG:3857" minx="-8178272.347"/>
+      <BoundingBox miny="-73.466671" maxy="55.847392" maxx="66.666594" CRS="EPSG:4326" minx="-71.14001"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=cf5048f6-5bbf-4e44-ba74-e6f429af51ea&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+     <Layer queryable="1">
+      <Name>surval_parametre_ligne</Name>
+      <Title>Surval données par paramètre (ligne)</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-4.937078</westBoundLongitude>
+       <eastBoundLongitude>45.198867</eastBoundLongitude>
+       <southBoundLatitude>-12.991367</southBoundLatitude>
+       <northBoundLatitude>51.07022</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-1204694.292" maxy="7881779.611" maxx="7759937.442" CRS="EPSG:2154" minx="-690919.791"/>
+      <BoundingBox miny="-1458745.951" maxy="6633724.141" maxx="5031514.822" CRS="EPSG:3857" minx="-549592.985"/>
+      <BoundingBox miny="-4.937078" maxy="45.198867" maxx="51.07022" CRS="EPSG:4326" minx="-12.991367"/>
+      <Style>
+       <Name>défaut</Name>
+       <Title>défaut</Title>
+       <LegendURL>
+        <Format>image/png</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_ligne&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </LegendURL>
+      </Style>
+      <MetadataURL type="ISO19115:2003">
+       <Format>text/xml</Format>
+       <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=cf5048f6-5bbf-4e44-ba74-e6f429af51ea&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+      </MetadataURL>
+     </Layer>
+     <Layer queryable="1">
+      <Name>Résultats par thème</Name>
+      <Title>Résultats par thème</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-180</westBoundLongitude>
+       <eastBoundLongitude>180</eastBoundLongitude>
+       <southBoundLatitude>-90</southBoundLatitude>
+       <northBoundLatitude>90</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-66597986.728" maxy="61954688.841" maxx="79915344.576" CRS="EPSG:2154" minx="-78592596.736"/>
+      <BoundingBox miny="-44927335.428" maxy="44927335.428" maxx="20037508.343" CRS="EPSG:3857" minx="-20037508.343"/>
+      <BoundingBox miny="-180" maxy="180" maxx="90" CRS="EPSG:4326" minx="-90"/>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_autres_point</Name>
+       <Title>Surval données par paramètre - Thème autres (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.741389</westBoundLongitude>
+        <eastBoundLongitude>164.675868</eastBoundLongitude>
+        <southBoundLatitude>-21.39053</southBoundLatitude>
+        <northBoundLatitude>51.069149</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2828845.447" maxy="19760898.26" maxx="16181647.465" CRS="EPSG:2154" minx="-815681.967"/>
+       <BoundingBox miny="-2438506.505" maxy="6633534.46" maxx="18331633.664" CRS="EPSG:3857" minx="-527808.973"/>
+       <BoundingBox miny="-4.741389" maxy="164.675868" maxx="51.069149" CRS="EPSG:4326" minx="-21.39053"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_autres_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=ed53ee07-9d51-4260-82b2-726b8f1fbab1&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_autres_polygone</Name>
+       <Title>Surval données par paramètre - Thème autres (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.628332</westBoundLongitude>
+        <eastBoundLongitude>55.48047</eastBoundLongitude>
+        <southBoundLatitude>-21.348127</southBoundLatitude>
+        <northBoundLatitude>50.257977</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2819777.35" maxy="8217805.687" maxx="10245005.119" CRS="EPSG:2154" minx="-792759.901"/>
+       <BoundingBox miny="-2433437.667" maxy="6491073.234" maxx="6176057.633" CRS="EPSG:3857" minx="-515223.486"/>
+       <BoundingBox miny="-4.628332" maxy="55.48047" maxx="50.257977" CRS="EPSG:4326" minx="-21.348127"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_autres_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=ed53ee07-9d51-4260-82b2-726b8f1fbab1&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_benthos_point</Name>
+       <Title>Surval données par paramètre - Thème benthos (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-63.1158</westBoundLongitude>
+        <eastBoundLongitude>55.809001</eastBoundLongitude>
+        <southBoundLatitude>-22.404029</southBoundLatitude>
+        <northBoundLatitude>51.026667</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-3042456.431" maxy="8938620.252" maxx="10434071.282" CRS="EPSG:2154" minx="-10962075.702"/>
+       <BoundingBox miny="-2560103.3" maxy="6626012.104" maxx="6212629.462" CRS="EPSG:3857" minx="-7026018.677"/>
+       <BoundingBox miny="-63.1158" maxy="55.809001" maxx="51.026667" CRS="EPSG:4326" minx="-22.404029"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_benthos_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=9bffdbf1-2bb6-46c5-910f-999db5e8278b&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_benthos_ligne</Name>
+       <Title>Surval données par paramètre - Thème benthos (ligne)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-90</southBoundLatitude>
+        <northBoundLatitude>90</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-66597986.728" maxy="61954688.841" maxx="79915344.576" CRS="EPSG:2154" minx="-78592596.736"/>
+       <BoundingBox miny="-44927335.428" maxy="44927335.428" maxx="20037508.343" CRS="EPSG:3857" minx="-20037508.343"/>
+       <BoundingBox miny="-180" maxy="180" maxx="90" CRS="EPSG:4326" minx="-90"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_benthos_ligne&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=9bffdbf1-2bb6-46c5-910f-999db5e8278b&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_benthos_polygone</Name>
+       <Title>Surval données par paramètre - Thème benthos (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-16.096096</westBoundLongitude>
+        <eastBoundLongitude>55.847392</eastBoundLongitude>
+        <southBoundLatitude>-25.750945</southBoundLatitude>
+        <northBoundLatitude>63.887479</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-3783931.717" maxy="9449185.995" maxx="10900354.781" CRS="EPSG:2154" minx="-3237449.1"/>
+       <BoundingBox miny="-2968266.901" maxy="9321247.91" maxx="6216903.157" CRS="EPSG:3857" minx="-1791809.139"/>
+       <BoundingBox miny="-16.096096" maxy="55.847392" maxx="63.887479" CRS="EPSG:4326" minx="-25.750945"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_benthos_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=9bffdbf1-2bb6-46c5-910f-999db5e8278b&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_chimie_ecotoxicologie_point</Name>
+       <Title>Surval données par paramètre - Thème Contaminants chimiques et écotoxicologie (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-63.057067</westBoundLongitude>
+        <eastBoundLongitude>55.83014</eastBoundLongitude>
+        <southBoundLatitude>-21.39193</southBoundLatitude>
+        <northBoundLatitude>51.21249</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2828934.29" maxy="8949437.533" maxx="10304542.832" CRS="EPSG:2154" minx="-10795281.403"/>
+       <BoundingBox miny="-2438673.883" maxy="6658967" maxx="6214982.756" CRS="EPSG:3857" minx="-7019480.59"/>
+       <BoundingBox miny="-63.057067" maxy="55.83014" maxx="51.21249" CRS="EPSG:4326" minx="-21.39193"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_chimie_ecotoxicologie_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=54c75193-38af-4659-998a-aaa487558678&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_chimie_ecotoxicologie_polygone</Name>
+       <Title>Surval données par paramètre - Thème Contaminants chimiques et écotoxicologie (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-16.096096</westBoundLongitude>
+        <eastBoundLongitude>55.28616</eastBoundLongitude>
+        <southBoundLatitude>-21.169044</southBoundLatitude>
+        <northBoundLatitude>63.887479</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2782486.046" maxy="9431238.716" maxx="10192006.704" CRS="EPSG:2154" minx="-2997331.683"/>
+       <BoundingBox miny="-2412046.666" maxy="9321247.91" maxx="6154427.149" CRS="EPSG:3857" minx="-1791809.139"/>
+       <BoundingBox miny="-16.096096" maxy="55.28616" maxx="63.887479" CRS="EPSG:4326" minx="-21.169044"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_chimie_ecotoxicologie_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=54c75193-38af-4659-998a-aaa487558678&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_dechets_point</Name>
+       <Title>Surval données par paramètre - Thème déchets (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>3.005</westBoundLongitude>
+        <eastBoundLongitude>45.289917</eastBoundLongitude>
+        <southBoundLatitude>-12.991684</southBoundLatitude>
+        <northBoundLatitude>43.583479</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-1205418.213" maxy="7169326.362" maxx="7773715.929" CRS="EPSG:2154" minx="700403.961"/>
+       <BoundingBox miny="-1458782.128" maxy="5401209.136" maxx="5041650.462" CRS="EPSG:3857" minx="334515.069"/>
+       <BoundingBox miny="3.005" maxy="45.289917" maxx="43.583479" CRS="EPSG:4326" minx="-12.991684"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_dechets_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=6b728818-478b-4dfc-94eb-b61b908d8e83&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_dechets_ligne</Name>
+       <Title>Surval données par paramètre - Thème déchets (ligne)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.937078</westBoundLongitude>
+        <eastBoundLongitude>45.198867</eastBoundLongitude>
+        <southBoundLatitude>-12.991367</southBoundLatitude>
+        <northBoundLatitude>51.07022</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-1204694.292" maxy="7881779.611" maxx="7759937.442" CRS="EPSG:2154" minx="-690919.791"/>
+       <BoundingBox miny="-1458745.951" maxy="6633724.141" maxx="5031514.822" CRS="EPSG:3857" minx="-549592.985"/>
+       <BoundingBox miny="-4.937078" maxy="45.198867" maxx="51.07022" CRS="EPSG:4326" minx="-12.991367"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_dechets_ligne&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=6b728818-478b-4dfc-94eb-b61b908d8e83&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_dechets_polygone</Name>
+       <Title>Surval données par paramètre - Thème déchets (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-73.466671</westBoundLongitude>
+        <eastBoundLongitude>18.986793</eastBoundLongitude>
+        <southBoundLatitude>-71.14001</southBoundLatitude>
+        <northBoundLatitude>66.666594</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-30378944.714" maxy="10525964.769" maxx="9355560.479" CRS="EPSG:2154" minx="-34768283.631"/>
+       <BoundingBox miny="-11450315.299" maxy="10061715.755" maxx="2113600.062" CRS="EPSG:3857" minx="-8178272.347"/>
+       <BoundingBox miny="-73.466671" maxy="18.986793" maxx="66.666594" CRS="EPSG:4326" minx="-71.14001"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_dechets_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=6b728818-478b-4dfc-94eb-b61b908d8e83&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_microbiologie_point</Name>
+       <Title>Surval données par paramètre - Thème microbiologie (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-5.103241</westBoundLongitude>
+        <eastBoundLongitude>9.572346</eastBoundLongitude>
+        <southBoundLatitude>41.413647</southBoundLatitude>
+        <northBoundLatitude>51.108333</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6034652.276" maxy="7141705.8" maxx="1250628.949" CRS="EPSG:2154" minx="21739.659"/>
+       <BoundingBox miny="5073547.318" maxy="6640478.995" maxx="1065825.036" CRS="EPSG:3857" minx="-568090.118"/>
+       <BoundingBox miny="-5.103241" maxy="9.57447" maxx="51.108333" CRS="EPSG:4326" minx="41.413647"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_microbiologie_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=1ba0c9e1-ab86-4d15-b84b-41789a12a947&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_microbiologie_polygone</Name>
+       <Title>Surval données par paramètre - Thème microbiologie (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.790644</westBoundLongitude>
+        <eastBoundLongitude>4.786811</eastBoundLongitude>
+        <southBoundLatitude>42.858427</southBoundLatitude>
+        <northBoundLatitude>50.318901</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6195449.548" maxy="7051951.479" maxx="846172.199" CRS="EPSG:2154" minx="63656.221"/>
+       <BoundingBox miny="5290447.789" maxy="6501688.12" maxx="532865.326" CRS="EPSG:3857" minx="-533291.963"/>
+       <BoundingBox miny="-4.790644" maxy="4.786811" maxx="50.318901" CRS="EPSG:4326" minx="42.858427"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_microbiologie_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=1ba0c9e1-ab86-4d15-b84b-41789a12a947&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_phytoplancton_hydrologie_point</Name>
+       <Title>Surval données par paramètre - Thème phytoplancton et hydrologie (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-63.057067</westBoundLongitude>
+        <eastBoundLongitude>55.864467</eastBoundLongitude>
+        <southBoundLatitude>-21.38885</southBoundLatitude>
+        <northBoundLatitude>51.167483</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2828320.33" maxy="8946074.416" maxx="10309422.159" CRS="EPSG:2154" minx="-10794802.655"/>
+       <BoundingBox miny="-2438305.654" maxy="6650973.09" maxx="6218804.019" CRS="EPSG:3857" minx="-7019480.59"/>
+       <BoundingBox miny="-63.057067" maxy="55.864467" maxx="51.167483" CRS="EPSG:4326" minx="-21.38885"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_phytoplancton_hydrologie_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=ba34c628-5761-4d80-b03b-720543295519&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_phytoplancton_hydrologie_polygone</Name>
+       <Title>Surval données par paramètre - Thème phytoplancton et hydrologie (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-10.094494</westBoundLongitude>
+        <eastBoundLongitude>10.218333</eastBoundLongitude>
+        <southBoundLatitude>40.08333</southBoundLatitude>
+        <northBoundLatitude>61.356666</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="5886363.213" maxy="8332450.081" maxx="1317950.198" CRS="EPSG:2154" minx="-417423.85"/>
+       <BoundingBox miny="4878059.013" maxy="8708182.795" maxx="1137499.627" CRS="EPSG:3857" minx="-1123713.828"/>
+       <BoundingBox miny="-10.094494" maxy="10.218333" maxx="61.356666" CRS="EPSG:4326" minx="40.08333"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_phytoplancton_hydrologie_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_ressources_aquacoles_point</Name>
+       <Title>Surval données par paramètre - Thème ressources aquacoles (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.608069</westBoundLongitude>
+        <eastBoundLongitude>3.665081</eastBoundLongitude>
+        <southBoundLatitude>42.87475</southBoundLatitude>
+        <northBoundLatitude>49.878724</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6197258.391" maxy="7001898.7" maxx="754396.42" CRS="EPSG:2154" minx="78696.89"/>
+       <BoundingBox miny="5292926.993" maxy="6425299.267" maxx="407994.892" CRS="EPSG:3857" minx="-512967.873"/>
+       <BoundingBox miny="-4.608069" maxy="3.665081" maxx="49.878724" CRS="EPSG:4326" minx="42.87475"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_ressources_aquacoles_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=2dff5de1-ffc9-4ab4-9b01-b714c91a77f9&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_zooplancton_point</Name>
+       <Title>Surval données par paramètre - Thème zooplancton (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-2.33471</westBoundLongitude>
+        <eastBoundLongitude>2.152</eastBoundLongitude>
+        <southBoundLatitude>48.799033</southBoundLatitude>
+        <northBoundLatitude>51.063333</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6855773.803" maxy="7120183.017" maxx="640418.701" CRS="EPSG:2154" minx="308437.996"/>
+       <BoundingBox miny="6240830.106" maxy="6632504.253" maxx="239559.545" CRS="EPSG:3857" minx="-259898.648"/>
+       <BoundingBox miny="-2.33471" maxy="2.152" maxx="51.063333" CRS="EPSG:4326" minx="48.799033"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_zooplancton_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=f2e34ec2-507f-49d9-af9b-9041268d6150&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_theme_zooplancton_polygone</Name>
+       <Title>Surval données par paramètre - Thème zooplancton (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-16.096096</westBoundLongitude>
+        <eastBoundLongitude>10.218333</eastBoundLongitude>
+        <southBoundLatitude>36.189895</southBoundLatitude>
+        <northBoundLatitude>63.887479</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="5450096.429" maxy="8686182.879" maxx="1357775.408" CRS="EPSG:2154" minx="-1025634.188"/>
+       <BoundingBox miny="4326782.243" maxy="9321247.91" maxx="1137499.627" CRS="EPSG:3857" minx="-1791809.139"/>
+       <BoundingBox miny="-16.096096" maxy="10.218333" maxx="63.887479" CRS="EPSG:4326" minx="36.189895"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_theme_zooplancton_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=f2e34ec2-507f-49d9-af9b-9041268d6150&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+     </Layer>
+     <Layer queryable="1">
+      <Name>Résultats par programme</Name>
+      <Title>Résultats par programme</Title>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:2154</CRS>
+      <EX_GeographicBoundingBox>
+       <westBoundLongitude>-63.057067</westBoundLongitude>
+       <eastBoundLongitude>55.864467</eastBoundLongitude>
+       <southBoundLatitude>-21.39193</southBoundLatitude>
+       <northBoundLatitude>51.21249</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox miny="-2828548.929" maxy="8938690.03" maxx="10309199.059" CRS="EPSG:2154" minx="-10794535.783"/>
+      <BoundingBox miny="-2438673.883" maxy="6658967" maxx="6218804.019" CRS="EPSG:3857" minx="-7019480.59"/>
+      <BoundingBox miny="-63.057067" maxy="55.864467" maxx="51.21249" CRS="EPSG:4326" minx="-21.39193"/>
+      <Layer queryable="1">
+       <Name>surval_parametre_REMI_point</Name>
+       <Title>Surval données par paramètre REMI (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-5.103241</westBoundLongitude>
+        <eastBoundLongitude>9.572346</eastBoundLongitude>
+        <southBoundLatitude>41.413647</southBoundLatitude>
+        <northBoundLatitude>51.108333</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6034652.276" maxy="7141705.8" maxx="1250628.949" CRS="EPSG:2154" minx="21739.659"/>
+       <BoundingBox miny="5073547.318" maxy="6640478.995" maxx="1065825.036" CRS="EPSG:3857" minx="-568090.118"/>
+       <BoundingBox miny="-5.103241" maxy="9.57447" maxx="51.108333" CRS="EPSG:4326" minx="41.413647"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_REMI_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=fa6e13d4-5700-4391-a472-dd29b82ba3db&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_REMI_polygone</Name>
+       <Title>Surval données par paramètre REMI (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.790644</westBoundLongitude>
+        <eastBoundLongitude>4.786811</eastBoundLongitude>
+        <southBoundLatitude>42.858427</southBoundLatitude>
+        <northBoundLatitude>50.146366</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6195443.921" maxy="7032830.218" maxx="846172.199" CRS="EPSG:2154" minx="63656.221"/>
+       <BoundingBox miny="5290447.789" maxy="6471662.449" maxx="532865.326" CRS="EPSG:3857" minx="-533291.963"/>
+       <BoundingBox miny="-4.790644" maxy="4.786811" maxx="50.146366" CRS="EPSG:4326" minx="42.858427"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_REMI_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=fa6e13d4-5700-4391-a472-dd29b82ba3db&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_REPHY_point</Name>
+       <Title>Surval données par paramètre REPHY (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-63.057067</westBoundLongitude>
+        <eastBoundLongitude>55.864467</eastBoundLongitude>
+        <southBoundLatitude>-21.387133</southBoundLatitude>
+        <northBoundLatitude>51.068651</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2827960.842" maxy="8938690.03" maxx="10309199.059" CRS="EPSG:2154" minx="-10794535.783"/>
+       <BoundingBox miny="-2438100.382" maxy="6633446.138" maxx="6218804.019" CRS="EPSG:3857" minx="-7019480.59"/>
+       <BoundingBox miny="-63.057067" maxy="55.864467" maxx="51.068651" CRS="EPSG:4326" minx="-21.387133"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_REPHY_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_REPHY_polygone</Name>
+       <Title>Surval données par paramètre REPHY (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-5.452101</westBoundLongitude>
+        <eastBoundLongitude>4.786811</eastBoundLongitude>
+        <southBoundLatitude>42.858427</southBoundLatitude>
+        <northBoundLatitude>51</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6195441.486" maxy="7132258.115" maxx="846172.199" CRS="EPSG:2154" minx="9826.467"/>
+       <BoundingBox miny="5290447.789" maxy="6621293.723" maxx="532865.326" CRS="EPSG:3857" minx="-606924.996"/>
+       <BoundingBox miny="-5.452101" maxy="4.786811" maxx="51" CRS="EPSG:4326" minx="42.858427"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_REPHY_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_REPHYTOX_point</Name>
+       <Title>Surval données par paramètre REPHYTOX (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.863892</westBoundLongitude>
+        <eastBoundLongitude>9.572346</eastBoundLongitude>
+        <southBoundLatitude>42.04613</southBoundLatitude>
+        <northBoundLatitude>51.002767</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6105077.003" maxy="7128297.376" maxx="1244772.457" CRS="EPSG:2154" minx="48708.028"/>
+       <BoundingBox miny="5167892" maxy="6621783.188" maxx="1065825.036" CRS="EPSG:3857" minx="-541445.949"/>
+       <BoundingBox miny="-4.863892" maxy="9.57447" maxx="51.002767" CRS="EPSG:4326" minx="42.04613"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_REPHYTOX_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_REPHYTOX_polygone</Name>
+       <Title>Surval données par paramètre REPHYTOX (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-5.452101</westBoundLongitude>
+        <eastBoundLongitude>8.765619</eastBoundLongitude>
+        <southBoundLatitude>41.920493</southBoundLatitude>
+        <northBoundLatitude>51.000027</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="6091091.149" maxy="7132261.07" maxx="1178897.33" CRS="EPSG:2154" minx="-1322.02"/>
+       <BoundingBox miny="5149077.24" maxy="6621298.439" maxx="975784.198" CRS="EPSG:3857" minx="-606924.996"/>
+       <BoundingBox miny="-5.452101" maxy="8.765619" maxx="51.000027" CRS="EPSG:4326" minx="41.920493"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_REPHYTOX_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=aa8fe568-d2c0-4b53-a8bb-d9fcef2b5293&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_ROCCH_biote_point</Name>
+       <Title>Surval données par paramètre ROCCH biote (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-61.842121</westBoundLongitude>
+        <eastBoundLongitude>9.535679</eastBoundLongitude>
+        <southBoundLatitude>14.447825</southBoundLatitude>
+        <northBoundLatitude>51.052484</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="2874185.624" maxy="8874540.817" maxx="1508679.663" CRS="EPSG:2154" minx="-6459501.148"/>
+       <BoundingBox miny="1625644.989" maxy="6630582.694" maxx="1061506.826" CRS="EPSG:3857" minx="-6884233.386"/>
+       <BoundingBox miny="-61.842121" maxy="9.535679" maxx="51.052484" CRS="EPSG:4326" minx="14.447825"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_ROCCH_biote_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=eddc7b90-5b1b-499f-83a9-411a887c5b17&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_ROCCH_biote_polygone</Name>
+       <Title>Surval données par paramètre ROCCH biote (polygone)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-3.163821</westBoundLongitude>
+        <eastBoundLongitude>55.2855</eastBoundLongitude>
+        <southBoundLatitude>-21.169044</southBoundLatitude>
+        <northBoundLatitude>50.146366</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2781991.12" maxy="8199430.946" maxx="10191904.961" CRS="EPSG:2154" minx="-736556.47"/>
+       <BoundingBox miny="-2412046.666" maxy="6471662.449" maxx="6154353.698" CRS="EPSG:3857" minx="-485142.014"/>
+       <BoundingBox miny="-4.358105" maxy="55.2855" maxx="50.146366" CRS="EPSG:4326" minx="-21.169044"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_ROCCH_biote_polygone&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=eddc7b90-5b1b-499f-83a9-411a887c5b17&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+      <Layer queryable="1">
+       <Name>surval_parametre_ROCCH_sediment_point</Name>
+       <Title>Surval données par paramètre ROCCH sédiment (point)</Title>
+       <CRS>CRS:84</CRS>
+       <CRS>EPSG:4326</CRS>
+       <CRS>EPSG:3857</CRS>
+       <CRS>EPSG:2154</CRS>
+       <EX_GeographicBoundingBox>
+        <westBoundLongitude>-4.756735</westBoundLongitude>
+        <eastBoundLongitude>55.63497</eastBoundLongitude>
+        <southBoundLatitude>-21.39193</southBoundLatitude>
+        <northBoundLatitude>51.21249</northBoundLatitude>
+       </EX_GeographicBoundingBox>
+       <BoundingBox miny="-2828548.929" maxy="8308224.902" maxx="10274490.881" CRS="EPSG:2154" minx="-818705.631"/>
+       <BoundingBox miny="-2438673.883" maxy="6658967" maxx="6193256.531" CRS="EPSG:3857" minx="-529517.276"/>
+       <BoundingBox miny="-4.756735" maxy="55.63497" maxx="51.21249" CRS="EPSG:4326" minx="-21.39193"/>
+       <Style>
+        <Name>défaut</Name>
+        <Title>défaut</Title>
+        <LegendURL>
+         <Format>image/png</Format>
+         <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetLegendGraphic&amp;LAYER=surval_parametre_ROCCH_sediment_point&amp;FORMAT=image/png&amp;STYLE=défaut&amp;SLD_VERSION=1.1.0" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+        </LegendURL>
+       </Style>
+       <Attribution>
+        <Title>Ifremer - Quadrige</Title>
+       </Attribution>
+       <MetadataURL type="ISO19115:2003">
+        <Format>text/xml</Format>
+        <OnlineResource xlink:type="simple" xlink:href="https://sextant.ifremer.fr/geonetwork/srv/fre/csw?request=GetRecordById&amp;elementSetName=full&amp;service=CSW&amp;version=2.0.2&amp;id=eddc7b90-5b1b-499f-83a9-411a887c5b17&amp;OutputSchema=http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+       </MetadataURL>
+      </Layer>
+     </Layer>
+    </Layer>
+   </Layer>
+  </Layer>
+ </Capability>
+</WMS_Capabilities>
