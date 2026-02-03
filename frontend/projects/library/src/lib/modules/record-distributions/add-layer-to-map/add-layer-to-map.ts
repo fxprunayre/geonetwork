@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { WmsEndpoint } from '@camptocamp/ogc-client';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidExclamation } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Link } from 'gn-api-client';
 import { Button } from 'primeng/button';
@@ -16,9 +18,6 @@ import { Skeleton } from 'primeng/skeleton';
 import { SplitButton } from 'primeng/splitbutton';
 import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
 import { MAP_ROUTE_PATH } from '../../search/search-constant';
-import { Badge } from 'primeng/badge';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidExclamation } from '@ng-icons/font-awesome/solid';
 
 export interface Gn4MapCommand {
   uuid?: string;

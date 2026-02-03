@@ -1,5 +1,5 @@
 {
-  "took": 15,
+  "took": 17,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,538 +9,247 @@
   },
   "hits": {
     "total": {
-      "value": 14897,
+      "value": 14865,
       "relation": "eq"
     },
     "max_score": null,
     "hits": [
       {
         "_index": "geo-records",
-        "_id": "62d3054c-5046-41b5-825a-738ed2019c91",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "Quality Information Document (CMEMS-SL-QUID-008-052)"
-          },
-          "dateStamp": "2021-04-19T12:58:40.000Z",
-          "resourceType": ["publication"],
-          "uuid": "62d3054c-5046-41b5-825a-738ed2019c91",
-          "draft": "n",
-          "id": "265948307",
-          "owner": "3680846",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "94cd2997-78be-47e6-b570-c51d51041118",
+        "_id": "839a9d1f-16ea-48c5-be73-33b05940ddb0",
         "_score": 0.0,
         "_ignored": [
-          "resourceAbstractObject.default.keyword",
-          "resourceAbstractObject.default.sort",
-          "resourceAbstractObject.langeng.keyword"
+          "lineageObject.default.sort",
+          "lineageObject.default.keyword",
+          "lineageObject.langfre.keyword"
         ],
         "_source": {
-          "dateStamp": "2025-07-29T14:39:33.483105Z",
-          "resourceType": ["series"],
-          "resourceTitleObject": {
-            "default": "Mediterranean Sea DIVA 4D analysis of Water_body_nitrite",
-            "langeng": "Mediterranean Sea DIVA 4D analysis of Water_body_nitrite"
-          },
-          "resourceAbstractObject": {
-            "default": "Moving 10-years analysis of nitrite at Mediterranean Sea for each season :\n- winter (January-March),\n- spring (April-June),\n- summer (July-September),\n- autumn (October-December).\n\nEvery year of the time dimension corresponds to the 10-year centered average of each season.\nDecades span from 1965-1974 until 2004-2013.\nObservational data span from 1961 to 2013.\nDepth range (IODE standard depths): -1500.0, -1400.0, -1300.0, -1200.0, -1100.0, -1000.0, -900.0, -800.0, -700.0, -600.0, -500.0, -400.0, -300.0, -250.0, -200.0, -150.0, -125.0, -100.0, -75.0, -50.0, -30.0, -20.0, -10.0, -5.0, -0.0.\n\nData Sources: observational data from SeaDataNet/EMODNet Chemistry Data Network.\n\nDescription of DIVA analysis: Geostatistical data analysis by DIVA (Data-Interpolating Variational Analysis) tool. Profiles were interpolated at standard depths using weighted parabolic interpolation algorithm (Reiniger and Ross, 1968). GEBCO 1min topography is used for the contouring preparation. Analyzed filed masked using relative error threshold 0.3 and 0.5.\n\nDIVA settings: A constant value for signal-to-noise ratio was used equal to 3. Correlation length was optimized and filtered vertically and a seasonally-averaged profile was used.\n\nLogarithmic transformation applied to the data prior to the analysis.\nBackground field: the data mean value is subtracted from the data.\nDetrending of data: no.\nAdvection constraint applied: no.\n\nOriginators of Italian data sets-List of contributors:\no\tBrunetti Fabio (OGS)\no\tCardin Vanessa, Bensi Manuel doi:10.6092/36728450-4296-4e6a-967d-d5b6da55f306\no\tCardin Vanessa, Bensi Manuel, Ursella Laura, Siena Giuseppe doi:10.6092/f8e6d18e-f877-4aa5-a983-a03b06ccb987\no\tCataletto Bruno (OGS)\no\tCinzia Comici Cinzia (OGS)\no\tCivitarese Giuseppe (OGS)\no\tDeVittor Cinzia (OGS)\no\tGiani Michele (OGS)\no\tKovacevic Vedrana (OGS)\no\tMosetti Renzo (OGS)\no\tSolidoro C.,Beran A.,Cataletto B.,Celussi M.,Cibic T.,Comici C.,Del Negro P.,De Vittor C.,Minocci M.,Monti M.,Fabbro C.,Falconi C.,Franzo A.,Libralato S.,Lipizer M.,Negussanti J.S.,Russel H.,Valli G., doi:10.6092/e5518899-b914-43b0-8139-023718aa63f5\no\tCelio Massimo (ARPA FVG)\no\tMalaguti Antonella (ENEA)\no\tFonda Umani Serena (UNITS)\no\tBignami Francesco (ISAC/CNR)\no\tBoldrini Alfredo (ISMAR/CNR)\no\tMarini Mauro (ISMAR/CNR)\no\tMiserocchi Stefano (ISMAR/CNR)\no\tZaccone Renata (IAMC/CNR)\no\tLavezza, R., Dubroca, L. F. C., Ludicone, D., Kress, N., Herut, B., Civitarese, G., Cruzado, A., Lefèvre, D., Souvermezoglou, E., Yilmaz, A., Tugrul, S., and Ribera d'Alcala, M.: Compilation of quality controlled nutrient profiles from the Mediterranean Sea, doi:10.1594/PANGAEA.771907, 2011.",
-            "langeng": "Moving 10-years analysis of nitrite at Mediterranean Sea for each season :\n- winter (January-March),\n- spring (April-June),\n- summer (July-September),\n- autumn (October-December).\n\nEvery year of the time dimension corresponds to the 10-year centered average of each season.\nDecades span from 1965-1974 until 2004-2013.\nObservational data span from 1961 to 2013.\nDepth range (IODE standard depths): -1500.0, -1400.0, -1300.0, -1200.0, -1100.0, -1000.0, -900.0, -800.0, -700.0, -600.0, -500.0, -400.0, -300.0, -250.0, -200.0, -150.0, -125.0, -100.0, -75.0, -50.0, -30.0, -20.0, -10.0, -5.0, -0.0.\n\nData Sources: observational data from SeaDataNet/EMODNet Chemistry Data Network.\n\nDescription of DIVA analysis: Geostatistical data analysis by DIVA (Data-Interpolating Variational Analysis) tool. Profiles were interpolated at standard depths using weighted parabolic interpolation algorithm (Reiniger and Ross, 1968). GEBCO 1min topography is used for the contouring preparation. Analyzed filed masked using relative error threshold 0.3 and 0.5.\n\nDIVA settings: A constant value for signal-to-noise ratio was used equal to 3. Correlation length was optimized and filtered vertically and a seasonally-averaged profile was used.\n\nLogarithmic transformation applied to the data prior to the analysis.\nBackground field: the data mean value is subtracted from the data.\nDetrending of data: no.\nAdvection constraint applied: no.\n\nOriginators of Italian data sets-List of contributors:\no\tBrunetti Fabio (OGS)\no\tCardin Vanessa, Bensi Manuel doi:10.6092/36728450-4296-4e6a-967d-d5b6da55f306\no\tCardin Vanessa, Bensi Manuel, Ursella Laura, Siena Giuseppe doi:10.6092/f8e6d18e-f877-4aa5-a983-a03b06ccb987\no\tCataletto Bruno (OGS)\no\tCinzia Comici Cinzia (OGS)\no\tCivitarese Giuseppe (OGS)\no\tDeVittor Cinzia (OGS)\no\tGiani Michele (OGS)\no\tKovacevic Vedrana (OGS)\no\tMosetti Renzo (OGS)\no\tSolidoro C.,Beran A.,Cataletto B.,Celussi M.,Cibic T.,Comici C.,Del Negro P.,De Vittor C.,Minocci M.,Monti M.,Fabbro C.,Falconi C.,Franzo A.,Libralato S.,Lipizer M.,Negussanti J.S.,Russel H.,Valli G., doi:10.6092/e5518899-b914-43b0-8139-023718aa63f5\no\tCelio Massimo (ARPA FVG)\no\tMalaguti Antonella (ENEA)\no\tFonda Umani Serena (UNITS)\no\tBignami Francesco (ISAC/CNR)\no\tBoldrini Alfredo (ISMAR/CNR)\no\tMarini Mauro (ISMAR/CNR)\no\tMiserocchi Stefano (ISMAR/CNR)\no\tZaccone Renata (IAMC/CNR)\no\tLavezza, R., Dubroca, L. F. C., Ludicone, D., Kress, N., Herut, B., Civitarese, G., Cruzado, A., Lefèvre, D., Souvermezoglou, E., Yilmaz, A., Tugrul, S., and Ribera d'Alcala, M.: Compilation of quality controlled nutrient profiles from the Mediterranean Sea, doi:10.1594/PANGAEA.771907, 2011."
-          },
-          "resourceCreditObject": [
-            {
-              "default": "Emodnet Chemistry",
-              "langeng": "Emodnet Chemistry"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-6.25, 30.0],
-                  [36.375, 30.0],
-                  [36.375, 45.875],
-                  [-6.25, 45.875],
-                  [-6.25, 30.0]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "hash": "877d5b01eb420aa863b276c57a971887",
-              "idx": 1,
-              "protocol": "DOI",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://dx.doi.org/10.6092/18EEA631-EA55-4DCF-A9A2-27E9618491DC",
-                "langeng": "http://dx.doi.org/10.6092/18EEA631-EA55-4DCF-A9A2-27E9618491DC"
-              },
-              "nameObject": {
-                "default": "Digital Object Identifier (DOI)",
-                "langeng": "Digital Object Identifier (DOI)"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "41a76823bb374c7a6f120c8ebe801093",
-              "idx": 2,
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Winter (January-March) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
-                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Winter (January-March) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
-              },
-              "nameObject": {
-                "default": "OPeNDAP (winter)",
-                "langeng": "OPeNDAP (winter)"
-              },
-              "descriptionObject": {
-                "default": "OPeNDAP (winter)",
-                "langeng": "OPeNDAP (winter)"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "9c1482d04dc161db27fcb37b9768d115",
-              "idx": 3,
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Spring (April-June) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
-                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Spring (April-June) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
-              },
-              "nameObject": {
-                "default": "OPeNDAP (spring)",
-                "langeng": "OPeNDAP (spring)"
-              },
-              "descriptionObject": {
-                "default": "OPeNDAP (spring)",
-                "langeng": "OPeNDAP (spring)"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "853106407899b28c75eb7be33d4e2015",
-              "idx": 4,
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Summer (July-September) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
-                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Summer (July-September) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
-              },
-              "nameObject": {
-                "default": "OPeNDAP (summer)",
-                "langeng": "OPeNDAP (summer)"
-              },
-              "descriptionObject": {
-                "default": "OPeNDAP (summer)",
-                "langeng": "OPeNDAP (summer)"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "e81938d8ef011a12c6788581c68d5c2b",
-              "idx": 5,
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Autumn (October-December) - 10-years running averages/Water_body_nitrite.4Danl.nc.html",
-                "langeng": "http://opendap.oceanbrowser.net/thredds/dodsC/data/emodnet-projects/Phase-2/Mediterranean Sea/Autumn (October-December) - 10-years running averages/Water_body_nitrite.4Danl.nc.html"
-              },
-              "nameObject": {
-                "default": "OPeNDAP (autumn)",
-                "langeng": "OPeNDAP (autumn)"
-              },
-              "descriptionObject": {
-                "default": "OPeNDAP (autumn)",
-                "langeng": "OPeNDAP (autumn)"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "94cd2997-78be-47e6-b570-c51d51041118",
-          "draft": "n",
-          "id": "334237958",
-          "owner": "4",
-          "groupOwner": "92",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "mdStatus": "2",
-          "op0": ["92", "1"],
-          "op1": ["92", "1"],
-          "documentStandard": "iso19139",
-          "op3": "92",
-          "op5": ["92", "1"],
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "mdStatusChangeDate": "2018-02-06T10:10:30Z",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "nameObject": {
-                "default": "win-ntri.png",
-                "langeng": "win-ntri.png"
-              },
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/94cd2997-78be-47e6-b570-c51d51041118/attachments/win-ntri.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "5d43234a-debc-4b29-b3dd-94addcdc5cbb",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "Product User Manual (CMEMS-BS-PUM-007-004)"
-          },
-          "dateStamp": "2021-04-19T12:57:21.000Z",
-          "resourceType": ["publication"],
-          "uuid": "5d43234a-debc-4b29-b3dd-94addcdc5cbb",
-          "draft": "n",
-          "id": "171315050",
-          "owner": "164187932",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "b0c93314-7a54-4e95-9cc5-5a9b80e792e0",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2025-04-11T09:56:37.498002Z",
-          "resourceType": ["series"],
-          "resourceTitleObject": {
-            "default": "Baltic Sea Wave Hindcast",
-            "langeng": "Baltic Sea Wave Hindcast"
-          },
-          "resourceAbstractObject": {
-            "default": "'''This product has been archived''' \n\n'''Short description :'''\n\nThis Baltic Sea wave model multiyear product provides a hindcast for the wave conditions in the Baltic Sea since 1/1 1980 and up to 0.5-1 year compared to real time.\nThis hindcast product consists of a dataset with hourly data for significant wave height, wave period and wave direction for total sea, wind sea and swell, the maximum waves, and also the Stokes drift. Another dataset contains hourly values for five air-sea flux parameters. Additionally a dataset with monthly climatology are provided for the significant wave height and the wave period. The product is based on the wave model WAM cycle 4.7, and surface forcing from ECMWF's ERA5 reanalysis products. The product grid has a horizontal resolution of 1 nautical mile. The area covers the Baltic Sea including the transition area towards the North Sea (i.e. the Danish Belts, the Kattegat and Skagerrak). The product provides hourly instantaneously model data.\n\n'''DOI (product) :'''\nhttps://doi.org/10.48670/moi-00014",
-            "langeng": "'''This product has been archived''' \n\n'''Short description :'''\n\nThis Baltic Sea wave model multiyear product provides a hindcast for the wave conditions in the Baltic Sea since 1/1 1980 and up to 0.5-1 year compared to real time.\nThis hindcast product consists of a dataset with hourly data for significant wave height, wave period and wave direction for total sea, wind sea and swell, the maximum waves, and also the Stokes drift. Another dataset contains hourly values for five air-sea flux parameters. Additionally a dataset with monthly climatology are provided for the significant wave height and the wave period. The product is based on the wave model WAM cycle 4.7, and surface forcing from ECMWF's ERA5 reanalysis products. The product grid has a horizontal resolution of 1 nautical mile. The area covers the Baltic Sea including the transition area towards the North Sea (i.e. the Danish Belts, the Kattegat and Skagerrak). The product provides hourly instantaneously model data.\n\n'''DOI (product) :'''\nhttps://doi.org/10.48670/moi-00014"
-          },
-          "resourceCreditObject": [
-            {
-              "default": "E.U. Copernicus Marine Service Information",
-              "langeng": "E.U. Copernicus Marine Service Information"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [9.0, 53.0],
-                  [30.0, 53.0],
-                  [30.0, 66.0],
-                  [9.0, 66.0],
-                  [9.0, 53.0]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "hash": "dfbf32132d0f72598627dc6a443063c1",
-              "idx": 1,
-              "protocol": "WWW:STAC",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://stac.marine.copernicus.eu/metadata/BALTICSEA_MULTIYEAR_WAV_003_015/cmems_mod_bal_wav_my_aflux_PT1H-i_202411/dataset.stac.json",
-                "langeng": "http://stac.marine.copernicus.eu/metadata/BALTICSEA_MULTIYEAR_WAV_003_015/cmems_mod_bal_wav_my_aflux_PT1H-i_202411/dataset.stac.json"
-              },
-              "nameObject": {
-                "default": "cmems_mod_bal_wav_my_aflux_PT1H-i",
-                "langeng": "cmems_mod_bal_wav_my_aflux_PT1H-i"
-              },
-              "descriptionObject": {
-                "default": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint",
-                "langeng": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "7ec2b133bef3a561f0fadeaa6810eb24",
-              "idx": 2,
-              "protocol": "OGC:WMTS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://wmts.marine.copernicus.eu/teroWmts/BALTICSEA_MULTIYEAR_WAV_003_015/cmems_mod_bal_wav_my_aflux_PT1H-i_202411",
-                "langeng": "https://wmts.marine.copernicus.eu/teroWmts/BALTICSEA_MULTIYEAR_WAV_003_015/cmems_mod_bal_wav_my_aflux_PT1H-i_202411"
-              },
-              "nameObject": {
-                "default": "cmems_mod_bal_wav_my_aflux_PT1H-i",
-                "langeng": "cmems_mod_bal_wav_my_aflux_PT1H-i"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "849583cae0a7ab8fa0744d00533787e6",
-              "idx": 3,
-              "protocol": "WWW:STAC",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://stac.marine.copernicus.eu/metadata/BALTICSEA_MULTIYEAR_WAV_003_015/cmems_mod_bal_wav_my_PT1H-i_202411/dataset.stac.json",
-                "langeng": "http://stac.marine.copernicus.eu/metadata/BALTICSEA_MULTIYEAR_WAV_003_015/cmems_mod_bal_wav_my_PT1H-i_202411/dataset.stac.json"
-              },
-              "nameObject": {
-                "default": "cmems_mod_bal_wav_my_PT1H-i",
-                "langeng": "cmems_mod_bal_wav_my_PT1H-i"
-              },
-              "descriptionObject": {
-                "default": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint",
-                "langeng": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "0a5b9dc9379bf1096890c591a7dd2942",
-              "idx": 4,
-              "protocol": "OGC:WMTS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://wmts.marine.copernicus.eu/teroWmts/BALTICSEA_MULTIYEAR_WAV_003_015/cmems_mod_bal_wav_my_PT1H-i_202411",
-                "langeng": "https://wmts.marine.copernicus.eu/teroWmts/BALTICSEA_MULTIYEAR_WAV_003_015/cmems_mod_bal_wav_my_PT1H-i_202411"
-              },
-              "nameObject": {
-                "default": "cmems_mod_bal_wav_my_PT1H-i",
-                "langeng": "cmems_mod_bal_wav_my_PT1H-i"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "cdac091705b82a6e165d9e9938269602",
-              "idx": 5,
-              "protocol": "WWW:STAC",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://stac.marine.copernicus.eu/metadata/BALTICSEA_REANALYSIS_WAV_003_015/cmems_mod_bal_wav_my_2km-climatology_P1M-m_202311/dataset.stac.json",
-                "langeng": "http://stac.marine.copernicus.eu/metadata/BALTICSEA_REANALYSIS_WAV_003_015/cmems_mod_bal_wav_my_2km-climatology_P1M-m_202311/dataset.stac.json"
-              },
-              "nameObject": {
-                "default": "cmems_mod_bal_wav_my_2km-climatology_P1M-m",
-                "langeng": "cmems_mod_bal_wav_my_2km-climatology_P1M-m"
-              },
-              "descriptionObject": {
-                "default": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint",
-                "langeng": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "9ea27a917037dc4e4abf9a8b8bfd0fda",
-              "idx": 6,
-              "protocol": "OGC:WMTS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://wmts.marine.copernicus.eu/teroWmts/BALTICSEA_REANALYSIS_WAV_003_015/cmems_mod_bal_wav_my_2km-climatology_P1M-m_202311",
-                "langeng": "https://wmts.marine.copernicus.eu/teroWmts/BALTICSEA_REANALYSIS_WAV_003_015/cmems_mod_bal_wav_my_2km-climatology_P1M-m_202311"
-              },
-              "nameObject": {
-                "default": "cmems_mod_bal_wav_my_2km-climatology_P1M-m",
-                "langeng": "cmems_mod_bal_wav_my_2km-climatology_P1M-m"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "7c881c9db2a0a9493dd444e357f96f3a",
-              "idx": 7,
-              "protocol": "WWW:STAC",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://stac.marine.copernicus.eu/metadata/BALTICSEA_REANALYSIS_WAV_003_015/cmems_mod_bal_wav_my_static_202112--ext--bathy/dataset.stac.json",
-                "langeng": "http://stac.marine.copernicus.eu/metadata/BALTICSEA_REANALYSIS_WAV_003_015/cmems_mod_bal_wav_my_static_202112--ext--bathy/dataset.stac.json"
-              },
-              "nameObject": {
-                "default": "cmems_mod_bal_wav_my_static",
-                "langeng": "cmems_mod_bal_wav_my_static"
-              },
-              "descriptionObject": {
-                "default": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint",
-                "langeng": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "55fdf2d2e0c0a0b1e9e0e653a81a8b60",
-              "idx": 8,
-              "protocol": "OGC:WMTS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://wmts.marine.copernicus.eu/teroWmts/BALTICSEA_REANALYSIS_WAV_003_015/cmems_mod_bal_wav_my_static_202112--ext--bathy",
-                "langeng": "https://wmts.marine.copernicus.eu/teroWmts/BALTICSEA_REANALYSIS_WAV_003_015/cmems_mod_bal_wav_my_static_202112--ext--bathy"
-              },
-              "nameObject": {
-                "default": "cmems_mod_bal_wav_my_static",
-                "langeng": "cmems_mod_bal_wav_my_static"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "b0c93314-7a54-4e95-9cc5-5a9b80e792e0",
-          "draft": "n",
-          "id": "338759915",
-          "owner": "3680846",
-          "groupOwner": "103",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "mdStatus": "2",
-          "op0": ["1", "103", "129"],
-          "op2": ["103", "129"],
-          "op1": ["1", "103", "129"],
-          "documentStandard": "iso19139",
-          "op3": ["103", "129"],
-          "op6": "129",
-          "op5": ["1", "103", "129"],
-          "valid": "0",
-          "isTemplate": "n",
-          "op7": "129",
-          "rating": "0",
-          "mdStatusChangeDate": "2024-10-17T13:38:38.406847Z",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://documentation.marine.copernicus.eu/IMG/BALTICSEA_MULTIYEAR_WAV_003_015.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "9805ee36-140a-4abb-bcd5-4703f9bf69d9",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2018-03-26T11:42:58.000Z",
-          "resourceType": ["dataset"],
+          "dateStamp": "2025-12-03T10:20:58.895048Z",
+          "resourceType": ["dataset", "featureCatalog"],
           "cl_status": [
             {
-              "key": "onGoing",
-              "default": "On going",
-              "langeng": "On going",
+              "key": "completed",
+              "default": "Finalisé",
+              "langfre": "Finalisé",
               "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
             }
           ],
           "resourceTitleObject": {
-            "default": "Phosphate concentration parameters in the water column | Concentration of phosphate {PO4} per unit mass of the water body [dissolved plus reactive particulate phase] | | Black Sea DIVA 4D analysis of Water_body_phosphate - Winter",
-            "langeng": "Phosphate concentration parameters in the water column | Concentration of phosphate {PO4} per unit mass of the water body [dissolved plus reactive particulate phase] | | Black Sea DIVA 4D analysis of Water_body_phosphate - Winter"
+            "default": "Cartographie des stocks de Laminaria hyperborea dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats",
+            "langfre": "Cartographie des stocks de Laminaria hyperborea dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats"
           },
+          "resourceAbstractObject": {
+            "default": "Cette cartographie fournit une estimation de la distribution spatiale des stocks de de Laminaria hyperborea en Bretagne, à une résolution de 5 km. Elle a été produite à travers des modèles corrélatifs de l’habitat potentiel de l’espèce. Le modèle établit un lien entre des observations in situ de biomasse issues de plusieurs travaux réalisés entre 2004 et 2019 et divers facteurs biotiques et abiotiques susceptibles d’influencer le développement de ces espèces. Afin de refléter le type de substrat favorisé par l’espèce, les projections ont été masqués et ne représentent que les zones rocheuses infralittorales.",
+            "langfre": "Cette cartographie fournit une estimation de la distribution spatiale des stocks de de Laminaria hyperborea en Bretagne, à une résolution de 5 km. Elle a été produite à travers des modèles corrélatifs de l’habitat potentiel de l’espèce. Le modèle établit un lien entre des observations in situ de biomasse issues de plusieurs travaux réalisés entre 2004 et 2019 et divers facteurs biotiques et abiotiques susceptibles d’influencer le développement de ces espèces. Afin de refléter le type de substrat favorisé par l’espèce, les projections ont été masqués et ne représentent que les zones rocheuses infralittorales."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Life Marha, IDEALG",
+              "langfre": "Life Marha, IDEALG"
+            }
+          ],
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [27.0, 40.0],
-                  [41.95, 40.0],
-                  [41.95, 47.95],
-                  [27.0, 47.95],
-                  [27.0, 40.0]
+                  [-5.199, 47.2126],
+                  [-1.6949, 47.2126],
+                  [-1.6949, 49.1518],
+                  [-5.199, 49.1518],
+                  [-5.199, 47.2126]
                 ]
               ]
             }
           ],
           "link": [
             {
-              "protocol": "WWW:LINK",
+              "protocol": "COPYFILE",
               "mimeType": "",
               "urlObject": {
-                "default": "https://sextant.ifremer.fr/en/web/emodnet_chemistry/catalogue",
-                "langeng": "https://sextant.ifremer.fr/en/web/emodnet_chemistry/catalogue"
+                "default": "file:///home/sextant/data_QGIS/DYNECO/Laminaires/Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea.zip",
+                "langfre": "file:///home/sextant/data_QGIS/DYNECO/Laminaires/Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea.zip"
+              },
+              "nameObject": {
+                "default": "Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea",
+                "langfre": "Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea"
+              },
+              "descriptionObject": {
+                "default": "Laminaria hyperborea - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats (.shp)",
+                "langfre": "Laminaria hyperborea - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats (.shp)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/dyneco",
+                "langfre": "https://sextant.ifremer.fr/services/wms/dyneco"
+              },
+              "nameObject": {
+                "default": "Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea",
+                "langfre": "Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea"
+              },
+              "descriptionObject": {
+                "default": "Laminaria hyperborea - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats",
+                "langfre": "Laminaria hyperborea - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats"
+              },
+              "function": "browsing",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.12770/839a9d1f-16ea-48c5-be73-33b05940ddb0",
+                "langfre": "https://doi.org/10.12770/839a9d1f-16ea-48c5-be73-33b05940ddb0"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langfre": "Digital Object Identifier (DOI)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            }
+          ],
+          "uuid": "839a9d1f-16ea-48c5-be73-33b05940ddb0",
+          "draft": "n",
+          "id": "340135329",
+          "owner": "137",
+          "groupOwner": "335589477",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "335589477", "14", "82", "163141952"],
+          "op2": "335589477",
+          "op1": ["1", "335589477", "14", "82", "163141952"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "335589477",
+          "op5": ["1", "335589477", "14", "82", "163141952"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/839a9d1f-16ea-48c5-be73-33b05940ddb0/attachments/stock_hyperborea_v2.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "496ff490-e093-4980-b914-47cebc1ca82d",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-05-15T22:15:14.237802Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Determinants of Reef Fish Assemblages on Tropical Oceanic Islands",
+            "langeng": "Determinants of Reef Fish Assemblages on Tropical Oceanic Islands"
+          },
+          "resourceAbstractObject": {
+            "default": "Diversity patterns are determined by biogeographic, energetic, and anthropogenic factors, yet few studies have combined them into a large-scale framework in order to decouple and compare their relative effects on fish faunas. Using an empirical dataset derived from 1527 underwater visual censuses (UVC) at 18 oceanic islands (five different marine provinces), we determined the relative influence of such factors on reef fish species richness, functional dispersion, density and biomass estimated from each UVC unit. Species richness presented low variation but was high at large island sites. High functional dispersion, density, and biomass were found at islands with large local species pool and distance from nearest reef. Primary productivity positively affected fish richness, density and biomass confirming that more productive areas support larger populations, and higher biomass and richness on oceanic islands. Islands densely populated by humans had lower fish species richness and biomass reflecting anthropogenic effects. Species richness, functional dispersion, and biomass were positively related to distance from the mainland. Overall, species richness and fish density were mainly influenced by biogeographical and energetic factors, whereas functional dispersion and biomass were strongly influenced by anthropogenic factors. Our results extend previous hypotheses for different assemblage metrics estimated from empirical data and confirm the negative impact of humans on fish assemblages, highlighting the need for conservation of oceanic islands.",
+            "langeng": "Diversity patterns are determined by biogeographic, energetic, and anthropogenic factors, yet few studies have combined them into a large-scale framework in order to decouple and compare their relative effects on fish faunas. Using an empirical dataset derived from 1527 underwater visual censuses (UVC) at 18 oceanic islands (five different marine provinces), we determined the relative influence of such factors on reef fish species richness, functional dispersion, density and biomass estimated from each UVC unit. Species richness presented low variation but was high at large island sites. High functional dispersion, density, and biomass were found at islands with large local species pool and distance from nearest reef. Primary productivity positively affected fish richness, density and biomass confirming that more productive areas support larger populations, and higher biomass and richness on oceanic islands. Islands densely populated by humans had lower fish species richness and biomass reflecting anthropogenic effects. Species richness, functional dispersion, and biomass were positively related to distance from the mainland. Overall, species richness and fish density were mainly influenced by biogeographical and energetic factors, whereas functional dispersion and biomass were strongly influenced by anthropogenic factors. Our results extend previous hypotheses for different assemblage metrics estimated from empirical data and confirm the negative impact of humans on fish assemblages, highlighting the need for conservation of oceanic islands."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Universidade Federal de Santa Catarina (Brazil)",
+              "langeng": "Universidade Federal de Santa Catarina (Brazil)"
+            },
+            {
+              "default": "Universidade de Brazilia (Brazil)",
+              "langeng": "Universidade de Brazilia (Brazil)"
+            },
+            {
+              "default": "Institut de Recherche pour le Développement (France)",
+              "langeng": "Institut de Recherche pour le Développement (France)"
+            },
+            {
+              "default": "Universidade Federal do Rio de Janeiro (Brazil)",
+              "langeng": "Universidade Federal do Rio de Janeiro (Brazil)"
+            },
+            {
+              "default": "Brown University (USA)",
+              "langeng": "Brown University (USA)"
+            },
+            {
+              "default": "University of California (USA)",
+              "langeng": "University of California (USA)"
+            },
+            {
+              "default": "Universidade de Costa Rica",
+              "langeng": "Universidade de Costa Rica"
+            },
+            {
+              "default": "Ecosistemas y Conservación, Proazul Terrestre (Mexico)",
+              "langeng": "Ecosistemas y Conservación, Proazul Terrestre (Mexico)"
+            },
+            {
+              "default": "Universidade Federal Fluminense (Brazil)",
+              "langeng": "Universidade Federal Fluminense (Brazil)"
+            },
+            {
+              "default": "Charles Darwin University (Australia)",
+              "langeng": "Charles Darwin University (Australia)"
+            },
+            {
+              "default": "Centro para la Biodiversidad Marina y la Conservación (Mexico)",
+              "langeng": "Centro para la Biodiversidad Marina y la Conservación (Mexico)"
+            },
+            {
+              "default": "California Academy of Sciences (USA)",
+              "langeng": "California Academy of Sciences (USA)"
+            },
+            {
+              "default": "Universidad de Guadalajara (Mexico)",
+              "langeng": "Universidad de Guadalajara (Mexico)"
+            },
+            {
+              "default": "Universidad del Valle (Colombia)",
+              "langeng": "Universidad del Valle (Colombia)"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-125.9923, -22.3624],
+                  [12.3031, -22.3624],
+                  [12.3031, 36.6874],
+                  [-125.9923, 36.6874],
+                  [-125.9923, -22.3624]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.1111/ecog.03506",
+                "langeng": "https://doi.org/10.1111/ecog.03506"
+              },
+              "nameObject": {
+                "default": "Determinants of reef fish assemblages in tropical Oceanic islands",
+                "langeng": "Determinants of reef fish assemblages in tropical Oceanic islands"
               },
               "function": "",
               "applicationProfile": "",
@@ -550,29 +259,30 @@
               "protocol": "WWW:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "https://sextant.ifremer.fr/en/web/emodnet_chemistry/catalogue",
-                "langeng": "https://sextant.ifremer.fr/en/web/emodnet_chemistry/catalogue"
+                "default": "https://github.com/quimbayo-jp/Fish_Assemblages_Oceanic_Islands/tree/untagged-987480790e96c38e377c",
+                "langeng": "https://github.com/quimbayo-jp/Fish_Assemblages_Oceanic_Islands/tree/untagged-987480790e96c38e377c"
               },
               "nameObject": {
-                "default": "2e99098f-1a52-11e5-a309-fc4dd4d3ff8e",
-                "langeng": "2e99098f-1a52-11e5-a309-fc4dd4d3ff8e"
+                "default": "Dataset on Github",
+                "langeng": "Dataset on Github"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             }
           ],
-          "uuid": "9805ee36-140a-4abb-bcd5-4703f9bf69d9",
+          "uuid": "496ff490-e093-4980-b914-47cebc1ca82d",
           "draft": "n",
-          "id": "148049015",
-          "owner": "147719142",
-          "groupOwner": "139606182",
+          "id": "335023032",
+          "owner": "334560115",
+          "groupOwner": "334585654",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "139606182", "83566259"],
-          "op2": "139606182",
-          "op1": "139606182",
+          "op0": ["1", "334585654"],
+          "op2": "334585654",
+          "op1": ["1", "334585654"],
           "documentStandard": "iso19115-3.2018",
-          "op5": ["1", "139606182"],
+          "op3": "334585654",
+          "op5": ["1", "334585654"],
           "valid": "-1",
           "isTemplate": "n",
           "rating": "0",
@@ -580,7 +290,233 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/9805ee36-140a-4abb-bcd5-4703f9bf69d9/attachments/CH8_eutrophication-150x150.jpg"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/496ff490-e093-4980-b914-47cebc1ca82d/attachments/23_Determinants%20of%20Reef%20Fish%20Assemblages%20on%20Tropical%20Oceanic%20Islands.jpg"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "6db5aaff-7418-42fc-b9f8-99fd08a355be",
+        "_score": 0.0,
+        "_ignored": [
+          "lineageObject.default.sort",
+          "lineageObject.default.keyword",
+          "lineageObject.langfre.keyword"
+        ],
+        "_source": {
+          "dateStamp": "2025-12-03T09:38:30.85933Z",
+          "resourceType": ["dataset", "featureCatalog"],
+          "cl_status": [
+            {
+              "key": "completed",
+              "default": "Finalisé",
+              "langfre": "Finalisé",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Cartographie des stocks de Laminaria digitata dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats",
+            "langfre": "Cartographie des stocks de Laminaria digitata dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats"
+          },
+          "resourceAbstractObject": {
+            "default": "Cette cartographie fournit une estimation de la distribution spatiale des stocks de de Laminaria digitata en Bretagne, à une résolution de 5 km. Elle a été produite à travers des modèles corrélatifs de l’habitat potentiel de l’espèce. Le modèle établit un lien entre des observations in situ de biomasse issues de plusieurs travaux réalisés entre 2004 et 2019 et divers facteurs biotiques et abiotiques susceptibles d’influencer le développement de ces espèces. Afin de refléter le type de substrat favorisé par l’espèce, les projections ont été masqués et ne représentent que les zones rocheuses infralittorales.",
+            "langfre": "Cette cartographie fournit une estimation de la distribution spatiale des stocks de de Laminaria digitata en Bretagne, à une résolution de 5 km. Elle a été produite à travers des modèles corrélatifs de l’habitat potentiel de l’espèce. Le modèle établit un lien entre des observations in situ de biomasse issues de plusieurs travaux réalisés entre 2004 et 2019 et divers facteurs biotiques et abiotiques susceptibles d’influencer le développement de ces espèces. Afin de refléter le type de substrat favorisé par l’espèce, les projections ont été masqués et ne représentent que les zones rocheuses infralittorales."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Life Marha, IDEALG",
+              "langfre": "Life Marha, IDEALG"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-5.199, 47.2126],
+                  [-1.6949, 47.2126],
+                  [-1.6949, 49.1518],
+                  [-5.199, 49.1518],
+                  [-5.199, 47.2126]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "COPYFILE",
+              "mimeType": "",
+              "urlObject": {
+                "default": "file:///home/sextant/data_QGIS/DYNECO/Laminaires/Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata.zip",
+                "langfre": "file:///home/sextant/data_QGIS/DYNECO/Laminaires/Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata.zip"
+              },
+              "nameObject": {
+                "default": "Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata",
+                "langfre": "Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata"
+              },
+              "descriptionObject": {
+                "default": "Laminaria digitata - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats (.shp)",
+                "langfre": "Laminaria digitata - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats (.shp)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/dyneco",
+                "langfre": "https://sextant.ifremer.fr/services/wms/dyneco"
+              },
+              "nameObject": {
+                "default": "Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata",
+                "langfre": "Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata"
+              },
+              "descriptionObject": {
+                "default": "Laminaria digitata - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats",
+                "langfre": "Laminaria digitata - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats"
+              },
+              "function": "browsing",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.12770/6db5aaff-7418-42fc-b9f8-99fd08a355be",
+                "langfre": "https://doi.org/10.12770/6db5aaff-7418-42fc-b9f8-99fd08a355be"
+              },
+              "nameObject": {
+                "default": "Digital Object Identifier (DOI)",
+                "langfre": "Digital Object Identifier (DOI)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            }
+          ],
+          "uuid": "6db5aaff-7418-42fc-b9f8-99fd08a355be",
+          "draft": "n",
+          "id": "340135326",
+          "owner": "137",
+          "groupOwner": "335589477",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "335589477", "14", "82", "163141952"],
+          "op2": "335589477",
+          "op1": ["1", "335589477", "14", "82", "163141952"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "335589477",
+          "op5": ["1", "335589477", "14", "82", "163141952"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6db5aaff-7418-42fc-b9f8-99fd08a355be/attachments/Stock_digitata_v2.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "SDN_CPRD_353_291704",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2018-03-20T12:52:43.000Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "353_291704 - Cabrera Island Natural Park Spain",
+            "langeng": "353_291704 - Cabrera Island Natural Park Spain"
+          },
+          "resourceAbstractObject": {
+            "default": "Composite DTM of Menorca Island at approximately 100 meters of resolution.",
+            "langeng": "Composite DTM of Menorca Island at approximately 100 meters of resolution."
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [2.851794, 39.077376],
+                  [3.044055, 39.077376],
+                  [3.044055, 39.222214],
+                  [2.851794, 39.222214],
+                  [2.851794, 39.077376]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "hash": "b052c9ebb6cbe3dea8252a7ed612d99e",
+              "idx": 1,
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.ieo.es/",
+                "langeng": "http://www.ieo.es/"
+              },
+              "nameObject": {
+                "default": "Web site of IEO",
+                "langeng": "Web site of IEO"
+              },
+              "descriptionObject": {
+                "default": "Contact ideo@ieo.es",
+                "langeng": "Contact ideo@ieo.es"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "SDN_CPRD_353_291704",
+          "draft": "n",
+          "id": "334236242",
+          "owner": "16173287",
+          "groupOwner": "74",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "mdStatus": "2",
+          "op0": ["1", "74"],
+          "op2": "74",
+          "op1": "74",
+          "documentStandard": "iso19139",
+          "op5": ["1", "74"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "mdStatusChangeDate": "2020-06-26T11:00:00Z",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/SDN_CPRD_353_291704/attachments/thumbnail_353_291704_CPRD.png"
             }
           ]
         },
@@ -599,118 +535,439 @@
       },
       {
         "_index": "geo-records",
-        "_id": "2d2d1d24-d93e-4c40-b60f-e54d3d2b96c1",
+        "_id": "69e7dab7-4d1f-45ff-a679-311aa5c653cc",
         "_score": 0.0,
         "_source": {
-          "resourceTitleObject": {
-            "default": "Product User Manual (CMEMS-BS-PUM-007-007)"
-          },
-          "dateStamp": "2021-04-19T12:57:17.000Z",
-          "resourceType": ["publication"],
-          "uuid": "2d2d1d24-d93e-4c40-b60f-e54d3d2b96c1",
-          "draft": "n",
-          "id": "171315193",
-          "owner": "164187932",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "9f6b8e25-35ae-4574-9aa2-5519edad9031",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "Product User Manual (CMEMS-GLO-PUM-001-025)"
-          },
-          "dateStamp": "2021-04-19T12:52:24.000Z",
-          "resourceType": ["publication"],
-          "uuid": "9f6b8e25-35ae-4574-9aa2-5519edad9031",
-          "draft": "n",
-          "id": "171314673",
-          "owner": "164187932",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "SDN_CPRD_1338_SEAMOUNT_VERCELLI",
-        "_score": 0.0,
-        "_ignored": ["keywordType-place.langeng.keyword"],
-        "_source": {
-          "dateStamp": "2021-08-24T11:57:33.000Z",
+          "dateStamp": "2025-05-15T22:44:44.006941Z",
           "resourceType": ["dataset"],
           "resourceTitleObject": {
-            "default": "1338_SEAMOUNT_VERCELLI",
-            "langeng": "1338_SEAMOUNT_VERCELLI"
+            "default": "AMI hydrolien : zones propices à l'implantation des fermes pilotes",
+            "langfre": "AMI hydrolien : zones propices à l'implantation des fermes pilotes"
           },
           "resourceAbstractObject": {
-            "default": "Systematic survey performed by Italian Navy Hydrographic vessels with Multibeam EchoSounder",
-            "langeng": "Systematic survey performed by Italian Navy Hydrographic vessels with Multibeam EchoSounder"
+            "default": "Le développement des énergies marines renouvelables, impulsé suite au Grenelle de l’environnement, impliquent une production électrique de 6 000 MW à l’horizon 2020.\nLa désignation de 4 zones propices au développement de parcs éoliens en mer et le lancement d’un appel d’offres pour 2 zones supplémentaires devraient permettre d’atteindre la production de 3 000 MW.\nAfin d'atteindre l'objectif de production électrique fixé et sachant que le pays possède le deuxième gisement hydrolien d’Europe, le gouvernement s’est engagé à soutenir le développement de la filière hydrolienne.\nLa couche localisant les zones propices identifiées va donc permettre d'engager la concertation en vue du lancement d'un Appel à Manifestation d'Intérêt (AMI) concernant l'implantation d'hydroliennes.",
+            "langfre": "Le développement des énergies marines renouvelables, impulsé suite au Grenelle de l’environnement, impliquent une production électrique de 6 000 MW à l’horizon 2020.\nLa désignation de 4 zones propices au développement de parcs éoliens en mer et le lancement d’un appel d’offres pour 2 zones supplémentaires devraient permettre d’atteindre la production de 3 000 MW.\nAfin d'atteindre l'objectif de production électrique fixé et sachant que le pays possède le deuxième gisement hydrolien d’Europe, le gouvernement s’est engagé à soutenir le développement de la filière hydrolienne.\nLa couche localisant les zones propices identifiées va donc permettre d'engager la concertation en vue du lancement d'un Appel à Manifestation d'Intérêt (AMI) concernant l'implantation d'hydroliennes."
           },
-          "uuid": "SDN_CPRD_1338_SEAMOUNT_VERCELLI",
+          "resourceCreditObject": [
+            {
+              "default": "CEREMA",
+              "langfre": "CEREMA"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-5.23866, 47.66078],
+                  [-0.44862, 47.66078],
+                  [-0.44862, 49.890229],
+                  [-5.23866, 49.890229],
+                  [-5.23866, 47.66078]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.geolittoral.developpement-durable.gouv.fr/energies-marines-renouvelables-emr-r153.html",
+                "langfre": "http://www.geolittoral.developpement-durable.gouv.fr/energies-marines-renouvelables-emr-r153.html"
+              },
+              "nameObject": {
+                "default": "Accès à la page internet dédiée aux EMR (site Géolittoral)",
+                "langfre": "Accès à la page internet dédiée aux EMR (site Géolittoral)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://cartelie.application.developpement-durable.gouv.fr/cartelie/voir.do?carte=carto_AMI_hydrolien&service=CEREMA",
+                "langfre": "http://cartelie.application.developpement-durable.gouv.fr/cartelie/voir.do?carte=carto_AMI_hydrolien&service=CEREMA"
+              },
+              "nameObject": {
+                "default": "Accès à la carte dynamique (visualiseur Cartelie)",
+                "langfre": "Accès à la carte dynamique (visualiseur Cartelie)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.geolittoral.developpement-durable.gouv.fr/telechargement-des-donnees-du-site-geolittoral-a802.html",
+                "langfre": "http://www.geolittoral.developpement-durable.gouv.fr/telechargement-des-donnees-du-site-geolittoral-a802.html"
+              },
+              "nameObject": {
+                "default": "Accès à la page internet de téléchargement (site Géolittoral)",
+                "langfre": "Accès à la page internet de téléchargement (site Géolittoral)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://geolittoral.din.developpement-durable.gouv.fr/wxs",
+                "langfre": "http://geolittoral.din.developpement-durable.gouv.fr/wxs"
+              },
+              "nameObject": {
+                "default": "n_hydrolien_zone_concertation_ami_s",
+                "langfre": "n_hydrolien_zone_concertation_ami_s"
+              },
+              "descriptionObject": {
+                "default": "AMI hydrolien : zones propices à l'implantation des fermes pilotes (WMS Géolittoral)",
+                "langfre": "AMI hydrolien : zones propices à l'implantation des fermes pilotes (WMS Géolittoral)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "urlObject": {
+                "default": "file:///home/sextant/data/DCSMM_EVAL2018/SOURCES/CEREMA/HYDROLIEN/N_hydrolien_zone_concertation_ami_S.shp",
+                "langfre": "file:///home/sextant/data/DCSMM_EVAL2018/SOURCES/CEREMA/HYDROLIEN/N_hydrolien_zone_concertation_ami_S.shp"
+              },
+              "nameObject": {
+                "default": "N_hydrolien_zone_concertation_ami_S",
+                "langfre": "N_hydrolien_zone_concertation_ami_S"
+              },
+              "descriptionObject": {
+                "default": "AMI hydrolien : zones propices à l'implantation des fermes pilotes (Fichier shape)",
+                "langfre": "AMI hydrolien : zones propices à l'implantation des fermes pilotes (Fichier shape)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            }
+          ],
+          "uuid": "69e7dab7-4d1f-45ff-a679-311aa5c653cc",
           "draft": "n",
-          "id": "334960017",
-          "owner": "334250598",
-          "groupOwner": "74",
+          "id": "216798470",
+          "owner": "112",
+          "groupOwner": "181712109",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "mdStatus": "2",
-          "op0": ["1", "74"],
-          "documentStandard": "iso19139",
+          "op0": ["1", "48", "181712109", "334291911", "334568939", "334569090"],
+          "op1": ["1", "48", "181712109", "334291911", "334568939", "334569090"],
+          "documentStandard": "iso19115-3.2018",
+          "op5": ["1", "48", "181712109", "334291911", "334568939", "334569090"],
           "valid": "-1",
           "isTemplate": "n",
           "rating": "0",
-          "mdStatusChangeDate": "2021-08-25T14:52:30Z",
           "isHarvested": "false",
           "overview": [
             {
               "data": "",
               "nameObject": {
-                "default": "9176-1.png",
-                "langeng": "9176-1.png"
+                "default": "large_thumbnail",
+                "langfre": "large_thumbnail"
               },
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/SDN_CPRD_1338_SEAMOUNT_VERCELLI/attachments/9176-1.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/69e7dab7-4d1f-45ff-a679-311aa5c653cc/attachments/AMI_ZP_fermes_pilotes.JPG"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "1724fed1-2f89-4e75-9c56-fd99e2c7f9cf",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Quality Information Document (CMEMS-GLO-QUID-001-026)"
+          },
+          "dateStamp": "2021-04-19T12:42:21.000Z",
+          "resourceType": ["publication"],
+          "uuid": "1724fed1-2f89-4e75-9c56-fd99e2c7f9cf",
+          "draft": "n",
+          "id": "222303653",
+          "owner": "164187932",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "104"],
+          "op2": "104",
+          "op1": ["1", "104"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "d4c4a40b-9552-4252-8a1c-f5fe8b844f5e",
+        "_score": 0.0,
+        "_source": {
+          "resourceTitleObject": {
+            "default": "Product User Manual (CMEMS-OSI-PUM-010-021-022)"
+          },
+          "dateStamp": "2021-04-19T12:59:29.000Z",
+          "resourceType": ["publication"],
+          "uuid": "d4c4a40b-9552-4252-8a1c-f5fe8b844f5e",
+          "draft": "n",
+          "id": "7608393",
+          "owner": "88",
+          "groupOwner": "104",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["104", "1"],
+          "op2": "104",
+          "op1": ["104", "1"],
+          "documentStandard": "dublin-core",
+          "op5": ["1", "104"],
+          "valid": "1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "c8889140-08a4-40ed-9d5b-0e9c544f27ee",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-02-20T10:38:01.000Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "BLACKSEA_CH05_Specification_6 / Sea level time series and trend for the past 50 years for each NUTS3 from selected coastal stations",
+            "langeng": "BLACKSEA_CH05_Specification_6 / Sea level time series and trend for the past 50 years for each NUTS3 from selected coastal stations"
+          },
+          "resourceAbstractObject": {
+            "default": "The product has been done by the University of Sofia (USOF) using yearly data from Batumi, Burgas, Constanza, Poti, Sevastopol, Tuapse and Varna coastal stations from the http://www.psmsl.org/data/obtaining/ portal for the designed period.",
+            "langeng": "The product has been done by the University of Sofia (USOF) using yearly data from Batumi, Burgas, Constanza, Poti, Sevastopol, Tuapse and Varna coastal stations from the http://www.psmsl.org/data/obtaining/ portal for the designed period."
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [27.0, 40.0],
+                  [42.0, 40.0],
+                  [42.0, 47.0],
+                  [27.0, 47.0],
+                  [27.0, 40.0]
+                ]
+              ]
+            }
+          ],
+          "uuid": "c8889140-08a4-40ed-9d5b-0e9c544f27ee",
+          "draft": "n",
+          "id": "334236333",
+          "owner": "147353051",
+          "groupOwner": "230733018",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["83566259", "230733018", "1"],
+          "op2": "230733018",
+          "op1": ["83566259", "230733018", "1"],
+          "documentStandard": "iso19115-3.2018",
+          "op5": ["83566259", "230733018", "1"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "81e7954f-3fd7-410c-aae4-ffcd389ca97f",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-04-13T08:38:54.000Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "ATLANTIC_CH05_Specification_1 / Spatial layer of absolute annually averaged sea level trend (in mm/year) for period of 10 years by stretch of coast",
+            "langeng": "ATLANTIC_CH05_Specification_1 / Spatial layer of absolute annually averaged sea level trend (in mm/year) for period of 10 years by stretch of coast"
+          },
+          "resourceAbstractObject": {
+            "default": "This product attempt to follow up on the sea level rise per stretch of coast of the North Atlantic, over past 10 years as follows:\n•\tCharacterization of absolute sea level trend at annual resolution, along the coasts of EU Member States (including Outermost Regions), Canada, Faroes, Greenland, Iceland, Mexico, Morocco, Norway and USA;\nThe stretchs or coast are defined by the administrative regions of the Atlantic Coast:\n•\tfrom NUTS3** administrative division for EU countries (see Eurostat), and \t\n•\tfrom GADM*** administrative divisions for non-EU countries. \n** Third level of Nomenclature of Territorial Units for Statistics\t\n*** Global Administrative Areas \n \nFor absolute sea level trend for 10 years we extract the information from grided satellite altimetry data and extrapolate it to the nearest strecth of coast. The product is Provided in tabular form and as a map layer.",
+            "langeng": "This product attempt to follow up on the sea level rise per stretch of coast of the North Atlantic, over past 10 years as follows:\n•\tCharacterization of absolute sea level trend at annual resolution, along the coasts of EU Member States (including Outermost Regions), Canada, Faroes, Greenland, Iceland, Mexico, Morocco, Norway and USA;\nThe stretchs or coast are defined by the administrative regions of the Atlantic Coast:\n•\tfrom NUTS3** administrative division for EU countries (see Eurostat), and \t\n•\tfrom GADM*** administrative divisions for non-EU countries. \n** Third level of Nomenclature of Territorial Units for Statistics\t\n*** Global Administrative Areas \n \nFor absolute sea level trend for 10 years we extract the information from grided satellite altimetry data and extrapolate it to the nearest strecth of coast. The product is Provided in tabular form and as a map layer."
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-98.0, 2.0],
+                  [33.0, 2.0],
+                  [33.0, 73.0],
+                  [-98.0, 73.0],
+                  [-98.0, 2.0]
+                ]
+              ]
+            }
+          ],
+          "uuid": "81e7954f-3fd7-410c-aae4-ffcd389ca97f",
+          "draft": "n",
+          "id": "334236653",
+          "owner": "146393428",
+          "groupOwner": "230734906",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["83566633", "1", "230734906"],
+          "op2": "230734906",
+          "op1": ["83566633", "1", "230734906"],
+          "documentStandard": "iso19115-3.2018",
+          "op5": ["83566633", "1", "230734906"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
+        "_id": "d2bcdfce-7336-4f1c-9223-df82a486a581",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-01-15T20:30:24.000Z",
+          "resourceType": ["series"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Bird taxonomy-related abundance per unit area of surface | Threatened and/or declining seabird species | EMODnet Secretariat | Puffinus mauretanicus",
+            "langeng": "Bird taxonomy-related abundance per unit area of surface | Threatened and/or declining seabird species | EMODnet Secretariat | Puffinus mauretanicus"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-72.070312, 28.304381],
+                  [33.046875, 28.304381],
+                  [33.046875, 72.395706],
+                  [-72.070312, 72.395706],
+                  [-72.070312, 28.304381]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-biology.eu/portal/index.php#",
+                "langeng": "http://www.emodnet-biology.eu/portal/index.php#"
+              },
+              "nameObject": {
+                "default": "Data Discovery and Access Service",
+                "langeng": "Data Discovery and Access Service"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-biology.eu/portal/index.php#",
+                "langeng": "http://www.emodnet-biology.eu/portal/index.php#"
+              },
+              "nameObject": {
+                "default": "Puffinus mauretanicus",
+                "langeng": "Puffinus mauretanicus"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "d2bcdfce-7336-4f1c-9223-df82a486a581",
+          "draft": "n",
+          "id": "158208474",
+          "owner": "135665118",
+          "groupOwner": "139596691",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["139596691", "1", "83566633"],
+          "op2": "139596691",
+          "op1": "139596691",
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596691",
+          "op5": "139596691",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/41af5c00-1ad1-4759-bf9a-e70aa6d191fe/attachments/Marine-Protected-Areas_children_icon.png"
             }
           ]
         },
@@ -726,617 +983,6 @@
         "featured": false,
         "guestdownload": false,
         "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "c00b2778-5c01-49eb-a8f9-22d0c333f3af",
-        "_score": 0.0,
-        "_ignored": [
-          "resourceAbstractObject.default.keyword",
-          "resourceAbstractObject.default.sort",
-          "resourceAbstractObject.langeng.keyword"
-        ],
-        "_source": {
-          "dateStamp": "2025-07-29T15:05:32.427017Z",
-          "resourceType": ["series"],
-          "resourceTitleObject": {
-            "default": "Beach litter - Median of total abundance items normalized per 100m & to 1 survey - Other sources 2001/2024 v2025",
-            "langeng": "Beach litter - Median of total abundance items normalized per 100m & to 1 survey - Other sources 2001/2024 v2025"
-          },
-          "resourceAbstractObject": {
-            "default": "This visualization product displays the total abundance of marine macro-litter (> 2.5cm) per beach per year from non-MSFD monitoring surveys, research & cleaning operations.\n\n\nEMODnet Chemistry included the collection of marine litter in its 3rd phase. Since the beginning of 2018, data of beach litter have been gathered and processed in the EMODnet Chemistry Marine Litter Database (MLDB).\nThe harmonization of all the data has been the most challenging task considering the heterogeneity of the data sources, sampling protocols and reference lists used on a European scale.\n\n\nPreliminary processings were necessary to harmonize all the data:\n\t\t- Exclusion of OSPAR 1000 protocol: in order to follow the approach of OSPAR that it is not including these data anymore in the monitoring;\n\t\t- Selection of surveys from non-MSFD monitoring, cleaning and research operations;\n\t\t- Exclusion of beaches without coordinates;\n\t\t- Some categories & some litter types like organic litter, small fragments (paraffin and wax; items > 2.5cm) and pollutants have been removed. The list of selected items is attached to this metadata. This list was created using EU Marine Beach Litter Baselines, the European Threshold Value for Macro Litter on Coastlines and the Joint list of litter categories for marine macro-litter monitoring from JRC (these three documents are attached to this metadata).\n\t\t- Exclusion of surveys without associated length;\n\t\t- Normalization of survey lengths to 100m & 1 survey / year: in some case, the survey length was not 100m, so in order to be able to compare the abundance of litter from different beaches a normalization is applied using this formula:\n\t\tNumber of items (normalized by 100 m) = Number of litter per items x (100 / survey length)\n\t\tThen, this normalized number of items is summed to obtain the total normalized number of litter for each survey. Finally, the median abundance for each beach and year is calculated from these normalized abundances per survey.\n\nPercentiles 50, 75, 95 & 99 have been calculated taking into account other sources data for all years. \n\n\nMore information is available in the attached documents.\n\n\nWarning: the absence of data on the map does not necessarily mean that they do not exist, but that no information has been entered in the Marine Litter Database for this area.",
-            "langeng": "This visualization product displays the total abundance of marine macro-litter (> 2.5cm) per beach per year from non-MSFD monitoring surveys, research & cleaning operations.\n\n\nEMODnet Chemistry included the collection of marine litter in its 3rd phase. Since the beginning of 2018, data of beach litter have been gathered and processed in the EMODnet Chemistry Marine Litter Database (MLDB).\nThe harmonization of all the data has been the most challenging task considering the heterogeneity of the data sources, sampling protocols and reference lists used on a European scale.\n\n\nPreliminary processings were necessary to harmonize all the data:\n\t\t- Exclusion of OSPAR 1000 protocol: in order to follow the approach of OSPAR that it is not including these data anymore in the monitoring;\n\t\t- Selection of surveys from non-MSFD monitoring, cleaning and research operations;\n\t\t- Exclusion of beaches without coordinates;\n\t\t- Some categories & some litter types like organic litter, small fragments (paraffin and wax; items > 2.5cm) and pollutants have been removed. The list of selected items is attached to this metadata. This list was created using EU Marine Beach Litter Baselines, the European Threshold Value for Macro Litter on Coastlines and the Joint list of litter categories for marine macro-litter monitoring from JRC (these three documents are attached to this metadata).\n\t\t- Exclusion of surveys without associated length;\n\t\t- Normalization of survey lengths to 100m & 1 survey / year: in some case, the survey length was not 100m, so in order to be able to compare the abundance of litter from different beaches a normalization is applied using this formula:\n\t\tNumber of items (normalized by 100 m) = Number of litter per items x (100 / survey length)\n\t\tThen, this normalized number of items is summed to obtain the total normalized number of litter for each survey. Finally, the median abundance for each beach and year is calculated from these normalized abundances per survey.\n\nPercentiles 50, 75, 95 & 99 have been calculated taking into account other sources data for all years. \n\n\nMore information is available in the attached documents.\n\n\nWarning: the absence of data on the map does not necessarily mean that they do not exist, but that no information has been entered in the Marine Litter Database for this area."
-          },
-          "resourceCreditObject": [
-            {
-              "default": "EMODnet Chemistry",
-              "langeng": "EMODnet Chemistry"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-31.149, 28.05],
-                  [48.335, 28.05],
-                  [48.335, 79.683],
-                  [-31.149, 79.683],
-                  [-31.149, 28.05]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "hash": "b86cefb7e407e6144a751d3a323c386d",
-              "idx": 1,
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/emodnet_chemistry2",
-                "langeng": "https://sextant.ifremer.fr/services/wms/emodnet_chemistry2"
-              },
-              "nameObject": {
-                "default": "bl_totalabundance_other",
-                "langeng": "bl_totalabundance_other"
-              },
-              "descriptionObject": {
-                "default": "Beach litter - Other sources - Median of total abundance items normalized per 100m & to 1 survey",
-                "langeng": "Beach litter - Other sources - Median of total abundance items normalized per 100m & to 1 survey"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "3fc9941872325b383df6d077cdc542d5",
-              "idx": 2,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/document/Field_description/BL_field_description_totalabundance.xlsx",
-                "langeng": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/document/Field_description/BL_field_description_totalabundance.xlsx"
-              },
-              "nameObject": {
-                "default": "Description of the layer's fields",
-                "langeng": "Description of the layer's fields"
-              },
-              "descriptionObject": {
-                "default": "Description of the layer's fields",
-                "langeng": "Description of the layer's fields"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "bbf5965ebd79b36a02f3e24d3c91c15a",
-              "idx": 3,
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/sextant_data/EMODNET/CHEMISTRY/MARINE_LITTER/2025/bl_totalabundance_other.zip",
-                "langeng": "https://sextant.ifremer.fr/sextant_data/EMODNET/CHEMISTRY/MARINE_LITTER/2025/bl_totalabundance_other.zip"
-              },
-              "nameObject": {
-                "default": "Direct Download",
-                "langeng": "Direct Download"
-              },
-              "descriptionObject": {
-                "default": "Direct Download",
-                "langeng": "Direct Download"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "b9afb093d6c6b7fe0284bff37d31378b",
-              "idx": 4,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://emodnet.ec.europa.eu/geoviewer/",
-                "langeng": "https://emodnet.ec.europa.eu/geoviewer/"
-              },
-              "nameObject": {
-                "default": "EMODnet Map Viewer",
-                "langeng": "EMODnet Map Viewer"
-              },
-              "descriptionObject": {
-                "default": "EMODnet Map Viewer",
-                "langeng": "EMODnet Map Viewer"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "ed2b0f082e7bf520db9a953bff8d86b2",
-              "idx": 5,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.13120/14cc-r118",
-                "langeng": "https://doi.org/10.13120/14cc-r118"
-              },
-              "nameObject": {
-                "default": "Visualization products for beach litter data",
-                "langeng": "Visualization products for beach litter data"
-              },
-              "descriptionObject": {
-                "default": "Methodologies applied to create the maps",
-                "langeng": "Methodologies applied to create the maps"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "40576bf5cb244527a15aa0cb0a4aeb8d",
-              "idx": 6,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/document/Beachlitter_maps_items_selection_v2025.xlsx",
-                "langeng": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/document/Beachlitter_maps_items_selection_v2025.xlsx"
-              },
-              "nameObject": {
-                "default": "List of selected items",
-                "langeng": "List of selected items"
-              },
-              "descriptionObject": {
-                "default": "List of selected items",
-                "langeng": "List of selected items"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "9e1896ed23ff493e1d156d322fa32eee",
-              "idx": 7,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://dx.doi.org/10.2760/54369",
-                "langeng": "https://dx.doi.org/10.2760/54369"
-              },
-              "nameObject": {
-                "default": "EU Threshold Value for Macro Litter on Coastlines",
-                "langeng": "EU Threshold Value for Macro Litter on Coastlines"
-              },
-              "descriptionObject": {
-                "default": "EU Threshold Value for Macro Litter on Coastlines",
-                "langeng": "EU Threshold Value for Macro Litter on Coastlines"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "c93b454ca13ad6380f8ff01109abef4c",
-              "idx": 8,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://dx.doi.org/10.2760/16903",
-                "langeng": "https://dx.doi.org/10.2760/16903"
-              },
-              "nameObject": {
-                "default": "EU Marine Beach Litter Baselines",
-                "langeng": "EU Marine Beach Litter Baselines"
-              },
-              "descriptionObject": {
-                "default": "EU Marine Beach Litter Baselines",
-                "langeng": "EU Marine Beach Litter Baselines"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "22637c4ea829a7293c17119dbc60a32e",
-              "idx": 9,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://dx.doi.org/10.2760/621710",
-                "langeng": "https://dx.doi.org/10.2760/621710"
-              },
-              "nameObject": {
-                "default": "Marine litter database document",
-                "langeng": "Marine litter database document"
-              },
-              "descriptionObject": {
-                "default": "Marine litter database document",
-                "langeng": "Marine litter database document"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "15b12fbaaf6015044ecef77c16062fa0",
-              "idx": 10,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://dx.doi.org/10.2760/127473",
-                "langeng": "https://dx.doi.org/10.2760/127473"
-              },
-              "nameObject": {
-                "default": "Joint list of litter categories for marine macro-litter monitoring",
-                "langeng": "Joint list of litter categories for marine macro-litter monitoring"
-              },
-              "descriptionObject": {
-                "default": "Joint list of litter categories for marine macro-litter monitoring",
-                "langeng": "Joint list of litter categories for marine macro-litter monitoring"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "fc531de3a85cea0336ce7b5241765cb6",
-              "idx": 11,
-              "protocol": "DOI",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.13120/c00b2778-5c01-49eb-a8f9-22d0c333f3af",
-                "langeng": "https://doi.org/10.13120/c00b2778-5c01-49eb-a8f9-22d0c333f3af"
-              },
-              "nameObject": {
-                "default": "Digital Object Identifier (DOI)",
-                "langeng": "Digital Object Identifier (DOI)"
-              },
-              "descriptionObject": {
-                "default": "Data Access and Citation",
-                "langeng": "Data Access and Citation"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "c00b2778-5c01-49eb-a8f9-22d0c333f3af",
-          "draft": "n",
-          "id": "339087959",
-          "owner": "334890330",
-          "groupOwner": "92",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "92"],
-          "op2": "92",
-          "op1": ["1", "92"],
-          "documentStandard": "iso19139",
-          "op3": "92",
-          "op5": ["1", "92"],
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/images/2025/bl_totalabundance_other.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "a44654a2-18f1-4145-b6ca-24073c9517a8",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2025-07-29T15:07:06.389912Z",
-          "resourceType": ["series"],
-          "resourceTitleObject": {
-            "default": "Beach litter - Number of surveys & temporal coverage per beach - EU-MSFD monitoring 2001/2023 v2025",
-            "langeng": "Beach litter - Number of surveys & temporal coverage per beach - EU-MSFD monitoring 2001/2023 v2025"
-          },
-          "resourceAbstractObject": {
-            "default": "This visualization product displays the number of Marine Strategy Framework Directive (MSFD) monitoring surveys and the associated temporal coverage per beach.\n\n\nEMODnet Chemistry included the collection of marine litter in its 3rd phase. Since the beginning of 2018, data of beach litter have been gathered and processed in the EMODnet Chemistry Marine Litter Database (MLDB).\nThe harmonization of all the data has been the most challenging task considering the heterogeneity of the data sources, sampling protocols and reference lists used on a European scale.\n\n\nPreliminary processings were necessary to harmonize all the data:\n\t\t- Exclusion of OSPAR 1000 protocol: in order to follow the approach of OSPAR that it is not including these data anymore in the monitoring;\n\t\t- Selection of MSFD surveys only (exclusion of other monitoring, cleaning and research operations);\n\t\t- Exclusion of beaches without coordinates.\n\n\nMore information is available in the attached documents.\n\n\nWarning: the absence of data on the map does not necessarily mean that they do not exist, but that no information has been entered in the Marine Litter Database for this area.",
-            "langeng": "This visualization product displays the number of Marine Strategy Framework Directive (MSFD) monitoring surveys and the associated temporal coverage per beach.\n\n\nEMODnet Chemistry included the collection of marine litter in its 3rd phase. Since the beginning of 2018, data of beach litter have been gathered and processed in the EMODnet Chemistry Marine Litter Database (MLDB).\nThe harmonization of all the data has been the most challenging task considering the heterogeneity of the data sources, sampling protocols and reference lists used on a European scale.\n\n\nPreliminary processings were necessary to harmonize all the data:\n\t\t- Exclusion of OSPAR 1000 protocol: in order to follow the approach of OSPAR that it is not including these data anymore in the monitoring;\n\t\t- Selection of MSFD surveys only (exclusion of other monitoring, cleaning and research operations);\n\t\t- Exclusion of beaches without coordinates.\n\n\nMore information is available in the attached documents.\n\n\nWarning: the absence of data on the map does not necessarily mean that they do not exist, but that no information has been entered in the Marine Litter Database for this area."
-          },
-          "resourceCreditObject": [
-            {
-              "default": "EMODnet Chemistry",
-              "langeng": "EMODnet Chemistry"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-31.121, 28.854],
-                  [34.545, 28.854],
-                  [34.545, 64.438],
-                  [-31.121, 64.438],
-                  [-31.121, 28.854]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "hash": "e0f75e62a979e6f444e17a689fd98242",
-              "idx": 1,
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/emodnet_chemistry2",
-                "langeng": "https://sextant.ifremer.fr/services/wms/emodnet_chemistry2"
-              },
-              "nameObject": {
-                "default": "bl_temporalcoverage_numbersurveys_monitoring",
-                "langeng": "bl_temporalcoverage_numbersurveys_monitoring"
-              },
-              "descriptionObject": {
-                "default": "Beach Litter - Number surveys & temporal coverage - EU-MSFD monitoring",
-                "langeng": "Beach Litter - Number surveys & temporal coverage - EU-MSFD monitoring"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "4a32467f1e95cb43a4aff80ccb81fb28",
-              "idx": 2,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/document/Field_description/BL_field_description_temporalcoverage_numbersurveys.xlsx",
-                "langeng": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/document/Field_description/BL_field_description_temporalcoverage_numbersurveys.xlsx"
-              },
-              "nameObject": {
-                "default": "Description of the layer's fields",
-                "langeng": "Description of the layer's fields"
-              },
-              "descriptionObject": {
-                "default": "Description of the layer's fields",
-                "langeng": "Description of the layer's fields"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "71e5660d77bece8422b27f37fbaab194",
-              "idx": 3,
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/sextant_data/EMODNET/CHEMISTRY/MARINE_LITTER/2025/bl_temporalcoverage_numbersurveys_monitoring.zip",
-                "langeng": "https://sextant.ifremer.fr/sextant_data/EMODNET/CHEMISTRY/MARINE_LITTER/2025/bl_temporalcoverage_numbersurveys_monitoring.zip"
-              },
-              "nameObject": {
-                "default": "Direct Download",
-                "langeng": "Direct Download"
-              },
-              "descriptionObject": {
-                "default": "Direct Download",
-                "langeng": "Direct Download"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "b9afb093d6c6b7fe0284bff37d31378b",
-              "idx": 4,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://emodnet.ec.europa.eu/geoviewer/",
-                "langeng": "https://emodnet.ec.europa.eu/geoviewer/"
-              },
-              "nameObject": {
-                "default": "EMODnet Map Viewer",
-                "langeng": "EMODnet Map Viewer"
-              },
-              "descriptionObject": {
-                "default": "EMODnet Map Viewer",
-                "langeng": "EMODnet Map Viewer"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "ed2b0f082e7bf520db9a953bff8d86b2",
-              "idx": 5,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.13120/14cc-r118",
-                "langeng": "https://doi.org/10.13120/14cc-r118"
-              },
-              "nameObject": {
-                "default": "Visualization products for beach litter data",
-                "langeng": "Visualization products for beach litter data"
-              },
-              "descriptionObject": {
-                "default": "Methodologies applied to create the maps",
-                "langeng": "Methodologies applied to create the maps"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "40576bf5cb244527a15aa0cb0a4aeb8d",
-              "idx": 6,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/document/Beachlitter_maps_items_selection_v2025.xlsx",
-                "langeng": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/document/Beachlitter_maps_items_selection_v2025.xlsx"
-              },
-              "nameObject": {
-                "default": "List of selected items",
-                "langeng": "List of selected items"
-              },
-              "descriptionObject": {
-                "default": "List of selected items",
-                "langeng": "List of selected items"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "9e1896ed23ff493e1d156d322fa32eee",
-              "idx": 7,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://dx.doi.org/10.2760/54369",
-                "langeng": "https://dx.doi.org/10.2760/54369"
-              },
-              "nameObject": {
-                "default": "EU Threshold Value for Macro Litter on Coastlines",
-                "langeng": "EU Threshold Value for Macro Litter on Coastlines"
-              },
-              "descriptionObject": {
-                "default": "EU Threshold Value for Macro Litter on Coastlines",
-                "langeng": "EU Threshold Value for Macro Litter on Coastlines"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "c93b454ca13ad6380f8ff01109abef4c",
-              "idx": 8,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://dx.doi.org/10.2760/16903",
-                "langeng": "https://dx.doi.org/10.2760/16903"
-              },
-              "nameObject": {
-                "default": "EU Marine Beach Litter Baselines",
-                "langeng": "EU Marine Beach Litter Baselines"
-              },
-              "descriptionObject": {
-                "default": "EU Marine Beach Litter Baselines",
-                "langeng": "EU Marine Beach Litter Baselines"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "22637c4ea829a7293c17119dbc60a32e",
-              "idx": 9,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://dx.doi.org/10.2760/621710",
-                "langeng": "https://dx.doi.org/10.2760/621710"
-              },
-              "nameObject": {
-                "default": "Marine litter database document",
-                "langeng": "Marine litter database document"
-              },
-              "descriptionObject": {
-                "default": "Marine litter database document",
-                "langeng": "Marine litter database document"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "15b12fbaaf6015044ecef77c16062fa0",
-              "idx": 10,
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://dx.doi.org/10.2760/127473",
-                "langeng": "https://dx.doi.org/10.2760/127473"
-              },
-              "nameObject": {
-                "default": "Joint list of litter categories for marine macro-litter monitoring",
-                "langeng": "Joint list of litter categories for marine macro-litter monitoring"
-              },
-              "descriptionObject": {
-                "default": "Joint list of litter categories for marine macro-litter monitoring",
-                "langeng": "Joint list of litter categories for marine macro-litter monitoring"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "28bb207b496d756cd36df095575468c6",
-              "idx": 11,
-              "protocol": "DOI",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.13120/a44654a2-18f1-4145-b6ca-24073c9517a8",
-                "langeng": "https://doi.org/10.13120/a44654a2-18f1-4145-b6ca-24073c9517a8"
-              },
-              "nameObject": {
-                "default": "Digital Object Identifier (DOI)",
-                "langeng": "Digital Object Identifier (DOI)"
-              },
-              "descriptionObject": {
-                "default": "Data Access and Citation",
-                "langeng": "Data Access and Citation"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "a44654a2-18f1-4145-b6ca-24073c9517a8",
-          "draft": "n",
-          "id": "339087958",
-          "owner": "334890330",
-          "groupOwner": "92",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "92"],
-          "op2": "92",
-          "op1": ["1", "92"],
-          "documentStandard": "iso19139",
-          "op3": "92",
-          "op5": ["1", "92"],
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/images/2025/bl_temporalcoverage_numbersurveys_monitoring.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
       }
     ]
   },
@@ -1345,7 +991,7 @@
       "meta": {
         "layout": "card",
         "decorator": {
-          "prefix": "text-6xl p-6",
+          "prefix": "p-2 text-4xl",
           "type": "icon",
           "map": {
             "service": "faSolidCloud",
@@ -1360,11 +1006,11 @@
         }
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 168,
+      "sum_other_doc_count": 112,
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 10876
+          "doc_count": 10844
         },
         {
           "key": "series",
@@ -1393,6 +1039,10 @@
         {
           "key": "map",
           "doc_count": 55
+        },
+        {
+          "key": "software",
+          "doc_count": 53
         }
       ]
     },
@@ -1415,7 +1065,7 @@
         "translateOnLoad": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 27,
+      "sum_other_doc_count": 0,
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947",
@@ -1423,7 +1073,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463",
-          "doc_count": 1870
+          "doc_count": 1876
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
@@ -1435,11 +1085,15 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1",
-          "doc_count": 366
+          "doc_count": 369
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f",
           "doc_count": 344
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921",
+          "doc_count": 27
         }
       ]
     },
@@ -1450,7 +1104,7 @@
         "translateOnLoad": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 2,
+      "sum_other_doc_count": 5,
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/311abf2d-6be9-472f-9f1a-ac5729745a97",
@@ -1487,10 +1141,6 @@
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/e23fee72-c17f-4b07-96bd-39b2b0e8dcd0",
           "doc_count": 4
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/ecb47d97-61c0-4cbe-b1ae-23dc9b59ac54",
-          "doc_count": 3
         }
       ]
     },
@@ -1689,7 +1339,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/840271f5-c45f-46d3-9fcf-e23fcf802d71",
-          "doc_count": 27
+          "doc_count": 20
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/730d8bf9-3a8c-4a21-bdf3-614968c5e3cb",
@@ -1708,11 +1358,15 @@
         "translateOnLoad": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 391,
+      "sum_other_doc_count": 424,
       "buckets": [
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEATEMP/",
-          "doc_count": 507
+          "doc_count": 508
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HUMACT/",
+          "doc_count": 446
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SAL/",
@@ -1720,115 +1374,111 @@
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CURR/",
-          "doc_count": 301
+          "doc_count": 307
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BATHY/",
+          "doc_count": 287
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SHORE/",
+          "doc_count": 280
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/INVER/",
+          "doc_count": 278
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BIOINFO/",
           "doc_count": 277
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SHORE/",
-          "doc_count": 249
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEALVL/",
+          "doc_count": 220
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BATHY/",
-          "doc_count": 247
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BENTHA/",
+          "doc_count": 214
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PRESS/",
           "doc_count": 211
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BENTHA/",
-          "doc_count": 171
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/MTBM/",
+          "doc_count": 189
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEALVL/",
-          "doc_count": 171
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FISH/",
+          "doc_count": 174
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HUMACT/",
-          "doc_count": 164
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WAVES/",
+          "doc_count": 166
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOXY/",
           "doc_count": 155
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WAVES/",
-          "doc_count": 148
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/MTBM/",
-          "doc_count": 144
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FISH/",
-          "doc_count": 112
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/GEOL/",
+          "doc_count": 125
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TURBID/",
-          "doc_count": 110
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/INVER/",
-          "doc_count": 99
+          "doc_count": 113
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PHYTO/",
-          "doc_count": 97
+          "doc_count": 99
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/C02/",
-          "doc_count": 95
+          "doc_count": 96
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PIGM/",
-          "doc_count": 88
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/GEOL/",
-          "doc_count": 85
+          "doc_count": 89
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HCORAL/",
-          "doc_count": 84
+          "doc_count": 87
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WIND/",
-          "doc_count": 72
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/NUTS/",
-          "doc_count": 62
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/ZOO/",
-          "doc_count": 62
+          "doc_count": 77
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CONT/",
-          "doc_count": 60
+          "doc_count": 65
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FLUO/",
-          "doc_count": 52
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/NUTS/",
+          "doc_count": 63
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SGRAS/",
+          "doc_count": 63
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/ZOO/",
+          "doc_count": 63
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEDFLUX/",
+          "doc_count": 61
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEISM/",
-          "doc_count": 52
+          "doc_count": 55
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SUSPMA/",
-          "doc_count": 52
+          "doc_count": 55
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TIDES/",
-          "doc_count": 48
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOM/",
-          "doc_count": 47
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FLUO/",
+          "doc_count": 54
         }
       ]
     }

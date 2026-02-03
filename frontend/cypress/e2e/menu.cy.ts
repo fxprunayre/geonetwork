@@ -25,28 +25,33 @@ describe('Navigation menu', () => {
     cy.get('@toggleBtn').parent().find('img[alt="Logo"]').should('not.be.visible');
   });
 
-  it('should navigate to Home', () => {
+  it('should navigate to the Home', () => {
     cy.get('@menuItems').eq(1).click();
     cy.url().should('eq', Cypress.config().baseUrl + '/');
   });
 
-  it('should navigate to Search', () => {
+  it('should navigate to the Search', () => {
     cy.get('@menuItems').eq(2).click();
     cy.url().should('include', '/search');
   });
 
-  it('should open the Map in a new window', () => {
-    cy.window().then((win) => {
-      cy.stub(win, 'open').as('windowOpen');
-    });
-
+  it('should navigate to the Map', () => {
     cy.get('@menuItems').eq(3).click();
-
-    cy.get('@windowOpen').should(
-      'be.calledWith',
-      'https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map',
-    );
+    cy.url().should('include', '/map');
   });
+
+  // it('should open the Map in a new window', () => {
+  //   cy.window().then((win) => {
+  //     cy.stub(win, 'open').as('windowOpen');
+  //   });
+
+  //   cy.get('@menuItems').eq(3).click();
+
+  //   cy.get('@windowOpen').should(
+  //     'be.calledWith',
+  //     'https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map',
+  //   );
+  // });
 
   // TODO: signin
   // TODO: configure

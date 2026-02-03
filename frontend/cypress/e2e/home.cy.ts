@@ -60,7 +60,7 @@ describe('Home Page', () => {
 
   it('should navigate to Search page when clicking on Search button', () => {
     cy.wait('@apiHomeSearch');
-    cy.get('app-search-input').find('[data-testid="search-button"]').as('searchButton');
+    cy.get('app-home app-search-input').find('[data-testid="search-button"]').as('searchButton');
     cy.get('@searchButton').should('have.attr', 'title', 'Search');
     cy.get('@searchButton').click();
     cy.url().should('include', '/search');

@@ -3,7 +3,10 @@ Cypress.Commands.add('initApp', () => {
   cy.intercept('GET', '**/srv/api/i18n/packages/gnui*', { fixture: 'home-api-i18n-gnui.json' }).as(
     'apiI18nGnui',
   );
-
+  cy.intercept('POST', '**/srv/api/registries/vocabularies/keyword?id=**', { body: {} }).as(
+    'apiKeywordById',
+  );
+  cy.intercept('GET', '**/viewer/sxt-viewer.js').as('apiMapViewerScript');
   cy.intercept(
     'GET',
     '**/srv/api/records/cf5048f6-5bbf-4e44-ba74-e6f429af51ea/formatters/citation?output=json&approved=true&format=%3F',

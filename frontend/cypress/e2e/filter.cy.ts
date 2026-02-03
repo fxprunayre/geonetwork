@@ -43,7 +43,7 @@ describe('Search', () => {
 
   it('should clear filters on reset', () => {
     cy.wait('@apiMainSearch');
-    cy.get('app-result-header app-aggregation app-aggregation-bucket button')
+    cy.get('app-search-header app-aggregation app-aggregation-bucket button')
       .first()
       .then((button) => {
         cy.wrap(button).click();
@@ -56,6 +56,7 @@ describe('Search', () => {
   });
 
   it('should open filter panel when filter button is clicked', () => {
+    cy.get('app-aggregations-panel').should('exist').and('not.be.visible');
     cy.get('app-search-active-filters-button p-button').first().click();
     cy.get('app-aggregations-panel').should('exist').and('be.visible');
   });
@@ -76,7 +77,7 @@ describe('Search', () => {
 
   it('should search when button aggregation is clicked', () => {
     cy.wait('@apiMainSearch');
-    cy.get('app-result-header app-aggregation app-aggregation-bucket button')
+    cy.get('app-search-header app-aggregation app-aggregation-bucket button')
       .first()
       .then((button) => {
         const bucketText = button.text();
