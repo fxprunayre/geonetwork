@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --project main",
+    "start": "ng serve --host 0.0.0.0 --project main",
     "watch-lib": "ng build library --watch",
     "watch-gn-api-client": "ng build gn-api-client --watch",
     "watch-gn4-api-client": "ng build gn4-api-client --watch",
