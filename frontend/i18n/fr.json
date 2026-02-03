@@ -58,11 +58,11 @@
   "record": {
     "view": {
       "section": {
-        "description": "Description",
+        "description": "Comprendre",
         "dates": "Dates",
         "about": "À propos",
         "contacts": "Contacts",
-        "dataAccess": "Accès aux données",
+        "dataAccess": "Accéder & télécharger",
         "explore": "Explorer",
         "publications": "Publications",
         "associatedResources": "Resources associées",
@@ -75,7 +75,7 @@
         "lineage": "Provenance",
         "content": "Contenu",
         "classification": "Classification",
-        "citation": "Citation",
+        "citation": "Citer",
         "usageAndAccess": "Utilisation et accès",
         "relatedResources": "Ressources connexes",
         "similarResources": "Ressources similaires"
