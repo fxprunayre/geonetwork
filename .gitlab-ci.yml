@@ -1,8 +1,17 @@
 image: node:lts-trixie
 
 stages:
+  - test
   - build
   - pages
+
+test:
+  stage: test
+  script:
+    - cd frontend
+    - npm install
+    - npm run build
+    - npm run e2e:ci
 
 build:
   stage: build
@@ -29,8 +38,6 @@ build:
       - public
       - public_sextant-test
     expire_in: 4 weeks
-
-
 
 pages:
   stage: pages
