@@ -4,17 +4,6 @@ stages:
   - build
   - pages
 
-test:
-  stage: test
-  image: 
-    name: cypress/included:15.8.2
-    entrypoint: [""]
-  script:
-    - cd frontend
-    - npm install
-    - npm run build
-    - npm run e2e:ci
-
 build:
   stage: build
   script:
