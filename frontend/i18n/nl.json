@@ -138,6 +138,22 @@
         "type": "Type"
       }
     },
+    "action": {
+      "menu": "Quick actions",
+      "share": "Share",
+      "shareHelp": "Permalink to the record",
+      "metadataDownload": "Metadata (XML)",
+      "metadataDownloadHelp": "Download the record in XML format",
+      "addWms": {
+        "addToMap": "Add to map",
+        "checking": "Checking WMS service...",
+        "allLayersFound": "All layers found in the endpoint: {{layerNames}}",
+        "unreachable": "The WMS service is unreachable.",
+        "chooseLayer": "Choose layer:",
+        "chooseServiceLayer": "Choose a layer from the service.",
+        "layerNotFoundButChooseAnother": "Layer '{{layerName}}' not found in the WMS service. Choose another layer from the service."
+      }
+    },
     "association": {
       "parent": "Part of {{count}} resource(s)",
       "children": "Composed of {{count}} resource(s)",

@@ -1,9 +1,50 @@
+Cypress.Commands.add('clearBrowserCache', () => {
+  cy.window().then(async (window) => {
+    window.sessionStorage.clear();
+    window.localStorage.clear();
+    if ('caches' in window) {
+      const keys = await window.caches.keys();
+      await Promise.all(keys.map((key) => window.caches.delete(key)));
+    }
+  });
+});
+
+Cypress.Commands.add('mockClipboard', (initialText = '') => {
+  cy.window().then((win) => {
+    let clipboardText = initialText;
+
+    if (!win.navigator.clipboard) {
+      Object.defineProperty(win.navigator, 'clipboard', {
+        value: {
+          readText: () => Promise.resolve(''),
+          writeText: () => Promise.resolve(),
+        },
+        writable: true,
+        enumerable: true,
+        configurable: true,
+      });
+    }
+
+    cy.stub(win.navigator.clipboard, 'readText').callsFake(() => {
+      return Promise.resolve(clipboardText);
+    });
+
+    cy.stub(win.navigator.clipboard, 'writeText').callsFake((text) => {
+      clipboardText = text;
+      return Promise.resolve();
+    });
+  });
+});
+
 Cypress.Commands.add('initApp', () => {
   cy.intercept('GET', '**/srv/api/ui/srv', { fixture: 'home-api-ui-srv.json' }).as('apiUiConfig');
   cy.intercept('GET', '**/srv/api/i18n/packages/gnui*', { fixture: 'home-api-i18n-gnui.json' }).as(
     'apiI18nGnui',
   );
-
+  cy.intercept('POST', '**/srv/api/registries/vocabularies/keyword?id=**', { body: {} }).as(
+    'apiKeywordById',
+  );
+  cy.intercept('GET', '**/viewer/sxt-viewer.js').as('apiMapViewerScript');
   cy.intercept(
     'GET',
     '**/srv/api/records/cf5048f6-5bbf-4e44-ba74-e6f429af51ea/formatters/citation?output=json&approved=true&format=%3F',

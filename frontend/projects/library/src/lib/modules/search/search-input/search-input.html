@@ -3,14 +3,13 @@
     (click)="searchOnClick()"
     [title]="'search.button.title' | translate"
     size="large"
-    styleClass="!p-4 !text-xl"
     data-testid="search-button"
   >
     <ng-icon name="faSolidMagnifyingGlass" pButtonIcon />
   </p-button>
 </ng-template>
 
-<div class="relative flex items-center gap-2 px-[20px] md:px-0">
+<div class="relative flex items-center gap-2 md:px-0">
   @if (autocompleteEnabled()) {
     <p-auto-complete
       [(ngModel)]="queryString"
@@ -29,7 +28,7 @@
       (click)="handleInputClick($event)"
       scrollHeight="400px"
       [pt]="{
-        pcInputText: { root: '!p-4 !text-xl' },
+        pcInputText: { root: '!p-4 !text-2xl' },
         pcOverlay: { root: 'w-full' },
       }"
       fluid

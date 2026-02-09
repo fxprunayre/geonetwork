@@ -3,11 +3,9 @@
     @for (section of linksBySections() | keyvalue; track $index) {
       <p-accordion-panel [value]="$index" [attr.data-testid]="'distribution-panel-' + section.key">
         <p-accordion-header>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 text-primary! text-2xl!">
             <ng-icon [svg]="iconsByType[section.key]" />
-            <span class="font-bold">{{
-              'record.field.distribution.sections.' + section.key | translate
-            }}</span>
+            <span>{{ 'record.field.distribution.sections.' + section.key | translate }}</span>
           </div>
         </p-accordion-header>
         <p-accordion-content>
@@ -16,7 +14,7 @@
               @if (link) {
                 <p-card styleClass="shadow-none border border-surface-200 dark:border-surface-700">
                   <ng-template #content>
-                    <div class="flex flex-col md:flex-row gap-4 items-start">
+                    <div class="flex flex-col md:flex-row gap-4 items-start text-primary">
                       <div class="flex-none">
                         <app-link-badge [link]="link" />
                       </div>
@@ -41,7 +39,7 @@
                             title="{{ link.descriptionObject?.['default'] }}"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="font-semibold text-primary hover:underline break-all block"
+                            class="font-semibold hover:underline break-all block"
                           >
                             {{ label }}
                           </a>
@@ -57,14 +55,8 @@
                         }
                       </div>
                       <div class="flex-none w-full md:w-auto">
-                        @if (link.protocol?.startsWith('OGC:WMS')) {
-                          <p-button
-                            styleClass="w-full md:w-auto"
-                            (click)="addWmsLayers([link])"
-                            [label]="'addToMap' | translate"
-                            size="small"
-                            [outlined]="true"
-                          />
+                        @if (link.protocol?.match('OGC:WMS|application/vnd.ogc.wms_xml')) {
+                          <app-add-layer-to-map [record]="record()" [link]="link" />
                         } @else if (isExplorable(link)) {
                           <p-button
                             styleClass="w-full md:w-auto"

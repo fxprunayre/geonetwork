@@ -3,9 +3,15 @@ import { defineConfig } from 'cypress';
 export default defineConfig({
   includeShadowDom: true,
   e2e: {
-    baseUrl: 'http://localhost:4200',
+    baseUrl: 'http://0.0.0.0:4200',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      on('before:browser:launch', (browser, launchOptions) => {
+        if (browser.name === 'electron') {
+          launchOptions.preferences.default['profile.managed_default_content_settings.clipboard'] =
+            1;
+        }
+        return launchOptions;
+      });
     },
   },
 });

@@ -42,7 +42,7 @@
   }
   @case ('card') {
     @for (bucket of buckets(); track bucket.key) {
-      <div class="w-full cursor-pointer">
+      <div class="w-full cursor-pointer transition-shadow hover:shadow-md">
         <app-aggregation-bucket
           [scope]="scope()"
           [keyName]="keyName()"
@@ -112,19 +112,19 @@
 }
 
 @if (search.hasMoreTerms(keyName()) || search.hasExpandedTerms(keyName())) {
-  <div class="mt-4 text-center">
-    @if (search.hasMoreTerms(keyName())) {
-      <p-button
-        variant="text"
-        (click)="search.loadMoreTerms(keyName(), 10)"
-        [label]="'search.aggregations.more' | translate"
-      ></p-button>
-    }
+  <div class="text-center">
     @if (search.hasExpandedTerms(keyName())) {
       <p-button
         variant="text"
         (click)="search.loadLessTerms(keyName(), 10)"
         [label]="'search.aggregations.less' | translate"
+      ></p-button>
+    }
+    @if (search.hasMoreTerms(keyName())) {
+      <p-button
+        variant="text"
+        (click)="search.loadMoreTerms(keyName(), 10)"
+        [label]="'search.aggregations.more' | translate"
       ></p-button>
     }
   </div>

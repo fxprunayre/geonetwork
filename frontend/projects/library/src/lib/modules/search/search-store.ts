@@ -441,11 +441,14 @@ export const SearchStore = signalStore(
             }
           }) as Record<string, AggregationsAggregationContainer>;
 
+          if (!aggregation) {
+            return false;
+          }
+
+          const layout = aggregation[field].meta?.layout || 'checkbox';
           if (
-            !aggregation ||
-            !aggregation[field] ||
             !aggregation[field].terms ||
-            aggregation[field].meta?.layout != 'checkbox' // tree, select, card do not support load more/less
+            layout !== 'checkbox' // tree, select, card do not support load more/less
           ) {
             return false;
           }

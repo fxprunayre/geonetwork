@@ -30,8 +30,6 @@ build:
       - public_sextant-test
     expire_in: 4 weeks
 
-
-
 pages:
   stage: pages
   script:

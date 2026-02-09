@@ -14,7 +14,6 @@ import {
   standalone: true,
   imports: [Aggregation, TranslatePipe],
   templateUrl: './home-highlights.html',
-  styleUrl: './home-highlights.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeHighlights extends SearchBase {

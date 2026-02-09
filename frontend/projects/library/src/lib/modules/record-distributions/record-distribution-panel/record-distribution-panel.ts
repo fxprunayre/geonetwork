@@ -1,28 +1,23 @@
-import { Component, inject, computed } from '@angular/core';
 import { KeyValuePipe } from '@angular/common';
-import { Badge } from 'primeng/badge';
-import { Button } from 'primeng/button';
-import { Link } from 'gn-api-client';
-import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
-import { LinkBadge } from '../link-badge/link-badge';
+import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
-import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
-import { Card } from 'primeng/card';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidCloudArrowDown,
   faSolidLink,
   faSolidNetworkWired,
 } from '@ng-icons/font-awesome/solid';
-import { RECORD_ROUTE_PATH } from '../../search/search-constant';
-import { InputText } from 'primeng/inputtext';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Link } from 'gn-api-client';
+import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
+import { Button } from 'primeng/button';
+import { Card } from 'primeng/card';
 import { IftaLabel } from 'primeng/iftalabel';
-
-interface Gn4MapCommand {
-  url: string;
-  name?: string;
-}
+import { InputText } from 'primeng/inputtext';
+import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../../search/search-constant';
+import { LinkBadge } from '../link-badge/link-badge';
+import { AddLayerToMap } from '../add-layer-to-map/add-layer-to-map';
+import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 
 @Component({
   selector: 'app-record-distribution-panel',
@@ -34,6 +29,7 @@ interface Gn4MapCommand {
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
+    AddLayerToMap,
     InputText,
     IftaLabel,
     LinkBadge,
@@ -81,25 +77,5 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
     this.router.navigate([RECORD_ROUTE_PATH, this.record().uuid, 'explore'], {
       queryParams: { datasource: link.urlObject?.['default'] },
     });
-  };
-  addWmsLayers = (links: Link[]) => {
-    const command = links
-      .filter((link) => link.urlObject)
-      .map((link) => {
-        const cmd: Gn4MapCommand = {
-          url: encodeURIComponent(link.urlObject!['default']),
-        };
-        if (link.nameObject) {
-          cmd.name = link.nameObject['default'];
-        }
-        return cmd;
-      });
-    if (command.length > 0) {
-      const commandParameter = 'add=' + JSON.stringify(command);
-      window.open(
-        `https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map?${commandParameter}`,
-        'map',
-      );
-    }
   };
 }

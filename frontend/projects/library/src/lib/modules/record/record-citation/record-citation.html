@@ -2,7 +2,7 @@
   <p-toast></p-toast>
   <p-card>
     <ng-template #title>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 text-primary text-2xl font-medium">
         <ng-icon name="faSolidQuoteRight"></ng-icon>
         {{ 'citation.title' | translate }}
       </div>
@@ -32,7 +32,12 @@
       </a>
     </div>
 
-    <p-panel class="m-4 p-4" [pt]="{ header: 'hidden!' }">
+    <p-panel
+      class="m-4 p-4"
+      [pt]="{ header: 'hidden!' }"
+      [class.bg-neutral-900!]="isCode()"
+      [class.text-neutral-200!]="isCode()"
+    >
       @if (loading()) {
         <p-skeleton class="mb-2" />
         <p-skeleton width="10rem" class="mb-2" />
@@ -41,7 +46,7 @@
         @if (!isCode()) {
           <div [innerHTML]="citationText()"></div>
         } @else {
-          <pre class="bg-neutral-900 text-neutral-200 p-4 rounded">{{ citationText() }}</pre>
+          <pre class="whitespace-pre-wrap wrap-break-word">{{ citationText() }}</pre>
         }
       }
     </p-panel>

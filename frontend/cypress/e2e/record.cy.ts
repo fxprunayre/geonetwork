@@ -54,6 +54,18 @@ describe('Record page', () => {
       'Le produit Surval "Données par paramètre" met à disposition',
     );
 
+    // last date should be the value of app-record-field-resource-last-update
+    cy.get('app-record-field-dates').as('datesField');
+    cy.get('@datesField')
+      .find('div:has(> span)')
+      .last()
+      .then((dateDiv) => {
+        // Only get the date part
+        const lastUpdateText = dateDiv.text().replace(dateDiv.find('span').text(), '').trim();
+
+        cy.get('app-record-field-resource-last-update').should('contain', lastUpdateText);
+      });
+
     cy.get('app-record-field-doi a').should(
       'contain',
       '10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea',
@@ -220,19 +232,6 @@ describe('Record page', () => {
 
     cy.get('[data-testid="distribution-panel-api"] .p-accordionheader').contains('API');
     cy.get('[data-testid="distribution-panel-api"]').find('p-card').should('have.length', 1);
-    cy.get('[data-testid="distribution-panel-api"]')
-      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
-      .find('ng-icon')
-      .should('have.attr', 'title', 'OGC:WMS');
-    cy.get('[data-testid="distribution-panel-api"]')
-      .contains('a', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
-      .should('have.attr', 'href', 'https://sextant.ifremer.fr/services/wms/environnement_marin')
-      .next('p')
-      .should('contain', 'Surval données par paramètre');
-    cy.get('[data-testid="distribution-panel-api"]')
-      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
-      .find('p-button')
-      .should('contain', 'Add to map');
 
     cy.get('[data-testid="distribution-panel-download"] .p-accordionheader').contains('Download');
     cy.get('[data-testid="distribution-panel-download"]').find('p-card').should('have.length', 2);
@@ -264,8 +263,110 @@ describe('Record page', () => {
   it('should display the explore tab content', () => {
     cy.visit(`/record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
+  });
 
-    cy.get('p-tablist p-tab[value="explore"]').contains('Explore').click();
+  it('should, for WMS distribution, allow it to be added to the map', () => {
+    cy.clearBrowserCache();
+    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.wait('@apiMainSearchGetRecord');
+
+    cy.get('p-tablist p-tab[value="data-access"]')
+      .should('have.attr', 'aria-selected', 'false')
+      .contains('Data access')
+      .click();
+
+    cy.get('[data-testid="distribution-panel-api"]')
+      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .find('ng-icon')
+      .should('have.attr', 'title', 'OGC:WMS');
+    cy.get('[data-testid="distribution-panel-api"]')
+      .contains('a', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .should('have.attr', 'href', 'https://sextant.ifremer.fr/services/wms/environnement_marin')
+      .next('p')
+      .should('contain', 'Surval données par paramètre');
+    cy.get('[data-testid="distribution-panel-api"]')
+      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .find('p-button')
+      .should('contain', 'Add to map')
+      .as('addToMapButton');
+
+    cy.get('@addToMapButton').click();
+    cy.url().should('include', '/map');
+    cy.get('sxt-viewer').should('exist').as('mapViewer');
+    cy.get('@mapViewer').within(() => {
+      cy.get('.layer-list > button').should('have.length', 1);
+    });
+  });
+
+  it('should, for WMS distribution, indicate service is down', () => {
+    cy.clearBrowserCache();
+    cy.intercept(
+      'GET',
+      'https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&REQUEST=GetCapabilities',
+      {
+        statusCode: 500,
+        body: 'Service Unavailable',
+      },
+    ).as('wmsServiceDown');
+
+    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.wait('@apiMainSearchGetRecord');
+
+    cy.get('p-tablist p-tab[value="data-access"]')
+      .should('have.attr', 'aria-selected', 'false')
+      .contains('Data access')
+      .click();
+
+    cy.get('[data-testid="distribution-panel-api"]')
+      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .find('ng-icon')
+      .should('have.attr', 'title', 'OGC:WMS');
+    cy.get('[data-testid="distribution-panel-api"]')
+      .contains('a', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .should('have.attr', 'href', 'https://sextant.ifremer.fr/services/wms/environnement_marin')
+      .next('p')
+      .should('contain', 'Surval données par paramètre');
+    cy.get('[data-testid="distribution-panel-api"]')
+      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .find('p-button')
+      .should('have.attr', 'severity', 'warn');
+  });
+
+  it('should, for WMS distribution, propose list of layers if layer name is not found', () => {
+    cy.clearBrowserCache();
+    cy.intercept(
+      'GET',
+      'https://sextant.ifremer.fr/services/wms/environnement_marin?SERVICE=WMS&REQUEST=GetCapabilities',
+      {
+        fixture: 'ogc-wms-surval-capabilities-withoutexpecetedlayers.xml',
+      },
+    ).as('wmsServiceCapabilitiesWithoutExpectedLayers');
+
+    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.wait('@apiMainSearchGetRecord');
+
+    cy.get('p-tablist p-tab[value="data-access"]')
+      .should('have.attr', 'aria-selected', 'false')
+      .contains('Data access')
+      .click();
+
+    cy.get('[data-testid="distribution-panel-api"]')
+      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .find('ng-icon')
+      .should('have.attr', 'title', 'OGC:WMS');
+    cy.get('[data-testid="distribution-panel-api"]')
+      .contains('a', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .should('have.attr', 'href', 'https://sextant.ifremer.fr/services/wms/environnement_marin')
+      .next('p')
+      .should('contain', 'Surval données par paramètre');
+    cy.get('[data-testid="distribution-panel-api"]')
+      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .find('p-splitbutton')
+      .should(
+        'have.attr',
+        'title',
+        "Layer 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone' not found in the WMS service. Choose another layer from the service.",
+      );
   });
 
   it('should display the citation tab content', () => {
@@ -287,15 +388,18 @@ describe('Record page', () => {
       'Quadrige (2026). Données par paramètre. Quadrige. https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea',
     );
 
+    const citationText =
+      'Quadrige (2026). Données par paramètre. Quadrige. https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea';
+    cy.mockClipboard(citationText);
+
     cy.get('app-record-citation app-copy-input p-button')
       .should('have.attr', 'title', 'Copy')
       .find('button')
       .click();
+
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((clipText) => {
-        expect(clipText).to.contain(
-          'Quadrige (2026). Données par paramètre. Quadrige. https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea',
-        );
+        expect(clipText, 'Citation must be in the clipboard').to.eq(citationText);
       });
     });
 

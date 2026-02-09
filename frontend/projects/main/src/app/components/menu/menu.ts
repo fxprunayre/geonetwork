@@ -20,6 +20,7 @@ import {
   APPLICATION_CONFIGURATION,
   IconStyleService,
   LanguageSwitcher,
+  MAP_ROUTE_PATH,
   SEARCH_ROUTE_PATH,
   ThemeDesigner,
 } from 'gn-library';
@@ -125,9 +126,11 @@ export class MenuComponent implements OnInit {
         label: this.translateService.instant('menu.map'),
         title: this.translateService.instant('menu.map'),
         icon: 'faMap',
-        command: () => {
-          window.open(`https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map`, 'map');
-        },
+        routerLink: MAP_ROUTE_PATH,
+        routerLinkActiveOptions: { exact: true },
+        // command: () => {
+        //   window.open(`https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map`, 'map');
+        // },
         ...this.itemConfig(),
       },
       {

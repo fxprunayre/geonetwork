@@ -1,9 +1,12 @@
 import { Component, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { filter } from 'rxjs';
 import {
   APPLICATION_CONFIGURATION,
   DEFAULT_LANGUAGE,
+  MAP_SLUG,
+  SEARCH_SLUG,
   SearchApp,
   SearchContextDirective,
   SearchService,
@@ -12,12 +15,23 @@ import { TranslateService } from '@ngx-translate/core';
 import { ScrollTop } from 'primeng/scrolltop';
 import { Toast } from 'primeng/toast';
 import { MenuComponent } from './components/menu/menu';
+import { MapComponent } from './components/map/map';
+import { Search } from './components/search/search';
 import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
 
 @Component({
   selector: 'app-root',
   providers: [SearchService],
-  imports: [RouterOutlet, FormsModule, SearchContextDirective, ScrollTop, MenuComponent, Toast],
+  imports: [
+    RouterOutlet,
+    FormsModule,
+    SearchContextDirective,
+    ScrollTop,
+    MenuComponent,
+    Toast,
+    MapComponent,
+    Search,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   standalone: true,
@@ -29,6 +43,8 @@ export class App extends PrimeShadowdomstyleComponent implements OnInit {
   private searchService = inject(SearchService);
 
   protected readonly title = signal('main');
+  isMapActive = signal(false);
+  isSearchActive = signal(false);
 
   searchConfig: SearchApp =
     inject(APPLICATION_CONFIGURATION)().config?.apps.search || ({} as SearchApp);
@@ -44,6 +60,13 @@ export class App extends PrimeShadowdomstyleComponent implements OnInit {
     this.translate.onLangChange.subscribe((event) => {
       this.searchService.getSearch('main').setLanguage(event.lang);
     });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        const url = event.urlAfterRedirects;
+        this.isMapActive.set(url.startsWith('/' + MAP_SLUG));
+        this.isSearchActive.set(url.startsWith('/' + SEARCH_SLUG));
+      });
   }
 
   override ngOnInit() {

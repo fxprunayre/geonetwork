@@ -93,9 +93,12 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
         if (!existingNode) {
           let label = translatedLabel;
           // This is Sextant specific where parent labels are prefixed to child labels
+          // and we remove leading "/" for top nodes
           if (parentLabel && label.startsWith(parentLabel)) {
             label = label.replace(parentLabel, '');
             label = label.replace(/^[\s\/]+/, '');
+          } else if (!parentLabel && label.startsWith('/')) {
+            label = label.substring(1);
           }
 
           existingNode = {

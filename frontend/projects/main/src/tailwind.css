@@ -52,6 +52,6 @@
 
   .header-row {
     @apply items-center;
-    @apply h-28;
+    @apply min-h-28;
   }
 }

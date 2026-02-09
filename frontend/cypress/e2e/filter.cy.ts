@@ -43,7 +43,7 @@ describe('Search', () => {
 
   it('should clear filters on reset', () => {
     cy.wait('@apiMainSearch');
-    cy.get('app-result-header app-aggregation app-aggregation-bucket button')
+    cy.get('app-search-header app-aggregation app-aggregation-bucket button')
       .first()
       .then((button) => {
         cy.wrap(button).click();
@@ -56,8 +56,9 @@ describe('Search', () => {
   });
 
   it('should open filter panel when filter button is clicked', () => {
+    cy.get('app-aggregations-panel').closest('.sticky').should('have.class', 'sm:opacity-0');
     cy.get('app-search-active-filters-button p-button').first().click();
-    cy.get('app-aggregations-panel').should('exist').and('be.visible');
+    cy.get('app-aggregations-panel').closest('.sticky').should('have.class', 'sm:opacity-100');
   });
 
   it('should contains as many section as aggregation', () => {
@@ -76,7 +77,7 @@ describe('Search', () => {
 
   it('should search when button aggregation is clicked', () => {
     cy.wait('@apiMainSearch');
-    cy.get('app-result-header app-aggregation app-aggregation-bucket button')
+    cy.get('app-search-header app-aggregation app-aggregation-bucket button')
       .first()
       .then((button) => {
         const bucketText = button.text();
@@ -94,7 +95,9 @@ describe('Search', () => {
   it('should search when checkbox aggregation is checked', () => {
     cy.get('app-search-active-filters-button p-button').first().click();
     cy.wait('@apiMainSearch');
-    cy.get('app-aggregations-panel app-aggregation input[type="checkbox"]')
+    cy.get(
+      'app-aggregations-panel app-aggregation > div > app-aggregation-bucket p-checkbox input[type="checkbox"]',
+    )
       .first()
       .then((checkbox) => {
         cy.wrap(checkbox).parent().parent().invoke('text').should('match', AGGREGATION_LABEL_REGEX);
@@ -129,4 +132,6 @@ describe('Search', () => {
           });
       });
   });
+
+  // TODO: test tree aggregation
 });
