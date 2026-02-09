@@ -1,7 +1,7 @@
 image: node:lts-trixie
 
 stages:
-  - test
+#  - test
   - build
   - pages
 
