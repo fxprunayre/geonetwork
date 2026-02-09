@@ -9,6 +9,33 @@ Cypress.Commands.add('clearBrowserCache', () => {
   });
 });
 
+Cypress.Commands.add('mockClipboard', (initialText = '') => {
+  cy.window().then((win) => {
+    let clipboardText = initialText;
+
+    if (!win.navigator.clipboard) {
+      Object.defineProperty(win.navigator, 'clipboard', {
+        value: {
+          readText: () => Promise.resolve(''),
+          writeText: () => Promise.resolve(),
+        },
+        writable: true,
+        enumerable: true,
+        configurable: true,
+      });
+    }
+
+    cy.stub(win.navigator.clipboard, 'readText').callsFake(() => {
+      return Promise.resolve(clipboardText);
+    });
+
+    cy.stub(win.navigator.clipboard, 'writeText').callsFake((text) => {
+      clipboardText = text;
+      return Promise.resolve();
+    });
+  });
+});
+
 Cypress.Commands.add('initApp', () => {
   cy.intercept('GET', '**/srv/api/ui/srv', { fixture: 'home-api-ui-srv.json' }).as('apiUiConfig');
   cy.intercept('GET', '**/srv/api/i18n/packages/gnui*', { fixture: 'home-api-i18n-gnui.json' }).as(

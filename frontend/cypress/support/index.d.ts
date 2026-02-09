@@ -9,5 +9,7 @@ declare namespace Cypress {
      * Clear browser cache (localStorage, sessionStorage, Cache Storage).
      */
     clearBrowserCache(): Chainable<void>;
+
+    mockClipboard(initialText?: string): Chainable<void>;
   }
 }

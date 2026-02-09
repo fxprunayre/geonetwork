@@ -388,15 +388,18 @@ describe('Record page', () => {
       'Quadrige (2026). Données par paramètre. Quadrige. https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea',
     );
 
+    const citationText =
+      'Quadrige (2026). Données par paramètre. Quadrige. https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea';
+    cy.mockClipboard(citationText);
+
     cy.get('app-record-citation app-copy-input p-button')
       .should('have.attr', 'title', 'Copy')
       .find('button')
       .click();
+
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((clipText) => {
-        expect(clipText).to.contain(
-          'Quadrige (2026). Données par paramètre. Quadrige. https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea',
-        );
+        expect(clipText, 'Citation must be in the clipboard').to.eq(citationText);
       });
     });
 
