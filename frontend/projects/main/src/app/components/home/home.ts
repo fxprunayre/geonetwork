@@ -23,7 +23,7 @@ export class Home {
           layout: 'card',
           decorator: {
             type: 'icon',
-            prefix: 'p-2 text-4xl',
+            prefix: '',
             map: {
               dataset: 'faSolidDatabase',
               map: 'faSolidMap',
