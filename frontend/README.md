@@ -41,7 +41,7 @@ To set up the development environment and start the main app, run the following 
 
 ```sh
 nvm use v22.19.0
-npm install
+npm install --legacy-peer-deps
 npm run build 
 npm run start
 ```
