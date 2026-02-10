@@ -68,8 +68,12 @@ export class Gn4AuthenticationService implements AuthenticationService {
         // * Current production is using CAS (see above)
         // * Test env use OAuth2 (Go to signin endpoint which redirect accordingly)
         // * Local dev env use database provider
-        if (this.catalogueUrl().includes('ifremer.fr')) {
+        if (this.catalogueUrl().includes('ifremer.fr') || true) {
           return [
+            {
+              id: 'database',
+              endpoint: '',
+            },
             {
               id: 'OpenID Connect',
               endpoint:

@@ -13,6 +13,8 @@ import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordsService } from 'gn4-api-client';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { IconStyleService } from '../../../shared/icon-style-service';
+import { AuthStore } from '../../authentication/auth.store';
+import { RecordEditButton } from '../record-edit-button/record-edit-button';
 
 @Component({
   selector: 'app-record-menu',
@@ -30,11 +32,13 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
   private readonly translate = inject(TranslateService);
   private readonly elementRef = inject(ElementRef);
   private readonly iconStyleService = inject(IconStyleService);
+  private authStore = inject(AuthStore);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   catalogueUrl = computed(() => this.appConfiguration().catalogueUrl);
 
   shareUrl = signal('');
+
   currentLang = signal(this.translate.getCurrentLang());
 
   constructor() {

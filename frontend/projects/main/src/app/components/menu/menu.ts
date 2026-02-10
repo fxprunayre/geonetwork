@@ -290,7 +290,6 @@ export class MenuComponent implements OnInit {
   currentLang = signal(this.translateService.getCurrentLang(), { equal: () => false });
 
   ngOnInit() {
-    this.authStore.loadUser();
     this.translateService.onLangChange.subscribe((event) => {
       this.currentLang.set(event.lang);
     });

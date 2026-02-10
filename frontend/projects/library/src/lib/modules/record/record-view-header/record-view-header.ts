@@ -13,6 +13,7 @@ import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-v
 import { RecordMenuComponent } from '../record-menu/record-menu.component';
 import { RecordFieldResourceLastUpdate } from '../record-field-resource-last-update/record-field-resource-last-update';
 import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
+import { RecordEditButton } from '../record-edit-button/record-edit-button';
 
 @Component({
   selector: 'app-record-view-header',
@@ -29,6 +30,7 @@ import { RecordFieldCodelist } from '../record-field-codelist/record-field-codel
     RecordDistributionBadges,
     RecordMenuComponent,
     RecordFieldCodelist,
+    RecordEditButton,
   ],
   templateUrl: './record-view-header.html',
 })

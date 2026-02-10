@@ -167,6 +167,7 @@
       "menu": "Quick actions",
       "share": "Share",
       "shareHelp": "Permalink to the record",
+      "edit": "Editer",
       "metadataDownload": "Metadata (XML)",
       "metadataDownloadHelp": "Download the record in XML format",
       "addWms": {
