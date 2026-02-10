@@ -31,9 +31,10 @@
             class="md:text-2xl"
           ></ng-icon>
         </a>
-        <a routerLink="/" [class.hidden]="isIconMode()" class="transition-all">
-          <img [src]="logo" alt="Logo" class="h-12 md:h-16" />
-        </a>
+        <app-catalogue-logo
+          [class.hidden]="isIconMode()"
+          class="transition-all"
+        ></app-catalogue-logo>
       </div>
     </ng-template>
 

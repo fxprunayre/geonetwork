@@ -1,4 +1,29 @@
 {
+  "auth": {
+    "signin": {
+      "title": "Welcome back",
+      "username": {
+        "placeholder": "Email or username",
+        "error": {
+          "required": "Email or username is required",
+          "email": "Enter a valid email address"
+        }
+      },
+      "password": {
+        "placeholder": "Password",
+        "error": {
+          "required": "Password is required"
+        }
+      },
+      "button": "Sign In",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "Don't have an account?",
+      "signup": "Sign up",
+      "or": "OR",
+      "signInWith": "Sign in with {{provider}}",
+      "signInFailure": "Incorrect password. Try again or click \"Forgot your password?\" for more options."
+    }
+  },
   "search": {
     "input": {
       "placeholder": "Zoeken ...",

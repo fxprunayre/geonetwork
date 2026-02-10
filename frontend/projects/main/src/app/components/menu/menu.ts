@@ -23,6 +23,8 @@ import {
   MAP_ROUTE_PATH,
   SEARCH_ROUTE_PATH,
   ThemeDesigner,
+  CatalogueLogo,
+  AuthStore,
 } from 'gn-library';
 import { MenuItem, MessageService, SharedModule } from 'primeng/api';
 import { Drawer } from 'primeng/drawer';
@@ -56,7 +58,6 @@ const ICONS = {
   imports: [
     Menu,
     TieredMenu,
-    RouterLink,
     LanguageSwitcher,
     TranslatePipe,
     ThemeDesigner,
@@ -68,6 +69,7 @@ const ICONS = {
     IftaLabel,
     FormsModule,
     TextareaModule,
+    CatalogueLogo,
   ],
   providers: [MessageService],
   standalone: true,
@@ -82,8 +84,7 @@ const ICONS = {
   ],
 })
 export class MenuComponent implements OnInit {
-  logo = 'images/logo.svg';
-
+  readonly authStore = inject(AuthStore);
   styleService = inject(IconStyleService);
   translateService = inject(TranslateService);
   router = inject(Router);
@@ -143,7 +144,7 @@ export class MenuComponent implements OnInit {
         visible: !this.isAuthenticated(),
         icon: 'faSolidArrowRightToBracket',
         command: () => {
-          this.isAuthenticated.update((v) => !v);
+          this.router.navigate(['/signin'], { queryParams: { redirectUrl: this.router.url } });
         },
         ...this.itemConfig(),
       },
@@ -193,7 +194,7 @@ export class MenuComponent implements OnInit {
         visible: this.isAuthenticated(),
         icon: 'faSolidArrowRightFromBracket',
         command: () => {
-          this.isAuthenticated.update((v) => !v);
+          this.authStore.signOut();
         },
         ...this.itemConfig(),
       },
@@ -284,11 +285,12 @@ export class MenuComponent implements OnInit {
 
   isConfigurationVisible = signal(false);
 
-  isAuthenticated = signal(false);
+  isAuthenticated = this.authStore.isAuthenticated;
 
   currentLang = signal(this.translateService.getCurrentLang(), { equal: () => false });
 
   ngOnInit() {
+    this.authStore.loadUser();
     this.translateService.onLangChange.subscribe((event) => {
       this.currentLang.set(event.lang);
     });

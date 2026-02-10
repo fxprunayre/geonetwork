@@ -1,0 +1,109 @@
+<div
+  class="h-full px-6 py-20 md:px-20 lg:px-80 flex items-center justify-center backdrop-blur-3xl bg-cover! bg-center! bg-no-repeat!"
+  [class.bg-primary-400]="!backgroundImageUrl()"
+  [class.bg-black]="backgroundImageUrl()"
+  [style.background-image]="backgroundImageUrl() ? 'url(' + backgroundImageUrl() + ')' : null"
+>
+  <div
+    class="px-8 md:px-12 lg:px-20 py-12 flex flex-col items-center gap-12 w-full backdrop-blur-2xl rounded-2xl bg-white/10 border border-white/10 max-w-md"
+  >
+    <div class="flex flex-col items-center gap-4 w-full">
+      <app-catalogue-logo />
+      <div class="flex flex-col gap-2 w-full">
+        <div class="text-center text-3xl font-medium text-white leading-tight">
+          {{ 'auth.signin.title' | translate }}
+        </div>
+
+        @if (hasSignup()) {
+          <div class="text-center">
+            <span class="text-white/80">{{ 'auth.signin.noAccount' | translate }} </span>
+            <a class="text-white/80 cursor-pointer hover:text-white/90 underline">{{
+              'auth.signin.signup' | translate
+            }}</a>
+          </div>
+        }
+      </div>
+    </div>
+    @if (hasDatabaseProvider()) {
+      <form (submit)="onSubmit($event)" class="flex flex-col items-center gap-8 w-full text-white">
+        <div class="flex flex-col gap-6 w-full">
+          <p-iconfield icon-position="left">
+            <p-inputicon>
+              <ng-icon name="fa-user"></ng-icon>
+            </p-inputicon>
+            <input
+              pInputText
+              [pAutoFocus]="true"
+              id="username"
+              [placeholder]="'auth.signin.username.placeholder' | translate"
+              [formField]="loginForm.email"
+              type="text"
+              fluid="true"
+            />
+          </p-iconfield>
+          @if (loginForm.email().invalid() && loginForm.email().touched()) {
+            <p-message severity="error">
+              @for (error of loginForm.email().errors(); track error.kind) {
+                <span>{{ error.message }}</span>
+              }
+            </p-message>
+          }
+
+          <p-iconfield icon-position="left">
+            <p-inputicon>
+              <ng-icon name="fa-solid-lock"></ng-icon>
+            </p-inputicon>
+            <input
+              pInputText
+              type="password"
+              id="password"
+              [placeholder]="'auth.signin.password.placeholder' | translate"
+              [formField]="loginForm.password"
+              fluid="true"
+            />
+          </p-iconfield>
+          @if (loginForm.password().invalid() && loginForm.password().touched()) {
+            <p-message severity="error">
+              @for (error of loginForm.password().errors(); track error.kind) {
+                <span>{{ error.message }}</span>
+              }
+            </p-message>
+          }
+          @if (signinFailure()) {
+            <p-message severity="error">{{ 'auth.signin.signInFailure' | translate }}</p-message>
+          }
+        </div>
+        <button type="submit" pButton [fluid]="true" [disabled]="loginForm().invalid()">
+          <span pButtonLabel>{{ 'auth.signin.button' | translate }}</span>
+        </button>
+      </form>
+
+      @if (hasForgotPassword()) {
+        <a class="text-white/80 cursor-pointer hover:text-white/90">{{
+          'auth.signin.forgotPassword' | translate
+        }}</a>
+      }
+    }
+
+    @if (hasExternalProviders() && hasDatabaseProvider()) {
+      <p-divider [align]="'center'" [type]="'solid'" class="w-full">
+        {{ 'auth.signin.or' | translate }}
+      </p-divider>
+    }
+
+    @if (hasExternalProviders()) {
+      <div class="flex flex-col items-center gap-4 w-full">
+        @for (provider of externalProviders(); track $index) {
+          <a
+            pButton
+            [fluid]="true"
+            [attr.href]="provider.endpoint"
+            [title]="'auth.signin.signInWith' | translate: { provider: provider.id }"
+          >
+            <span pButtonLabel>{{ provider.id | translate }}</span>
+          </a>
+        }
+      </div>
+    }
+  </div>
+</div>

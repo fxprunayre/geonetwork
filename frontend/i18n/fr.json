@@ -1,4 +1,29 @@
 {
+  "auth": {
+    "signin": {
+      "title": "Bienvenue",
+      "username": {
+        "placeholder": "Email ou nom d'utilisateur",
+        "error": {
+          "required": "Email ou nom d'utilisateur est requis",
+          "email": "Entrez une adresse email valide"
+        }
+      },
+      "password": {
+        "placeholder": "Mot de passe",
+        "error": {
+          "required": "Le mot de passe est requis"
+        }
+      },
+      "button": "Se connecter",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signup": "S'inscrire",
+      "or": "OU",
+      "signInWith": "Se connecter avec {{provider}}",
+      "signInFailure": "Mot de passe incorrect. Réessayez ou cliquez sur \"Mot de passe oublié ?\" pour plus d'options."
+    }
+  },
   "search": {
     "input": {
       "placeholder": "Rechercher ...",

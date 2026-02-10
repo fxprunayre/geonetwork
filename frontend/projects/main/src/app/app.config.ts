@@ -15,7 +15,12 @@ import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpBackend, provideHttpClient } from '@angular/common/http';
-import { APPLICATION_CONFIGURATION, TranslationsLoader } from 'gn-library';
+import {
+  APPLICATION_CONFIGURATION,
+  TranslationsLoader,
+  AuthenticationService,
+  Gn4AuthenticationService,
+} from 'gn-library';
 import AppTheme from './app.theme';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { LocationStrategy, registerLocaleData } from '@angular/common';
@@ -89,6 +94,7 @@ export class InMemoryLocationStrategy extends LocationStrategy {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: AuthenticationService, useClass: Gn4AuthenticationService },
     importProvidersFrom([
       GnApiModule.forRoot(() => {
         return new Configuration({
