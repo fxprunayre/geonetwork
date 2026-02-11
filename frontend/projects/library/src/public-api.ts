@@ -53,4 +53,5 @@ export * from './lib/modules/authentication/authentication.service';
 export * from './lib/modules/authentication/auth.store';
 export * from './lib/modules/authentication/gn4-authentication.service';
 export * from './lib/modules/authentication/gn-authentication.service';
+export * from './lib/modules/authentication/user-avatar/user-avatar';
 export * from './lib/modules/catalogue/catalogue-logo/catalogue-logo';

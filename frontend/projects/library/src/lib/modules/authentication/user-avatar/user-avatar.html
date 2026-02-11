@@ -1,0 +1,36 @@
+@if (isAuthenticated()) {
+  <p-avatar
+    [label]="initials()"
+    shape="circle"
+    (click)="op.toggle($event)"
+    class="border-2 border-white"
+    [style]="{ 'background-color': 'var(--p-primary-500)', color: '#ffffff' }"
+  />
+
+  <p-popover #op>
+    <div class="flex flex-col gap-4 min-w-64">
+      <div class="flex items-center gap-3">
+        <p-avatar
+          [label]="initials()"
+          shape="circle"
+          size="large"
+          [style]="{ 'background-color': 'var(--p-primary-500)', color: '#ffffff' }"
+        />
+        <div class="flex flex-col">
+          <span class="font-bold">{{ user()?.name }} {{ user()?.surname }}</span>
+          <span class="text-sm text-surface-500">{{ user()?.email }}</span>
+          <span class="text-sm text-surface-500">{{ user()?.profile | translate }}</span>
+        </div>
+      </div>
+
+      <p-button
+        [label]="'signout' | translate"
+        icon="pi pi-sign-out"
+        [outlined]="true"
+        severity="danger"
+        (onClick)="signOut()"
+        [fluid]="true"
+      />
+    </div>
+  </p-popover>
+}

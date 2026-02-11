@@ -25,6 +25,7 @@ import {
   ThemeDesigner,
   CatalogueLogo,
   AuthStore,
+  UserAvatarComponent,
 } from 'gn-library';
 import { MenuItem, MessageService, SharedModule } from 'primeng/api';
 import { Drawer } from 'primeng/drawer';
@@ -70,6 +71,7 @@ const ICONS = {
     FormsModule,
     TextareaModule,
     CatalogueLogo,
+    UserAvatarComponent,
   ],
   providers: [MessageService],
   standalone: true,
