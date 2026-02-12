@@ -104,7 +104,7 @@ import { filter, map } from 'rxjs';
         }
         @case ('side') {
           <div
-            class="w-full h-screen sticky top-0 self-start transition-all duration-300 ease-in-out min-w-0 max-w-[400px] border-primary-50 overflow-x-hidden"
+            class="w-full h-screen sticky top-0 self-start transition-all duration-300 ease-in-out min-w-0 max-w-100 border-primary-50 overflow-x-hidden"
             [ngClass]="
               visible
                 ? 'sm:w-1/3 sm:opacity-100 border-l-2 shadow overflow-y-auto'

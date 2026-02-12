@@ -15,7 +15,7 @@ import { TranslationsService } from '../../i18n/translations-service';
       <a
         pButton
         [attr.href]="editorUrl()"
-        [title]="'record.action.edit' | translate"
+        [title]="'record.action.editTitle' | translate"
         target="_blank"
       >
         <ng-icon name="faSolidPenToSquare" pButtonIcon></ng-icon>

@@ -19,7 +19,6 @@ interface SectionItem {
         user-select: none;
         position: relative;
         border-style: solid;
-        white-space: nowrap;
         gap: var(--p-tabs-tab-gap);
         background: var(--p-tabs-tab-background);
         border-color: var(--p-tabs-tab-border-color);

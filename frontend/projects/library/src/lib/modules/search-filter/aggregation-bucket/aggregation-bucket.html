@@ -52,15 +52,15 @@
     >
       <ng-template #title>
         @if (isIconDecorator() && !backgroundImage()) {
-          <div class="absolute -right-4 -bottom-8 opacity-60 text-[12rem] text-white">
+          <div class="absolute -right-4 -bottom-8 opacity-60 text-[10rem] text-white">
             <app-aggregation-bucket-decorator
-              class="block text-[12rem]"
+              class="block text-[10rem]"
               [bucket]="bucket()"
               [decorator]="decorator()"
             />
           </div>
         }
-        <p class="font-bold text-3xl line-clamp-2 relative z-10">
+        <p class="font-bold text-3xl line-clamp-3 relative z-10">
           {{ bucket().key | aggregationTranslate: keyName() }}
         </p>
         @if (!backgroundImage() && !isIconDecorator()) {

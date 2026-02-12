@@ -168,6 +168,7 @@
       "share": "Share",
       "shareHelp": "Permalink to the record",
       "edit": "Editer",
+      "editTitle": "Editer la fiche",
       "metadataDownload": "Metadata (XML)",
       "metadataDownloadHelp": "Download the record in XML format",
       "addWms": {

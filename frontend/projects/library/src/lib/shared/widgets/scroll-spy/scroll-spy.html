@@ -27,7 +27,7 @@
     <ng-content />
   </main>
   @if (navPosition() === 'aside') {
-    <aside class="w-64 p-4 sticky top-4 h-full">
+    <aside class="hidden md:inline w-40 p-4 sticky top-4 h-full">
       <ng-container *ngTemplateOutlet="navigation" />
     </aside>
   }

@@ -2,7 +2,7 @@
   @let description = result.resourceAbstractObject?.['default'] || '';
   <ng-template #content>
     <div
-      class="w-full md:w-1/4 h-64 md:h-54 relative overflow-hidden rounded-t-(--p-border-radius-md) md:rounded-tr-none md:rounded-l-(--p-border-radius-md) md:border-r border-surface-100"
+      class="w-full aspect-video md:w-1/3 h-64 md:h-54 relative overflow-hidden rounded-t-(--p-border-radius-md) md:rounded-tr-none md:rounded-l-(--p-border-radius-md) md:border-r border-surface-100"
     >
       <app-record-field-overview
         [field]="result.overview?.[0]"
