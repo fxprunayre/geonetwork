@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal, ElementRef, OnInit } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, OnInit, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidEllipsisVertical,
@@ -6,22 +6,20 @@ import {
   faSolidUpRightFromSquare,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { RecordsService } from 'gn4-api-client';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { Menu } from 'primeng/menu';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
-import { RecordsService } from 'gn4-api-client';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { TieredMenu } from 'primeng/tieredmenu';
 import { IconStyleService } from '../../../shared/icon-style-service';
 import { AuthStore } from '../../authentication/auth.store';
-import { RecordEditButton } from '../record-edit-button/record-edit-button';
-import { TieredMenu } from 'primeng/tieredmenu';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
-  selector: 'app-record-menu',
+  selector: 'app-record-menu', 
   templateUrl: './record-menu.component.html',
   standalone: true,
-  imports: [Menu, ButtonModule, NgIcon, TranslatePipe, TieredMenu],
+  imports: [ButtonModule, NgIcon, TieredMenu, TranslatePipe],
   viewProviders: [
     provideIcons({
       faSolidEllipsisVertical,

@@ -22,8 +22,8 @@ import { AutoComplete } from 'primeng/autocomplete';
 import { Button, ButtonIcon } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 import { Popover } from 'primeng/popover';
-import { SearchService } from '../search-service';
 import { SearchBase } from '../search-base/search-base';
+import { SearchService } from '../search-service';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -34,16 +34,16 @@ interface AutoCompleteCompleteEvent {
   selector: 'app-search-input',
   standalone: true,
   imports: [
-    NgTemplateOutlet,
-    FormsModule,
-    NgIcon,
-    TranslatePipe,
-    Popover,
     AutoComplete,
-    PrimeTemplate,
     Button,
     ButtonIcon,
+    FormsModule,
     InputText,
+    NgIcon,
+    NgTemplateOutlet,
+    Popover,
+    PrimeTemplate,
+    TranslatePipe,
   ],
   viewProviders: [provideIcons({ faSolidMagnifyingGlass, faSolidXmark })],
   templateUrl: './search-input.html',

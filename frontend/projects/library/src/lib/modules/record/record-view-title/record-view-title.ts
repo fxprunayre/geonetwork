@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input, TemplateRef } from '@angular/core';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
@@ -5,16 +6,15 @@ import { RecordEditButton } from '../record-edit-button/record-edit-button';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { RecordMenuComponent } from '../record-menu/record-menu.component';
-import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-record-view-title',
   imports: [
+    NgTemplateOutlet,
+    RecordDistributionBadges,
     RecordEditButton,
     RecordFieldType,
-    RecordDistributionBadges,
     RecordMenuComponent,
-    NgTemplateOutlet,
   ],
   template: `
     <ng-template #defaultBackButton />

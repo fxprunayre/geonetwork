@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -10,17 +11,16 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import perspective from '@perspective-dev/client';
-import { Datasource, DuckDbService } from '../duck-db-service';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidExpand, faSolidCompress, faSolidXmark } from '@ng-icons/font-awesome/solid';
+import { faSolidCompress, faSolidExpand, faSolidXmark } from '@ng-icons/font-awesome/solid';
+import perspective from '@perspective-dev/client';
 import { Button, ButtonIcon } from 'primeng/button';
-import { NgClass } from '@angular/common';
 import { ProgressBar } from 'primeng/progressbar';
+import { Datasource, DuckDbService } from '../duck-db-service';
 
 @Component({
   selector: 'app-perspective',
-  imports: [Button, NgIcon, ProgressBar, NgClass, ButtonIcon],
+  imports: [Button, ButtonIcon, NgClass, NgIcon, ProgressBar],
   viewProviders: [
     provideIcons({
       faSolidExpand,

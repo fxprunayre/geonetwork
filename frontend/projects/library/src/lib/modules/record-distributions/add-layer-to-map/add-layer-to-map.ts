@@ -28,7 +28,7 @@ export interface Gn4MapCommand {
 
 @Component({
   selector: 'app-add-layer-to-map',
-  imports: [TranslatePipe, Button, SplitButton, Skeleton, NgIcon],
+  imports: [Button, NgIcon, Skeleton, SplitButton, TranslatePipe],
   viewProviders: [
     provideIcons({
       faSolidExclamation,

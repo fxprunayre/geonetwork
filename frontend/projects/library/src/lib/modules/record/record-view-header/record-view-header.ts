@@ -14,12 +14,12 @@ import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-v
   imports: [
     AsyncPipe,
     MarkdownPipe,
+    RecordFieldCodelist,
+    RecordFieldDoi,
     RecordFieldOverviewComponent,
     RecordFieldResourceLastUpdate,
-    ShowMoreToggle,
     RecordFieldVocabulary,
-    RecordFieldDoi,
-    RecordFieldCodelist,
+    ShowMoreToggle,
   ],
   templateUrl: './record-view-header.html',
 })

@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
 import { DecimalPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { SearchBase } from '../../search/search-base/search-base';
 
 @Component({
   selector: 'app-results-number',
-  imports: [TranslatePipe, DecimalPipe],
+  imports: [DecimalPipe, TranslatePipe],
   templateUrl: './results-number.component.html',
   standalone: true,
 })

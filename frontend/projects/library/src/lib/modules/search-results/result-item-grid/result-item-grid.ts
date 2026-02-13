@@ -1,6 +1,7 @@
-import { Component, computed, input, output } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { Component, computed, input, output } from '@angular/core';
 
+import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import { faSolidArrowUpRightFromSquare, faSolidEye } from '@ng-icons/font-awesome/solid';
@@ -12,7 +13,6 @@ import { RecordDistributionBadges } from '../../record-distributions/record-dist
 import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 import { RecordFieldType } from '../../record/record-field-type/record-field-type';
-import { RouterLink } from '@angular/router';
 import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 
 @Component({
@@ -20,15 +20,15 @@ import { RECORD_ROUTE_PATH } from '../../search/search-constant';
   standalone: true,
   imports: [
     ButtonModule,
-    TooltipModule,
+    NgIcon,
+    NgTemplateOutlet,
+    RecordDistributionBadges,
     RecordFieldOverviewComponent,
     RecordFieldTitle,
     RecordFieldType,
-    NgIcon,
-    RecordDistributionBadges,
     RouterLink,
-    NgTemplateOutlet,
     SkeletonModule,
+    TooltipModule,
   ],
   templateUrl: './result-item-grid.html',
   viewProviders: [

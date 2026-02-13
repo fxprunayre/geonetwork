@@ -8,7 +8,7 @@ import { SearchBase } from '../../search/search-base/search-base';
 
 @Component({
   selector: 'app-search-active-filters-button',
-  imports: [InputGroup, InputGroupAddon, NgIcon, Button, ButtonIcon, TranslatePipe],
+  imports: [Button, ButtonIcon, InputGroup, InputGroupAddon, NgIcon, TranslatePipe],
   template: `<div>
     <p-inputgroup
       [dt]="{

@@ -1,20 +1,20 @@
+import { KeyValuePipe, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
-import { TranslatePipe } from '@ngx-translate/core';
-import { DatePipe, KeyValuePipe, NgTemplateOutlet } from '@angular/common';
-import { RecordField } from '../record-field/record-field';
-import { Card } from 'primeng/card';
 import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faBrandOrcid } from '@ng-icons/font-awesome/brands';
 import {
   faSolidEnvelope,
+  faSolidFingerprint,
   faSolidGlobe,
   faSolidLocationDot,
   faSolidPhone,
-  faSolidFingerprint,
 } from '@ng-icons/font-awesome/solid';
-import { faBrandOrcid } from '@ng-icons/font-awesome/brands';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Card } from 'primeng/card';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { SearchLink } from '../../search/search-link/search-link';
+import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordField } from '../record-field/record-field';
 
 // TODO: to add to IndexRecord in gn-api-client
 export interface OrganisationObject {
@@ -43,7 +43,7 @@ export interface ContactInfo {
 
 @Component({
   selector: 'app-record-field-contact',
-  imports: [TranslatePipe, KeyValuePipe, RecordField, NgTemplateOutlet, Card, NgIcon, SearchLink],
+  imports: [Card, KeyValuePipe, NgIcon, NgTemplateOutlet, RecordField, SearchLink, TranslatePipe],
   viewProviders: [
     provideIcons({
       faSolidEnvelope,

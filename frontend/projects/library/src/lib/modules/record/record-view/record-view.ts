@@ -5,13 +5,13 @@ import { RelatedItemType } from 'gn-api-client';
 import { Message } from 'primeng/message';
 import { map, of } from 'rxjs';
 import { SearchService } from '../../search/search-service';
-import { RecordViewContent } from './record-view-content';
 import { RecordViewSkeleton } from '../record-view-skeleton/record-view-skeleton';
+import { RecordViewContent } from './record-view-content';
 
 @Component({
   selector: 'app-record-view',
   standalone: true,
-  imports: [RecordViewContent, RecordViewSkeleton, Message, TranslatePipe],
+  imports: [Message, RecordViewContent, RecordViewSkeleton, TranslatePipe],
   template: `
     @if (recordResource.isLoading()) {
       <app-record-view-skeleton />

@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import {
   Component,
   computed,
@@ -8,33 +9,32 @@ import {
   Output,
   output,
 } from '@angular/core';
-import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
-import { Checkbox } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
-import { Button, ButtonIcon } from 'primeng/button';
-import { SearchBase } from '../../search/search-base/search-base';
-import { AggregationLayout, Decorator } from 'gn-api-client';
-import { Card } from 'primeng/card';
-import { SearchFilter, SearchFilterChange } from '../../search/search-store.model';
-import { DecimalPipe } from '@angular/common';
-import { TranslateService } from '@ngx-translate/core';
-import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
-import { Tooltip } from 'primeng/tooltip';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidChevronRight } from '@ng-icons/font-awesome/solid';
+import { TranslateService } from '@ngx-translate/core';
+import { AggregationLayout, Decorator } from 'gn-api-client';
+import { Button, ButtonIcon } from 'primeng/button';
+import { Card } from 'primeng/card';
+import { Checkbox } from 'primeng/checkbox';
+import { Tooltip } from 'primeng/tooltip';
+import { SearchBase } from '../../search/search-base/search-base';
+import { SearchFilterChange } from '../../search/search-store.model';
+import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
+import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 
 @Component({
   selector: 'app-aggregation-bucket',
   imports: [
+    AggregationBucketDecorator,
+    AggregationTranslatePipe,
+    Button,
+    ButtonIcon,
+    Card,
     Checkbox,
     FormsModule,
-    Button,
-    Card,
-    AggregationTranslatePipe,
-    AggregationBucketDecorator,
-    ButtonIcon,
-    Tooltip,
     NgIcon,
+    Tooltip,
   ],
   templateUrl: './aggregation-bucket.html',
   providers: [AggregationTranslatePipe, DecimalPipe],

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SignInFormComponent } from './sign-in-form';
-import { TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
+import { SignInFormComponent } from './sign-in-form';
 
 describe('SignInFormComponent', () => {
   let component: SignInFormComponent;
@@ -9,7 +9,7 @@ describe('SignInFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SignInFormComponent, TranslateModule.forRoot(), BrowserAnimationsModule],
+      imports: [BrowserAnimationsModule, SignInFormComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SignInFormComponent);

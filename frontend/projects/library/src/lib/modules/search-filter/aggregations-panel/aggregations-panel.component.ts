@@ -1,12 +1,15 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   computed,
-  inject,
-  effect,
-  input,
   ContentChild,
+  effect,
+  inject,
+  input,
   TemplateRef,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { elasticsearch } from 'gn-api-client';
 import {
   Accordion,
   AccordionContent,
@@ -15,25 +18,22 @@ import {
   AccordionTabCloseEvent,
   AccordionTabOpenEvent,
 } from 'primeng/accordion';
-import { TranslatePipe } from '@ngx-translate/core';
-import { Aggregation } from '../aggregation/aggregation';
-import { SearchBase } from '../../search/search-base/search-base';
-import { elasticsearch } from 'gn-api-client';
-import { AggregationService } from '../aggregation-service';
-import { NgTemplateOutlet } from '@angular/common';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
+import { SearchBase } from '../../search/search-base/search-base';
+import { AggregationService } from '../aggregation-service';
+import { Aggregation } from '../aggregation/aggregation';
 
 @Component({
   selector: 'app-aggregations-panel',
   imports: [
+    Accordion,
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
-    TranslatePipe,
     Aggregation,
-    Accordion,
     NgTemplateOutlet,
     OverlayBadgeModule,
+    TranslatePipe,
   ],
   templateUrl: './aggregations-panel.component.html',
 })

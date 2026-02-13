@@ -12,11 +12,11 @@ import { ResultsPaginatorComponent } from '../results-paginator/results-paginato
   selector: 'app-results-view',
   standalone: true,
   imports: [
+    NgTemplateOutlet,
+    NoResultFound,
     ResultItemGrid,
     ResultItemList,
-    NgTemplateOutlet,
     ResultsPaginatorComponent,
-    NoResultFound,
   ],
   templateUrl: './results-view.html',
 })

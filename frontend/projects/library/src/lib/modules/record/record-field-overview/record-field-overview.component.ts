@@ -1,16 +1,16 @@
 import { Component, computed, input } from '@angular/core';
-import { ImageModule } from 'primeng/image';
-import { GalleriaModule } from 'primeng/galleria';
-import { Overview } from 'gn-api-client';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { TranslatePipe } from '@ngx-translate/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Overview } from 'gn-api-client';
+import { GalleriaModule } from 'primeng/galleria';
+import { ImageModule } from 'primeng/image';
 
 @Component({
   selector: 'app-record-field-overview',
   templateUrl: './record-field-overview.component.html',
   standalone: true,
-  imports: [ImageModule, GalleriaModule, NgIcon, TranslatePipe],
+  imports: [GalleriaModule, ImageModule, NgIcon, TranslatePipe],
   viewProviders: [
     provideIcons({
       faImage,

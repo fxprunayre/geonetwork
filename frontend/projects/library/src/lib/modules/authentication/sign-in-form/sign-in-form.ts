@@ -1,30 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { form, FormField, required, submit } from '@angular/forms/signals';
+import { ActivatedRoute } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faUser } from '@ng-icons/font-awesome/regular';
 import { faSolidLock } from '@ng-icons/font-awesome/solid';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { AuthenticationService, AuthenticationProvider } from '../authentication.service';
-import { MessageService } from 'primeng/api';
+import { AutoFocusModule } from 'primeng/autofocus';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { FocusTrap } from 'primeng/focustrap';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
+import { MessageModule } from 'primeng/message';
 import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
 import { CatalogueLogo } from '../../catalogue/catalogue-logo/catalogue-logo';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { ToastModule } from 'primeng/toast';
-import { MessageModule } from 'primeng/message';
-import { AutoFocusModule } from 'primeng/autofocus';
 import { AuthStore } from '../auth.store';
+import { AuthenticationService } from '../authentication.service';
 
 interface LoginData {
   email: string;
@@ -35,23 +33,23 @@ interface LoginData {
   selector: 'app-sign-in-form',
   standalone: true,
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule,
-    ButtonModule,
-    InputTextModule,
-    InputIconModule,
-    PasswordModule,
-    IconFieldModule,
-    CardModule,
-    NgIcon,
-    FloatLabelModule,
-    CatalogueLogo,
-    DividerModule,
-    FormField,
-    ToastModule,
-    MessageModule,
     AutoFocusModule,
+    ButtonModule,
+    CardModule,
+    CatalogueLogo,
+    CommonModule,
+    DividerModule,
+    FloatLabelModule,
+    FormField,
+    IconFieldModule,
+    InputIconModule,
+    InputTextModule,
+    MessageModule,
+    NgIcon,
+    PasswordModule,
+    ReactiveFormsModule,
+    ToastModule,
+    TranslateModule,
   ],
   providers: [],
   viewProviders: [provideIcons({ faUser, faSolidLock })],

@@ -1,29 +1,29 @@
+import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   computed,
   effect,
+  ElementRef,
   EventEmitter,
+  HostListener,
   inject,
   input,
   Output,
   signal,
-  ElementRef,
-  HostListener,
   viewChild,
 } from '@angular/core';
-import { Select, SelectChangeEvent } from 'primeng/select';
-import { ButtonModule } from 'primeng/button';
-import { SearchBase } from '../../search/search-base/search-base';
 import { FormsModule } from '@angular/forms';
-import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
-import { AggregationTree } from '../aggregation-tree/aggregation-tree';
-import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
-import { AggregationLayout } from 'gn-api-client';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { SearchFilterChange } from '../../search/search-store.model';
+import { AggregationLayout } from 'gn-api-client';
+import { ButtonModule } from 'primeng/button';
 import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
-import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
+import { Select, SelectChangeEvent } from 'primeng/select';
+import { SearchBase } from '../../search/search-base/search-base';
+import { SearchFilterChange } from '../../search/search-store.model';
+import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
 import { AggregationService } from '../aggregation-service';
+import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
+import { AggregationTree } from '../aggregation-tree/aggregation-tree';
 
 export type AggregationBucketType = {
   key: string | number;
@@ -35,13 +35,13 @@ export type AggregationBucketType = {
   selector: 'app-aggregation',
   standalone: true,
   imports: [
-    Select,
-    ButtonModule,
-    FormsModule,
     AggregationBucket,
     AggregationTree,
+    ButtonModule,
+    FormsModule,
     MultiSelect,
     NgTemplateOutlet,
+    Select,
     TranslatePipe,
   ],
   providers: [AggregationTranslatePipe, DecimalPipe],

@@ -31,12 +31,12 @@ import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-mo
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
-import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 import { AssociatedPanel } from '../../record-associations/associated-panel/associated-panel';
-import { RecordCitation } from '../record-citation/record-citation';
-import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
 import { RecordDistributionFormat } from '../../record-distributions/record-distribution-format/record-distribution-format';
 import { RecordDistributionPanel } from '../../record-distributions/record-distribution-panel/record-distribution-panel';
+import { RECORD_ROUTE_PATH } from '../../search/search-constant';
+import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
+import { RecordCitation } from '../record-citation/record-citation';
 import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
 import { RecordFieldConstraints } from '../record-field-constraints/record-field-constraints';
 import { RecordFieldContact } from '../record-field-contact/record-field-contact';
@@ -60,40 +60,40 @@ export const DEFAULT_TAB = 'about';
   standalone: true,
   imports: [
     AccordionModule,
-    MarkdownPipe,
-    ShowMoreToggle,
-    RecordField,
-    RecordFieldContact,
-    RecordFieldCredit,
-    RecordFieldConstraints,
-    RecordDistributionPanel,
-    RecordViewHeader,
-    RecordViewTitle,
-    TranslatePipe,
-    Tabs,
-    Tab,
-    TabPanels,
-    TabPanel,
-    TabList,
-    FeedbackPanel,
-    RecordFieldVocabulary,
-    RecordFieldType,
-    Chip,
     AssociatedPanel,
-    DataModelPanel,
-    RecordFieldDates,
-    FormsModule,
-    NgTemplateOutlet,
     AsyncPipe,
-    RecordCitation,
+    Chip,
+    DataModelPanel,
     ExplorePanel,
-    ScrollSpy,
-    RecordHarvesterLogo,
+    FeedbackPanel,
+    FormsModule,
+    MarkdownPipe,
+    NgTemplateOutlet,
+    RecordCitation,
+    RecordDistributionFormat,
+    RecordDistributionPanel,
+    RecordField,
     RecordFieldCodelist,
+    RecordFieldConstraints,
+    RecordFieldContact,
     RecordFieldCoverageSpatial,
     RecordFieldCoverageTemporal,
     RecordFieldCoverageVertical,
-    RecordDistributionFormat,
+    RecordFieldCredit,
+    RecordFieldDates,
+    RecordFieldType,
+    RecordFieldVocabulary,
+    RecordHarvesterLogo,
+    RecordViewHeader,
+    RecordViewTitle,
+    ScrollSpy,
+    ShowMoreToggle,
+    Tab,
+    TabList,
+    TabPanel,
+    TabPanels,
+    Tabs,
+    TranslatePipe,
   ],
   viewProviders: [
     provideIcons({

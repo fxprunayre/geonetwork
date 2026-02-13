@@ -36,7 +36,7 @@ import { ResultItemGrid } from '../../search-results/result-item-grid/result-ite
 
 @Component({
   selector: 'app-associated-records',
-  imports: [TranslatePipe, ResultItemGrid, NgTemplateOutlet, DataView, Button, Drawer, NgIcon],
+  imports: [Button, DataView, Drawer, NgIcon, NgTemplateOutlet, ResultItemGrid, TranslatePipe],
   providers: [
     provideIcons({
       faSolidBook,

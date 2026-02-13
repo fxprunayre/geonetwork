@@ -1,14 +1,14 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Badge } from 'primeng/badge';
 import { Card } from 'primeng/card';
-import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
-import { NgTemplateOutlet } from '@angular/common';
 import { SearchLink } from '../../search/search-link/search-link';
+import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 
 @Component({
   selector: 'app-record-distribution-format',
-  imports: [Card, TranslatePipe, Badge, SearchLink, NgTemplateOutlet],
+  imports: [Badge, Card, NgTemplateOutlet, SearchLink, TranslatePipe],
   template: `
     @if (formats().length > 0) {
       <p-card

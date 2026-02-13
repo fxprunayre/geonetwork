@@ -1,13 +1,13 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { SearchBase } from '../../search/search-base/search-base';
-import { Paginator } from 'primeng/paginator';
-import { Button } from 'primeng/button';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { TranslateModule } from '@ngx-translate/core';
+import { Button } from 'primeng/button';
+import { Paginator } from 'primeng/paginator';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { SearchBase } from '../../search/search-base/search-base';
 
 @Component({
   selector: 'app-results-paginator',
-  imports: [Paginator, Button, TranslateModule],
+  imports: [Button, Paginator, TranslateModule],
   templateUrl: './results-paginator.html',
   standalone: true,
 })
