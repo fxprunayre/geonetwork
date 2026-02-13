@@ -15,12 +15,13 @@ import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { IconStyleService } from '../../../shared/icon-style-service';
 import { AuthStore } from '../../authentication/auth.store';
 import { RecordEditButton } from '../record-edit-button/record-edit-button';
+import { TieredMenu } from 'primeng/tieredmenu';
 
 @Component({
   selector: 'app-record-menu',
   templateUrl: './record-menu.component.html',
   standalone: true,
-  imports: [Menu, ButtonModule, NgIcon, TranslatePipe],
+  imports: [Menu, ButtonModule, NgIcon, TranslatePipe, TieredMenu],
   viewProviders: [
     provideIcons({
       faSolidEllipsisVertical,

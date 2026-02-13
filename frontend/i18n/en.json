@@ -254,7 +254,10 @@
     "detail_success": "Successfully copied to clipboard"
   },
   "data": {
-    "available_datasources": "{{count}} data sources available"
+    "datasource": {
+      "select": "Choose a datasource",
+      "available": "{{count}} data sources available"
+    }
   },
   "discussions": "Discussions",
   "relations": {

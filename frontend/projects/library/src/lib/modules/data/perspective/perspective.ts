@@ -41,7 +41,7 @@ import { ProgressBar } from 'primeng/progressbar';
         class="flex flex-row items-center justify-items-end w-full gap-4"
         [ngClass]="{
           'float-right': isFullScreen(),
-          'h-full mt-2': !isFullScreen(),
+          'mt-2': !isFullScreen(),
         }"
       >
         <div class="flex flex-row items-center gap-4 grow">

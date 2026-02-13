@@ -1,5 +1,5 @@
 <p-select
-  placeholder="Choose a datasource"
+  [placeholder]="'data.datasource.select' | translate"
   [options]="datasources()"
   optionLabel="url"
   [(ngModel)]="datasource"

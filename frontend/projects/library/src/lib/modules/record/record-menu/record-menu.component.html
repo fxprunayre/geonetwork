@@ -4,8 +4,9 @@
     (click)="menu.toggle($event)"
     size="small"
     severity="secondary"
+    #addRecordMenu
   >
     <ng-icon name="faSolidEllipsisVertical" pButtonIcon></ng-icon>
   </p-button>
-  <p-menu #menu [model]="items()" [popup]="true"></p-menu>
+  <p-tieredmenu #menu [model]="items()" [popup]="true"></p-tieredmenu>
 </div>

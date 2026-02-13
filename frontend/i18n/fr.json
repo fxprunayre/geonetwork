@@ -248,7 +248,10 @@
     "detail_success": "Copie réussie dans le presse-papiers"
   },
   "data": {
-    "available_datasources": "{{count}} sources de données disponibles"
+    "datasource": {
+      "select": "Choisissez une source de données",
+      "available": "{{count}} sources de données disponibles"
+    }
   },
   "discussions": "Discussions",
   "relations": {
