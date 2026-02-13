@@ -1,37 +1,37 @@
+import { LocationStrategy, registerLocaleData } from '@angular/common';
+import { HttpBackend, provideHttpClient } from '@angular/common/http';
+import localeFr from '@angular/common/locales/fr';
 import {
   ApplicationConfig,
   importProvidersFrom,
   Injectable,
   provideBrowserGlobalErrorListeners,
-  provideZoneChangeDetection,
+  provideZonelessChangeDetection,
   signal,
 } from '@angular/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   provideRouter,
   withDisabledInitialNavigation,
   withInMemoryScrolling,
 } from '@angular/router';
-import { routes } from './app.routes';
-import { providePrimeNG } from 'primeng/config';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpBackend, provideHttpClient } from '@angular/common/http';
-import {
-  APPLICATION_CONFIGURATION,
-  TranslationsLoader,
-  AuthenticationService,
-  Gn4AuthenticationService,
-} from 'gn-library';
-import AppTheme from './app.theme';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
-import { LocationStrategy, registerLocaleData } from '@angular/common';
-import localeFr from '@angular/common/locales/fr';
-import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
-import { environment } from '../../../library/src/environments/environment';
-import { Configuration, GnApiModule } from 'gn-api-client';
-import { Gn4ApiModule, Configuration as Gn4Configuration } from 'gn4-api-client';
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
+import { Configuration, GnApiModule } from 'gn-api-client';
+import {
+  APPLICATION_CONFIGURATION,
+  AuthenticationService,
+  Gn4AuthenticationService,
+  TranslationsLoader,
+} from 'gn-library';
+import { Gn4ApiModule, Configuration as Gn4Configuration } from 'gn4-api-client';
+import { provideMarkdown } from 'ngx-markdown';
 import { MessageService } from 'primeng/api';
+import { providePrimeNG } from 'primeng/config';
+import { environment } from '../../../library/src/environments/environment';
+import { routes } from './app.routes';
+import AppTheme from './app.theme';
 
 export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   return new TranslationsLoader(_httpBackend, [
@@ -109,7 +109,7 @@ export const appConfig: ApplicationConfig = {
     ]),
     provideBrowserGlobalErrorListeners(),
     MessageService,
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     provideRouter(
       routes,
       withDisabledInitialNavigation(),
