@@ -14,18 +14,18 @@ describe('Record page', () => {
 
     cy.wait('@getPermalink');
 
-    cy.get('app-record-menu .p-menu-item-link')
+    cy.get('app-record-menu .p-tieredmenu-item')
       .first()
-      .find('.p-menu-item-label')
+      .find('.p-tieredmenu-item-label')
       .should('have.text', 'Share')
       .should('be.visible')
       .closest('a')
       .should('have.attr', 'href')
       .and('include', `https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea`);
 
-    cy.get('app-record-menu .p-menu-item-link')
+    cy.get('app-record-menu .p-tieredmenu-item')
       .last()
-      .find('.p-menu-item-label')
+      .find('.p-tieredmenu-item-label')
       .should('have.text', 'Metadata (XML)')
       .should('be.visible')
       .closest('a')
@@ -37,14 +37,14 @@ describe('Record page', () => {
     cy.visit(`/record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
-    cy.get('app-record-view-header h1').should('contain', 'Données par paramètre');
+    cy.get('app-record-view-title h1').should('contain', 'Données par paramètre');
 
-    cy.get('app-record-view-header app-record-field-type')
+    cy.get('app-record-view-title app-record-field-type')
       .find('.p-chip .p-chip-label')
       .first()
       .should('contain', 'Dataset');
 
-    cy.get('app-record-view-header app-record-field-type')
+    cy.get('app-record-view-title app-record-field-type')
       .find('.p-chip .p-chip-label')
       .last()
       .should('contain', 'Vecteur');
@@ -230,7 +230,7 @@ describe('Record page', () => {
       .contains('Data access')
       .click();
 
-    cy.get('[data-testid="distribution-panel-api"] .p-accordionheader').contains('API');
+    cy.get('[data-testid="distribution-panel-api"] .p-accordionheader').contains('View');
     cy.get('[data-testid="distribution-panel-api"]').find('p-card').should('have.length', 1);
 
     cy.get('[data-testid="distribution-panel-download"] .p-accordionheader').contains('Download');
@@ -433,7 +433,7 @@ describe('Record page', () => {
     cy.wait('@apiMainSearchGetRecord');
     cy.url().should('include', `/record/${SURVAL_UUID}`);
 
-    cy.contains('button', 'Back to results').click();
+    cy.get('button[title="Back to results"]').click();
 
     cy.url().should('include', '/search');
     cy.get('app-result-item-list').should('have.length.at.least', 1);

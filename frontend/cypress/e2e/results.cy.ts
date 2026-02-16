@@ -22,7 +22,7 @@ const checkResultItem = (hit: any, layout: 'grid' | 'list') => {
 
   cy.get('app-record-distribution-badges').as('distributionBadges').should('exist');
   cy.get('@distributionBadges').find('p-button').as('distributionButtons').should('have.length', 2);
-  cy.get('@distributionButtons').first().should('contain.text', 'API');
+  cy.get('@distributionButtons').first().should('contain.text', 'View');
   cy.get('@distributionButtons').last().should('contain.text', 'Download');
 
   if (layout === 'list') {
