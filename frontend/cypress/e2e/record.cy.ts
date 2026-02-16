@@ -72,6 +72,19 @@ describe('Record page', () => {
     );
   });
 
+  it('should set the route corresponding to the current tab', () => {
+    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.wait('@apiMainSearchGetRecord');
+
+    ['data-access', 'explore'].forEach((tab) => {
+      cy.get(`p-tablist p-tab[value="${tab}"]`)
+        .click()
+        .then(() => {
+          cy.url().should('include', `/record/${SURVAL_UUID}/${tab}`);
+        });
+    });
+  });
+
   it('should display the about tab content', () => {
     cy.visit(`/record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');

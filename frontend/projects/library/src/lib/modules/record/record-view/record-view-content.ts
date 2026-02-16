@@ -194,5 +194,15 @@ export class RecordViewContent implements AfterViewInit {
     return (this.record()?.lineageObject as any)?.['default'] ?? '';
   }
 
+  onTabChange(tab: string | number | undefined) {
+    if (!!tab && this.tab() === tab) return;
+
+    if (this.record()?.uuid) {
+      this.router.navigate([RECORD_ROUTE_PATH, this.record()!.uuid, tab], {
+        queryParamsHandling: 'preserve',
+      });
+    }
+  }
+
   protected readonly RelatedItemType = RelatedItemType;
 }

@@ -9,12 +9,12 @@ import {
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Link } from 'gn-api-client';
-import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
+import { ButtonIcon, ButtonLabel, ButtonModule } from 'primeng/button';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 
 @Component({
   selector: 'app-record-distribution-badges',
-  imports: [Button, ButtonIcon, ButtonLabel, KeyValuePipe, NgIcon, RouterLink, TranslatePipe],
+  imports: [ButtonModule, ButtonIcon, ButtonLabel, KeyValuePipe, NgIcon, RouterLink, TranslatePipe],
   viewProviders: [
     provideIcons({
       faSolidCloudArrowDown,

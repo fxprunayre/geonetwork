@@ -2,19 +2,17 @@
   <div class="flex flex-wrap gap-2">
     @for (section of linksBySectionsSelected() | keyvalue; track $index) {
       @let label = 'record.field.distribution.sections.' + section.key | translate;
-      <p-button
+      <a
+        pButton
         [title]="label"
-        [routerLink]="'/record/' + record().uuid + '/data-access'"
-        class=""
+        [routerLink]="['/record', record().uuid, 'data-access']"
+        (click)="$event.stopPropagation()"
         severity="success"
         size="small"
       >
         <ng-icon [svg]="iconsByType[section.key]" pButtonIcon />
         <span pButtonLabel class="hidden 2xl:inline">{{ label }}</span>
-      </p-button>
-      @for (link of section.value; track link) {
-        @if (link) {}
-      }
+      </a>
     }
   </div>
 }

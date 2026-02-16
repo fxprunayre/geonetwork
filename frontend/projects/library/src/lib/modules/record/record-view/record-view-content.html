@@ -137,7 +137,13 @@
 
   <!-- Main Layout with Tabs -->
   <div class="mx-auto max-w-7xl grid grid-cols-1 w-full">
-    <p-tabs [value]="tab()" [scrollable]="true" lazy class="mt-15 block w-full">
+    <p-tabs
+      [value]="tab()"
+      (valueChange)="onTabChange($event)"
+      [scrollable]="true"
+      lazy
+      class="mt-15 block w-full"
+    >
       <p-tablist>
         <p-tab value="about" class="text-lg">{{
           'record.view.section.description' | translate
