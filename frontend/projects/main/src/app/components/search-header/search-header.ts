@@ -1,35 +1,36 @@
+import { NgClass } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   HostListener,
   inject,
   model,
+  OnDestroy,
   signal,
   ViewChild,
-  ElementRef,
-  AfterViewInit,
-  OnDestroy,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router } from '@angular/router';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidFilter, faSolidXmark } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
-  SearchInput,
+  APPLICATION_CONFIGURATION,
+  SEARCH_ROUTE_PATH,
   SearchActiveFiltersButton,
   SearchBase,
-  APPLICATION_CONFIGURATION,
+  SearchInput,
   SearchWelcomeTextPipe,
-  SEARCH_ROUTE_PATH,
+  UserAvatarComponent,
 } from 'gn-library';
-import { FilterPanelLayout } from '../search/search';
-import { Drawer } from 'primeng/drawer';
-import { SearchFilters } from '../search-filters/search-filters';
-import { NgIcon, provideIcons } from '@ng-icons/core';
 import { Button } from 'primeng/button';
-import { NgClass } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
-import { faSolidFilter, faSolidXmark } from '@ng-icons/font-awesome/solid';
-import { Router, NavigationEnd } from '@angular/router';
+import { Drawer } from 'primeng/drawer';
 import { filter, map } from 'rxjs';
+import { SearchFilters } from '../search-filters/search-filters';
+import { FilterPanelLayout } from '../search/search';
 
 @Component({
   selector: 'app-search-header',
@@ -43,6 +44,7 @@ import { filter, map } from 'rxjs';
     Button,
     NgClass,
     TranslatePipe,
+    UserAvatarComponent,
   ],
   viewProviders: [provideIcons({ faSolidFilter, faSolidXmark })],
   template: `
@@ -60,12 +62,16 @@ import { filter, map } from 'rxjs';
           "
         >
           <div class="mx-auto max-w-7xl flex flex-col lg:gap-2">
-            <section class="transition-all duration-300" [style]="headerStyle()">
-              <h1
-                class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight max-w-2xl mx-auto md:mx-0"
-              >
-                {{ 'home.title' | translate }}
-              </h1>
+            <section class="transition-all duration-300" [class.hidden]="!isHome()">
+              <div class="flex flex-row">
+                <h1
+                  class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight max-w-2xl mx-auto md:mx-0"
+                >
+                  {{ 'home.title' | translate }}
+                </h1>
+
+                <app-user-avatar class="grow text-right" />
+              </div>
 
               <p
                 class="text-white text-lg sm:text-xl md:text-2xl mt-4 mb-8 max-w-xl mx-auto md:mx-0"
@@ -84,6 +90,8 @@ import { filter, map } from 'rxjs';
               @if (filterPanelMode() == 'drawer' || filterPanelMode() == 'side') {
                 <app-search-active-filters-button [(visible)]="visible" />
               }
+
+              <app-user-avatar [class.hidden]="isHome()" />
             </div>
           </div>
         </div>

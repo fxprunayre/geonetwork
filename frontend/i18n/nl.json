@@ -228,6 +228,12 @@
       "favorites": "My favorites"
     }
   },
+  "user": {
+    "work": "My work",
+    "bookmark": "My bookmarks",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
   "citation": {
     "title": "Cite dataset",
     "download": "Download",

@@ -227,6 +227,12 @@
       "favorites": "Mes favoris"
     }
   },
+  "user": {
+    "work": "Mon travail",
+    "bookmark": "Mes favoris",
+    "profile": "Mon profil",
+    "settings": "Paramètres"
+  },
   "citation": {
     "title": "Citer l'ensemble de données",
     "download": "Télécharger",

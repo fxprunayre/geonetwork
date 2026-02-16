@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { RecordViewHeader } from './record-view-header';
 import { MarkdownService } from 'ngx-markdown';
 import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
+import { RecordViewHeader } from './record-view-header';
 
 describe('RecordViewHeader', () => {
   let component: RecordViewHeader;

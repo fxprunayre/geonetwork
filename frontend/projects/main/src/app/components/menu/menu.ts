@@ -1,31 +1,31 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faCompass, faMap } from '@ng-icons/font-awesome/regular';
 import {
   faSolidArrowRightFromBracket,
   faSolidArrowRightToBracket,
   faSolidBars,
+  faSolidBookmark,
   faSolidEllipsisVertical,
   faSolidGear,
-  faSolidBookmark,
   faSolidHouse,
   faSolidLanguage,
   faSolidMagnifyingGlass,
   faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { MenuDesignTokens } from '@primeuix/themes/types/menu';
 import {
   APPLICATION_CONFIGURATION,
+  AuthStore,
+  CatalogueLogo,
   IconStyleService,
   LanguageSwitcher,
   MAP_ROUTE_PATH,
   SEARCH_ROUTE_PATH,
   ThemeDesigner,
-  CatalogueLogo,
-  AuthStore,
-  UserAvatarComponent,
 } from 'gn-library';
 import { MenuItem, MessageService, SharedModule } from 'primeng/api';
 import { Drawer } from 'primeng/drawer';
@@ -34,10 +34,8 @@ import { IftaLabel } from 'primeng/iftalabel';
 import { Menu } from 'primeng/menu';
 import { TextareaModule } from 'primeng/textarea';
 import { TieredMenu } from 'primeng/tieredmenu';
-import AppTheme from '../../app.theme';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { MenuDesignTokens } from '@primeuix/themes/types/menu';
 import { Toast } from 'primeng/toast';
+import AppTheme from '../../app.theme';
 
 const ICONS = {
   faSolidHouse,
@@ -71,7 +69,6 @@ const ICONS = {
     FormsModule,
     TextareaModule,
     CatalogueLogo,
-    UserAvatarComponent,
   ],
   providers: [MessageService],
   standalone: true,
@@ -159,36 +156,6 @@ export class MenuComponent implements OnInit {
         command: (event: any) => {
           this.addRecordMenu?.toggle(event.originalEvent);
         },
-      },
-      {
-        label: this.translateService.instant('menu.my.record'),
-        title: this.translateService.instant('menu.my.record'),
-        icon: 'faSolidHouse',
-        visible: this.isAuthenticated(),
-        command: () => {
-          this.messageService.add({
-            severity: 'warn',
-            summary: 'See my record',
-            detail: 'Not implemented yet',
-            life: 3000,
-          });
-        },
-        ...this.itemConfig(),
-      },
-      {
-        label: this.translateService.instant('menu.my.favorites'),
-        title: this.translateService.instant('menu.my.favorites'),
-        icon: 'faSolidBookmark',
-        visible: this.isAuthenticated(),
-        command: () => {
-          this.messageService.add({
-            severity: 'warn',
-            summary: 'See my favorite',
-            detail: 'Not implemented yet',
-            life: 3000,
-          });
-        },
-        ...this.itemConfig(),
       },
       {
         label: this.translateService.instant('menu.signout'),
