@@ -53,6 +53,14 @@ import { RecordViewHeader } from '../record-view-header/record-view-header';
 import { RecordViewTitle } from '../record-view-title/record-view-title';
 
 export const DEFAULT_TAB = 'about';
+export const VALID_TABS = [
+  'about',
+  'data-access',
+  'explore',
+  'associated-resources',
+  'citation',
+  'discussions',
+];
 
 @Component({
   selector: 'app-record-view-content',

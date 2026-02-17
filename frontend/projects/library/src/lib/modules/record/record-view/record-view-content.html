@@ -157,7 +157,7 @@
           }}</p-tab>
         }
         @if (recordHasAssociatedRecords()) {
-          <p-tab value="associatedResources" class="text-lg">{{
+          <p-tab value="associated-resources" class="text-lg">{{
             'record.view.section.associatedResources' | translate
           }}</p-tab>
         }
@@ -274,7 +274,7 @@
         }
 
         @if (recordHasAssociatedRecords()) {
-          <p-tabpanel value="associatedResources">
+          <p-tabpanel value="associated-resources">
             <ng-container
               *ngTemplateOutlet="relatedContent; context: { record: record }"
             ></ng-container>
