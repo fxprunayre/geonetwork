@@ -64,6 +64,14 @@
                 }
               ]
             },
+            "sextant-test": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/library/src/environments/environment.ts",
+                  "with": "projects/library/src/environments/environment.sextant-test.ts"
+                }
+              ]
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
