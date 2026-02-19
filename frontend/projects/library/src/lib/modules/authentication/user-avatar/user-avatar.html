@@ -1,73 +1,21 @@
 @if (isAuthenticated()) {
   <p-avatar
-    [label]="initials()"
+    [label]="user() | userFullName | initials"
+    [title]="user() | userFullName"
     shape="circle"
-    size="xlarge"
-    (click)="visible = true"
+    size="normal"
     [pt]="pt"
     [dt]="dt"
+    (click)="toggle($event)"
     [ngClass]="profileClass()"
   />
-  @if (drawer()) {
-    <p-drawer [(visible)]="visible" position="right">
-      <ng-template #header>
-        <div class="flex flex-row items-center font-bold gap-2">
-          <p-avatar
-            [label]="initials()"
-            [title]="user()?.profile | translate"
-            shape="circle"
-            [pt]="pt"
-            [dt]="dt"
-            [ngClass]="profileClass()"
-          />
-          <span>{{ user()?.name + ' ' + user()?.surname }}</span>
-        </div>
-      </ng-template>
-      <div class="flex flex-col gap-4">
-        <p-button (click)="yourWork()" [fluid]="true">
-          <ng-icon name="faSolidPenToSquare" pButtonIcon></ng-icon>
-          <span pButtonLabel>{{ 'user.work' | translate }}</span>
-        </p-button>
-        <button pButton (click)="yourBookmark()">
-          <ng-icon name="faSolidBookmark" pButtonIcon></ng-icon>
-          <span pButtonLabel>{{ 'user.bookmark' | translate }}</span>
-        </button>
-        <button pButton (click)="yourProfile()">
-          <ng-icon name="faSolidCircleUser" pButtonIcon></ng-icon>
-          <span pButtonLabel>{{ 'user.profile' | translate }}</span>
-        </button>
-        <button pButton (click)="yourSettings()">
-          <ng-icon name="faSolidGear" pButtonIcon></ng-icon>
-          <span pButtonLabel>{{ 'user.settings' | translate }}</span>
-        </button>
-        <button pButton (click)="signOut()">
-          <ng-icon name="faSolidArrowRightFromBracket" pButtonIcon></ng-icon>
-          <span pButtonLabel>{{ 'menu.signout' | translate }}</span>
-        </button>
-
-        <p-accordion value="0">
-          <p-accordion-panel value="0">
-            <p-accordion-header>Recent work</p-accordion-header>
-            <p-accordion-content>
-              <p>Work 1</p>
-              <p>Work 2</p>
-              <p>Work 3</p>
-            </p-accordion-content>
-          </p-accordion-panel>
-          <p-accordion-panel value="0">
-            <p-accordion-header>Last searches</p-accordion-header>
-            <p-accordion-content>
-              <p>Search for MEMO</p>
-            </p-accordion-content>
-          </p-accordion-panel>
-          <p-accordion-panel value="0">
-            <p-accordion-header>Last visisted records</p-accordion-header>
-            <p-accordion-content>
-              <p>Record 1</p>
-            </p-accordion-content>
-          </p-accordion-panel>
-        </p-accordion>
-      </div>
-    </p-drawer>
+  @if (withLabel()) {
+    <span class="inline-flex flex-col items-start">
+      <span class="font-bold"> {{ user() | userFullName }}</span>
+      <span class="text-sm">{{ userRole() }}</span>
+    </span>
+  }
+  @if (withMenu()) {
+    <p-tieredmenu #menu [popup]="true" [model]="menuItems"></p-tieredmenu>
   }
 }

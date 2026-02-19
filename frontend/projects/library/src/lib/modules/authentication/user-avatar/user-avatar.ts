@@ -1,20 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input } from '@angular/core';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { Component, computed, ElementRef, inject, input, OnInit, ViewChild } from '@angular/core';
+import { provideIcons } from '@ng-icons/core';
 import {
   faSolidArrowRightFromBracket,
-  faSolidBookmark,
   faSolidCircleUser,
   faSolidGear,
-  faSolidPenToSquare,
 } from '@ng-icons/font-awesome/solid';
-import { TranslatePipe } from '@ngx-translate/core';
-import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
+import { TranslateService } from '@ngx-translate/core';
+import { MenuItem } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
-import { Drawer } from 'primeng/drawer';
+import { Menu } from 'primeng/menu';
 import { PopoverModule } from 'primeng/popover';
+import { TieredMenu } from 'primeng/tieredmenu';
+import { IconStyleService } from '../../../shared/icon-style-service';
 import { AuthStore } from '../auth.store';
+import { InitialsPipe } from '../pipes/initials.pipe';
+import { UserFullNamePipe } from '../pipes/user-full-name.pipe';
 
 @Component({
   selector: 'app-user-avatar',
@@ -24,27 +26,30 @@ import { AuthStore } from '../auth.store';
     ButtonModule,
     CommonModule,
     PopoverModule,
-    TranslatePipe,
-    Drawer,
-    NgIcon,
-    Accordion,
-    AccordionPanel,
-    AccordionHeader,
-    AccordionContent,
+    TieredMenu,
+    UserFullNamePipe,
+    InitialsPipe,
   ],
   viewProviders: [
     provideIcons({
       faSolidArrowRightFromBracket,
-      faSolidPenToSquare,
       faSolidCircleUser,
-      faSolidBookmark,
       faSolidGear,
     }),
   ],
   templateUrl: './user-avatar.html',
 })
-export class UserAvatarComponent {
-  drawer = input(true);
+export class UserAvatar implements OnInit {
+  @ViewChild('menu') menu: Menu | undefined;
+
+  withLabel = input(false);
+  withMenu = input(false);
+
+  toggle(event: Event) {
+    if (this.withMenu() && this.menu) {
+      this.menu.toggle(event);
+    }
+  }
 
   dt = {
     colorScheme: {
@@ -58,22 +63,20 @@ export class UserAvatarComponent {
     root: 'ring-3',
   };
 
-  readonly store = inject(AuthStore);
+  private readonly elementRef = inject(ElementRef);
+  readonly styleService = inject(IconStyleService);
+  readonly authStore = inject(AuthStore);
+  private translateService = inject(TranslateService);
 
-  user = this.store.user;
+  user = this.authStore.user;
 
-  isAuthenticated = this.store.isAuthenticated;
+  isAuthenticated = this.authStore.isAuthenticated;
 
-  initials = computed(() => {
+  userRole = computed(() => {
     const u = this.user();
     if (!u) return '';
-    if (u.name && u.surname) {
-      return `${u.name.charAt(0)}${u.surname.charAt(0)}`.toUpperCase();
-    }
-    return (u.username || '').substring(0, 2).toUpperCase();
+    return u.profile || '';
   });
-
-  visible: boolean = false;
 
   profileClass = computed(() => {
     const profile = this.user()?.profile;
@@ -93,23 +96,47 @@ export class UserAvatarComponent {
     }
   });
 
-  yourProfile() {
-    throw new Error('Method not implemented.');
-  }
+  menuItems: MenuItem[] = [
+    {
+      label: this.translateService.instant('user.profile'),
+      title: this.translateService.instant('user.profile'),
+      icon: 'faSolidCircleUser',
+      command: () => {
+        // Navigate to profile page
+      },
+    },
+    {
+      label: this.translateService.instant('user.settings'),
+      title: this.translateService.instant('user.settings'),
+      icon: 'faSolidGear',
+      command: () => {
+        // Navigate to settings page
+      },
+    },
+    {
+      separator: true,
+    },
+    {
+      label: this.translateService.instant('menu.signout'),
+      title: this.translateService.instant('menu.signout'),
+      visible: this.isAuthenticated(),
+      icon: 'faSolidArrowRightFromBracket',
+      command: () => {
+        this.authStore.signOut();
+      },
+    },
+  ];
 
-  yourWork() {
-    throw new Error('Method not implemented.');
-  }
-
-  yourBookmark() {
-    throw new Error('Method not implemented.');
-  }
-
-  yourSettings() {
-    throw new Error('Method not implemented.');
-  }
-
-  signOut() {
-    this.store.signOut();
+  ngOnInit() {
+    this.styleService.createIconsStyle(
+      'user-avatar-icon-style',
+      this.menuItems,
+      {
+        faSolidArrowRightFromBracket,
+        faSolidCircleUser,
+        faSolidGear,
+      },
+      this.elementRef.nativeElement.getRootNode(),
+    );
   }
 }

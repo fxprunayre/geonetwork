@@ -39,16 +39,30 @@
     </ng-template>
 
     <ng-template pTemplate="end">
-      <div class="h-full flex flex-col gap-6 grow p-4"></div>
+      <ul class="p-menu-list">
+        <li
+          class="p-menu-item-link"
+          role="menuitem"
+          routerLinkActive="p-menu-item-link-active"
+          [routerLinkActiveOptions]="{ exact: false }"
+        >
+          <a [routerLink]="[DASHBOARD_ROUTE_PATH]" class="flex flex-row gap-4">
+            <app-user-avatar />
+
+            <span
+              class="transition-all flex flex-col items-start w-full"
+              [class.hidden]="isIconMode()"
+            >
+              <span class="font-bold wrap-break-word"> {{ user() | userFullName }}</span>
+              <span class="text-sm">{{ userRole() }}</span>
+            </span>
+          </a>
+        </li>
+      </ul>
     </ng-template>
   </p-menu>
 
-  <p-tieredmenu
-    #addRecordMenu
-    [model]="addRecordItems()"
-    [popup]="true"
-    appendTo="body"
-  ></p-tieredmenu>
+  <app-record-add-button />
 
   <p-drawer
     [(visible)]="isConfigurationVisible"

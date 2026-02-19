@@ -133,3 +133,7 @@ Cypress.Commands.add('initApp', () => {
       });
     });
 });
+
+Cypress.Commands.add('signin', (profile = 'administrator') => {
+  cy.intercept('GET', '**/srv/api/me', { fixture: `me-${profile}.json` }).as('apiMe');
+});

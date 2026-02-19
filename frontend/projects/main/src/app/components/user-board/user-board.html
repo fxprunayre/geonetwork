@@ -1,0 +1,89 @@
+@if (isAuthenticated()) {
+  <app-search-header [withSearch]="false">
+    <ng-template #header>
+      <section class="flex flex-row pb-6 mb-6">
+        <h1 class="grow text-white">
+          {{ 'user.welcome' | translate: { name: (user() | userFullName) } }}
+        </h1>
+        <app-user-avatar [withMenu]="true" />
+      </section>
+    </ng-template>
+    <ng-template #footer>
+      <section class="">
+        <div class="flex flex-row">
+          <h1
+            class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight max-w-2xl mx-auto md:mx-0"
+          >
+            {{ 'user.dashboard.title' | translate }}
+          </h1>
+        </div>
+        <p class="text-white mt-4 mb-8 max-w-xl mx-auto md:mx-0">
+          {{ 'user.dashboard.subtitle' | translate }}
+        </p>
+      </section>
+    </ng-template>
+    <div
+      class="mx-auto max-w-7xl w-full px-6 py-6 grid grid-cols-1 md:grid-cols-3 gap-4"
+      appSearchContext="user-records"
+      [aggregations]="userRecordAggregationConfig"
+      [currentSort]="'-dateStamp'"
+      [filter]="[{ query_string: { query: userRecordQuery() } }]"
+      [language]="language()"
+    >
+      <div
+        class="col-span-2 border rounded-(--p-border-radius-md) border-surface-100 flex flex-col gap-4 p-4"
+      >
+        <div class="flex flex-row">
+          <div class="grow">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
+              {{ 'user.dashboard.allWork' | translate }}
+            </h2>
+            <app-results-number scope="user-records" labelKey="user.contributions" class="" />
+          </div>
+
+          <p-button (click)="recordAddMenu?.menu?.toggle($event)">
+            <ng-icon name="faSolidPlus" pButtonIcon />
+            <span pButtonLabel>{{ 'menu.addRecord' | translate }}</span>
+          </p-button>
+
+          <app-record-add-button />
+        </div>
+
+        <section>
+          @if (search().results.length === 0) {
+            <p class="text-center text-lg text-surface-500 py-20">
+              {{ 'user.dashboard.noWork' | translate }}
+            </p>
+          } @else {
+            <app-results-view scope="user-records" [layout]="'table'" />
+          }
+        </section>
+      </div>
+
+      <div class="border rounded-(--p-border-radius-md) border-surface-100 flex flex-col gap-4 p-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
+          {{ 'user.dashboard.statistics' | translate }}
+        </h2>
+        <app-aggregations-panel scope="user-records" />
+      </div>
+
+      <div
+        class="col-span-2 border rounded-(--p-border-radius-md) border-surface-100 flex flex-col gap-4 p-4"
+      >
+        <div class="flex flex-row">
+          <div class="grow">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
+              {{ 'user.dashboard.favorites' | translate }}
+            </h2>
+          </div>
+        </div>
+
+        <section>
+          <p class="text-center text-lg text-surface-500 py-20">
+            {{ 'user.dashboard.noFavorites' | translate }}
+          </p>
+        </section>
+      </div>
+    </div>
+  </app-search-header>
+}

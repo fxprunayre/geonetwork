@@ -7,7 +7,13 @@
   <ng-template let-item #item>
     <ng-icon
       [title]="'results.layout.' + item | translate"
-      [name]="item === 'list' ? 'faSolidList' : 'faSolidTableCellsLarge'"
+      [name]="
+        item === 'list'
+          ? 'faSolidList'
+          : item === 'grid'
+            ? 'faSolidTableCellsLarge'
+            : 'faSolidTable'
+      "
     />
   </ng-template>
 </p-selectButton>

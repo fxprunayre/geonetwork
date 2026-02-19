@@ -45,6 +45,10 @@
     },
     "aggregations": {
       "groupPublishedId": "Groups",
+      "isPublishedToAll": "Public",
+      "isHarvested": "Harvested",
+      "isTemplate": "Template",
+      "cl_status.key": "Resource status",
       "th_sextant-theme_tree.key": "Sextant themes",
       "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
       "th_simm-reglementaire_tree.key": "Cadre Réglementaire - SIMM",
@@ -114,6 +118,8 @@
       }
     },
     "field": {
+      "resourceTitle": "Title",
+      "dateStamp": "Updated",
       "abstract": "Overview",
       "credit": "Credits",
       "lineage": "Lineage",
@@ -224,21 +230,29 @@
   "menu": {
     "home": "Home",
     "map": "Map",
-    "addrecord": "Add",
+    "addRecord": "Add record",
+    "importRecord": "Import record",
     "signin": "Sign in",
     "signout": "Sign out",
     "settings": "Configure",
-    "search": "Search",
-    "my": {
-      "record": "My records",
-      "favorites": "My favorites"
-    }
+    "search": "Search"
   },
   "user": {
-    "work": "My work",
-    "bookmark": "My bookmarks",
+    "recentWork": "Recent work",
+    "contributions": "contributions",
+    "favorites": "Favorites",
     "profile": "Profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "welcome": "Welcome, {{name}}",
+    "dashboard": {
+      "title": "Editor dashboard",
+      "subtitle": "Manage your contributions and access key resources",
+      "allWork": "All of your work",
+      "noWork": "You haven't contributed to any records yet.",
+      "statistics": "Statistics",
+      "favorites": "Your favorites",
+      "noFavorites": "You haven't added any records to your favorites yet."
+    }
   },
   "citation": {
     "title": "Cite dataset",

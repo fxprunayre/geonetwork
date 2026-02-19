@@ -45,6 +45,10 @@
     },
     "aggregations": {
       "groupPublishedId": "Catalogues",
+      "isPublishedToAll": "Public",
+      "isHarvested": "Moissonné",
+      "isTemplate": "Modèle",
+      "cl_status.key": "Statut de la ressource",
       "th_sextant-theme_tree.key": "Thèmes Sextant",
       "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
       "th_simm-reglementaire_tree.key": "Cadre Réglementaire - SIMM",
@@ -107,6 +111,8 @@
       }
     },
     "field": {
+      "resourceTitle": "Titre",
+      "dateStamp": "Mis à jour",
       "abstract": "Aperçu",
       "credit": "Source",
       "lineage": "Généalogie",
@@ -221,11 +227,7 @@
     "signin": "Se connecter",
     "signout": "Se déconnecter",
     "settings": "Configurer",
-    "search": "Rechercher",
-    "my": {
-      "record": "Mes données",
-      "favorites": "Mes favoris"
-    }
+    "search": "Rechercher"
   },
   "user": {
     "work": "Mon travail",

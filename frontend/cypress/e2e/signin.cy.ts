@@ -51,7 +51,7 @@ describe('Sign In Page', () => {
     cy.location('pathname').should('eq', '/');
   });
 
-  it('should display error on failed sign in', () => {
+  it('should display error on sign in failure', () => {
     cy.intercept('POST', '**/signin', {
       statusCode: 401,
       body: 'Authentication failed',

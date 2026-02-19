@@ -85,6 +85,12 @@ describe('Record page', () => {
     });
   });
 
+  it('should set the route to default tab if tab value is invalid', () => {
+    cy.visit(`/record/${SURVAL_UUID}/invalid-tab`);
+    cy.wait('@apiMainSearchGetRecord');
+    cy.url().should('include', `/record/${SURVAL_UUID}`);
+  });
+
   it('should display the about tab content', () => {
     cy.visit(`/record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');

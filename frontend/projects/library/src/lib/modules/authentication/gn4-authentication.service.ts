@@ -1,10 +1,10 @@
-import { Injectable, computed, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable, computed, inject } from '@angular/core';
+import { MeResponse, MeService, SiteService } from 'gn4-api-client';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { MeResponse, MeService, SiteService } from 'gn4-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
-import { AuthenticationService, AuthenticationProvider } from './authentication.service';
+import { AuthenticationProvider, AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',
@@ -39,9 +39,9 @@ export class Gn4AuthenticationService implements AuthenticationService {
   }
 
   signOut(): Observable<any> {
+    const redirectUrl = document.baseURI || window.location.origin;
     window.location.href =
-      this.catalogueUrl() + '/signout?redirectUrl=' + encodeURIComponent(window.location.href);
-    // return this.http.post(this.catalogueUrl() + '/signout', {});
+      this.catalogueUrl() + '/signout?redirectUrl=' + encodeURIComponent(redirectUrl);
     return new Observable(() => {});
   }
 
@@ -50,6 +50,12 @@ export class Gn4AuthenticationService implements AuthenticationService {
   }
 
   getAuthenticationProviders(): Observable<AuthenticationProvider[]> {
+    const params = new URLSearchParams(window.location.search);
+    let redirectUrl = params.get('redirectUrl') || window.location.href;
+    if (redirectUrl.startsWith('/')) {
+      redirectUrl = window.location.origin + redirectUrl;
+    }
+
     return this.siteService.isCasEnabled().pipe(
       map((isCasEnabled) => {
         if (isCasEnabled) {
@@ -57,9 +63,7 @@ export class Gn4AuthenticationService implements AuthenticationService {
             {
               id: 'cas',
               endpoint:
-                this.catalogueUrl() +
-                '/casRedirect?service=' +
-                encodeURIComponent(window.location.href),
+                this.catalogueUrl() + '/casRedirect?service=' + encodeURIComponent(redirectUrl),
             },
           ];
         }
@@ -68,18 +72,12 @@ export class Gn4AuthenticationService implements AuthenticationService {
         // * Current production is using CAS (see above)
         // * Test env use OAuth2 (Go to signin endpoint which redirect accordingly)
         // * Local dev env use database provider
-        if (this.catalogueUrl().includes('ifremer.fr')) {
+        if (this.catalogueUrl().includes('ifremer.fr') || true) {
           return [
-            {
-              id: 'database',
-              endpoint: '',
-            },
             {
               id: 'OpenID Connect',
               endpoint:
-                this.catalogueUrl() +
-                '/signin?redirectUrl=' +
-                encodeURIComponent(window.location.href),
+                this.catalogueUrl() + '/signin?redirectUrl=' + encodeURIComponent(redirectUrl),
             },
           ];
         }

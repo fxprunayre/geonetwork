@@ -1,14 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import {
-  Component,
-  computed,
-  EventEmitter,
-  inject,
-  input,
-  model,
-  Output,
-  output,
-} from '@angular/core';
+import { Component, computed, EventEmitter, inject, input, Output, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidChevronRight } from '@ng-icons/font-awesome/solid';
@@ -45,7 +36,6 @@ export class AggregationBucket extends SearchBase {
   keyName = input.required<string>();
   bucket = input.required<{ key: string | number; doc_count: number }>();
   displayType = input<AggregationLayout | undefined>();
-  selectedValue = model();
   index = input(0);
 
   cardLines = `
@@ -78,11 +68,7 @@ export class AggregationBucket extends SearchBase {
   });
 
   isActive = computed(() => {
-    const selected = this.selectedValue();
-    if (Array.isArray(selected)) {
-      return selected.includes(this.bucket().key);
-    }
-    return selected === this.bucket().key;
+    return this.search.isFilterActive(this.keyName(), this.bucket().key);
   });
 
   isIconDecorator = computed(() => {
@@ -132,11 +118,11 @@ export class AggregationBucket extends SearchBase {
 
   tabSelected = output<string>();
 
-  handleChange(bucketValue: string | number, value: boolean) {
+  handleChange(bucketValue: string | number, addValue: boolean) {
     this.onSelected.emit({
       field: this.keyName(),
       values: [bucketValue],
-      add: !this.isActive(),
+      add: addValue,
     });
   }
 }

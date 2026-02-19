@@ -6,6 +6,7 @@ import { SearchBase } from '../../search/search-base/search-base';
 import { NoResultFound } from '../no-result-found/no-result-found';
 import { ResultItemGrid } from '../result-item-grid/result-item-grid';
 import { ResultItemList } from '../result-item-list/result-item-list';
+import { ResultItemTable } from '../result-item-table/result-item-table';
 import { ResultsPaginatorComponent } from '../results-paginator/results-paginator';
 
 @Component({
@@ -16,12 +17,13 @@ import { ResultsPaginatorComponent } from '../results-paginator/results-paginato
     NoResultFound,
     ResultItemGrid,
     ResultItemList,
+    ResultItemTable,
     ResultsPaginatorComponent,
   ],
   templateUrl: './results-view.html',
 })
 export class ResultsView extends SearchBase {
-  layout = input.required<SearchAppLayout>();
+  layout = input<SearchAppLayout>('grid');
   onRecordClick = output<string>();
 
   @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<any> | undefined;

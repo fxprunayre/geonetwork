@@ -1,19 +1,21 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   computed,
+  ContentChild,
   ElementRef,
   HostListener,
   inject,
+  input,
   model,
   OnDestroy,
   signal,
+  TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidFilter, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -24,11 +26,9 @@ import {
   SearchBase,
   SearchInput,
   SearchWelcomeTextPipe,
-  UserAvatarComponent,
 } from 'gn-library';
 import { Button } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
-import { filter, map } from 'rxjs';
 import { SearchFilters } from '../search-filters/search-filters';
 import { FilterPanelLayout } from '../search/search';
 
@@ -43,18 +43,19 @@ import { FilterPanelLayout } from '../search/search';
     NgIcon,
     Button,
     NgClass,
+    NgTemplateOutlet,
     TranslatePipe,
-    UserAvatarComponent,
   ],
   viewProviders: [provideIcons({ faSolidFilter, faSolidXmark })],
   template: `
+    <ng-template #defaultHeader />
+    <ng-template #defaultFooter />
+
     <div class="flex flex-row w-full">
       <div class="flex flex-col w-full">
-        <!-- [style.top.px]="stickyTop()" -->
         <div
           #headerRow
           class="top-0 z-10 w-full header-row bg-cover bg-bottom bg-no-repeat px-6 py-8"
-          [class.sticky]="!isHome()"
           [class.bg-primary-400]="!backgroundImageUrl()"
           [class.bg-black]="backgroundImageUrl()"
           [style.background-image]="
@@ -62,37 +63,22 @@ import { FilterPanelLayout } from '../search/search';
           "
         >
           <div class="mx-auto max-w-7xl flex flex-col lg:gap-2">
-            <section class="transition-all duration-300" [class.hidden]="!isHome()">
-              <div class="flex flex-row">
-                <h1
-                  class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight max-w-2xl mx-auto md:mx-0"
-                >
-                  {{ 'home.title' | translate }}
-                </h1>
+            <ng-container *ngTemplateOutlet="header || defaultHeader" />
+            @if (withSearch()) {
+              <div class="flex flex-row items-center gap-2">
+                <app-search-input
+                  class="w-full grow"
+                  [autocompleteEnabled]="true"
+                  (onSearch)="setRouteToSearch()"
+                  [placeholder]="search | searchWelcomeTextPipe: 'resourceType' : 3"
+                />
 
-                <app-user-avatar class="grow text-right" />
+                @if (filterPanelMode() == 'drawer' || filterPanelMode() == 'side') {
+                  <app-search-active-filters-button [(visible)]="visible" />
+                }
               </div>
-
-              <p
-                class="text-white text-lg sm:text-xl md:text-2xl mt-4 mb-8 max-w-xl mx-auto md:mx-0"
-              >
-                {{ 'home.subtitle' | translate }}
-              </p>
-            </section>
-            <div class="flex flex-row items-center gap-2">
-              <app-search-input
-                class="w-full grow"
-                [autocompleteEnabled]="true"
-                (onSearch)="setRouteToSearch()"
-                [placeholder]="search | searchWelcomeTextPipe: 'resourceType' : 3"
-              />
-
-              @if (filterPanelMode() == 'drawer' || filterPanelMode() == 'side') {
-                <app-search-active-filters-button [(visible)]="visible" />
-              }
-
-              <app-user-avatar [class.hidden]="isHome()" />
-            </div>
+            }
+            <ng-container *ngTemplateOutlet="footer || defaultFooter" />
           </div>
         </div>
         <ng-content />
@@ -139,6 +125,10 @@ import { FilterPanelLayout } from '../search/search';
 export class SearchHeader extends SearchBase implements AfterViewInit, OnDestroy {
   @ViewChild('titleSection') titleSection!: ElementRef<HTMLElement>;
   @ViewChild('headerRow') headerRow!: ElementRef<HTMLElement>;
+  @ContentChild('header') header!: TemplateRef<any>;
+  @ContentChild('footer') footer!: TemplateRef<any>;
+
+  withSearch = input(true);
 
   filterPanelMode = model<FilterPanelLayout>('side');
 
@@ -190,40 +180,6 @@ export class SearchHeader extends SearchBase implements AfterViewInit, OnDestroy
       this.headerRowHeight.set(this.headerRow.nativeElement.offsetHeight);
     }
   }
-
-  headerStyle = computed(() => {
-    if (!this.isHome()) {
-      return {
-        display: 'none',
-      };
-    }
-
-    return {};
-
-    // TODO: Re-enable when we want the header to fade out on scroll
-    const scroll = this.scrollY();
-    // Fade out over the distance of the header row height minus the visible sticky height (112px)
-    // This ensures the title fades out completely just as the header becomes fully sticky.
-    const fadeDistance = Math.max(100, this.headerRowHeight() - 112);
-    const opacity = Math.max(0, 1 - scroll / fadeDistance);
-
-    return {
-      opacity: opacity.toFixed(2),
-      visibility: opacity === 0 ? 'hidden' : 'visible',
-    };
-  });
-
-  isHome = toSignal(
-    this.router.events.pipe(
-      filter((e) => e instanceof NavigationEnd),
-      map((e: any) => e.urlAfterRedirects === '/' || e.urlAfterRedirects === ''),
-    ),
-    { initialValue: this.router.url === '/' || this.router.url === '' },
-  );
-
-  isCatchWordDisplayed = computed(() => {
-    return this.isHome();
-  });
 
   setRouteToSearch() {
     if (!this.router.url.startsWith(SEARCH_ROUTE_PATH)) {

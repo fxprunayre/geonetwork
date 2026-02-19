@@ -1,7 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidList, faSolidTableCellsLarge } from '@ng-icons/font-awesome/solid';
+import { faSolidList, faSolidTable, faSolidTableCellsLarge } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SelectButton } from 'primeng/selectbutton';
 import { SearchAppLayout } from '../../config/model/gnConfig';
@@ -11,7 +11,7 @@ import { SearchAppLayout } from '../../config/model/gnConfig';
   standalone: true,
   imports: [FormsModule, NgIcon, SelectButton, TranslatePipe],
   templateUrl: './result-layout-switcher.html',
-  viewProviders: [provideIcons({ faSolidList, faSolidTableCellsLarge })],
+  viewProviders: [provideIcons({ faSolidList, faSolidTableCellsLarge, faSolidTable })],
 })
 export class ResultLayoutSwitcher {
   options = input.required<SearchAppLayout[]>();
