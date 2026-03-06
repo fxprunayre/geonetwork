@@ -1,0 +1,21 @@
+@if (isAuthenticated()) {
+  <p-avatar
+    [label]="user() | userFullName | initials"
+    [title]="user() | userFullName"
+    shape="circle"
+    size="normal"
+    [pt]="pt"
+    [dt]="dt"
+    (click)="toggle($event)"
+    [ngClass]="profileClass()"
+  />
+  @if (withLabel()) {
+    <span class="inline-flex flex-col items-start">
+      <span class="font-bold"> {{ user() | userFullName }}</span>
+      <span class="text-sm">{{ userRole() }}</span>
+    </span>
+  }
+  @if (withMenu()) {
+    <p-tieredmenu #menu [popup]="true" [model]="menuItems"></p-tieredmenu>
+  }
+}

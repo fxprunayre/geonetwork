@@ -40,6 +40,47 @@
   }
   @case ('card') {
     <p-card
+      class="w-full text-left"
+      (click)="handleChange(bucket().key, !isActive())"
+      [title]="bucket().key | aggregationTranslate: keyName()"
+      [pt]="{
+        header: 'bg-primary text-white',
+        root: 'overflow-hidden relative aspect-square flex flex-col hover:shadow-xl! transition-shadow duration-300',
+        body: 'flex flex-col flex-1 justify-between h-full cursor-pointer',
+      }"
+      [style]="cardStyle()"
+    >
+      <ng-template #title>
+        @if (isIconDecorator() && !backgroundImage()) {
+          <div class="absolute -right-4 -bottom-8 opacity-60 text-[10rem] text-white">
+            <app-aggregation-bucket-decorator
+              class="block text-[10rem]"
+              [bucket]="bucket()"
+              [decorator]="decorator()"
+            />
+          </div>
+        }
+        <p class="font-bold text-3xl line-clamp-3 relative z-10">
+          {{ bucket().key | aggregationTranslate: keyName() }}
+        </p>
+        @if (!backgroundImage() && !isIconDecorator()) {
+          <app-aggregation-bucket-decorator
+            class="w-full flex justify-center"
+            [bucket]="bucket()"
+            [decorator]="decorator()"
+          />
+        }
+      </ng-template>
+      <ng-template #footer>
+        <div class="flex flex-row font-bold text-3xl">
+          <div class="grow">{{ bucket().doc_count }}</div>
+          <ng-icon name="faSolidChevronRight"></ng-icon>
+        </div>
+      </ng-template>
+    </p-card>
+  }
+  <!-- @case ('card') {
+    <p-card
       class="w-full"
       (click)="handleChange(bucket().key, !isActive())"
       [title]="bucket().key | aggregationTranslate: keyName()"
@@ -57,5 +98,5 @@
         {{ bucket().key | aggregationTranslate: keyName() }}
       </p>
     </p-card>
-  }
+  } -->
 }

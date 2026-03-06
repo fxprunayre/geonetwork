@@ -1,5 +1,6 @@
-import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 export interface IconDefinition {
   className: string;
@@ -17,6 +18,39 @@ export class IconStyleService {
     @Inject(DOCUMENT) private document: Document,
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
+  }
+
+  /**
+   * Utility to register icons as CSS classes when primeng component
+   * does not allow using NgIcon. eg. Menu
+   */
+  createIconsStyle(styleId: string, items: MenuItem[] | undefined, iconMap: any, rootNode?: Node) {
+    if (!items) return;
+
+    const usedIcons = new Set<string>();
+    const collectIcons = (items: MenuItem[]) => {
+      items.forEach((item) => {
+        if (item.icon) {
+          usedIcons.add(item.icon);
+        }
+        if (item.items) {
+          collectIcons(item.items);
+        }
+      });
+    };
+
+    collectIcons(items);
+
+    this.ensureIconsStyle(
+      styleId,
+      Array.from(usedIcons)
+        .map((icon) => ({
+          className: icon,
+          svgContent: iconMap[icon as keyof typeof iconMap],
+        }))
+        .filter((def: any) => def.svgContent),
+      rootNode,
+    );
   }
 
   ensureIconsStyle(styleId: string, icons: IconDefinition[], rootNode?: Node) {

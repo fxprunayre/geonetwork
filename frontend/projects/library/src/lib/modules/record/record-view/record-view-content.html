@@ -1,0 +1,301 @@
+<ng-template #defaultHeader let-record="record">
+  <app-record-view-title [record]="record" [backButtonTplRef]="backButtonTplRef()">
+  </app-record-view-title>
+  <app-record-view-header [record]="record" [vocabularies]="mainVocabularies()">
+  </app-record-view-header>
+</ng-template>
+
+@if (record(); as record) {
+  <ng-container
+    *ngTemplateOutlet="headerTplRef() || defaultHeader; context: { record: record }"
+  ></ng-container>
+
+  <!-- Content Templates for Accordion Sections -->
+  <ng-template #datesContent>
+    <app-record-field [label]="'record.field.resourceDate' | translate">
+      <app-record-field-dates [record]="record" />
+    </app-record-field>
+  </ng-template>
+
+  <ng-template #contactsContent let-role="role">
+    <app-record-field-contact [record]="record" [role]="role" />
+  </ng-template>
+
+  <ng-template #aboutContent>
+    <div class="flex flex-row gap-6">
+      <div class="w-3/4">
+        <app-record-field [label]="'record.field.credit'">
+          <app-record-field-credit [record]="record" [withSearchLink]="true" />
+        </app-record-field>
+      </div>
+    </div>
+    <app-associated-panel
+      [record]="record"
+      [include]="[RelatedItemType.Parent]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
+    <app-associated-panel
+      [record]="record"
+      [include]="[RelatedItemType.Children]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
+  </ng-template>
+
+  <ng-template #dataAccessContent>
+    <app-record-distribution-panel [record]="record" />
+    <app-associated-panel
+      [record]="record"
+      [include]="[RelatedItemType.Services, RelatedItemType.Datasets]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
+  </ng-template>
+
+  <ng-template #dataModel>
+    <app-data-model-panel [record]="record" />
+  </ng-template>
+
+  <ng-template #licenseContent>
+    <app-record-field [label]="'record.field.useLimitation'">
+      <app-record-field-constraints
+        [record]="record"
+        type="MD_LegalConstraintsUseLimitationObject"
+      />
+    </app-record-field>
+
+    <app-record-field [label]="'record.field.cl_accessConstraints'">
+      <app-record-field-codelist [record]="record" codelist="cl_accessConstraints" />
+    </app-record-field>
+
+    <app-record-field [label]="'record.field.otherConstraints'">
+      <app-record-field-constraints
+        [record]="record"
+        type="MD_LegalConstraintsOtherConstraintsObject"
+      />
+    </app-record-field>
+  </ng-template>
+
+  <ng-template #lineageContent>
+    <app-record-field [label]="'record.field.lineage'">
+      <app-show-more-toggle>
+        <p
+          class="leading-relaxed markdown-content"
+          [innerHTML]="getLineage() | markdown | async"
+        ></p>
+      </app-show-more-toggle>
+    </app-record-field>
+    <app-associated-panel
+      [record]="record"
+      [include]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
+  </ng-template>
+
+  <ng-template #coverageContent>
+    <app-record-field [label]="'record.field.coverage.spatial'">
+      <app-record-field-coverage-spatial [record]="record" />
+    </app-record-field>
+    <app-record-field [label]="'record.field.coverage.temporal'">
+      <app-record-field-coverage-temporal [record]="record" />
+    </app-record-field>
+    <app-record-field [label]="'record.field.coverage.vertical'">
+      <app-record-field-coverage-vertical [record]="record" />
+    </app-record-field>
+  </ng-template>
+
+  <ng-template #spatialInfoContent>
+    <app-record-field [label]="'record.field.resourceType'">
+      <app-record-field-type [record]="record" [withSpatialType]="true" />
+    </app-record-field>
+    <app-record-field [label]="'record.field.resolution'">
+      @for (res of record.resolutionDistance; track $index) {
+        <p-chip [label]="res"></p-chip>
+      }
+      @for (scale of record.resolutionScaleDenominator; track $index) {
+        <p-chip [label]="'1:' + scale"></p-chip>
+      }
+    </app-record-field>
+    <app-record-field [label]="'record.field.coordinateSystem'">
+      @for (crs of record.coordinateSystem; track $index) {
+        <p-chip [label]="crs"></p-chip>
+      }
+    </app-record-field>
+  </ng-template>
+
+  <ng-template #classificationContent>
+    <app-record-field-vocabulary [record]="record" [exclude]="mainVocabularies()" />
+  </ng-template>
+
+  <ng-template #relatedContent>
+    <app-associated-panel
+      [record]="record"
+      [exclude]="excludedTypesForAssociatedTab"
+      (onRecordClick)="handleRecordClick($event)"
+    />
+  </ng-template>
+
+  <ng-template #similarContent> Similar resources content goes here.</ng-template>
+
+  <!-- Main Layout with Tabs -->
+  <div class="mx-auto max-w-7xl grid grid-cols-1 w-full">
+    <p-tabs
+      [value]="tab()"
+      (valueChange)="onTabChange($event)"
+      [scrollable]="true"
+      lazy
+      class="mt-15 block w-full"
+    >
+      <p-tablist>
+        <p-tab value="about" class="text-lg">{{
+          'record.view.section.description' | translate
+        }}</p-tab>
+        <p-tab value="data-access" class="text-lg">{{
+          'record.view.section.dataAccess' | translate
+        }}</p-tab>
+        @if (record.info?.hasDatasource) {
+          <p-tab value="explore" class="text-lg">{{
+            'record.view.section.explore' | translate
+          }}</p-tab>
+        }
+        @if (recordHasAssociatedRecords()) {
+          <p-tab value="associated-resources" class="text-lg">{{
+            'record.view.section.associatedResources' | translate
+          }}</p-tab>
+        }
+        <p-tab value="citation" class="text-lg">{{
+          'record.view.section.citation' | translate
+        }}</p-tab>
+        <p-tab value="discussions" class="text-lg">{{
+          'record.view.section.discussions' | translate
+        }}</p-tab>
+      </p-tablist>
+
+      <p-tabpanels>
+        <p-tabpanel value="about">
+          @let sections =
+            [
+              { label: 'about', tpl: aboutContent },
+              { label: 'dates', tpl: datesContent },
+              { label: 'classification', tpl: classificationContent },
+              { label: 'usageAndAccess', tpl: licenseContent },
+              { label: 'dataModel', tpl: dataModel, hidden: !record.info?.hasDataModel },
+              { label: 'coverage', tpl: coverageContent },
+              { label: 'spatialInfo', tpl: spatialInfoContent },
+              { label: 'lineage', tpl: lineageContent },
+            ];
+
+          <div class="flex flex-row gap-4">
+            <div class="md:w-3/4" #spyTarget>
+              <p-accordion [multiple]="true" [value]="expandedSections()">
+                @for (section of sections; track section.label; let i = $index) {
+                  @let sectionLabel =
+                    'record.view.section.' + section.label
+                      | translate: { resourceType: record.resourceType };
+
+                  @if (section.hidden !== true) {
+                    @if (section.label === 'lineage') {
+                      <p-accordion-panel
+                        [value]="section.label"
+                        [attr.data-testid]="'accordion-panel-' + section.label"
+                      >
+                        <p-accordion-header class="text-primary! text-2xl!">{{
+                          sectionLabel
+                        }}</p-accordion-header>
+                        <p-accordion-content>
+                          <ng-container
+                            *ngTemplateOutlet="section.tpl; context: { record: record }"
+                          />
+                        </p-accordion-content>
+                      </p-accordion-panel>
+
+                      @for (role of contactRoles(); track role) {
+                        <p-accordion-panel
+                          [value]="'contact-' + role"
+                          [attr.data-testid]="'accordion-panel-contact-' + role"
+                        >
+                          <p-accordion-header class="text-primary! text-2xl!">{{
+                            role + '' | translate
+                          }}</p-accordion-header>
+                          <p-accordion-content>
+                            <ng-container
+                              *ngTemplateOutlet="
+                                contactsContent;
+                                context: { record: record, role: role }
+                              "
+                            />
+                          </p-accordion-content>
+                        </p-accordion-panel>
+                      }
+                    } @else {
+                      <p-accordion-panel
+                        [value]="section.label"
+                        [attr.data-testid]="'accordion-panel-' + section.label"
+                      >
+                        <p-accordion-header class="text-primary! text-2xl!">{{
+                          sectionLabel
+                        }}</p-accordion-header>
+                        <p-accordion-content>
+                          <ng-container
+                            *ngTemplateOutlet="section.tpl; context: { record: record }"
+                          />
+                        </p-accordion-content>
+                      </p-accordion-panel>
+                    }
+                  }
+                }
+              </p-accordion>
+            </div>
+            <div class="hidden md:block md:w-1/4 sticky top-10 self-start">
+              <app-scroll-spy
+                [target]="spyTarget"
+                [section]="'p-accordion > p-accordion-panel'"
+                [title]="'p-accordion-header'"
+              />
+            </div>
+          </div>
+        </p-tabpanel>
+
+        <p-tabpanel value="data-access">
+          <div class="flex flex-row gap-4">
+            <div class="w-3/4">
+              <ng-container
+                *ngTemplateOutlet="dataAccessContent; context: { record: record }"
+              ></ng-container>
+            </div>
+            <div class="w-1/4">
+              <app-record-distribution-format [record]="record" [withSearchLink]="true" />
+            </div>
+          </div>
+        </p-tabpanel>
+
+        @if (record.info?.hasDatasource) {
+          <p-tabpanel value="explore">
+            <app-explore-panel [record]="record" />
+          </p-tabpanel>
+        }
+
+        @if (recordHasAssociatedRecords()) {
+          <p-tabpanel value="associated-resources">
+            <ng-container
+              *ngTemplateOutlet="relatedContent; context: { record: record }"
+            ></ng-container>
+          </p-tabpanel>
+        }
+
+        <p-tabpanel value="citation">
+          <div class="flex flex-col lg:flex-row lg:gap-4">
+            <div class="w-full lg:w-3/4">
+              <app-record-citation [uuid]="record.uuid!" [format]="'html'"></app-record-citation>
+            </div>
+            <div class="w-full lg:w-1/4">
+              <app-record-harvester-logo [record]="record" />
+            </div>
+          </div>
+        </p-tabpanel>
+
+        <p-tabpanel value="discussions">
+          <app-feedback-panel />
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+}

@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { DEFAULT_AGGREGATION_SIZE } from '../search/search-store.model';
+import { TranslateService } from '@ngx-translate/core';
 import { elasticsearch } from 'gn-api-client';
 import { RegistriesService } from 'gn4-api-client';
-import { TranslateService } from '@ngx-translate/core';
+import { DEFAULT_AGGREGATION_SIZE } from '../search/search-store.model';
 
 @Injectable({
   providedIn: 'root',
@@ -155,6 +155,7 @@ export class AggregationService {
         return aggregation;
       }
       const aggKey = Object.keys(aggregation)[0];
+
       if (aggKey === key) {
         return {
           ...aggregation,

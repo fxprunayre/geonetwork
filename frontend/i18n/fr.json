@@ -1,4 +1,29 @@
 {
+  "auth": {
+    "signin": {
+      "title": "Bienvenue",
+      "username": {
+        "placeholder": "Email ou nom d'utilisateur",
+        "error": {
+          "required": "Email ou nom d'utilisateur est requis",
+          "email": "Entrez une adresse email valide"
+        }
+      },
+      "password": {
+        "placeholder": "Mot de passe",
+        "error": {
+          "required": "Le mot de passe est requis"
+        }
+      },
+      "button": "Se connecter",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signup": "S'inscrire",
+      "or": "OU",
+      "signInWith": "Se connecter avec {{provider}}",
+      "signInFailure": "Mot de passe incorrect. Réessayez ou cliquez sur \"Mot de passe oublié ?\" pour plus d'options."
+    }
+  },
   "search": {
     "input": {
       "placeholder": "Rechercher ...",
@@ -20,6 +45,10 @@
     },
     "aggregations": {
       "groupPublishedId": "Catalogues",
+      "isPublishedToAll": "Public",
+      "isHarvested": "Moissonné",
+      "isTemplate": "Modèle",
+      "cl_status.key": "Statut de la ressource",
       "th_sextant-theme_tree.key": "Thèmes Sextant",
       "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
       "th_simm-reglementaire_tree.key": "Cadre Réglementaire - SIMM",
@@ -82,6 +111,8 @@
       }
     },
     "field": {
+      "resourceTitle": "Titre",
+      "dateStamp": "Mis à jour",
       "abstract": "Aperçu",
       "credit": "Source",
       "lineage": "Généalogie",
@@ -142,6 +173,8 @@
       "menu": "Quick actions",
       "share": "Share",
       "shareHelp": "Permalink to the record",
+      "edit": "Editer",
+      "editTitle": "Editer la fiche",
       "metadataDownload": "Metadata (XML)",
       "metadataDownloadHelp": "Download the record in XML format",
       "addWms": {
@@ -194,11 +227,13 @@
     "signin": "Se connecter",
     "signout": "Se déconnecter",
     "settings": "Configurer",
-    "search": "Rechercher",
-    "my": {
-      "record": "Mes données",
-      "favorites": "Mes favoris"
-    }
+    "search": "Rechercher"
+  },
+  "user": {
+    "work": "Mon travail",
+    "bookmark": "Mes favoris",
+    "profile": "Mon profil",
+    "settings": "Paramètres"
   },
   "citation": {
     "title": "Citer l'ensemble de données",
@@ -221,7 +256,10 @@
     "detail_success": "Copie réussie dans le presse-papiers"
   },
   "data": {
-    "available_datasources": "{{count}} sources de données disponibles"
+    "datasource": {
+      "select": "Choisissez une source de données",
+      "available": "{{count}} sources de données disponibles"
+    }
   },
   "discussions": "Discussions",
   "relations": {

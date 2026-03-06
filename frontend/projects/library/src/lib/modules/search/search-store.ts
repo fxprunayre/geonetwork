@@ -18,6 +18,7 @@ import {
   elasticsearch,
 } from 'gn-api-client';
 import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
+import { AuthStore } from '../authentication/auth.store';
 import { DEFAULT_LANGUAGE } from '../config/config.loader';
 import { SearchAppLayout } from '../config/model/gnConfig';
 import { SearchRouteService } from './search-route-service';
@@ -65,40 +66,45 @@ export const SearchStore = signalStore(
     router: inject(Router),
     results$: toObservable(results),
   })),
-  withComputed((store) => ({
-    searchFilterParameters: computed(() => {
-      // Trigger update when aggregationsConfigTrigger changes
-      store.aggregationsConfigTrigger();
-      return {
-        searchQuery: store.searchQuery(),
-        filter: store.filter(),
-        filters: store.filters(),
-        currentSort: store.currentSort(),
-        aggregationsConfig: untracked(store.aggregationsConfig),
-        language: store.language(),
-      } as SearchFilterParameters;
-    }),
-    searchRequestPageParameters: computed(() => {
-      return {
-        currentPage: store.currentPage(),
-        pageSize: store.pageSize(),
-      } as SearchRequestPageParameters;
-    }),
-    hasMore: computed(() => store.currentPage() + store.pageSize() < store.totalCount()),
-    hasResults: computed(() => store.results().length > 0),
-    isEmpty: computed(() => store.results().length === 0),
-    totalPages: computed(() => Math.ceil(store.totalCount() / store.pageSize())),
-    hasActiveFilters: computed(() => {
-      return Object.keys(store.filters()).length > 0;
-    }),
-    activeFilterCount: computed(() => {
-      let count = 0;
-      for (const [, filter] of Object.entries(store.filters())) {
-        count += filter.values.length;
-      }
-      return count;
-    }),
-  })),
+  withComputed((store) => {
+    const authStore = inject(AuthStore);
+    return {
+      searchFilterParameters: computed(() => {
+        // Trigger update when aggregationsConfigTrigger changes
+        store.aggregationsConfigTrigger();
+        // Trigger update when authentication state changes
+        authStore.isAuthenticated();
+        return {
+          searchQuery: store.searchQuery(),
+          filter: store.filter(),
+          filters: store.filters(),
+          currentSort: store.currentSort(),
+          aggregationsConfig: untracked(store.aggregationsConfig),
+          language: store.language(),
+        } as SearchFilterParameters;
+      }),
+      searchRequestPageParameters: computed(() => {
+        return {
+          currentPage: store.currentPage(),
+          pageSize: store.pageSize(),
+        } as SearchRequestPageParameters;
+      }),
+      hasMore: computed(() => store.currentPage() + store.pageSize() < store.totalCount()),
+      hasResults: computed(() => store.results().length > 0),
+      isEmpty: computed(() => store.results().length === 0),
+      totalPages: computed(() => Math.ceil(store.totalCount() / store.pageSize())),
+      hasActiveFilters: computed(() => {
+        return Object.keys(store.filters()).length > 0;
+      }),
+      activeFilterCount: computed(() => {
+        let count = 0;
+        for (const [, filter] of Object.entries(store.filters())) {
+          count += filter.values.length;
+        }
+        return count;
+      }),
+    };
+  }),
 
   withMethods(
     (

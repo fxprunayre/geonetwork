@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
 import {
   APPLICATION_CONFIGURATION,
+  AuthStore,
   DEFAULT_LANGUAGE,
   MAP_SLUG,
   SEARCH_SLUG,
@@ -41,6 +42,7 @@ export class App extends PrimeShadowdomstyleComponent implements OnInit {
   private translate = inject(TranslateService);
   private router = inject(Router);
   private searchService = inject(SearchService);
+  private authStore = inject(AuthStore);
 
   protected readonly title = signal('main');
   isMapActive = signal(false);
@@ -67,6 +69,7 @@ export class App extends PrimeShadowdomstyleComponent implements OnInit {
         this.isMapActive.set(url.startsWith('/' + MAP_SLUG));
         this.isSearchActive.set(url.startsWith('/' + SEARCH_SLUG));
       });
+    this.authStore.loadUser();
   }
 
   override ngOnInit() {

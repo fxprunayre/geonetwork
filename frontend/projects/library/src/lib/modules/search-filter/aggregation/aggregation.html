@@ -42,15 +42,14 @@
   }
   @case ('card') {
     @for (bucket of buckets(); track bucket.key) {
-      <div class="w-full cursor-pointer transition-shadow hover:shadow-md">
-        <app-aggregation-bucket
-          [scope]="scope()"
-          [keyName]="keyName()"
-          [bucket]="bucket"
-          [displayType]="layout()"
-          (onSelected)="filter($event)"
-        />
-      </div>
+      <app-aggregation-bucket
+        [index]="$index"
+        [scope]="scope()"
+        [keyName]="keyName()"
+        [bucket]="bucket"
+        [displayType]="layout()"
+        (onSelected)="filter($event)"
+      />
     }
   }
   @case ('multiselect') {

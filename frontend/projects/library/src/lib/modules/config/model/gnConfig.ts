@@ -26,7 +26,7 @@ export interface I18nApp extends App {
   detection?: 'browser' | 'url' | 'html' | 'none';
 }
 
-export type SearchAppLayout = 'list' | 'grid';
+export type SearchAppLayout = 'list' | 'grid' | 'table';
 
 export interface SearchApp extends App {
   topTabFilter?: string;

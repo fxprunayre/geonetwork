@@ -1,11 +1,10 @@
 import { Component, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Select } from 'primeng/select';
-import { SearchBase } from '../../search/search-base/search-base';
-import { TranslatePipe } from '@ngx-translate/core';
-import { PrimeTemplate } from 'primeng/api';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidArrowDownShortWide, faSolidArrowUpShortWide } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Select } from 'primeng/select';
+import { SearchBase } from '../../search/search-base/search-base';
 
 interface SortOption {
   label: string;
@@ -14,7 +13,7 @@ interface SortOption {
 
 @Component({
   selector: 'app-results-sorter',
-  imports: [Select, FormsModule, TranslatePipe, NgIcon],
+  imports: [FormsModule, NgIcon, Select, TranslatePipe],
   viewProviders: [provideIcons({ faSolidArrowDownShortWide, faSolidArrowUpShortWide })],
   templateUrl: './results-sorter.html',
   standalone: true,

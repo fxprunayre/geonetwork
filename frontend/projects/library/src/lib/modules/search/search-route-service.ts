@@ -1,9 +1,15 @@
+import { Location } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { Params, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { SearchFilter, SearchRequestParameters } from './search-store.model';
 import { HistoryService } from '../../shared/history-service';
-import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH, SEARCH_ROUTE_PATH } from './search-constant';
+import {
+  DASHBOARD_ROUTE_PATH,
+  MAP_ROUTE_PATH,
+  RECORD_ROUTE_PATH,
+  SEARCH_ROUTE_PATH,
+  SIGNIN_ROUTE_PATH,
+} from './search-constant';
+import { SearchFilter, SearchRequestParameters } from './search-store.model';
 
 @Injectable({
   providedIn: 'root',
@@ -90,7 +96,9 @@ export class SearchRouteService {
     const baseUrl = url.split('?')[0];
     return !(
       baseUrl === '/' ||
+      baseUrl.startsWith(SIGNIN_ROUTE_PATH) ||
       baseUrl.startsWith(RECORD_ROUTE_PATH) ||
+      baseUrl.startsWith(DASHBOARD_ROUTE_PATH) ||
       baseUrl.startsWith(MAP_ROUTE_PATH)
     );
   }

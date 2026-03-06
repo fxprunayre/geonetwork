@@ -79,8 +79,7 @@ export interface AggregationsFiltersBucketKeys extends AggregationsMultiBucketBa
 export type AggregationsFiltersBucket = AggregationsFiltersBucketKeys & {
   [property: string]: AggregationsAggregate | long;
 };
-export interface AggregationsFiltersAggregate
-  extends AggregationsMultiBucketAggregateBase<AggregationsFiltersBucket> {}
+export interface AggregationsFiltersAggregate extends AggregationsMultiBucketAggregateBase<AggregationsFiltersBucket> {}
 export interface AggregationsFiltersAggregation extends AggregationsBucketAggregationBase {
   filters?: AggregationsBuckets<QueryDslQueryContainer>;
   other_bucket?: boolean;
@@ -94,8 +93,7 @@ export interface AggregationsHistogramBucketKeys extends AggregationsMultiBucket
 export type AggregationsHistogramBucket = AggregationsHistogramBucketKeys & {
   [property: string]: AggregationsAggregate | string | double | long;
 };
-export interface AggregationsHistogramAggregate
-  extends AggregationsMultiBucketAggregateBase<AggregationsHistogramBucket> {}
+export interface AggregationsHistogramAggregate extends AggregationsMultiBucketAggregateBase<AggregationsHistogramBucket> {}
 
 export type AggregationsAggregate =
   | AggregationsHistogramAggregate
@@ -108,13 +106,15 @@ export interface AggregationsAggregateBase {
 
 export type AggregationsBuckets<TBucket = unknown> = Record<string, TBucket> | TBucket[];
 
-export interface AggregationsMultiBucketAggregateBase<TBucket = unknown>
-  extends AggregationsAggregateBase {
+export interface AggregationsMultiBucketAggregateBase<
+  TBucket = unknown,
+> extends AggregationsAggregateBase {
   buckets: AggregationsBuckets<TBucket>;
 }
 
-export interface AggregationsTermsAggregateBase<TBucket = unknown>
-  extends AggregationsMultiBucketAggregateBase<TBucket> {
+export interface AggregationsTermsAggregateBase<
+  TBucket = unknown,
+> extends AggregationsMultiBucketAggregateBase<TBucket> {
   doc_count_error_upper_bound?: long;
   sum_other_doc_count?: long;
 }
@@ -123,8 +123,7 @@ export interface AggregationsTermsBucketBase extends AggregationsMultiBucketBase
   doc_count_error_upper_bound?: long;
 }
 
-export interface AggregationsStringTermsAggregate
-  extends AggregationsTermsAggregateBase<AggregationsStringTermsBucket> {}
+export interface AggregationsStringTermsAggregate extends AggregationsTermsAggregateBase<AggregationsStringTermsBucket> {}
 export interface AggregationsStringTermsBucketKeys extends AggregationsTermsBucketBase {
   key: FieldValue;
 }
@@ -298,20 +297,26 @@ export interface QueryDslUntypedDecayFunctionKeys extends QueryDslDecayFunctionB
 export type QueryDslUntypedDecayFunction = QueryDslUntypedDecayFunctionKeys & {
   [property: string]: QueryDslDecayPlacement | QueryDslMultiValueMode;
 };
-export interface QueryDslDateDecayFunctionKeys
-  extends QueryDslDecayFunctionBase<DateMath, Duration> {}
+export interface QueryDslDateDecayFunctionKeys extends QueryDslDecayFunctionBase<
+  DateMath,
+  Duration
+> {}
 
 export type QueryDslDateDecayFunction = QueryDslDateDecayFunctionKeys & {
   [property: string]: QueryDslDecayPlacement | QueryDslMultiValueMode;
 };
-export interface QueryDslNumericDecayFunctionKeys
-  extends QueryDslDecayFunctionBase<double, double> {}
+export interface QueryDslNumericDecayFunctionKeys extends QueryDslDecayFunctionBase<
+  double,
+  double
+> {}
 
 export type QueryDslNumericDecayFunction = QueryDslNumericDecayFunctionKeys & {
   [property: string]: QueryDslDecayPlacement | QueryDslMultiValueMode;
 };
-export interface QueryDslGeoDecayFunctionKeys
-  extends QueryDslDecayFunctionBase<GeoLocation, Distance> {}
+export interface QueryDslGeoDecayFunctionKeys extends QueryDslDecayFunctionBase<
+  GeoLocation,
+  Distance
+> {}
 export type QueryDslGeoDecayFunction = QueryDslGeoDecayFunctionKeys & {
   [property: string]: QueryDslDecayPlacement | QueryDslMultiValueMode;
 };

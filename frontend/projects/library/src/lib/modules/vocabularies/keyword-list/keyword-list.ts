@@ -1,5 +1,5 @@
 import { Component, computed, inject, input, resource, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidMagnifyingGlass, faSolidTag } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -12,12 +12,11 @@ import { Skeleton } from 'primeng/skeleton';
 import { firstValueFrom } from 'rxjs';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchLink } from '../../search/search-link/search-link';
-import { SEARCH_ROUTE_PATH } from '../../search/search-constant';
 
 @Component({
   selector: 'app-keyword-list',
   standalone: true,
-  imports: [Chip, PopoverModule, OverlayModule, NgIcon, TranslatePipe, Skeleton, SearchLink],
+  imports: [Chip, NgIcon, OverlayModule, PopoverModule, SearchLink, Skeleton, TranslatePipe],
   templateUrl: './keyword-list.html',
   viewProviders: [
     provideIcons({

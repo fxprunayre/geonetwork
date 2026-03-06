@@ -1,12 +1,12 @@
 import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { InputNumber } from 'primeng/inputnumber';
-import { IftaLabelModule } from 'primeng/iftalabel';
 import { TranslatePipe } from '@ngx-translate/core';
+import { IftaLabelModule } from 'primeng/iftalabel';
+import { InputNumber } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-record-field-coverage-coordinate',
-  imports: [FormsModule, InputNumber, IftaLabelModule, TranslatePipe],
+  imports: [FormsModule, IftaLabelModule, InputNumber, TranslatePipe],
   template: `
     <p-iftalabel>
       <p-inputnumber

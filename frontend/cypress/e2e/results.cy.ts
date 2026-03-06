@@ -21,8 +21,8 @@ const checkResultItem = (hit: any, layout: 'grid' | 'list') => {
   );
 
   cy.get('app-record-distribution-badges').as('distributionBadges').should('exist');
-  cy.get('@distributionBadges').find('p-button').as('distributionButtons').should('have.length', 2);
-  cy.get('@distributionButtons').first().should('contain.text', 'API');
+  cy.get('@distributionBadges').find('a').as('distributionButtons').should('have.length', 2);
+  cy.get('@distributionButtons').first().should('contain.text', 'View');
   cy.get('@distributionButtons').last().should('contain.text', 'Download');
 
   if (layout === 'list') {
@@ -82,7 +82,7 @@ describe('Results', () => {
     cy.get('app-results-view app-result-item-list')
       .first()
       .within(() => {
-        cy.get('app-record-distribution-badges p-button').each(($btn) => {
+        cy.get('app-record-distribution-badges a').each(($btn) => {
           cy.wrap($btn).find('.p-button-label').should('be.hidden');
         });
       });
@@ -91,9 +91,21 @@ describe('Results', () => {
     cy.get('app-results-view app-result-item-list')
       .first()
       .within(() => {
-        cy.get('app-record-distribution-badges p-button').each(($btn) => {
+        cy.get('app-record-distribution-badges a').each(($btn) => {
           cy.wrap($btn).find('.p-button-label').should('be.visible');
         });
+      });
+  });
+
+  it('should open record data access tab when clicking distribution buttons', () => {
+    cy.visit(`/search?q=${SURVAL_UUID}`);
+    cy.wait('@apiMainSearchByUuid');
+
+    cy.get('app-results-view app-result-item-list')
+      .first()
+      .within(() => {
+        cy.get('app-record-distribution-badges a').first().click();
+        cy.url().should('include', `/record/${SURVAL_UUID}/data-access`);
       });
   });
 });

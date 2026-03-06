@@ -1,13 +1,13 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { TranslateDirective, TranslateService } from '@ngx-translate/core';
-import { DecimalPipe } from '@angular/common';
 import { SearchBase } from '../search-base/search-base';
 
 @Component({
   selector: 'app-search-welcome-text',
   templateUrl: './search-welcome-text.html',
   standalone: true,
-  imports: [TranslateDirective, DecimalPipe],
+  imports: [DecimalPipe, TranslateDirective],
 })
 export class SearchWelcomeText extends SearchBase {
   maxBucketsToShow = input(3);

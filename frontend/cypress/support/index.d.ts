@@ -11,5 +11,11 @@ declare namespace Cypress {
     clearBrowserCache(): Chainable<void>;
 
     mockClipboard(initialText?: string): Chainable<void>;
+
+    /**
+     * Sign in to the application by returning a MeApi response
+     * corresponding to the user profile.
+     */
+    signin(profile?: string): Chainable<void>;
   }
 }

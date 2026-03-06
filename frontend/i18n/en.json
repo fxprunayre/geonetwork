@@ -1,4 +1,29 @@
 {
+  "auth": {
+    "signin": {
+      "title": "Welcome back",
+      "username": {
+        "placeholder": "Email or username",
+        "error": {
+          "required": "Email or username is required",
+          "email": "Enter a valid email address"
+        }
+      },
+      "password": {
+        "placeholder": "Password",
+        "error": {
+          "required": "Password is required"
+        }
+      },
+      "button": "Sign In",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "Don't have an account?",
+      "signup": "Sign up",
+      "or": "OR",
+      "signInWith": "Sign in with {{provider}}",
+      "signInFailure": "Incorrect password. Try again or click \"Forgot your password?\" for more options."
+    }
+  },
   "search": {
     "input": {
       "placeholder": "Search ...",
@@ -20,6 +45,10 @@
     },
     "aggregations": {
       "groupPublishedId": "Groups",
+      "isPublishedToAll": "Public",
+      "isHarvested": "Harvested",
+      "isTemplate": "Template",
+      "cl_status.key": "Resource status",
       "th_sextant-theme_tree.key": "Sextant themes",
       "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
       "th_simm-reglementaire_tree.key": "Cadre Réglementaire - SIMM",
@@ -89,6 +118,8 @@
       }
     },
     "field": {
+      "resourceTitle": "Title",
+      "dateStamp": "Updated",
       "abstract": "Overview",
       "credit": "Credits",
       "lineage": "Lineage",
@@ -130,7 +161,7 @@
       "distribution": {
         "format": "Format",
         "sections": {
-          "api": "API",
+          "api": "View",
           "download": "Download",
           "links": "Links",
           "mapLegend": "Map legend",
@@ -149,6 +180,8 @@
       "menu": "Quick actions",
       "share": "Share",
       "shareHelp": "Permalink to the record",
+      "edit": "Edit",
+      "editTitle": "Edit record",
       "metadataDownload": "Metadata (XML)",
       "metadataDownloadHelp": "Download the record in XML format",
       "addWms": {
@@ -197,14 +230,28 @@
   "menu": {
     "home": "Home",
     "map": "Map",
-    "addrecord": "Add",
+    "addRecord": "Add record",
+    "importRecord": "Import record",
     "signin": "Sign in",
     "signout": "Sign out",
     "settings": "Configure",
-    "search": "Search",
-    "my": {
-      "record": "My records",
-      "favorites": "My favorites"
+    "search": "Search"
+  },
+  "user": {
+    "recentWork": "Recent work",
+    "contributions": "contributions",
+    "favorites": "Favorites",
+    "profile": "Profile",
+    "settings": "Settings",
+    "welcome": "Welcome, {{name}}",
+    "dashboard": {
+      "title": "Editor dashboard",
+      "subtitle": "Manage your contributions and access key resources",
+      "allWork": "All of your work",
+      "noWork": "You haven't contributed to any records yet.",
+      "statistics": "Statistics",
+      "favorites": "Your favorites",
+      "noFavorites": "You haven't added any records to your favorites yet."
     }
   },
   "citation": {
@@ -227,7 +274,10 @@
     "detail_success": "Successfully copied to clipboard"
   },
   "data": {
-    "available_datasources": "{{count}} data sources available"
+    "datasource": {
+      "select": "Choose a datasource",
+      "available": "{{count}} data sources available"
+    }
   },
   "discussions": "Discussions",
   "relations": {

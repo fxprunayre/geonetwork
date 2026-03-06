@@ -19,6 +19,13 @@
             }
           </div>
         }
+        @case ('table') {
+          <div class="results-list grid gap-4">
+            @for (i of [].constructor(search.pageSize()); track $index) {
+              <app-result-item-table />
+            }
+          </div>
+        }
       }
     </ng-template>
 
@@ -55,6 +62,12 @@
                 />
               }
             </div>
+          }
+          @case ('table') {
+            <app-result-item-table
+              [results]="search.results()"
+              (onRecordClick)="handleRecordClick($event)"
+            />
           }
         }
         <app-results-paginator [scope]="scope()" [resultsContainerRef]="resultsContainer" />

@@ -1,32 +1,29 @@
-import { Component, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ButtonIcon, ButtonLabel, ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidArrowLeft } from '@ng-icons/font-awesome/solid';
-import { RecordView } from 'gn-library';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, computed, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DEFAULT_TAB } from 'gn-library';
-import { HistoryService, RECORD_ROUTE_PATH, SEARCH_ROUTE_PATH } from 'gn-library';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidXmark } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
+import {
+  APPLICATION_CONFIGURATION,
+  DEFAULT_TAB,
+  HistoryService,
+  RECORD_ROUTE_PATH,
+  RecordView,
+  SEARCH_ROUTE_PATH,
+  VALID_TABS,
+} from 'gn-library';
+import { ButtonIcon, ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-record',
   standalone: true,
-  imports: [
-    RecordView,
-    CommonModule,
-    ButtonModule,
-    ButtonLabel,
-    ButtonIcon,
-    CardModule,
-    NgIcon,
-    TranslatePipe,
-  ],
+  imports: [RecordView, CommonModule, ButtonModule, ButtonIcon, CardModule, NgIcon, TranslatePipe],
   viewProviders: [
     provideIcons({
-      faSolidArrowLeft,
+      faSolidXmark,
     }),
   ],
   templateUrl: './record.html',
@@ -41,10 +38,22 @@ export class RecordComponent {
 
   @ViewChild('recordDetails') contentRef!: ElementRef<HTMLDivElement>;
 
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+
+  backgroundImageUrl = computed(() => this.appConfiguration().config?.backgroundImageUrl || '');
+
   constructor() {
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
       this.uuid.set(params.get('uuid'));
-      this.tab.set(params.get('tab') || DEFAULT_TAB);
+      let tab = params.get('tab') || DEFAULT_TAB;
+      if (!VALID_TABS.includes(tab)) {
+        this.router.navigate([RECORD_ROUTE_PATH, this.uuid()], {
+          relativeTo: this.route,
+          replaceUrl: true,
+        });
+        tab = DEFAULT_TAB;
+      }
+      this.tab.set(tab);
       this.contentRef &&
         this.contentRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'start' });
     });

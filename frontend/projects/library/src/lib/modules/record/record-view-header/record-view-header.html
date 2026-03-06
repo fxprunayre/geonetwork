@@ -1,58 +1,33 @@
-<p-card>
-  <ng-template #header>
-    <div class="p-4 bg-surface-50 flex flex-col">
-      <div class="grow mb-4">
-        <h1 class="text-2xl text-primary-500 font-bold">
-          {{ record().resourceTitleObject?.['default'] }}
-        </h1>
-      </div>
-      <div class="flex flex-row gap-3 items-center">
-        <app-record-field-type [record]="record()" [withSpatialType]="true" class="text-xl grow" />
-
-        <app-record-distribution-badges
-          [record]="record()"
-          [types]="['api', 'download']"
-          [layout]="'badge'"
-        />
-
-        <app-record-menu [record]="record()" />
+<div class="mx-auto max-w-7xl p-6">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="md:col-span-1">
+      <div class="">
+        <app-record-field-overview [field]="record().overview" />
       </div>
     </div>
-  </ng-template>
+    <div class="md:col-span-2">
+      <app-show-more-toggle>
+        <p
+          class="text-surface-700 leading-relaxed mb-6 markdown-content"
+          [innerHTML]="record().resourceAbstractObject?.['default'] || '' | markdown | async"
+        ></p>
+      </app-show-more-toggle>
 
-  <div class="p-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="md:col-span-1">
-        <div class="bg-surface-100 rounded p-8 text-center">
-          <app-record-field-overview [field]="record().overview" />
-        </div>
-      </div>
-      <div class="md:col-span-2">
-        <app-show-more-toggle>
-          <p
-            class="text-surface-700 leading-relaxed mb-6 markdown-content"
-            [innerHTML]="record().resourceAbstractObject?.['default'] || '' | markdown | async"
-          ></p>
-        </app-show-more-toggle>
-
-        @if (vocabularies().length > 0) {
-          <app-record-field-vocabulary [record]="record()" [include]="vocabularies()" />
-        }
-      </div>
+      @if (vocabularies().length > 0) {
+        <app-record-field-vocabulary [record]="record()" [include]="vocabularies()" />
+      }
     </div>
   </div>
 
-  <ng-template #footer>
-    <div class="flex flex-row gap-3 items-center border-t-2 border-surface-50 p-4">
-      <div class="grow flex flex-row gap-2 font-medium">
-        <app-record-field-resource-last-update [record]="record()" />
-        @if (record()['cl_status']) {
-          <span>|</span>
-          <app-record-field-codelist [record]="record()" codelist="cl_status" />
-        }
-      </div>
-
-      <app-record-field-doi [record]="record()" />
+  <div class="flex flex-row gap-3 items-center border-t-2 border-surface-50 p-4">
+    <div class="grow flex flex-row gap-2 font-medium text-surface-700">
+      <app-record-field-resource-last-update [record]="record()" />
+      @if (record()['cl_status']) {
+        <span>|</span>
+        <app-record-field-codelist [record]="record()" codelist="cl_status" />
+      }
     </div>
-  </ng-template>
-</p-card>
+
+    <app-record-field-doi [record]="record()" />
+  </div>
+</div>

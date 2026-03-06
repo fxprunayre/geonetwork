@@ -1,19 +1,19 @@
-import { Component, computed, effect, inject, input, OnChanges, signal } from '@angular/core';
-import { RecordsService } from 'gn4-api-client';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Component, computed, effect, inject, input, OnChanges, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidDownload, faSolidQuoteRight } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { ToastModule } from 'primeng/toast';
+import { RecordsService } from 'gn4-api-client';
+import { MessageService } from 'primeng/api';
 import { ButtonDirective } from 'primeng/button';
 import { Card } from 'primeng/card';
-import { faSolidQuoteRight, faSolidDownload } from '@ng-icons/font-awesome/solid';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
-import { TabsModule } from 'primeng/tabs';
 import { Panel } from 'primeng/panel';
 import { SelectButton } from 'primeng/selectbutton';
-import { MessageService } from 'primeng/api';
 import { Skeleton } from 'primeng/skeleton';
+import { TabsModule } from 'primeng/tabs';
+import { ToastModule } from 'primeng/toast';
+import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
 
 interface FormatOption {
   id: string;
@@ -25,18 +25,18 @@ interface FormatOption {
   standalone: true,
   templateUrl: './record-citation.html',
   imports: [
-    FormsModule,
-    CommonModule,
-    TranslatePipe,
-    ToastModule,
     ButtonDirective,
     Card,
-    NgIcon,
+    CommonModule,
     CopyInput,
-    TabsModule,
-    SelectButton,
+    FormsModule,
+    NgIcon,
     Panel,
+    SelectButton,
     Skeleton,
+    TabsModule,
+    ToastModule,
+    TranslatePipe,
   ],
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
   providers: [MessageService],

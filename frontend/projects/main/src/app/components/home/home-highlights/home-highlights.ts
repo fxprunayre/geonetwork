@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
   Aggregation,
+  APPLICATION_CONFIGURATION,
   SEARCH_ROUTE_PATH,
   SearchBase,
   SearchFilter,

@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal, ElementRef, OnInit } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject, OnInit, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidEllipsisVertical,
@@ -6,19 +6,20 @@ import {
   faSolidUpRightFromSquare,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { RecordsService } from 'gn4-api-client';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { Menu } from 'primeng/menu';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
-import { RecordsService } from 'gn4-api-client';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { TieredMenu } from 'primeng/tieredmenu';
 import { IconStyleService } from '../../../shared/icon-style-service';
+import { AuthStore } from '../../authentication/auth.store';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
-  selector: 'app-record-menu',
+  selector: 'app-record-menu', 
   templateUrl: './record-menu.component.html',
   standalone: true,
-  imports: [Menu, ButtonModule, NgIcon, TranslatePipe],
+  imports: [ButtonModule, NgIcon, TieredMenu, TranslatePipe],
   viewProviders: [
     provideIcons({
       faSolidEllipsisVertical,
@@ -30,11 +31,13 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
   private readonly translate = inject(TranslateService);
   private readonly elementRef = inject(ElementRef);
   private readonly iconStyleService = inject(IconStyleService);
+  private authStore = inject(AuthStore);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   catalogueUrl = computed(() => this.appConfiguration().catalogueUrl);
 
   shareUrl = signal('');
+
   currentLang = signal(this.translate.getCurrentLang());
 
   constructor() {

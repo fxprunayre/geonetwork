@@ -1,12 +1,12 @@
-<div>
-  <p-menu #menu [model]="items()" [popup]="true"></p-menu>
+<div class="flex flex-row gap-2 items-center">
   <p-button
     [title]="'record.action.menu' | translate"
     (click)="menu.toggle($event)"
-    variant="outlined"
     size="small"
     severity="secondary"
+    #addRecordMenu
   >
-    <ng-icon name="faSolidEllipsisVertical"></ng-icon>
+    <ng-icon name="faSolidEllipsisVertical" pButtonIcon></ng-icon>
   </p-button>
+  <p-tieredmenu #menu [model]="items()" [popup]="true"></p-tieredmenu>
 </div>

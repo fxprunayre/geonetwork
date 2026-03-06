@@ -1,12 +1,11 @@
-import { Component, computed, effect, inject } from '@angular/core';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { signal } from '@angular/core';
-import { Select } from 'primeng/select';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { I18nApp } from '../../config/model/gnConfig';
-import { APPLICATION_CONFIGURATION, DEFAULT_LANGUAGE } from '../../config/config.loader';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidLanguage } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Select } from 'primeng/select';
+import { APPLICATION_CONFIGURATION, DEFAULT_LANGUAGE } from '../../config/config.loader';
+import { I18nApp } from '../../config/model/gnConfig';
 
 interface Language {
   iso3code: string;
@@ -17,7 +16,7 @@ interface Language {
   selector: 'app-language-switcher',
   templateUrl: './language-switcher.html',
   viewProviders: [provideIcons({ faSolidLanguage })],
-  imports: [TranslatePipe, Select, NgIcon, FormsModule],
+  imports: [FormsModule, NgIcon, Select, TranslatePipe],
 })
 export class LanguageSwitcher {
   private translate = inject(TranslateService);

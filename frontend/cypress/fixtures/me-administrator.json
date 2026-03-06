@@ -1,0 +1,11 @@
+{
+  "admin": true,
+  "email": "user@localhost.org",
+  "hash": "user_hash",
+  "id": "1",
+  "name": "Admin",
+  "organisation": "GeoNetwork",
+  "profile": "Administrator",
+  "surname": "User",
+  "username": "admin"
+}

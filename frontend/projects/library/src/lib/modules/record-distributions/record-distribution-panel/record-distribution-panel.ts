@@ -14,28 +14,14 @@ import { Button } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { IftaLabel } from 'primeng/iftalabel';
 import { InputText } from 'primeng/inputtext';
-import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../../search/search-constant';
-import { LinkBadge } from '../link-badge/link-badge';
+import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 import { AddLayerToMap } from '../add-layer-to-map/add-layer-to-map';
+import { LinkBadge } from '../link-badge/link-badge';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 
 @Component({
   selector: 'app-record-distribution-panel',
-  imports: [
-    KeyValuePipe,
-    Button,
-    TranslatePipe,
-    Accordion,
-    AccordionContent,
-    AccordionHeader,
-    AccordionPanel,
-    AddLayerToMap,
-    InputText,
-    IftaLabel,
-    LinkBadge,
-    Card,
-    NgIcon,
-  ],
+  imports: [Accordion, AccordionContent, AccordionHeader, AccordionPanel, AddLayerToMap, Button, Card, IftaLabel, InputText, KeyValuePipe, LinkBadge, NgIcon, TranslatePipe],
   viewProviders: [
     provideIcons({
       faSolidCloudArrowDown,

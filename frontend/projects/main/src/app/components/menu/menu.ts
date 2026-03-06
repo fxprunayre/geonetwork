@@ -1,4 +1,3 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -8,21 +7,29 @@ import {
   faSolidArrowRightFromBracket,
   faSolidArrowRightToBracket,
   faSolidBars,
+  faSolidBookmark,
   faSolidEllipsisVertical,
   faSolidGear,
-  faSolidBookmark,
   faSolidHouse,
   faSolidLanguage,
   faSolidMagnifyingGlass,
   faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { MenuDesignTokens } from '@primeuix/themes/types/menu';
 import {
   APPLICATION_CONFIGURATION,
+  AuthStore,
+  CatalogueLogo,
+  DASHBOARD_ROUTE_PATH,
   IconStyleService,
   LanguageSwitcher,
   MAP_ROUTE_PATH,
+  RecordAddMenu,
   SEARCH_ROUTE_PATH,
   ThemeDesigner,
+  UserAvatar,
+  UserFullNamePipe,
 } from 'gn-library';
 import { MenuItem, MessageService, SharedModule } from 'primeng/api';
 import { Drawer } from 'primeng/drawer';
@@ -30,11 +37,8 @@ import { Fieldset } from 'primeng/fieldset';
 import { IftaLabel } from 'primeng/iftalabel';
 import { Menu } from 'primeng/menu';
 import { TextareaModule } from 'primeng/textarea';
-import { TieredMenu } from 'primeng/tieredmenu';
-import AppTheme from '../../app.theme';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { MenuDesignTokens } from '@primeuix/themes/types/menu';
 import { Toast } from 'primeng/toast';
+import AppTheme from '../../app.theme';
 
 const ICONS = {
   faSolidHouse,
@@ -54,20 +58,24 @@ const ICONS = {
 @Component({
   selector: 'app-menu',
   imports: [
-    Menu,
-    TieredMenu,
-    RouterLink,
+    CatalogueLogo,
+    Drawer,
+    Fieldset,
+    FormsModule,
+    IftaLabel,
     LanguageSwitcher,
+    Menu,
+    NgIcon,
+    RecordAddMenu,
+    RouterLink,
+    RouterLinkActive,
+    SharedModule,
     TranslatePipe,
     ThemeDesigner,
-    NgIcon,
-    SharedModule,
-    Drawer,
     Toast,
-    Fieldset,
-    IftaLabel,
-    FormsModule,
     TextareaModule,
+    UserAvatar,
+    UserFullNamePipe,
   ],
   providers: [MessageService],
   standalone: true,
@@ -82,8 +90,9 @@ const ICONS = {
   ],
 })
 export class MenuComponent implements OnInit {
-  logo = 'images/logo.svg';
+  @ViewChild(RecordAddMenu) recordAddButton: RecordAddMenu | undefined;
 
+  readonly authStore = inject(AuthStore);
   styleService = inject(IconStyleService);
   translateService = inject(TranslateService);
   router = inject(Router);
@@ -92,6 +101,8 @@ export class MenuComponent implements OnInit {
   elementRef = inject(ElementRef);
   appConfig = inject(APPLICATION_CONFIGURATION);
   appConfigJson = computed(() => JSON.stringify(this.appConfig(), null, 2));
+
+  DASHBOARD_ROUTE_PATH = DASHBOARD_ROUTE_PATH;
 
   updateConfig(event: string) {
     this.appConfig.set(JSON.parse(event));
@@ -143,72 +154,39 @@ export class MenuComponent implements OnInit {
         visible: !this.isAuthenticated(),
         icon: 'faSolidArrowRightToBracket',
         command: () => {
-          this.isAuthenticated.update((v) => !v);
+          this.router.navigate(['/signin'], { queryParams: { redirectUrl: this.router.url } });
         },
         ...this.itemConfig(),
       },
       {
-        label: this.translateService.instant('menu.addrecord'),
-        title: this.translateService.instant('menu.addrecord'),
+        label: this.translateService.instant('menu.addRecord'),
+        title: this.translateService.instant('menu.addRecord'),
         icon: 'faSolidPlus',
         visible: this.isAuthenticated(),
         ...this.itemConfig(),
         command: (event: any) => {
-          this.addRecordMenu?.toggle(event.originalEvent);
+          this.recordAddButton?.menu?.toggle(event.originalEvent);
         },
       },
-      {
-        label: this.translateService.instant('menu.my.record'),
-        title: this.translateService.instant('menu.my.record'),
-        icon: 'faSolidHouse',
-        visible: this.isAuthenticated(),
-        command: () => {
-          this.messageService.add({
-            severity: 'warn',
-            summary: 'See my record',
-            detail: 'Not implemented yet',
-            life: 3000,
-          });
-        },
-        ...this.itemConfig(),
-      },
-      {
-        label: this.translateService.instant('menu.my.favorites'),
-        title: this.translateService.instant('menu.my.favorites'),
-        icon: 'faSolidBookmark',
-        visible: this.isAuthenticated(),
-        command: () => {
-          this.messageService.add({
-            severity: 'warn',
-            summary: 'See my favorite',
-            detail: 'Not implemented yet',
-            life: 3000,
-          });
-        },
-        ...this.itemConfig(),
-      },
-      {
-        label: this.translateService.instant('menu.signout'),
-        title: this.translateService.instant('menu.signout'),
-        visible: this.isAuthenticated(),
-        icon: 'faSolidArrowRightFromBracket',
-        command: () => {
-          this.isAuthenticated.update((v) => !v);
-        },
-        ...this.itemConfig(),
-      },
-      {
-        separator: true,
-      },
-      {
-        label: this.translateService.instant('menu.settings'),
-        title: this.translateService.instant('menu.settings'),
-        icon: 'faSolidGear',
-        command: () => {
-          this.isConfigurationVisible.update((v) => !v);
-        },
-        ...this.itemConfig(),
-      },
+      // {
+      //   label: this.translateService.instant('menu.signout'),
+      //   title: this.translateService.instant('menu.signout'),
+      //   visible: this.isAuthenticated(),
+      //   icon: 'faSolidArrowRightFromBracket',
+      //   command: () => {
+      //     this.authStore.signOut();
+      //   },
+      //   ...this.itemConfig(),
+      // },
+      // {
+      //   label: this.translateService.instant('menu.settings'),
+      //   title: this.translateService.instant('menu.settings'),
+      //   icon: 'faSolidGear',
+      //   command: () => {
+      //     this.isConfigurationVisible.update((v) => !v);
+      //   },
+      //   ...this.itemConfig(),
+      // },
     ];
   });
 
@@ -239,52 +217,19 @@ export class MenuComponent implements OnInit {
     },
   };
 
-  @ViewChild('addRecordMenu') addRecordMenu: TieredMenu | undefined;
-
-  addRecordItems = computed<MenuItem[]>(() => {
-    this.currentLang();
-    return [
-      {
-        label: this.translateService.instant('New dataset'),
-        icon: 'faSolidFile',
-        command: () => {
-          this.messageService.add({
-            severity: 'info',
-            summary: 'Add record',
-            detail: 'From template',
-          });
-        },
-      },
-      {
-        label: this.translateService.instant('New Software'),
-        icon: 'faSolidCloudArrowUp',
-        command: () => {
-          this.messageService.add({
-            severity: 'info',
-            summary: 'Add record',
-            detail: 'From software template',
-          });
-        },
-      },
-      {
-        label: this.translateService.instant('Import from file or URL'),
-        icon: 'faSolidArrowRightToBracket',
-        command: () => {
-          this.messageService.add({
-            severity: 'info',
-            summary: 'Add record',
-            detail: 'Import from file or URL',
-          });
-        },
-      },
-    ];
-  });
-
   isIconMode = signal(true);
 
   isConfigurationVisible = signal(false);
 
-  isAuthenticated = signal(false);
+  isAuthenticated = this.authStore.isAuthenticated;
+
+  user = this.authStore.user;
+
+  userRole = computed(() => {
+    const u = this.user();
+    if (!u) return '';
+    return u.profile || '';
+  });
 
   currentLang = signal(this.translateService.getCurrentLang(), { equal: () => false });
 
@@ -293,37 +238,20 @@ export class MenuComponent implements OnInit {
       this.currentLang.set(event.lang);
     });
 
-    const usedIcons = new Set<string>();
-    const collectIcons = (items: MenuItem[]) => {
-      items.forEach((item) => {
-        if (item.icon) {
-          usedIcons.add(item.icon);
-        }
-        if (item.items) {
-          collectIcons(item.items);
-        }
-      });
-    };
-
-    const menuItems = this.items();
-    if (menuItems) {
-      collectIcons(menuItems);
-    }
-
-    this.styleService.ensureIconsStyle(
+    this.styleService.createIconsStyle(
       'menu-icon-style',
-      Array.from(usedIcons)
-        .map((icon) => ({
-          className: icon,
-          svgContent: ICONS[icon as keyof typeof ICONS],
-        }))
-        .filter((def) => def.svgContent),
+      this.items(),
+      ICONS,
       this.elementRef.nativeElement.getRootNode(),
     );
   }
 
   toggleMenu() {
     this.isIconMode.update((v) => !v);
+  }
+
+  toggleConfiguration() {
+    this.isConfigurationVisible.update((v) => !v);
   }
 
   expandMenu() {
