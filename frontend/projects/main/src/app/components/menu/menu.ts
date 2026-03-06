@@ -154,7 +154,7 @@ export class MenuComponent implements OnInit {
         visible: !this.isAuthenticated(),
         icon: 'faSolidArrowRightToBracket',
         command: () => {
-          this.router.navigate(['/signin'], { queryParams: { redirectUrl: this.router.url } });
+          this.router.navigate(['/signin'], { queryParams: { redirectUrl: location.href } });
         },
         ...this.itemConfig(),
       },
