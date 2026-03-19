@@ -110,6 +110,7 @@ export class Perspective implements OnDestroy {
       const ds = this.datasource();
       if (ds) {
         this.initialize();
+        this.clearPreviousDataIfAny();
 
         await this.duckDbService.loadDatasource(ds);
         this.loadDataIntoPerspective();
@@ -119,6 +120,12 @@ export class Perspective implements OnDestroy {
 
   cancel(): void {
     this.duckDbService.cancelDownload();
+  }
+
+  private clearPreviousDataIfAny(): void {
+    if (this.perspectiveViewer?.nativeElement && this.worker) {
+      this.perspectiveViewer.nativeElement.load(this.worker.table([]));
+    }
   }
 
   toggleFullScreen(): void {

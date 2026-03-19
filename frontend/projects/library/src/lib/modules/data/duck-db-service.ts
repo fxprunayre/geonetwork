@@ -88,6 +88,7 @@ export class DuckDbService {
       await this.conn.query(`
         INSTALL json; LOAD json;
         INSTALL spatial; LOAD spatial;
+        INSTALL excel; LOAD excel;
       `);
       // INSTALL arrow FROM community; LOAD arrow;
 
@@ -270,6 +271,7 @@ export class DuckDbService {
   }
 
   async loadDatasource(ds: Datasource): Promise<void> {
+    this.clearPreviousDataIfAny();
     this.loadingMode = 'duckdb';
     this.progress.set({
       status: 'connecting',
@@ -300,6 +302,16 @@ export class DuckDbService {
       await this.browserDownloadMode(ds, signal);
     } else {
       await this.loadData(this.buildFileName(ds), undefined, ds, signal);
+    }
+  }
+
+  private async clearPreviousDataIfAny(): Promise<void> {
+    if (this.conn) {
+      try {
+        await this.conn.query('DROP TABLE IF EXISTS data');
+      } catch (e) {
+        console.warn('Failed to drop data table', e);
+      }
     }
   }
 
@@ -424,6 +436,13 @@ export class DuckDbService {
     }
   }
 
+  buildFromClause(reader: string, dataTable: string): string {
+    if (reader === 'read_xlsx') {
+      return `${reader}('${dataTable}', header = true)`;
+    }
+    return `${reader}('${dataTable}')`;
+  }
+
   /**
    * Load data into DuckDB from file URL or ArrayBuffer.
    */
@@ -451,7 +470,7 @@ export class DuckDbService {
         gdal: 'ST_Read',
         wfs: 'ST_Read',
         geojson: 'ST_Read',
-        xlsx: 'ST_Read',
+        xlsx: 'read_xlsx',
       };
       const reader = readerMap[ext];
       if (!reader) throw new Error(`Unsupported file type: .${ext}`);
@@ -464,7 +483,10 @@ export class DuckDbService {
       }
 
       if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
-      const fromClause = `${reader}('${datasource && !data ? datasource.url : fileName}')`;
+      const fromClause = this.buildFromClause(
+        reader,
+        `${datasource && !data ? datasource.url : fileName}`,
+      );
 
       // await this.conn.query("SELECT * FROM st_drivers();").then(function(data) {
       //     const rows = data.toArray();
