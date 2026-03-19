@@ -112,7 +112,7 @@ export class AggregationService {
       // TODO: Modify OpenApi spec to use POST with body for this endpoint.
       // Loop on batches of 50 ids
       const idsArray = Array.from(bucketKeySet);
-      const BATCH_SIZE = 60;
+      const BATCH_SIZE = 30;
 
       for (let i = 0; i < idsArray.length; i += BATCH_SIZE) {
         const batch = idsArray.slice(i, i + BATCH_SIZE);

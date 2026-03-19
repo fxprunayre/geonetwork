@@ -1,5 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, EventEmitter, inject, input, Output, output } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidChevronRight } from '@ng-icons/font-awesome/solid';
@@ -53,6 +54,9 @@ export class AggregationBucket extends SearchBase {
   translateService = inject(TranslateService);
   decimalPipe = inject(DecimalPipe);
 
+  translationChange = toSignal(this.translateService.onTranslationChange);
+  langChange = toSignal(this.translateService.onLangChange);
+
   layout = computed(() => {
     return (
       this.displayType() || this.search.aggregations()[this.keyName()].meta?.layout || 'checkbox'
@@ -64,6 +68,8 @@ export class AggregationBucket extends SearchBase {
   });
 
   label = computed(() => {
+    this.translationChange();
+    this.langChange();
     return `${this.aggregationTranslate.transform(this.bucket().key, this.keyName())}  (${this.decimalPipe.transform(this.bucket().doc_count, undefined, this.translateService.getCurrentLang())})`;
   });
 
