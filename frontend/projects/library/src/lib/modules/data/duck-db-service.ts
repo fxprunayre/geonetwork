@@ -271,7 +271,7 @@ export class DuckDbService {
   }
 
   async loadDatasource(ds: Datasource): Promise<void> {
-    this.clearPreviousDataIfAny();
+    await this.clearPreviousDataIfAny();
     this.loadingMode = 'duckdb';
     this.progress.set({
       status: 'connecting',

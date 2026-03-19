@@ -12,20 +12,27 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidCompress, faSolidExpand, faSolidXmark } from '@ng-icons/font-awesome/solid';
+import {
+  faSolidCompress,
+  faSolidExpand,
+  faSolidTriangleExclamation,
+  faSolidXmark,
+} from '@ng-icons/font-awesome/solid';
 import perspective from '@perspective-dev/client';
 import { Button, ButtonIcon } from 'primeng/button';
+import { Message } from 'primeng/message';
 import { ProgressBar } from 'primeng/progressbar';
 import { Datasource, DuckDbService } from '../duck-db-service';
 
 @Component({
   selector: 'app-perspective',
-  imports: [Button, ButtonIcon, NgClass, NgIcon, ProgressBar],
+  imports: [Button, ButtonIcon, Message, NgClass, NgIcon, ProgressBar],
   viewProviders: [
     provideIcons({
       faSolidExpand,
       faSolidCompress,
       faSolidXmark,
+      faSolidTriangleExclamation,
     }),
   ],
   template: `
@@ -41,7 +48,7 @@ import { Datasource, DuckDbService } from '../duck-db-service';
         class="flex flex-row items-center justify-items-end w-full gap-4"
         [ngClass]="{
           'float-right': isFullScreen(),
-          'mt-2': !isFullScreen(),
+          'my-4': !isFullScreen(),
         }"
       >
         <div class="flex flex-row items-center gap-4 grow">
@@ -75,6 +82,15 @@ import { Datasource, DuckDbService } from '../duck-db-service';
               }
             </div>
           }
+
+          @if (progress().status === 'completed' && isTruncated()) {
+            <p-message [severity]="'warn'" title="{{ loadedCount() }} / {{ totalCount() }} rows.">
+              @if (isTruncated()) {
+                <ng-icon name="faSolidTriangleExclamation" />
+                Dataset is large. Showing first {{ loadedCount() }} rows.
+              }
+            </p-message>
+          }
         </div>
 
         <p-button (click)="toggleFullScreen()">
@@ -101,6 +117,10 @@ export class Perspective implements OnDestroy {
 
   progress = this.duckDbService.progress;
   isFullScreen = signal(false);
+  isTruncated = signal(false);
+  totalCount = signal(0);
+  loadedCount = signal(0);
+  limit = 100000;
   error: string | undefined;
 
   private worker: any;
@@ -165,13 +185,16 @@ export class Perspective implements OnDestroy {
   private async loadDataIntoPerspective() {
     this.worker = this.worker || (await perspective.worker());
 
-    // TODO: Count features and limit rows accordingly
-    const limit = 100000;
+    const countResult = await this.duckDbService.runQuery('SELECT count(*) as count FROM data');
+    this.totalCount.set(Number(countResult[0]?.count || 0));
+    this.isTruncated.set(this.totalCount() > this.limit);
+    this.loadedCount.set(Math.min(this.totalCount(), this.limit));
+
     // Perspective does not support GEOMETRY columns
     const geomColumns = await this.duckDbService.getGeometryColumns('data');
     const excludeStatement = geomColumns.length > 0 ? ` EXCLUDE (${geomColumns.join(', ')})` : '';
     const result = await this.duckDbService.runQuery(
-      `SELECT *${excludeStatement} FROM data LIMIT ${limit}`,
+      `SELECT *${excludeStatement} FROM data LIMIT ${this.limit}`,
     );
 
     if (!Array.isArray(result)) {
