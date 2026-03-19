@@ -21,7 +21,21 @@ import { RecordDistributionFieldBase } from '../record-distribution-field-base/r
 
 @Component({
   selector: 'app-record-distribution-panel',
-  imports: [Accordion, AccordionContent, AccordionHeader, AccordionPanel, AddLayerToMap, Button, Card, IftaLabel, InputText, KeyValuePipe, LinkBadge, NgIcon, TranslatePipe],
+  imports: [
+    Accordion,
+    AccordionContent,
+    AccordionHeader,
+    AccordionPanel,
+    AddLayerToMap,
+    Button,
+    Card,
+    IftaLabel,
+    InputText,
+    KeyValuePipe,
+    LinkBadge,
+    NgIcon,
+    TranslatePipe,
+  ],
   viewProviders: [
     provideIcons({
       faSolidCloudArrowDown,
@@ -51,7 +65,6 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
         url.endsWith('.parquet') ||
         url.endsWith('.json') ||
         url.endsWith('.csv') ||
-        url.endsWith('.xls') ||
         url.endsWith('.xlsx') ||
         link.protocol === 'OGC:WFS'
       );

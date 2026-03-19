@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { elasticsearch, IndexRecord, Link, RelatedItemType } from 'gn-api-client';
 import { SearchService as ApiSearchService } from 'gn4-api-client';
+import { map, Observable } from 'rxjs';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
+import { Datasource } from '../data/duck-db-service';
+import { AggregationService } from '../search-filter/aggregation-service';
+import { SEARCH_SOURCE } from './search-constant';
 import { SearchRegistry, SearchStoreType } from './search-store';
 import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './search-store.model';
-import { SEARCH_SOURCE } from './search-constant';
-import { AggregationService } from '../search-filter/aggregation-service';
-import { Datasource } from '../data/duck-db-service';
-import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 
 @Injectable({
   providedIn: 'root',
@@ -309,7 +309,6 @@ export class SearchService {
           csv: 'csv',
           gml: 'gml',
           xlsx: 'xlsx',
-          xls: 'xls',
         };
         if (extension && formatMapping[extension]) {
           acc.push({ url, format: formatMapping[extension] });

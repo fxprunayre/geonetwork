@@ -1,11 +1,11 @@
 import { inject, Injectable, Renderer2, signal } from '@angular/core';
 import * as duckdb from '@duckdb/duckdb-wasm';
 import { AsyncDuckDB, AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
-import { IndexRecord, Link } from 'gn-api-client';
 import perspective from '@perspective-dev/client';
 import perspective_viewer from '@perspective-dev/viewer';
-import { SearchService } from '../search/search-service';
+import { IndexRecord } from 'gn-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
+import { SearchService } from '../search/search-service';
 
 export interface Datasource {
   url: string;
@@ -296,18 +296,25 @@ export class DuckDbService {
       this.loadingMode = 'browser';
     }
 
-    const fileName = this.buildFileName(ds);
-
     if (this.loadingMode === 'browser' || ds.format === 'wfs') {
-      await this.browserDownloadMode(ds, fileName, signal);
+      await this.browserDownloadMode(ds, signal);
     } else {
-      await this.loadData(fileName, undefined, ds, signal);
+      await this.loadData(this.buildFileName(ds), undefined, ds, signal);
     }
   }
 
-  private buildFileName(ds: Datasource): string {
-    const name = ds.url.split('/').pop() || 'data';
-    return `${name}.${ds.format}`;
+  private sanitizeFileName(ds: Datasource): string {
+    let name = ds.url.split('/').pop() || 'data';
+    return name.replace(/[^a-zA-Z0-9_\-\.]/g, '_');
+  }
+
+  private buildFileName(ds: Datasource, extension?: string): string {
+    const name = this.sanitizeFileName(ds);
+    const ext = extension || ds.format;
+    if (!name.toLowerCase().endsWith(`.${ext}`)) {
+      return `${name}.${ext}`;
+    }
+    return name;
   }
 
   private async resolveWfsGetFeatureUrl(ds: Datasource, signal: AbortSignal): Promise<string> {
@@ -384,7 +391,7 @@ export class DuckDbService {
    * Browser download mode: download the entire file into memory, then load into DuckDB.
    * It also infers the file type if missing or unknown from data content.
    */
-  private async browserDownloadMode(ds: Datasource, fileName: string, signal: AbortSignal) {
+  private async browserDownloadMode(ds: Datasource, signal: AbortSignal) {
     const fileUrl = ds.format === 'wfs' ? await this.resolveWfsGetFeatureUrl(ds, signal) : ds.url;
     try {
       const { buffer, contentType } = await this.downloadDatasource(fileUrl, signal);
@@ -395,7 +402,6 @@ export class DuckDbService {
       if (!inferredExt) {
         const uint8 = new Uint8Array(buffer, 0, 4);
         if (uint8[0] === 80 && uint8[1] === 65 && uint8[2] === 82 && uint8[3] === 49) {
-          // 'PAR1'
           inferredExt = 'parquet';
         } else {
           const text = new TextDecoder().decode(buffer.slice(0, 1)).trim();
@@ -405,7 +411,9 @@ export class DuckDbService {
         }
       }
 
-      const finalFileName = inferredExt ? `${fileName}.${inferredExt}` : `${fileName}.csv`;
+      const finalFileName = inferredExt
+        ? this.buildFileName(ds, inferredExt)
+        : this.buildFileName(ds);
       await this.loadData(finalFileName, buffer, ds, signal);
     } catch (e: any) {
       if (e.name === 'AbortError' || signal.aborted) {
@@ -444,7 +452,6 @@ export class DuckDbService {
         wfs: 'ST_Read',
         geojson: 'ST_Read',
         xlsx: 'ST_Read',
-        xls: 'ST_Read',
       };
       const reader = readerMap[ext];
       if (!reader) throw new Error(`Unsupported file type: .${ext}`);
@@ -458,6 +465,11 @@ export class DuckDbService {
 
       if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
       const fromClause = `${reader}('${datasource && !data ? datasource.url : fileName}')`;
+
+      // await this.conn.query("SELECT * FROM st_drivers();").then(function(data) {
+      //     const rows = data.toArray();
+      //     console.table(rows.map(row => row.toJSON()));
+      // });
 
       // If signal is aborted while query is running, we can't really stop the query easily on duckdb-wasm side
       // without closing connection, but we can check before keeping result.
