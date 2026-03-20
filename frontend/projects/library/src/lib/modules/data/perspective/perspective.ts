@@ -18,6 +18,7 @@ import {
   faSolidTriangleExclamation,
   faSolidXmark,
 } from '@ng-icons/font-awesome/solid';
+import { TranslateModule } from '@ngx-translate/core';
 import perspective from '@perspective-dev/client';
 import { Button, ButtonIcon } from 'primeng/button';
 import { Message } from 'primeng/message';
@@ -26,7 +27,7 @@ import { Datasource, DuckDbService } from '../duck-db-service';
 
 @Component({
   selector: 'app-perspective',
-  imports: [Button, ButtonIcon, Message, NgClass, NgIcon, ProgressBar],
+  imports: [Button, ButtonIcon, Message, NgClass, NgIcon, ProgressBar, TranslateModule],
   viewProviders: [
     provideIcons({
       faSolidExpand,
@@ -84,11 +85,18 @@ import { Datasource, DuckDbService } from '../duck-db-service';
           }
 
           @if (progress().status === 'completed' && isTruncated()) {
-            <p-message [severity]="'warn'" title="{{ loadedCount() }} / {{ totalCount() }} rows.">
-              @if (isTruncated()) {
-                <ng-icon name="faSolidTriangleExclamation" />
-                Dataset is large. Showing first {{ loadedCount() }} rows.
-              }
+            <p-message
+              [severity]="'warn'"
+              title="{{
+                'perspective.largeDataset'
+                  | translate: { count: loadedCount(), total: totalCount() }
+              }}"
+            >
+              <ng-icon name="faSolidTriangleExclamation" />
+              {{
+                'perspective.largeDataset'
+                  | translate: { count: loadedCount(), total: totalCount() }
+              }}
             </p-message>
           }
         </div>

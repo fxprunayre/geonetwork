@@ -287,5 +287,8 @@
   "share": {
     "title_error": "Error",
     "detail_error": "Failed to fetch permalink"
+  },
+  "perspective": {
+    "largeDataset": "Dataset is large. Showing first {{count}} rows of {{total}}."
   }
 }

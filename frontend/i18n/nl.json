@@ -264,5 +264,8 @@
     "seeAll": "See all"
   },
   "addToMap": "Add to map",
-  "exploreData": "Explore data"
+  "exploreData": "Explore data",
+  "perspective": {
+    "largeDataset": "Dataset is groot. De eerste {{count}} rijen van {{total}} worden getoond."
+  }
 }

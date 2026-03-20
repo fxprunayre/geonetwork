@@ -270,5 +270,8 @@
   "share": {
     "title_error": "Erreur",
     "detail_error": "Impossible de récupérer le lien permanent"
+  },
+  "perspective": {
+    "largeDataset": "Jeu de données volumineux. Affichage des {{count}} premières lignes sur {{total}}."
   }
 }
