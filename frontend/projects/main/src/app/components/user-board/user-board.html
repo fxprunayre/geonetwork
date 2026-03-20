@@ -50,7 +50,7 @@
         </div>
 
         <section>
-          @if (search().results.length === 0) {
+          @if (search().results().length === 0) {
             <p class="text-center text-lg text-surface-500 py-20">
               {{ 'user.dashboard.noWork' | translate }}
             </p>
