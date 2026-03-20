@@ -1,4 +1,6 @@
 {
+  "success": "Succès",
+  "error": "Erreur",
   "auth": {
     "signin": {
       "title": "Bienvenue",
@@ -173,8 +175,16 @@
       "menu": "Quick actions",
       "share": "Share",
       "shareHelp": "Permalink to the record",
-      "edit": "Editer",
-      "editTitle": "Editer la fiche",
+      "cancel": "Annuler",
+      "delete": "Supprimer",
+      "deleteTitle": "Supprimer cette fiche",
+      "deleteConfirmationTitle": "Confirmation de suppression",
+      "deleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer cette fiche ? Cette action ne peut pas être annulée.",
+      "typeToConfirm": "Tapez \"{{word}}\" pour confirmer",
+      "deleteSuccess": "La fiche a été supprimée avec succès.",
+      "deleteError": "Une erreur s'est produite lors de la suppression de la fiche.",
+      "edit": "Éditer",
+      "editTitle": "Éditer cette fiche",
       "metadataDownload": "Metadata (XML)",
       "metadataDownloadHelp": "Download the record in XML format",
       "addWms": {

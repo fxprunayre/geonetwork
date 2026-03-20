@@ -2,6 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input, TemplateRef } from '@angular/core';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
+import { RecordDeleteButton } from '../record-delete-button/record-delete-button';
 import { RecordEditButton } from '../record-edit-button/record-edit-button';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldType } from '../record-field-type/record-field-type';
@@ -13,6 +14,7 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
     NgTemplateOutlet,
     RecordDistributionBadges,
     RecordEditButton,
+    RecordDeleteButton,
     RecordFieldType,
     RecordMenuComponent,
   ],
@@ -32,6 +34,7 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
           </h1>
 
           <app-record-edit-button [record]="record()" />
+          <app-record-delete-button [record]="record()" />
 
           <div>
             <ng-container
