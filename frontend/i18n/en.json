@@ -1,6 +1,8 @@
 {
   "success": "Success",
   "error": "Error",
+  "cancel": "Cancel",
+  "delete": "Delete",
   "auth": {
     "signin": {
       "title": "Welcome back",
@@ -182,16 +184,15 @@
       "menu": "Quick actions",
       "share": "Share",
       "shareHelp": "Permalink to the record",
-      "cancel": "Cancel",
-      "delete": "Delete",
       "deleteTitle": "Delete this record",
       "deleteConfirmationTitle": "Delete confirmation",
       "deleteConfirmationMessage": "Are you sure you want to delete this record? This action cannot be undone.",
       "typeToConfirm": "Type \"{{word}}\" to confirm",
       "deleteSuccess": "Record deleted successfully.",
       "deleteError": "An error occurred while deleting the record.",
+      "relatedRecordsWarning": "This record is associated with other resources:",
       "edit": "Edit",
-      "editTitle": "Edit record",
+      "editTitle": "Edit this record",
       "metadataDownload": "Metadata (XML)",
       "metadataDownloadHelp": "Download the record in XML format",
       "addWms": {

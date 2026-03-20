@@ -33,6 +33,7 @@ import { Button } from 'primeng/button';
 import { DataView } from 'primeng/dataview';
 import { Drawer } from 'primeng/drawer';
 import { ResultItemGrid } from '../../search-results/result-item-grid/result-item-grid';
+import { getAssociationLabel } from '../association-utils';
 
 @Component({
   selector: 'app-associated-records',
@@ -159,18 +160,7 @@ export class AssociatedRecords {
   });
 
   label = computed(() => {
-    const parts = this.siblingParts();
-
-    if (parts) {
-      const labels = [
-        this.translateService.instant(this.associationType() ?? ''),
-        this.translateService.instant(this.initiativeType() ?? ''),
-      ];
-      return labels.join(' - ');
-    }
-    return this.translateService.instant('record.association.' + this.type(), {
-      count: this.relations().length,
-    });
+    return getAssociationLabel(this.translateService, this.type(), this.relations().length);
   });
 
   handleRecordClick(uuid: string) {
