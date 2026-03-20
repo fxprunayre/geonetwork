@@ -10,7 +10,7 @@ import { RecordsService } from '../../../../../../gn4-api-client/src/public-api'
 import { DeleteConfirmationDialog } from '../../../shared/widgets/delete-confirmation-dialog/delete-confirmation-dialog';
 import { AuthStore } from '../../authentication/auth.store';
 import { AssociatedRecordsSummary } from '../../record-associations/associated-records-summary/associated-records-summary';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
 
 @Component({
   selector: 'app-record-delete-button',

@@ -1,9 +1,9 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input, TemplateRef } from '@angular/core';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { RecordDeleteButton } from '../../record-actions/record-delete-button/record-delete-button';
+import { RecordEditButton } from '../../record-actions/record-edit-button/record-edit-button';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
-import { RecordDeleteButton } from '../record-delete-button/record-delete-button';
-import { RecordEditButton } from '../record-edit-button/record-edit-button';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { RecordMenuComponent } from '../record-menu/record-menu.component';
