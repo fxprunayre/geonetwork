@@ -9,15 +9,15 @@ import {
   Output,
   signal,
 } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { TranslateService } from '@ngx-translate/core';
 import { TreeNode } from 'primeng/api';
 import { Tree } from 'primeng/tree';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
-import { AggregationBucketType } from '../aggregation/aggregation';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchFilterChange } from '../../search/search-store.model';
+import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
+import { AggregationBucketType } from '../aggregation/aggregation';
 
 @Component({
   selector: 'app-aggregation-tree',
@@ -45,6 +45,9 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
   translateService = inject(TranslateService);
   aggregationTranslatePipe = inject(AggregationTranslatePipe);
   decimalPipe = inject(DecimalPipe);
+
+  translationChange = toSignal(this.translateService.onTranslationChange);
+  langChange = toSignal(this.translateService.onLangChange);
 
   separator = input<string>('^');
 
@@ -77,6 +80,9 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
     if (!buckets) {
       return root;
     }
+
+    this.translationChange();
+    this.langChange();
 
     buckets.forEach((bucket) => {
       const parts = (bucket.key as string).split(this.separator());
