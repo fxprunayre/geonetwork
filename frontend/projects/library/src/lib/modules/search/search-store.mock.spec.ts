@@ -1,9 +1,9 @@
 /// <reference types="jasmine" />
 import { signal } from '@angular/core';
-import { SearchStoreType, initialState } from './search-store';
+import { IndexRecord } from 'gn-api-client';
 import { Observable, of } from 'rxjs';
 import { SearchService } from './search-service';
-import { IndexRecord } from 'gn-api-client';
+import { SearchStoreType, initialState } from './search-store';
 
 // Define a consistent mock response for the searchService calls
 const mockSearchResults: IndexRecord[] = [];

@@ -74,6 +74,7 @@ npm run e2e:start
 npm run e2e:ci
 ```
 
+E2E tests are running with live version of the catalogue with some static [fixtures](cypress/fixtures/).
 
 ### Configuring catalogue API endpoint
 
@@ -160,3 +161,23 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 RewriteRule ^ ./index.html
 ```
+
+# Misc
+
+## Checking for circular dependency
+
+```
+npx madge --circular --extensions ts .
+```
+
+
+### Build error
+
+```
+Cannot destructure property 'pos' of 'file.referencedFiles[index]' as it is unde
+```
+This is usually due to import statements not using paths eg.
+```
+import { RecordsService } from '../../../../../../gn4-api-client/src/public-api';
+```
+

@@ -17,7 +17,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchFilterChange } from '../../search/search-store.model';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
-import { AggregationBucketType } from '../aggregation/aggregation';
+import { AggregationBucketType } from '../aggregation/aggregation.model';
 
 @Component({
   selector: 'app-aggregation-tree',

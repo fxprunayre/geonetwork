@@ -24,12 +24,7 @@ import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
 import { AggregationService } from '../aggregation-service';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationTree } from '../aggregation-tree/aggregation-tree';
-
-export type AggregationBucketType = {
-  key: string | number;
-  label: string;
-  doc_count: number;
-};
+import { AggregationBucketType } from './aggregation.model';
 
 @Component({
   selector: 'app-aggregation',
