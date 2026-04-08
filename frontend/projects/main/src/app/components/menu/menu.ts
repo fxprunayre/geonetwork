@@ -185,6 +185,7 @@ export class MenuComponent implements OnInit {
       {
         label: this.translateService.instant('menu.settings'),
         title: this.translateService.instant('menu.settings'),
+        visible: this.isAuthenticated(),
         icon: 'faSolidGear',
         command: () => {
           this.isConfigurationVisible.update((v) => !v);

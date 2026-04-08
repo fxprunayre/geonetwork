@@ -13,5 +13,6 @@ import { SearchBase } from '../../search/search-base/search-base';
   }`,
 })
 export class ResultsNumberComponent extends SearchBase {
-  labelKey = input('search.result');
+  // TODO: pluralization
+  labelKey = input('search.results');
 }

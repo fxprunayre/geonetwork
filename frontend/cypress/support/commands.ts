@@ -37,6 +37,7 @@ Cypress.Commands.add('mockClipboard', (initialText = '') => {
 });
 
 Cypress.Commands.add('initApp', () => {
+  cy.intercept('GET', 'https://tile.openstreetmap.org/**', { fixture: 'tile.png' }).as('osmTile');
   cy.intercept('GET', '**/srv/api/ui/srv', { fixture: 'home-api-ui-srv.json' }).as('apiUiConfig');
   cy.intercept('GET', '**/srv/api/i18n/packages/gnui*', { fixture: 'home-api-i18n-gnui.json' }).as(
     'apiI18nGnui',

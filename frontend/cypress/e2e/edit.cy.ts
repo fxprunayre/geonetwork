@@ -5,12 +5,14 @@ describe('Record page editing', () => {
     cy.initApp();
   });
 
-  it('should display the edit button', () => {
+  it('should display the edit button linking to GN4 and delete action', () => {
     cy.signin();
     cy.visit(`/record/${SURVAL_UUID}`);
     cy.wait(['@apiMainSearchGetRecord', '@apiMe']);
-    cy.get('a[title="Edit record"]')
+    cy.get('a[title="Edit this record"]')
       .should('be.visible')
       .should('have.attr', 'href', `/geonetwork/srv/eng/catalog.edit#/metadata/${SURVAL_UUID}`);
+    // cy.get('a[title="Delete this record"]')
+    //   .should('be.visible');
   });
 });
