@@ -1,222 +1,56 @@
 {
-  "success": "Success",
-  "error": "Error",
-  "cancel": "Cancel",
-  "delete": "Delete",
   "auth": {
     "signin": {
-      "title": "Welcome back",
-      "username": {
-        "placeholder": "Email or username",
-        "error": {
-          "required": "Email or username is required",
-          "email": "Enter a valid email address"
-        }
-      },
-      "password": {
-        "placeholder": "Password",
-        "error": {
-          "required": "Password is required"
-        }
-      },
       "button": "Sign In",
       "forgotPassword": "Forgot your password?",
       "noAccount": "Don't have an account?",
-      "signup": "Sign up",
       "or": "OR",
+      "password": {
+        "error": {
+          "required": "Password is required"
+        },
+        "placeholder": "Password"
+      },
+      "signInFailure": "Incorrect password. Try again or click \"Forgot your password?\" for more options.",
       "signInWith": "Sign in with {{provider}}",
-      "signInFailure": "Incorrect password. Try again or click \"Forgot your password?\" for more options."
+      "signup": "Sign up",
+      "title": "Welcome back",
+      "username": {
+        "error": {
+          "email": "Enter a valid email address",
+          "required": "Email or username is required"
+        },
+        "placeholder": "Email or username"
+      }
     }
   },
-  "search": {
-    "input": {
-      "placeholder": "Search ...",
-      "popover": {
-        "resourceType": {
-          "title": "Resource type"
-        }
-      }
-    },
-    "button": {
-      "title": "Search"
-    },
-    "filter": {
-      "title": "All filters",
-      "activeFilters": "Active filters",
-      "panel": {
-        "open": "Filter"
-      }
-    },
-    "aggregations": {
-      "groupPublishedId": "Groups",
-      "isPublishedToAll": "Public",
-      "isHarvested": "Harvested",
-      "isTemplate": "Template",
-      "cl_status.key": "Resource status",
-      "th_sextant-theme_tree.key": "Sextant themes",
-      "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
-      "th_simm-reglementaire_tree.key": "Cadre Réglementaire - SIMM",
-      "th_dcsmm-area_tree.key": "Marine regions",
-      "th_NVS-OD1_tree.key": "ODATIS aggregation parameters and Essential Variable names",
-      "th_odatis_centre_donnees_tree.key": "ODATIS Data centers",
-      "th_dcsmm-descripteur_tree.key": "DCSMM Descriptors",
-      "tag.default": "Keywords",
-      "creationYearForResource": "Creation year",
-      "OrgForResource": "Organisation",
-      "resourceType": "Resource type",
-      "more": "more",
-      "less": "less"
-    },
-    "sort": {
-      "placeholder": "Sort by",
-      "options": {
-        "_score": "Relevance",
-        "-revisionDateForResource,-publicationDateForResource,-creationDateForResource": "Last update",
-        "-changeDate": "Latest record",
-        "-createDate": "New record",
-        "resourceTitleObject.default.sort": "Title",
-        "-rating": "Rating",
-        "-popularity": "Popularity"
-      }
-    },
-    "result": "result",
-    "results": "results",
-    "searchLink": "Search for {{value}}",
-    "backToResults": "Back to results",
-    "welcome": {
-      "default": "Search ...",
-      "text": "Search over {{count}} {{mainBuckets}}, ..."
+  "cancel": "Cancel",
+  "citation": {
+    "detail_error": "Error loading citation formats..",
+    "download": "Download",
+    "loading": "Loading citation ...",
+    "title": "Cite dataset",
+    "title_error": "Error"
+  },
+  "copy": {
+    "detail_success": "Successfully copied to clipboard",
+    "title": "Copy",
+    "title_success": "Copy success"
+  },
+  "data": {
+    "datasource": {
+      "available": "{{count}} data sources available",
+      "select": "Choose a datasource"
     }
   },
-  "results": {
-    "layout": {
-      "list": "List view",
-      "grid": "Grid view"
-    }
-  },
-  "record": {
-    "view": {
-      "notFoundOrNotShared": "Record with identifier {{uuid}} was not found or is not shared with you. Try to sign in or do another search.",
-      "section": {
-        "description": "Description",
-        "dates": "Dates",
-        "about": "About",
-        "contacts": "Contacts",
-        "dataAccess": "Data access",
-        "explore": "Explore",
-        "publications": "Publications",
-        "associatedResources": "Associated resources",
-        "discussions": "Discussions",
-        "dataExplorer": "Data explorer",
-        "dataModel": "Data model",
-        "contact": "Contact",
-        "coverage": "Coverage",
-        "spatialInfo": "Spatial information",
-        "lineage": "Lineage",
-        "content": "Content",
-        "classification": "Classification",
-        "citation": "Citation",
-        "usageAndAccess": "Usage and access",
-        "relatedResources": "Related resources",
-        "similarResources": "Similar resources"
-      }
-    },
-    "field": {
-      "resourceTitle": "Title",
-      "dateStamp": "Updated",
-      "abstract": "Overview",
-      "credit": "Credits",
-      "lineage": "Lineage",
-      "useLimitation": "Use limitation",
-      "useConstraints": "Use constraints",
-      "otherConstraints": "Other constraints",
-      "cl_accessConstraints": "Access constraints",
-      "contact": {
-        "address": "Address",
-        "phone": "Phone",
-        "email": "Email",
-        "website": "Website"
-      },
-      "lastUpdated": "Last updated on ",
-      "coverage": {
-        "overviewAltText": "Geospatial coverage overview image",
-        "spatial": "Geospatial coverage",
-        "north": "North",
-        "south": "South",
-        "east": "East",
-        "west": "West",
-        "temporal": "Temporal coverage",
-        "vertical": "Vertical coverage"
-      },
-      "resourceType": "Resource type",
-      "resolution": "Resolution",
-      "coordinateSystem": "Coordinate system",
-      "overview": {
-        "notAvailable": "No preview"
-      },
-      "resourceDate": "Dates",
-      "catalogue": {
-        "title": "Catalogue",
-        "help": "Origin of the record",
-        "logo": {
-          "alt": "Catalogue logo"
-        }
-      },
-      "distribution": {
-        "format": "Format",
-        "sections": {
-          "api": "View",
-          "download": "Download",
-          "links": "Links",
-          "mapLegend": "Map legend",
-          "featureCatalog": "Data model",
-          "quality": "Quality"
-        }
-      },
-      "datamodel": {
-        "field": "Field",
-        "label": "Label",
-        "description": "Description",
-        "type": "Type"
-      }
-    },
-    "action": {
-      "menu": "Quick actions",
-      "share": "Share",
-      "shareHelp": "Permalink to the record",
-      "deleteTitle": "Delete this record",
-      "deleteConfirmationTitle": "Delete confirmation",
-      "deleteConfirmationMessage": "Are you sure you want to delete this record? This action cannot be undone.",
-      "typeToConfirm": "Type \"{{word}}\" to confirm",
-      "deleteSuccess": "Record deleted successfully.",
-      "deleteError": "An error occurred while deleting the record.",
-      "relatedRecordsWarning": "This record is associated with other resources:",
-      "edit": "Edit",
-      "editTitle": "Edit this record",
-      "metadataDownload": "Metadata (XML)",
-      "metadataDownloadHelp": "Download the record in XML format",
-      "addWms": {
-        "addToMap": "Add to map",
-        "checking": "Checking WMS service...",
-        "allLayersFound": "All layers found in the endpoint: {{layerNames}}",
-        "unreachable": "The WMS service is unreachable.",
-        "chooseServiceLayer": "Choose a layer from the service.",
-        "layerNotFoundButChooseAnother": "Layer '{{layerName}}' not found in the WMS service. Choose another layer from the service."
-      }
-    },
-    "association": {
-      "parent": "Part of {{count}} resource(s)",
-      "children": "Composed of {{count}} resource(s)",
-      "hassources": "Used for {{count}} resource(s)",
-      "sources": "Derived from {{count}} resource(s)",
-      "associated": "Associated with {{count}} resource(s)",
-      "brothersAndSisters": "{{count}} siblings",
-      "siblings": "{{count}} siblings",
-      "fcats": "{{count}}  data models",
-      "services": "{{count}} services",
-      "datasets": "{{count}} datasets",
-      "hasfeaturecats": "{{count}} associated data"
-    }
+  "delete": "Delete",
+  "discussions": "Discussions",
+  "error": "Error",
+  "exploreData": "Explore data",
+  "home": {
+    "discover": "Discover our themes",
+    "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",
+    "title": "Charting the ocean's story through data"
   },
   "i18n": {
     "languageSwitcher": {
@@ -227,79 +61,245 @@
     "eng": "English",
     "fre": "Français"
   },
-  "shared": {
-    "show-more-toggle": {
-      "more": "Read more",
-      "less": "View less"
-    }
-  },
-  "home": {
-    "title": "Charting the ocean's story through data",
-    "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",
-    "discover": "Discover our themes"
-  },
   "menu": {
-    "home": "Home",
-    "map": "Map",
     "addRecord": "Add record",
+    "home": "Home",
     "importRecord": "Import record",
-    "signin": "Sign in",
-    "signout": "Sign out",
+    "map": "Map",
+    "search": "Search",
     "settings": "Configure",
-    "search": "Search"
-  },
-  "user": {
-    "recentWork": "Recent work",
-    "contributions": "contributions",
-    "favorites": "Favorites",
-    "profile": "Profile",
-    "settings": "Settings",
-    "welcome": "Welcome, {{name}}",
-    "dashboard": {
-      "title": "Editor dashboard",
-      "subtitle": "Manage your contributions and access key resources",
-      "allWork": "All of your work",
-      "noWork": "You haven't contributed to any records yet.",
-      "statistics": "Statistics",
-      "favorites": "Your favorites",
-      "noFavorites": "You haven't added any records to your favorites yet."
-    }
-  },
-  "citation": {
-    "title": "Cite dataset",
-    "download": "Download",
-    "loading": "Loading citation ...",
-    "title_error": "Error",
-    "detail_error": "Error loading citation formats.."
-  },
-  "vocabulary": {
-    "moreInfoOnKeyword": "Read more information about this keyword",
-    "searchByKeyword": "Search by keyword",
-    "searchByKeywordHelp": "More records with this keyword",
-    "noDefinitionAvailable": "No definition available",
-    "otherKeywords": "Other keywords"
-  },
-  "copy": {
-    "title": "Copy",
-    "title_success": "Copy success",
-    "detail_success": "Successfully copied to clipboard"
-  },
-  "data": {
-    "datasource": {
-      "select": "Choose a datasource",
-      "available": "{{count}} data sources available"
-    }
-  },
-  "discussions": "Discussions",
-  "relations": {
-    "seeAll": "See all"
-  },
-  "exploreData": "Explore data",
-  "share": {
-    "title_error": "Error",
-    "detail_error": "Failed to fetch permalink"
+    "signin": "Sign in",
+    "signout": "Sign out"
   },
   "perspective": {
     "largeDataset": "Dataset is large. Showing first {{count}} rows of {{total}}."
+  },
+  "record": {
+    "action": {
+      "addWms": {
+        "addToMap": "Add to map",
+        "allLayersFound": "All layers found in the endpoint: {{layerNames}}",
+        "checking": "Checking WMS service...",
+        "chooseServiceLayer": "Choose a layer from the service.",
+        "layerNotFoundButChooseAnother": "Layer '{{layerName}}' not found in the WMS service. Choose another layer from the service.",
+        "unreachable": "The WMS service is unreachable."
+      },
+      "deleteConfirmationMessage": "Are you sure you want to delete this record? This action cannot be undone.",
+      "deleteConfirmationTitle": "Delete confirmation",
+      "deleteError": "An error occurred while deleting the record.",
+      "deleteSuccess": "Record deleted successfully.",
+      "deleteTitle": "Delete this record",
+      "edit": "Edit",
+      "editTitle": "Edit this record",
+      "menu": "Quick actions",
+      "metadataDownload": "Metadata (XML)",
+      "metadataDownloadHelp": "Download the record in XML format",
+      "relatedRecordsWarning": "This record is associated with other resources:",
+      "share": "Share",
+      "shareHelp": "Permalink to the record",
+      "typeToConfirm": "Type \"{{word}}\" to confirm"
+    },
+    "association": {
+      "associated": "Associated with {{count}} resource(s)",
+      "brothersAndSisters": "{{count}} siblings",
+      "children": "Composed of {{count}} resource(s)",
+      "datasets": "{{count}} datasets",
+      "fcats": "{{count}}  data models",
+      "hasfeaturecats": "{{count}} associated data",
+      "hassources": "Used for {{count}} resource(s)",
+      "parent": "Part of {{count}} resource(s)",
+      "services": "{{count}} services",
+      "siblings": "{{count}} siblings",
+      "sources": "Derived from {{count}} resource(s)"
+    },
+    "field": {
+      "abstract": "Overview",
+      "catalogue": {
+        "help": "Origin of the record",
+        "logo": {
+          "alt": "Catalogue logo"
+        },
+        "title": "Catalogue"
+      },
+      "cl_accessConstraints": "Access constraints",
+      "contact": {
+        "address": "Address",
+        "email": "Email",
+        "phone": "Phone",
+        "website": "Website"
+      },
+      "coordinateSystem": "Coordinate system",
+      "coverage": {
+        "east": "East",
+        "north": "North",
+        "overviewAltText": "Geospatial coverage overview image",
+        "south": "South",
+        "spatial": "Geospatial coverage",
+        "temporal": "Temporal coverage",
+        "vertical": "Vertical coverage",
+        "west": "West"
+      },
+      "credit": "Credits",
+      "datamodel": {
+        "description": "Description",
+        "field": "Field",
+        "label": "Label",
+        "type": "Type"
+      },
+      "dateStamp": "Updated",
+      "distribution": {
+        "format": "Format",
+        "sections": {
+          "api": "View",
+          "download": "Download",
+          "featureCatalog": "Data model",
+          "links": "Links",
+          "mapLegend": "Map legend",
+          "quality": "Quality"
+        }
+      },
+      "lastUpdated": "Last updated on ",
+      "lineage": "Lineage",
+      "otherConstraints": "Other constraints",
+      "overview": {
+        "notAvailable": "No preview"
+      },
+      "resolution": "Resolution",
+      "resourceDate": "Dates",
+      "resourceTitle": "Title",
+      "resourceType": "Resource type",
+      "useConstraints": "Use constraints",
+      "useLimitation": "Use limitation"
+    },
+    "view": {
+      "notFoundOrNotShared": "Record with identifier {{uuid}} was not found or is not shared with you. Try to sign in or do another search.",
+      "section": {
+        "about": "About",
+        "associatedResources": "Associated resources",
+        "citation": "Citation",
+        "classification": "Classification",
+        "contact": "Contact",
+        "contacts": "Contacts",
+        "content": "Content",
+        "coverage": "Coverage",
+        "dataAccess": "Data access",
+        "dataExplorer": "Data explorer",
+        "dataModel": "Data model",
+        "dates": "Dates",
+        "description": "Description",
+        "discussions": "Discussions",
+        "explore": "Explore",
+        "lineage": "Lineage",
+        "publications": "Publications",
+        "relatedResources": "Related resources",
+        "similarResources": "Similar resources",
+        "spatialInfo": "Spatial information",
+        "usageAndAccess": "Usage and access"
+      }
+    }
+  },
+  "relations": {
+    "seeAll": "See all"
+  },
+  "results": {
+    "layout": {
+      "grid": "Grid view",
+      "list": "List view"
+    }
+  },
+  "search": {
+    "aggregations": {
+      "cl_status.key": "Resource status",
+      "creationYearForResource": "Creation year",
+      "groupPublishedId": "Groups",
+      "isHarvested": "Harvested",
+      "isPublishedToAll": "Public",
+      "isTemplate": "Template",
+      "less": "less",
+      "more": "more",
+      "OrgForResource": "Organisation",
+      "resourceType": "Resource type",
+      "tag.default": "Keywords",
+      "th_dcsmm-area_tree.key": "Marine regions",
+      "th_dcsmm-descripteur_tree.key": "DCSMM Descriptors",
+      "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
+      "th_NVS-OD1_tree.key": "ODATIS aggregation parameters and Essential Variable names",
+      "th_odatis_centre_donnees_tree.key": "ODATIS Data centers",
+      "th_sextant-theme_tree.key": "Sextant themes",
+      "th_simm-reglementaire_tree.key": "Cadre Réglementaire - SIMM"
+    },
+    "backToResults": "Back to results",
+    "button": {
+      "title": "Search"
+    },
+    "filter": {
+      "activeFilters": "Active filters",
+      "panel": {
+        "open": "Filter"
+      },
+      "title": "All filters"
+    },
+    "input": {
+      "placeholder": "Search ...",
+      "popover": {
+        "resourceType": {
+          "title": "Resource type"
+        }
+      }
+    },
+    "result": "result",
+    "results": "results",
+    "searchLink": "Search for {{value}}",
+    "sort": {
+      "options": {
+        "_score": "Relevance",
+        "-changeDate": "Latest record",
+        "-createDate": "New record",
+        "-popularity": "Popularity",
+        "-rating": "Rating",
+        "-revisionDateForResource,-publicationDateForResource,-creationDateForResource": "Last update",
+        "resourceTitleObject.default.sort": "Title"
+      },
+      "placeholder": "Sort by"
+    },
+    "welcome": {
+      "default": "Search ...",
+      "text": "Search over {{count}} {{mainBuckets}}, ..."
+    }
+  },
+  "share": {
+    "detail_error": "Failed to fetch permalink",
+    "title_error": "Error"
+  },
+  "shared": {
+    "show-more-toggle": {
+      "less": "View less",
+      "more": "Read more"
+    }
+  },
+  "success": "Success",
+  "user": {
+    "bookmarks": "Bookmarks",
+    "contributions": "contributions",
+    "dashboard": {
+      "allWork": "All of your work",
+      "bookmarks": "Your bookmarks",
+      "noBookmarks": "You haven't added any records to your bookmarks yet.",
+      "noWork": "You haven't contributed to any records yet.",
+      "statistics": "Statistics",
+      "subtitle": "Manage your contributions and access key resources",
+      "title": "Editor dashboard"
+    },
+    "profile": "Profile",
+    "recentWork": "Recent work",
+    "settings": "Settings",
+    "welcome": "Welcome, {{name}}"
+  },
+  "vocabulary": {
+    "moreInfoOnKeyword": "Read more information about this keyword",
+    "noDefinitionAvailable": "No definition available",
+    "otherKeywords": "Other keywords",
+    "searchByKeyword": "Search by keyword",
+    "searchByKeywordHelp": "More records with this keyword"
   }
 }
