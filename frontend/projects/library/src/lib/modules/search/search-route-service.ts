@@ -96,6 +96,7 @@ export class SearchRouteService {
     const baseUrl = url.split('?')[0];
     return !(
       baseUrl === '/' ||
+      baseUrl === '/test' ||
       baseUrl.startsWith(SIGNIN_ROUTE_PATH) ||
       baseUrl.startsWith(RECORD_ROUTE_PATH) ||
       baseUrl.startsWith(DASHBOARD_ROUTE_PATH) ||

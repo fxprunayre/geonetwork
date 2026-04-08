@@ -41,12 +41,10 @@
             <app-results-number scope="user-records" labelKey="user.contributions" class="" />
           </div>
 
-          <p-button (click)="recordAddMenu?.menu?.toggle($event)">
+          <p-button (click)="addRecord()">
             <ng-icon name="faSolidPlus" pButtonIcon />
             <span pButtonLabel>{{ 'menu.addRecord' | translate }}</span>
           </p-button>
-
-          <app-record-add-button />
         </div>
 
         <section>

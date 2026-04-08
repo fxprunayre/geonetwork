@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { TieredMenu } from 'primeng/tieredmenu';
 
+// Unused for now. Linking to GN4 editor
 @Component({
   selector: 'app-record-add-button',
   imports: [TieredMenu],

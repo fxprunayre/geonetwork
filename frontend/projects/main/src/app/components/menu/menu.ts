@@ -139,6 +139,7 @@ export class MenuComponent implements OnInit {
         icon: 'faMap',
         routerLink: MAP_ROUTE_PATH,
         routerLinkActiveOptions: { exact: true },
+        // TODO: External mapviewer?
         // command: () => {
         //   window.open(`https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map`, 'map');
         // },
@@ -164,8 +165,11 @@ export class MenuComponent implements OnInit {
         icon: 'faSolidPlus',
         visible: this.isAuthenticated(),
         ...this.itemConfig(),
-        command: (event: any) => {
-          this.recordAddButton?.menu?.toggle(event.originalEvent);
+        // command: (event: any) => {
+        //   this.recordAddButton?.menu?.toggle(event.originalEvent);
+        // },
+        command: () => {
+          window.open(`${this.appConfig().catalogueUrl}/srv/fre/catalog.edit#/create`, '_blank');
         },
       },
       // {
@@ -178,15 +182,15 @@ export class MenuComponent implements OnInit {
       //   },
       //   ...this.itemConfig(),
       // },
-      // {
-      //   label: this.translateService.instant('menu.settings'),
-      //   title: this.translateService.instant('menu.settings'),
-      //   icon: 'faSolidGear',
-      //   command: () => {
-      //     this.isConfigurationVisible.update((v) => !v);
-      //   },
-      //   ...this.itemConfig(),
-      // },
+      {
+        label: this.translateService.instant('menu.settings'),
+        title: this.translateService.instant('menu.settings'),
+        icon: 'faSolidGear',
+        command: () => {
+          this.isConfigurationVisible.update((v) => !v);
+        },
+        ...this.itemConfig(),
+      },
     ];
   });
 

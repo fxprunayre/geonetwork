@@ -13,6 +13,7 @@ import {
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import {
   AggregationsPanel,
+  APPLICATION_CONFIGURATION,
   AuthStore,
   DEFAULT_LANGUAGE,
   RecordAddMenu,
@@ -38,7 +39,6 @@ import { SearchHeader } from '../search-header/search-header';
     Button,
     AggregationsPanel,
     UserAvatar,
-    RecordAddMenu,
     UserFullNamePipe,
   ],
   viewProviders: [
@@ -60,6 +60,7 @@ export class UserBoard {
 
   readonly store = inject(AuthStore);
   searchService = inject(SearchService);
+  appConfig = inject(APPLICATION_CONFIGURATION);
 
   user = this.store.user;
 
@@ -212,5 +213,9 @@ export class UserBoard {
 
   signOut() {
     this.store.signOut();
+  }
+
+  addRecord() {
+    window.open(`${this.appConfig().catalogueUrl}/srv/fre/catalog.edit#/create`, '_blank');
   }
 }
