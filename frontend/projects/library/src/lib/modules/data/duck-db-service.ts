@@ -529,9 +529,9 @@ export class DuckDbService {
 
   async getGeometryColumns(tableName: string): Promise<string[]> {
     const describe = await this.runQuery(`DESCRIBE ${tableName}`);
-    const geometryTypes = new Set(['GEOMETRY', 'POINT', 'LINE', 'POLYGON']);
+    const geometryTypes = ['GEOMETRY', 'POINT', 'LINE', 'POLYGON'];
     return describe
-      .filter((row) => geometryTypes.has(row.column_type))
+      .filter((row) => geometryTypes.some((type) => row.column_type.startsWith(type)))
       .map((row) => row.column_name);
   }
 

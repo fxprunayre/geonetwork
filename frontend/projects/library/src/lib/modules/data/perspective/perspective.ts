@@ -22,12 +22,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import perspective from '@perspective-dev/client';
 import { Button, ButtonIcon } from 'primeng/button';
 import { Message } from 'primeng/message';
+import { Popover } from 'primeng/popover';
 import { ProgressBar } from 'primeng/progressbar';
 import { Datasource, DuckDbService } from '../duck-db-service';
 
 @Component({
   selector: 'app-perspective',
-  imports: [Button, ButtonIcon, Message, NgClass, NgIcon, ProgressBar, TranslateModule],
+  imports: [Button, ButtonIcon, Message, NgClass, NgIcon, Popover, ProgressBar, TranslateModule],
   viewProviders: [
     provideIcons({
       faSolidExpand,
@@ -62,6 +63,14 @@ import { Datasource, DuckDbService } from '../duck-db-service';
             />
             <div class="basis-2/3 flex items-center gap-2">
               {{ progress().status }}
+              @if (progress().status === 'error' && progress().errorMessage) {
+                <p-button (click)="op.toggle($event)" variant="text" severity="danger">
+                  <ng-icon name="faSolidTriangleExclamation" pButtonIcon></ng-icon>
+                </p-button>
+                <p-popover #op>
+                  {{ progress().errorMessage }}
+                </p-popover>
+              }
 
               @if (progress().downloadedBytes) {
                 - {{ (progress().downloadedBytes / (1024 * 1024)).toFixed(2) }} MB
@@ -211,7 +220,9 @@ export class Perspective implements OnDestroy {
 
     const table = this.worker.table(this.sanitizeData(result));
     this.perspectiveViewer.nativeElement.load(table);
-    this.perspectiveViewer.nativeElement.restore();
+    this.perspectiveViewer.nativeElement.restore({
+      settings: false,
+    });
   }
 
   ngOnDestroy() {
