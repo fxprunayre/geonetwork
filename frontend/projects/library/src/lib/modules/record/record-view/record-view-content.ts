@@ -206,9 +206,16 @@ export class RecordViewContent implements AfterViewInit {
     if (!!tab && this.tab() === tab) return;
 
     if (this.record()?.uuid) {
-      this.router.navigate([RECORD_ROUTE_PATH, this.record()!.uuid, tab], {
-        queryParamsHandling: 'preserve',
-      });
+      if (this.tab() === 'explore' && tab !== 'explore') {
+        this.router.navigate([RECORD_ROUTE_PATH, this.record()!.uuid, tab], {
+          queryParams: { datasource: null },
+          queryParamsHandling: 'merge',
+        });
+      } else {
+        this.router.navigate([RECORD_ROUTE_PATH, this.record()!.uuid, tab], {
+          queryParamsHandling: 'preserve',
+        });
+      }
     }
   }
 

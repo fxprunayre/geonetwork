@@ -118,7 +118,7 @@ import { Datasource, DuckDbService } from '../duck-db-service';
           }
         </p-button>
       </div>
-      <perspective-viewer #perspectiveViewer class="w-full min-h-dvh h-full" />
+      <perspective-viewer #perspectiveViewer class="w-full h-[93vh]" />
     </div>
   `,
   styleUrl: './perspective.scss',
