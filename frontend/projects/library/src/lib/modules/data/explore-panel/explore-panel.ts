@@ -4,14 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
-import { Fieldset } from 'primeng/fieldset';
 import { DatasourceSelect } from '../datasource-select/datasource-select';
 import { Datasource, DuckDbService } from '../duck-db-service';
 import { Perspective } from '../perspective/perspective';
 
 @Component({
   selector: 'app-explore-panel',
-  imports: [DatasourceSelect, Fieldset, NgIcon, Perspective, TranslatePipe],
+  imports: [DatasourceSelect, NgIcon, Perspective, TranslatePipe],
   templateUrl: './explore-panel.html',
 })
 export class ExplorePanel {

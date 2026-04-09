@@ -221,11 +221,11 @@ export class Perspective implements OnDestroy {
     const table = this.worker.table(this.sanitizeData(result));
     this.perspectiveViewer.nativeElement.load(table);
     this.perspectiveViewer.nativeElement.restore({
-      settings: false,
+      settings: true,
     });
   }
 
   ngOnDestroy() {
-    this.perspectiveViewer?.nativeElement?.eject?.();
+    this.clearPreviousDataIfAny();
   }
 }
