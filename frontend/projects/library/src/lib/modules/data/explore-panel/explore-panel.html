@@ -1,13 +1,15 @@
 @if (datasources().length > 0) {
-  <p-fieldset>
-    <ng-template #header>
-      <div class="flex items-center gap-2 px-2">
-        <ng-icon name="faSolidDatabase" />
-        {{ 'data.datasource.available' | translate: { count: datasources().length } }}
-      </div>
-    </ng-template>
-    <app-datasource-select [datasources]="datasources()" [(datasource)]="datasource" />
-  </p-fieldset>
+  <div class="flex items-center gap-2 px-2">
+    <div class="w-1/4 flex items-center gap-2">
+      <ng-icon name="faSolidDatabase" />
+      {{ 'data.datasource.available' | translate: { count: datasources().length } }}
+    </div>
+    <app-datasource-select
+      class="w-3/4 grow"
+      [datasources]="datasources()"
+      [(datasource)]="datasource"
+    />
+  </div>
 
   @if (datasource()) {
     <app-perspective [datasource]="datasource()" />

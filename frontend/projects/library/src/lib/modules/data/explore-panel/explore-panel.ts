@@ -1,13 +1,4 @@
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  input,
-  OnDestroy,
-  signal,
-  untracked,
-} from '@angular/core';
+import { Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
@@ -23,8 +14,9 @@ import { Perspective } from '../perspective/perspective';
   imports: [DatasourceSelect, Fieldset, NgIcon, Perspective, TranslatePipe],
   templateUrl: './explore-panel.html',
 })
-export class ExplorePanel implements OnDestroy {
+export class ExplorePanel {
   record = input.required<IndexRecord>();
+  activeTab = input<string>('explore');
   datasource = signal<Datasource | undefined>(undefined);
 
   duckdbService = inject(DuckDbService);
@@ -46,6 +38,10 @@ export class ExplorePanel implements OnDestroy {
       () => {
         const sources = this.datasources();
         const qp = this.queryParams();
+        const active = this.activeTab();
+        if (active !== 'explore') {
+          return;
+        }
 
         if (sources.length > 0) {
           const currentDs = untracked(() => this.datasource());
@@ -76,14 +72,6 @@ export class ExplorePanel implements OnDestroy {
           });
         }
       }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.router.navigate([], {
-      queryParams: { datasource: null },
-      queryParamsHandling: 'merge',
-      replaceUrl: true,
     });
   }
 }

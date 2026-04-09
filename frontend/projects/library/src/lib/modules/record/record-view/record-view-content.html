@@ -269,7 +269,7 @@
 
         @if (record.info?.hasDatasource) {
           <p-tabpanel value="explore">
-            <app-explore-panel [record]="record" />
+            <app-explore-panel [record]="record" [activeTab]="tab()" />
           </p-tabpanel>
         }
 
