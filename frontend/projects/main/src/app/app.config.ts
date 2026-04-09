@@ -1,4 +1,4 @@
-import { LocationStrategy, registerLocaleData } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, registerLocaleData } from '@angular/common';
 import { HttpBackend, provideHttpClient } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import {
@@ -118,7 +118,8 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
       }),
     ),
-    //{ provide: LocationStrategy, useClass: InMemoryLocationStrategy },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    // { provide: LocationStrategy, useClass: InMemoryLocationStrategy },
     provideAnimationsAsync(),
     provideHttpClient(),
     provideTranslateService({

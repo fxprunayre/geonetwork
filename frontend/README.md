@@ -31,6 +31,26 @@ See [`test-wc.html`](test-wc.html)
 <sextant-app></sextant-app>
 ```
 
+### WebComponent mode
+
+#### Routing
+
+By default angular use `PathLocationStrategy` with `/`. When embedding the webcomponent in another site which does not set redirection for location path, this strategy will not work when accessing the application with a non root path.
+
+
+In such case, 2 options:
+
+* `ApplicationConfig` use an in memory strategy
+```
+{ provide: LocationStrategy, useClass: InMemoryLocationStrategy }
+```
+
+* Use the `HashLocationStrategy` (default)
+
+
+See [`ApplicationConfig`](projects/main/src/app/app.config.ts) for configuration of the strategy.
+
+`HashLocationStrategy` may not be the best option for SEO (to be investigated).
 
 
 # Development
