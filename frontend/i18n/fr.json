@@ -1,4 +1,7 @@
 {
+  "admin": {
+    "goto": "Administrer"
+  },
   "auth": {
     "signin": {
       "button": "Se connecter",

@@ -13,6 +13,7 @@ import {
   faSolidHouse,
   faSolidLanguage,
   faSolidMagnifyingGlass,
+  faSolidPaintRoller,
   faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -49,6 +50,7 @@ const ICONS = {
   faSolidPlus,
   faSolidGear,
   faSolidMagnifyingGlass,
+  faSolidPaintRoller,
   faMap,
   faSolidBookmark,
   faCompass,
@@ -171,22 +173,30 @@ export class MenuComponent implements OnInit {
           window.open(this.gn4UrlService.getEditorUrl('create'), '_blank');
         },
       },
-      // {
-      //   label: this.translateService.instant('menu.signout'),
-      //   title: this.translateService.instant('menu.signout'),
-      //   visible: this.isAuthenticated(),
-      //   icon: 'faSolidArrowRightFromBracket',
-      //   command: () => {
-      //     this.authStore.signOut();
-      //   },
-      //   ...this.itemConfig(),
-      // },
+      {
+        label: this.translateService.instant('admin.goto'),
+        icon: 'faSolidGear',
+        visible: this.isAuthenticated() && this.userRole() === 'Administrator',
+        ...this.itemConfig(),
+        command: () => {
+          window.open(this.gn4UrlService.getAdminConsoleUrl(), 'adminConsole');
+        },
+      },
       {
         label: this.translateService.instant('menu.settings'),
         visible: this.isAuthenticated(),
-        icon: 'faSolidGear',
+        icon: 'faSolidPaintRoller',
         command: () => {
           this.isConfigurationVisible.update((v) => !v);
+        },
+        ...this.itemConfig(),
+      },
+      {
+        label: this.translateService.instant('menu.signout'),
+        visible: this.isAuthenticated(),
+        icon: 'faSolidArrowRightFromBracket',
+        command: () => {
+          this.authStore.signOut();
         },
         ...this.itemConfig(),
       },
