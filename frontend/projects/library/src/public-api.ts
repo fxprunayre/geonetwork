@@ -14,6 +14,7 @@ export * from './lib/modules/authentication/user-avatar/user-avatar';
 export * from './lib/modules/catalogue/catalogue-logo/catalogue-logo';
 export * from './lib/modules/config/config.loader';
 export * from './lib/modules/config/fixtures';
+export * from './lib/modules/config/gn4-url.service';
 export * from './lib/modules/config/model/gn4config';
 export * from './lib/modules/config/model/gnConfig';
 export * from './lib/modules/i18n/language-switcher/language-switcher';

@@ -17,6 +17,7 @@ import {
   APPLICATION_CONFIGURATION,
   AuthStore,
   DEFAULT_LANGUAGE,
+  Gn4UrlService,
   initialState,
   RecordAddMenu,
   ResultsNumberComponent,
@@ -65,6 +66,7 @@ export class UserBoard {
   readonly store = inject(AuthStore);
   searchService = inject(SearchService);
   appConfig = inject(APPLICATION_CONFIGURATION);
+  gn4UrlService = inject(Gn4UrlService);
 
   user = this.store.user;
 
@@ -96,16 +98,12 @@ export class UserBoard {
     return Object.keys(this.search().aggregations());
   });
 
-  iso3Lang = computed(() => {
-    return this.translationsService.getIso3Code(this.translate.getCurrentLang());
-  });
-
   addRecordUrl = computed(() => {
-    return `${this.appConfig().catalogueUrl}/srv/${this.iso3Lang()}/catalog.edit#/create`;
+    return this.gn4UrlService.getEditorUrl('create');
   });
 
   importRecordUrl = computed(() => {
-    return `${this.appConfig().catalogueUrl}/srv/${this.iso3Lang()}/catalog.edit#/import`;
+    return this.gn4UrlService.getEditorUrl('import');
   });
 
   constructor() {

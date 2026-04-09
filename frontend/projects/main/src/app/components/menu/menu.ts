@@ -22,12 +22,14 @@ import {
   AuthStore,
   CatalogueLogo,
   DASHBOARD_ROUTE_PATH,
+  Gn4UrlService,
   IconStyleService,
   LanguageSwitcher,
   MAP_ROUTE_PATH,
   RecordAddMenu,
   SEARCH_ROUTE_PATH,
   ThemeDesigner,
+  TranslationsService,
   UserAvatar,
   UserFullNamePipe,
 } from 'gn-library';
@@ -95,6 +97,8 @@ export class MenuComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   styleService = inject(IconStyleService);
   translateService = inject(TranslateService);
+  translationsService = inject(TranslationsService);
+  gn4UrlService = inject(Gn4UrlService);
   router = inject(Router);
   messageService = inject(MessageService);
 
@@ -119,7 +123,6 @@ export class MenuComponent implements OnInit {
     return [
       {
         label: this.translateService.instant('menu.home'),
-        title: this.translateService.instant('menu.home'),
         icon: 'faCompass',
         routerLink: '/',
         routerLinkActiveOptions: { exact: true },
@@ -127,7 +130,6 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('menu.search'),
-        title: this.translateService.instant('menu.search'),
         icon: 'faSolidMagnifyingGlass',
         routerLink: SEARCH_ROUTE_PATH,
         routerLinkActiveOptions: { exact: false },
@@ -135,7 +137,6 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('menu.map'),
-        title: this.translateService.instant('menu.map'),
         icon: 'faMap',
         routerLink: MAP_ROUTE_PATH,
         routerLinkActiveOptions: { exact: true },
@@ -151,7 +152,6 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('menu.signin'),
-        title: this.translateService.instant('menu.signin'),
         visible: !this.isAuthenticated(),
         icon: 'faSolidArrowRightToBracket',
         command: () => {
@@ -160,8 +160,7 @@ export class MenuComponent implements OnInit {
         ...this.itemConfig(),
       },
       {
-        label: this.translateService.instant('menu.addRecord'),
-        title: this.translateService.instant('menu.addRecord'),
+        label: this.translateService.instant('record.action.addRecord.label'),
         icon: 'faSolidPlus',
         visible: this.isAuthenticated(),
         ...this.itemConfig(),
@@ -169,7 +168,7 @@ export class MenuComponent implements OnInit {
         //   this.recordAddButton?.menu?.toggle(event.originalEvent);
         // },
         command: () => {
-          window.open(`${this.appConfig().catalogueUrl}/srv/fre/catalog.edit#/create`, '_blank');
+          window.open(this.gn4UrlService.getEditorUrl('create'), '_blank');
         },
       },
       // {
@@ -184,7 +183,6 @@ export class MenuComponent implements OnInit {
       // },
       {
         label: this.translateService.instant('menu.settings'),
-        title: this.translateService.instant('menu.settings'),
         visible: this.isAuthenticated(),
         icon: 'faSolidGear',
         command: () => {
