@@ -1,5 +1,5 @@
 @if (doi(); as doi) {
-  <a [href]="doi.url" [title]="doi.code" target="_blank" rel="noopener noreferrer">
+  <a [href]="doi.url" [title]="'doi.title' | translate" target="_blank" rel="noopener noreferrer">
     <p-chip class="!py-0 !pl-0 !pr-4">
       <span
         class="bg-primary text-primary-contrast text-xs rounded-full w-8 h-8 flex items-center justify-center"

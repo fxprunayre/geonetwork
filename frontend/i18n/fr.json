@@ -46,6 +46,9 @@
   },
   "delete": "Supprimer",
   "discussions": "Discussions",
+  "doi": {
+    "title": "Digital Object Identifier (DOI)"
+  },
   "error": "Erreur",
   "exploreData": "Explorer les données",
   "home": {
@@ -215,7 +218,6 @@
   },
   "search": {
     "aggregations": {
-      "OrgForResource": "Organisation",
       "cl_status.key": "Statut de la ressource",
       "creationYearForResource": "Année de création",
       "groupPublishedId": "Catalogues",
@@ -224,12 +226,13 @@
       "isTemplate": "Modèle",
       "less": "moins",
       "more": "plus",
+      "OrgForResource": "Organisation",
       "resourceType": "Type de ressource",
       "tag.default": "Mots-clés",
-      "th_NVS-OD1_tree.key": "Paramètres d'agrégation ODATIS et noms de variables essentielles",
       "th_dcsmm-area_tree.key": "Sous-régions marines",
       "th_dcsmm-descripteur_tree.key": "Descripteurs DCSMM",
       "th_httpinspireeceuropaeutheme-theme_tree.key": "Thèmes INSPIRE",
+      "th_NVS-OD1_tree.key": "Paramètres d'agrégation ODATIS et noms de variables essentielles",
       "th_odatis_centre_donnees_tree.key": "Centres de données ODATIS",
       "th_sextant-theme_tree.key": "Thèmes Sextant",
       "th_simm-reglementaire_tree.key": "Cadre Réglementaire - SIMM"
@@ -258,12 +261,12 @@
     "searchLink": "Rechercher {{value}}",
     "sort": {
       "options": {
+        "_score": "Pertinence",
         "-changeDate": "Dernier enregistrement",
         "-createDate": "Nouveau record",
         "-popularity": "Popularité",
         "-rating": "Notation",
         "-revisionDateForResource,-publicationDateForResource,-creationDateForResource": "Dernière mise à jour",
-        "_score": "Pertinence",
         "resourceTitleObject.default.sort": "Titre"
       },
       "placeholder": "Trier par"

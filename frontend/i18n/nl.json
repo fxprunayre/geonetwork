@@ -45,6 +45,9 @@
   },
   "delete": "Delete",
   "discussions": "Discussions",
+  "doi": {
+    "title": "Digital Object Identifier (DOI)"
+  },
   "error": "Fout",
   "exploreData": "Explore data",
   "home": {
@@ -214,7 +217,6 @@
   },
   "search": {
     "aggregations": {
-      "OrgForResource": "Organisation",
       "cl_status.key": "Resource status",
       "creationYearForResource": "Creation year",
       "groupPublishedId": "Groups",
@@ -223,12 +225,13 @@
       "isTemplate": "Template",
       "less": "less",
       "more": "more",
+      "OrgForResource": "Organisation",
       "resourceType": "Resource type",
       "tag.default": "Keywords",
-      "th_NVS-OD1_tree.key": "ODATIS aggregation parameters and Essential Variable names",
       "th_dcsmm-area_tree.key": "Marine regions",
       "th_dcsmm-descripteur_tree.key": "DCSMM Descriptors",
       "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
+      "th_NVS-OD1_tree.key": "ODATIS aggregation parameters and Essential Variable names",
       "th_odatis_centre_donnees_tree.key": "ODATIS Data centers",
       "th_sextant-theme_tree.key": "Sextant themes",
       "th_simm-reglementaire_tree.key": "Cadre Réglementaire - SIMM"
@@ -257,12 +260,12 @@
     "searchLink": "Search for {{value}}",
     "sort": {
       "options": {
+        "_score": "Relevantie",
         "-changeDate": "Laatste record",
         "-createDate": "Nieuw record",
         "-popularity": "Populariteit",
         "-rating": "Oordeel",
         "-revisionDateForResource,-publicationDateForResource,-creationDateForResource": "Laaste update",
-        "_score": "Relevantie",
         "resourceTitleObject.default.sort": "Titel"
       },
       "placeholder": "Sorteer op"

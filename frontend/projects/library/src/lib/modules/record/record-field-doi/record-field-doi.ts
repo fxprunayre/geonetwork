@@ -1,10 +1,11 @@
 import { Component, computed } from '@angular/core';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Chip } from 'primeng/chip';
+import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
   selector: 'app-record-field-doi',
-  imports: [Chip],
+  imports: [Chip, TranslatePipe],
   templateUrl: './record-field-doi.html',
 })
 export class RecordFieldDoi extends RecordFieldBase {

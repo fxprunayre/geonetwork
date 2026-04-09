@@ -45,6 +45,9 @@
   },
   "delete": "Delete",
   "discussions": "Discussions",
+  "doi": {
+    "title": "Digital Object Identifier (DOI)"
+  },
   "error": "Error",
   "exploreData": "Explore data",
   "home": {
