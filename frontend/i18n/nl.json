@@ -1,5 +1,4 @@
 {
-  "addToMap": "Add to map",
   "auth": {
     "signin": {
       "button": "Sign In",
@@ -63,7 +62,6 @@
     "fre": "Français"
   },
   "menu": {
-    "addrecord": "Add",
     "addRecord": "Record toevoegen",
     "home": "Home",
     "importRecord": "Record importeren",
