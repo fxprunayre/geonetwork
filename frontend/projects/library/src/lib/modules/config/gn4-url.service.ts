@@ -11,10 +11,19 @@ export class Gn4UrlService {
   private readonly translateService = inject(TranslateService);
   private readonly translationsService = inject(TranslationsService);
 
-  getEditorUrl(targetPath: string): string {
+  private getCurrentLangIso3(): string {
     const defaultLang = this.translateService.getDefaultLang() || 'eng';
     const currentLang = this.translateService.currentLang || defaultLang;
-    const langIso3 = this.translationsService.getIso3Code(currentLang);
+    return this.translationsService.getIso3Code(currentLang);
+  }
+
+  getEditorUrl(targetPath: string): string {
+    const langIso3 = this.getCurrentLangIso3();
     return `${this.appConfig().catalogueUrl}/srv/${langIso3}/catalog.edit#/${targetPath}`;
+  }
+
+  getAdminConsoleUrl(): string {
+    const langIso3 = this.getCurrentLangIso3();
+    return `${this.appConfig().catalogueUrl}/srv/${langIso3}/admin.console`;
   }
 }
