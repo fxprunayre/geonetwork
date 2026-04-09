@@ -62,9 +62,7 @@
     "fre": "Français"
   },
   "menu": {
-    "addRecord": "Add record",
     "home": "Home",
-    "importRecord": "Import record",
     "map": "Map",
     "search": "Search",
     "settings": "Configure",
@@ -76,6 +74,11 @@
   },
   "record": {
     "action": {
+      "addRecord": {
+        "label": "Add record",
+        "noTemplates": "You cannot add a new record because there are no templates available. Please contact your administrator.",
+        "xTemplateAvailable": "{{count}} template(s) available"
+      },
       "addWms": {
         "addToMap": "Add to map",
         "allLayersFound": "All layers found in the endpoint: {{layerNames}}",
@@ -91,6 +94,7 @@
       "deleteTitle": "Delete this record",
       "edit": "Edit",
       "editTitle": "Edit this record",
+      "importRecord": "Import record",
       "menu": "Quick actions",
       "metadataDownload": "Metadata (XML)",
       "metadataDownloadHelp": "Download the record in XML format",
@@ -209,6 +213,7 @@
   },
   "search": {
     "aggregations": {
+      "OrgForResource": "Organisation",
       "cl_status.key": "Resource status",
       "creationYearForResource": "Creation year",
       "groupPublishedId": "Groups",
@@ -217,13 +222,12 @@
       "isTemplate": "Template",
       "less": "less",
       "more": "more",
-      "OrgForResource": "Organisation",
       "resourceType": "Resource type",
       "tag.default": "Keywords",
+      "th_NVS-OD1_tree.key": "ODATIS aggregation parameters and Essential Variable names",
       "th_dcsmm-area_tree.key": "Marine regions",
       "th_dcsmm-descripteur_tree.key": "DCSMM Descriptors",
       "th_httpinspireeceuropaeutheme-theme_tree.key": "INSPIRE themes",
-      "th_NVS-OD1_tree.key": "ODATIS aggregation parameters and Essential Variable names",
       "th_odatis_centre_donnees_tree.key": "ODATIS Data centers",
       "th_sextant-theme_tree.key": "Sextant themes",
       "th_simm-reglementaire_tree.key": "Cadre Réglementaire - SIMM"
@@ -252,12 +256,12 @@
     "searchLink": "Search for {{value}}",
     "sort": {
       "options": {
-        "_score": "Relevance",
         "-changeDate": "Latest record",
         "-createDate": "New record",
         "-popularity": "Popularity",
         "-rating": "Rating",
         "-revisionDateForResource,-publicationDateForResource,-creationDateForResource": "Last update",
+        "_score": "Relevance",
         "resourceTitleObject.default.sort": "Title"
       },
       "placeholder": "Sort by"

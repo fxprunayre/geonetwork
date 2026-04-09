@@ -4,6 +4,7 @@ import {
   faSolidArrowRightFromBracket,
   faSolidBookmark,
   faSolidCircleUser,
+  faSolidFileImport,
   faSolidGear,
   faSolidLock,
   faSolidLockOpen,
@@ -16,15 +17,17 @@ import {
   APPLICATION_CONFIGURATION,
   AuthStore,
   DEFAULT_LANGUAGE,
+  initialState,
   RecordAddMenu,
   ResultsNumberComponent,
   ResultsView,
   SearchContextDirective,
   SearchService,
+  TranslationsService,
   UserAvatar,
   UserFullNamePipe,
 } from 'gn-library';
-import { Button } from 'primeng/button';
+import { ButtonDirective } from 'primeng/button';
 import { SearchHeader } from '../search-header/search-header';
 
 @Component({
@@ -36,7 +39,7 @@ import { SearchHeader } from '../search-header/search-header';
     SearchContextDirective,
     ResultsNumberComponent,
     ResultsView,
-    Button,
+    ButtonDirective,
     AggregationsPanel,
     UserAvatar,
     UserFullNamePipe,
@@ -45,6 +48,7 @@ import { SearchHeader } from '../search-header/search-header';
     provideIcons({
       faSolidPenToSquare,
       faSolidCircleUser,
+      faSolidFileImport,
       faSolidPlus,
       faSolidBookmark,
       faSolidGear,
@@ -74,11 +78,15 @@ export class UserBoard {
     return `+owner:${this.user()?.id} +isTemplate:n`;
   });
 
+  templateCount = signal(0);
+  hasTemplates = signal<boolean | undefined>(undefined);
+
   isAuthenticated = this.store.isAuthenticated;
 
   language = signal<string | undefined>(DEFAULT_LANGUAGE);
 
   translate = inject(TranslateService);
+  translationsService = inject(TranslationsService);
 
   search = computed(() => {
     return this.searchService.getSearch('user-records');
@@ -87,12 +95,34 @@ export class UserBoard {
   aggregations = computed(() => {
     return Object.keys(this.search().aggregations());
   });
-  recordAddButton: any;
+
+  iso3Lang = computed(() => {
+    return this.translationsService.getIso3Code(this.translate.getCurrentLang());
+  });
+
+  addRecordUrl = computed(() => {
+    return `${this.appConfig().catalogueUrl}/srv/${this.iso3Lang()}/catalog.edit#/create`;
+  });
+
+  importRecordUrl = computed(() => {
+    return `${this.appConfig().catalogueUrl}/srv/${this.iso3Lang()}/catalog.edit#/import`;
+  });
 
   constructor() {
     this.translate.onLangChange.subscribe((event) => {
       this.language.set(event.lang);
     });
+
+    this.searchService
+      .search({
+        ...initialState,
+        filters: { isTemplate: { field: 'isTemplate', values: ['y'] } },
+        pageSize: 0,
+      })
+      .subscribe((results) => {
+        this.templateCount.set(results.totalCount);
+        this.hasTemplates.set(results.totalCount > 0);
+      });
   }
 
   userRecordAggregationConfig = [
@@ -213,9 +243,5 @@ export class UserBoard {
 
   signOut() {
     this.store.signOut();
-  }
-
-  addRecord() {
-    window.open(`${this.appConfig().catalogueUrl}/srv/fre/catalog.edit#/create`, '_blank');
   }
 }

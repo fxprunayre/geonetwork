@@ -33,18 +33,36 @@
       <div
         class="col-span-2 border rounded-(--p-border-radius-md) border-surface-100 flex flex-col gap-4 p-4"
       >
-        <div class="flex flex-row">
+        <div class="flex flex-row items-start gap-2">
           <div class="grow">
             <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
               {{ 'user.dashboard.allWork' | translate }}
             </h2>
             <app-results-number scope="user-records" labelKey="user.contributions" class="" />
           </div>
-
-          <p-button (click)="addRecord()">
-            <ng-icon name="faSolidPlus" pButtonIcon />
-            <span pButtonLabel>{{ 'menu.addRecord' | translate }}</span>
-          </p-button>
+          <span
+            [title]="
+              hasTemplates()
+                ? ('record.action.addRecord.xTemplateAvailable'
+                  | translate: { count: templateCount() })
+                : ('record.action.addRecord.noTemplates' | translate)
+            "
+          >
+            <a
+              pButton
+              [href]="addRecordUrl()"
+              (click)="!hasTemplates() ? $event.preventDefault() : null"
+              [class.p-disabled]="!hasTemplates()"
+              target="_blank"
+            >
+              <ng-icon name="faSolidPlus" pButtonIcon />
+              <span pButtonLabel>{{ 'record.action.addRecord.label' | translate }}</span>
+            </a>
+          </span>
+          <a pButton [href]="importRecordUrl()" severity="secondary" target="_blank">
+            <ng-icon name="faSolidFileImport" pButtonIcon />
+            <span pButtonLabel>{{ 'record.action.importRecord' | translate }}</span>
+          </a>
         </div>
 
         <section>
