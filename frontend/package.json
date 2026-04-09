@@ -36,6 +36,9 @@
     ]
   },
   "lint-staged": {
+    "i18n/*.json": [
+      "node scripts/sort-i18n.js"
+    ],
     "**/*.{ts,html,scss,css,json}": [
       "prettier --write"
     ]
