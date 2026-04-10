@@ -53,18 +53,24 @@
                             {{ link.descriptionObject?.['default'] }}
                           </p>
                         }
+
+                        @if (isExplorable(link)) {
+                          <app-download-data [link]="link" />
+                        }
                       </div>
                       <div class="flex-none w-full md:w-auto">
                         @if (link.protocol?.match('OGC:WMS|application/vnd.ogc.wms_xml')) {
                           <app-add-layer-to-map [record]="record()" [link]="link" />
                         } @else if (isExplorable(link)) {
-                          <p-button
-                            styleClass="w-full md:w-auto"
-                            (click)="exploreData(link)"
-                            [label]="'exploreData' | translate"
-                            size="small"
-                            [outlined]="true"
-                          />
+                          <div class="flex flex-col md:flex-row gap-2">
+                            <p-button
+                              styleClass="w-full md:w-auto"
+                              (click)="exploreData(link)"
+                              [label]="'exploreData' | translate"
+                              size="small"
+                              [outlined]="true"
+                            />
+                          </div>
                         }
                       </div>
                     </div>

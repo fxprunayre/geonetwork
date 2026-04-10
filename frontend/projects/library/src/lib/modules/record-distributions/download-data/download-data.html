@@ -1,0 +1,41 @@
+@if (loading()) {
+  <p-skeleton
+    [title]="'record.field.distribution.download.checking' | translate"
+    size="2rem"
+    class="mr-2"
+  />
+} @else if (isWfs() && wfsConfigs().length > 0) {
+  <div class="flex flex-col gap-3">
+    @if (friendlyFormats().length > 0) {
+      <div class="flex flex-col gap-1 items-start text-sm">
+        <span class="text-surface-600 dark:text-surface-400">{{
+          'record.field.distribution.download.formatsAvailable' | translate
+        }}</span>
+        <div class="flex flex-wrap gap-1">
+          @for (format of friendlyFormats(); track format) {
+            <p-badge severity="success" [value]="format"></p-badge>
+          }
+        </div>
+      </div>
+    }
+    <div class="flex flex-col gap-2">
+      @for (config of wfsConfigs(); track config.label) {
+        <p-button
+          class="w-full md:w-auto"
+          size="small"
+          [outlined]="true"
+          (click)="wfsMenu.toggle($event)"
+        >
+          <ng-icon pButtonIcon name="faSolidCloudArrowDown" class="mr-2" />
+          <span pButtonLabel>{{ config.label }}</span>
+        </p-button>
+        <p-tieredMenu #wfsMenu [model]="config.menuItems" [popup]="true" appendTo="body" />
+      }
+    </div>
+  </div>
+} @else {
+  <p-button styleClass="w-full md:w-auto" (click)="download()" size="small" [outlined]="true">
+    <ng-icon pButtonIcon name="faSolidCloudArrowDown" class="mr-2" />
+    <span pButtonLabel>{{ 'record.field.distribution.download.download.label' | translate }}</span>
+  </p-button>
+}

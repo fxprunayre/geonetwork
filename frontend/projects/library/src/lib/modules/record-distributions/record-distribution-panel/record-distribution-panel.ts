@@ -16,6 +16,7 @@ import { IftaLabel } from 'primeng/iftalabel';
 import { InputText } from 'primeng/inputtext';
 import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 import { AddLayerToMap } from '../add-layer-to-map/add-layer-to-map';
+import { DownloadData } from '../download-data/download-data';
 import { LinkBadge } from '../link-badge/link-badge';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 
@@ -27,6 +28,7 @@ import { RecordDistributionFieldBase } from '../record-distribution-field-base/r
     AccordionHeader,
     AccordionPanel,
     AddLayerToMap,
+    DownloadData,
     Button,
     Card,
     IftaLabel,

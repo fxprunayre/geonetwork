@@ -158,6 +158,10 @@
       },
       "dateStamp": "Updated",
       "distribution": {
+        "download": {
+          "formatsAvailable": "Download in one of the available formats",
+          "label": "Download"
+        },
         "format": "Format",
         "sections": {
           "api": "View",
