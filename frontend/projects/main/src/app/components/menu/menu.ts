@@ -96,6 +96,8 @@ const ICONS = {
 export class MenuComponent implements OnInit {
   @ViewChild(RecordAddMenu) recordAddButton: RecordAddMenu | undefined;
 
+  isExpandedOnHover = signal(false);
+
   readonly authStore = inject(AuthStore);
   styleService = inject(IconStyleService);
   translateService = inject(TranslateService);
@@ -125,6 +127,7 @@ export class MenuComponent implements OnInit {
     return [
       {
         label: this.translateService.instant('menu.home'),
+        title: this.isIconMode() ? this.translateService.instant('menu.home') : '',
         icon: 'faCompass',
         routerLink: '/',
         routerLinkActiveOptions: { exact: true },
@@ -132,6 +135,7 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('menu.search'),
+        title: this.isIconMode() ? this.translateService.instant('menu.search') : '',
         icon: 'faSolidMagnifyingGlass',
         routerLink: SEARCH_ROUTE_PATH,
         routerLinkActiveOptions: { exact: false },
@@ -139,6 +143,7 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('menu.map'),
+        title: this.isIconMode() ? this.translateService.instant('menu.map') : '',
         icon: 'faMap',
         routerLink: MAP_ROUTE_PATH,
         routerLinkActiveOptions: { exact: true },
@@ -154,6 +159,7 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('menu.signin'),
+        title: this.isIconMode() ? this.translateService.instant('menu.signin') : '',
         visible: !this.isAuthenticated(),
         icon: 'faSolidArrowRightToBracket',
         command: () => {
@@ -163,6 +169,9 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('record.action.addRecord.label'),
+        title: this.isIconMode()
+          ? this.translateService.instant('record.action.addRecord.label')
+          : '',
         icon: 'faSolidPlus',
         visible: this.isAuthenticated(),
         ...this.itemConfig(),
@@ -175,6 +184,7 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('admin.goto'),
+        title: this.isIconMode() ? this.translateService.instant('admin.goto') : '',
         icon: 'faSolidGear',
         visible: this.isAuthenticated() && this.userRole() === 'Administrator',
         ...this.itemConfig(),
@@ -184,6 +194,7 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('menu.settings'),
+        title: this.isIconMode() ? this.translateService.instant('menu.settings') : '',
         visible: this.isAuthenticated(),
         icon: 'faSolidPaintRoller',
         command: () => {
@@ -193,6 +204,7 @@ export class MenuComponent implements OnInit {
       },
       {
         label: this.translateService.instant('menu.signout'),
+        title: this.isIconMode() ? this.translateService.instant('menu.signout') : '',
         visible: this.isAuthenticated(),
         icon: 'faSolidArrowRightFromBracket',
         command: () => {
@@ -268,10 +280,12 @@ export class MenuComponent implements OnInit {
   }
 
   expandMenu() {
+    if (!this.isExpandedOnHover()) return;
     this.isIconMode.set(false);
   }
 
   collapseMenu() {
+    if (!this.isExpandedOnHover()) return;
     this.isIconMode.set(true);
   }
 
