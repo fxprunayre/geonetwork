@@ -26,6 +26,7 @@ import {
   SearchBase,
   SearchInput,
   SearchWelcomeTextPipe,
+  SpaceSelector,
 } from 'gn-library';
 import { Button } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
@@ -45,6 +46,7 @@ import { FilterPanelLayout } from '../search/search';
     NgClass,
     NgTemplateOutlet,
     TranslatePipe,
+    SpaceSelector,
   ],
   viewProviders: [provideIcons({ faSolidFilter, faSolidXmark })],
   template: `
@@ -76,6 +78,8 @@ import { FilterPanelLayout } from '../search/search';
                 @if (filterPanelMode() == 'drawer' || filterPanelMode() == 'side') {
                   <app-search-active-filters-button [(visible)]="visible" />
                 }
+
+                <app-space-selector />
               </div>
             }
             <ng-container *ngTemplateOutlet="footer || defaultFooter" />
