@@ -1,10 +1,11 @@
 import { Component, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
-import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { filter } from 'rxjs';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import {
   APPLICATION_CONFIGURATION,
   AuthStore,
+  BaseComponent,
   DEFAULT_LANGUAGE,
   MAP_SLUG,
   SEARCH_SLUG,
@@ -12,13 +13,12 @@ import {
   SearchContextDirective,
   SearchService,
 } from 'gn-library';
-import { TranslateService } from '@ngx-translate/core';
 import { ScrollTop } from 'primeng/scrolltop';
 import { Toast } from 'primeng/toast';
-import { MenuComponent } from './components/menu/menu';
+import { filter } from 'rxjs';
 import { MapComponent } from './components/map/map';
+import { MenuComponent } from './components/menu/menu';
 import { Search } from './components/search/search';
-import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +38,7 @@ import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
   standalone: true,
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class App extends PrimeShadowdomstyleComponent implements OnInit {
+export class App extends BaseComponent implements OnInit {
   private translate = inject(TranslateService);
   private router = inject(Router);
   private searchService = inject(SearchService);

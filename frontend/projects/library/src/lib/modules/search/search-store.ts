@@ -19,15 +19,15 @@ import {
 } from 'gn-api-client';
 import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
 import { AuthStore } from '../authentication/auth.store';
-import { DEFAULT_LANGUAGE } from '../config/config.loader';
+import { APPLICATION_CONFIGURATION, DEFAULT_LANGUAGE } from '../config/config.loader';
 import { SearchAppLayout } from '../config/model/gnConfig';
 import { SearchRouteService } from './search-route-service';
 import { SearchService } from './search-service';
 import {
+  DEFAULT_AGGREGATION_SIZE,
   DEFAULT_PAGE_SIZE,
   DEFAULT_SORT,
   DEFAULT_SORT_OPTIONS,
-  DEFAULT_AGGREGATION_SIZE,
   SearchFilterParameters,
   SearchRequestPageParameters,
   SearchRequestParameters,
@@ -68,12 +68,16 @@ export const SearchStore = signalStore(
   })),
   withComputed((store) => {
     const authStore = inject(AuthStore);
+    const apiConfiguration = inject(APPLICATION_CONFIGURATION);
     return {
       searchFilterParameters: computed(() => {
         // Trigger update when aggregationsConfigTrigger changes
         store.aggregationsConfigTrigger();
         // Trigger update when authentication state changes
         authStore.isAuthenticated();
+        // Trigger update when space or catalogueUrl changes
+        apiConfiguration().space;
+        apiConfiguration().catalogueUrl;
         return {
           searchQuery: store.searchQuery(),
           filter: store.filter(),
