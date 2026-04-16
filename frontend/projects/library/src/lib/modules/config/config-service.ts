@@ -1,5 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Link } from 'gn-api-client';
+import { inject, Injectable } from '@angular/core';
+import { APPLICATION_CONFIGURATION } from './config.loader';
+
+import { Configuration as GnConfiguration } from 'gn-api-client';
+import { Configuration as Gn4Configuration } from 'gn4-api-client';
 
 export interface Filter {
   field: string;
@@ -11,6 +14,24 @@ export interface Filter {
   providedIn: 'root',
 })
 export class ConfigService {
+  apiConfiguration = inject(APPLICATION_CONFIGURATION);
+  gnApiConfig = inject(GnConfiguration);
+  gn4ApiConfig = inject(Gn4Configuration);
+
+  updateConfiguration(apiUrl: string | undefined, space: string | undefined) {
+    console.log('Update config with ', apiUrl, space);
+    apiUrl = apiUrl || this.apiConfiguration().catalogueUrl;
+    space = space || this.apiConfiguration().space;
+    this.apiConfiguration.set({ ...this.apiConfiguration(), catalogueUrl: apiUrl, space: space });
+    if (this.gnApiConfig) {
+      this.gnApiConfig.basePath = apiUrl;
+    }
+
+    if (this.gn4ApiConfig) {
+      this.gn4ApiConfig.basePath = `${apiUrl}/${space}/api`;
+    }
+  }
+
   /**
    * Parse a filter expression into an array of filters.
    * eg.
