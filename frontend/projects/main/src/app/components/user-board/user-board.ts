@@ -25,11 +25,11 @@ import {
   SearchContextDirective,
   SearchService,
   TranslationsService,
-  UserAvatar,
   UserFullNamePipe,
 } from 'gn-library';
 import { ButtonDirective } from 'primeng/button';
 import { SearchHeader } from '../search-header/search-header';
+import { UserBoardMenu } from '../user-board-menu/user-board-menu';
 
 @Component({
   selector: 'app-user-board',
@@ -42,8 +42,8 @@ import { SearchHeader } from '../search-header/search-header';
     ResultsView,
     ButtonDirective,
     AggregationsPanel,
-    UserAvatar,
     UserFullNamePipe,
+    UserBoardMenu,
   ],
   viewProviders: [
     provideIcons({

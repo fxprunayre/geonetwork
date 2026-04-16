@@ -8,7 +8,6 @@ import { MenuItem } from 'primeng/api';
 import { Badge } from 'primeng/badge';
 import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
-import { ProgressSpinner } from 'primeng/progressspinner';
 import { Skeleton } from 'primeng/skeleton';
 import { TieredMenu } from 'primeng/tieredmenu';
 
@@ -23,7 +22,6 @@ interface WfsDownloadConfig {
     Button,
     MenuModule,
     TranslatePipe,
-    ProgressSpinner,
     NgIcon,
     ButtonIcon,
     ButtonLabel,

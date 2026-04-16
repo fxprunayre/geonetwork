@@ -1,11 +1,11 @@
 @if (isAuthenticated()) {
   <app-search-header [withSearch]="false">
     <ng-template #header>
-      <section class="flex flex-row pb-6 mb-6">
+      <section class="flex flex-row pb-6 mb-6 items-center">
         <h1 class="grow text-white">
           {{ 'user.welcome' | translate: { name: (user() | userFullName) } }}
         </h1>
-        <app-user-avatar [withMenu]="true" />
+        <app-user-board-menu />
       </section>
     </ng-template>
     <ng-template #footer>

@@ -83,7 +83,7 @@
   "record": {
     "action": {
       "addRecord": {
-        "label": "Ajouter une fiche",
+        "label": "Ajouter",
         "noTemplates": "Vous ne pouvez pas ajouter une nouvelle fiche car il n'y a pas de modèle disponible. Veuillez contacter votre administrateur.",
         "xTemplateAvailable": "{{count}} modèle(s) disponible(s)"
       },
@@ -102,7 +102,7 @@
       "deleteTitle": "Supprimer cette fiche",
       "edit": "Éditer",
       "editTitle": "Éditer cette fiche",
-      "importRecord": "Importer une fiche",
+      "importRecord": "Importer",
       "menu": "Quick actions",
       "metadataDownload": "Metadata (XML)",
       "metadataDownloadHelp": "Download the record in XML format",

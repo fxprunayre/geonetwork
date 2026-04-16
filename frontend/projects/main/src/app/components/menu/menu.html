@@ -62,35 +62,6 @@
   </p-menu>
 
   <app-record-add-button />
-
-  <p-drawer
-    [(visible)]="isConfigurationVisible"
-    [header]="'menu.settings' | translate"
-    position="right"
-    [pt]="{ header: 'header-row' }"
-  >
-    <p-fieldset legend="Language">
-      <app-language-switcher />
-    </p-fieldset>
-
-    <p-fieldset legend="Theme">
-      <app-theme-designer [theme]="theme" />
-    </p-fieldset>
-
-    <p-fieldset legend="Config">
-      <p-iftalabel>
-        <textarea
-          pTextarea
-          id="description"
-          [ngModel]="appConfigJson()"
-          (ngModelChange)="updateConfig($event)"
-          rows="10"
-          style="resize: none"
-        ></textarea>
-        <label for="description">Configuration</label>
-      </p-iftalabel>
-    </p-fieldset>
-  </p-drawer>
 </nav>
 
 <p-toast />

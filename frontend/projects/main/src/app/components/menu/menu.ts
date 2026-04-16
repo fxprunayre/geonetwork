@@ -16,32 +16,25 @@ import {
   faSolidPaintRoller,
   faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuDesignTokens } from '@primeuix/themes/types/menu';
 import {
-  APPLICATION_CONFIGURATION,
   AuthStore,
   CatalogueLogo,
   DASHBOARD_ROUTE_PATH,
   Gn4UrlService,
   IconStyleService,
-  LanguageSwitcher,
   MAP_ROUTE_PATH,
   RecordAddMenu,
   SEARCH_ROUTE_PATH,
-  ThemeDesigner,
   TranslationsService,
   UserAvatar,
   UserFullNamePipe,
 } from 'gn-library';
 import { MenuItem, MessageService, SharedModule } from 'primeng/api';
-import { Drawer } from 'primeng/drawer';
-import { Fieldset } from 'primeng/fieldset';
-import { IftaLabel } from 'primeng/iftalabel';
 import { Menu } from 'primeng/menu';
 import { TextareaModule } from 'primeng/textarea';
 import { Toast } from 'primeng/toast';
-import AppTheme from '../../app.theme';
 
 const ICONS = {
   faSolidHouse,
@@ -63,19 +56,13 @@ const ICONS = {
   selector: 'app-menu',
   imports: [
     CatalogueLogo,
-    Drawer,
-    Fieldset,
     FormsModule,
-    IftaLabel,
-    LanguageSwitcher,
     Menu,
     NgIcon,
     RecordAddMenu,
     RouterLink,
     RouterLinkActive,
     SharedModule,
-    TranslatePipe,
-    ThemeDesigner,
     Toast,
     TextareaModule,
     UserAvatar,
@@ -107,14 +94,8 @@ export class MenuComponent implements OnInit {
   messageService = inject(MessageService);
 
   elementRef = inject(ElementRef);
-  appConfig = inject(APPLICATION_CONFIGURATION);
-  appConfigJson = computed(() => JSON.stringify(this.appConfig(), null, 2));
 
   DASHBOARD_ROUTE_PATH = DASHBOARD_ROUTE_PATH;
-
-  updateConfig(event: string) {
-    this.appConfig.set(JSON.parse(event));
-  }
 
   itemConfig = computed<MenuItem>(() => {
     return {
@@ -168,41 +149,6 @@ export class MenuComponent implements OnInit {
         ...this.itemConfig(),
       },
       {
-        label: this.translateService.instant('record.action.addRecord.label'),
-        title: this.isIconMode()
-          ? this.translateService.instant('record.action.addRecord.label')
-          : '',
-        icon: 'faSolidPlus',
-        visible: this.isAuthenticated(),
-        ...this.itemConfig(),
-        // command: (event: any) => {
-        //   this.recordAddButton?.menu?.toggle(event.originalEvent);
-        // },
-        command: () => {
-          window.open(this.gn4UrlService.getEditorUrl('create'), '_blank');
-        },
-      },
-      {
-        label: this.translateService.instant('admin.goto'),
-        title: this.isIconMode() ? this.translateService.instant('admin.goto') : '',
-        icon: 'faSolidGear',
-        visible: this.isAuthenticated() && this.userRole() === 'Administrator',
-        ...this.itemConfig(),
-        command: () => {
-          window.open(this.gn4UrlService.getAdminConsoleUrl(), 'adminConsole');
-        },
-      },
-      {
-        label: this.translateService.instant('menu.settings'),
-        title: this.isIconMode() ? this.translateService.instant('menu.settings') : '',
-        visible: this.isAuthenticated(),
-        icon: 'faSolidPaintRoller',
-        command: () => {
-          this.isConfigurationVisible.update((v) => !v);
-        },
-        ...this.itemConfig(),
-      },
-      {
         label: this.translateService.instant('menu.signout'),
         title: this.isIconMode() ? this.translateService.instant('menu.signout') : '',
         visible: this.isAuthenticated(),
@@ -244,8 +190,6 @@ export class MenuComponent implements OnInit {
 
   isIconMode = signal(true);
 
-  isConfigurationVisible = signal(false);
-
   isAuthenticated = this.authStore.isAuthenticated;
 
   user = this.authStore.user;
@@ -275,10 +219,6 @@ export class MenuComponent implements OnInit {
     this.isIconMode.update((v) => !v);
   }
 
-  toggleConfiguration() {
-    this.isConfigurationVisible.update((v) => !v);
-  }
-
   expandMenu() {
     if (!this.isExpandedOnHover()) return;
     this.isIconMode.set(false);
@@ -288,6 +228,4 @@ export class MenuComponent implements OnInit {
     if (!this.isExpandedOnHover()) return;
     this.isIconMode.set(true);
   }
-
-  theme = AppTheme;
 }
