@@ -1,7 +1,7 @@
 describe('Map Page', () => {
   beforeEach(() => {
     cy.initApp();
-    cy.visit('/map');
+    cy.visitPage('map');
   });
 
   it('should initilialize the map with no layers', () => {

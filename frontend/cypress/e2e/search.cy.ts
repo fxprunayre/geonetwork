@@ -6,24 +6,24 @@ describe('Search', () => {
   });
 
   it('should run a global search about the catalogue and one to get the results', () => {
-    cy.visit('/search');
+    cy.visitPage('search');
     cy.wait('@apiMainSearch');
     cy.get('@apiMainSearch.all').should('have.length', 1);
   });
 
   it('should run a search with query when route contains query parameter', () => {
-    cy.visit(`/search?q=${SURVAL_UUID}`);
+    cy.visitPage('search', { q: SURVAL_UUID });
     cy.wait('@apiMainSearchByUuid');
     cy.get('@apiMainSearchByUuid.all').should('have.length', 1);
   });
 
   it('should display main aggregations correctly', () => {
-    cy.visit('/search');
+    cy.visitPage('search');
     cy.wait('@apiMainSearch').then((search) => {
       const keyname = 'resourceType';
       const buckets = search.response?.body.aggregations[keyname].buckets;
 
-      cy.get('app-results app-aggregation').as('searchAggregation');
+      cy.get('app-results-info app-aggregation').as('searchAggregation');
       cy.get('@searchAggregation')
         .find('app-aggregation-bucket')
         .should('have.length', buckets.length);
@@ -41,7 +41,7 @@ describe('Search', () => {
   });
 
   it('should display total results count and placeholder', () => {
-    cy.visit(`/search?q=${SURVAL_UUID}`);
+    cy.visitPage('search', { q: SURVAL_UUID });
     cy.wait('@apiMainSearchByUuid').then((search) => {
       const total = search.response?.body.hits.total.value;
       const formattedTotal = formatNumber(total);
@@ -58,7 +58,7 @@ describe('Search', () => {
   });
 
   it('should have the sort by with default sort option', () => {
-    cy.visit(`/search?q=${SURVAL_UUID}`);
+    cy.visitPage('search', { q: SURVAL_UUID });
     cy.wait('@apiMainSearchByUuid').then((search) => {
       cy.get('app-results-sorter').as('sortBy').should('exist');
       cy.get('@sortBy').find('p-select > span').should('contain.text', 'Popularity');

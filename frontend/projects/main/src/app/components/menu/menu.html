@@ -38,26 +38,28 @@
     </ng-template>
 
     <ng-template pTemplate="end">
-      <ul class="p-menu-list">
-        <li
-          class="p-menu-item-link"
-          role="menuitem"
-          routerLinkActive="p-menu-item-link-active"
-          [routerLinkActiveOptions]="{ exact: false }"
-        >
-          <a [routerLink]="[DASHBOARD_ROUTE_PATH]" class="flex flex-row gap-4">
-            <app-user-avatar />
+      @if (isAuthenticated()) {
+        <ul class="p-menu-list">
+          <li
+            class="p-menu-item-link"
+            role="menuitem"
+            routerLinkActive="p-menu-item-link-active"
+            [routerLinkActiveOptions]="{ exact: false }"
+          >
+            <a [routerLink]="[DASHBOARD_ROUTE_PATH]" class="flex flex-row gap-4">
+              <app-user-avatar />
 
-            <span
-              class="transition-all flex flex-col items-start w-full"
-              [class.hidden]="isIconMode()"
-            >
-              <span class="font-bold wrap-break-word"> {{ user() | userFullName }}</span>
-              <span class="text-sm">{{ userRole() }}</span>
-            </span>
-          </a>
-        </li>
-      </ul>
+              <span
+                class="transition-all flex flex-col items-start w-full"
+                [class.hidden]="isIconMode()"
+              >
+                <span class="font-bold wrap-break-word"> {{ user() | userFullName }}</span>
+                <span class="text-sm">{{ userRole() }}</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      }
     </ng-template>
   </p-menu>
 

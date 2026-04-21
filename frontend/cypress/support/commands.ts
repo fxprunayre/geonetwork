@@ -36,7 +36,9 @@ Cypress.Commands.add('mockClipboard', (initialText = '') => {
   });
 });
 
-Cypress.Commands.add('initApp', () => {
+Cypress.Commands.add('initApp', (profile = '') => {
+  cy.intercept('GET', '**/srv/api/me', { fixture: `me-${profile}.json` }).as('apiMe');
+
   cy.intercept('GET', 'https://tile.openstreetmap.org/**', { fixture: 'tile.png' }).as('osmTile');
   cy.intercept('GET', '**/srv/api/ui/srv', { fixture: 'home-api-ui-srv.json' }).as('apiUiConfig');
   cy.intercept('GET', '**/srv/api/i18n/packages/gnui*', { fixture: 'home-api-i18n-gnui.json' }).as(
@@ -135,6 +137,15 @@ Cypress.Commands.add('initApp', () => {
     });
 });
 
-Cypress.Commands.add('signin', (profile = 'administrator') => {
-  cy.intercept('GET', '**/srv/api/me', { fixture: `me-${profile}.json` }).as('apiMe');
+/**
+ * Visit an application page, supporting both PathLocationStrategy and
+ * HashLocationStrategy. When `useHash` is true the URL is built as
+ * `/#/<path>?<params>` instead of `/<path>?<params>`.
+ */
+Cypress.Commands.add('visitPage', (path: string, params?: Record<string, string>) => {
+  const useHash = true; // Set to true to use HashLocationStrategy, false for PathLocationStrategy
+  const query = params ? '?' + new URLSearchParams(params).toString() : '';
+  const normalizedPath = path ? `/${path}` : '/';
+  const url = useHash ? `/#${normalizedPath}${query}` : `${normalizedPath}${query}`;
+  cy.visit(url);
 });

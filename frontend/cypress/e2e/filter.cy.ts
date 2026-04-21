@@ -1,9 +1,9 @@
-import { AGGREGATION_LABEL_REGEX, formatNumber, SURVAL_UUID } from '../support/utils';
+import { AGGREGATION_LABEL_REGEX } from '../support/utils';
 
 describe('Search', () => {
   beforeEach(() => {
     cy.initApp();
-    cy.visit('/search');
+    cy.visitPage('search');
   });
 
   it('should search the value from search box', () => {

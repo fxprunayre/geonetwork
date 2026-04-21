@@ -7,7 +7,7 @@ describe('Record page', () => {
   });
 
   it('should display the record menu with share and download options', () => {
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
     cy.get('app-record-menu p-button[title="Quick actions"]').click();
@@ -34,7 +34,7 @@ describe('Record page', () => {
   });
 
   it('should display the record header information', () => {
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
     cy.get('app-record-view-title h1').should('contain', 'Données par paramètre');
@@ -73,7 +73,7 @@ describe('Record page', () => {
   });
 
   it('should set the route corresponding to the current tab', () => {
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
     ['data-access', 'explore'].forEach((tab) => {
@@ -86,13 +86,13 @@ describe('Record page', () => {
   });
 
   it('should set the route to default tab if tab value is invalid', () => {
-    cy.visit(`/record/${SURVAL_UUID}/invalid-tab`);
+    cy.visitPage(`record/${SURVAL_UUID}/invalid-tab`);
     cy.wait('@apiMainSearchGetRecord');
     cy.url().should('include', `/record/${SURVAL_UUID}`);
   });
 
   it('should display the about tab content', () => {
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
     // Check tab description is active
@@ -217,7 +217,8 @@ describe('Record page', () => {
     );
     cy.get('[data-testid="accordion-panel-contact-pointOfContact"]')
       .contains('a', "Cellule d'Administration Quadrige")
-      .should('have.attr', 'href', "/search?q=%22Cellule%20d'Administration%20Quadrige%22");
+      .should('have.attr', 'href')
+      .and('match', /\/#?\/?search\?q=%22Cellule%20d'Administration%20Quadrige%22/);
 
     cy.get('[data-testid="accordion-panel-contact-author"] .p-accordionheader').contains('Author');
     cy.get('[data-testid="accordion-panel-contact-publisher"] .p-accordionheader').contains(
@@ -241,7 +242,7 @@ describe('Record page', () => {
   });
 
   it('should display the data access tab content', () => {
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
     cy.get('p-tablist p-tab[value="data-access"]')
@@ -280,13 +281,13 @@ describe('Record page', () => {
   });
 
   it('should display the explore tab content', () => {
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
   });
 
   it('should, for WMS distribution, allow it to be added to the map', () => {
     cy.clearBrowserCache();
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
     cy.get('p-tablist p-tab[value="data-access"]')
@@ -328,7 +329,7 @@ describe('Record page', () => {
       },
     ).as('wmsServiceDown');
 
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
     cy.get('p-tablist p-tab[value="data-access"]')
@@ -361,7 +362,7 @@ describe('Record page', () => {
       },
     ).as('wmsServiceCapabilitiesWithoutExpectedLayers');
 
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
     cy.get('p-tablist p-tab[value="data-access"]')
@@ -389,7 +390,7 @@ describe('Record page', () => {
   });
 
   it('should display the citation tab content', () => {
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
 
     cy.get('p-tablist p-tab[value="citation"]').contains('Citation').click();
@@ -444,7 +445,7 @@ describe('Record page', () => {
   });
 
   it('should navigate back to search results', () => {
-    cy.visit('/search');
+    cy.visitPage('search');
     cy.wait('@apiMainSearch');
 
     cy.get('app-result-item-list a').first().click();

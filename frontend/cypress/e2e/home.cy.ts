@@ -3,7 +3,7 @@ import { formatNumber } from '../support/utils';
 describe('Home Page', () => {
   beforeEach(() => {
     cy.initApp();
-    cy.visit('/');
+    cy.visitPage('');
   });
 
   it('should initilialize the app by loading the configuration, the translations and run a global search', () => {

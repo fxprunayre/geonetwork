@@ -7,7 +7,7 @@ describe('Record page editing', () => {
 
   it('should display the edit button linking to GN4 and delete action', () => {
     cy.signin();
-    cy.visit(`/record/${SURVAL_UUID}`);
+    cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait(['@apiMainSearchGetRecord', '@apiMe']);
     cy.get('a[title="Edit this record"]')
       .should('be.visible')

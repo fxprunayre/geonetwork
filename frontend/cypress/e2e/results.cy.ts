@@ -1,9 +1,11 @@
 import { SURVAL_UUID } from '../support/utils';
 
 const checkResultItem = (hit: any, layout: 'grid' | 'list') => {
-  cy.get('a')
-    .should('have.attr', 'href', `/record/${hit._id}`)
-    .should('have.attr', 'title', hit._source.resourceAbstractObject.default);
+  const recordHrefRegex = new RegExp(`^(?:\\/#/|#/|/)record/${hit._id}$`);
+
+  cy.get('a').should('have.attr', 'href').and('match', recordHrefRegex);
+
+  cy.get('a').should('have.attr', 'title', hit._source.resourceAbstractObject.default);
 
   cy.get('app-record-field-overview img').should('have.attr', 'src', hit._source.overview[0].url);
 
@@ -32,7 +34,7 @@ const checkResultItem = (hit: any, layout: 'grid' | 'list') => {
     );
   }
 
-  cy.get(`a[href="/record/${hit._id}"]`).first().click();
+  cy.get(`a[href$="/record/${hit._id}"]`).first().click();
   cy.url().should('include', `/record/${hit._id}`);
 };
 
@@ -42,7 +44,7 @@ describe('Results', () => {
   });
 
   it('should display result items in list view', () => {
-    cy.visit(`/search?q=${SURVAL_UUID}`);
+    cy.visitPage('search', { q: SURVAL_UUID });
     cy.wait('@apiMainSearchByUuid').then((search) => {
       const hits = search.response?.body.hits.hits;
 
@@ -58,7 +60,7 @@ describe('Results', () => {
   });
 
   it('should switch to grid view and display result items', () => {
-    cy.visit(`/search?q=${SURVAL_UUID}`);
+    cy.visitPage('search', { q: SURVAL_UUID });
     cy.wait('@apiMainSearchByUuid').then((search) => {
       const hits = search.response?.body.hits.hits;
 
@@ -75,7 +77,7 @@ describe('Results', () => {
   });
 
   it('should display distribution buttons text only on large screens', () => {
-    cy.visit(`/search?q=${SURVAL_UUID}`);
+    cy.visitPage('search', { q: SURVAL_UUID });
     cy.wait('@apiMainSearchByUuid');
 
     cy.viewport(1024, 768);
@@ -98,7 +100,7 @@ describe('Results', () => {
   });
 
   it('should open record data access tab when clicking distribution buttons', () => {
-    cy.visit(`/search?q=${SURVAL_UUID}`);
+    cy.visitPage('search', { q: SURVAL_UUID });
     cy.wait('@apiMainSearchByUuid');
 
     cy.get('app-results-view app-result-item-list')
