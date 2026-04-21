@@ -12,11 +12,11 @@ import { ButtonModule } from 'primeng/button';
 import { TieredMenu } from 'primeng/tieredmenu';
 import { IconStyleService } from '../../../shared/icon-style-service';
 import { AuthStore } from '../../authentication/auth.store';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { APPLICATION_CONFIGURATION, DEFAULT_SPACE } from '../../config/config.loader';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
-  selector: 'app-record-menu', 
+  selector: 'app-record-menu',
   templateUrl: './record-menu.component.html',
   standalone: true,
   imports: [ButtonModule, NgIcon, TieredMenu, TranslatePipe],
@@ -65,7 +65,7 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
     if (!uuid) {
       return '';
     }
-    return `${this.catalogueUrl()}/srv/api/records/${uuid}/formatters/xml`;
+    return `${this.catalogueUrl()}/${DEFAULT_SPACE}/api/records/${uuid}/formatters/xml`;
   });
 
   items = computed<MenuItem[]>(() => {

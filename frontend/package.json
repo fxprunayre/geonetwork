@@ -8,6 +8,7 @@
     "watch-gn-api-client": "ng build gn-api-client --watch",
     "watch-gn4-api-client": "ng build gn4-api-client --watch",
     "build": "ng build  gn-api-client && ng build gn4-api-client && ng build library && ng build --project=main",
+    "build-webcomponent": "ng build --project=main --output-hashing none --output-path=dist/webcomponent ",
     "prettier": "prettier --write \"**/*.{ts,html,scss,css,json}\"",
     "test": "ng test library",
     "test:ci": "ng test library --code-coverage --browsers=ChromeHeadless --watch=false",

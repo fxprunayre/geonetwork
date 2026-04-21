@@ -22,6 +22,8 @@ import { Configuration, GnApiModule } from 'gn-api-client';
 import {
   APPLICATION_CONFIGURATION,
   AuthenticationService,
+  DEFAULT_SPACE,
+  getWebComponentAttribute,
   Gn4AuthenticationService,
   TranslationsLoader,
 } from 'gn-library';
@@ -34,14 +36,26 @@ import { routes } from './app.routes';
 import AppTheme from './app.theme';
 
 export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
+  let scriptBaseUrl = '';
+  const scripts = document.getElementsByTagName('script');
+  for (let i = 0; i < scripts.length; i++) {
+    const src = scripts[i].src;
+    if (src && src.match(/(\/dist\/webcomponent\/browser|sextant.ifremer.fr\/.*)\/main\.js/)) {
+      scriptBaseUrl = src.substring(0, src.lastIndexOf('/') + 1);
+      break;
+    }
+  }
+
+  let apiUrl = getWebComponentAttribute('url') || environment.geonetworkApiUrl;
+
   return new TranslationsLoader(_httpBackend, [
     // Order is important. The last files can override previous ones.
     {
-      prefix: `${environment.geonetworkApiUrl}/srv/api/i18n/packages/gnui`,
+      prefix: `${apiUrl}/${DEFAULT_SPACE}/api/i18n/packages/gnui`,
       suffix: '',
       useHeader: true,
     },
-    { prefix: 'i18n/', suffix: '.json' },
+    { prefix: `${scriptBaseUrl}i18n/`, suffix: '.json' },
   ]);
 }
 
@@ -97,13 +111,15 @@ export const appConfig: ApplicationConfig = {
     { provide: AuthenticationService, useClass: Gn4AuthenticationService },
     importProvidersFrom([
       GnApiModule.forRoot(() => {
+        const apiUrl = getWebComponentAttribute('url') || environment.geonetworkApiUrl;
         return new Configuration({
-          basePath: environment.geonetworkApiUrl,
+          basePath: apiUrl,
         });
       }),
       Gn4ApiModule.forRoot(() => {
+        const apiUrl = getWebComponentAttribute('url') || environment.geonetworkApiUrl;
         return new Gn4Configuration({
-          basePath: environment.geonetworkApiUrl + '/srv/api',
+          basePath: `${apiUrl}/${DEFAULT_SPACE}/api`,
         });
       }),
     ]),

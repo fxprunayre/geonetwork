@@ -7,10 +7,8 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { Popover } from 'primeng/popover';
 import { ConfigService } from '../config/config-service';
-import { APPLICATION_CONFIGURATION } from '../config/config.loader';
+import { APPLICATION_CONFIGURATION, DEFAULT_SPACE } from '../config/config.loader';
 import { TranslationsService } from '../i18n/translations-service';
-
-const MAIN_SPACE_ID = 'srv';
 
 @Component({
   selector: 'app-space-selector',
@@ -36,7 +34,7 @@ const MAIN_SPACE_ID = 'srv';
         >
           @for (item of spaceList(); track item.label) {
             <p-button
-              [severity]="item.id === MAIN_SPACE_ID ? 'primary' : 'secondary'"
+              [severity]="item.id === DEFAULT_SPACE ? 'primary' : 'secondary'"
               [disabled]="item.id === currentSpace()"
               [fluid]="true"
               (click)="selectSpace(item)"
@@ -57,18 +55,18 @@ const MAIN_SPACE_ID = 'srv';
   `,
 })
 export class SpaceSelector implements OnInit {
-  readonly MAIN_SPACE_ID = MAIN_SPACE_ID;
+  readonly DEFAULT_SPACE = DEFAULT_SPACE;
   @ViewChild('popover') popover: Popover | undefined;
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   apiBase = computed(() => this.appConfiguration().catalogueUrl);
 
-  space = signal(MAIN_SPACE_ID);
-  currentSpace = computed(() => this.appConfiguration().space || MAIN_SPACE_ID);
+  space = signal(DEFAULT_SPACE);
+  currentSpace = computed(() => this.appConfiguration().space || DEFAULT_SPACE);
 
   spaces: Source[] = [
     {
-      name: MAIN_SPACE_ID,
+      name: DEFAULT_SPACE,
     },
   ];
 
@@ -106,7 +104,7 @@ export class SpaceSelector implements OnInit {
 
   getSpaceLabel(space: Source | undefined): string {
     if (space) {
-      if (space.name === MAIN_SPACE_ID) {
+      if (space.name === DEFAULT_SPACE) {
         return this.translateService.instant('space.main');
       }
       return (space.label && space.label[this.currentLang()]) || space.name || '';

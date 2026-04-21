@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslationsService } from '../i18n/translations-service';
-import { APPLICATION_CONFIGURATION } from './config.loader';
+import { APPLICATION_CONFIGURATION, DEFAULT_SPACE } from './config.loader';
 
 @Injectable({
   providedIn: 'root',
@@ -13,17 +13,17 @@ export class Gn4UrlService {
 
   private getCurrentLangIso3(): string {
     const defaultLang = this.translateService.getDefaultLang() || 'eng';
-    const currentLang = this.translateService.currentLang || defaultLang;
+    const currentLang = this.translateService.getCurrentLang() || defaultLang;
     return this.translationsService.getIso3Code(currentLang);
   }
 
   getEditorUrl(targetPath: string): string {
     const langIso3 = this.getCurrentLangIso3();
-    return `${this.appConfig().catalogueUrl}/srv/${langIso3}/catalog.edit#/${targetPath}`;
+    return `${this.appConfig().catalogueUrl}/${DEFAULT_SPACE}/${langIso3}/catalog.edit#/${targetPath}`;
   }
 
   getAdminConsoleUrl(): string {
     const langIso3 = this.getCurrentLangIso3();
-    return `${this.appConfig().catalogueUrl}/srv/${langIso3}/admin.console`;
+    return `${this.appConfig().catalogueUrl}/${DEFAULT_SPACE}/${langIso3}/admin.console`;
   }
 }

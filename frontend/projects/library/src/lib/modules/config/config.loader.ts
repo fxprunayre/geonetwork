@@ -30,24 +30,53 @@ export function parseGn4Config(conf: any): UiConfiguration {
   return JSON.parse(conf.configuration) as UiConfiguration;
 }
 
+export function getWebComponentAttribute(name: string): string | null {
+  const webComponent = document.querySelector('sextant-app');
+  if (webComponent && webComponent.hasAttribute(name)) {
+    return webComponent.getAttribute(name);
+  }
+  return null;
+}
+
 export function loadAppConfig() {
   appConfigLoading = true;
-  return fetch(`${environment.geonetworkApiUrl}/srv/api/ui/${appConfig.space}`, {
+
+  // Default to environment url, but allow override from web component attribute
+  let apiUrl = getWebComponentAttribute('url') || environment.geonetworkApiUrl;
+  const webComponentSpace = getWebComponentAttribute('space');
+  if (webComponentSpace) {
+    appConfig.space = webComponentSpace;
+  }
+  const configUrl = `${apiUrl}/${DEFAULT_SPACE}/api/ui/${appConfig.space}`;
+  return fetch(configUrl, {
     headers: {
       Accept: 'application/json',
     },
   })
     .then((resp) => {
       if (!resp.ok) {
-        //throw new Error('Configuration file could not be loaded')
-        return SEXTANT_UI_CONFIGURATION;
+        return undefined;
       }
       return resp.json();
     })
+    .then((config) => {
+      if (config) {
+        try {
+          return JSON.parse(config['configuration']) as UiConfiguration;
+        } catch (e) {
+          console.error(
+            `Failed to parse configuration from ${configUrl}, falling back to default`,
+            e,
+          );
+          return SEXTANT_UI_CONFIGURATION;
+        }
+      }
+      return SEXTANT_UI_CONFIGURATION;
+    })
     .then((conf) => {
       appConfig.config = migrateGn4Config(SEXTANT_UI_CONFIGURATION);
-      appConfig.catalogueUrl = environment.geonetworkApiUrl;
-      appConfig.config.proxyUrl = environment.geonetworkApiUrl + '/proxy?url=';
+      appConfig.catalogueUrl = apiUrl;
+      appConfig.config.proxyUrl = apiUrl + '/proxy?url=';
       appConfig.config.backgroundImageUrl = environment.backgroundUrl;
       // TODO: parseGn4Config(conf);
       console.log(appConfig);

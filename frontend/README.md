@@ -33,6 +33,20 @@ See [`test-wc.html`](test-wc.html)
 
 ### WebComponent mode
 
+#### Testing
+
+To test the app in a third party page, use:
+
+```
+npx http-server .
+```
+
+Then access:
+
+* http://localhost:8081/projects/main/src/assets/test/odatis.html or 
+* http://localhost:8081/projects/main/src/assets/test/sextant.html
+
+
 #### Routing
 
 By default angular use `PathLocationStrategy` with `/`. When embedding the webcomponent in another site which does not set redirection for location path, this strategy will not work when accessing the application with a non root path.
