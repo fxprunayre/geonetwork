@@ -109,8 +109,8 @@ import { FilterPanelLayout } from '../search/search';
                 : 'sm:w-0! sm:opacity-0 border-none shadow-none'
             "
           >
-            <div class="p-drawer-header header-row">
-              <div class="p-drawer-title text-primary-500">
+            <div class="app-drawer-header header-row">
+              <div class="app-drawer-title text-primary-500">
                 <ng-icon name="faSolidFilter"></ng-icon>
                 {{ 'search.filter.title' | translate }}
               </div>
@@ -124,6 +124,27 @@ import { FilterPanelLayout } from '../search/search';
       }
     </div>
   `,
+  styles: [
+    `
+      .app-drawer-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: var(--p-drawer-header-padding, 1rem);
+        border-bottom: 1px solid var(--p-content-border-color, var(--p-surface-200));
+        background: var(--p-content-background, var(--p-surface-0));
+      }
+
+      .app-drawer-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: var(--p-drawer-title-font-size, 1.25rem);
+        font-weight: var(--p-drawer-title-font-weight, 600);
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchHeader extends SearchBase implements AfterViewInit, OnDestroy {

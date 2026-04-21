@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal, ViewChild } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidArrowRightFromBracket,
@@ -9,7 +9,6 @@ import {
   faSolidLock,
   faSolidLockOpen,
   faSolidPenToSquare,
-  faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import {
@@ -18,8 +17,7 @@ import {
   AuthStore,
   DEFAULT_LANGUAGE,
   Gn4UrlService,
-  initialState,
-  RecordAddMenu,
+  RecordAddButton,
   ResultsNumberComponent,
   ResultsView,
   SearchContextDirective,
@@ -38,6 +36,7 @@ import { UserBoardMenu } from '../user-board-menu/user-board-menu';
     TranslatePipe,
     SearchHeader,
     SearchContextDirective,
+    RecordAddButton,
     ResultsNumberComponent,
     ResultsView,
     ButtonDirective,
@@ -50,7 +49,6 @@ import { UserBoardMenu } from '../user-board-menu/user-board-menu';
       faSolidPenToSquare,
       faSolidCircleUser,
       faSolidFileImport,
-      faSolidPlus,
       faSolidBookmark,
       faSolidGear,
       faSolidArrowRightFromBracket,
@@ -61,8 +59,6 @@ import { UserBoardMenu } from '../user-board-menu/user-board-menu';
   templateUrl: './user-board.html',
 })
 export class UserBoard {
-  @ViewChild(RecordAddMenu) recordAddMenu: RecordAddMenu | undefined;
-
   readonly store = inject(AuthStore);
   searchService = inject(SearchService);
   appConfig = inject(APPLICATION_CONFIGURATION);
@@ -80,9 +76,6 @@ export class UserBoard {
     return `+owner:${this.user()?.id} +isTemplate:n`;
   });
 
-  templateCount = signal(0);
-  hasTemplates = signal<boolean | undefined>(undefined);
-
   isAuthenticated = this.store.isAuthenticated;
 
   language = signal<string | undefined>(DEFAULT_LANGUAGE);
@@ -98,10 +91,6 @@ export class UserBoard {
     return Object.keys(this.search().aggregations());
   });
 
-  addRecordUrl = computed(() => {
-    return this.gn4UrlService.getEditorUrl('create');
-  });
-
   importRecordUrl = computed(() => {
     return this.gn4UrlService.getEditorUrl('import');
   });
@@ -110,17 +99,6 @@ export class UserBoard {
     this.translate.onLangChange.subscribe((event) => {
       this.language.set(event.lang);
     });
-
-    this.searchService
-      .search({
-        ...initialState,
-        filters: { isTemplate: { field: 'isTemplate', values: ['y'] } },
-        pageSize: 0,
-      })
-      .subscribe((results) => {
-        this.templateCount.set(results.totalCount);
-        this.hasTemplates.set(results.totalCount > 0);
-      });
   }
 
   userRecordAggregationConfig = [

@@ -8,7 +8,7 @@ import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
   providers: [],
 })
 export class BaseComponent extends PrimeShadowdomstyleComponent implements OnInit, OnChanges {
-  @Input({ alias: 'api-url' }) apiUrl: string = '/geonetwork';
+  @Input() url: string = '/geonetwork';
   @Input() space: string = 'srv';
 
   configService = inject(ConfigService);
@@ -19,12 +19,12 @@ export class BaseComponent extends PrimeShadowdomstyleComponent implements OnIni
 
   ngOnChanges(changes: SimpleChanges): void {
     Object.keys(changes).forEach((prop) => {
-      if (prop == 'apiUrl') {
-        this.apiUrl = changes['apiUrl'].currentValue;
-        this.configService.updateConfiguration(this.apiUrl, this.space);
+      if (prop == 'url') {
+        this.url = changes['url'].currentValue;
+        this.configService.updateConfiguration(this.url, this.space);
       } else if (prop == 'space') {
         this.space = changes['space'].currentValue;
-        this.configService.updateConfiguration(this.apiUrl, this.space);
+        this.configService.updateConfiguration(this.url, this.space);
       }
     });
   }

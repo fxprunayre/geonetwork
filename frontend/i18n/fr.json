@@ -289,6 +289,9 @@
       "more": "Lire la suite"
     }
   },
+  "space": {
+    "main": "Tous"
+  },
   "success": "Succès",
   "user": {
     "bookmark": "Mes favoris",

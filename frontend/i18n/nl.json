@@ -288,6 +288,9 @@
       "more": "Read more"
     }
   },
+  "space": {
+    "main": "Alle"
+  },
   "success": "Succes",
   "user": {
     "bookmark": "My bookmarks",

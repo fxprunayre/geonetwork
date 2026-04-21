@@ -1,19 +1,19 @@
-import { Component, EventEmitter, inject, Input, model, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject, Input, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
 import {
   Aggregation,
   APPLICATION_CONFIGURATION,
   ResultLayoutSwitcher,
-  SearchAppLayout,
   ResultsNumberComponent,
   ResultsSorterComponent,
+  SearchAppLayout,
 } from 'gn-library';
+import { ButtonModule } from 'primeng/button';
 import { Card } from 'primeng/card';
 
 @Component({
-  selector: 'app-results',
+  selector: 'app-results-info',
   standalone: true,
   imports: [
     CommonModule,
@@ -25,10 +25,9 @@ import { Card } from 'primeng/card';
     Card,
     ResultLayoutSwitcher,
   ],
-  templateUrl: './results.html',
-  styleUrl: './results.scss',
+  templateUrl: './results-info.html',
 })
-export class Results {
+export class ResultsInfo {
   layout = model<SearchAppLayout>('list');
   @Input() layoutOptions: SearchAppLayout[] = [];
 

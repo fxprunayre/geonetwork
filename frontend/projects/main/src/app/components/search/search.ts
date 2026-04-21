@@ -2,14 +2,14 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { APPLICATION_CONFIGURATION, ResultsView, SearchBase } from 'gn-library';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
-import { Results } from '../results/results';
+import { ResultsInfo } from '../results-info/results-info';
 import { SearchHeader } from '../search-header/search-header';
 
 export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 
 @Component({
   selector: 'app-search',
-  imports: [Results, ResultsView, FormsModule, OverlayBadgeModule, SearchHeader],
+  imports: [ResultsInfo, ResultsView, FormsModule, OverlayBadgeModule, SearchHeader],
   standalone: true,
   templateUrl: './search.html',
   styleUrl: './search.scss',

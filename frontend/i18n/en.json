@@ -291,6 +291,9 @@
       "more": "Read more"
     }
   },
+  "space": {
+    "main": "All"
+  },
   "success": "Success",
   "user": {
     "bookmarks": "Bookmarks",

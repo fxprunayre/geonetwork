@@ -40,25 +40,7 @@
             </h2>
             <app-results-number scope="user-records" labelKey="user.contributions" class="" />
           </div>
-          <span
-            [title]="
-              hasTemplates()
-                ? ('record.action.addRecord.xTemplateAvailable'
-                  | translate: { count: templateCount() })
-                : ('record.action.addRecord.noTemplates' | translate)
-            "
-          >
-            <a
-              pButton
-              [href]="addRecordUrl()"
-              (click)="!hasTemplates() ? $event.preventDefault() : null"
-              [class.p-disabled]="!hasTemplates()"
-              target="_blank"
-            >
-              <ng-icon name="faSolidPlus" pButtonIcon />
-              <span pButtonLabel>{{ 'record.action.addRecord.label' | translate }}</span>
-            </a>
-          </span>
+          <app-record-add-button target="_blank" />
           <a pButton [href]="importRecordUrl()" severity="secondary" target="_blank">
             <ng-icon name="faSolidFileImport" pButtonIcon />
             <span pButtonLabel>{{ 'record.action.importRecord' | translate }}</span>

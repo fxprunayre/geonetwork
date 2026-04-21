@@ -15,9 +15,9 @@ import {
   Gn4UrlService,
   IconStyleService,
   LanguageSwitcher,
+  RecordAddActionService,
   ThemeDesigner,
   TranslationsService,
-  UserAvatar,
 } from 'gn-library';
 import { MenuItem } from 'primeng/api';
 import { Drawer } from 'primeng/drawer';
@@ -45,7 +45,6 @@ const ICONS = {
     ThemeDesigner,
     IftaLabel,
     FormsModule,
-    UserAvatar,
   ],
   viewProviders: [provideIcons(ICONS)],
   template: ` <p-menubar [model]="items()">
@@ -86,13 +85,26 @@ const ICONS = {
 export class UserBoardMenu implements OnInit {
   items = computed<MenuItem[] | undefined>(() => {
     this.currentLang();
+    const templateCount = this.recordAddAction.templateCount();
+    const hasTemplates = this.recordAddAction.hasTemplates();
+    const addRecordTitle = hasTemplates
+      ? this.translateService.instant('record.action.addRecord.xTemplateAvailable', {
+          count: templateCount,
+        })
+      : this.translateService.instant('record.action.addRecord.noTemplates');
+
     return [
       {
         label: this.translateService.instant('record.action.addRecord.label'),
         icon: 'faSolidPlus',
+        badge: templateCount > 0 ? templateCount.toString() : undefined,
+        title: addRecordTitle,
+        tooltip: addRecordTitle,
+        tooltipPosition: 'bottom',
+        disabled: !hasTemplates,
         visible: this.isAuthenticated(),
         command: () => {
-          window.open(this.gn4UrlService.getEditorUrl('create'), '_blank');
+          this.recordAddAction.openCreateRecord('_blank');
         },
       },
       {
@@ -129,6 +141,7 @@ export class UserBoardMenu implements OnInit {
   readonly authStore = inject(AuthStore);
 
   gn4UrlService = inject(Gn4UrlService);
+  recordAddAction = inject(RecordAddActionService);
 
   elementRef = inject(ElementRef);
 
@@ -159,6 +172,8 @@ export class UserBoardMenu implements OnInit {
     this.translateService.onLangChange.subscribe((event) => {
       this.currentLang.set(event.lang);
     });
+
+    this.recordAddAction.refreshTemplateCount();
 
     this.styleService.createIconsStyle(
       'editor-menu-icon-style',

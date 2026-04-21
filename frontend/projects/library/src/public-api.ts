@@ -20,6 +20,8 @@ export * from './lib/modules/config/model/gnConfig';
 export * from './lib/modules/i18n/language-switcher/language-switcher';
 export * from './lib/modules/i18n/translations-service';
 export * from './lib/modules/i18n/translations.loader';
+export * from './lib/modules/record-actions/record-add-action.service';
+export * from './lib/modules/record-actions/record-add-button/record-add-button';
 export * from './lib/modules/record-actions/record-add-menu/record-add-menu';
 export * from './lib/modules/record-actions/record-edit-button/record-edit-button';
 export * from './lib/modules/record-associations/associated-records-summary/associated-records-summary';
