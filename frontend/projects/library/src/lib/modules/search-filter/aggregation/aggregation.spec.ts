@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Aggregation } from './aggregation';
-import { provideMockSearchService } from '../search-store.mock.spec';
-import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
-import { Component, DebugElement, input } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { Component, DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
+import { provideMockSearchService } from '../../search/search-store.mock.spec';
+import { Aggregation } from './aggregation';
 
 @Component({
   standalone: true,

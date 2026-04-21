@@ -1,6 +1,6 @@
-import { Observable, of } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { MockProvider } from 'ng-mocks';
+import { Observable, of } from 'rxjs';
+
 import { Provider } from '@angular/core';
 
 export function provideMockTranslateService(): Provider {
@@ -11,18 +11,23 @@ export function provideMockTranslateService(): Provider {
     dataset: 'Dataset',
   };
 
-  return MockProvider(TranslateService, {
-    get: (key: string | string[], interpolateParams?: object): Observable<any> => {
-      if (Array.isArray(key)) {
-        return of(key.join(' '));
-      }
-      return of(translations[key.toString()] || key.toString());
+  return {
+    provide: TranslateService,
+    useValue: {
+      get: (key: string | string[], interpolateParams?: object): Observable<any> => {
+        if (Array.isArray(key)) {
+          return of(key.join(' '));
+        }
+        return of(translations[key.toString()] || key.toString());
+      },
+      instant: (key: string) => translations[key.toString()] || key.toString(),
+      getParsedResult: (translations: any, key: any, interpolateParams?: any) => key,
+      use: (lang: string) => of(undefined),
+      getCurrentLang: () => 'en',
+      onLangChange: mockEvent,
+      onFallbackLangChange: mockEvent,
+      onTranslationChange: mockEvent,
+      onDefaultLangChange: mockEvent,
     },
-
-    instant: (key: string) => translations[key.toString()] || key.toString(),
-
-    onLangChange: mockEvent,
-    onFallbackLangChange: mockEvent,
-    onTranslationChange: mockEvent,
-  });
+  };
 }

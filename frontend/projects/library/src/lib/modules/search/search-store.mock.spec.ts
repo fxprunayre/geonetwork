@@ -67,6 +67,15 @@ export const createMockSearchStore = (): SearchStoreType => {
     setRouting: jasmine.createSpy('setRouting'),
     subscribeToRouteChange: jasmine.createSpy('subscribeToRouteChange'),
     setSort: jasmine.createSpy('setSort'),
+    hasMoreTerms: signal((keyName: string) => false),
+    hasExpandedTerms: signal((keyName: string) => false),
+    loadMoreTerms: jasmine.createSpy('loadMoreTerms'),
+    loadLessTerms: jasmine.createSpy('loadLessTerms'),
+    hasActiveFilters: signal(false),
+    activeFilterCount: signal(0),
+    sort: signal([]),
+    setSortOption: jasmine.createSpy('setSortOption'),
+    currentSort: signal({ code: 'relevance', field: '_score' }),
   };
 
   return mockStore as any;
@@ -74,7 +83,12 @@ export const createMockSearchStore = (): SearchStoreType => {
 
 export function provideMockSearchService(mockStore?: SearchStoreType) {
   let mockSearchService: jasmine.SpyObj<SearchService>;
-  mockSearchService = jasmine.createSpyObj('SearchService', ['getSearch', 'search', 'page']);
+  mockSearchService = jasmine.createSpyObj('SearchService', [
+    'getSearch',
+    'search',
+    'page',
+    'getSupportedDatasource',
+  ]);
   mockSearchService.getSearch.and.returnValue(mockStore ?? createMockSearchStore());
   mockSearchService.search.and.returnValue(
     of({ results: mockSearchResults, aggregations: {}, totalCount: mockTotalCount }),
@@ -82,5 +96,6 @@ export function provideMockSearchService(mockStore?: SearchStoreType) {
   mockSearchService.page.and.returnValue(
     of({ results: mockSearchResults, aggregations: {}, totalCount: mockTotalCount }),
   );
+  mockSearchService.getSupportedDatasource.and.returnValue([]);
   return { provide: SearchService, useValue: mockSearchService };
 }

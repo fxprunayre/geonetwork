@@ -13,6 +13,7 @@ describe('AssociatedPanel', () => {
 
     fixture = TestBed.createComponent(AssociatedPanel);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('record', {});
     fixture.detectChanges();
   });
 

@@ -1,6 +1,12 @@
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
+import { AuthenticationService } from '../authentication.service';
 import { SignInFormComponent } from './sign-in-form';
 
 describe('SignInFormComponent', () => {
@@ -9,6 +15,11 @@ describe('SignInFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthenticationService, useValue: { getAuthenticationProviders: () => of([]) } },
+        { provide: ActivatedRoute, useValue: { parent: null } },
+        { provide: APPLICATION_CONFIGURATION, useValue: signal(DEFAULT_TEST_CONFIG) },
+      ],
       imports: [BrowserAnimationsModule, SignInFormComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
@@ -22,12 +33,12 @@ describe('SignInFormComponent', () => {
   });
 
   it('should be invalid when empty', () => {
-    expect(component.signInForm.valid).toBeFalsy();
+    expect(component.loginForm().valid()).toBeFalsy();
   });
 
   it('should be valid when filled', () => {
-    component.signInForm.controls.username.setValue('test');
-    component.signInForm.controls.password.setValue('test');
-    expect(component.signInForm.valid).toBeTruthy();
+    component.loginModel.set({ email: 'test', password: 'test' });
+    fixture.detectChanges();
+    expect(component.loginForm().valid()).toBeTruthy();
   });
 });

@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
+import { provideMockSearchService } from '../../search/search-store.mock.spec';
 import { DatasourceSelect } from './datasource-select';
 
 describe('DatasourceSelect', () => {
@@ -8,6 +10,7 @@ describe('DatasourceSelect', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideMockTranslateService(), provideMockSearchService()],
       imports: [DatasourceSelect],
     }).compileComponents();
 

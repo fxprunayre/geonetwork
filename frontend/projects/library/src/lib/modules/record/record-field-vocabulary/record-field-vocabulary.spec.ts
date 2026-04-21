@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
 import { RecordFieldVocabulary } from './record-field-vocabulary';
 
 describe('RecordFieldVocabulary', () => {
@@ -8,6 +9,7 @@ describe('RecordFieldVocabulary', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideMockTranslateService()],
       imports: [RecordFieldVocabulary],
     }).compileComponents();
 

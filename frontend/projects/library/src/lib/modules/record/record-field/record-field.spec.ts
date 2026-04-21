@@ -1,8 +1,14 @@
+import { EventEmitter } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RecordField } from './record-field';
-import { MockProvider } from 'ng-mocks';
-import { TranslateService } from '@ngx-translate/core';
+
+import {
+  DefaultLangChangeEvent,
+  LangChangeEvent,
+  TranslateService,
+  TranslationChangeEvent,
+} from '@ngx-translate/core';
+import { of } from 'rxjs';
 
 describe('RecordField', () => {
   let component: RecordField;
@@ -12,9 +18,18 @@ describe('RecordField', () => {
     await TestBed.configureTestingModule({
       imports: [RecordField],
       providers: [
-        MockProvider(TranslateService, {
-          instant: (key: string) => key.toUpperCase(),
-        }),
+        {
+          provide: TranslateService,
+          useValue: {
+            instant: (key: string) => key.toUpperCase(),
+            get: (key: string) => of(key),
+            getCurrentLang: () => 'fr',
+            getParsedResult: (translations: any, key: any, interpolateParams?: any) => key,
+            onLangChange: new EventEmitter<LangChangeEvent>(),
+            onTranslationChange: new EventEmitter<TranslationChangeEvent>(),
+            onDefaultLangChange: new EventEmitter<DefaultLangChangeEvent>(),
+          },
+        },
       ],
     }).compileComponents();
 

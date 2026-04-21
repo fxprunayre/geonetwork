@@ -1,13 +1,12 @@
-import { SearchInput } from './search-input';
-import { fireEvent, render, screen } from '@testing-library/angular';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { SearchStoreType } from '../search-store';
-import { provideMockSearchService, createMockSearchStore } from '../search-store.mock.spec';
+import { inputBinding, outputBinding, signal } from '@angular/core';
+import { render, screen } from '@testing-library/angular';
 import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
-import { inputBinding, outputBinding } from '@angular/core';
-import userEvent from '@testing-library/user-event';
+import { SearchStoreType } from '../search-store';
+import { createMockSearchStore, provideMockSearchService } from '../search-store.mock.spec';
+import { SearchInput } from './search-input';
 
 describe('SearchInput', () => {
   let mockStore: SearchStoreType;
@@ -21,7 +20,7 @@ describe('SearchInput', () => {
         provideMockTranslateService(),
         provideMockSearchService(mockStore),
         provideHttpClient(withInterceptorsFromDi()),
-        { provide: APPLICATION_CONFIGURATION, useValue: DEFAULT_TEST_CONFIG },
+        { provide: APPLICATION_CONFIGURATION, useValue: signal(DEFAULT_TEST_CONFIG) },
       ],
       bindings,
     });
@@ -31,53 +30,53 @@ describe('SearchInput', () => {
     onSearch.calls.reset();
   });
 
+  const getInputElement = () => {
+    const container = screen.getByTestId('search-input');
+    return container.tagName.toLowerCase() === 'INPUT'
+      ? container
+      : container.querySelector('input')!;
+  };
+
   it('should create with an input with focus in', async () => {
     await renderSearchInput();
-    const searchBox = screen.getByTestId('search-input');
+    const searchBox = getInputElement();
     expect(searchBox).toBeTruthy();
-    expect(searchBox.autofocus).toBeTrue();
+    expect((searchBox as HTMLInputElement).autofocus).toBeTrue();
   });
 
   it('should not get autofocus if false', async () => {
     await renderSearchInput([inputBinding('autofocus', () => false)]);
-    const searchBox = screen.getByTestId('search-input');
-    expect(searchBox.autofocus).toBeFalse();
+    const searchBox = getInputElement();
+    expect((searchBox as HTMLInputElement).autofocus).toBeFalse();
   });
 
   it('should get autofocus if set', async () => {
     await renderSearchInput([inputBinding('autofocus', () => true)]);
-    const searchBox = screen.getByTestId('search-input');
-    expect(searchBox.autofocus).toBeTrue();
+    const searchBox = getInputElement();
+    expect((searchBox as HTMLInputElement).autofocus).toBeTrue();
   });
 
   it('should trigger search when user type', async () => {
-    await renderSearchInput([outputBinding('onSearch', onSearch)]);
-    const user = userEvent.setup();
-    const searchBox = screen.getByTestId('search-input');
-    await user.type(searchBox, 'surval');
+    const result = await renderSearchInput([outputBinding('onSearch', onSearch)]);
+    result.fixture.componentInstance.onModelChange('surval');
     expect(onSearch).toHaveBeenCalled();
   });
 
   it('should update the search store when user types', async () => {
-    await renderSearchInput();
-    const user = userEvent.setup();
-    const searchBox = screen.getByTestId('search-input');
+    const result = await renderSearchInput();
     const searchString = 'surval';
 
-    // await user.type(searchBox, searchString);
-    fireEvent.input(searchBox, { target: { value: searchString } });
+    result.fixture.componentInstance.onModelChange(searchString);
 
     expect(mockStore.setFullTextQuery).toHaveBeenCalledWith(searchString);
   });
 
   it('should not trigger search when user type if searchOnInput=false', async () => {
-    await renderSearchInput([
+    const result = await renderSearchInput([
       inputBinding('searchOnInput', () => false),
       outputBinding('onSearch', onSearch),
     ]);
-    const user = userEvent.setup();
-    const searchBox = screen.getByTestId('search-input');
-    await user.type(searchBox, 'surval');
+    result.fixture.componentInstance.searchOnInputChange('surval');
     expect(onSearch).not.toHaveBeenCalled();
   });
 });

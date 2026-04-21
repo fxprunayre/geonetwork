@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { of } from 'rxjs';
 import { SearchActiveFilters } from './search-active-filters.component';
-import { MockProvider } from 'ng-mocks';
-import { TranslateService } from '@ngx-translate/core';
+
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { TranslateService } from '@ngx-translate/core';
 import { provideMockSearchService } from '../../search/search-store.mock.spec';
 
 describe('ActiveFilters', () => {
@@ -14,9 +14,18 @@ describe('ActiveFilters', () => {
     await TestBed.configureTestingModule({
       imports: [SearchActiveFilters],
       providers: [
-        MockProvider(TranslateService, {
-          instant: (key: string) => key.toUpperCase(),
-        }),
+        {
+          provide: TranslateService,
+          useValue: {
+            instant: (key: string) => key.toUpperCase(),
+            getCurrentLang: () => 'en',
+            getParsedResult: (translations: any, key: string, interpolateParams?: any) => key,
+            get: (key: string) => of(key),
+            onTranslationChange: of(),
+            onLangChange: of(),
+            onDefaultLangChange: of(),
+          },
+        },
         provideHttpClientTesting(),
         provideMockSearchService(),
       ],

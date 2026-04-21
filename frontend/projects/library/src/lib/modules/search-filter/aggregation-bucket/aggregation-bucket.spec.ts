@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AggregationBucket } from './aggregation-bucket';
 import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
-import { provideMockSearchService } from '../search-store.mock.spec';
-import { signal } from '@angular/core';
+import { provideMockSearchService } from '../../search/search-store.mock.spec';
+import { AggregationBucket } from './aggregation-bucket';
 
 describe('AggregationBucket', () => {
   let component: AggregationBucket;

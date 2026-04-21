@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchBase } from './search-base';
-import { MockProvider } from 'ng-mocks';
-import { TranslateService } from '@ngx-translate/core';
+
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
 import { provideMockSearchService } from '../search-store.mock.spec';

@@ -271,7 +271,10 @@ export class DuckDbService {
   }
 
   async loadDatasource(ds: Datasource): Promise<void> {
+    console.log('Starting to load datasource:', ds);
     await this.clearPreviousDataIfAny();
+
+    console.log('Clear:', ds);
     this.loadingMode = 'duckdb';
     this.progress.set({
       status: 'connecting',
@@ -306,13 +309,16 @@ export class DuckDbService {
   }
 
   private async clearPreviousDataIfAny(): Promise<void> {
+    console.log('Clearing previous data if any');
     if (this.conn) {
       try {
-        await this.conn.query('DROP TABLE IF EXISTS data');
+        const dropResult = await this.conn.query('DROP TABLE IF EXISTS data');
+        console.log(dropResult);
       } catch (e) {
         console.warn('Failed to drop data table', e);
       }
     }
+    console.log('Cleared previous data if any');
   }
 
   private sanitizeFileName(ds: Datasource): string {

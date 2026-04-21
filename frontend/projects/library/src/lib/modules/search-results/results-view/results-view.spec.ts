@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultView } from './results-view';
 import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
-import { provideMockSearchService } from '../../search/search-store.mock.spec';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
+import { provideMockSearchService } from '../../search/search-store.mock.spec';
+import { ResultsView } from './results-view';
 
-describe('ResultView', () => {
-  let component: ResultView;
-  let fixture: ComponentFixture<ResultView>;
+describe('ResultsView', () => {
+  let component: ResultsView;
+  let fixture: ComponentFixture<ResultsView>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ResultView],
+      imports: [ResultsView],
       providers: [
         provideMockTranslateService(),
         provideMockSearchService(),
@@ -20,7 +20,7 @@ describe('ResultView', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ResultView);
+    fixture = TestBed.createComponent(ResultsView);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

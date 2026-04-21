@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMarkdown } from 'ngx-markdown';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
 
 import { AssociatedRecords } from './associated-records';
 
@@ -9,6 +11,7 @@ describe('AssociatedRecordsPanel', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AssociatedRecords],
+      providers: [provideMockTranslateService(), provideMarkdown()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AssociatedRecords);
