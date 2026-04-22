@@ -83,8 +83,8 @@ export class Aggregation extends SearchBase {
   });
 
   buckets = computed(() => {
-    let buckets = this.search.aggregations()[this.keyName()]?.buckets || [];
-    if (Array.isArray(buckets)) {
+    let buckets = this.aggregationService.getBuckets(this.search.aggregations()[this.keyName()]);
+    if (buckets) {
       return buckets.map((bucket) => {
         return {
           key: bucket.key,

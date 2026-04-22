@@ -1,5 +1,9 @@
 @if (decorator()) {
-  @if (icon()) {
+  @if (icon() && isInspireTheme()) {
+    <app-inspire-theme-styles></app-inspire-theme-styles>
+    <span [class]="inspireThemeClass()"> </span>
+  }
+  @if (icon() && !isInspireTheme()) {
     <span [class]="decorator()?.prefix || ''">
       <ng-icon [name]="icon()"></ng-icon>
     </span>

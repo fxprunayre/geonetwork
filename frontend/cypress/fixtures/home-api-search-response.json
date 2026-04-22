@@ -1,5 +1,5 @@
 {
-  "took": 17,
+  "took": 59,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,95 +9,77 @@
   },
   "hits": {
     "total": {
-      "value": 14865,
+      "value": 14872,
       "relation": "eq"
     },
     "max_score": null,
     "hits": [
       {
-        "_index": "geo-records",
-        "_id": "839a9d1f-16ea-48c5-be73-33b05940ddb0",
+        "_index": "sextant-records",
+        "_id": "d3c8b0f4-855d-4006-b0f0-77d50ff66acc",
         "_score": 0.0,
-        "_ignored": [
-          "lineageObject.default.sort",
-          "lineageObject.default.keyword",
-          "lineageObject.langfre.keyword"
-        ],
+        "_ignored": ["dqSReport.keyword", "dqValues.keyword"],
         "_source": {
-          "dateStamp": "2025-12-03T10:20:58.895048Z",
-          "resourceType": ["dataset", "featureCatalog"],
-          "cl_status": [
-            {
-              "key": "completed",
-              "default": "Finalisé",
-              "langfre": "Finalisé",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
+          "dateStamp": "2025-01-28T08:44:38.97882Z",
+          "resourceType": ["dataset"],
           "resourceTitleObject": {
-            "default": "Cartographie des stocks de Laminaria hyperborea dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats",
-            "langfre": "Cartographie des stocks de Laminaria hyperborea dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats"
+            "default": "ATLANTIC_CH07_Product_2 / Damage to seafloor to both living and non-living components",
+            "langeng": "ATLANTIC_CH07_Product_2 / Damage to seafloor to both living and non-living components"
           },
           "resourceAbstractObject": {
-            "default": "Cette cartographie fournit une estimation de la distribution spatiale des stocks de de Laminaria hyperborea en Bretagne, à une résolution de 5 km. Elle a été produite à travers des modèles corrélatifs de l’habitat potentiel de l’espèce. Le modèle établit un lien entre des observations in situ de biomasse issues de plusieurs travaux réalisés entre 2004 et 2019 et divers facteurs biotiques et abiotiques susceptibles d’influencer le développement de ces espèces. Afin de refléter le type de substrat favorisé par l’espèce, les projections ont été masqués et ne représentent que les zones rocheuses infralittorales.",
-            "langfre": "Cette cartographie fournit une estimation de la distribution spatiale des stocks de de Laminaria hyperborea en Bretagne, à une résolution de 5 km. Elle a été produite à travers des modèles corrélatifs de l’habitat potentiel de l’espèce. Le modèle établit un lien entre des observations in situ de biomasse issues de plusieurs travaux réalisés entre 2004 et 2019 et divers facteurs biotiques et abiotiques susceptibles d’influencer le développement de ces espèces. Afin de refléter le type de substrat favorisé par l’espèce, les projections ont été masqués et ne représentent que les zones rocheuses infralittorales."
+            "default": "The impact of fishing on benthic habitats has previously been investigated however; a conclusive classification of potentially sensitive habitats per gear type does not exist. Currently only qualitative estimates of fishery impact using Broad-scale habitat maps are possible. Here a sensitivity matrix using both fishing pressure (fishing Intensity) and habitat sensitivity is employed to define habitat disturbance categories. The predominant fishing activities associated with physical abrasion of the seafloor area are from bottom contacting towed fishing gear. The swept area of the aforementioned gear in contact with the seabed is generally considered a function of gear width, vessel speed and fishing effort (ICES. 2015). The varying characteristics of fishing gear, their interaction with the sea floor and species being targeted; provide scope for differing interactions with subsurface (infaunal) and surface (epifaunal) dwelling communities. An evaluation of the abrasion pressure and habitat sensitivity split into surface and subsurface pressure allows greater insight to the ecological effects. Fishing intensity was calculated annually and based on the area of sea floor being swept (or swept area ratio SAR) by gear type. Calculations are based on SAR’s of gear types per area, per year. Fishing pressure ranks and habitat sensitivity ranks obtained from WGSFD working group (01 WGSFD - Report of the Working Group on Spatial Fisheries Data 2015) can be incorporated within a GIS environment to existing ICES fisheries data to provide habitat disturbance maps (fishing pressure maps+ habitat sensitivity maps)\n\nICES. 2015. Report of the Working Group on Spatial Fisheries Data (WGSFD), 8–12\nJune 2015, ICES Headquarters, Copenhagen, Denmark. ICES CM 2015/SSGEPI:18. 150\npp.",
+            "langeng": "The impact of fishing on benthic habitats has previously been investigated however; a conclusive classification of potentially sensitive habitats per gear type does not exist. Currently only qualitative estimates of fishery impact using Broad-scale habitat maps are possible. Here a sensitivity matrix using both fishing pressure (fishing Intensity) and habitat sensitivity is employed to define habitat disturbance categories. The predominant fishing activities associated with physical abrasion of the seafloor area are from bottom contacting towed fishing gear. The swept area of the aforementioned gear in contact with the seabed is generally considered a function of gear width, vessel speed and fishing effort (ICES. 2015). The varying characteristics of fishing gear, their interaction with the sea floor and species being targeted; provide scope for differing interactions with subsurface (infaunal) and surface (epifaunal) dwelling communities. An evaluation of the abrasion pressure and habitat sensitivity split into surface and subsurface pressure allows greater insight to the ecological effects. Fishing intensity was calculated annually and based on the area of sea floor being swept (or swept area ratio SAR) by gear type. Calculations are based on SAR’s of gear types per area, per year. Fishing pressure ranks and habitat sensitivity ranks obtained from WGSFD working group (01 WGSFD - Report of the Working Group on Spatial Fisheries Data 2015) can be incorporated within a GIS environment to existing ICES fisheries data to provide habitat disturbance maps (fishing pressure maps+ habitat sensitivity maps)\n\nICES. 2015. Report of the Working Group on Spatial Fisheries Data (WGSFD), 8–12\nJune 2015, ICES Headquarters, Copenhagen, Denmark. ICES CM 2015/SSGEPI:18. 150\npp."
           },
-          "resourceCreditObject": [
-            {
-              "default": "Life Marha, IDEALG",
-              "langfre": "Life Marha, IDEALG"
-            }
-          ],
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-5.199, 47.2126],
-                  [-1.6949, 47.2126],
-                  [-1.6949, 49.1518],
-                  [-5.199, 49.1518],
-                  [-5.199, 47.2126]
+                  [-41.102, 24.584],
+                  [1.9309, 24.584],
+                  [1.9309, 63.709],
+                  [-41.102, 63.709],
+                  [-41.102, 24.584]
                 ]
               ]
             }
           ],
           "link": [
             {
-              "protocol": "COPYFILE",
+              "protocol": "WWW:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "file:///home/sextant/data_QGIS/DYNECO/Laminaires/Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea.zip",
-                "langfre": "file:///home/sextant/data_QGIS/DYNECO/Laminaires/Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea.zip"
+                "default": "http://ices.dk/sites/pub/Publication%20Reports/Forms/defaultone.aspx?RootFolder=%2fsites%2fpub%2fPublication%20Reports%2fData%20outputs&FolderCTID=0x0120005DAF18EB10DAA049BBB066544D790785",
+                "langeng": "http://ices.dk/sites/pub/Publication%20Reports/Forms/defaultone.aspx?RootFolder=%2fsites%2fpub%2fPublication%20Reports%2fData%20outputs&FolderCTID=0x0120005DAF18EB10DAA049BBB066544D790785"
               },
               "nameObject": {
-                "default": "Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea",
-                "langfre": "Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea"
+                "default": "Publication Reports : Data outputs",
+                "langeng": "Publication Reports : Data outputs"
               },
               "descriptionObject": {
-                "default": "Laminaria hyperborea - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats (.shp)",
-                "langfre": "Laminaria hyperborea - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats (.shp)"
+                "default": "Data linked to ICES Publication reports",
+                "langeng": "Data linked to ICES Publication reports"
               },
               "function": "download",
               "applicationProfile": "",
               "group": 0
             },
             {
-              "protocol": "OGC:WMS",
+              "protocol": "WWW:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/dyneco",
-                "langfre": "https://sextant.ifremer.fr/services/wms/dyneco"
+                "default": "http://www.emodnet-seabedhabitats.eu/default.aspx?page=1953",
+                "langeng": "http://www.emodnet-seabedhabitats.eu/default.aspx?page=1953"
               },
               "nameObject": {
-                "default": "Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea",
-                "langfre": "Ifr_Marha_BZH_Stock_5km_Laminaria_Hyperborea"
+                "default": "EMODnet Spatial Data Downloads",
+                "langeng": "EMODnet Spatial Data Downloads"
               },
               "descriptionObject": {
-                "default": "Laminaria hyperborea - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats",
-                "langfre": "Laminaria hyperborea - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats"
+                "default": "Main habitat data products available for download",
+                "langeng": "Main habitat data products available for download"
               },
-              "function": "browsing",
+              "function": "download",
               "applicationProfile": "",
               "group": 0
             },
@@ -105,30 +87,604 @@
               "protocol": "DOI",
               "mimeType": "",
               "urlObject": {
-                "default": "https://doi.org/10.12770/839a9d1f-16ea-48c5-be73-33b05940ddb0",
-                "langfre": "https://doi.org/10.12770/839a9d1f-16ea-48c5-be73-33b05940ddb0"
+                "default": "https://doi.org/10.12770/d3c8b0f4-855d-4006-b0f0-77d50ff66acc",
+                "langeng": "https://doi.org/10.12770/d3c8b0f4-855d-4006-b0f0-77d50ff66acc"
               },
               "nameObject": {
-                "default": "Digital Object Identifier (DOI)",
-                "langfre": "Digital Object Identifier (DOI)"
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "descriptionObject": {
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "OGC:OWS-C",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge7_product2.xml",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/contexte/challenge7_product2.xml"
+              },
+              "nameObject": {
+                "default": "CH07_product_02",
+                "langeng": "CH07_product_02"
+              },
+              "descriptionObject": {
+                "default": "Product visualization",
+                "langeng": "Product visualization"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 2
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-atlantic.eu",
+                "langeng": "http://www.emodnet-atlantic.eu"
+              },
+              "descriptionObject": {
+                "default": "Access to the website",
+                "langeng": "Access to the website"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 3
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_7_product_2.zip",
+                "langeng": "https://sextant.ifremer.fr/documentation/atlcheckpoint/product/CH_7_product_2.zip"
+              },
+              "nameObject": {
+                "default": "Download product",
+                "langeng": "Download product"
+              },
+              "descriptionObject": {
+                "default": "Download product",
+                "langeng": "Download product"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 4
+            }
+          ],
+          "uuid": "d3c8b0f4-855d-4006-b0f0-77d50ff66acc",
+          "draft": "n",
+          "id": "334238577",
+          "owner": "213606957",
+          "groupOwner": "139596738",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "139596738", "230734906"],
+          "op2": "139596738",
+          "op1": ["1", "139596738", "230734906"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596738",
+          "op5": ["1", "139596738", "230734906"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "fee8d5ac-421a-477b-8d20-16a213f18d23",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2025-01-28T08:45:18.613551Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "BLACKSEA_CH01_Product_01 / A high resolution wind-wave-tides database for the Black Sea area",
+            "langeng": "BLACKSEA_CH01_Product_01 / A high resolution wind-wave-tides database for the Black Sea area"
+          },
+          "resourceAbstractObject": {
+            "default": "One of the main objectives of the Work Package 2 (Windfarm Siting) is the determination of the suitability of sites for wind farm development in specific predefined Black Sea areas. \nTowards this direction a high resolution database has been developed, based on the outcomes of the FP7 MARINA Platform project (http://forecast.uoa.gr/proj_marina.php). The data base covers a time period of 10 years (2001 – 2010) containing hourly data and covering a wide range of atmospheric, wave and tidal information",
+            "langeng": "One of the main objectives of the Work Package 2 (Windfarm Siting) is the determination of the suitability of sites for wind farm development in specific predefined Black Sea areas. \nTowards this direction a high resolution database has been developed, based on the outcomes of the FP7 MARINA Platform project (http://forecast.uoa.gr/proj_marina.php). The data base covers a time period of 10 years (2001 – 2010) containing hourly data and covering a wide range of atmospheric, wave and tidal information"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [27.2, 41.0],
+                  [42.0, 41.0],
+                  [42.0, 47.0],
+                  [27.2, 47.0],
+                  [27.2, 41.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.12770/fee8d5ac-421a-477b-8d20-16a213f18d23",
+                "langeng": "https://doi.org/10.12770/fee8d5ac-421a-477b-8d20-16a213f18d23"
+              },
+              "nameObject": {
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "descriptionObject": {
+                "default": "DOI of the product",
+                "langeng": "DOI of the product"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-blacksea.eu",
+                "langeng": "http://www.emodnet-blacksea.eu"
+              },
+              "descriptionObject": {
+                "default": "Access to the website",
+                "langeng": "Access to the website"
               },
               "function": "",
               "applicationProfile": "",
               "group": 1
             }
           ],
-          "uuid": "839a9d1f-16ea-48c5-be73-33b05940ddb0",
+          "uuid": "fee8d5ac-421a-477b-8d20-16a213f18d23",
           "draft": "n",
-          "id": "340135329",
-          "owner": "137",
-          "groupOwner": "335589477",
+          "id": "334238432",
+          "owner": "4",
+          "groupOwner": "230733018",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "335589477", "14", "82", "163141952"],
-          "op2": "335589477",
-          "op1": ["1", "335589477", "14", "82", "163141952"],
+          "op0": ["230733018", "1"],
+          "op2": "230733018",
+          "op1": ["230733018", "1"],
           "documentStandard": "iso19115-3.2018",
-          "op3": "335589477",
-          "op5": ["1", "335589477", "14", "82", "163141952"],
+          "op3": "230733018",
+          "op5": ["230733018", "1"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "3b9f73d5-6aae-4f75-aa1d-c90b6f314641",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-04-03T10:48:34.000Z",
+          "resourceType": ["series"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Industrial activity | Telecommunication Cables | European Commission. Directorate-General for Maritime Affairs and Fisheries | Telecommunication Cables (actual route locations)",
+            "langeng": "Industrial activity | Telecommunication Cables | European Commission. Directorate-General for Maritime Affairs and Fisheries | Telecommunication Cables (actual route locations)"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-23.144524, 32.220235],
+                  [21.503913, 32.220235],
+                  [21.503913, 63.058941],
+                  [-23.144524, 63.058941],
+                  [-23.144524, 32.220235]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
+                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
+              },
+              "nameObject": {
+                "default": "Telecommunication Cables (actual route locations)",
+                "langeng": "Telecommunication Cables (actual route locations)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.emodnet-humanactivities.eu/view-data.php",
+                "langeng": "http://www.emodnet-humanactivities.eu/view-data.php"
+              },
+              "nameObject": {
+                "default": "Telecommunication Cables (actual route locations)",
+                "langeng": "Telecommunication Cables (actual route locations)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "3b9f73d5-6aae-4f75-aa1d-c90b6f314641",
+          "draft": "n",
+          "id": "334238459",
+          "owner": "113112277",
+          "groupOwner": "139596411",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["139596411", "1", "83566633"],
+          "op2": "139596411",
+          "op1": "139596411",
+          "documentStandard": "iso19115-3.2018",
+          "op3": "139596411",
+          "op5": ["139596411", "83566633"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "c184f4ac-af6c-4e10-9ba9-eb7d29749b30",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-04-11T13:10:20.000Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "BLACKSEA_CH01_Specification_1 / A high resolution wind-wave-tides database for the Black Sea area",
+            "langeng": "BLACKSEA_CH01_Specification_1 / A high resolution wind-wave-tides database for the Black Sea area"
+          },
+          "resourceAbstractObject": {
+            "default": "One of the main objectives of the Work Package 2 (Windfarm Siting) is the determination of the suitability of sites for wind farm development in specific predefined Black Sea areas. \nTowards this direction a high resolution database has been developed, based on the outcomes of the FP7 MARINA Platform project (http://forecast.uoa.gr/proj_marina.php). The data base covers a time period of 10 years (2001 – 2010) containing hourly data and covering a wide range of atmospheric, wave and tidal information",
+            "langeng": "One of the main objectives of the Work Package 2 (Windfarm Siting) is the determination of the suitability of sites for wind farm development in specific predefined Black Sea areas. \nTowards this direction a high resolution database has been developed, based on the outcomes of the FP7 MARINA Platform project (http://forecast.uoa.gr/proj_marina.php). The data base covers a time period of 10 years (2001 – 2010) containing hourly data and covering a wide range of atmospheric, wave and tidal information"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [27.2, 41.0],
+                  [42.0, 41.0],
+                  [42.0, 47.0],
+                  [27.2, 47.0],
+                  [27.2, 41.0]
+                ]
+              ]
+            }
+          ],
+          "uuid": "c184f4ac-af6c-4e10-9ba9-eb7d29749b30",
+          "draft": "n",
+          "id": "334238433",
+          "owner": "4",
+          "groupOwner": "230733018",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["230733018", "1"],
+          "op2": "230733018",
+          "op1": ["230733018", "1"],
+          "documentStandard": "iso19115-3.2018",
+          "op3": "230733018",
+          "op5": ["230733018", "1"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false"
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "342e3c00-701d-11dc-8293-000086f6a603",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2026-01-22T21:32:31.599757Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Zones Naturelles d'Intérêt Ecologique Faunistique et Floristique (ZNIEFF1)",
+            "langfre": "Zones Naturelles d'Intérêt Ecologique Faunistique et Floristique (ZNIEFF1)"
+          },
+          "resourceAbstractObject": {
+            "default": "L’enquête nationale pour la constitution de l’inventaire des zones naturelles d’intérêt écologique,faunistique et floristique (ZNIEFF) a été conduite de 1982 à 1995. Fort de cet état des lieux desespaces naturels à forte valeur patrimoniale, et conscient que la nature est en constante évolution, une enquête de modernisation a été lancée dès 1997 (pour les régions ayant répondu au plus tôt à l’enquête initiale) et doit s’achever en 2012. Une fois terminée, la nouvelle enquête remplace et annule la précédente. Généralement et respectivement désignées comme enquêtes de première et de deuxième génération, le mode opératoire de la future nouvelle enquête va évoluer vers un inventaire permanent et continu, mettant à jour l’information sur les zones existantes tout en permettant l’éventuelle description de nouvelles zones.\nLe site internet de l’Inventaire National du Patrimoine Naturel (INPN) intègre d’ores et déjà cette mutation annoncée. Il affiche l’inventaire des ZNIEFF de première génération pour les régions n’ayant pas terminé l’enquête pour la constitution de l’inventaire des ZNIEFF de deuxième génération. Il affiche l’inventaire des ZNIEFF de deuxième génération ainsi que les éventuelles mises à jour de ce nouvel inventaire, pour les régions qui ont déjà terminé leur enquête de modernisation.\nLa carte nationale de l’inventaire des ZNIEFF continentales intègre cet élément générationnel en distinguant l’inventaire de première génération (en vert clair) et l’inventaire de deuxième génération (en vert foncé), en distinguant toujours, au sein de chaque génération, les zones de type 1 (délimitée sur la base d’un seul grand type de milieu écologique) et les zones de type 2 (délimitées sur la base des assemblages écologiques, dans une notion de fonctionnement naturel général et de paysages).",
+            "langfre": "L’enquête nationale pour la constitution de l’inventaire des zones naturelles d’intérêt écologique,faunistique et floristique (ZNIEFF) a été conduite de 1982 à 1995. Fort de cet état des lieux desespaces naturels à forte valeur patrimoniale, et conscient que la nature est en constante évolution, une enquête de modernisation a été lancée dès 1997 (pour les régions ayant répondu au plus tôt à l’enquête initiale) et doit s’achever en 2012. Une fois terminée, la nouvelle enquête remplace et annule la précédente. Généralement et respectivement désignées comme enquêtes de première et de deuxième génération, le mode opératoire de la future nouvelle enquête va évoluer vers un inventaire permanent et continu, mettant à jour l’information sur les zones existantes tout en permettant l’éventuelle description de nouvelles zones.\nLe site internet de l’Inventaire National du Patrimoine Naturel (INPN) intègre d’ores et déjà cette mutation annoncée. Il affiche l’inventaire des ZNIEFF de première génération pour les régions n’ayant pas terminé l’enquête pour la constitution de l’inventaire des ZNIEFF de deuxième génération. Il affiche l’inventaire des ZNIEFF de deuxième génération ainsi que les éventuelles mises à jour de ce nouvel inventaire, pour les régions qui ont déjà terminé leur enquête de modernisation.\nLa carte nationale de l’inventaire des ZNIEFF continentales intègre cet élément générationnel en distinguant l’inventaire de première génération (en vert clair) et l’inventaire de deuxième génération (en vert foncé), en distinguant toujours, au sein de chaque génération, les zones de type 1 (délimitée sur la base d’un seul grand type de milieu écologique) et les zones de type 2 (délimitées sur la base des assemblages écologiques, dans une notion de fonctionnement naturel général et de paysages)."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "MNHN-INPN",
+              "langfre": "MNHN-INPN"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-5.142101, 41.312477],
+                  [9.557153, 41.312477],
+                  [9.557153, 51.091034],
+                  [-5.142101, 51.091034],
+                  [-5.142101, 41.312477]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://inpn.mnhn.fr/telechargement/cartes-et-information-geographique/inv/znieff1",
+                "langfre": "https://inpn.mnhn.fr/telechargement/cartes-et-information-geographique/inv/znieff1"
+              },
+              "nameObject": {
+                "default": "INPN",
+                "langfre": "INPN"
+              },
+              "descriptionObject": {
+                "default": "INPN - Cartes et informations géographiques",
+                "langfre": "INPN - Cartes et informations géographiques"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://inpn.mnhn.fr/docs/transfertSIG.pdf",
+                "langfre": "http://inpn.mnhn.fr/docs/transfertSIG.pdf"
+              },
+              "nameObject": {
+                "default": "transfertSIG.pdf",
+                "langfre": "transfertSIG.pdf"
+              },
+              "descriptionObject": {
+                "default": "Informations relatives à la composition des couches SIG nationales de référence des espaces naturels",
+                "langfre": "Informations relatives à la composition des couches SIG nationales de référence des espaces naturels"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://inpn.mnhn.fr/docs/map_pdf/znieff1.pdf",
+                "langfre": "http://inpn.mnhn.fr/docs/map_pdf/znieff1.pdf"
+              },
+              "nameObject": {
+                "default": "znieff1.pdf",
+                "langfre": "znieff1.pdf"
+              },
+              "descriptionObject": {
+                "default": "Carte des ZNIEFF de catégorie 1",
+                "langfre": "Carte des ZNIEFF de catégorie 1"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://ws.carmencarto.fr/WMS/119/fxx_inpn?",
+                "langfre": "https://ws.carmencarto.fr/WMS/119/fxx_inpn?"
+              },
+              "nameObject": {
+                "default": "Znieff1",
+                "langfre": "Znieff1"
+              },
+              "descriptionObject": {
+                "default": "Znieff1 2021 (WMS INPN)",
+                "langfre": "Znieff1 2021 (WMS INPN)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "OGC:WFS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://ws.carmencarto.fr/WFS/119/fxx_inpn?",
+                "langfre": "https://ws.carmencarto.fr/WFS/119/fxx_inpn?"
+              },
+              "nameObject": {
+                "default": "Znieff1",
+                "langfre": "Znieff1"
+              },
+              "descriptionObject": {
+                "default": "Znieff1 2021 (WFS INPN)",
+                "langfre": "Znieff1 2021 (WFS INPN)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "urlObject": {
+                "default": "file:///home/sextant/data/MNHN/ZNIEFF_ZICO/znieff1_G2_2021.shp",
+                "langfre": "file:///home/sextant/data/MNHN/ZNIEFF_ZICO/znieff1_G2_2021.shp"
+              },
+              "nameObject": {
+                "default": "znieff1_G2_2021",
+                "langfre": "znieff1_G2_2021"
+              },
+              "descriptionObject": {
+                "default": "Znieff1 2021 (fichier shape)",
+                "langfre": "Znieff1 2021 (fichier shape)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 2
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "urlObject": {
+                "default": "file:///home/sextant/data/MNHN/ZNIEFF_ZICO/ZNIEFF1_G2.shp",
+                "langfre": "file:///home/sextant/data/MNHN/ZNIEFF_ZICO/ZNIEFF1_G2.shp"
+              },
+              "nameObject": {
+                "default": "ZNIEFF1_G2",
+                "langfre": "ZNIEFF1_G2"
+              },
+              "descriptionObject": {
+                "default": "Znieff1 2016 (fichier shape)",
+                "langfre": "Znieff1 2016 (fichier shape)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 2
+            }
+          ],
+          "uuid": "342e3c00-701d-11dc-8293-000086f6a603",
+          "draft": "n",
+          "id": "100",
+          "owner": "13",
+          "groupOwner": "4",
+          "op0": [
+            "1",
+            "4",
+            "14",
+            "48",
+            "42",
+            "29",
+            "45",
+            "37",
+            "58",
+            "7",
+            "5",
+            "28",
+            "31",
+            "95",
+            "181712109",
+            "191227451",
+            "15",
+            "334291911",
+            "334568939",
+            "334569090"
+          ],
+          "op1": [
+            "1",
+            "4",
+            "14",
+            "48",
+            "42",
+            "29",
+            "45",
+            "37",
+            "58",
+            "7",
+            "5",
+            "28",
+            "31",
+            "95",
+            "181712109",
+            "191227451",
+            "15",
+            "334291911",
+            "334568939",
+            "334569090"
+          ],
+          "documentStandard": "iso19115-3.2018",
+          "op5": [
+            "1",
+            "4",
+            "14",
+            "48",
+            "42",
+            "29",
+            "45",
+            "37",
+            "58",
+            "7",
+            "5",
+            "28",
+            "31",
+            "95",
+            "181712109",
+            "191227451",
+            "15",
+            "334291911",
+            "334568939",
+            "334569090"
+          ],
           "valid": "0",
           "isTemplate": "n",
           "rating": "0",
@@ -136,7 +692,11 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/839a9d1f-16ea-48c5-be73-33b05940ddb0/attachments/stock_hyperborea_v2.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/342e3c00-701d-11dc-8293-000086f6a603/attachments/znieff1_2002_small.png"
+            },
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/342e3c00-701d-11dc-8293-000086f6a603/attachments/znieff1_2002_big.png"
             }
           ]
         },
@@ -153,76 +713,29 @@
         "selected": false
       },
       {
-        "_index": "geo-records",
-        "_id": "496ff490-e093-4980-b914-47cebc1ca82d",
+        "_index": "sextant-records",
+        "_id": "e82ab947-9eeb-4b0a-8dfb-2fdc2227ff24",
         "_score": 0.0,
+        "_ignored": [
+          "lineageObject.default.keyword",
+          "lineageObject.default.sort",
+          "lineageObject.langfre.keyword"
+        ],
         "_source": {
-          "dateStamp": "2025-05-15T22:15:14.237802Z",
+          "dateStamp": "2025-05-16T09:23:04.766372Z",
           "resourceType": ["dataset"],
           "resourceTitleObject": {
-            "default": "Determinants of Reef Fish Assemblages on Tropical Oceanic Islands",
-            "langeng": "Determinants of Reef Fish Assemblages on Tropical Oceanic Islands"
+            "default": "Prévisions biogéochimiques (ECO-MARS3D) pour la façade Manche / Golfe de Gascogne (B1)",
+            "langfre": "Prévisions biogéochimiques (ECO-MARS3D) pour la façade Manche / Golfe de Gascogne (B1)"
           },
           "resourceAbstractObject": {
-            "default": "Diversity patterns are determined by biogeographic, energetic, and anthropogenic factors, yet few studies have combined them into a large-scale framework in order to decouple and compare their relative effects on fish faunas. Using an empirical dataset derived from 1527 underwater visual censuses (UVC) at 18 oceanic islands (five different marine provinces), we determined the relative influence of such factors on reef fish species richness, functional dispersion, density and biomass estimated from each UVC unit. Species richness presented low variation but was high at large island sites. High functional dispersion, density, and biomass were found at islands with large local species pool and distance from nearest reef. Primary productivity positively affected fish richness, density and biomass confirming that more productive areas support larger populations, and higher biomass and richness on oceanic islands. Islands densely populated by humans had lower fish species richness and biomass reflecting anthropogenic effects. Species richness, functional dispersion, and biomass were positively related to distance from the mainland. Overall, species richness and fish density were mainly influenced by biogeographical and energetic factors, whereas functional dispersion and biomass were strongly influenced by anthropogenic factors. Our results extend previous hypotheses for different assemblage metrics estimated from empirical data and confirm the negative impact of humans on fish assemblages, highlighting the need for conservation of oceanic islands.",
-            "langeng": "Diversity patterns are determined by biogeographic, energetic, and anthropogenic factors, yet few studies have combined them into a large-scale framework in order to decouple and compare their relative effects on fish faunas. Using an empirical dataset derived from 1527 underwater visual censuses (UVC) at 18 oceanic islands (five different marine provinces), we determined the relative influence of such factors on reef fish species richness, functional dispersion, density and biomass estimated from each UVC unit. Species richness presented low variation but was high at large island sites. High functional dispersion, density, and biomass were found at islands with large local species pool and distance from nearest reef. Primary productivity positively affected fish richness, density and biomass confirming that more productive areas support larger populations, and higher biomass and richness on oceanic islands. Islands densely populated by humans had lower fish species richness and biomass reflecting anthropogenic effects. Species richness, functional dispersion, and biomass were positively related to distance from the mainland. Overall, species richness and fish density were mainly influenced by biogeographical and energetic factors, whereas functional dispersion and biomass were strongly influenced by anthropogenic factors. Our results extend previous hypotheses for different assemblage metrics estimated from empirical data and confirm the negative impact of humans on fish assemblages, highlighting the need for conservation of oceanic islands."
+            "default": "Le modèle biogéochimique B1-ECOMARS3D-MANGA4000 sur la façade Manche Atlantique est un modèle 3D de résolution spatiale 4km qui fournit les concentrations de nutriments et de plancton toutes les heures sur 30 niveaux",
+            "langfre": "Le modèle biogéochimique B1-ECOMARS3D-MANGA4000 sur la façade Manche Atlantique est un modèle 3D de résolution spatiale 4km qui fournit les concentrations de nutriments et de plancton toutes les heures sur 30 niveaux"
           },
           "resourceCreditObject": [
             {
-              "default": "Universidade Federal de Santa Catarina (Brazil)",
-              "langeng": "Universidade Federal de Santa Catarina (Brazil)"
-            },
-            {
-              "default": "Universidade de Brazilia (Brazil)",
-              "langeng": "Universidade de Brazilia (Brazil)"
-            },
-            {
-              "default": "Institut de Recherche pour le Développement (France)",
-              "langeng": "Institut de Recherche pour le Développement (France)"
-            },
-            {
-              "default": "Universidade Federal do Rio de Janeiro (Brazil)",
-              "langeng": "Universidade Federal do Rio de Janeiro (Brazil)"
-            },
-            {
-              "default": "Brown University (USA)",
-              "langeng": "Brown University (USA)"
-            },
-            {
-              "default": "University of California (USA)",
-              "langeng": "University of California (USA)"
-            },
-            {
-              "default": "Universidade de Costa Rica",
-              "langeng": "Universidade de Costa Rica"
-            },
-            {
-              "default": "Ecosistemas y Conservación, Proazul Terrestre (Mexico)",
-              "langeng": "Ecosistemas y Conservación, Proazul Terrestre (Mexico)"
-            },
-            {
-              "default": "Universidade Federal Fluminense (Brazil)",
-              "langeng": "Universidade Federal Fluminense (Brazil)"
-            },
-            {
-              "default": "Charles Darwin University (Australia)",
-              "langeng": "Charles Darwin University (Australia)"
-            },
-            {
-              "default": "Centro para la Biodiversidad Marina y la Conservación (Mexico)",
-              "langeng": "Centro para la Biodiversidad Marina y la Conservación (Mexico)"
-            },
-            {
-              "default": "California Academy of Sciences (USA)",
-              "langeng": "California Academy of Sciences (USA)"
-            },
-            {
-              "default": "Universidad de Guadalajara (Mexico)",
-              "langeng": "Universidad de Guadalajara (Mexico)"
-            },
-            {
-              "default": "Universidad del Valle (Colombia)",
-              "langeng": "Universidad del Valle (Colombia)"
+              "default": "MARC",
+              "langfre": "MARC"
             }
           ],
           "geom": [
@@ -230,59 +743,120 @@
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-125.9923, -22.3624],
-                  [12.3031, -22.3624],
-                  [12.3031, 36.6874],
-                  [-125.9923, 36.6874],
-                  [-125.9923, -22.3624]
+                  [-7.9756, 43.16],
+                  [5.1043, 43.16],
+                  [5.1043, 52.75],
+                  [-7.9756, 52.75],
+                  [-7.9756, 43.16]
                 ]
               ]
             }
           ],
           "link": [
             {
-              "protocol": "DOI",
+              "protocol": "NETWORK:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "https://doi.org/10.1111/ecog.03506",
-                "langeng": "https://doi.org/10.1111/ecog.03506"
-              },
-              "nameObject": {
-                "default": "Determinants of reef fish assemblages in tropical Oceanic islands",
-                "langeng": "Determinants of reef fish assemblages in tropical Oceanic islands"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://github.com/quimbayo-jp/Fish_Assemblages_Oceanic_Islands/tree/untagged-987480790e96c38e377c",
-                "langeng": "https://github.com/quimbayo-jp/Fish_Assemblages_Oceanic_Islands/tree/untagged-987480790e96c38e377c"
-              },
-              "nameObject": {
-                "default": "Dataset on Github",
-                "langeng": "Dataset on Github"
+                "default": "/home/ref-marc/b1",
+                "langfre": "/home/ref-marc/b1"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             }
           ],
-          "uuid": "496ff490-e093-4980-b914-47cebc1ca82d",
+          "uuid": "e82ab947-9eeb-4b0a-8dfb-2fdc2227ff24",
           "draft": "n",
-          "id": "335023032",
-          "owner": "334560115",
-          "groupOwner": "334585654",
+          "id": "334238601",
+          "owner": "10",
+          "groupOwner": "192556831",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "334585654"],
-          "op2": "334585654",
-          "op1": ["1", "334585654"],
+          "op0": ["1", "136009538", "174375699", "192556831", "122", "334291911"],
+          "op2": ["192556831", "122"],
+          "op1": ["1", "136009538", "174375699", "192556831", "122", "334291911"],
           "documentStandard": "iso19115-3.2018",
-          "op3": "334585654",
-          "op5": ["1", "334585654"],
+          "op3": "192556831",
+          "op5": ["1", "136009538", "174375699", "192556831", "122", "334291911"],
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/e82ab947-9eeb-4b0a-8dfb-2fdc2227ff24/attachments/3D_Golfe_Gascogne.PNG"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "8e7b40ef-c6f0-4285-86ac-27b0cda26e46",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2016-11-17T12:36:47.000Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "On going",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Zooplankton wet weight biomass | Wet weight biomass of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset",
+            "langeng": "Zooplankton wet weight biomass | Wet weight biomass of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset"
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [28.13, 41.0],
+                  [41.5, 41.0],
+                  [41.5, 43.4],
+                  [28.13, 43.4],
+                  [28.13, 41.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.ims.metu.edu.tr/IMS_Inventory/",
+                "langeng": "http://www.ims.metu.edu.tr/IMS_Inventory/"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "8e7b40ef-c6f0-4285-86ac-27b0cda26e46",
+          "draft": "n",
+          "id": "153356294",
+          "owner": "141622272",
+          "groupOwner": "139608974",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "139608974", "83566259"],
+          "op2": "139608974",
+          "op1": "139608974",
+          "documentStandard": "iso19115-3.2018",
+          "op5": "139608974",
           "valid": "-1",
           "isTemplate": "n",
           "rating": "0",
@@ -290,7 +864,7 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/496ff490-e093-4980-b914-47cebc1ca82d/attachments/23_Determinants%20of%20Reef%20Fish%20Assemblages%20on%20Tropical%20Oceanic%20Islands.jpg"
+              "url": "http://emodnet-blacksea.eu/wp-content/uploads/2015/11/CH11_alien_species_n.png"
             }
           ]
         },
@@ -301,43 +875,31 @@
         "isPublishedToAll": true,
         "view": true,
         "notify": false,
-        "download": true,
-        "dynamic": true,
+        "download": false,
+        "dynamic": false,
         "featured": false,
+        "guestdownload": false,
         "selected": false
       },
       {
-        "_index": "geo-records",
-        "_id": "6db5aaff-7418-42fc-b9f8-99fd08a355be",
+        "_index": "sextant-records",
+        "_id": "16bc16ef-588a-47e2-803e-03b4acb85dca",
         "_score": 0.0,
-        "_ignored": [
-          "lineageObject.default.sort",
-          "lineageObject.default.keyword",
-          "lineageObject.langfre.keyword"
-        ],
         "_source": {
-          "dateStamp": "2025-12-03T09:38:30.85933Z",
-          "resourceType": ["dataset", "featureCatalog"],
-          "cl_status": [
-            {
-              "key": "completed",
-              "default": "Finalisé",
-              "langfre": "Finalisé",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
+          "dateStamp": "2025-12-13T15:59:45.324967Z",
+          "resourceType": ["nonGeographicDataset"],
           "resourceTitleObject": {
-            "default": "Cartographie des stocks de Laminaria digitata dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats",
-            "langfre": "Cartographie des stocks de Laminaria digitata dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats"
+            "default": "Metabarcoding of Coastal Ecosystems",
+            "langeng": "Metabarcoding of Coastal Ecosystems"
           },
           "resourceAbstractObject": {
-            "default": "Cette cartographie fournit une estimation de la distribution spatiale des stocks de de Laminaria digitata en Bretagne, à une résolution de 5 km. Elle a été produite à travers des modèles corrélatifs de l’habitat potentiel de l’espèce. Le modèle établit un lien entre des observations in situ de biomasse issues de plusieurs travaux réalisés entre 2004 et 2019 et divers facteurs biotiques et abiotiques susceptibles d’influencer le développement de ces espèces. Afin de refléter le type de substrat favorisé par l’espèce, les projections ont été masqués et ne représentent que les zones rocheuses infralittorales.",
-            "langfre": "Cette cartographie fournit une estimation de la distribution spatiale des stocks de de Laminaria digitata en Bretagne, à une résolution de 5 km. Elle a été produite à travers des modèles corrélatifs de l’habitat potentiel de l’espèce. Le modèle établit un lien entre des observations in situ de biomasse issues de plusieurs travaux réalisés entre 2004 et 2019 et divers facteurs biotiques et abiotiques susceptibles d’influencer le développement de ces espèces. Afin de refléter le type de substrat favorisé par l’espèce, les projections ont été masqués et ne représentent que les zones rocheuses infralittorales."
+            "default": "A total number of 277 water samples were collected during distinct oceanographic cruises or at fixed stations across coastal systems of France and Senegal. The seawater samples were progressively filtered onto size-fractionated filters (representing micro, nano and pico-plankton). Metabarcoding of the V4 domain of the Eukaryotic 18S rDNA region was carried out to characterize the genetic diversity of the sampled communities. Genomic DNA was extracted following the DNA extraction kit Nucleospin Plant II (Macherey-Nagel) and the V4 markers were amplified with a taq polymerase (Phusion High-Fidelity PCR Master Mix with GC Buffer). Sequencing was performed by the Genotoul sequencing platform (get.genotoul.fr) with the Illumina MISeq method (2x250 bp). The present dataset gathers the different results issued from sequencing. This dataset was submitted to sequence cleaning, filtering, taxonomic assignment and OTU clustering, which resulted in a final dataset also presented.",
+            "langeng": "A total number of 277 water samples were collected during distinct oceanographic cruises or at fixed stations across coastal systems of France and Senegal. The seawater samples were progressively filtered onto size-fractionated filters (representing micro, nano and pico-plankton). Metabarcoding of the V4 domain of the Eukaryotic 18S rDNA region was carried out to characterize the genetic diversity of the sampled communities. Genomic DNA was extracted following the DNA extraction kit Nucleospin Plant II (Macherey-Nagel) and the V4 markers were amplified with a taq polymerase (Phusion High-Fidelity PCR Master Mix with GC Buffer). Sequencing was performed by the Genotoul sequencing platform (get.genotoul.fr) with the Illumina MISeq method (2x250 bp). The present dataset gathers the different results issued from sequencing. This dataset was submitted to sequence cleaning, filtering, taxonomic assignment and OTU clustering, which resulted in a final dataset also presented."
           },
           "resourceCreditObject": [
             {
-              "default": "Life Marha, IDEALG",
-              "langfre": "Life Marha, IDEALG"
+              "default": "Projet POHEM - Laboratoire Dyneco PELAGOS and Station Biologique de Roscoff",
+              "langeng": "Projet POHEM - Laboratoire Dyneco PELAGOS and Station Biologique de Roscoff"
             }
           ],
           "geom": [
@@ -345,82 +907,78 @@
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-5.199, 47.2126],
-                  [-1.6949, 47.2126],
-                  [-1.6949, 49.1518],
-                  [-5.199, 49.1518],
-                  [-5.199, 47.2126]
+                  [-22.015156, 8.700516],
+                  [0.01, 8.700516],
+                  [0.01, 50.846072],
+                  [-22.015156, 50.846072],
+                  [-22.015156, 8.700516]
                 ]
               ]
             }
           ],
           "link": [
             {
-              "protocol": "COPYFILE",
-              "mimeType": "",
-              "urlObject": {
-                "default": "file:///home/sextant/data_QGIS/DYNECO/Laminaires/Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata.zip",
-                "langfre": "file:///home/sextant/data_QGIS/DYNECO/Laminaires/Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata.zip"
-              },
-              "nameObject": {
-                "default": "Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata",
-                "langfre": "Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata"
-              },
-              "descriptionObject": {
-                "default": "Laminaria digitata - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats (.shp)",
-                "langfre": "Laminaria digitata - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats (.shp)"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/dyneco",
-                "langfre": "https://sextant.ifremer.fr/services/wms/dyneco"
-              },
-              "nameObject": {
-                "default": "Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata",
-                "langfre": "Ifr_Marha_BZH_Stock_5km_Laminaria_Digitata"
-              },
-              "descriptionObject": {
-                "default": "Laminaria digitata - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats",
-                "langfre": "Laminaria digitata - Cartographie des stocks dans les fonds rocheux infralittoraux de Bretagne par modélisation statistique d’habitats"
-              },
-              "function": "browsing",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
               "protocol": "DOI",
               "mimeType": "",
               "urlObject": {
-                "default": "https://doi.org/10.12770/6db5aaff-7418-42fc-b9f8-99fd08a355be",
-                "langfre": "https://doi.org/10.12770/6db5aaff-7418-42fc-b9f8-99fd08a355be"
+                "default": "https://doi.org/10.12770/16bc16ef-588a-47e2-803e-03b4acb85dca",
+                "langeng": "https://doi.org/10.12770/16bc16ef-588a-47e2-803e-03b4acb85dca"
               },
               "nameObject": {
-                "default": "Digital Object Identifier (DOI)",
-                "langfre": "Digital Object Identifier (DOI)"
+                "default": "DOI of the dataset",
+                "langeng": "DOI of the dataset"
+              },
+              "descriptionObject": {
+                "default": "DOI of the dataset",
+                "langeng": "DOI of the dataset"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://data-dataref.ifremer.fr/bioinfo/ifremer/dyneco/POHEM/",
+                "langeng": "https://data-dataref.ifremer.fr/bioinfo/ifremer/dyneco/POHEM/"
+              },
+              "nameObject": {
+                "default": "Download link",
+                "langeng": "Download link"
+              },
+              "descriptionObject": {
+                "default": "Download link",
+                "langeng": "Download link"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "NETWORK:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "/home/ref-bioinfo-public/ifremer-controlled/dyneco/POHEM",
+                "langeng": "/home/ref-bioinfo-public/ifremer-controlled/dyneco/POHEM"
               },
               "function": "",
               "applicationProfile": "",
               "group": 1
             }
           ],
-          "uuid": "6db5aaff-7418-42fc-b9f8-99fd08a355be",
+          "uuid": "16bc16ef-588a-47e2-803e-03b4acb85dca",
           "draft": "n",
-          "id": "340135326",
-          "owner": "137",
-          "groupOwner": "335589477",
+          "id": "334238705",
+          "owner": "10",
+          "groupOwner": "192556831",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "335589477", "14", "82", "163141952"],
-          "op2": "335589477",
-          "op1": ["1", "335589477", "14", "82", "163141952"],
+          "op0": ["174375699", "1", "192556831", "334274722"],
+          "op2": ["192556831", "334274722"],
+          "op1": ["1", "192556831", "334274722"],
           "documentStandard": "iso19115-3.2018",
-          "op3": "335589477",
-          "op5": ["1", "335589477", "14", "82", "163141952"],
+          "op3": "192556831",
+          "op5": ["1", "192556831", "334274722"],
           "valid": "0",
           "isTemplate": "n",
           "rating": "0",
@@ -428,7 +986,7 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6db5aaff-7418-42fc-b9f8-99fd08a355be/attachments/Stock_digitata_v2.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/16bc16ef-588a-47e2-803e-03b4acb85dca/attachments/Sans%20titre.png"
             }
           ]
         },
@@ -445,78 +1003,92 @@
         "selected": false
       },
       {
-        "_index": "geo-records",
-        "_id": "SDN_CPRD_353_291704",
+        "_index": "sextant-records",
+        "_id": "ab32de50-8d50-11dc-a35b-000086f6a603",
         "_score": 0.0,
         "_source": {
-          "dateStamp": "2018-03-20T12:52:43.000Z",
+          "dateStamp": "2026-01-27T16:00:43.519381Z",
           "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
           "resourceTitleObject": {
-            "default": "353_291704 - Cabrera Island Natural Park Spain",
-            "langeng": "353_291704 - Cabrera Island Natural Park Spain"
+            "default": "Les pêcheries de la baie du Mont Saint-Michel. État 2002.",
+            "langfre": "Les pêcheries de la baie du Mont Saint-Michel. État 2002."
           },
           "resourceAbstractObject": {
-            "default": "Composite DTM of Menorca Island at approximately 100 meters of resolution.",
-            "langeng": "Composite DTM of Menorca Island at approximately 100 meters of resolution."
+            "default": "Pêcheries fixes en bois de la baie du Mont Saint-Michel numérisées sur l'ortholittorale 2000 (2002) par la DDAM d'Ille-et-Vilaine sous forme de polylignes.",
+            "langfre": "Pêcheries fixes en bois de la baie du Mont Saint-Michel numérisées sur l'ortholittorale 2000 (2002) par la DDAM d'Ille-et-Vilaine sous forme de polylignes."
           },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [2.851794, 39.077376],
-                  [3.044055, 39.077376],
-                  [3.044055, 39.222214],
-                  [2.851794, 39.222214],
-                  [2.851794, 39.077376]
+                  [-1.850716, 48.626154],
+                  [-1.650948, 48.626154],
+                  [-1.650948, 48.655237],
+                  [-1.850716, 48.655237],
+                  [-1.850716, 48.626154]
                 ]
               ]
             }
           ],
           "link": [
             {
-              "hash": "b052c9ebb6cbe3dea8252a7ed612d99e",
-              "idx": 1,
-              "protocol": "WWW:LINK",
+              "protocol": "OGC:WMS",
               "mimeType": "",
               "urlObject": {
-                "default": "http://www.ieo.es/",
-                "langeng": "http://www.ieo.es/"
+                "default": "https://sextant.ifremer.fr/services/wms/ogive_agil",
+                "langfre": "https://sextant.ifremer.fr/services/wms/ogive_agil"
               },
               "nameObject": {
-                "default": "Web site of IEO",
-                "langeng": "Web site of IEO"
+                "default": "IFR_DDAM_PECHERIES_MSM_A",
+                "langfre": "IFR_DDAM_PECHERIES_MSM_A"
               },
-              "descriptionObject": {
-                "default": "Contact ideo@ieo.es",
-                "langeng": "Contact ideo@ieo.es"
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "IFR_DDAM_PECHERIES_MSM_A",
+                "langfre": "IFR_DDAM_PECHERIES_MSM_A"
               },
-              "function": "information",
+              "function": "",
               "applicationProfile": "",
               "group": 0
             }
           ],
-          "uuid": "SDN_CPRD_353_291704",
+          "uuid": "ab32de50-8d50-11dc-a35b-000086f6a603",
           "draft": "n",
-          "id": "334236242",
-          "owner": "16173287",
-          "groupOwner": "74",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "mdStatus": "2",
-          "op0": ["1", "74"],
-          "op2": "74",
-          "op1": "74",
-          "documentStandard": "iso19139",
-          "op5": ["1", "74"],
+          "id": "160",
+          "owner": "13",
+          "groupOwner": "4",
+          "op0": ["17", "1", "58", "5", "80", "82", "87"],
+          "op2": "87",
+          "op1": ["17", "5", "80", "87"],
+          "documentStandard": "iso19115-3.2018",
+          "op5": ["17", "1", "5", "80", "82", "87"],
           "valid": "0",
           "isTemplate": "n",
           "rating": "0",
-          "mdStatusChangeDate": "2020-06-26T11:00:00Z",
           "isHarvested": "false",
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/SDN_CPRD_353_291704/attachments/thumbnail_353_291704_CPRD.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ab32de50-8d50-11dc-a35b-000086f6a603/attachments/PecheriesMSM_small.png"
+            },
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ab32de50-8d50-11dc-a35b-000086f6a603/attachments/PecheriesMSM_big.png"
             }
           ]
         },
@@ -534,384 +1106,38 @@
         "selected": false
       },
       {
-        "_index": "geo-records",
-        "_id": "69e7dab7-4d1f-45ff-a679-311aa5c653cc",
+        "_index": "sextant-records",
+        "_id": "42c2bd10-7b24-11dc-a860-000086f6a62e",
         "_score": 0.0,
         "_source": {
-          "dateStamp": "2025-05-15T22:44:44.006941Z",
+          "dateStamp": "2025-05-15T22:09:13.076861Z",
           "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "AMI hydrolien : zones propices à l'implantation des fermes pilotes",
-            "langfre": "AMI hydrolien : zones propices à l'implantation des fermes pilotes"
-          },
-          "resourceAbstractObject": {
-            "default": "Le développement des énergies marines renouvelables, impulsé suite au Grenelle de l’environnement, impliquent une production électrique de 6 000 MW à l’horizon 2020.\nLa désignation de 4 zones propices au développement de parcs éoliens en mer et le lancement d’un appel d’offres pour 2 zones supplémentaires devraient permettre d’atteindre la production de 3 000 MW.\nAfin d'atteindre l'objectif de production électrique fixé et sachant que le pays possède le deuxième gisement hydrolien d’Europe, le gouvernement s’est engagé à soutenir le développement de la filière hydrolienne.\nLa couche localisant les zones propices identifiées va donc permettre d'engager la concertation en vue du lancement d'un Appel à Manifestation d'Intérêt (AMI) concernant l'implantation d'hydroliennes.",
-            "langfre": "Le développement des énergies marines renouvelables, impulsé suite au Grenelle de l’environnement, impliquent une production électrique de 6 000 MW à l’horizon 2020.\nLa désignation de 4 zones propices au développement de parcs éoliens en mer et le lancement d’un appel d’offres pour 2 zones supplémentaires devraient permettre d’atteindre la production de 3 000 MW.\nAfin d'atteindre l'objectif de production électrique fixé et sachant que le pays possède le deuxième gisement hydrolien d’Europe, le gouvernement s’est engagé à soutenir le développement de la filière hydrolienne.\nLa couche localisant les zones propices identifiées va donc permettre d'engager la concertation en vue du lancement d'un Appel à Manifestation d'Intérêt (AMI) concernant l'implantation d'hydroliennes."
-          },
-          "resourceCreditObject": [
-            {
-              "default": "CEREMA",
-              "langfre": "CEREMA"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-5.23866, 47.66078],
-                  [-0.44862, 47.66078],
-                  [-0.44862, 49.890229],
-                  [-5.23866, 49.890229],
-                  [-5.23866, 47.66078]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://www.geolittoral.developpement-durable.gouv.fr/energies-marines-renouvelables-emr-r153.html",
-                "langfre": "http://www.geolittoral.developpement-durable.gouv.fr/energies-marines-renouvelables-emr-r153.html"
-              },
-              "nameObject": {
-                "default": "Accès à la page internet dédiée aux EMR (site Géolittoral)",
-                "langfre": "Accès à la page internet dédiée aux EMR (site Géolittoral)"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://cartelie.application.developpement-durable.gouv.fr/cartelie/voir.do?carte=carto_AMI_hydrolien&service=CEREMA",
-                "langfre": "http://cartelie.application.developpement-durable.gouv.fr/cartelie/voir.do?carte=carto_AMI_hydrolien&service=CEREMA"
-              },
-              "nameObject": {
-                "default": "Accès à la carte dynamique (visualiseur Cartelie)",
-                "langfre": "Accès à la carte dynamique (visualiseur Cartelie)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://www.geolittoral.developpement-durable.gouv.fr/telechargement-des-donnees-du-site-geolittoral-a802.html",
-                "langfre": "http://www.geolittoral.developpement-durable.gouv.fr/telechargement-des-donnees-du-site-geolittoral-a802.html"
-              },
-              "nameObject": {
-                "default": "Accès à la page internet de téléchargement (site Géolittoral)",
-                "langfre": "Accès à la page internet de téléchargement (site Géolittoral)"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://geolittoral.din.developpement-durable.gouv.fr/wxs",
-                "langfre": "http://geolittoral.din.developpement-durable.gouv.fr/wxs"
-              },
-              "nameObject": {
-                "default": "n_hydrolien_zone_concertation_ami_s",
-                "langfre": "n_hydrolien_zone_concertation_ami_s"
-              },
-              "descriptionObject": {
-                "default": "AMI hydrolien : zones propices à l'implantation des fermes pilotes (WMS Géolittoral)",
-                "langfre": "AMI hydrolien : zones propices à l'implantation des fermes pilotes (WMS Géolittoral)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "urlObject": {
-                "default": "file:///home/sextant/data/DCSMM_EVAL2018/SOURCES/CEREMA/HYDROLIEN/N_hydrolien_zone_concertation_ami_S.shp",
-                "langfre": "file:///home/sextant/data/DCSMM_EVAL2018/SOURCES/CEREMA/HYDROLIEN/N_hydrolien_zone_concertation_ami_S.shp"
-              },
-              "nameObject": {
-                "default": "N_hydrolien_zone_concertation_ami_S",
-                "langfre": "N_hydrolien_zone_concertation_ami_S"
-              },
-              "descriptionObject": {
-                "default": "AMI hydrolien : zones propices à l'implantation des fermes pilotes (Fichier shape)",
-                "langfre": "AMI hydrolien : zones propices à l'implantation des fermes pilotes (Fichier shape)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            }
-          ],
-          "uuid": "69e7dab7-4d1f-45ff-a679-311aa5c653cc",
-          "draft": "n",
-          "id": "216798470",
-          "owner": "112",
-          "groupOwner": "181712109",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "48", "181712109", "334291911", "334568939", "334569090"],
-          "op1": ["1", "48", "181712109", "334291911", "334568939", "334569090"],
-          "documentStandard": "iso19115-3.2018",
-          "op5": ["1", "48", "181712109", "334291911", "334568939", "334569090"],
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "nameObject": {
-                "default": "large_thumbnail",
-                "langfre": "large_thumbnail"
-              },
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/69e7dab7-4d1f-45ff-a679-311aa5c653cc/attachments/AMI_ZP_fermes_pilotes.JPG"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "1724fed1-2f89-4e75-9c56-fd99e2c7f9cf",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "Quality Information Document (CMEMS-GLO-QUID-001-026)"
-          },
-          "dateStamp": "2021-04-19T12:42:21.000Z",
-          "resourceType": ["publication"],
-          "uuid": "1724fed1-2f89-4e75-9c56-fd99e2c7f9cf",
-          "draft": "n",
-          "id": "222303653",
-          "owner": "164187932",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "104"],
-          "op2": "104",
-          "op1": ["1", "104"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "d4c4a40b-9552-4252-8a1c-f5fe8b844f5e",
-        "_score": 0.0,
-        "_source": {
-          "resourceTitleObject": {
-            "default": "Product User Manual (CMEMS-OSI-PUM-010-021-022)"
-          },
-          "dateStamp": "2021-04-19T12:59:29.000Z",
-          "resourceType": ["publication"],
-          "uuid": "d4c4a40b-9552-4252-8a1c-f5fe8b844f5e",
-          "draft": "n",
-          "id": "7608393",
-          "owner": "88",
-          "groupOwner": "104",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["104", "1"],
-          "op2": "104",
-          "op1": ["104", "1"],
-          "documentStandard": "dublin-core",
-          "op5": ["1", "104"],
-          "valid": "1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "c8889140-08a4-40ed-9d5b-0e9c544f27ee",
-        "_score": 0.0,
-        "_ignored": ["dqValues.keyword"],
-        "_source": {
-          "dateStamp": "2018-02-20T10:38:01.000Z",
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "BLACKSEA_CH05_Specification_6 / Sea level time series and trend for the past 50 years for each NUTS3 from selected coastal stations",
-            "langeng": "BLACKSEA_CH05_Specification_6 / Sea level time series and trend for the past 50 years for each NUTS3 from selected coastal stations"
-          },
-          "resourceAbstractObject": {
-            "default": "The product has been done by the University of Sofia (USOF) using yearly data from Batumi, Burgas, Constanza, Poti, Sevastopol, Tuapse and Varna coastal stations from the http://www.psmsl.org/data/obtaining/ portal for the designed period.",
-            "langeng": "The product has been done by the University of Sofia (USOF) using yearly data from Batumi, Burgas, Constanza, Poti, Sevastopol, Tuapse and Varna coastal stations from the http://www.psmsl.org/data/obtaining/ portal for the designed period."
-          },
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [27.0, 40.0],
-                  [42.0, 40.0],
-                  [42.0, 47.0],
-                  [27.0, 47.0],
-                  [27.0, 40.0]
-                ]
-              ]
-            }
-          ],
-          "uuid": "c8889140-08a4-40ed-9d5b-0e9c544f27ee",
-          "draft": "n",
-          "id": "334236333",
-          "owner": "147353051",
-          "groupOwner": "230733018",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["83566259", "230733018", "1"],
-          "op2": "230733018",
-          "op1": ["83566259", "230733018", "1"],
-          "documentStandard": "iso19115-3.2018",
-          "op5": ["83566259", "230733018", "1"],
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "81e7954f-3fd7-410c-aae4-ffcd389ca97f",
-        "_score": 0.0,
-        "_ignored": ["dqValues.keyword"],
-        "_source": {
-          "dateStamp": "2018-04-13T08:38:54.000Z",
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "ATLANTIC_CH05_Specification_1 / Spatial layer of absolute annually averaged sea level trend (in mm/year) for period of 10 years by stretch of coast",
-            "langeng": "ATLANTIC_CH05_Specification_1 / Spatial layer of absolute annually averaged sea level trend (in mm/year) for period of 10 years by stretch of coast"
-          },
-          "resourceAbstractObject": {
-            "default": "This product attempt to follow up on the sea level rise per stretch of coast of the North Atlantic, over past 10 years as follows:\n•\tCharacterization of absolute sea level trend at annual resolution, along the coasts of EU Member States (including Outermost Regions), Canada, Faroes, Greenland, Iceland, Mexico, Morocco, Norway and USA;\nThe stretchs or coast are defined by the administrative regions of the Atlantic Coast:\n•\tfrom NUTS3** administrative division for EU countries (see Eurostat), and \t\n•\tfrom GADM*** administrative divisions for non-EU countries. \n** Third level of Nomenclature of Territorial Units for Statistics\t\n*** Global Administrative Areas \n \nFor absolute sea level trend for 10 years we extract the information from grided satellite altimetry data and extrapolate it to the nearest strecth of coast. The product is Provided in tabular form and as a map layer.",
-            "langeng": "This product attempt to follow up on the sea level rise per stretch of coast of the North Atlantic, over past 10 years as follows:\n•\tCharacterization of absolute sea level trend at annual resolution, along the coasts of EU Member States (including Outermost Regions), Canada, Faroes, Greenland, Iceland, Mexico, Morocco, Norway and USA;\nThe stretchs or coast are defined by the administrative regions of the Atlantic Coast:\n•\tfrom NUTS3** administrative division for EU countries (see Eurostat), and \t\n•\tfrom GADM*** administrative divisions for non-EU countries. \n** Third level of Nomenclature of Territorial Units for Statistics\t\n*** Global Administrative Areas \n \nFor absolute sea level trend for 10 years we extract the information from grided satellite altimetry data and extrapolate it to the nearest strecth of coast. The product is Provided in tabular form and as a map layer."
-          },
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-98.0, 2.0],
-                  [33.0, 2.0],
-                  [33.0, 73.0],
-                  [-98.0, 73.0],
-                  [-98.0, 2.0]
-                ]
-              ]
-            }
-          ],
-          "uuid": "81e7954f-3fd7-410c-aae4-ffcd389ca97f",
-          "draft": "n",
-          "id": "334236653",
-          "owner": "146393428",
-          "groupOwner": "230734906",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["83566633", "1", "230734906"],
-          "op2": "230734906",
-          "op1": ["83566633", "1", "230734906"],
-          "documentStandard": "iso19115-3.2018",
-          "op5": ["83566633", "1", "230734906"],
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false"
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "geo-records",
-        "_id": "d2bcdfce-7336-4f1c-9223-df82a486a581",
-        "_score": 0.0,
-        "_ignored": ["dqValues.keyword"],
-        "_source": {
-          "dateStamp": "2018-01-15T20:30:24.000Z",
-          "resourceType": ["series"],
           "cl_status": [
             {
               "key": "onGoing",
-              "default": "On going",
-              "langeng": "On going",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
               "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
             }
           ],
           "resourceTitleObject": {
-            "default": "Bird taxonomy-related abundance per unit area of surface | Threatened and/or declining seabird species | EMODnet Secretariat | Puffinus mauretanicus",
-            "langeng": "Bird taxonomy-related abundance per unit area of surface | Threatened and/or declining seabird species | EMODnet Secretariat | Puffinus mauretanicus"
+            "default": "Zones de pêche des ormeaux dans le département du Finistère",
+            "langfre": "Zones de pêche des ormeaux dans le département du Finistère"
+          },
+          "resourceAbstractObject": {
+            "default": "Zones de pêche des ormeaux dans le département du Finistère.\nDonnées fournies par la DDAM du Finistère.",
+            "langfre": "Zones de pêche des ormeaux dans le département du Finistère.\nDonnées fournies par la DDAM du Finistère."
           },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-72.070312, 28.304381],
-                  [33.046875, 28.304381],
-                  [33.046875, 72.395706],
-                  [-72.070312, 72.395706],
-                  [-72.070312, 28.304381]
+                  [-5.449495, 47.426831],
+                  [-3.533333, 47.426831],
+                  [-3.533333, 49.077381],
+                  [-5.449495, 49.077381],
+                  [-5.449495, 47.426831]
                 ]
               ]
             }
@@ -921,45 +1147,28 @@
               "protocol": "WWW:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "http://www.emodnet-biology.eu/portal/index.php#",
-                "langeng": "http://www.emodnet-biology.eu/portal/index.php#"
+                "default": "http://www.comitedespeches-finistere.fr/",
+                "langfre": "http://www.comitedespeches-finistere.fr/"
               },
               "nameObject": {
-                "default": "Data Discovery and Access Service",
-                "langeng": "Data Discovery and Access Service"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://www.emodnet-biology.eu/portal/index.php#",
-                "langeng": "http://www.emodnet-biology.eu/portal/index.php#"
-              },
-              "nameObject": {
-                "default": "Puffinus mauretanicus",
-                "langeng": "Puffinus mauretanicus"
+                "default": "Comite des peches Finistere",
+                "langfre": "Comite des peches Finistere"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             }
           ],
-          "uuid": "d2bcdfce-7336-4f1c-9223-df82a486a581",
+          "uuid": "42c2bd10-7b24-11dc-a860-000086f6a62e",
           "draft": "n",
-          "id": "158208474",
-          "owner": "135665118",
-          "groupOwner": "139596691",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["139596691", "1", "83566633"],
-          "op2": "139596691",
-          "op1": "139596691",
+          "id": "141",
+          "owner": "13",
+          "groupOwner": "4",
+          "op0": ["82", "7", "58", "1"],
+          "op2": "7",
+          "op1": "7",
           "documentStandard": "iso19115-3.2018",
-          "op3": "139596691",
-          "op5": "139596691",
+          "op5": "7",
           "valid": "-1",
           "isTemplate": "n",
           "rating": "0",
@@ -967,7 +1176,11 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/41af5c00-1ad1-4759-bf9a-e70aa6d191fe/attachments/Marine-Protected-Areas_children_icon.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/42c2bd10-7b24-11dc-a860-000086f6a62e/attachments/ZonesOrmeaux_small.png"
+            },
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/42c2bd10-7b24-11dc-a860-000086f6a62e/attachments/ZonesOrmeaux_big.png"
             }
           ]
         },
@@ -991,7 +1204,7 @@
       "meta": {
         "layout": "card",
         "decorator": {
-          "prefix": "p-2 text-4xl",
+          "prefix": "",
           "type": "icon",
           "map": {
             "service": "faSolidCloud",
@@ -1010,7 +1223,7 @@
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 10844
+          "doc_count": 10852
         },
         {
           "key": "series",
@@ -1022,7 +1235,7 @@
         },
         {
           "key": "nonGeographicDataset",
-          "doc_count": 322
+          "doc_count": 321
         },
         {
           "key": "map-static",
@@ -1155,7 +1368,7 @@
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41",
-          "doc_count": 2127
+          "doc_count": 2125
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5dc22e69-c8de-4a13-bf4e-8541681a45f5",
@@ -1167,7 +1380,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/02ae5489-80f4-4790-b7ef-ec7372037454",
-          "doc_count": 819
+          "doc_count": 818
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ec646e7f-9c24-4182-a0e1-8e6524d2b91b",
@@ -1319,35 +1532,31 @@
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/807b0273-8206-420f-91f4-e0dcdd13110c",
-          "doc_count": 110
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/720a0782-03c4-46a4-a35a-e5bd71d741b8",
-          "doc_count": 96
+          "doc_count": 97
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/1500646c-46f5-4da2-b6b2-2bfa6eb9415d",
-          "doc_count": 87
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/5c8a927b-6d39-4506-9b8b-88908a2974c3",
-          "doc_count": 57
+          "doc_count": 68
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/34c66ea5-3b28-4a1f-9cd7-623c827dc525",
-          "doc_count": 33
+          "doc_count": 67
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/840271f5-c45f-46d3-9fcf-e23fcf802d71",
-          "doc_count": 20
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/720a0782-03c4-46a4-a35a-e5bd71d741b8",
+          "doc_count": 42
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/5c8a927b-6d39-4506-9b8b-88908a2974c3",
+          "doc_count": 38
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/730d8bf9-3a8c-4a21-bdf3-614968c5e3cb",
-          "doc_count": 13
+          "doc_count": 9
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/66b253d4-1e05-454b-9641-4e281c11431a",
-          "doc_count": 7
+          "doc_count": 1
         }
       ]
     },
@@ -1358,75 +1567,63 @@
         "translateOnLoad": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 424,
+      "sum_other_doc_count": 277,
       "buckets": [
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEATEMP/",
-          "doc_count": 508
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HUMACT/",
-          "doc_count": 446
+          "doc_count": 500
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SAL/",
-          "doc_count": 390
+          "doc_count": 383
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CURR/",
-          "doc_count": 307
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BATHY/",
-          "doc_count": 287
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SHORE/",
-          "doc_count": 280
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/INVER/",
-          "doc_count": 278
+          "doc_count": 302
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BIOINFO/",
           "doc_count": 277
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEALVL/",
-          "doc_count": 220
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SHORE/",
+          "doc_count": 251
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BENTHA/",
-          "doc_count": 214
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BATHY/",
+          "doc_count": 247
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PRESS/",
           "doc_count": 211
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/MTBM/",
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BENTHA/",
           "doc_count": 189
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FISH/",
-          "doc_count": 174
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEALVL/",
+          "doc_count": 170
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WAVES/",
-          "doc_count": 166
+          "doc_count": 159
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOXY/",
           "doc_count": 155
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/GEOL/",
-          "doc_count": 125
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/INVER/",
+          "doc_count": 146
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TURBID/",
           "doc_count": 113
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FISH/",
+          "doc_count": 99
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PHYTO/",
@@ -1441,12 +1638,8 @@
           "doc_count": 89
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HCORAL/",
-          "doc_count": 87
-        },
-        {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WIND/",
-          "doc_count": 77
+          "doc_count": 72
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CONT/",
@@ -1457,28 +1650,44 @@
           "doc_count": 63
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SGRAS/",
-          "doc_count": 63
-        },
-        {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/ZOO/",
           "doc_count": 63
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEDFLUX/",
-          "doc_count": 61
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEISM/",
-          "doc_count": 55
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SUSPMA/",
           "doc_count": 55
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FLUO/",
-          "doc_count": 54
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOM/",
+          "doc_count": 48
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEDFLUX/",
+          "doc_count": 48
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TIDES/",
+          "doc_count": 47
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEISM/",
+          "doc_count": 43
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/AIRPRES/",
+          "doc_count": 41
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEAICE/",
+          "doc_count": 39
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/ACOUST/",
+          "doc_count": 36
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TRACELE/",
+          "doc_count": 36
         }
       ]
     }

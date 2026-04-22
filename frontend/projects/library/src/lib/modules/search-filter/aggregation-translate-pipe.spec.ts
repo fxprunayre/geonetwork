@@ -1,7 +1,7 @@
-import { AggregationTranslatePipe } from './aggregation-translate-pipe';
-import { TranslateModule } from '@ngx-translate/core';
 import { TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { provideMockTranslateService } from '../../shared/translate-service.mock.spec';
+import { AggregationTranslatePipe } from './aggregation-translate-pipe';
 
 describe('AggregationTranslatePipe', () => {
   let pipe: AggregationTranslatePipe;
@@ -20,6 +20,10 @@ describe('AggregationTranslatePipe', () => {
 
   it('returns the translation for a know value and unknown aggregation', () => {
     expect(pipe.transform('dataset', 'xyz')).toBe('Dataset');
+  });
+
+  it('returns the translation for a know value in local translations', () => {
+    expect(pipe.transform('availableInServices', 'availableInViewService')).toBe('View service');
   });
 
   it('returns the value if translation is missing', () => {

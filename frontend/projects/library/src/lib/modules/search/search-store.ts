@@ -19,7 +19,8 @@ import {
 } from 'gn-api-client';
 import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
 import { AuthStore } from '../authentication/auth.store';
-import { APPLICATION_CONFIGURATION, DEFAULT_LANGUAGE } from '../config/config.loader';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
+import { DEFAULT_LANGUAGE } from '../config/gn-constants';
 import { SearchAppLayout } from '../config/model/gnConfig';
 import { SearchRouteService } from './search-route-service';
 import { SearchService } from './search-service';

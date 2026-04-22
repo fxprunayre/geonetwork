@@ -1,28 +1,32 @@
 import { Component, computed, input } from '@angular/core';
-import { Decorator } from 'gn-api-client';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
-  faSolidCopy,
   faSolidBook,
   faSolidChartColumn,
-  faSolidDatabase,
-  faSolidMap,
-  faSolidTable,
   faSolidCloud,
+  faSolidCloudArrowDown,
   faSolidCode,
+  faSolidCopy,
+  faSolidDatabase,
   faSolidFileContract,
   faSolidFolderClosed,
+  faSolidMap,
+  faSolidTable,
 } from '@ng-icons/font-awesome/solid';
+import { Decorator } from 'gn-api-client';
+import { InspireThemeStylesComponent } from './inspire-theme-styles';
 
 @Component({
   selector: 'app-aggregation-bucket-decorator',
-  imports: [NgIcon],
+  imports: [NgIcon, InspireThemeStylesComponent],
   templateUrl: './aggregation-bucket-decorator.html',
   standalone: true,
   viewProviders: [
+    // TODO: Decorator icons can't be loaded dynamically with the current implementation of @ng-icons
     provideIcons({
       faSolidDatabase,
       faSolidMap,
+      faSolidCloudArrowDown,
       faSolidTable,
       faSolidCopy,
       faSolidChartColumn,
@@ -45,6 +49,24 @@ export class AggregationBucketDecorator {
     repository: 'faSolidFolderClosed',
     'map-static': 'faSolidMap',
   };
+
+  isInspireTheme = computed(() => {
+    const decorator = this.decorator();
+    return decorator?.type === 'icon' && decorator.prefix === 'iti-';
+  });
+
+  inspireThemeClass = computed(() => {
+    const decorator = this.decorator();
+    if (decorator && this.isInspireTheme()) {
+      const bucket = this.bucket();
+      const key = bucket?.key;
+      return (
+        decorator.prefix +
+        (decorator.expression ? key.replace(new RegExp(decorator.expression), '$1') : key)
+      );
+    }
+    return '';
+  });
 
   icon = computed(() => {
     const decorator = this.decorator();

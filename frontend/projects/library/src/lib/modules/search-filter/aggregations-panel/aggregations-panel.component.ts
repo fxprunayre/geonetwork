@@ -69,16 +69,15 @@ export class AggregationsPanel extends SearchBase {
 
   hasBuckets = (key: string) => {
     const agg = this.aggregations[key];
-    return agg && Array.isArray(agg.buckets) && agg.buckets.length > 0;
+    const buckets = this.aggregationService.getBuckets(agg);
+    return buckets.length > 0;
   };
 
   hasActiveFilter = (keyName: string) => {
-    let buckets = this.search.aggregations()[keyName]?.buckets || [];
-    if (Array.isArray(buckets)) {
-      for (const bucket of buckets) {
-        if (this.search.isFilterActive(keyName, bucket.key)) {
-          return true;
-        }
+    let buckets = this.aggregationService.getBuckets(this.search.aggregations()[keyName]);
+    for (const bucket of buckets) {
+      if (this.search.isFilterActive(keyName, bucket.key)) {
+        return true;
       }
     }
     return false;

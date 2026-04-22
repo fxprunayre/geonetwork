@@ -36,6 +36,19 @@ export class AggregationService {
     return {};
   }
 
+  getBuckets(aggregation: elasticsearch.AggregationsAggregate | undefined | null): any[] {
+    if (!aggregation || !aggregation.buckets) return [];
+    if (Array.isArray(aggregation.buckets)) {
+      return aggregation.buckets;
+    } else if (typeof aggregation.buckets === 'object') {
+      return Object.keys(aggregation.buckets).map((key) => ({
+        key,
+        ...(aggregation.buckets as any)[key],
+      }));
+    }
+    return [];
+  }
+
   getAggregationConfig(
     key: string,
     aggregationConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
@@ -89,8 +102,8 @@ export class AggregationService {
         return;
       }
 
-      const buckets = aggregation.buckets;
-      if (!Array.isArray(buckets) || buckets.length === 0) {
+      const buckets = this.getBuckets(aggregation);
+      if (buckets.length === 0) {
         return;
       }
 

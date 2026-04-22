@@ -7,6 +7,7 @@ import {
   AuthStore,
   BaseComponent,
   DEFAULT_LANGUAGE,
+  DEFAULT_SEARCH_APP_CONFIGURATION,
   MAP_SLUG,
   SEARCH_SLUG,
   SearchApp,
@@ -49,7 +50,7 @@ export class App extends BaseComponent implements OnInit {
   isSearchActive = signal(false);
 
   searchConfig: SearchApp =
-    inject(APPLICATION_CONFIGURATION)().config?.apps.search || ({} as SearchApp);
+    inject(APPLICATION_CONFIGURATION)().config?.apps.search || DEFAULT_SEARCH_APP_CONFIGURATION;
 
   searchPageSize =
     inject(APPLICATION_CONFIGURATION)().config?.apps.search?.hitsPerPageOptions[0] || 10;

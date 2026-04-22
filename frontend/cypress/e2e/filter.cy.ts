@@ -67,10 +67,9 @@ describe('Search', () => {
       const aggregations = search.response?.body.aggregations;
       const aggregationKeys = Object.keys(aggregations);
       // FIXME: resourceType is displayed as top-level aggregation, so it is not in the panel
-      // FIXME: filter aggegation is not displayed in the panel
       cy.get('app-aggregations-panel app-aggregation').should(
         'have.length',
-        aggregationKeys.length - 1,
+        aggregationKeys.length,
       );
     });
   });
@@ -131,6 +130,44 @@ describe('Search', () => {
               .should('exist');
           });
       });
+  });
+
+  it('should display INSPIRE icon when available', () => {
+    cy.get('app-search-active-filters-button p-button').first().click();
+    cy.wait('@apiMainSearch');
+
+    cy.get(
+      'app-aggregations-panel p-accordion-panel[data-testid="aggregation-panel-th_httpinspireeceuropaeutheme-theme_tree.key"] p-accordion-header',
+    ).click({ force: true });
+
+    cy.get(
+      'app-aggregations-panel p-accordion-panel[data-testid="aggregation-panel-th_httpinspireeceuropaeutheme-theme_tree.key"] p-accordion-content',
+    ).within(() => {
+      cy.get('app-inspire-theme-styles').should('exist');
+      cy.get('span[class*="iti-"]').should('exist');
+    });
+  });
+
+  it('should display availableInServices aggregation and allow selection', () => {
+    cy.get('app-search-active-filters-button p-button').first().click();
+    cy.wait('@apiMainSearch');
+
+    cy.get(
+      'app-aggregations-panel p-accordion-panel[data-testid="aggregation-panel-availableInServices"] p-accordion-header',
+    ).click({ force: true });
+
+    cy.get(
+      'app-aggregations-panel p-accordion-panel[data-testid="aggregation-panel-availableInServices"] p-accordion-content',
+    ).within(() => {
+      cy.get('app-aggregation-bucket').should('exist');
+      cy.get('p-checkbox input[type="checkbox"]').first().click({ force: true });
+    });
+
+    cy.wait('@unmatchedSearchRequest');
+
+    cy.get(
+      'app-aggregations-panel p-accordion-panel[data-testid="aggregation-panel-availableInServices"] p-accordion-header p-overlaybadge',
+    ).should('exist');
   });
 
   // TODO: test tree aggregation

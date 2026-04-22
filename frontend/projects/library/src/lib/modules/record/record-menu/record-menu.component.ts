@@ -12,7 +12,8 @@ import { ButtonModule } from 'primeng/button';
 import { TieredMenu } from 'primeng/tieredmenu';
 import { IconStyleService } from '../../../shared/icon-style-service';
 import { AuthStore } from '../../authentication/auth.store';
-import { APPLICATION_CONFIGURATION, DEFAULT_SPACE } from '../../config/config.loader';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { DEFAULT_SPACE } from '../../config/gn-constants';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({

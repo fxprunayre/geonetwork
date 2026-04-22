@@ -1,5 +1,5 @@
 {
-  "took": 23,
+  "took": 72,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -15,17 +15,17 @@
     "max_score": null,
     "hits": [
       {
-        "_index": "geo-records",
+        "_index": "sextant-records",
         "_id": "cf5048f6-5bbf-4e44-ba74-e6f429af51ea",
         "_score": null,
         "_ignored": [
+          "link.applicationProfile.keyword",
           "resourceAbstractObject.default.keyword",
-          "resourceAbstractObject.langfre.keyword",
           "resourceAbstractObject.default.sort",
-          "link.applicationProfile.keyword"
+          "resourceAbstractObject.langfre.keyword"
         ],
         "_source": {
-          "dateStamp": "2026-01-14T15:57:17.308366Z",
+          "dateStamp": "2026-04-08T14:15:19.55817Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
@@ -289,7 +289,7 @@
         "selected": false
       },
       {
-        "_index": "geo-records",
+        "_index": "sextant-records",
         "_id": "seanoe:101587",
         "_score": null,
         "_ignored": [
@@ -390,7 +390,6 @@
           "id": "338592946",
           "owner": "3",
           "groupOwner": "335589474",
-          "logo": "/images/logos/dfc66bad-98b5-429d-a7dc-c94290d6071b.gif",
           "op0": ["1", "335589494", "335589474", "174375699", "335589511"],
           "op1": ["1", "335589494", "335589474", "174375699", "335589511"],
           "documentStandard": "iso19139",
@@ -509,6 +508,11 @@
     },
     "th_httpinspireeceuropaeutheme-theme_tree.key": {
       "meta": {
+        "decorator": {
+          "expression": "http://inspire.ec.europa.eu/theme/(.*)",
+          "prefix": "iti-",
+          "type": "icon"
+        },
         "collapsed": true,
         "orderByTranslation": true,
         "translateOnLoad": true
@@ -592,7 +596,40 @@
       },
       "doc_count_error_upper_bound": 0,
       "sum_other_doc_count": 0,
-      "buckets": []
+      "buckets": [
+        {
+          "key": "IFREMER",
+          "doc_count": 1
+        },
+        {
+          "key": "OSU STAMAR, UAR 2017 - Sorbonne Université - CNRS, France",
+          "doc_count": 1
+        },
+        {
+          "key": "Station biologique de Roscoff, FR2424 - Sorbonne Université - CNRS, France",
+          "doc_count": 1
+        }
+      ]
+    },
+    "availableInServices": {
+      "meta": {
+        "decorator": {
+          "type": "icon",
+          "map": {
+            "availableInDownloadService": "faSolidCloudArrowDown",
+            "availableInViewService": "faSolidMap"
+          }
+        },
+        "collapsed": true
+      },
+      "buckets": {
+        "availableInDownloadService": {
+          "doc_count": 2
+        },
+        "availableInViewService": {
+          "doc_count": 1
+        }
+      }
     },
     "resourceType": {
       "meta": {

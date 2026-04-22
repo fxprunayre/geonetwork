@@ -4,7 +4,7 @@ export const MISSING_CONFIG_ERROR = 'Configuration not yet loaded.';
 
 export const APP_CONFIG = 'app.config';
 
-export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
+export const DEFAULT_GN4_UI_CONFIGURATION: UiConfiguration = {
   langDetector: {
     fromHtmlTag: false,
     regexp: '^(?:/.+)?/.+/([a-z]{2,3})/.+',
@@ -1265,19 +1265,19 @@ export const DEFAULT_UI_CONFIGURATION: UiConfiguration = {
   },
 };
 
-export const SEXTANT_UI_CONFIGURATION: UiConfiguration = {
-  ...DEFAULT_UI_CONFIGURATION,
+export const SEXTANT_GN4_UI_CONFIGURATION: UiConfiguration = {
+  ...DEFAULT_GN4_UI_CONFIGURATION,
   mods: {
-    ...DEFAULT_UI_CONFIGURATION.mods,
+    ...DEFAULT_GN4_UI_CONFIGURATION.mods,
     header: {
-      ...DEFAULT_UI_CONFIGURATION.mods.header,
+      ...DEFAULT_GN4_UI_CONFIGURATION.mods.header,
       languages: {
         eng: 'en',
         fre: 'fr',
       },
     },
     search: {
-      ...DEFAULT_UI_CONFIGURATION.mods.search,
+      ...DEFAULT_GN4_UI_CONFIGURATION.mods.search,
       facetConfig: {
         ...{
           groupPublishedId: {

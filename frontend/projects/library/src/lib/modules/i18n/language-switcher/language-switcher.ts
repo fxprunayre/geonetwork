@@ -4,7 +4,8 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidLanguage } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Select } from 'primeng/select';
-import { APPLICATION_CONFIGURATION, DEFAULT_LANGUAGE } from '../../config/config.loader';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { DEFAULT_LANGUAGE } from '../../config/gn-constants';
 import { I18nApp } from '../../config/model/gnConfig';
 
 interface Language {

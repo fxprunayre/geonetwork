@@ -1,6 +1,15 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { DEFAULT_UI_CONFIGURATION, SEXTANT_UI_CONFIGURATION } from './gn4constants';
+import {
+  DEFAULT_APPS_CONFIGURATION,
+  DEFAULT_HEADER_APP_CONFIGURATION,
+  DEFAULT_LANGUAGE,
+  DEFAULT_MAP_CONTEXT,
+  DEFAULT_RECORD_DETAILS_APP_CONFIGURATION,
+  DEFAULT_SEARCH_APP_CONFIGURATION,
+  DEFAULT_SPACE,
+} from './gn-constants';
+import { DEFAULT_GN4_UI_CONFIGURATION, SEXTANT_GN4_UI_CONFIGURATION } from './gn4constants';
 import { Recordview, Search, UiConfiguration } from './model/gn4config';
 import { AppsConfiguration } from './model/gnConfig';
 
@@ -9,10 +18,6 @@ export interface ApplicationConfiguration {
   space: string;
   catalogueUrl: string;
 }
-
-export const DEFAULT_SPACE = 'srv';
-
-export const DEFAULT_LANGUAGE = 'eng';
 
 export const APPLICATION_CONFIGURATION = new InjectionToken<
   WritableSignal<ApplicationConfiguration>
@@ -68,95 +73,88 @@ export function loadAppConfig() {
             `Failed to parse configuration from ${configUrl}, falling back to default`,
             e,
           );
-          return SEXTANT_UI_CONFIGURATION;
+          return SEXTANT_GN4_UI_CONFIGURATION;
         }
       }
-      return SEXTANT_UI_CONFIGURATION;
+      return SEXTANT_GN4_UI_CONFIGURATION;
     })
     .then((conf) => {
-      appConfig.config = migrateGn4Config(SEXTANT_UI_CONFIGURATION);
+      appConfig.config = migrateGn4Config(conf);
       appConfig.catalogueUrl = apiUrl;
       appConfig.config.proxyUrl = apiUrl + '/proxy?url=';
       appConfig.config.backgroundImageUrl = environment.backgroundUrl;
-      // TODO: parseGn4Config(conf);
       console.log(appConfig);
       appConfigLoading = false;
       return appConfig;
     });
 }
 
-export const DEFAULT_MAP_CONTEXT = {
-  layers: [
-    {
-      type: 'xyz',
-      id: 'basemap-osm',
-      url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-      visibility: true,
-      opacity: 1,
-      label: 'OpenStreetMap',
-      attributions: '© OpenStreetMap contributors',
-      extras: {
-        basemap: true,
-      },
-    },
-  ],
-  view: {
-    center: [-4.56243, 0],
-    zoom: 1,
-  },
-};
-
 export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration {
   const conf: AppsConfiguration = { apps: {}, proxyUrl: '/geonetwork/proxy?url=' };
+
+  if (!gn4config || !gn4config.mods || Object.keys(gn4config.mods).length === 0) {
+    return { ...DEFAULT_APPS_CONFIGURATION, ...conf };
+  }
 
   for (const modKey of Object.keys(gn4config.mods)) {
     const module = gn4config.mods[modKey as keyof UiConfiguration['mods']];
 
     if (modKey === 'search') {
+      const searchConfig = module as Search;
       conf.apps.search = {
         enabled: true,
-        aggregations: Object.entries((module as Search).facetConfig).map(([key, value]) => ({
-          [key]: value,
-        })),
-        sort: (module as Search).sortbyValues.map((sortOpt) => {
-          const sortField = sortOpt.sortBy === 'relevance' ? '_score' : sortOpt.sortBy;
-          const sortOrder = sortOpt.sortOrder === 'desc' ? '-' : '';
-          return sortOrder + sortField;
-        }),
+        aggregations: searchConfig.facetConfig
+          ? Object.entries(searchConfig.facetConfig).map(([key, value]) => ({
+              [key]: value,
+            }))
+          : DEFAULT_SEARCH_APP_CONFIGURATION.aggregations,
+        sort: searchConfig.sortbyValues
+          ? searchConfig.sortbyValues.map((sortOpt) => {
+              const sortField = sortOpt.sortBy === 'relevance' ? '_score' : sortOpt.sortBy;
+              const sortOrder = sortOpt.sortOrder === 'desc' ? '-' : '';
+              return sortOrder + sortField;
+            })
+          : DEFAULT_SEARCH_APP_CONFIGURATION.sort,
         currentSort:
-          (module as Search).sortBy === 'relevance' ? '_score' : (module as Search).sortBy,
-        hitsPerPageOptions: (module as Search).hitsperpageValues,
-        resultsLayoutOptions: (module as Search).resultViewTpls
-          .map((layout) => {
-            if (layout.tplUrl.indexOf('grid.html') !== -1) {
-              return 'grid';
-            } else if (layout.tplUrl.indexOf('list.html') !== -1) {
-              return 'list';
-            }
-            return undefined;
-          })
-          .filter((layout) => layout !== undefined),
+          searchConfig.sortBy === 'relevance'
+            ? '_score'
+            : searchConfig.sortBy || DEFAULT_SEARCH_APP_CONFIGURATION.currentSort,
+        hitsPerPageOptions:
+          searchConfig.hitsperpageValues || DEFAULT_SEARCH_APP_CONFIGURATION.hitsPerPageOptions,
+        resultsLayoutOptions: searchConfig.resultViewTpls
+          ? searchConfig.resultViewTpls
+              .map((layout) => {
+                if (layout.tplUrl.indexOf('grid.html') !== -1) {
+                  return 'grid';
+                } else if (layout.tplUrl.indexOf('list.html') !== -1) {
+                  return 'list';
+                }
+                return undefined;
+              })
+              .filter((layout) => layout !== undefined)
+          : DEFAULT_SEARCH_APP_CONFIGURATION.resultsLayoutOptions,
       };
-      if (
-        (module as Search).facetTabField &&
-        (module as Search).facetConfig[(module as Search).facetTabField]
-      ) {
-        conf.apps.search.topTabFilter = (module as Search).facetTabField;
-        conf.apps.search.filter = (module as Search).filters;
+      if (searchConfig.facetTabField && searchConfig.facetConfig[searchConfig.facetTabField]) {
+        conf.apps.search.topTabFilter = searchConfig.facetTabField;
+        conf.apps.search.filter = searchConfig.filters;
+      } else if (DEFAULT_SEARCH_APP_CONFIGURATION.topTabFilter) {
+        conf.apps.search.topTabFilter = DEFAULT_SEARCH_APP_CONFIGURATION.topTabFilter;
       }
     } else if (modKey === 'header') {
+      const headerConfig = module as any;
       conf.apps.i18n = {
         enabled: true,
-        languages: (module as any).languages || DEFAULT_UI_CONFIGURATION.mods.header.languages,
+        languages: headerConfig.languages || DEFAULT_GN4_UI_CONFIGURATION.mods.header.languages,
         language: gn4config.langDetector.default || DEFAULT_LANGUAGE,
       };
     } else if (modKey === 'recordview') {
+      const recordConfig = module as Recordview;
       conf.apps.record = {
         enabled: true,
-        mainThesaurus: (module as Recordview).mainThesaurus || [],
+        mainThesaurus:
+          recordConfig.mainThesaurus || DEFAULT_RECORD_DETAILS_APP_CONFIGURATION.mainThesaurus,
         distribution:
-          (module as Recordview).distributionConfig ||
-          DEFAULT_UI_CONFIGURATION.mods.recordview.distributionConfig,
+          recordConfig.distributionConfig || DEFAULT_RECORD_DETAILS_APP_CONFIGURATION.distribution,
       };
     } else if (modKey === 'map') {
       conf.apps.map = {
@@ -164,6 +162,15 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
         context: DEFAULT_MAP_CONTEXT,
       };
     }
+  }
+
+  const hasHeader = Object.keys(gn4config.mods).includes('header');
+  const hasRecordDetails = Object.keys(gn4config.mods).includes('recordview');
+  if (!hasHeader) {
+    conf.apps.i18n = DEFAULT_HEADER_APP_CONFIGURATION;
+  }
+  if (!hasRecordDetails) {
+    conf.apps.record = DEFAULT_RECORD_DETAILS_APP_CONFIGURATION;
   }
 
   return conf;

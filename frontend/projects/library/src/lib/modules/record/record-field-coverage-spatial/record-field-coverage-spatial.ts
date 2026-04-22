@@ -1,6 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { APPLICATION_CONFIGURATION, DEFAULT_SPACE } from '../../config/config.loader';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { DEFAULT_SPACE } from '../../config/gn-constants';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordinate/record-field-coverage-coordinate';
 

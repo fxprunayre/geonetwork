@@ -33,7 +33,7 @@
     >
       @for (key of aggregationKeys(); track $index) {
         @if (hasBuckets(key)) {
-          <p-accordion-panel [value]="key">
+          <p-accordion-panel [value]="key" [attr.data-testid]="'aggregation-panel-' + key">
             <p-accordion-header class="text-primary!">
               <ng-container
                 *ngTemplateOutlet="

@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslationsService } from '../i18n/translations-service';
-import { APPLICATION_CONFIGURATION, DEFAULT_SPACE } from './config.loader';
+import { APPLICATION_CONFIGURATION } from './config.loader';
+import { DEFAULT_SPACE } from './gn-constants';
 
 @Injectable({
   providedIn: 'root',

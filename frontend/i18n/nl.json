@@ -220,6 +220,7 @@
   },
   "search": {
     "aggregations": {
+      "availableInServices": "Access type",
       "cl_status.key": "Resource status",
       "creationYearForResource": "Creation year",
       "groupPublishedId": "Groups",

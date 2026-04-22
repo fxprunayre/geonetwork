@@ -90,7 +90,12 @@
       "meta": {
         "collapsed": true,
         "translateOnLoad": true,
-        "orderByTranslation": true
+        "orderByTranslation": true,
+        "decorator": {
+          "type": "icon",
+          "prefix": "iti-",
+          "expression": "http://inspire.ec.europa.eu/theme/(.*)"
+        }
       }
     },
     "tag.default": {
@@ -118,13 +123,39 @@
     },
     "OrgForResource": {
       "terms": {
-        "field": "OrgForResource",
+        "field": "OrgForResourceObject.default",
         "include": ".*",
         "size": 10
       },
       "meta": {
         "collapsed": true,
         "caseInsensitiveInclude": true
+      }
+    },
+    "availableInServices": {
+      "filters": {
+        "filters": {
+          "availableInViewService": {
+            "query_string": {
+              "query": "+linkProtocol:/OGC:WMS|OGC:OWS-C|OGC Web Map Service|OGC:WMTS|ESRI:REST/"
+            }
+          },
+          "availableInDownloadService": {
+            "query_string": {
+              "query": "+linkProtocol:/WWW:DOWNLOAD|WWW:DOWNLOAD.*|WWW:OPENDAP|WWW:FTP|OGC:WFS|OGC Web Feature Service|OGC:WCS|MYO:MOTU-SUB|FILE|COPYFILE|DB|KML/"
+            }
+          }
+        }
+      },
+      "meta": {
+        "collapsed": true,
+        "decorator": {
+          "type": "icon",
+          "map": {
+            "availableInViewService": "faSolidMap",
+            "availableInDownloadService": "faSolidCloudArrowDown"
+          }
+        }
       }
     },
     "resourceType": {

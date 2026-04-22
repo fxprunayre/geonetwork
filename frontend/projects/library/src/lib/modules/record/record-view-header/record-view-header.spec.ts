@@ -12,7 +12,14 @@ describe('RecordViewHeader', () => {
       imports: [RecordViewHeader],
       providers: [
         provideMockTranslateService(),
-        { provide: MarkdownService, useValue: { compile: (text: string) => text } },
+        {
+          provide: MarkdownService,
+          useValue: {
+            compile: (text: string) => text,
+            parse: (text: string) => text,
+            render: (text: string) => text,
+          },
+        },
       ],
     }).compileComponents();
 

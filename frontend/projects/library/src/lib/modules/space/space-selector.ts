@@ -7,7 +7,8 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { Popover } from 'primeng/popover';
 import { ConfigService } from '../config/config-service';
-import { APPLICATION_CONFIGURATION, DEFAULT_SPACE } from '../config/config.loader';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
+import { DEFAULT_SPACE } from '../config/gn-constants';
 import { TranslationsService } from '../i18n/translations-service';
 
 @Component({

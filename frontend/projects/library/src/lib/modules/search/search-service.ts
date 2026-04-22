@@ -54,6 +54,10 @@ export class SearchService {
     query: string,
     queryFilter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
     filters: Record<string, SearchFilter>,
+    aggregationsConfig?: (
+      | string
+      | Record<string, elasticsearch.AggregationsAggregationContainer>
+    )[],
   ): elasticsearch.QueryDslQueryContainer {
     const filter = queryFilter;
     const must: elasticsearch.QueryDslQueryContainer[] = [];
@@ -77,12 +81,42 @@ export class SearchService {
       }
     }
     for (const field of Object.keys(filters)) {
-      const termQuery = {
-        terms: {
-          [field]: filters[field].values,
-        },
-      };
-      must.push(termQuery);
+      let isFiltersAgg = false;
+      const matchedFilters: elasticsearch.QueryDslQueryContainer[] = [];
+
+      if (aggregationsConfig) {
+        const aggDef = this.aggregationService.getAggregationConfig(field, aggregationsConfig);
+        if (aggDef && aggDef['filters'] && aggDef['filters']['filters']) {
+          isFiltersAgg = true;
+          const aggFilters = aggDef['filters']['filters'] as Record<
+            string,
+            elasticsearch.QueryDslQueryContainer
+          >;
+          for (const val of filters[field].values) {
+            const v = String(val);
+            if (aggFilters[v]) {
+              matchedFilters.push(aggFilters[v]);
+            }
+          }
+        }
+      }
+
+      if (isFiltersAgg) {
+        if (matchedFilters.length > 0) {
+          must.push({
+            bool: {
+              should: matchedFilters,
+            },
+          });
+        }
+      } else {
+        const termQuery = {
+          terms: {
+            [field]: filters[field].values,
+          },
+        };
+        must.push(termQuery);
+      }
     }
     const must_not: elasticsearch.QueryDslQueryContainer[] = [];
     const should: elasticsearch.QueryDslQueryContainer[] = [];
@@ -108,6 +142,7 @@ export class SearchService {
         searchRequestParameters.searchQuery,
         searchRequestParameters.filter,
         searchRequestParameters.filters,
+        searchRequestParameters.aggregationsConfig,
       ),
       _source: SEARCH_SOURCE,
       sort: this.buildSort(searchRequestParameters.currentSort),
@@ -133,6 +168,7 @@ export class SearchService {
         searchRequestParameters.searchQuery,
         searchRequestParameters.filter,
         searchRequestParameters.filters,
+        searchRequestParameters.aggregationsConfig,
       ),
     };
 

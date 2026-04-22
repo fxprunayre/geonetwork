@@ -9,12 +9,13 @@ import { TranslateService } from '@ngx-translate/core';
 export class AggregationTranslatePipe implements PipeTransform {
   private readonly translateService = inject(TranslateService);
 
-  private static readonly translationKeys: ReadonlyMap<string, string> = new Map([
-    ['isTemplate', 'recordType'],
-    ['groupOwner', 'group'],
-    ['groupPublishedId', 'group'],
-    ['sourceCatalogue', 'source'],
-  ]);
+  private static readonly aggregationKeyToServerSideTranslationKey: ReadonlyMap<string, string> =
+    new Map([
+      ['isTemplate', 'recordType'],
+      ['groupOwner', 'group'],
+      ['groupPublishedId', 'group'],
+      ['sourceCatalogue', 'source'],
+    ]);
 
   transform(value: string | number, aggregation: string): string | number {
     if (typeof value === 'number') return value;
@@ -23,12 +24,19 @@ export class AggregationTranslatePipe implements PipeTransform {
     if (aggregation.indexOf('_tree.') !== -1 && value.indexOf('^')) {
       value = value.split('^').at(-1) || value;
     }
-    const key = `${AggregationTranslatePipe.translationKeys.get(aggregation) ?? aggregation}-${value}`;
+    const key = `${AggregationTranslatePipe.aggregationKeyToServerSideTranslationKey.get(aggregation) ?? aggregation}-${value}`;
     const translation = this.translateService.instant(key);
-    return translation !== key
-      ? translation
-      : typeof value === 'string'
-        ? this.translateService.instant(value) || value
-        : value;
+
+    if (translation !== key) {
+      return translation;
+    }
+
+    const localKey = `search.aggregations.${key}`;
+    const localTranslation = this.translateService.instant(localKey);
+    if (localTranslation !== localKey) {
+      return localTranslation;
+    }
+
+    return typeof value === 'string' ? this.translateService.instant(value) || value : value;
   }
 }

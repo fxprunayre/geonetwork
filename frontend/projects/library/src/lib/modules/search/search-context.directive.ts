@@ -1,9 +1,9 @@
 import { Directive, inject, input, model, OnInit } from '@angular/core';
-import { SearchService } from './search-service';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
-import { DEFAULT_PAGE_SIZE, DEFAULT_SORT } from './search-store.model';
+import { DEFAULT_LANGUAGE } from '../config/gn-constants';
+import { SearchService } from './search-service';
 import { SearchStore } from './search-store';
-import { DEFAULT_LANGUAGE } from '../config/config.loader';
+import { DEFAULT_PAGE_SIZE, DEFAULT_SORT } from './search-store.model';
 
 @Directive({
   selector: '[appSearchContext]',

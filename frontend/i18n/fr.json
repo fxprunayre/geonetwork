@@ -221,6 +221,7 @@
   },
   "search": {
     "aggregations": {
+      "availableInServices": "Type d'accès",
       "cl_status.key": "Statut de la ressource",
       "creationYearForResource": "Année de création",
       "groupPublishedId": "Catalogues",

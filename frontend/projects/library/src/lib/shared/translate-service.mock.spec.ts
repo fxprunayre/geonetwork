@@ -9,6 +9,7 @@ export function provideMockTranslateService(): Provider {
   const translations: Record<string, string> = {
     'group-1': 'Odatis',
     dataset: 'Dataset',
+    'search.aggregations.availableInViewService-availableInServices': 'View service',
   };
 
   return {
