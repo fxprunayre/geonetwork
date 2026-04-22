@@ -18,10 +18,7 @@ import { SEARCH_ROUTE_PATH } from '../search-constant';
       [title]="computedTitle()"
     >
       <ng-content />
-      <ng-icon
-        name="faSolidMagnifyingGlass"
-        class="grow text-surface-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-      />
+      <ng-icon name="faSolidMagnifyingGlass" class="grow text-surface-500" />
     </a>
   `,
 })

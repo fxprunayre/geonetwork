@@ -1,4 +1,7 @@
 <div class="mt-4">
+  @if (isInspireTheme()) {
+    <app-inspire-theme-styles></app-inspire-theme-styles>
+  }
   <div class="text-primary-400">
     {{ title() }}
   </div>
@@ -8,6 +11,7 @@
       <p-chip
         [label]="keyword.default"
         class="mr-2 my-1 cursor-pointer"
+        [icon]="isInspireTheme() ? getInspireThemeClass(keyword) : undefined"
         (click)="openPopover($event, keyword, popover)"
       />
     }
@@ -19,7 +23,11 @@
   @if (keyword) {
     <div class="p-3 text-sm">
       <div class="font-semibold mb-1 flex items-center gap-1 group">
-        <ng-icon name="faSolidTag"></ng-icon>
+        @if (isInspireTheme()) {
+          <span [class]="getInspireThemeClass(keyword)"></span>
+        } @else {
+          <ng-icon name="faSolidTag"></ng-icon>
+        }
 
         @if (keyword.link) {
           <a

@@ -10,13 +10,23 @@ import { OverlayModule } from 'primeng/overlay';
 import { PopoverModule } from 'primeng/popover';
 import { Skeleton } from 'primeng/skeleton';
 import { firstValueFrom } from 'rxjs';
+import { InspireThemeStylesComponent } from '../../search-filter/aggregation-bucket-decorator/inspire-theme-styles';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchLink } from '../../search/search-link/search-link';
 
 @Component({
   selector: 'app-keyword-list',
   standalone: true,
-  imports: [Chip, NgIcon, OverlayModule, PopoverModule, SearchLink, Skeleton, TranslatePipe],
+  imports: [
+    Chip,
+    NgIcon,
+    OverlayModule,
+    PopoverModule,
+    SearchLink,
+    Skeleton,
+    TranslatePipe,
+    InspireThemeStylesComponent,
+  ],
   templateUrl: './keyword-list.html',
   viewProviders: [
     provideIcons({
@@ -52,6 +62,18 @@ export class KeywordList extends SearchBase {
     }
     return this.translate.instant('vocabulary.otherKeywords');
   });
+
+  isInspireTheme = computed<boolean>(() => {
+    const vocabId = this.vocabulary()['id'] || '';
+    return vocabId.includes('httpinspireeceuropaeutheme-theme');
+  });
+
+  getInspireThemeClass(keyword: Keyword): string {
+    if (!keyword || !keyword.link) return '';
+    return (
+      'iti-' + keyword.link.replace(new RegExp('http://inspire.ec.europa.eu/theme/(.*)'), '$1')
+    );
+  }
 
   activeKeyword = signal<Keyword | null>(null);
 
