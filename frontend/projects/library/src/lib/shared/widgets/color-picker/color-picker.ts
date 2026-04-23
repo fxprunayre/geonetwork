@@ -1,10 +1,11 @@
 import { Component, input, model } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColorPicker as PrimeNGColorPicker } from 'primeng/colorpicker';
 import { FloatLabel } from 'primeng/floatlabel';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { InputText } from 'primeng/inputtext';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Popover } from 'primeng/popover';
 
 @Component({
   selector: 'app-color-picker',
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InputGroup,
     InputGroupAddon,
     InputText,
+    Popover,
     ReactiveFormsModule,
     FormsModule,
   ],

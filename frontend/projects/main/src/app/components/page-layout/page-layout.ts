@@ -34,7 +34,7 @@ import { SearchFilters } from '../search-filters/search-filters';
 import { FilterPanelLayout } from '../search/search';
 
 @Component({
-  selector: 'app-search-header',
+  selector: 'app-page-layout',
   imports: [
     SearchInput,
     SearchActiveFiltersButton,
@@ -87,39 +87,40 @@ import { FilterPanelLayout } from '../search/search';
         </div>
         <ng-content />
       </div>
-
-      @switch (filterPanelMode()) {
-        @case ('drawer') {
-          <p-drawer
-            [(visible)]="visible"
-            [header]="'search.filter.title' | translate"
-            [modal]="false"
-            position="right"
-            [pt]="{ header: 'header-row' }"
-          >
-            <app-search-filters />
-          </p-drawer>
-        }
-        @case ('side') {
-          <div
-            class="w-full h-screen sticky top-0 self-start transition-all duration-300 ease-in-out min-w-0 max-w-100 border-primary-50 overflow-x-hidden"
-            [ngClass]="
-              visible
-                ? 'sm:w-1/3 sm:opacity-100 border-l-2 shadow overflow-y-auto'
-                : 'sm:w-0! sm:opacity-0 border-none shadow-none'
-            "
-          >
-            <div class="app-drawer-header header-row">
-              <div class="app-drawer-title text-primary-500">
-                <ng-icon name="faSolidFilter"></ng-icon>
-                {{ 'search.filter.title' | translate }}
+      @if (withSearch()) {
+        @switch (filterPanelMode()) {
+          @case ('drawer') {
+            <p-drawer
+              [(visible)]="visible"
+              [header]="'search.filter.title' | translate"
+              [modal]="false"
+              position="right"
+              [pt]="{ header: 'header-row' }"
+            >
+              <app-search-filters />
+            </p-drawer>
+          }
+          @case ('side') {
+            <div
+              class="w-full h-screen sticky top-0 self-start transition-all duration-300 ease-in-out min-w-0 max-w-100 border-primary-50 overflow-x-hidden"
+              [ngClass]="
+                visible
+                  ? 'sm:w-1/3 sm:opacity-100 border-l-2 shadow overflow-y-auto'
+                  : 'sm:w-0! sm:opacity-0 border-none shadow-none'
+              "
+            >
+              <div class="app-drawer-header header-row">
+                <div class="app-drawer-title text-primary-500">
+                  <ng-icon name="faSolidFilter"></ng-icon>
+                  {{ 'search.filter.title' | translate }}
+                </div>
+                <p-button (click)="visible = !visible" variant="text" rounded="true">
+                  <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
+                </p-button>
               </div>
-              <p-button (click)="visible = !visible" variant="text" rounded="true">
-                <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
-              </p-button>
+              <app-search-filters />
             </div>
-            <app-search-filters />
-          </div>
+          }
         }
       }
     </div>
@@ -147,7 +148,7 @@ import { FilterPanelLayout } from '../search/search';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchHeader extends SearchBase implements AfterViewInit, OnDestroy {
+export class PageLayout extends SearchBase implements AfterViewInit, OnDestroy {
   @ViewChild('titleSection') titleSection!: ElementRef<HTMLElement>;
   @ViewChild('headerRow') headerRow!: ElementRef<HTMLElement>;
   @ContentChild('header') header!: TemplateRef<any>;

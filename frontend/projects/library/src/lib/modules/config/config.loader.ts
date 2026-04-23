@@ -1,8 +1,11 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { DEFAULT_THEME } from './default-theme';
 import {
   DEFAULT_APPS_CONFIGURATION,
+  DEFAULT_AUTHENTICATION_APP_CONFIGURATION,
   DEFAULT_HEADER_APP_CONFIGURATION,
+  DEFAULT_HOME_APP_CONFIGURATION,
   DEFAULT_LANGUAGE,
   DEFAULT_MAP_CONTEXT,
   DEFAULT_RECORD_DETAILS_APP_CONFIGURATION,
@@ -58,22 +61,16 @@ export function loadAppConfig() {
       Accept: 'application/json',
     },
   })
-    .then((resp) => {
-      if (!resp.ok) {
-        return undefined;
-      }
-      return resp.json();
-    })
+    .then((resp) => (resp.ok ? resp.json() : undefined))
     .then((config) => {
-      if (config) {
+      if (config?.configuration) {
         try {
-          return JSON.parse(config['configuration']) as UiConfiguration;
+          return JSON.parse(config.configuration) as UiConfiguration;
         } catch (e) {
           console.error(
             `Failed to parse configuration from ${configUrl}, falling back to default`,
             e,
           );
-          return SEXTANT_GN4_UI_CONFIGURATION;
         }
       }
       return SEXTANT_GN4_UI_CONFIGURATION;
@@ -81,7 +78,7 @@ export function loadAppConfig() {
     .then((conf) => {
       appConfig.config = migrateGn4Config(conf);
       appConfig.catalogueUrl = apiUrl;
-      appConfig.config.proxyUrl = apiUrl + '/proxy?url=';
+      appConfig.config.proxyUrl = `${apiUrl}/proxy?url=`;
       appConfig.config.backgroundImageUrl = environment.backgroundUrl;
       console.log(appConfig);
       appConfigLoading = false;
@@ -90,7 +87,11 @@ export function loadAppConfig() {
 }
 
 export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration {
-  const conf: AppsConfiguration = { apps: {}, proxyUrl: '/geonetwork/proxy?url=' };
+  const conf: AppsConfiguration = {
+    apps: {},
+    proxyUrl: '/geonetwork/proxy?url=',
+    theme: DEFAULT_THEME,
+  };
 
   if (!gn4config || !gn4config.mods || Object.keys(gn4config.mods).length === 0) {
     return { ...DEFAULT_APPS_CONFIGURATION, ...conf };
@@ -102,7 +103,7 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
     if (modKey === 'search') {
       const searchConfig = module as Search;
       conf.apps.search = {
-        enabled: true,
+        enabled: searchConfig.enabled ?? true,
         aggregations: searchConfig.facetConfig
           ? Object.entries(searchConfig.facetConfig).map(([key, value]) => ({
               [key]: value,
@@ -157,20 +158,47 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
           recordConfig.distributionConfig || DEFAULT_RECORD_DETAILS_APP_CONFIGURATION.distribution,
       };
     } else if (modKey === 'map') {
+      const mapConfig = module as any;
       conf.apps.map = {
-        enabled: true,
+        enabled: mapConfig.enabled ?? true,
         context: DEFAULT_MAP_CONTEXT,
+      };
+    } else if (modKey === 'home') {
+      const homeConfig = module as any;
+      conf.apps.home = {
+        ...DEFAULT_HOME_APP_CONFIGURATION,
+        enabled: homeConfig.enabled ?? true,
+      };
+    } else if (modKey === 'authentication') {
+      const authConfig = module as any;
+      conf.apps.authentication = {
+        enabled: authConfig.enabled ?? true,
       };
     }
   }
 
   const hasHeader = Object.keys(gn4config.mods).includes('header');
-  const hasRecordDetails = Object.keys(gn4config.mods).includes('recordview');
   if (!hasHeader) {
     conf.apps.i18n = DEFAULT_HEADER_APP_CONFIGURATION;
   }
+  const hasRecordDetails = Object.keys(gn4config.mods).includes('recordview');
   if (!hasRecordDetails) {
     conf.apps.record = DEFAULT_RECORD_DETAILS_APP_CONFIGURATION;
+  }
+  const hasHome = Object.keys(gn4config.mods).includes('home');
+  if (!hasHome) {
+    conf.apps.home = DEFAULT_HOME_APP_CONFIGURATION;
+  }
+  const hasAuthentication = Object.keys(gn4config.mods).includes('authentication');
+  if (!hasAuthentication) {
+    conf.apps.authentication = DEFAULT_AUTHENTICATION_APP_CONFIGURATION;
+  }
+  const hasMap = Object.keys(gn4config.mods).includes('map');
+  if (!hasMap) {
+    conf.apps.map = {
+      enabled: true,
+      context: DEFAULT_MAP_CONTEXT,
+    };
   }
 
   return conf;

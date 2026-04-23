@@ -2,7 +2,7 @@ import { Preset } from '@primeuix/themes/types';
 
 // https://github.com/primefaces/primeuix/blob/main/packages/themes/src/presets/aura/base/index.ts
 
-const AppTheme: Preset = {
+const DefaultTheme: Preset = {
   primitive: {
     myprimary: {
       '50': '#f3f5f7',
@@ -154,4 +154,4 @@ const AppTheme: Preset = {
     },
   },
 };
-export default AppTheme;
+export const DEFAULT_THEME = DefaultTheme;

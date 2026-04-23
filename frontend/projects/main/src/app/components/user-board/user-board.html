@@ -1,5 +1,5 @@
 @if (isAuthenticated()) {
-  <app-search-header [withSearch]="false">
+  <app-page-layout [withSearch]="false">
     <ng-template #header>
       <section class="flex flex-row pb-6 mb-6 items-center">
         <h1 class="grow text-white">
@@ -83,5 +83,5 @@
         </section>
       </div>
     </div>
-  </app-search-header>
+  </app-page-layout>
 }

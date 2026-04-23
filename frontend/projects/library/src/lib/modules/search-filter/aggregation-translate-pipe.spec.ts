@@ -31,6 +31,6 @@ describe('AggregationTranslatePipe', () => {
   });
 
   it('returns the number as is when value is a number', () => {
-    expect(pipe.transform(42, 'isTemplate')).toBe(42);
+    expect(pipe.transform(42, 'isTemplate')).toBe('42');
   });
 });

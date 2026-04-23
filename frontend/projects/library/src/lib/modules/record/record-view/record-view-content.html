@@ -148,9 +148,11 @@
         <p-tab value="about" class="text-lg">{{
           'record.view.section.description' | translate
         }}</p-tab>
-        <p-tab value="data-access" class="text-lg">{{
-          'record.view.section.dataAccess' | translate
-        }}</p-tab>
+        @if (record.link && record.link.length > 0) {
+          <p-tab value="data-access" class="text-lg">{{
+            'record.view.section.dataAccess' | translate
+          }}</p-tab>
+        }
         @if (record.info?.hasDatasource) {
           <p-tab value="explore" class="text-lg">{{
             'record.view.section.explore' | translate

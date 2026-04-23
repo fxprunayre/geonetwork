@@ -1,5 +1,4 @@
 import { Component, computed, ElementRef, inject, OnInit, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import {
   faSolidArrowRightFromBracket,
@@ -12,19 +11,18 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import {
   APPLICATION_CONFIGURATION,
   AuthStore,
+  ConfigEditorComponent,
   Gn4UrlService,
   IconStyleService,
   LanguageSwitcher,
   RecordAddActionService,
-  ThemeDesigner,
   TranslationsService,
 } from 'gn-library';
 import { MenuItem } from 'primeng/api';
 import { Drawer } from 'primeng/drawer';
-import { Fieldset } from 'primeng/fieldset';
-import { IftaLabel } from 'primeng/iftalabel';
 import { MenubarModule } from 'primeng/menubar';
-import AppTheme from '../../app.theme';
+
+import { TabsModule } from 'primeng/tabs';
 
 const ICONS = {
   faSolidPlus,
@@ -40,11 +38,9 @@ const ICONS = {
     MenubarModule,
     TranslatePipe,
     Drawer,
-    Fieldset,
     LanguageSwitcher,
-    ThemeDesigner,
-    IftaLabel,
-    FormsModule,
+    ConfigEditorComponent,
+    TabsModule,
   ],
   viewProviders: [provideIcons(ICONS)],
   template: ` <p-menubar [model]="items()">
@@ -57,29 +53,27 @@ const ICONS = {
       [(visible)]="isConfigurationVisible"
       [header]="'menu.settings' | translate"
       position="right"
+      styleClass="!w-3/4"
       [pt]="{ header: 'header-row' }"
     >
-      <p-fieldset legend="Language">
-        <app-language-switcher />
-      </p-fieldset>
-
-      <p-fieldset legend="Theme">
-        <app-theme-designer [theme]="theme" />
-      </p-fieldset>
-
-      <p-fieldset legend="Config">
-        <p-iftalabel>
-          <textarea
-            pTextarea
-            id="description"
-            [ngModel]="appConfigJson()"
-            (ngModelChange)="updateConfig($event)"
-            rows="10"
-            style="resize: none"
-          ></textarea>
-          <label for="description">Configuration</label>
-        </p-iftalabel>
-      </p-fieldset>
+      <p-tabs value="preferences">
+        <p-tablist>
+          <p-tab value="preferences">User preferences</p-tab>
+          @if (userRole() === 'Administrator') {
+            <p-tab value="configuration">App configuration</p-tab>
+          }
+        </p-tablist>
+        <p-tabpanels>
+          <p-tabpanel value="preferences">
+            <app-language-switcher />
+          </p-tabpanel>
+          @if (userRole() === 'Administrator') {
+            <p-tabpanel value="configuration">
+              <app-config-editor />
+            </p-tabpanel>
+          }
+        </p-tabpanels>
+      </p-tabs>
     </p-drawer>`,
 })
 export class UserBoardMenu implements OnInit {
@@ -97,7 +91,6 @@ export class UserBoardMenu implements OnInit {
       {
         label: this.translateService.instant('record.action.addRecord.label'),
         icon: 'faSolidPlus',
-        badge: templateCount > 0 ? templateCount.toString() : undefined,
         title: addRecordTitle,
         tooltip: addRecordTitle,
         tooltipPosition: 'bottom',
@@ -157,14 +150,7 @@ export class UserBoardMenu implements OnInit {
 
   isConfigurationVisible = signal(false);
 
-  theme = AppTheme;
-
   appConfig = inject(APPLICATION_CONFIGURATION);
-  appConfigJson = computed(() => JSON.stringify(this.appConfig(), null, 2));
-
-  updateConfig(event: string) {
-    this.appConfig.set(JSON.parse(event));
-  }
 
   currentLang = signal(this.translateService.getCurrentLang(), { equal: () => false });
 

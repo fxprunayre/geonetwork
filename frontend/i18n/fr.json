@@ -160,6 +160,10 @@
       },
       "dateStamp": "Mis à jour",
       "distribution": {
+        "download": {
+          "formatsAvailable": "Télécharger les données dans les formats suivants :",
+          "label": "Télécharger"
+        },
         "format": "Format",
         "sections": {
           "api": "Visualiser",
@@ -222,15 +226,24 @@
   "search": {
     "aggregations": {
       "availableInServices": "Type d'accès",
+      "availableInServices-availableInDownloadService": "Service de téléchargement",
+      "availableInServices-availableInViewService": "Service de visualisation",
       "cl_status.key": "Statut de la ressource",
       "creationYearForResource": "Année de création",
       "groupPublishedId": "Catalogues",
       "isHarvested": "Moissonné",
-      "isPublishedToAll": "Public",
+      "isHarvested-0": "Local",
+      "isHarvested-1": "Moissonnée",
+      "isPublishedToAll": "Fiches publiées",
+      "isPublishedToAll-false": "Non",
+      "isPublishedToAll-true": "Oui",
       "isTemplate": "Modèle",
       "less": "moins",
       "more": "plus",
       "OrgForResource": "Organisation",
+      "recordType-n": "Fiche",
+      "recordType-s": "Annuaire",
+      "recordType-y": "Modèle",
       "resourceType": "Type de ressource",
       "tag.default": "Mots-clés",
       "th_dcsmm-area_tree.key": "Sous-régions marines",
@@ -295,7 +308,6 @@
   },
   "success": "Succès",
   "user": {
-    "bookmark": "Mes favoris",
     "bookmarks": "Favoris",
     "contributions": "contributions",
     "dashboard": {
@@ -310,8 +322,7 @@
     "profile": "Mon profil",
     "recentWork": "Travail récent",
     "settings": "Paramètres",
-    "welcome": "Bienvenue, {{name}}",
-    "work": "Mon travail"
+    "welcome": "Bienvenue, {{name}}"
   },
   "vocabulary": {
     "moreInfoOnKeyword": "En savoir plus sur ce mot-clé",

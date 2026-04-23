@@ -2,8 +2,15 @@
   <label for="color">{{ label() }}</label>
   <p-inputgroup>
     <input pInputText type="text" [(ngModel)]="color" />
-    <p-inputgroup-addon>
-      <p-colorpicker id="color" [(ngModel)]="color" />
+    <p-inputgroup-addon (click)="op.toggle($event)" class="cursor-pointer">
+      <div
+        class="w-6 h-6 rounded shadow-sm border border-surface-300 dark:border-surface-600"
+        [style.background-color]="color()"
+      ></div>
     </p-inputgroup-addon>
   </p-inputgroup>
 </p-floatlabel>
+
+<p-popover #op appendTo="body">
+  <p-colorpicker [inline]="true" [(ngModel)]="color" />
+</p-popover>

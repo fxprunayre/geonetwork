@@ -1,3 +1,4 @@
+import { Preset } from '@primeuix/themes/types';
 import { elasticsearch } from 'gn-api-client';
 import { DistributionConfig } from './gn4config';
 
@@ -5,13 +6,16 @@ export interface AppsConfiguration {
   apps: Apps;
   proxyUrl?: string;
   backgroundImageUrl?: string;
+  theme?: Preset;
 }
 
 export interface Apps {
+  i18n?: I18nApp;
+  authentication?: AuthenticationApp;
+  home?: HomeApp;
   search?: SearchApp;
   record?: RecordDetailsApp;
   map?: MapApp;
-  i18n?: I18nApp;
 }
 
 export interface App {
@@ -24,6 +28,12 @@ export interface I18nApp extends App {
   };
   language: string;
   detection?: 'browser' | 'url' | 'html' | 'none';
+}
+
+export interface AuthenticationApp extends App {}
+
+export interface HomeApp extends App {
+  aggregations: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
 }
 
 export type SearchAppLayout = 'list' | 'grid' | 'table';

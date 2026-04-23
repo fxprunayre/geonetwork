@@ -26,7 +26,7 @@ import {
   UserFullNamePipe,
 } from 'gn-library';
 import { ButtonDirective } from 'primeng/button';
-import { SearchHeader } from '../search-header/search-header';
+import { PageLayout } from '../page-layout/page-layout';
 import { UserBoardMenu } from '../user-board-menu/user-board-menu';
 
 @Component({
@@ -34,7 +34,7 @@ import { UserBoardMenu } from '../user-board-menu/user-board-menu';
   imports: [
     NgIcon,
     TranslatePipe,
-    SearchHeader,
+    PageLayout,
     SearchContextDirective,
     RecordAddButton,
     ResultsNumberComponent,

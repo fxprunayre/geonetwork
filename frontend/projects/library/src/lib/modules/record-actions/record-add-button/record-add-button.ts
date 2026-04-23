@@ -37,9 +37,6 @@ import { RecordAddActionService } from '../record-add-action.service';
       >
         <ng-icon name="faSolidPlus" pButtonIcon />
         <span pButtonLabel>{{ 'record.action.addRecord.label' | translate }}</span>
-        @if (templateCount() > 0) {
-          <p-badge [value]="templateCount().toString()" severity="secondary" />
-        }
       </a>
     </span>
   `,

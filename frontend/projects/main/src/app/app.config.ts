@@ -23,6 +23,7 @@ import {
   APPLICATION_CONFIGURATION,
   AuthenticationService,
   DEFAULT_SPACE,
+  DEFAULT_THEME,
   getWebComponentAttribute,
   Gn4AuthenticationService,
   TranslationsLoader,
@@ -33,7 +34,6 @@ import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
 import { environment } from '../../../library/src/environments/environment';
 import { routes } from './app.routes';
-import AppTheme from './app.theme';
 
 export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   let scriptBaseUrl = '';
@@ -147,14 +147,6 @@ export const appConfig: ApplicationConfig = {
       fallbackLang: 'en',
       lang: 'en',
     }),
-    providePrimeNG({
-      theme: {
-        preset: definePreset(Aura, AppTheme),
-        options: {
-          darkModeSelector: '.no-dark-mode',
-        },
-      },
-    }),
     provideMarkdown(),
   ],
 };
@@ -166,6 +158,14 @@ export function getAppConfig(config: any): ApplicationConfig {
     ...appConfig,
     providers: [
       ...appConfig.providers!,
+      providePrimeNG({
+        theme: {
+          preset: definePreset(Aura, config?.config?.theme || DEFAULT_THEME),
+          options: {
+            darkModeSelector: '.no-dark-mode',
+          },
+        },
+      }),
       { provide: APPLICATION_CONFIGURATION, useValue: signal(config) },
     ],
   };

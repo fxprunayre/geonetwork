@@ -19,6 +19,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { MenuDesignTokens } from '@primeuix/themes/types/menu';
 import {
+  APPLICATION_CONFIGURATION,
   AuthStore,
   CatalogueLogo,
   DASHBOARD_ROUTE_PATH,
@@ -86,6 +87,7 @@ export class MenuComponent implements OnInit {
   isExpandedOnHover = signal(false);
 
   readonly authStore = inject(AuthStore);
+  appConfig = inject(APPLICATION_CONFIGURATION);
   styleService = inject(IconStyleService);
   translateService = inject(TranslateService);
   translationsService = inject(TranslationsService);
@@ -105,10 +107,12 @@ export class MenuComponent implements OnInit {
 
   items = computed<MenuItem[] | undefined>(() => {
     this.currentLang();
+    const appsConfig = this.appConfig().config?.apps;
     return [
       {
         label: this.translateService.instant('menu.home'),
         title: this.isIconMode() ? this.translateService.instant('menu.home') : '',
+        visible: appsConfig?.home?.enabled ?? true,
         icon: 'faCompass',
         routerLink: '/',
         routerLinkActiveOptions: { exact: true },
@@ -117,6 +121,7 @@ export class MenuComponent implements OnInit {
       {
         label: this.translateService.instant('menu.search'),
         title: this.isIconMode() ? this.translateService.instant('menu.search') : '',
+        visible: appsConfig?.search?.enabled ?? true,
         icon: 'faSolidMagnifyingGlass',
         routerLink: SEARCH_ROUTE_PATH,
         routerLinkActiveOptions: { exact: false },
@@ -125,6 +130,7 @@ export class MenuComponent implements OnInit {
       {
         label: this.translateService.instant('menu.map'),
         title: this.isIconMode() ? this.translateService.instant('menu.map') : '',
+        visible: appsConfig?.map?.enabled ?? true,
         icon: 'faMap',
         routerLink: MAP_ROUTE_PATH,
         routerLinkActiveOptions: { exact: true },
@@ -141,7 +147,7 @@ export class MenuComponent implements OnInit {
       {
         label: this.translateService.instant('menu.signin'),
         title: this.isIconMode() ? this.translateService.instant('menu.signin') : '',
-        visible: !this.isAuthenticated(),
+        visible: !this.isAuthenticated() && (appsConfig?.authentication?.enabled ?? true),
         icon: 'faSolidArrowRightToBracket',
         command: () => {
           this.router.navigate(['/signin'], { queryParams: { redirectUrl: location.href } });

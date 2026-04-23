@@ -159,6 +159,10 @@
       },
       "dateStamp": "Updated",
       "distribution": {
+        "download": {
+          "formatsAvailable": "Download in one of the available formats",
+          "label": "Download"
+        },
         "format": "Format",
         "sections": {
           "api": "API",
@@ -221,15 +225,24 @@
   "search": {
     "aggregations": {
       "availableInServices": "Access type",
+      "availableInServices-availableInDownloadService": "Download service",
+      "availableInServices-availableInViewService": "View service",
       "cl_status.key": "Resource status",
       "creationYearForResource": "Creation year",
       "groupPublishedId": "Groups",
       "isHarvested": "Harvested",
-      "isPublishedToAll": "Public",
-      "isTemplate": "Template",
+      "isHarvested-0": "Local",
+      "isHarvested-1": "Harvested",
+      "isPublishedToAll": "Public record",
+      "isPublishedToAll-false": "No",
+      "isPublishedToAll-true": "Yes",
+      "isTemplate": "Record type",
       "less": "less",
       "more": "more",
       "OrgForResource": "Organisation",
+      "recordType-n": "Metadata",
+      "recordType-s": "Directory",
+      "recordType-y": "Template",
       "resourceType": "Resource type",
       "tag.default": "Keywords",
       "th_dcsmm-area_tree.key": "Marine regions",

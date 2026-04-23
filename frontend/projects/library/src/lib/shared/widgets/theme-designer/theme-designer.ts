@@ -1,33 +1,27 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { PrimeNG } from 'primeng/config';
-import { definePreset } from '@primeuix/themes';
-import Aura from '@primeuix/themes/aura';
-import { ThemingService } from '../../theming-service';
-import { ColorPicker } from '../color-picker/color-picker';
+import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidPaintRoller } from '@ng-icons/font-awesome/solid';
-import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
-import { Popover } from 'primeng/popover';
-import { InputText } from 'primeng/inputtext';
-import { FloatLabel } from 'primeng/floatlabel';
+import { definePreset } from '@primeuix/themes';
+import Aura from '@primeuix/themes/aura';
 import { Preset } from '@primeuix/themes/types';
+import { ButtonModule } from 'primeng/button';
+import { PrimeNG } from 'primeng/config';
+import { FloatLabel } from 'primeng/floatlabel';
 import { InputNumber } from 'primeng/inputnumber';
+import { InputText } from 'primeng/inputtext';
+import {
+  APPLICATION_CONFIGURATION,
+  ApplicationConfiguration,
+} from '../../../modules/config/config.loader';
+import { ThemingService } from '../../theming-service';
+import { ColorPicker } from '../color-picker/color-picker';
 
 @Component({
   selector: 'app-theme-designer',
   standalone: true,
   viewProviders: [provideIcons({ faSolidPaintRoller })],
-  imports: [
-    ButtonModule,
-    NgIcon,
-    FormsModule,
-    Popover,
-    InputText,
-    FloatLabel,
-    ColorPicker,
-    InputNumber,
-  ],
+  imports: [ButtonModule, NgIcon, FormsModule, InputText, FloatLabel, ColorPicker, InputNumber],
   templateUrl: './theme-designer.html',
 })
 export class ThemeDesigner implements OnInit {
@@ -35,6 +29,7 @@ export class ThemeDesigner implements OnInit {
 
   primeng = inject(PrimeNG);
   themingService = inject(ThemingService);
+  appConfig = inject(APPLICATION_CONFIGURATION);
 
   primaryColor = signal('#093564');
   surfaceColor = signal('#565658');
@@ -45,6 +40,7 @@ export class ThemeDesigner implements OnInit {
   backgroundColor = signal('#f1f5f9');
   font = signal('Inter');
   borderRadius = signal(0);
+  backgroundImageUrl = signal('');
 
   themePropertiesByColor = {
     primary: 'myprimary',
@@ -57,6 +53,10 @@ export class ThemeDesigner implements OnInit {
 
   ngOnInit() {
     this.initFromCssVariables();
+    const config = this.appConfig().config;
+    if (config?.backgroundImageUrl) {
+      this.backgroundImageUrl.set(config.backgroundImageUrl);
+    }
   }
 
   initFromCssVariables() {
@@ -108,6 +108,13 @@ export class ThemeDesigner implements OnInit {
         },
       },
     });
+
+    const currentConfig = this.appConfig() as ApplicationConfiguration;
+    if (currentConfig.config) {
+      currentConfig.config.theme = t;
+      currentConfig.config.backgroundImageUrl = this.backgroundImageUrl();
+      (this.appConfig as any).set({ ...currentConfig });
+    }
 
     this.themingService.updateCssVariable('--app-font-family-sans', this.font());
   }
