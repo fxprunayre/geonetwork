@@ -58,28 +58,21 @@ import { App, Apps } from './model/gnConfig';
   template: `
     @if (appConfig().config?.apps; as apps) {
       <div class="flex flex-row gap-4 h-full min-h-125">
-        <!-- Left Sidebar -->
-        <div
-          class="flex flex-col w-1/4 max-w-62.5 border-r border-surface-200 dark:border-surface-700 pr-4"
-        >
-          <p-menu [model]="menuItems()" styleClass="w-full border-none bg-transparent">
-            <ng-template #item let-item let-options="options">
-              <a
-                pRipple
-                class="flex items-center py-2 px-3 no-underline cursor-pointer rounded transition-colors text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-800"
-                [ngClass]="item.styleClass"
-                (click)="item.command()"
-              >
-                @if (item.icon) {
-                  <ng-icon [name]="item.icon" class="mr-2"></ng-icon>
-                }
-                <span>{{ item.label }}</span>
-              </a>
-            </ng-template>
-          </p-menu>
-        </div>
-
-        <!-- Right Content Area -->
+        <p-menu [model]="menuItems()" styleClass="w-1/4">
+          <ng-template #item let-item let-options="options">
+            <a
+              pRipple
+              class="flex items-center py-2 px-3 no-underline cursor-pointer rounded transition-colors text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-800"
+              [ngClass]="item.styleClass"
+              (click)="item.command()"
+            >
+              @if (item.icon) {
+                <ng-icon [name]="item.icon" class="mr-2"></ng-icon>
+              }
+              <span>{{ item.label }}</span>
+            </a>
+          </ng-template>
+        </p-menu>
         <div class="flex-1 w-3/4 pl-2 overflow-y-auto">
           @if (selectedApp(); as appName) {
             <div class="flex flex-col gap-4">

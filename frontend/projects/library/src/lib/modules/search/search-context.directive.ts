@@ -1,4 +1,4 @@
-import { Directive, inject, input, model, OnInit } from '@angular/core';
+import { Directive, effect, inject, input, model, OnInit, untracked } from '@angular/core';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
 import { DEFAULT_LANGUAGE } from '../config/gn-constants';
 import { SearchService } from './search-service';
@@ -24,7 +24,18 @@ export class SearchContextDirective implements OnInit {
   searchStore = inject(SearchStore);
   searchService = inject(SearchService);
 
-  constructor() {}
+  constructor() {
+    effect(() => {
+      const newAggregations = this.aggregations();
+
+      untracked(() => {
+        const currentAggregations = this.searchStore.aggregationsConfig();
+        if (JSON.stringify(newAggregations) !== JSON.stringify(currentAggregations)) {
+          this.searchStore.setAggregationsConfig(newAggregations);
+        }
+      });
+    });
+  }
 
   ngOnInit(): void {
     this.searchStore.init(

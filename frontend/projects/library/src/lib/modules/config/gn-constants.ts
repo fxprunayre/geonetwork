@@ -1,5 +1,5 @@
 import { elasticsearch } from 'gn-api-client';
-import { DEFAULT_THEME } from 'gn-library';
+import { DEFAULT_THEME } from './default-theme';
 import {
   AppsConfiguration,
   AuthenticationApp,

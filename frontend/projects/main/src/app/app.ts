@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -44,16 +44,17 @@ export class App extends BaseComponent implements OnInit {
   private router = inject(Router);
   private searchService = inject(SearchService);
   private authStore = inject(AuthStore);
+  appConfig = inject(APPLICATION_CONFIGURATION);
 
   protected readonly title = signal('main');
   isMapActive = signal(false);
   isSearchActive = signal(false);
 
-  searchConfig: SearchApp =
-    inject(APPLICATION_CONFIGURATION)().config?.apps.search || DEFAULT_SEARCH_APP_CONFIGURATION;
+  searchConfig = computed<SearchApp>(
+    () => this.appConfig().config?.apps.search || DEFAULT_SEARCH_APP_CONFIGURATION,
+  );
 
-  searchPageSize =
-    inject(APPLICATION_CONFIGURATION)().config?.apps.search?.hitsPerPageOptions[0] || 10;
+  searchPageSize = computed(() => this.searchConfig().hitsPerPageOptions[0] || 10);
 
   language = signal<string | undefined>(DEFAULT_LANGUAGE);
 

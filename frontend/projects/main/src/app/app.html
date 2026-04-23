@@ -4,13 +4,13 @@
   <section
     class="grow"
     appSearchContext="main"
-    [aggregations]="searchConfig.aggregations"
-    [filter]="searchConfig.filter"
+    [aggregations]="searchConfig().aggregations"
+    [filter]="searchConfig().filter"
     [routing]="true"
-    [size]="searchPageSize"
+    [size]="searchPageSize()"
     [filter]="[{ query_string: { query: '+isTemplate:n' } }]"
-    [sort]="searchConfig.sort"
-    [currentSort]="searchConfig.currentSort"
+    [sort]="searchConfig().sort"
+    [currentSort]="searchConfig().currentSort"
     [language]="language()"
   >
     <app-map [class.hidden]="!isMapActive()" class="h-full w-full block"></app-map>
