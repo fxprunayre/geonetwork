@@ -1,38 +1,54 @@
+import { Location } from '@angular/common';
 import { Component, computed, effect, ElementRef, inject, OnInit, signal } from '@angular/core';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { Router } from '@angular/router';
+import { provideIcons } from '@ng-icons/core';
 import {
   faSolidEllipsisVertical,
+  faSolidPenToSquare,
   faSolidShareNodes,
+  faSolidTrash,
   faSolidUpRightFromSquare,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { RecordsService } from 'gn4-api-client';
-import { MenuItem } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { TieredMenu } from 'primeng/tieredmenu';
+import { MenuItem, MessageService } from 'primeng/api';
+
+import { MenubarModule } from 'primeng/menubar';
+import { DeleteConfirmationDialog } from '../../../shared/widgets/delete-confirmation-dialog/delete-confirmation-dialog';
+import { AssociatedRecordsSummary } from '../../record-associations/associated-records-summary/associated-records-summary';
+
 import { IconStyleService } from '../../../shared/icon-style-service';
 import { AuthStore } from '../../authentication/auth.store';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_SPACE } from '../../config/gn-constants';
+import { Gn4UrlService } from '../../config/gn4-url.service';
+import { RecordActionService } from '../../record-actions/record-action.service';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
   selector: 'app-record-menu',
   templateUrl: './record-menu.component.html',
   standalone: true,
-  imports: [ButtonModule, NgIcon, TieredMenu, TranslatePipe],
+  imports: [MenubarModule, TranslatePipe, DeleteConfirmationDialog, AssociatedRecordsSummary],
   viewProviders: [
     provideIcons({
       faSolidEllipsisVertical,
+      faSolidPenToSquare,
+      faSolidTrash,
     }),
   ],
 })
 export class RecordMenuComponent extends RecordFieldBase implements OnInit {
   private readonly recordsService = inject(RecordsService);
+  private readonly recordActionService = inject(RecordActionService);
   private readonly translate = inject(TranslateService);
   private readonly elementRef = inject(ElementRef);
   private readonly iconStyleService = inject(IconStyleService);
   private authStore = inject(AuthStore);
+  private router = inject(Router);
+  private messageService = inject(MessageService);
+  private location = inject(Location);
+  private gn4UrlService = inject(Gn4UrlService);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   catalogueUrl = computed(() => this.appConfiguration().catalogueUrl);
@@ -40,6 +56,13 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
   shareUrl = signal('');
 
   currentLang = signal(this.translate.getCurrentLang());
+
+  displayConfirmation = false;
+  confirmationWord = 'DELETE';
+
+  canDelete = computed(() => {
+    return this.authStore.isAuthenticated() && this.record().info?.edit;
+  });
 
   constructor() {
     super();
@@ -71,7 +94,7 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
 
   items = computed<MenuItem[]>(() => {
     this.currentLang();
-    return [
+    const arr: MenuItem[] = [
       {
         label: this.translate.instant('record.action.share'),
         title: this.translate.instant('record.action.shareHelp'),
@@ -88,7 +111,43 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
         target: '_blank',
       },
     ];
+
+    if (this.authStore.isAuthenticated() && this.record().info?.edit) {
+      arr.push({
+        label: this.translate.instant('record.action.edit'),
+        title: this.translate.instant('record.action.editTitle'),
+        icon: 'icon-pen-to-square',
+        command: () => {
+          const uuid = this.record().uuid;
+          if (uuid) {
+            window.open(this.gn4UrlService.getEditorUrl(`metadata/${uuid}`), '_blank');
+          }
+        },
+      });
+      arr.push({
+        label: this.translate.instant('delete'),
+        title: this.translate.instant('record.action.deleteTitle'),
+        icon: 'icon-trash',
+        command: () => {
+          this.confirmDeletion();
+        },
+      });
+    }
+
+    return arr;
   });
+
+  confirmDeletion() {
+    this.displayConfirmation = true;
+  }
+
+  deleteRecord() {
+    const uuid = this.record().uuid;
+    if (!uuid) return;
+
+    this.displayConfirmation = false;
+    this.recordActionService.deleteRecord(uuid).subscribe();
+  }
 
   ngOnInit() {
     this.translate.onLangChange.subscribe((event) => {
@@ -105,6 +164,14 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
         {
           className: 'icon-external-link',
           svgContent: faSolidUpRightFromSquare,
+        },
+        {
+          className: 'icon-pen-to-square',
+          svgContent: faSolidPenToSquare,
+        },
+        {
+          className: 'icon-trash',
+          svgContent: faSolidTrash,
         },
       ],
       this.elementRef.nativeElement.getRootNode(),

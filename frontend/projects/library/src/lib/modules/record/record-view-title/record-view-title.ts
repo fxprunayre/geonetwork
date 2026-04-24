@@ -1,8 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input, TemplateRef } from '@angular/core';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { RecordDeleteButton } from '../../record-actions/record-delete-button/record-delete-button';
-import { RecordEditButton } from '../../record-actions/record-edit-button/record-edit-button';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldType } from '../record-field-type/record-field-type';
@@ -10,14 +8,7 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
 
 @Component({
   selector: 'app-record-view-title',
-  imports: [
-    NgTemplateOutlet,
-    RecordDistributionBadges,
-    RecordEditButton,
-    RecordDeleteButton,
-    RecordFieldType,
-    RecordMenuComponent,
-  ],
+  imports: [NgTemplateOutlet, RecordDistributionBadges, RecordFieldType, RecordMenuComponent],
   template: `
     <ng-template #defaultBackButton />
 
@@ -33,8 +24,7 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
             {{ record().resourceTitleObject?.['default'] }}
           </h1>
 
-          <app-record-edit-button [record]="record()" />
-          <app-record-delete-button [record]="record()" />
+          <app-record-menu [record]="record()" />
 
           <div>
             <ng-container
@@ -54,8 +44,6 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
             [types]="['api', 'download']"
             [layout]="'badge'"
           />
-
-          <app-record-menu [record]="record()" />
         </div>
       </div>
     </div>

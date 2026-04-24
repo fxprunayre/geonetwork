@@ -5,7 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { BadgeModule } from 'primeng/badge';
 import { ButtonDirective, ButtonSeverity } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { RecordAddActionService } from '../record-add-action.service';
+import { RecordActionService } from '../record-action.service';
 
 /**
  * Button that links to the GeoNetwork editor to create a new record.
@@ -45,14 +45,14 @@ export class RecordAddButton {
   target = input<string>('_blank');
   severity = input<ButtonSeverity>('primary');
 
-  private readonly recordAddAction = inject(RecordAddActionService);
+  private readonly recordActionService = inject(RecordActionService);
 
-  templateCount = this.recordAddAction.templateCount;
-  hasTemplates = this.recordAddAction.hasTemplates;
+  templateCount = this.recordActionService.templateCount;
+  hasTemplates = this.recordActionService.hasTemplates;
 
-  addRecordUrl = computed(() => this.recordAddAction.getCreateRecordUrl());
+  addRecordUrl = computed(() => this.recordActionService.getCreateRecordUrl());
 
-  constructor() {
-    this.recordAddAction.refreshTemplateCount();
+  ngOnInit() {
+    this.recordActionService.refreshTemplateCount();
   }
 }

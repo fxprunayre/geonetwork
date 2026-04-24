@@ -1,12 +1,20 @@
-<div class="flex flex-row gap-2 items-center">
-  <p-button
-    [title]="'record.action.menu' | translate"
-    (click)="menu.toggle($event)"
-    size="small"
-    severity="secondary"
-    #addRecordMenu
+<p-menubar
+  [model]="items()"
+  (click)="$event.stopPropagation()"
+  [pt]="{
+    rootList: { class: '!min-w-42 !left-auto !right-0' },
+  }"
+></p-menubar>
+
+@if (canDelete()) {
+  <app-delete-confirmation-dialog
+    [(visible)]="displayConfirmation"
+    [title]="'record.action.deleteConfirmationTitle' | translate"
+    [message]="'record.action.deleteConfirmationMessage' | translate"
+    [confirmInputLabel]="'record.action.typeToConfirm' | translate: { word: confirmationWord }"
+    [confirmWord]="confirmationWord"
+    (onConfirm)="deleteRecord()"
   >
-    <ng-icon name="faSolidEllipsisVertical" pButtonIcon></ng-icon>
-  </p-button>
-  <p-tieredmenu #menu [model]="items()" [popup]="true"></p-tieredmenu>
-</div>
+    <app-associated-records-summary [record]="record()" />
+  </app-delete-confirmation-dialog>
+}

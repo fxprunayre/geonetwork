@@ -40,7 +40,7 @@ export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   const scripts = document.getElementsByTagName('script');
   for (let i = 0; i < scripts.length; i++) {
     const src = scripts[i].src;
-    if (src && src.match(/(\/dist\/webcomponent\/browser|sextant.ifremer.fr\/.*)\/main\.js/)) {
+    if (src && src.match(/(\/webcomponent\/browser|sextant.ifremer.fr\/.*)\/main\.js/)) {
       scriptBaseUrl = src.substring(0, src.lastIndexOf('/') + 1);
       break;
     }

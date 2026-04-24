@@ -94,7 +94,7 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
   };
 
   if (!gn4config || !gn4config.mods || Object.keys(gn4config.mods).length === 0) {
-    return { ...DEFAULT_APPS_CONFIGURATION, ...conf };
+    return { ...DEFAULT_APPS_CONFIGURATION };
   }
 
   for (const modKey of Object.keys(gn4config.mods)) {

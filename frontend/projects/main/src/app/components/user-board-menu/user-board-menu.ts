@@ -15,7 +15,7 @@ import {
   Gn4UrlService,
   IconStyleService,
   LanguageSwitcher,
-  RecordAddActionService,
+  RecordActionService,
   TranslationsService,
 } from 'gn-library';
 import { MenuItem } from 'primeng/api';
@@ -43,7 +43,13 @@ const ICONS = {
     TabsModule,
   ],
   viewProviders: [provideIcons(ICONS)],
-  template: ` <p-menubar [model]="items()">
+  template: ` <p-menubar
+      [model]="items()"
+      (click)="$event.stopPropagation()"
+      [pt]="{
+        rootList: { class: '!min-w-42 !left-auto !right-0' },
+      }"
+    >
       <ng-template #start>
         <!-- <app-user-avatar /> -->
       </ng-template>
@@ -134,7 +140,7 @@ export class UserBoardMenu implements OnInit {
   readonly authStore = inject(AuthStore);
 
   gn4UrlService = inject(Gn4UrlService);
-  recordAddAction = inject(RecordAddActionService);
+  recordAddAction = inject(RecordActionService);
 
   elementRef = inject(ElementRef);
 

@@ -1,16 +1,13 @@
-import { Location } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidTrash } from '@ng-icons/font-awesome/solid';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { RecordsService } from 'gn4-api-client';
-import { MessageService } from 'primeng/api';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { DeleteConfirmationDialog } from '../../../shared/widgets/delete-confirmation-dialog/delete-confirmation-dialog';
 import { AuthStore } from '../../authentication/auth.store';
 import { AssociatedRecordsSummary } from '../../record-associations/associated-records-summary/associated-records-summary';
 import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
+import { RecordActionService } from '../record-action.service';
 
 @Component({
   selector: 'app-record-delete-button',
@@ -52,12 +49,8 @@ import { RecordFieldBase } from '../../record/record-field-base/record-field-bas
   ],
 })
 export class RecordDeleteButton extends RecordFieldBase {
-  private readonly translate = inject(TranslateService);
-  private readonly router = inject(Router);
+  private readonly recordActionService = inject(RecordActionService);
   private authStore = inject(AuthStore);
-  private recordsService = inject(RecordsService);
-  private messageService = inject(MessageService);
-  private location = inject(Location);
 
   canDelete = computed(() => {
     return this.authStore.isAuthenticated() && this.record().info?.edit;
@@ -74,30 +67,7 @@ export class RecordDeleteButton extends RecordFieldBase {
     const uuid = this.record().uuid;
     if (!uuid) return;
 
-    this.recordsService.deleteRecord(uuid).subscribe({
-      next: () => {
-        this.displayConfirmation = false;
-        this.messageService.add({
-          severity: 'success',
-          summary: this.translate.instant('success'),
-          detail: this.translate.instant('record.action.deleteSuccess'),
-        });
-        // Navigate away, e.g. to home or search
-        this.displayConfirmation = false;
-        if (window.history.length > 1) {
-          this.location.back();
-        } else {
-          this.router.navigate(['/search']);
-        }
-      },
-      error: (err) => {
-        console.error('Failed to delete record', err);
-        this.messageService.add({
-          severity: 'error',
-          summary: this.translate.instant('error'),
-          detail: this.translate.instant('record.action.deleteError'),
-        });
-      },
-    });
+    this.displayConfirmation = false;
+    this.recordActionService.deleteRecord(uuid).subscribe();
   }
 }
