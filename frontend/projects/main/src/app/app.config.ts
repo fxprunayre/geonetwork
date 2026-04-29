@@ -25,8 +25,8 @@ import {
   DEFAULT_SPACE,
   DEFAULT_THEME,
   getWebComponentAttribute,
-  Gn4AuthenticationService,
   TranslationsLoader,
+  VersionAwareAuthenticationService,
 } from 'gn-library';
 import { Gn4ApiModule, Configuration as Gn4Configuration } from 'gn4-api-client';
 import { provideMarkdown } from 'ngx-markdown';
@@ -108,7 +108,7 @@ export class InMemoryLocationStrategy extends LocationStrategy {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: AuthenticationService, useClass: Gn4AuthenticationService },
+    { provide: AuthenticationService, useClass: VersionAwareAuthenticationService },
     importProvidersFrom([
       GnApiModule.forRoot(() => {
         const apiUrl = getWebComponentAttribute('url') || environment.geonetworkApiUrl;

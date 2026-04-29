@@ -11,6 +11,7 @@ export * from './lib/modules/authentication/pipes/initials.pipe';
 export * from './lib/modules/authentication/pipes/user-full-name.pipe';
 export * from './lib/modules/authentication/sign-in-form/sign-in-form';
 export * from './lib/modules/authentication/user-avatar/user-avatar';
+export * from './lib/modules/authentication/version-aware-authentication.service';
 export * from './lib/modules/catalogue/catalogue-logo/catalogue-logo';
 export * from './lib/modules/config/config-editor';
 export * from './lib/modules/config/config.loader';
