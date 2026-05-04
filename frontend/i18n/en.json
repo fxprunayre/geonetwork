@@ -100,6 +100,7 @@
       "deleteTitle": "Delete this record",
       "edit": "Edit",
       "editTitle": "Edit this record",
+      "externalUrl": "View external resource",
       "importRecord": "Import record",
       "menu": "Quick actions",
       "metadataDownload": "Metadata (XML)",

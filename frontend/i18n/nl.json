@@ -101,6 +101,7 @@
       "deleteTitle": "Delete this record",
       "edit": "Bewerken",
       "editTitle": "Edit record",
+      "externalUrl": "Bekijk externe bron",
       "importRecord": "Record importeren",
       "menu": "Quick actions",
       "metadataDownload": "Metadata (XML)",

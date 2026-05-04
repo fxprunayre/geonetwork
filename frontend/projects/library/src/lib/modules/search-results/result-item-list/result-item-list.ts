@@ -9,6 +9,7 @@ import {
   faSolidDownload,
   faSolidShareNodes,
 } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -34,6 +35,7 @@ import { RECORD_ROUTE_PATH } from '../../search/search-constant';
     RecordFieldType,
     RouterLink,
     SkeletonModule,
+    TranslatePipe,
   ],
   viewProviders: [
     provideIcons({
@@ -49,6 +51,7 @@ import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 export class ResultItemList {
   protected readonly RECORD_ROUTE_PATH = RECORD_ROUTE_PATH;
   result = input<IndexRecord>();
+  layout = input<'default' | 'compact'>('default');
   onRecordClick = output<string>();
 
   externalUrl = computed(() => {

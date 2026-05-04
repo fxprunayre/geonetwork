@@ -1,47 +1,90 @@
+<ng-template #externalUrlIcon>
+  <ng-icon name="faSolidArrowUpRightFromSquare" [title]="'record.action.externalUrl' | translate" />
+</ng-template>
+
 @if (result(); as result) {
   @let description = result.resourceAbstractObject?.['default'] || '';
   <ng-template #content>
-    <div
-      class="w-full aspect-video md:w-1/3 h-64 md:h-54 relative overflow-hidden rounded-t-(--p-border-radius-md) md:rounded-tr-none md:rounded-l-(--p-border-radius-md) md:border-r border-surface-100"
-    >
-      <app-record-field-overview
-        [field]="result.overview?.[0]"
-        [preview]="false"
-        styleClass="absolute inset-0 w-full h-full object-cover rounded-t-(--p-border-radius-md) md:rounded-tr-none md:rounded-l-(--p-border-radius-md)"
-      />
-    </div>
+    @if (layout() === 'compact') {
+      <div
+        class="w-28 md:w-36 h-20 md:h-24 shrink-0 relative overflow-hidden rounded-l-(--p-border-radius-md) border-r border-surface-100"
+      >
+        <app-record-field-overview
+          [field]="result.overview?.[0]"
+          [preview]="false"
+          styleClass="absolute inset-0 w-full h-full object-cover rounded-l-(--p-border-radius-md)"
+        />
+      </div>
 
-    <div class="flex flex-col p-6 justify-start items-start gap-2 w-full">
-      <div class="flex justify-between items-start w-full">
-        <app-record-field-type [record]="result" />
-        <div>
-          <div class="flex gap-3 justify-around">
-            <app-record-distribution-badges
-              [record]="result"
-              [types]="['api', 'download']"
-              [layout]="'badge'"
-            />
+      <div class="flex flex-col p-3 md:p-4 justify-center gap-2 w-full min-w-0">
+        <div class="flex justify-between items-start gap-3 w-full">
+          <app-record-field-title
+            [record]="result"
+            class="text-primary font-semibold text-base md:text-lg line-clamp-1 min-w-0"
+          />
+          <div class="flex gap-2 items-center shrink-0">
+            <app-record-field-type [record]="result" />
             @if (externalUrl()) {
-              <ng-icon name="faSolidArrowUpRightFromSquare" />
+              <ng-container *ngTemplateOutlet="externalUrlIcon" />
             }
           </div>
         </div>
+
+        <div class="flex justify-between items-center gap-2 w-full">
+          <app-record-distribution-badges
+            [record]="result"
+            [types]="['api', 'download']"
+            [layout]="'badge'"
+          />
+          <app-record-field-credit
+            [record]="result"
+            class="font-semibold uppercase text-primary text-xs line-clamp-1 text-right"
+          />
+        </div>
+      </div>
+    } @else {
+      <div
+        class="w-full aspect-video md:w-1/3 h-64 md:h-54 relative overflow-hidden rounded-t-(--p-border-radius-md) md:rounded-tr-none md:rounded-l-(--p-border-radius-md) md:border-r border-surface-100"
+      >
+        <app-record-field-overview
+          [field]="result.overview?.[0]"
+          [preview]="false"
+          styleClass="absolute inset-0 w-full h-full object-cover rounded-t-(--p-border-radius-md) md:rounded-tr-none md:rounded-l-(--p-border-radius-md)"
+        />
       </div>
 
-      <app-record-field-title
-        [record]="result"
-        class="text-primary font-bold text-xl line-clamp-1"
-      />
+      <div class="flex flex-col p-6 justify-start items-start gap-2 w-full">
+        <div class="flex justify-between items-start w-full">
+          <app-record-field-type [record]="result" />
+          <div>
+            <div class="flex gap-3 justify-around">
+              <app-record-distribution-badges
+                [record]="result"
+                [types]="['api', 'download']"
+                [layout]="'badge'"
+              />
+              @if (externalUrl()) {
+                <ng-container *ngTemplateOutlet="externalUrlIcon" />
+              }
+            </div>
+          </div>
+        </div>
 
-      <span class="text-base line-clamp-2 wrap-break-word">
-        {{ description }}
-      </span>
+        <app-record-field-title
+          [record]="result"
+          class="text-primary font-bold text-xl line-clamp-1"
+        />
 
-      <app-record-field-credit
-        [record]="result"
-        class="font-bold uppercase text-primary line-clamp-1"
-      />
-    </div>
+        <span class="text-base line-clamp-2 wrap-break-word">
+          {{ description }}
+        </span>
+
+        <app-record-field-credit
+          [record]="result"
+          class="font-bold uppercase text-primary line-clamp-1"
+        />
+      </div>
+    }
   </ng-template>
 
   @if (externalUrl()) {
@@ -49,8 +92,11 @@
       [attr.href]="externalUrl()"
       [title]="description"
       target="_blank"
-      (click)="handleRecordClick()"
-      class="flex flex-col md:flex-row items-stretch gap-0 cursor-pointer rounded-(--p-border-radius-md) border border-surface-100 transition-shadow hover:shadow-md"
+      [class]="
+        layout() === 'compact'
+          ? 'flex flex-row items-stretch gap-0 cursor-pointer rounded-(--p-border-radius-md) border border-surface-100 transition-shadow hover:shadow-sm'
+          : 'flex flex-col md:flex-row items-stretch gap-0 cursor-pointer rounded-(--p-border-radius-md) border border-surface-100 transition-shadow hover:shadow-md'
+      "
     >
       <ng-container *ngTemplateOutlet="content" />
     </a>
@@ -59,23 +105,42 @@
       [routerLink]="[RECORD_ROUTE_PATH, result.info?._id]"
       [title]="description"
       (click)="handleRecordClick()"
-      class="flex flex-col md:flex-row items-stretch gap-0 cursor-pointer rounded-(--p-border-radius-md) border border-surface-100 transition-shadow hover:shadow-md"
+      [class]="
+        layout() === 'compact'
+          ? 'flex flex-row items-stretch gap-0 cursor-pointer rounded-(--p-border-radius-md) border border-surface-100 transition-shadow hover:shadow-sm'
+          : 'flex flex-col md:flex-row items-stretch gap-0 cursor-pointer rounded-(--p-border-radius-md) border border-surface-100 transition-shadow hover:shadow-md'
+      "
     >
       <ng-container *ngTemplateOutlet="content" />
     </a>
   }
 } @else {
-  <div
-    class="flex flex-col md:flex-row items-center gap-4 rounded-(--p-border-radius-md) p-6 border border-surface-100"
-  >
-    <div class="w-full md:w-1/4 h-60 md:h-54">
-      <p-skeleton size="10rem" class="" />
-    </div>
+  @if (layout() === 'compact') {
+    <div
+      class="flex flex-row items-center gap-4 rounded-(--p-border-radius-md) p-3 border border-surface-100"
+    >
+      <div class="w-28 md:w-36 h-20 md:h-24 shrink-0">
+        <p-skeleton width="100%" height="100%" />
+      </div>
 
-    <div class="flex flex-col justify-start items-start gap-2 w-full">
-      <p-skeleton class="mb-2" />
-      <p-skeleton width="10rem" class="mb-2" />
-      <p-skeleton width="5rem" class="mb-2" />
+      <div class="flex flex-col justify-center items-start gap-2 w-full">
+        <p-skeleton width="18rem" class="max-w-full" />
+        <p-skeleton width="10rem" class="max-w-full" />
+      </div>
     </div>
-  </div>
+  } @else {
+    <div
+      class="flex flex-col md:flex-row items-center gap-4 rounded-(--p-border-radius-md) p-6 border border-surface-100"
+    >
+      <div class="w-full md:w-1/4 h-60 md:h-54">
+        <p-skeleton size="10rem" class="" />
+      </div>
+
+      <div class="flex flex-col justify-start items-start gap-2 w-full">
+        <p-skeleton class="mb-2" />
+        <p-skeleton width="10rem" class="mb-2" />
+        <p-skeleton width="5rem" class="mb-2" />
+      </div>
+    </div>
+  }
 }

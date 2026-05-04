@@ -33,11 +33,21 @@ import { Button } from 'primeng/button';
 import { DataView } from 'primeng/dataview';
 import { Drawer } from 'primeng/drawer';
 import { ResultItemGrid } from '../../search-results/result-item-grid/result-item-grid';
+import { ResultItemList } from '../../search-results/result-item-list/result-item-list';
 import { getAssociationLabel } from '../association-utils';
 
 @Component({
   selector: 'app-associated-records',
-  imports: [Button, DataView, Drawer, NgIcon, NgTemplateOutlet, ResultItemGrid, TranslatePipe],
+  imports: [
+    Button,
+    DataView,
+    Drawer,
+    NgIcon,
+    NgTemplateOutlet,
+    ResultItemGrid,
+    ResultItemList,
+    TranslatePipe,
+  ],
   providers: [
     provideIcons({
       faSolidBook,
@@ -79,7 +89,7 @@ export class AssociatedRecords {
 
   isFullScreen = false;
 
-  pageSize = 3;
+  pageSize = 10;
 
   private siblingParts = computed(() => {
     const t = this.type();
