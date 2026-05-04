@@ -32,22 +32,12 @@ import { IndexRecord } from 'gn-api-client';
 import { Button } from 'primeng/button';
 import { DataView } from 'primeng/dataview';
 import { Drawer } from 'primeng/drawer';
-import { ResultItemGrid } from '../../search-results/result-item-grid/result-item-grid';
 import { ResultItemList } from '../../search-results/result-item-list/result-item-list';
 import { getAssociationLabel } from '../association-utils';
 
 @Component({
   selector: 'app-associated-records',
-  imports: [
-    Button,
-    DataView,
-    Drawer,
-    NgIcon,
-    NgTemplateOutlet,
-    ResultItemGrid,
-    ResultItemList,
-    TranslatePipe,
-  ],
+  imports: [Button, DataView, Drawer, NgIcon, NgTemplateOutlet, ResultItemList, TranslatePipe],
   providers: [
     provideIcons({
       faSolidBook,

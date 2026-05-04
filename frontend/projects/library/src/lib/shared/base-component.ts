@@ -3,13 +3,15 @@ import { ConfigService } from '../modules/config/config-service';
 import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
 
 @Component({
-  selector: 'gc-base-component',
+  selector: 'app-base-component',
   template: '<div></div>',
   providers: [],
 })
 export class BaseComponent extends PrimeShadowdomstyleComponent implements OnInit, OnChanges {
   @Input() url: string = '/geonetwork';
   @Input() space: string = 'srv';
+  @Input() language?: string;
+  @Input() config?: string;
 
   configService = inject(ConfigService);
 
@@ -24,6 +26,12 @@ export class BaseComponent extends PrimeShadowdomstyleComponent implements OnIni
         this.configService.updateConfiguration(this.url, this.space);
       } else if (prop == 'space') {
         this.space = changes['space'].currentValue;
+        this.configService.updateConfiguration(this.url, this.space);
+      } else if (prop == 'language') {
+        this.language = changes['language'].currentValue;
+        this.configService.updateConfiguration(this.url, this.space);
+      } else if (prop == 'config') {
+        this.config = changes['config'].currentValue;
         this.configService.updateConfiguration(this.url, this.space);
       }
     });

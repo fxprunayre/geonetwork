@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { APPLICATION_CONFIGURATION } from './config.loader';
+import { APPLICATION_CONFIGURATION, loadAppConfig } from './config.loader';
 
 import { Configuration as GnConfiguration } from 'gn-api-client';
 import { Configuration as Gn4Configuration } from 'gn4-api-client';
@@ -22,14 +22,17 @@ export class ConfigService {
     console.log('Update config with ', apiUrl, space);
     apiUrl = apiUrl || this.apiConfiguration().catalogueUrl;
     space = space || this.apiConfiguration().space;
-    this.apiConfiguration.set({ ...this.apiConfiguration(), catalogueUrl: apiUrl, space: space });
+
     if (this.gnApiConfig) {
       this.gnApiConfig.basePath = apiUrl;
     }
-
     if (this.gn4ApiConfig) {
       this.gn4ApiConfig.basePath = `${apiUrl}/${space}/api`;
     }
+
+    loadAppConfig({ apiUrl, space }).then((config) => {
+      this.apiConfiguration.set(config);
+    });
   }
 
   /**

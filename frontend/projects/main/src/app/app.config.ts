@@ -25,6 +25,7 @@ import {
   DEFAULT_SPACE,
   DEFAULT_THEME,
   getWebComponentAttribute,
+  iso3ToIso2,
   TranslationsLoader,
   VersionAwareAuthenticationService,
 } from 'gn-library';
@@ -145,7 +146,7 @@ export const appConfig: ApplicationConfig = {
         deps: [HttpBackend],
       },
       fallbackLang: 'en',
-      lang: 'en',
+      lang: iso3ToIso2(getWebComponentAttribute('language') || 'eng'),
     }),
     provideMarkdown(),
   ],

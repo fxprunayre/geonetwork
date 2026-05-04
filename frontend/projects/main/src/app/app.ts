@@ -56,7 +56,9 @@ export class App extends BaseComponent implements OnInit {
 
   searchPageSize = computed(() => this.searchConfig().hitsPerPageOptions[0] || 10);
 
-  language = signal<string | undefined>(DEFAULT_LANGUAGE);
+  searchLanguage = signal<string | undefined>(
+    this.appConfig().config?.apps.i18n?.language || DEFAULT_LANGUAGE,
+  );
 
   constructor() {
     super();
