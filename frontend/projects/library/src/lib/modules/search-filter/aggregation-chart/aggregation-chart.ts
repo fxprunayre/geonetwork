@@ -87,7 +87,9 @@ export class AggregationChart implements OnDestroy {
 
     const activeSet = new Set(this.activeKeys());
     const keys = allBuckets.map((b) => b.key);
-    const labels = allBuckets.map((b) => this.translatePipe.transform(b.key, this.keyName()));
+    const labels = allBuckets.map(
+      (b) => b.displayLabel ?? this.translatePipe.transform(b.key, this.keyName()),
+    );
     const compactLabels = labels.map((l) => this.truncateLabel(String(l), 22));
 
     const primaryColor = this.themeColor('--p-primary-500', '#2563eb');

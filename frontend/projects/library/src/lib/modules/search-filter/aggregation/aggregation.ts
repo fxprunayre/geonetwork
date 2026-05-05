@@ -105,17 +105,55 @@ export class Aggregation extends SearchBase implements OnDestroy {
 
   buckets = computed(() => {
     let buckets = this.aggregationService.getBuckets(this.search.aggregations()[this.keyName()]);
+    const aggregationConfig = this.aggregationService.getAggregationConfig(
+      this.keyName(),
+      this.search.aggregationsConfig(),
+    );
+    const histogramInterval = aggregationConfig?.histogram?.interval;
     if (buckets) {
       return buckets.map((bucket) => {
+        const displayLabel = this.getBucketDisplayLabel(bucket.key, histogramInterval);
         return {
           key: bucket.key,
-          label: `${this.aggregationTranslatePipe.transform(bucket.key, this.keyName())} (${this.decimalPipe.transform(bucket.doc_count, undefined, this.translateService.getCurrentLang())})`,
+          label: `${displayLabel} (${this.decimalPipe.transform(bucket.doc_count, undefined, this.translateService.getCurrentLang())})`,
+          displayLabel,
           doc_count: bucket.doc_count,
         } as AggregationBucketType;
       });
     }
     return [];
   });
+
+  private getBucketDisplayLabel(key: string | number, histogramInterval?: number): string {
+    const numericKey = typeof key === 'number' ? key : Number(key);
+    if (
+      typeof histogramInterval === 'number' &&
+      histogramInterval !== 1 &&
+      Number.isFinite(numericKey)
+    ) {
+      const from = this.formatNumber(numericKey);
+      const to = this.formatNumber(numericKey + histogramInterval);
+      return `${from} - ${to}`;
+    }
+
+    return String(this.aggregationTranslatePipe.transform(key, this.keyName()));
+  }
+
+  private formatNumber(value: number): string {
+    // Keep year values readable (e.g. 2000 instead of 2,000).
+    if (this.isYearAggregation() && Number.isInteger(value)) {
+      return String(value);
+    }
+
+    return (
+      this.decimalPipe.transform(value, undefined, this.translateService.getCurrentLang()) ||
+      String(value)
+    );
+  }
+
+  private isYearAggregation(): boolean {
+    return this.keyName().toLowerCase().includes('year');
+  }
 
   layout = computed(() => {
     const configuredLayout = this.search.aggregations()[this.keyName()]?.meta
