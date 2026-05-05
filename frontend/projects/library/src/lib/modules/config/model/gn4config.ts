@@ -1,4 +1,5 @@
 import { elasticsearch } from 'gn-api-client';
+import { SextantConfig } from './sextantConfig';
 
 export interface UiConfiguration {
   langDetector: LangDetector;
@@ -6,6 +7,7 @@ export interface UiConfiguration {
   serviceDetector: ServiceDetector;
   baseURLDetector: BaseUrldetector;
   mods: Mods;
+  sextant?: SextantConfig;
 }
 
 export interface LangDetector {

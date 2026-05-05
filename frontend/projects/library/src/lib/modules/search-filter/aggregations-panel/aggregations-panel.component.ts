@@ -83,6 +83,10 @@ export class AggregationsPanel extends SearchBase {
     return false;
   };
 
+  getAggregationMetaLabel(key: string): string | null {
+    return this.aggregationService.getAggregationMetaLabel(key, this.search.aggregationsConfig());
+  }
+
   setPanelExpanded(event: AccordionTabOpenEvent) {
     this.updatePanelState(event.index + '', false);
   }

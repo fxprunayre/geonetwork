@@ -1,5 +1,6 @@
 <ng-template #defaultLabelTemplate let-key>
-  @let label = 'search.aggregations.' + key | translate;
+  @let metaLabel = getAggregationMetaLabel(key);
+  @let label = metaLabel ? metaLabel : ('search.aggregations.' + key | translate);
   @if (hasActiveFilter(key)) {
     <p-overlaybadge>
       {{ label }}

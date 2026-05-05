@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { elasticsearch } from 'gn-api-client';
 import { RegistriesService } from 'gn4-api-client';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { DEFAULT_AGGREGATION_SIZE } from '../search/search-store.model';
 
 @Injectable({
@@ -10,6 +11,7 @@ import { DEFAULT_AGGREGATION_SIZE } from '../search/search-store.model';
 export class AggregationService {
   registriesService: RegistriesService = inject(RegistriesService);
   translateService = inject(TranslateService);
+  private readonly appConfiguration = inject(APPLICATION_CONFIGURATION);
 
   /**
    * Interprets aggregation configuration which can be either a string (field name)
@@ -62,6 +64,25 @@ export class AggregationService {
     return undefined;
   }
 
+  getAggregationMetaLabel(
+    key: string,
+    aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
+  ): string | null {
+    const aggregationConfig = this.getAggregationConfig(key, aggregationsConfig) as any;
+    const labels = aggregationConfig?.meta?.labels as Record<string, string> | undefined;
+    if (!labels || Object.keys(labels).length === 0) {
+      return null;
+    }
+
+    const currentLang = this.translateService.getCurrentLang();
+    const configuredLanguages = this.appConfiguration().config?.apps?.i18n?.languages || {};
+    const iso3Lang = Object.keys(configuredLanguages).find(
+      (iso3) => configuredLanguages[iso3] === currentLang,
+    );
+
+    return labels[iso3Lang || ''] || labels[currentLang] || labels[Object.keys(labels)[0]] || null;
+  }
+
   buildAggregationQuery(
     aggregationConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
   ): Record<string, elasticsearch.AggregationsAggregationContainer> {
@@ -98,10 +119,10 @@ export class AggregationService {
           /th_(.*)_tree.*/,
           '$1',
         );
+
       if (!thesaurus) {
         return;
       }
-
       const buckets = this.getBuckets(aggregation);
       if (buckets.length === 0) {
         return;
