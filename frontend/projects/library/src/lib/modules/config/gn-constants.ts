@@ -69,6 +69,48 @@ export const DEFAULT_RECORD_DOWNLOAD_PROTOCOLS = [
   'KML',
 ];
 
+export const RESOURCE_TYPE_AGGREGATION: elasticsearch.AggregationsAggregationContainer = {
+  terms: {
+    field: 'resourceType',
+    size: 10,
+    exclude: 'map/.*|publication-.*',
+  },
+  meta: {
+    collapsed: true,
+    decorator: {
+      type: 'icon',
+      map: {
+        dataset: 'faSolidDatabase',
+        map: 'faSolidMap',
+        featureCatalog: 'faSolidTable',
+        document: 'faSolidCopy',
+        service: 'faSolidCloud',
+        series: 'faSolidCopy',
+        nonGeographicDataset: 'faSolidChartColumn',
+        publication: 'faSolidBook',
+      },
+    },
+  },
+};
+
+export const INSPIRE_AGGREGATION: elasticsearch.AggregationsAggregationContainer = {
+  terms: {
+    field: 'th_httpinspireeceuropaeutheme-theme_tree.key',
+    size: 34,
+    order: { _key: 'asc' },
+  },
+  meta: {
+    collapsed: true,
+    translateOnLoad: true,
+    orderByTranslation: true,
+    decorator: {
+      type: 'icon',
+      prefix: 'iti-',
+      expression: 'http://inspire.ec.europa.eu/theme/(.*)',
+    },
+  },
+};
+
 export const DEFAULT_SEARCH_APP_AGGREGATIONS: (
   | string
   | Record<string, elasticsearch.AggregationsAggregationContainer>
@@ -108,23 +150,7 @@ export const DEFAULT_SEARCH_APP_AGGREGATIONS: (
     },
   },
   {
-    'th_httpinspireeceuropaeutheme-theme_tree.key': {
-      terms: {
-        field: 'th_httpinspireeceuropaeutheme-theme_tree.key',
-        size: 34,
-        order: { _key: 'asc' },
-      },
-      meta: {
-        collapsed: true,
-        translateOnLoad: true,
-        orderByTranslation: true,
-        decorator: {
-          type: 'icon',
-          prefix: 'iti-',
-          expression: 'http://inspire.ec.europa.eu/theme/(.*)',
-        },
-      },
-    },
+    'th_httpinspireeceuropaeutheme-theme_tree.key': INSPIRE_AGGREGATION,
   },
   {
     'tag.default': {
@@ -202,29 +228,7 @@ export const DEFAULT_SEARCH_APP_AGGREGATIONS: (
     },
   },
   {
-    resourceType: {
-      terms: {
-        field: 'resourceType',
-        size: 10,
-        exclude: 'map/.*|publication-.*',
-      },
-      meta: {
-        collapsed: true,
-        decorator: {
-          type: 'icon',
-          map: {
-            dataset: 'faSolidDatabase',
-            map: 'faSolidMap',
-            featureCatalog: 'faSolidTable',
-            document: 'faSolidCopy',
-            service: 'faSolidCloud',
-            series: 'faSolidCopy',
-            nonGeographicDataset: 'faSolidChartColumn',
-            publication: 'faSolidBook',
-          },
-        },
-      },
-    },
+    resourceType: RESOURCE_TYPE_AGGREGATION,
   },
 ];
 

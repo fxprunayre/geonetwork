@@ -11,7 +11,7 @@ import { DEFAULT_AGGREGATION_SIZE } from '../search/search-store.model';
 export class AggregationService {
   registriesService: RegistriesService = inject(RegistriesService);
   translateService = inject(TranslateService);
-  private readonly appConfiguration = inject(APPLICATION_CONFIGURATION);
+  private readonly appConfiguration = inject(APPLICATION_CONFIGURATION, { optional: true });
 
   /**
    * Interprets aggregation configuration which can be either a string (field name)
@@ -75,7 +75,7 @@ export class AggregationService {
     }
 
     const currentLang = this.translateService.getCurrentLang();
-    const configuredLanguages = this.appConfiguration().config?.apps?.i18n?.languages || {};
+    const configuredLanguages = this.appConfiguration?.().config?.apps?.i18n?.languages || {};
     const iso3Lang = Object.keys(configuredLanguages).find(
       (iso3) => configuredLanguages[iso3] === currentLang,
     );

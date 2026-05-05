@@ -67,8 +67,9 @@
         "orderByTranslation": true,
         "filterByTranslation": true,
         "displayFilter": true,
-        "collapsed": false,
-        "layout": "multiselect"
+        "collapsed": true,
+        "layout": "multiselect",
+        "caseInsensitiveInclude": true
       }
     },
     "th_sextant-theme_tree.key": {
@@ -77,14 +78,14 @@
         "size": 300,
         "order": {
           "_key": "asc"
-        }
+        },
+        "include": ".*"
       },
       "meta": {
-        "collapsed": false,
-        "orderByTranslation": true,
-        "translateOnLoad": true,
-        "layout": "tree",
-        "refreshPolicy": "none"
+        "collapsed": true,
+        "displayFilter": true,
+        "filterByTranslation": true,
+        "caseInsensitiveInclude": true
       }
     },
     "th_httpinspireeceuropaeutheme-theme_tree.key": {
@@ -109,61 +110,33 @@
     "tag.default": {
       "terms": {
         "field": "tag.default",
-        "include": ".*",
-        "size": 10
+        "size": 15
       },
       "meta": {
-        "collapsed": true,
-        "caseInsensitiveInclude": true
+        "collapsed": true
+      }
+    },
+    "OrgForResource": {
+      "terms": {
+        "field": "OrgForResource",
+        "include": ".*",
+        "size": 15
+      },
+      "meta": {
+        "caseInsensitiveInclude": true,
+        "collapsed": true
       }
     },
     "creationYearForResource": {
       "terms": {
         "field": "creationYearForResource",
-        "size": 10,
+        "size": 40,
         "order": {
           "_key": "desc"
         }
       },
       "meta": {
-        "collapsed": false
-      }
-    },
-    "OrgForResource": {
-      "terms": {
-        "field": "OrgForResourceObject.default",
-        "include": ".*",
-        "size": 10
-      },
-      "meta": {
-        "collapsed": true,
-        "caseInsensitiveInclude": true
-      }
-    },
-    "availableInServices": {
-      "filters": {
-        "filters": {
-          "availableInViewService": {
-            "query_string": {
-              "query": "+linkProtocol:/OGC:WMS|OGC:OWS-C|OGC Web Map Service|OGC:WMTS|ESRI:REST/"
-            }
-          },
-          "availableInDownloadService": {
-            "query_string": {
-              "query": "+linkProtocol:/WWW:DOWNLOAD|WWW:DOWNLOAD.*|WWW:OPENDAP|WWW:FTP|OGC:WFS|OGC Web Feature Service|OGC:WCS|MYO:MOTU-SUB|FILE|COPYFILE|DB|KML/"
-            }
-          }
-        }
-      },
-      "meta": {
-        "collapsed": true,
-        "decorator": {
-          "type": "icon",
-          "map": {
-            "availableInViewService": "faSolidMap",
-            "availableInDownloadService": "faSolidCloudArrowDown"
-          }
-        }
+        "collapsed": true
       }
     },
     "resourceType": {
@@ -187,6 +160,25 @@
             "publication": "faSolidBook"
           }
         }
+      }
+    },
+    "availableInServices": {
+      "filters": {
+        "filters": {
+          "availableInViewService": {
+            "query_string": {
+              "query": "+linkProtocol:/OGC:WMS|OGC:OWS-C|OGC Web Map Service|OGC:WMTS|ESRI:REST/"
+            }
+          },
+          "availableInDownloadService": {
+            "query_string": {
+              "query": "+linkProtocol:/WWW:DOWNLOAD|WWW:DOWNLOAD.*|WWW:OPENDAP|WWW:FTP|OGC:WFS|OGC Web Feature Service|OGC:WCS|MYO:MOTU-SUB|FILE|COPYFILE|DB|KML/"
+            }
+          }
+        }
+      },
+      "meta": {
+        "collapsed": true
       }
     }
   }

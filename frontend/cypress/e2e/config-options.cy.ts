@@ -5,6 +5,9 @@ describe('Application config options', () => {
     // Provide a mocked UI config that disables home, search, map, and signin
     cy.fixture('home-api-ui-srv.json').then((fixture) => {
       const config = JSON.parse(fixture.configuration);
+
+      if (!config.mods) config.mods = {};
+
       if (!config.mods.home) config.mods.home = {};
       config.mods.home.enabled = false;
 

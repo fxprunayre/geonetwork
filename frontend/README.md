@@ -110,6 +110,16 @@ npm run e2e:ci
 
 E2E tests are running with live version of the catalogue with some static [fixtures](cypress/fixtures/).
 
+To update static fixtures use (eg. when changing aggregations config): 
+
+```bash
+cd cypress/fixtures
+./fixtures-from-requests.sh
+```
+
+To configure Cypress see [configuration file](cypress.config.ts).
+
+
 ### Configuring catalogue API endpoint
 
 In [`proxy.config.js`](proxy.config.js), update or change API endpoint eg.

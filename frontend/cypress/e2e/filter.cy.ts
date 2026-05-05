@@ -43,7 +43,7 @@ describe('Search', () => {
 
   it('should clear filters on reset', () => {
     cy.wait('@apiMainSearch');
-    cy.get('app-search-header app-aggregation app-aggregation-bucket button')
+    cy.get('app-results-info app-aggregation app-aggregation-bucket button')
       .first()
       .then((button) => {
         cy.wrap(button).click();
@@ -55,7 +55,7 @@ describe('Search', () => {
       });
   });
 
-  it('should open filter panel when filter button is clicked', () => {
+  it('should open side filter panel when filter button is clicked', () => {
     cy.get('app-aggregations-panel').closest('.sticky').should('have.class', 'sm:opacity-0');
     cy.get('app-search-active-filters-button p-button').first().click();
     cy.get('app-aggregations-panel').closest('.sticky').should('have.class', 'sm:opacity-100');
@@ -66,17 +66,17 @@ describe('Search', () => {
     cy.wait('@apiMainSearch').then((search) => {
       const aggregations = search.response?.body.aggregations;
       const aggregationKeys = Object.keys(aggregations);
-      // FIXME: resourceType is displayed as top-level aggregation, so it is not in the panel
+      // resourceType is displayed as top-level aggregation, so it is not in the side panel
       cy.get('app-aggregations-panel app-aggregation').should(
         'have.length',
-        aggregationKeys.length,
+        aggregationKeys.length - 1,
       );
     });
   });
 
-  it('should search when button aggregation is clicked', () => {
+  it('should search when button aggregation is clicked and display badge on active filters button', () => {
     cy.wait('@apiMainSearch');
-    cy.get('app-search-header app-aggregation app-aggregation-bucket button')
+    cy.get('app-results-info app-aggregation app-aggregation-bucket button')
       .first()
       .then((button) => {
         const bucketText = button.text();
@@ -99,11 +99,16 @@ describe('Search', () => {
     )
       .first()
       .then((checkbox) => {
-        cy.wrap(checkbox).parent().parent().invoke('text').should('match', AGGREGATION_LABEL_REGEX);
-        cy.wrap(checkbox).click({ force: true });
+        cy.wrap(checkbox)
+          .as('checkbox')
+          .parent()
+          .parent()
+          .invoke('text')
+          .should('match', AGGREGATION_LABEL_REGEX);
+        cy.get('@checkbox').click({ force: true });
         cy.wait('@unmatchedSearchRequest');
 
-        cy.wrap(checkbox)
+        cy.get('@checkbox')
           .parents('p-accordion-panel')
           .find('p-accordion-header p-overlaybadge')
           .should('exist');

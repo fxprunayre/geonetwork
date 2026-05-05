@@ -1,6 +1,4 @@
-import { Location } from '@angular/common';
 import { Component, computed, effect, ElementRef, inject, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import {
   faSolidEllipsisVertical,
@@ -11,7 +9,7 @@ import {
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { RecordsService } from 'gn4-api-client';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 
 import { MenubarModule } from 'primeng/menubar';
 import { DeleteConfirmationDialog } from '../../../shared/widgets/delete-confirmation-dialog/delete-confirmation-dialog';
@@ -45,9 +43,6 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
   private readonly elementRef = inject(ElementRef);
   private readonly iconStyleService = inject(IconStyleService);
   private authStore = inject(AuthStore);
-  private router = inject(Router);
-  private messageService = inject(MessageService);
-  private location = inject(Location);
   private gn4UrlService = inject(Gn4UrlService);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);

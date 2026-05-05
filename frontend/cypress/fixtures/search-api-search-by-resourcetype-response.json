@@ -1,5 +1,5 @@
 {
-  "took": 94,
+  "took": 32,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,23 +9,24 @@
   },
   "hits": {
     "total": {
-      "value": 10852,
+      "value": 10972,
       "relation": "eq"
     },
     "max_score": null,
     "hits": [
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "cf5048f6-5bbf-4e44-ba74-e6f429af51ea",
         "_score": null,
         "_ignored": [
-          "link.applicationProfile.keyword",
           "resourceAbstractObject.default.keyword",
+          "resourceAbstractObject.langfre.keyword",
+          "overview.data.keyword",
           "resourceAbstractObject.default.sort",
-          "resourceAbstractObject.langfre.keyword"
+          "link.applicationProfile.keyword"
         ],
         "_source": {
-          "dateStamp": "2026-04-08T14:15:19.55817Z",
+          "dateStamp": "2026-04-23T11:47:07.590317Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
@@ -267,7 +268,7 @@
           "isHarvested": "false",
           "overview": [
             {
-              "data": "",
+              "data": "data:image/png;base64, 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",
               "nameObject": {
                 "default": "parametres.gif",
                 "langfre": "parametres.gif"
@@ -276,7 +277,7 @@
             }
           ]
         },
-        "sort": [22085],
+        "sort": [22949],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -289,12 +290,12 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "d089a801-c853-49bd-9064-dde5808ff8d8",
         "_score": null,
         "_ignored": [
-          "link.descriptionObject.default.keyword",
-          "link.descriptionObject.langeng.keyword"
+          "link.descriptionObject.langeng.keyword",
+          "link.descriptionObject.default.keyword"
         ],
         "_source": {
           "dateStamp": "2025-10-31T09:31:31.67711Z",
@@ -454,7 +455,7 @@
             }
           ]
         },
-        "sort": [9762],
+        "sort": [10665],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -467,7 +468,7 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "64bfb689-43fa-4c5e-85b9-ad80df7b4fe1",
         "_score": null,
         "_source": {
@@ -723,25 +724,26 @@
           "groupOwner": "60",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
           "op0": [
-            "174375699",
             "1",
             "4",
             "41",
-            "60",
             "100",
             "1571242",
             "109",
+            "335589495",
             "82",
             "81040752",
             "45047740",
+            "174375699",
             "334288365",
-            "334291911"
+            "334291911",
+            "60"
           ],
           "op2": "60",
-          "op1": ["1", "41", "60", "109", "82", "334288365", "334291911", "334590726"],
+          "op1": ["1", "41", "109", "82", "334288365", "334291911", "334590726", "60"],
           "documentStandard": "iso19115-3.2018",
           "op3": "60",
-          "op5": ["1", "41", "60", "109", "82", "334288365", "334291911", "334590726"],
+          "op5": ["1", "41", "109", "82", "334288365", "334291911", "334590726", "60"],
           "valid": "0",
           "isTemplate": "n",
           "rating": "0",
@@ -753,7 +755,7 @@
             }
           ]
         },
-        "sort": [9004],
+        "sort": [9592],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -766,7 +768,7 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "59ab5f6f-79ea-425d-830e-be5ecdb7bdbe",
         "_score": null,
         "_source": {
@@ -877,7 +879,7 @@
             }
           ]
         },
-        "sort": [8146],
+        "sort": [9017],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -890,7 +892,7 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "ff8d8cd6-c753-4581-99a3-af23fe4c996b",
         "_score": null,
         "_source": {
@@ -1144,7 +1146,7 @@
             }
           ]
         },
-        "sort": [7484],
+        "sort": [7664],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -1157,11 +1159,11 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "a96b7ba0-a1bc-11dd-9201-000086f6a62e",
         "_score": null,
         "_source": {
-          "dateStamp": "2026-04-14T12:58:55.028587Z",
+          "dateStamp": "2026-01-30T10:25:08.502361Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
@@ -1296,12 +1298,13 @@
           "id": "596",
           "owner": "13",
           "groupOwner": "4",
-          "op0": ["1", "20", "21", "334291911", "334568939", "334569090", "82"],
+          "logo": "/images/logos/ifremer.png",
+          "op0": ["1", "20", "21", "334291911", "334568939", "334569090", "174375699", "82"],
           "op2": ["20", "21", "334568939"],
           "op1": ["1", "20", "21", "334291911", "334568939", "334569090", "82"],
           "documentStandard": "iso19115-3.2018",
           "op5": ["1", "20", "21", "334291911", "334568939", "334569090", "82"],
-          "valid": "1",
+          "valid": "0",
           "isTemplate": "n",
           "rating": "0",
           "isHarvested": "false",
@@ -1317,7 +1320,7 @@
             }
           ]
         },
-        "sort": [6944],
+        "sort": [7275],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -1330,15 +1333,171 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
+        "_id": "50b53ab1-fe74-453e-91c4-77eb49d2ef37",
+        "_score": null,
+        "_source": {
+          "dateStamp": "2025-05-15T22:22:18.438702Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Epaves et obstructions répertoriées par le SHOM",
+            "langfre": "Epaves et obstructions répertoriées par le SHOM"
+          },
+          "resourceAbstractObject": {
+            "default": "La base de données du SHOM contient environ 5400 épaves et 2600 obstructions réparties sur les côtes de France métropolitaine et d'outre-mer. Outre la position géographique, toutes les caractéristiques connues de l'épave ou de l'obstruction sont renseignées : son état, son nom, sa nationalité, la date et les circonstances du naufrage... La base de données des épaves et des obstructions a pour vocation principale de contribuer à la sécurité nautique, mais une épave est un\ncentre d’intérêt à divers égards : richesse de la vie sous-marine, étude des habitats marins, archéologie, histoire des naufrages, danger de croche pour le chalutage ou le dragage...",
+            "langfre": "La base de données du SHOM contient environ 5400 épaves et 2600 obstructions réparties sur les côtes de France métropolitaine et d'outre-mer. Outre la position géographique, toutes les caractéristiques connues de l'épave ou de l'obstruction sont renseignées : son état, son nom, sa nationalité, la date et les circonstances du naufrage... La base de données des épaves et des obstructions a pour vocation principale de contribuer à la sécurité nautique, mais une épave est un\ncentre d’intérêt à divers égards : richesse de la vie sous-marine, étude des habitats marins, archéologie, histoire des naufrages, danger de croche pour le chalutage ou le dragage..."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "©SHOM",
+              "langfre": "©SHOM"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-180.0, -90.0],
+                  [180.0, -90.0],
+                  [180.0, 90.0],
+                  [-180.0, 90.0],
+                  [-180.0, -90.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://data.shom.fr",
+                "langfre": "http://data.shom.fr"
+              },
+              "nameObject": {
+                "default": "Portail d'information géographique du SHOM",
+                "langfre": "Portail d'information géographique du SHOM"
+              },
+              "descriptionObject": {
+                "default": "Portail d'information géographique du SHOM",
+                "langfre": "Portail d'information géographique du SHOM"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://diffusion.shom.fr/produits/bd-maritime-et-littoral/epaves.html",
+                "langfre": "http://diffusion.shom.fr/produits/bd-maritime-et-littoral/epaves.html"
+              },
+              "nameObject": {
+                "default": "Espace de diffusion du SHOM",
+                "langfre": "Espace de diffusion du SHOM"
+              },
+              "descriptionObject": {
+                "default": "Espace de diffusion du SHOM",
+                "langfre": "Espace de diffusion du SHOM"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "nameObject": {
+                "default": "EPAVES_PYR-PNG_WLD_3857_WMSR",
+                "langfre": "EPAVES_PYR-PNG_WLD_3857_WMSR"
+              },
+              "descriptionObject": {
+                "default": "Épaves et obstructions",
+                "langfre": "Épaves et obstructions"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "nameObject": {
+                "default": "Prepackage_EPAVES_PACK",
+                "langfre": "Prepackage_EPAVES_PACK"
+              },
+              "descriptionObject": {
+                "default": "Accès sécurisé",
+                "langfre": "Accès sécurisé"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "nameObject": {
+                "default": "EPAVES_BDD_WLD_WGS84G_WMS",
+                "langfre": "EPAVES_BDD_WLD_WGS84G_WMS"
+              },
+              "descriptionObject": {
+                "default": "Epaves et obstructions (avec attributs)",
+                "langfre": "Epaves et obstructions (avec attributs)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            }
+          ],
+          "uuid": "50b53ab1-fe74-453e-91c4-77eb49d2ef37",
+          "draft": "n",
+          "id": "191997580",
+          "owner": "13",
+          "groupOwner": "181712109",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "181712109"],
+          "op2": "181712109",
+          "op1": "181712109",
+          "documentStandard": "iso19115-3.2018",
+          "op3": "181712109",
+          "op5": "181712109",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/50b53ab1-fe74-453e-91c4-77eb49d2ef37/attachments/Epaves.png"
+            }
+          ]
+        },
+        "sort": [7131],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": false,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
         "_id": "01051510-a178-11dc-8c36-000086f6a62e",
         "_score": null,
         "_ignored": [
-          "processSteps.descriptionObject.default.keyword",
-          "processSteps.descriptionObject.langfre.keyword",
           "supplementalInformationObject.default.keyword",
+          "supplementalInformationObject.langfre.keyword",
           "supplementalInformationObject.default.sort",
-          "supplementalInformationObject.langfre.keyword"
+          "processSteps.descriptionObject.langfre.keyword",
+          "processSteps.descriptionObject.default.keyword"
         ],
         "_source": {
           "dateStamp": "2025-05-15T21:11:03.156052Z",
@@ -1544,6 +1703,7 @@
           "id": "189",
           "owner": "13",
           "groupOwner": "4",
+          "logo": "/images/logos/rebent.png",
           "op0": ["1", "4", "12", "58", "82", "334291911"],
           "op2": "12",
           "op1": ["1", "4", "12", "58", "82", "334291911"],
@@ -1560,7 +1720,7 @@
             }
           ]
         },
-        "sort": [6767],
+        "sort": [6759],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -1573,163 +1733,7 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
-        "_id": "50b53ab1-fe74-453e-91c4-77eb49d2ef37",
-        "_score": null,
-        "_source": {
-          "dateStamp": "2025-05-15T22:22:18.438702Z",
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Epaves et obstructions répertoriées par le SHOM",
-            "langfre": "Epaves et obstructions répertoriées par le SHOM"
-          },
-          "resourceAbstractObject": {
-            "default": "La base de données du SHOM contient environ 5400 épaves et 2600 obstructions réparties sur les côtes de France métropolitaine et d'outre-mer. Outre la position géographique, toutes les caractéristiques connues de l'épave ou de l'obstruction sont renseignées : son état, son nom, sa nationalité, la date et les circonstances du naufrage... La base de données des épaves et des obstructions a pour vocation principale de contribuer à la sécurité nautique, mais une épave est un\ncentre d’intérêt à divers égards : richesse de la vie sous-marine, étude des habitats marins, archéologie, histoire des naufrages, danger de croche pour le chalutage ou le dragage...",
-            "langfre": "La base de données du SHOM contient environ 5400 épaves et 2600 obstructions réparties sur les côtes de France métropolitaine et d'outre-mer. Outre la position géographique, toutes les caractéristiques connues de l'épave ou de l'obstruction sont renseignées : son état, son nom, sa nationalité, la date et les circonstances du naufrage... La base de données des épaves et des obstructions a pour vocation principale de contribuer à la sécurité nautique, mais une épave est un\ncentre d’intérêt à divers égards : richesse de la vie sous-marine, étude des habitats marins, archéologie, histoire des naufrages, danger de croche pour le chalutage ou le dragage..."
-          },
-          "resourceCreditObject": [
-            {
-              "default": "©SHOM",
-              "langfre": "©SHOM"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-180.0, -90.0],
-                  [180.0, -90.0],
-                  [180.0, 90.0],
-                  [-180.0, 90.0],
-                  [-180.0, -90.0]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://data.shom.fr",
-                "langfre": "http://data.shom.fr"
-              },
-              "nameObject": {
-                "default": "Portail d'information géographique du SHOM",
-                "langfre": "Portail d'information géographique du SHOM"
-              },
-              "descriptionObject": {
-                "default": "Portail d'information géographique du SHOM",
-                "langfre": "Portail d'information géographique du SHOM"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://diffusion.shom.fr/produits/bd-maritime-et-littoral/epaves.html",
-                "langfre": "http://diffusion.shom.fr/produits/bd-maritime-et-littoral/epaves.html"
-              },
-              "nameObject": {
-                "default": "Espace de diffusion du SHOM",
-                "langfre": "Espace de diffusion du SHOM"
-              },
-              "descriptionObject": {
-                "default": "Espace de diffusion du SHOM",
-                "langfre": "Espace de diffusion du SHOM"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "nameObject": {
-                "default": "EPAVES_PYR-PNG_WLD_3857_WMSR",
-                "langfre": "EPAVES_PYR-PNG_WLD_3857_WMSR"
-              },
-              "descriptionObject": {
-                "default": "Épaves et obstructions",
-                "langfre": "Épaves et obstructions"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "nameObject": {
-                "default": "Prepackage_EPAVES_PACK",
-                "langfre": "Prepackage_EPAVES_PACK"
-              },
-              "descriptionObject": {
-                "default": "Accès sécurisé",
-                "langfre": "Accès sécurisé"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "nameObject": {
-                "default": "EPAVES_BDD_WLD_WGS84G_WMS",
-                "langfre": "EPAVES_BDD_WLD_WGS84G_WMS"
-              },
-              "descriptionObject": {
-                "default": "Epaves et obstructions (avec attributs)",
-                "langfre": "Epaves et obstructions (avec attributs)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            }
-          ],
-          "uuid": "50b53ab1-fe74-453e-91c4-77eb49d2ef37",
-          "draft": "n",
-          "id": "191997580",
-          "owner": "13",
-          "groupOwner": "181712109",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "181712109"],
-          "op2": "181712109",
-          "op1": "181712109",
-          "documentStandard": "iso19115-3.2018",
-          "op3": "181712109",
-          "op5": "181712109",
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/50b53ab1-fe74-453e-91c4-77eb49d2ef37/attachments/Epaves.png"
-            }
-          ]
-        },
-        "sort": [6519],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": false,
-        "dynamic": false,
-        "featured": false,
-        "guestdownload": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "5924fa10-ac45-11de-8853-000086f6a603",
         "_score": null,
         "_source": {
@@ -2297,6 +2301,7 @@
           "id": "898",
           "owner": "268",
           "groupOwner": "21",
+          "logo": "/images/logos/ifremer.png",
           "op0": ["1", "58", "88", "82", "15", "334291911", "21"],
           "op2": "21",
           "op1": ["1", "82", "15", "334291911", "21"],
@@ -2313,7 +2318,7 @@
             }
           ]
         },
-        "sort": [6478],
+        "sort": [6711],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -2326,7 +2331,7 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "c13e50de-47c6-4b44-b641-09775c70330c",
         "_score": null,
         "_source": {
@@ -2410,7 +2415,7 @@
           "owner": "13",
           "groupOwner": "73",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "41", "100", "119", "73", "334288365", "334291911"],
+          "op0": ["1", "41", "100", "119", "73", "334288365", "334291911", "174375699"],
           "op2": "60",
           "op1": ["100", "119", "73"],
           "documentStandard": "iso19115-3.2018",
@@ -2426,7 +2431,7 @@
             }
           ]
         },
-        "sort": [5946],
+        "sort": [6280],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -2440,7 +2445,7 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "f4968943-ad6f-4563-a737-58fe3285fb3c",
         "_score": null,
         "_source": {
@@ -2702,7 +2707,7 @@
             }
           ]
         },
-        "sort": [5918],
+        "sort": [6102],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -2715,7 +2720,7 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "18ff0d48-b203-4a65-94a9-5fd8b0ec35f6",
         "_score": null,
         "_ignored": [
@@ -2955,7 +2960,7 @@
             }
           ]
         },
-        "sort": [5534],
+        "sort": [5749],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -2968,7 +2973,7 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "af599f42-2770-4d6d-8209-13f40e2c292f",
         "_score": null,
         "_source": {
@@ -3077,7 +3082,7 @@
             }
           ]
         },
-        "sort": [5208],
+        "sort": [5743],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -3090,7 +3095,161 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
+        "_id": "8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca",
+        "_score": null,
+        "_source": {
+          "dateStamp": "2025-05-15T23:18:32.427849Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Cartes de répartition des couvertures de Sargasses dérivées de MODIS sur l'Atlantique",
+            "langfre": "Cartes de répartition des couvertures de Sargasses dérivées de MODIS sur l'Atlantique",
+            "langeng": "SAREDA MODIS-derived daily gridded Sargassum area coverage over the Atlantic"
+          },
+          "resourceAbstractObject": {
+            "default": "Cartes journalières de distribution des couvertures de Sargasses dérivées des observations MODIS-Terra et MODIS-Aqua sur l'océan Atlantique, calculées avec l'algorithme SAREDA (SArgassum Evolving Distribution in the Atlantic) basé sur l'indice AFAI (Alternative Floating Algae Index).",
+            "langfre": "Cartes journalières de distribution des couvertures de Sargasses dérivées des observations MODIS-Terra et MODIS-Aqua sur l'océan Atlantique, calculées avec l'algorithme SAREDA (SArgassum Evolving Distribution in the Atlantic) basé sur l'indice AFAI (Alternative Floating Algae Index).",
+            "langeng": "Daily gridded Sargassum area coverage derived from MODIS Terra and Aqua observations over the Atlantic, produced with the AFAI (Alternative Floating Algae Index)-based SAREDA (SArgassum Evolving Distribution in the Atlantic) algorithm."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "AERIS/ICARE - CNES/TOSCA",
+              "langfre": "AERIS/ICARE - CNES/TOSCA",
+              "langeng": "AERIS/ICARE - CNES/TOSCA"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-100.0, -15.0],
+                  [15.0, -15.0],
+                  [15.0, 50.0],
+                  [-100.0, 50.0],
+                  [-100.0, -15.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.12770/8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca",
+                "langfre": "https://doi.org/10.12770/8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca"
+              },
+              "nameObject": {
+                "default": "DOI du jeu de données Sargasses",
+                "langfre": "DOI du jeu de données Sargasses"
+              },
+              "descriptionObject": {
+                "default": "DOI du jeu de données Sargasses",
+                "langfre": "DOI du jeu de données Sargasses",
+                "langeng": "DOI of the dataset Sargassum"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MOD-AFAI-D3.v1.21/",
+                "langfre": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MOD-AFAI-D3.v1.21/"
+              },
+              "nameObject": {
+                "default": "SAREDA products - MODIS Terra via https",
+                "langfre": "SAREDA products - MODIS Terra via https"
+              },
+              "descriptionObject": {
+                "default": "SAREDA products - MODIS Terra via https",
+                "langfre": "SAREDA products - MODIS Terra via https",
+                "langeng": "SAREDA products - MODIS Terra via https"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MYD-AFAI-D3.v1.21/",
+                "langfre": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MYD-AFAI-D3.v1.21/"
+              },
+              "nameObject": {
+                "default": "SAREDA products - MODIS Aqua via https",
+                "langfre": "SAREDA products - MODIS Aqua via https"
+              },
+              "descriptionObject": {
+                "default": "SAREDA products - MODIS Aqua via https",
+                "langfre": "SAREDA products - MODIS Aqua via https",
+                "langeng": "SAREDA products - MODIS Aqua via https"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MCD-AFAI-D3.v1.21/",
+                "langfre": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MCD-AFAI-D3.v1.21/"
+              },
+              "nameObject": {
+                "default": "SAREDA products - MODIS Aqua + Terra via https",
+                "langfre": "SAREDA products - MODIS Aqua + Terra via https"
+              },
+              "descriptionObject": {
+                "default": "SAREDA products - MODIS Aqua + Terra via https",
+                "langfre": "SAREDA products - MODIS Aqua + Terra via https",
+                "langeng": "SAREDA products - MODIS Aqua + Terra via https"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca",
+          "draft": "n",
+          "id": "335060486",
+          "owner": "279864374",
+          "groupOwner": "174375699",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["174375699", "1"],
+          "op2": "174375699",
+          "op1": "1",
+          "documentStandard": "iso19115-3.2018",
+          "op5": "1",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca/attachments/Sargasses_AFAI_MODIS_202006.png"
+            }
+          ]
+        },
+        "sort": [5464],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
         "_id": "bb6a87dd-e579-4036-abe1-e649cea9881a",
         "_score": null,
         "_ignored": [
@@ -3330,7 +3489,7 @@
             }
           ]
         },
-        "sort": [5184],
+        "sort": [5420],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -3343,166 +3502,12 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
-        "_id": "8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca",
-        "_score": null,
-        "_source": {
-          "dateStamp": "2025-05-15T23:18:32.427849Z",
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Cartes de répartition des couvertures de Sargasses dérivées de MODIS sur l'Atlantique",
-            "langfre": "Cartes de répartition des couvertures de Sargasses dérivées de MODIS sur l'Atlantique",
-            "langeng": "SAREDA MODIS-derived daily gridded Sargassum area coverage over the Atlantic"
-          },
-          "resourceAbstractObject": {
-            "default": "Cartes journalières de distribution des couvertures de Sargasses dérivées des observations MODIS-Terra et MODIS-Aqua sur l'océan Atlantique, calculées avec l'algorithme SAREDA (SArgassum Evolving Distribution in the Atlantic) basé sur l'indice AFAI (Alternative Floating Algae Index).",
-            "langfre": "Cartes journalières de distribution des couvertures de Sargasses dérivées des observations MODIS-Terra et MODIS-Aqua sur l'océan Atlantique, calculées avec l'algorithme SAREDA (SArgassum Evolving Distribution in the Atlantic) basé sur l'indice AFAI (Alternative Floating Algae Index).",
-            "langeng": "Daily gridded Sargassum area coverage derived from MODIS Terra and Aqua observations over the Atlantic, produced with the AFAI (Alternative Floating Algae Index)-based SAREDA (SArgassum Evolving Distribution in the Atlantic) algorithm."
-          },
-          "resourceCreditObject": [
-            {
-              "default": "AERIS/ICARE - CNES/TOSCA",
-              "langfre": "AERIS/ICARE - CNES/TOSCA",
-              "langeng": "AERIS/ICARE - CNES/TOSCA"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-100.0, -15.0],
-                  [15.0, -15.0],
-                  [15.0, 50.0],
-                  [-100.0, 50.0],
-                  [-100.0, -15.0]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "DOI",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.12770/8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca",
-                "langfre": "https://doi.org/10.12770/8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca"
-              },
-              "nameObject": {
-                "default": "DOI du jeu de données Sargasses",
-                "langfre": "DOI du jeu de données Sargasses"
-              },
-              "descriptionObject": {
-                "default": "DOI du jeu de données Sargasses",
-                "langfre": "DOI du jeu de données Sargasses",
-                "langeng": "DOI of the dataset Sargassum"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MOD-AFAI-D3.v1.21/",
-                "langfre": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MOD-AFAI-D3.v1.21/"
-              },
-              "nameObject": {
-                "default": "SAREDA products - MODIS Terra via https",
-                "langfre": "SAREDA products - MODIS Terra via https"
-              },
-              "descriptionObject": {
-                "default": "SAREDA products - MODIS Terra via https",
-                "langfre": "SAREDA products - MODIS Terra via https",
-                "langeng": "SAREDA products - MODIS Terra via https"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MYD-AFAI-D3.v1.21/",
-                "langfre": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MYD-AFAI-D3.v1.21/"
-              },
-              "nameObject": {
-                "default": "SAREDA products - MODIS Aqua via https",
-                "langfre": "SAREDA products - MODIS Aqua via https"
-              },
-              "descriptionObject": {
-                "default": "SAREDA products - MODIS Aqua via https",
-                "langfre": "SAREDA products - MODIS Aqua via https",
-                "langeng": "SAREDA products - MODIS Aqua via https"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MCD-AFAI-D3.v1.21/",
-                "langfre": "https://www.icare.univ-lille.fr/asd-content/archive/?dir=MODIS/MCD-AFAI-D3.v1.21/"
-              },
-              "nameObject": {
-                "default": "SAREDA products - MODIS Aqua + Terra via https",
-                "langfre": "SAREDA products - MODIS Aqua + Terra via https"
-              },
-              "descriptionObject": {
-                "default": "SAREDA products - MODIS Aqua + Terra via https",
-                "langfre": "SAREDA products - MODIS Aqua + Terra via https",
-                "langeng": "SAREDA products - MODIS Aqua + Terra via https"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca",
-          "draft": "n",
-          "id": "335060486",
-          "owner": "279864374",
-          "groupOwner": "174375699",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["174375699", "1"],
-          "op2": "174375699",
-          "op1": "1",
-          "documentStandard": "iso19115-3.2018",
-          "op5": "1",
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/8fe1cdcb-f4ea-4c81-8543-50f0b39b4eca/attachments/Sargasses_AFAI_MODIS_202006.png"
-            }
-          ]
-        },
-        "sort": [5133],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "9352f74a-7ecb-485e-8ea3-9aa91001b9a1",
         "_score": null,
         "_ignored": [
-          "lineageObject.default.keyword",
           "lineageObject.default.sort",
+          "lineageObject.default.keyword",
           "lineageObject.langfre.keyword"
         ],
         "_source": {
@@ -3598,6 +3603,7 @@
           "groupOwner": "181712109",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
           "op0": [
+            "174375699",
             "335589512",
             "1",
             "83",
@@ -3624,7 +3630,7 @@
             }
           ]
         },
-        "sort": [5087],
+        "sort": [5347],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -3637,7 +3643,7 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
         "_id": "m_FRA-LIENSs-R1808-1",
         "_score": null,
         "_source": {
@@ -3693,7 +3699,7 @@
             }
           ]
         },
-        "sort": [4864],
+        "sort": [5154],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -3707,15 +3713,162 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
+        "_index": "geo-records",
+        "_id": "6a84a633-8ea3-4b65-bd52-6bf117ee7729",
+        "_score": null,
+        "_source": {
+          "dateStamp": "2025-05-15T22:45:20.738398Z",
+          "resourceType": ["dataset"],
+          "resourceTitleObject": {
+            "default": "Cartographie (polygones sources) multisource des habitats benthiques de France métropolitaine, typologie Eunis",
+            "langfre": "Cartographie (polygones sources) multisource des habitats benthiques de France métropolitaine, typologie Eunis"
+          },
+          "resourceAbstractObject": {
+            "default": "La carte de synthèse des habitats benthiques est produite pour répondre aux besoins d’analyse des risques d’effets concomitants du projet Carpediem mené par l'AFB sur la période 2016-2018. Elle répond au cahier des charges suivant :\n- Couvrir l’ensemble des eaux françaises métropolitaines en intégrant les données existantes et accessibles, notamment des sources de données locales et régionales ;\n- Utiliser la typologie européenne Eunis ;\n- Intégrer, partout ou cela est possible les données sources permettant de cartographier les habitats benthiques au niveau Eunis 4 minimum ;\n- Intégrer, partout ou cela est possible les données les plus récentes et apportant la meilleure résolution spatiale ;\n- Intégrer un indice de confiance permettant de qualifier la qualité des données sources.",
+            "langfre": "La carte de synthèse des habitats benthiques est produite pour répondre aux besoins d’analyse des risques d’effets concomitants du projet Carpediem mené par l'AFB sur la période 2016-2018. Elle répond au cahier des charges suivant :\n- Couvrir l’ensemble des eaux françaises métropolitaines en intégrant les données existantes et accessibles, notamment des sources de données locales et régionales ;\n- Utiliser la typologie européenne Eunis ;\n- Intégrer, partout ou cela est possible les données sources permettant de cartographier les habitats benthiques au niveau Eunis 4 minimum ;\n- Intégrer, partout ou cela est possible les données les plus récentes et apportant la meilleure résolution spatiale ;\n- Intégrer un indice de confiance permettant de qualifier la qualité des données sources."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "OFB, projet Carpediem",
+              "langfre": "OFB, projet Carpediem"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-10.0, 41.0],
+                  [10.0, 41.0],
+                  [10.0, 52.0],
+                  [-10.0, 52.0],
+                  [-10.0, 41.0]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/carpediem",
+                "langfre": "https://sextant.ifremer.fr/services/wms/carpediem"
+              },
+              "nameObject": {
+                "default": "source_habitats_benthiques_carpediem_v16_fr00_2019",
+                "langfre": "source_habitats_benthiques_carpediem_v16_fr00_2019"
+              },
+              "descriptionObject": {
+                "default": "Polygones sources - habitats benthiques de France métropolitaine, typologie Eunis (wms)",
+                "langfre": "Polygones sources - habitats benthiques de France métropolitaine, typologie Eunis (wms)"
+              },
+              "function": "information",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "COPYFILE",
+              "mimeType": "",
+              "urlObject": {
+                "default": "file:///home/sextant/data_QGIS/CARPEDIEM/DATA/habitats_benthiques/source_habitats_benthiques_carpediem_v16_fr00_2019.zip",
+                "langfre": "file:///home/sextant/data_QGIS/CARPEDIEM/DATA/habitats_benthiques/source_habitats_benthiques_carpediem_v16_fr00_2019.zip"
+              },
+              "nameObject": {
+                "default": "source_habitats_benthiques_carpediem_v16_fr00_2019",
+                "langfre": "source_habitats_benthiques_carpediem_v16_fr00_2019"
+              },
+              "descriptionObject": {
+                "default": "Polygones sources - habitats benthiques de France métropolitaine, typologie Eunis (shape)",
+                "langfre": "Polygones sources - habitats benthiques de France métropolitaine, typologie Eunis (shape)"
+              },
+              "function": "download",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6a84a633-8ea3-4b65-bd52-6bf117ee7729/attachments/Quemmerais_2019_carpediem_note_methodo_cartographie_habitats.pdf",
+                "langfre": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6a84a633-8ea3-4b65-bd52-6bf117ee7729/attachments/Quemmerais_2019_carpediem_note_methodo_cartographie_habitats.pdf"
+              },
+              "nameObject": {
+                "default": "Quemmerais_2019_carpediem_note_methodo_cartographie_habitats.pdf",
+                "langfre": "Quemmerais_2019_carpediem_note_methodo_cartographie_habitats.pdf"
+              },
+              "descriptionObject": {
+                "default": "Note de présentation de la méthode et des sources de données utilisées pour la réalisation de la cartographie multisources des habitats benthiques.",
+                "langfre": "Note de présentation de la méthode et des sources de données utilisées pour la réalisation de la cartographie multisources des habitats benthiques."
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.12770/6a84a633-8ea3-4b65-bd52-6bf117ee7729",
+                "langfre": "https://doi.org/10.12770/6a84a633-8ea3-4b65-bd52-6bf117ee7729"
+              },
+              "nameObject": {
+                "default": "DOI du jeu de données",
+                "langfre": "DOI du jeu de données"
+              },
+              "descriptionObject": {
+                "default": "DOI du jeu de données",
+                "langfre": "DOI du jeu de données"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            }
+          ],
+          "uuid": "6a84a633-8ea3-4b65-bd52-6bf117ee7729",
+          "draft": "n",
+          "id": "334398883",
+          "owner": "123",
+          "groupOwner": "75",
+          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "op0": ["1", "334399225", "334291911", "334568939", "334569090"],
+          "op2": "334399225",
+          "op1": ["1", "334399225", "334291911", "334568939", "334569090"],
+          "documentStandard": "iso19115-3.2018",
+          "op5": ["1", "334399225", "334291911", "334568939", "334569090"],
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/07086708-8b73-4889-9626-2d2bec555b6c/attachments/figure_carte_synthese_habitats_benthiques.jpg"
+            }
+          ]
+        },
+        "sort": [5070],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "geo-records",
         "_id": "6294e08c-baec-4282-a251-33fee22ec67f",
         "_score": null,
         "_ignored": [
-          "lineageObject.default.keyword",
-          "lineageObject.default.sort",
           "lineageObject.langeng.keyword",
-          "link.descriptionObject.default.keyword",
-          "link.descriptionObject.langeng.keyword"
+          "lineageObject.default.sort",
+          "lineageObject.default.keyword",
+          "link.descriptionObject.langeng.keyword",
+          "link.descriptionObject.default.keyword"
         ],
         "_source": {
           "dateStamp": "2025-11-01T14:04:57.884159Z",
@@ -4035,7 +4188,7 @@
             }
           ]
         },
-        "sort": [4814],
+        "sort": [5054],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -4048,24 +4201,35 @@
         "selected": false
       },
       {
-        "_index": "sextant-records",
-        "_id": "6a84a633-8ea3-4b65-bd52-6bf117ee7729",
+        "_index": "geo-records",
+        "_id": "d3cd37cf-1cf1-4ee7-9c51-c540da0044f2",
         "_score": null,
         "_source": {
-          "dateStamp": "2025-05-15T22:45:20.738398Z",
+          "dateStamp": "2025-05-16T00:16:20.897627Z",
           "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
           "resourceTitleObject": {
-            "default": "Cartographie (polygones sources) multisource des habitats benthiques de France métropolitaine, typologie Eunis",
-            "langfre": "Cartographie (polygones sources) multisource des habitats benthiques de France métropolitaine, typologie Eunis"
+            "default": "ZEE - Zones économiques exclusives (200NM)",
+            "langfre": "ZEE - Zones économiques exclusives (200NM)",
+            "langeng": "Maritime Boundaries: Exclusive Economic Zones (200NM)"
           },
           "resourceAbstractObject": {
-            "default": "La carte de synthèse des habitats benthiques est produite pour répondre aux besoins d’analyse des risques d’effets concomitants du projet Carpediem mené par l'AFB sur la période 2016-2018. Elle répond au cahier des charges suivant :\n- Couvrir l’ensemble des eaux françaises métropolitaines en intégrant les données existantes et accessibles, notamment des sources de données locales et régionales ;\n- Utiliser la typologie européenne Eunis ;\n- Intégrer, partout ou cela est possible les données sources permettant de cartographier les habitats benthiques au niveau Eunis 4 minimum ;\n- Intégrer, partout ou cela est possible les données les plus récentes et apportant la meilleure résolution spatiale ;\n- Intégrer un indice de confiance permettant de qualifier la qualité des données sources.",
-            "langfre": "La carte de synthèse des habitats benthiques est produite pour répondre aux besoins d’analyse des risques d’effets concomitants du projet Carpediem mené par l'AFB sur la période 2016-2018. Elle répond au cahier des charges suivant :\n- Couvrir l’ensemble des eaux françaises métropolitaines en intégrant les données existantes et accessibles, notamment des sources de données locales et régionales ;\n- Utiliser la typologie européenne Eunis ;\n- Intégrer, partout ou cela est possible les données sources permettant de cartographier les habitats benthiques au niveau Eunis 4 minimum ;\n- Intégrer, partout ou cela est possible les données les plus récentes et apportant la meilleure résolution spatiale ;\n- Intégrer un indice de confiance permettant de qualifier la qualité des données sources."
+            "default": "Cet ensemble de données s'appuie sur les versions précédentes de la ZEE mondiale. Dans la version 9, la limite extérieure de 200 milles nautiques a été complètement recalculée à l'aide d'un trait de côte à résolution plus élevée comme base de référence normale (ESRI Pays 2014) et lignes de base droites, le cas échéant. Cet ensemble de données se compose de deux fichiers : les polylignes qui représentent les limites maritimes des pays du monde, l'autre est une couche de polygones représentant la zone économique exclusive des pays. Cet ensemble de données contient également des informations numériques sur les traités, le régime conjoint et les limites contestées.",
+            "langfre": "Cet ensemble de données s'appuie sur les versions précédentes de la ZEE mondiale. Dans la version 9, la limite extérieure de 200 milles nautiques a été complètement recalculée à l'aide d'un trait de côte à résolution plus élevée comme base de référence normale (ESRI Pays 2014) et lignes de base droites, le cas échéant. Cet ensemble de données se compose de deux fichiers : les polylignes qui représentent les limites maritimes des pays du monde, l'autre est une couche de polygones représentant la zone économique exclusive des pays. Cet ensemble de données contient également des informations numériques sur les traités, le régime conjoint et les limites contestées.",
+            "langeng": "This dataset builds on previous versions of the world's EEZ. In version 9, the 200 nautical miles outer limit was completely recalculated using a higher resolution coastline as a normal baseline (ESRI Countries 2014) and straight baselines, where available. This dataset consists of two shapefiles: polylines that represent the maritime boundaries of the world's countries, the other one is a polygon layer representing the Exclusive Economic Zone of countries. This dataset also contains digital information about treaties, joint regime, and disputed boundaries."
           },
           "resourceCreditObject": [
             {
-              "default": "OFB, projet Carpediem",
-              "langfre": "OFB, projet Carpediem"
+              "default": "Marine Regions",
+              "langfre": "Marine Regions"
             }
           ],
           "geom": [
@@ -4073,104 +4237,124 @@
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-10.0, 41.0],
-                  [10.0, 41.0],
-                  [10.0, 52.0],
-                  [-10.0, 52.0],
-                  [-10.0, 41.0]
+                  [-180.0, -90.0],
+                  [180.0, -90.0],
+                  [180.0, 90.0],
+                  [-180.0, 90.0],
+                  [-180.0, -90.0]
                 ]
               ]
             }
           ],
           "link": [
             {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/carpediem",
-                "langfre": "https://sextant.ifremer.fr/services/wms/carpediem"
-              },
-              "nameObject": {
-                "default": "source_habitats_benthiques_carpediem_v16_fr00_2019",
-                "langfre": "source_habitats_benthiques_carpediem_v16_fr00_2019"
-              },
-              "descriptionObject": {
-                "default": "Polygones sources - habitats benthiques de France métropolitaine, typologie Eunis (wms)",
-                "langfre": "Polygones sources - habitats benthiques de France métropolitaine, typologie Eunis (wms)"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "COPYFILE",
-              "mimeType": "",
-              "urlObject": {
-                "default": "file:///home/sextant/data_QGIS/CARPEDIEM/DATA/habitats_benthiques/source_habitats_benthiques_carpediem_v16_fr00_2019.zip",
-                "langfre": "file:///home/sextant/data_QGIS/CARPEDIEM/DATA/habitats_benthiques/source_habitats_benthiques_carpediem_v16_fr00_2019.zip"
-              },
-              "nameObject": {
-                "default": "source_habitats_benthiques_carpediem_v16_fr00_2019",
-                "langfre": "source_habitats_benthiques_carpediem_v16_fr00_2019"
-              },
-              "descriptionObject": {
-                "default": "Polygones sources - habitats benthiques de France métropolitaine, typologie Eunis (shape)",
-                "langfre": "Polygones sources - habitats benthiques de France métropolitaine, typologie Eunis (shape)"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
               "protocol": "WWW:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6a84a633-8ea3-4b65-bd52-6bf117ee7729/attachments/Quemmerais_2019_carpediem_note_methodo_cartographie_habitats.pdf",
-                "langfre": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6a84a633-8ea3-4b65-bd52-6bf117ee7729/attachments/Quemmerais_2019_carpediem_note_methodo_cartographie_habitats.pdf"
+                "default": "http://www.marineregions.org",
+                "langfre": "http://www.marineregions.org"
               },
               "nameObject": {
-                "default": "Quemmerais_2019_carpediem_note_methodo_cartographie_habitats.pdf",
-                "langfre": "Quemmerais_2019_carpediem_note_methodo_cartographie_habitats.pdf"
+                "default": "http://www.marineregions.org",
+                "langfre": "http://www.marineregions.org"
               },
               "descriptionObject": {
-                "default": "Note de présentation de la méthode et des sources de données utilisées pour la réalisation de la cartographie multisources des habitats benthiques.",
-                "langfre": "Note de présentation de la méthode et des sources de données utilisées pour la réalisation de la cartographie multisources des habitats benthiques."
+                "default": "Site web de Marine Regions",
+                "langfre": "Site web de Marine Regions",
+                "langeng": "Marine Regions website"
               },
               "function": "",
               "applicationProfile": "",
-              "group": 1
+              "group": 0
             },
             {
               "protocol": "DOI",
               "mimeType": "",
               "urlObject": {
-                "default": "https://doi.org/10.12770/6a84a633-8ea3-4b65-bd52-6bf117ee7729",
-                "langfre": "https://doi.org/10.12770/6a84a633-8ea3-4b65-bd52-6bf117ee7729"
+                "default": "http://dx.doi.org/10.14284/242",
+                "langfre": "http://dx.doi.org/10.14284/242"
               },
               "nameObject": {
                 "default": "DOI du jeu de données",
                 "langfre": "DOI du jeu de données"
               },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://geo.vliz.be/geoserver/MarineRegions/wms?Request=getCapabilities",
+                "langfre": "http://geo.vliz.be/geoserver/MarineRegions/wms?Request=getCapabilities"
+              },
+              "nameObject": {
+                "default": "eez",
+                "langfre": "eez"
+              },
               "descriptionObject": {
-                "default": "DOI du jeu de données",
-                "langfre": "DOI du jeu de données"
+                "default": "Zones Economiques Exclusives (200 NM) - polygones",
+                "langfre": "Zones Economiques Exclusives (200 NM) - polygones",
+                "langeng": "Exclusive Economic Zones (200 NM) - polygons"
               },
               "function": "",
               "applicationProfile": "",
               "group": 1
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://geo.vliz.be/geoserver/MarineRegions/wms?Request=getCapabilities",
+                "langfre": "http://geo.vliz.be/geoserver/MarineRegions/wms?Request=getCapabilities"
+              },
+              "nameObject": {
+                "default": "eez_boundaries",
+                "langfre": "eez_boundaries"
+              },
+              "descriptionObject": {
+                "default": "ZEE limites - polylignes",
+                "langfre": "ZEE limites - polylignes",
+                "langeng": "EEZ Maritime boundaries - lines"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "WWW:DOWNLOAD",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.marineregions.org/downloads.php",
+                "langfre": "http://www.marineregions.org/downloads.php"
+              },
+              "nameObject": {
+                "default": "http://www.marineregions.org/downloads",
+                "langfre": "http://www.marineregions.org/downloads"
+              },
+              "descriptionObject": {
+                "default": "Page de telechargement",
+                "langfre": "Page de telechargement",
+                "langeng": "Download page"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 2
             }
           ],
-          "uuid": "6a84a633-8ea3-4b65-bd52-6bf117ee7729",
+          "uuid": "d3cd37cf-1cf1-4ee7-9c51-c540da0044f2",
           "draft": "n",
-          "id": "334398883",
-          "owner": "123",
-          "groupOwner": "75",
+          "id": "107196664",
+          "owner": "10",
+          "groupOwner": "4",
           "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["1", "334399225", "334291911", "334568939", "334569090"],
-          "op2": "334399225",
-          "op1": ["1", "334399225", "334291911", "334568939", "334569090"],
+          "op0": ["1", "123708945", "4", "335589512"],
+          "op2": "123708945",
+          "op1": ["1", "123708945", "4"],
           "documentStandard": "iso19115-3.2018",
-          "op5": ["1", "334399225", "334291911", "334568939", "334569090"],
+          "op3": "4",
+          "op5": ["1", "123708945", "4"],
           "valid": "-1",
           "isTemplate": "n",
           "rating": "0",
@@ -4178,456 +4362,11 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/07086708-8b73-4889-9626-2d2bec555b6c/attachments/figure_carte_synthese_habitats_benthiques.jpg"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/d3cd37cf-1cf1-4ee7-9c51-c540da0044f2/attachments/ZEE.JPG"
             }
           ]
         },
-        "sort": [4655],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "857a3337-f59a-481a-bf98-5561e8b61e7b",
-        "_score": null,
-        "_ignored": ["lineageObject.langang.keyword"],
-        "_source": {
-          "dateStamp": "2025-12-13T15:30:07.042955Z",
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "GLOBMULTI_ERA5_GLOBCUR_01",
-            "langang": "GLOBMULTI_ERA5_GLOBCUR_01"
-          },
-          "resourceAbstractObject": {
-            "default": "Wave hindcast based on WAVEWATCH-III (r) with parameterization from Alday et al 2021. Forced by ERA5 winds, CMEMS-GLOBCURRENT currents, SSMI ice mask and ALTIBERG iceberg mask on a global grid nested with regional subgrids at higher resolution",
-            "langang": "Wave hindcast based on WAVEWATCH-III (r) with parameterization from Alday et al 2021. Forced by ERA5 winds, CMEMS-GLOBCURRENT currents, SSMI ice mask and ALTIBERG iceberg mask on a global grid nested with regional subgrids at higher resolution"
-          },
-          "resourceCreditObject": [
-            {
-              "default": "Laboratoire d'Océanographie Physique et Spatiale",
-              "langang": "Laboratoire d'Océanographie Physique et Spatiale"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-180.0, -78.0],
-                  [179.5, -78.0],
-                  [179.5, 83.0],
-                  [-180.0, 83.0],
-                  [-180.0, -78.0]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "NETWORK:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "/home/ref-ww3/GLOBMULTI_ERA5_GLOBCUR_01",
-                "langang": "/home/ref-ww3/GLOBMULTI_ERA5_GLOBCUR_01"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "DOI",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.12770/857a3337-f59a-481a-bf98-5561e8b61e7b",
-                "langang": "https://doi.org/10.12770/857a3337-f59a-481a-bf98-5561e8b61e7b"
-              },
-              "nameObject": {
-                "default": "DOI of the dataset",
-                "langang": "DOI of the dataset"
-              },
-              "descriptionObject": {
-                "default": "DOI of the dataset",
-                "langang": "DOI of the dataset"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "ftp://ftp.ifremer.fr/ifremer/dataref/ww3/GLOBMULTI_ERA5_GLOBCUR_01",
-                "langang": "ftp://ftp.ifremer.fr/ifremer/dataref/ww3/GLOBMULTI_ERA5_GLOBCUR_01"
-              },
-              "nameObject": {
-                "default": "FTP Download link",
-                "langang": "FTP Download link"
-              },
-              "descriptionObject": {
-                "default": "FTP Download link",
-                "langang": "FTP Download link"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK-1.0-http--publication-URL",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.1016/j.ocemod.2021.101848",
-                "langang": "https://doi.org/10.1016/j.ocemod.2021.101848"
-              },
-              "nameObject": {
-                "default": "Alday et. al. 2021. A global wave parameter database for geophysical applications. Part 3: Improved forcing and spectral resolution. Ocean Modelling",
-                "langang": "Alday et. al. 2021. A global wave parameter database for geophysical applications. Part 3: Improved forcing and spectral resolution. Ocean Modelling"
-              },
-              "descriptionObject": {
-                "default": "Alday Matias, Accensi Mickael, Ardhuin Fabrice, Dodet Guillaume (2021). A global wave parameter database for geophysical applications. Part 3: Improved forcing and spectral resolution. Ocean Modelling, 166, 101848 (19p.).",
-                "langang": "Alday Matias, Accensi Mickael, Ardhuin Fabrice, Dodet Guillaume (2021). A global wave parameter database for geophysical applications. Part 3: Improved forcing and spectral resolution. Ocean Modelling, 166, 101848 (19p.)."
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://data-dataref.ifremer.fr/ww3/GLOBMULTI_ERA5_GLOBCUR_01",
-                "langang": "https://data-dataref.ifremer.fr/ww3/GLOBMULTI_ERA5_GLOBCUR_01"
-              },
-              "nameObject": {
-                "default": "HTTPS Download link",
-                "langang": "HTTPS Download link"
-              },
-              "descriptionObject": {
-                "default": "HTTPS Download link",
-                "langang": "HTTPS Download link"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/catalogs/GLOBMULTI-ERA5-GLOBCUR_01/GLOBMULTI-ERA5-GLOBCUR_01.html",
-                "langang": "https://tds0.ifremer.fr/thredds/catalogs/GLOBMULTI-ERA5-GLOBCUR_01/GLOBMULTI-ERA5-GLOBCUR_01.html"
-              },
-              "nameObject": {
-                "default": "thredds for opendap link",
-                "langang": "thredds for opendap link"
-              },
-              "descriptionObject": {
-                "default": "thredds for opendap link",
-                "langang": "thredds for opendap link"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_PACE_VIEW_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_PACE_VIEW_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "hs",
-                "langang": "hs"
-              },
-              "descriptionObject": {
-                "default": "EAST PACIFIC",
-                "langang": "EAST PACIFIC"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_AFRICA_VIEW_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_AFRICA_VIEW_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "hs",
-                "langang": "hs"
-              },
-              "descriptionObject": {
-                "default": "AFRICA",
-                "langang": "AFRICA"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_CRB_VIEW_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_CRB_VIEW_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "hs",
-                "langang": "hs"
-              },
-              "descriptionObject": {
-                "default": "CARIBBEAN",
-                "langang": "CARIBBEAN"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_GLOB_VIEW_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_GLOB_VIEW_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "hs",
-                "langang": "hs"
-              },
-              "descriptionObject": {
-                "default": "GLOBAL",
-                "langang": "GLOBAL"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_ATNE_VIEW_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_ATNE_VIEW_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "hs",
-                "langang": "hs"
-              },
-              "descriptionObject": {
-                "default": "NORTH-EAST ATLANTIC",
-                "langang": "NORTH-EAST ATLANTIC"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_NC_VIEW_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_NC_VIEW_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "hs",
-                "langang": "hs"
-              },
-              "descriptionObject": {
-                "default": "NEW CALEDONIA",
-                "langang": "NEW CALEDONIA"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_ATNW_VIEW_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_ATNW_VIEW_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "hs",
-                "langang": "hs"
-              },
-              "descriptionObject": {
-                "default": "NORTH-WEST ATLANTIC",
-                "langang": "NORTH-WEST ATLANTIC"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_GLOB-30M_P2L_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_GLOB-30M_P2L_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "p2l",
-                "langang": "p2l"
-              },
-              "descriptionObject": {
-                "default": "GLOBAL",
-                "langang": "GLOBAL"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_AFRICA-10M_P2L_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_AFRICA-10M_P2L_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "p2l",
-                "langang": "p2l"
-              },
-              "descriptionObject": {
-                "default": "AFRICA",
-                "langang": "AFRICA"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 2
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_ATNE-10M_P2L_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_ATNE-10M_P2L_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "p2l",
-                "langang": "p2l"
-              },
-              "descriptionObject": {
-                "default": "NORTH-EAST ATLANTIC",
-                "langang": "NORTH-EAST ATLANTIC"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 4
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_ATNW-10M_P2L_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_ATNW-10M_P2L_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "p2l",
-                "langang": "p2l"
-              },
-              "descriptionObject": {
-                "default": "NORTH-WEST ATLANTIC",
-                "langang": "NORTH-WEST ATLANTIC"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 5
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_CRB-3M_P2L_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_CRB-3M_P2L_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "p2l",
-                "langang": "p2l"
-              },
-              "descriptionObject": {
-                "default": "CARIBBEAN",
-                "langang": "CARIBBEAN"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 6
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_NC-3M_P2L_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_NC-3M_P2L_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "p2l",
-                "langang": "p2l"
-              },
-              "descriptionObject": {
-                "default": "NEW CALEDONIA",
-                "langang": "NEW CALEDONIA"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 7
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_PACE-10M_P2L_FULL_TIME_SERIE?",
-                "langang": "https://tds0.ifremer.fr/thredds/wms/GLOBMULTI_ERA5_GLOBCUR_01_PACE-10M_P2L_FULL_TIME_SERIE?"
-              },
-              "nameObject": {
-                "default": "p2l",
-                "langang": "p2l"
-              },
-              "descriptionObject": {
-                "default": "EAST PACIFIC",
-                "langang": "EAST PACIFIC"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 8
-            }
-          ],
-          "uuid": "857a3337-f59a-481a-bf98-5561e8b61e7b",
-          "draft": "n",
-          "id": "334776292",
-          "owner": "10",
-          "groupOwner": "192556831",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "op0": ["174375699", "136009538", "192556831", "334613272", "1"],
-          "op2": ["192556831", "334613272"],
-          "op1": ["1", "136009538", "192556831", "334613272"],
-          "documentStandard": "iso19115-3.2018",
-          "op3": "192556831",
-          "op5": ["1", "136009538", "192556831", "334613272"],
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/857a3337-f59a-481a-bf98-5561e8b61e7b/attachments/glob-30m_hs.jpg"
-            }
-          ]
-        },
-        "sort": [4634],
+        "sort": [4914],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -4648,19 +4387,20 @@
         "layout": "multiselect",
         "displayFilter": true,
         "field": "groupPublishedId",
-        "collapsed": false,
+        "collapsed": true,
+        "caseInsensitiveInclude": true,
         "orderByTranslation": true
       },
       "doc_count_error_upper_bound": 0,
       "sum_other_doc_count": 0,
       "buckets": [
         {
-          "key": "82",
-          "doc_count": 3587
+          "key": "174375699",
+          "doc_count": 3732
         },
         {
-          "key": "174375699",
-          "doc_count": 2079
+          "key": "82",
+          "doc_count": 3628
         },
         {
           "key": "334291911",
@@ -4672,19 +4412,19 @@
         },
         {
           "key": "335589474",
-          "doc_count": 1148
+          "doc_count": 1151
         },
         {
           "key": "4",
-          "doc_count": 765
+          "doc_count": 812
+        },
+        {
+          "key": "21",
+          "doc_count": 577
         },
         {
           "key": "83566259",
           "doc_count": 541
-        },
-        {
-          "key": "21",
-          "doc_count": 533
         },
         {
           "key": "334568939",
@@ -4700,7 +4440,7 @@
         },
         {
           "key": "334233983",
-          "doc_count": 405
+          "doc_count": 410
         },
         {
           "key": "101",
@@ -4715,6 +4455,10 @@
           "doc_count": 352
         },
         {
+          "key": "71",
+          "doc_count": 349
+        },
+        {
           "key": "181712109",
           "doc_count": 338
         },
@@ -4723,20 +4467,16 @@
           "doc_count": 332
         },
         {
-          "key": "71",
-          "doc_count": 332
+          "key": "115388015",
+          "doc_count": 312
         },
         {
           "key": "41",
           "doc_count": 312
         },
         {
-          "key": "115388015",
-          "doc_count": 311
-        },
-        {
           "key": "74",
-          "doc_count": 305
+          "doc_count": 307
         },
         {
           "key": "89",
@@ -4795,11 +4535,11 @@
           "doc_count": 115
         },
         {
-          "key": "20",
-          "doc_count": 113
+          "key": "334266184",
+          "doc_count": 115
         },
         {
-          "key": "334266184",
+          "key": "20",
           "doc_count": 113
         },
         {
@@ -4817,10 +4557,6 @@
         {
           "key": "85",
           "doc_count": 102
-        },
-        {
-          "key": "192556831",
-          "doc_count": 99
         },
         {
           "key": "181717787",
@@ -4847,6 +4583,10 @@
           "doc_count": 76
         },
         {
+          "key": "14",
+          "doc_count": 75
+        },
+        {
           "key": "60",
           "doc_count": 75
         },
@@ -4855,7 +4595,7 @@
           "doc_count": 74
         },
         {
-          "key": "14",
+          "key": "335589495",
           "doc_count": 72
         },
         {
@@ -4879,6 +4619,10 @@
           "doc_count": 65
         },
         {
+          "key": "192556831",
+          "doc_count": 65
+        },
+        {
           "key": "45",
           "doc_count": 65
         },
@@ -4899,6 +4643,10 @@
           "doc_count": 61
         },
         {
+          "key": "335589499",
+          "doc_count": 61
+        },
+        {
           "key": "80",
           "doc_count": 61
         },
@@ -4907,11 +4655,11 @@
           "doc_count": 60
         },
         {
-          "key": "120",
-          "doc_count": 59
+          "key": "335589485",
+          "doc_count": 60
         },
         {
-          "key": "335589485",
+          "key": "120",
           "doc_count": 59
         },
         {
@@ -4923,7 +4671,7 @@
           "doc_count": 57
         },
         {
-          "key": "335589499",
+          "key": "250019890",
           "doc_count": 57
         },
         {
@@ -4931,12 +4679,12 @@
           "doc_count": 56
         },
         {
-          "key": "335004805",
+          "key": "335589498",
           "doc_count": 56
         },
         {
-          "key": "335589498",
-          "doc_count": 56
+          "key": "335004805",
+          "doc_count": 54
         },
         {
           "key": "6",
@@ -4944,6 +4692,10 @@
         },
         {
           "key": "109",
+          "doc_count": 53
+        },
+        {
+          "key": "163141952",
           "doc_count": 53
         },
         {
@@ -4963,10 +4715,6 @@
           "doc_count": 48
         },
         {
-          "key": "250019890",
-          "doc_count": 48
-        },
-        {
           "key": "334263998",
           "doc_count": 48
         },
@@ -4980,10 +4728,6 @@
         },
         {
           "key": "139606182",
-          "doc_count": 46
-        },
-        {
-          "key": "163141952",
           "doc_count": 46
         },
         {
@@ -5092,7 +4836,7 @@
         },
         {
           "key": "14223220",
-          "doc_count": 26
+          "doc_count": 27
         },
         {
           "key": "334250000",
@@ -5143,11 +4887,11 @@
           "doc_count": 22
         },
         {
-          "key": "139596764",
-          "doc_count": 20
+          "key": "335589477",
+          "doc_count": 22
         },
         {
-          "key": "335589495",
+          "key": "139596764",
           "doc_count": 20
         },
         {
@@ -5163,16 +4907,16 @@
           "doc_count": 19
         },
         {
+          "key": "334259620",
+          "doc_count": 19
+        },
+        {
           "key": "39",
           "doc_count": 19
         },
         {
           "key": "57998573",
           "doc_count": 19
-        },
-        {
-          "key": "334259620",
-          "doc_count": 18
         },
         {
           "key": "139600468",
@@ -5203,6 +4947,10 @@
           "doc_count": 16
         },
         {
+          "key": "335589473",
+          "doc_count": 16
+        },
+        {
           "key": "335589492",
           "doc_count": 16
         },
@@ -5215,19 +4963,7 @@
           "doc_count": 15
         },
         {
-          "key": "335589473",
-          "doc_count": 15
-        },
-        {
-          "key": "77611318",
-          "doc_count": 15
-        },
-        {
           "key": "334399225",
-          "doc_count": 14
-        },
-        {
-          "key": "335589477",
           "doc_count": 14
         },
         {
@@ -5243,7 +4979,19 @@
           "doc_count": 13
         },
         {
+          "key": "334253426",
+          "doc_count": 13
+        },
+        {
+          "key": "335224701",
+          "doc_count": 13
+        },
+        {
           "key": "67",
+          "doc_count": 13
+        },
+        {
+          "key": "77611318",
           "doc_count": 13
         },
         {
@@ -5255,19 +5003,11 @@
           "doc_count": 12
         },
         {
-          "key": "334253426",
-          "doc_count": 12
-        },
-        {
           "key": "334264477",
           "doc_count": 12
         },
         {
           "key": "334590726",
-          "doc_count": 12
-        },
-        {
-          "key": "335224701",
           "doc_count": 12
         },
         {
@@ -5279,16 +5019,16 @@
           "doc_count": 11
         },
         {
+          "key": "253186911",
+          "doc_count": 11
+        },
+        {
           "key": "334243878",
           "doc_count": 11
         },
         {
           "key": "57998572",
           "doc_count": 11
-        },
-        {
-          "key": "253186911",
-          "doc_count": 10
         },
         {
           "key": "43",
@@ -5327,11 +5067,19 @@
           "doc_count": 8
         },
         {
+          "key": "335224697",
+          "doc_count": 8
+        },
+        {
           "key": "335589482",
           "doc_count": 8
         },
         {
           "key": "335589497",
+          "doc_count": 8
+        },
+        {
+          "key": "335589515",
           "doc_count": 8
         },
         {
@@ -5348,10 +5096,6 @@
         },
         {
           "key": "334585986",
-          "doc_count": 7
-        },
-        {
-          "key": "335224697",
           "doc_count": 7
         },
         {
@@ -5443,7 +5187,7 @@
           "doc_count": 3
         },
         {
-          "key": "335589515",
+          "key": "335589517",
           "doc_count": 3
         },
         {
@@ -5531,11 +5275,11 @@
           "doc_count": 1
         },
         {
-          "key": "335589487",
+          "key": "335589491",
           "doc_count": 1
         },
         {
-          "key": "335589491",
+          "key": "335589500",
           "doc_count": 1
         },
         {
@@ -5546,22 +5290,21 @@
     },
     "th_sextant-theme_tree.key": {
       "meta": {
-        "layout": "tree",
-        "collapsed": false,
-        "refreshPolicy": "none",
-        "orderByTranslation": true,
-        "translateOnLoad": true
+        "filterByTranslation": true,
+        "displayFilter": true,
+        "collapsed": true,
+        "caseInsensitiveInclude": true
       },
       "doc_count_error_upper_bound": 0,
       "sum_other_doc_count": 0,
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1",
-          "doc_count": 344
+          "doc_count": 366
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca",
-          "doc_count": 140
+          "doc_count": 141
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/657cb559-f758-497f-938c-fc505ad3c69c",
@@ -5573,7 +5316,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7f6edc70-0465-4da6-a1a1-1aa64fc8ba85",
-          "doc_count": 21
+          "doc_count": 22
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/80f15c76-4901-40c6-be47-0e004ca50028",
@@ -5581,11 +5324,11 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b3946b91-cda0-4bee-a8a4-c6aba80d9382",
-          "doc_count": 115
+          "doc_count": 118
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3c8deed-b81d-468b-b150-ff53b64a9d8f",
-          "doc_count": 85
+          "doc_count": 103
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3c8deed-b81d-468b-b150-ff53b64a9d8f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/9ddab5a0-08aa-40e6-98f3-1b912a4d9f7d",
@@ -5737,7 +5480,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
-          "doc_count": 1242
+          "doc_count": 1245
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0d2356f4-bcea-4eb1-a584-05def26f19a6",
@@ -5821,7 +5564,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3e513bd-53dd-4dcb-9de6-290e9e6cd130",
-          "doc_count": 10
+          "doc_count": 12
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3e513bd-53dd-4dcb-9de6-290e9e6cd130^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/36c832d8-8599-4e74-bc77-c5cc38c7662f",
@@ -5841,7 +5584,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e07169d6-9cd6-4d5d-aeba-220a2b47ef11",
-          "doc_count": 77
+          "doc_count": 78
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921",
@@ -5877,11 +5620,11 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947",
-          "doc_count": 2291
+          "doc_count": 2289
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8",
-          "doc_count": 51
+          "doc_count": 52
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/493a8f9c-6792-422e-b534-0e7dacd4e55c",
@@ -5901,7 +5644,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0c782d1-bd5c-436b-8318-900edb34aec0",
-          "doc_count": 32
+          "doc_count": 33
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6ddaddc7-1f50-419a-b5af-6ea5177498de",
@@ -5909,7 +5652,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb",
-          "doc_count": 1801
+          "doc_count": 1798
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0470b995-f8d8-4d18-9a33-bb537b91cfc5",
@@ -5921,11 +5664,11 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/611c44d1-ee38-4fd8-a80e-e6145d59cbec",
-          "doc_count": 383
+          "doc_count": 384
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6f550a25-d637-4cdf-8c11-1b88316e7a6c",
-          "doc_count": 45
+          "doc_count": 43
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c4baffb4-928d-46f2-9f98-af9fd0e1e34e",
@@ -5933,7 +5676,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e5687e7d-5e37-4799-8240-4216b92b36d3",
-          "doc_count": 1205
+          "doc_count": 1203
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e95c79ce-707b-43a0-b1e5-6b84a0cbf46f",
@@ -5941,7 +5684,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463",
-          "doc_count": 1704
+          "doc_count": 1744
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/2a52c99c-e573-4afd-896b-6e8e1256d041",
@@ -5981,7 +5724,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8e3044e6-9720-491b-ac10-42e9b8e74245",
-          "doc_count": 115
+          "doc_count": 116
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8e3044e6-9720-491b-ac10-42e9b8e74245^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/16379831-6f19-4737-9d2d-4c438d4ede4e",
@@ -5993,7 +5736,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8e3044e6-9720-491b-ac10-42e9b8e74245^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c4b843dd-3a12-4ede-b23b-bd4964e7d343",
-          "doc_count": 52
+          "doc_count": 53
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/8e3044e6-9720-491b-ac10-42e9b8e74245^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c858954c-e113-4e10-9821-e0f7e7565502",
@@ -6001,7 +5744,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115",
-          "doc_count": 1089
+          "doc_count": 1124
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0b7d8274-e377-4fe6-8cd5-a712530a38a1",
@@ -6009,7 +5752,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ba12df3c-e19d-4b55-a7f2-b23d67a1df88",
-          "doc_count": 925
+          "doc_count": 931
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/cc1c27f0-8120-470a-bf65-53ba05616108",
@@ -6053,7 +5796,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f1876ff5-b5e0-4932-8779-c720bda5a8b8",
-          "doc_count": 64
+          "doc_count": 68
         }
       ]
     },
@@ -6105,7 +5848,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/el",
-          "doc_count": 1144
+          "doc_count": 1182
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/er",
@@ -6113,7 +5856,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/ge",
-          "doc_count": 305
+          "doc_count": 321
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/gg",
@@ -6125,7 +5868,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/hb",
-          "doc_count": 734
+          "doc_count": 740
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/hh",
@@ -6133,11 +5876,11 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/hy",
-          "doc_count": 510
+          "doc_count": 517
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/lc",
-          "doc_count": 40
+          "doc_count": 42
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/lu",
@@ -6157,11 +5900,11 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/of",
-          "doc_count": 885
+          "doc_count": 921
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/oi",
-          "doc_count": 208
+          "doc_count": 210
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/pd",
@@ -6189,7 +5932,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/sr",
-          "doc_count": 217
+          "doc_count": 232
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/su",
@@ -6207,15 +5950,14 @@
     },
     "tag.default": {
       "meta": {
-        "collapsed": true,
-        "caseInsensitiveInclude": true
+        "collapsed": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 101303,
+      "sum_other_doc_count": 97448,
       "buckets": [
         {
           "key": "Répartition des espèces",
-          "doc_count": 1485
+          "doc_count": 1484
         },
         {
           "key": "Delayed",
@@ -6235,72 +5977,43 @@
         },
         {
           "key": "Habitats et biotopes",
-          "doc_count": 1005
+          "doc_count": 1011
         },
         {
           "key": "ressource halieutique",
           "doc_count": 964
         },
         {
+          "key": "/Observational data/in-situ",
+          "doc_count": 928
+        },
+        {
           "key": "/Métropole/Golfe de Gascogne",
           "doc_count": 908
         },
         {
-          "key": "/Observational data/in-situ",
-          "doc_count": 897
-        },
-        {
           "key": "/Métropole/Méditerranée occidentale",
           "doc_count": 891
-        }
-      ]
-    },
-    "creationYearForResource": {
-      "meta": {
-        "collapsed": false
-      },
-      "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 2416,
-      "buckets": [
-        {
-          "key": 2026,
-          "doc_count": 6
         },
         {
-          "key": 2025,
-          "doc_count": 65
+          "key": "Bathymetry and Elevation",
+          "doc_count": 869
         },
         {
-          "key": 2024,
-          "doc_count": 219
+          "key": "/Données d'observation/in-situ",
+          "doc_count": 819
         },
         {
-          "key": 2023,
-          "doc_count": 162
+          "key": "Directive Cadre Stratégie pour le Milieu Marin (DCSMM)",
+          "doc_count": 804
         },
         {
-          "key": 2022,
-          "doc_count": 252
+          "key": "/Métropole/Mers Celtiques",
+          "doc_count": 794
         },
         {
-          "key": 2021,
-          "doc_count": 439
-        },
-        {
-          "key": 2020,
-          "doc_count": 393
-        },
-        {
-          "key": 2019,
-          "doc_count": 207
-        },
-        {
-          "key": 2018,
-          "doc_count": 474
-        },
-        {
-          "key": 2017,
-          "doc_count": 495
+          "key": "Altitude",
+          "doc_count": 767
         }
       ]
     },
@@ -6310,69 +6023,177 @@
         "caseInsensitiveInclude": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 30456,
-      "buckets": [
-        {
-          "key": "Ifremer",
-          "doc_count": 2452
-        },
-        {
-          "key": "IFREMER",
-          "doc_count": 1110
-        },
-        {
-          "key": "CHARM Consortium",
-          "doc_count": 1039
-        },
-        {
-          "key": "Center for Environment, Fisheries & Aquaculture Science",
-          "doc_count": 357
-        },
-        {
-          "key": "ARTELIA Eau et Environnement",
-          "doc_count": 305
-        },
-        {
-          "key": "Syndicat Mixte Baie de Somme Grand Littoral Picard / CC Opale Sud",
-          "doc_count": 305
-        },
-        {
-          "key": "ROLNHDF",
-          "doc_count": 302
-        },
-        {
-          "key": "Geological Survey Ireland",
-          "doc_count": 295
-        },
-        {
-          "key": "IHPT, Hydrographic Institute",
-          "doc_count": 295
-        },
-        {
-          "key": "British Geological Survey, Edinburgh",
-          "doc_count": 287
-        }
-      ]
+      "sum_other_doc_count": 0,
+      "buckets": []
     },
-    "availableInServices": {
+    "creationYearForResource": {
       "meta": {
-        "decorator": {
-          "type": "icon",
-          "map": {
-            "availableInDownloadService": "faSolidCloudArrowDown",
-            "availableInViewService": "faSolidMap"
-          }
-        },
         "collapsed": true
       },
-      "buckets": {
-        "availableInDownloadService": {
-          "doc_count": 7049
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 30,
+      "buckets": [
+        {
+          "key": 2026,
+          "doc_count": 15
         },
-        "availableInViewService": {
-          "doc_count": 5113
+        {
+          "key": 2025,
+          "doc_count": 83
+        },
+        {
+          "key": 2024,
+          "doc_count": 222
+        },
+        {
+          "key": 2023,
+          "doc_count": 169
+        },
+        {
+          "key": 2022,
+          "doc_count": 254
+        },
+        {
+          "key": 2021,
+          "doc_count": 443
+        },
+        {
+          "key": 2020,
+          "doc_count": 395
+        },
+        {
+          "key": 2019,
+          "doc_count": 208
+        },
+        {
+          "key": 2018,
+          "doc_count": 475
+        },
+        {
+          "key": 2017,
+          "doc_count": 497
+        },
+        {
+          "key": 2016,
+          "doc_count": 349
+        },
+        {
+          "key": 2015,
+          "doc_count": 317
+        },
+        {
+          "key": 2014,
+          "doc_count": 399
+        },
+        {
+          "key": 2013,
+          "doc_count": 180
+        },
+        {
+          "key": 2012,
+          "doc_count": 366
+        },
+        {
+          "key": 2011,
+          "doc_count": 124
+        },
+        {
+          "key": 2010,
+          "doc_count": 78
+        },
+        {
+          "key": 2009,
+          "doc_count": 68
+        },
+        {
+          "key": 2008,
+          "doc_count": 72
+        },
+        {
+          "key": 2007,
+          "doc_count": 83
+        },
+        {
+          "key": 2006,
+          "doc_count": 56
+        },
+        {
+          "key": 2005,
+          "doc_count": 44
+        },
+        {
+          "key": 2004,
+          "doc_count": 38
+        },
+        {
+          "key": 2003,
+          "doc_count": 23
+        },
+        {
+          "key": 2002,
+          "doc_count": 37
+        },
+        {
+          "key": 2001,
+          "doc_count": 18
+        },
+        {
+          "key": 2000,
+          "doc_count": 33
+        },
+        {
+          "key": 1999,
+          "doc_count": 11
+        },
+        {
+          "key": 1998,
+          "doc_count": 18
+        },
+        {
+          "key": 1997,
+          "doc_count": 6
+        },
+        {
+          "key": 1996,
+          "doc_count": 6
+        },
+        {
+          "key": 1995,
+          "doc_count": 18
+        },
+        {
+          "key": 1994,
+          "doc_count": 11
+        },
+        {
+          "key": 1993,
+          "doc_count": 24
+        },
+        {
+          "key": 1992,
+          "doc_count": 12
+        },
+        {
+          "key": 1991,
+          "doc_count": 4
+        },
+        {
+          "key": 1990,
+          "doc_count": 2
+        },
+        {
+          "key": 1989,
+          "doc_count": 1
+        },
+        {
+          "key": 1988,
+          "doc_count": 4
+        },
+        {
+          "key": 1987,
+          "doc_count": 1
         }
-      }
+      ]
     },
     "resourceType": {
       "meta": {
@@ -6396,13 +6217,26 @@
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 10852
+          "doc_count": 10972
         },
         {
           "key": "featureCatalog",
-          "doc_count": 21
+          "doc_count": 26
         }
       ]
+    },
+    "availableInServices": {
+      "meta": {
+        "collapsed": true
+      },
+      "buckets": {
+        "availableInDownloadService": {
+          "doc_count": 7094
+        },
+        "availableInViewService": {
+          "doc_count": 5131
+        }
+      }
     }
   }
 }

@@ -1,5 +1,10 @@
 import { elasticsearch } from 'gn-api-client';
-import { DEFAULT_RECORD_DOWNLOAD_PROTOCOLS, DEFAULT_RECORD_VIEW_PROTOCOLS } from './gn-constants';
+import {
+  DEFAULT_RECORD_DOWNLOAD_PROTOCOLS,
+  DEFAULT_RECORD_VIEW_PROTOCOLS,
+  INSPIRE_AGGREGATION,
+  RESOURCE_TYPE_AGGREGATION,
+} from './gn-constants';
 import { UiConfiguration } from './model/gn4config';
 import { SextantLegacyFacet } from './model/sextantConfig';
 
@@ -57,44 +62,19 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
     },
   },
   inspireTheme: {
-    'th_httpinspireeceuropaeutheme-theme_tree.key': {
-      terms: {
-        field: 'th_httpinspireeceuropaeutheme-theme_tree.key',
-        size: 34,
-      },
-    },
+    'th_httpinspireeceuropaeutheme-theme_tree.key': INSPIRE_AGGREGATION,
   },
   inspireTheme_en: {
-    'th_httpinspireeceuropaeutheme-theme_tree.key': {
-      terms: {
-        field: 'th_httpinspireeceuropaeutheme-theme_tree.key',
-        size: 34,
-      },
-    },
+    'th_httpinspireeceuropaeutheme-theme_tree.key': INSPIRE_AGGREGATION,
   },
   inspireTheme_fr: {
-    'th_httpinspireeceuropaeutheme-theme_tree.key': {
-      terms: {
-        field: 'th_httpinspireeceuropaeutheme-theme_tree.key',
-        size: 34,
-      },
-    },
+    'th_httpinspireeceuropaeutheme-theme_tree.key': INSPIRE_AGGREGATION,
   },
   inspireThemeWithAc: {
-    'th_httpinspireeceuropaeutheme-theme_tree.key': {
-      terms: {
-        field: 'th_httpinspireeceuropaeutheme-theme_tree.key',
-        size: 34,
-      },
-    },
+    'th_httpinspireeceuropaeutheme-theme_tree.key': INSPIRE_AGGREGATION,
   },
   inspireThemeURI: {
-    'th_httpinspireeceuropaeutheme-theme_tree.key': {
-      terms: {
-        field: 'th_httpinspireeceuropaeutheme-theme_tree.key',
-        size: 34,
-      },
-    },
+    'th_httpinspireeceuropaeutheme-theme_tree.key': INSPIRE_AGGREGATION,
   },
   denominator: {
     resolutionScaleDenominator: {
@@ -155,12 +135,10 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
     },
   },
   type: {
-    resourceType: {
-      terms: {
-        field: 'resourceType',
-        size: 10,
-      },
-    },
+    resourceType: RESOURCE_TYPE_AGGREGATION,
+  },
+  resourceType: {
+    resourceType: RESOURCE_TYPE_AGGREGATION,
   },
   createDateYear: {
     creationYearForResource: {
@@ -285,7 +263,7 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
     },
   },
   publishedForGroup: {
-    group: {
+    groupPublishedId: {
       terms: {
         field: 'groupPublishedId',
         size: 300,
@@ -296,6 +274,27 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
         field: 'groupPublishedId',
         orderByTranslation: true,
         filterByTranslation: true,
+        displayFilter: true,
+        collapsed: false,
+        layout: 'multiselect',
+      },
+    },
+  },
+  _groupPublished: {
+    groupPublishedId: {
+      terms: {
+        field: 'groupPublishedId',
+        size: 300,
+        include: '.*',
+        exclude: '1',
+      },
+      meta: {
+        field: 'groupPublishedId',
+        orderByTranslation: true,
+        filterByTranslation: true,
+        displayFilter: true,
+        collapsed: false,
+        layout: 'multiselect',
       },
     },
   },
@@ -532,23 +531,6 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
       terms: {
         field: 'th_dcsmm-descripteur.default',
         size: 300,
-      },
-    },
-  },
-  _groupPublished: {
-    group: {
-      terms: {
-        field: 'groupPublishedId',
-        size: 300,
-        include: '.*',
-        exclude: '1',
-      },
-      meta: {
-        field: 'groupPublishedId',
-        orderByTranslation: true,
-        filterByTranslation: true,
-        displayFilter: true,
-        collapsed: true,
       },
     },
   },
@@ -851,7 +833,8 @@ export function migrateSextantConfig(config: UiConfiguration): UiConfiguration {
   }
 
   const tabOverflow = config.sextant.tabOverflow;
-  const searchEnabled = tabOverflow?.search;
+  // TODO: Check sextant if undefined means no module? and it is active status?
+  const searchEnabled = tabOverflow?.search !== undefined ? true : false;
   const mapEnabled = tabOverflow?.map;
 
   return {

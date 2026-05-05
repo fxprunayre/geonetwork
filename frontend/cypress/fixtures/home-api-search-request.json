@@ -95,6 +95,25 @@
         }
       }
     },
+    "th_httpinspireeceuropaeutheme-theme_tree.key": {
+      "terms": {
+        "field": "th_httpinspireeceuropaeutheme-theme_tree.key",
+        "size": 34,
+        "order": {
+          "_key": "asc"
+        }
+      },
+      "meta": {
+        "collapsed": true,
+        "translateOnLoad": true,
+        "orderByTranslation": true,
+        "decorator": {
+          "type": "icon",
+          "prefix": "iti-",
+          "expression": "http://inspire.ec.europa.eu/theme/(.*)"
+        }
+      }
+    },
     "th_simm-reglementaire_tree.key": {
       "terms": {
         "field": "th_simm-reglementaire_tree.key",

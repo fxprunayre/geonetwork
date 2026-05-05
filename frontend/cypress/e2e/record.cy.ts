@@ -9,26 +9,17 @@ describe('Record page', () => {
   it('should display the record menu with share and download options', () => {
     cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
-
-    cy.get('app-record-menu p-button[title="Quick actions"]').click();
-
     cy.wait('@getPermalink');
 
-    cy.get('app-record-menu .p-tieredmenu-item')
-      .first()
-      .find('.p-tieredmenu-item-label')
+    cy.get('a[title="Permalink to the record"]')
       .should('have.text', 'Share')
       .should('be.visible')
-      .closest('a')
       .should('have.attr', 'href')
       .and('include', `https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea`);
 
-    cy.get('app-record-menu .p-tieredmenu-item')
-      .last()
-      .find('.p-tieredmenu-item-label')
+    cy.get('a[title="Download the record in XML format"]')
       .should('have.text', 'Metadata (XML)')
       .should('be.visible')
-      .closest('a')
       .should('have.attr', 'href')
       .and('include', `/srv/api/records/${SURVAL_UUID}/formatters/xml`);
   });
@@ -118,7 +109,6 @@ describe('Record page', () => {
       'div',
       'Composed of 8 resource(s)',
     );
-    cy.get('[data-testid="associated-records-children"]').contains('p-button', 'See all');
 
     // Check we have 2 dates
     cy.get('app-record-field-dates div:has(> span)').should('have.length', 2);
@@ -211,6 +201,7 @@ describe('Record page', () => {
       'div',
       'Used for 34 resource(s)',
     );
+    cy.get('[data-testid="associated-records-hassources"]').contains('p-button', 'See all');
 
     cy.get('[data-testid="accordion-panel-contact-pointOfContact"] .p-accordionheader').contains(
       'Point of contact',

@@ -4,6 +4,8 @@ export default defineConfig({
   includeShadowDom: true,
   e2e: {
     retries: 0,
+    requestTimeout: 15000,
+    experimentalRunAllSpecs: true,
     baseUrl: 'http://0.0.0.0:4200',
     setupNodeEvents(on, config) {
       on('before:browser:launch', (browser, launchOptions) => {

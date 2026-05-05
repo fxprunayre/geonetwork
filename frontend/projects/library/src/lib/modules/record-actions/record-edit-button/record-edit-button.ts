@@ -42,7 +42,9 @@ export class RecordEditButton extends RecordFieldBase {
   catalogueUrl = computed(() => this.appConfiguration().catalogueUrl);
   currentLang = signal(this.translate.getCurrentLang());
 
-  isAuthenticated = computed(() => this.authStore.isAuthenticated());
+  isAuthenticated = computed(() => {
+    return this.authStore.isAuthenticated();
+  });
 
   editorUrl = computed(() => {
     const uuid = this.record().uuid;

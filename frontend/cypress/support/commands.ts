@@ -37,6 +37,39 @@ Cypress.Commands.add('mockClipboard', (initialText = '') => {
 });
 
 Cypress.Commands.add('initApp', (profile = '') => {
+  const isAuthenticated = profile.trim().length > 0;
+
+  const withEditPermission = (responseBody: any) => {
+    if (!isAuthenticated) {
+      return responseBody;
+    }
+
+    const patchedResponse = Cypress._.cloneDeep(responseBody);
+
+    const markEditable = (value: any) => {
+      if (!value || typeof value !== 'object') {
+        return;
+      }
+
+      if ('edit' in value) {
+        value.edit = true;
+      }
+
+      if (value.info && typeof value.info === 'object') {
+        value.info.edit = true;
+      }
+
+      for (const key in value) {
+        if (Object.prototype.hasOwnProperty.call(value, key)) {
+          markEditable(value[key]);
+        }
+      }
+    };
+
+    markEditable(patchedResponse);
+    return patchedResponse;
+  };
+
   cy.intercept('GET', '**/srv/api/me', { fixture: `me-${profile}.json` }).as('apiMe');
 
   cy.intercept('GET', 'https://tile.openstreetmap.org/**', { fixture: 'tile.png' }).as('osmTile');
@@ -113,28 +146,39 @@ Cypress.Commands.add('initApp', (profile = '') => {
   ];
 
   const loadedMocks: any[] = [];
-  cy.wrap(mockMap)
+  return cy
+    .wrap(mockMap)
     .each((mock: any) => {
-      cy.fixture(mock.req).then((body) => {
-        loadedMocks.push({ ...mock, body });
+      cy.fixture(mock.req).then((requestBody) => {
+        cy.fixture(mock.res).then((responseBody) => {
+          loadedMocks.push({ ...mock, body: requestBody, responseBody });
+        });
       });
     })
     .then(() => {
       cy.intercept('POST', '**/search/records/_search*', (req) => {
         // Ensure body is an object to ignore JSON formatting differences (whitespace, etc.)
         const body = Cypress._.isString(req.body) ? JSON.parse(req.body) : req.body;
-
         const match = loadedMocks.find((m) => Cypress._.isEqual(body, m.body));
 
         if (match) {
           req.alias = match.alias;
-          req.reply({ fixture: match.res });
+          req.reply({
+            body:
+              match.alias === 'apiMainSearchGetRecord'
+                ? withEditPermission(match.responseBody)
+                : match.responseBody,
+          });
         } else {
           req.alias = 'unmatchedSearchRequest';
-          console.warn('No matching fixture for unmatched search request body:', body);
+          console.warn('No matching fixture for unmatched search request body:', req.url, body);
+          req.continue();
         }
       });
-    });
+    })
+    .then(() => {
+      return undefined as void;
+    }) as unknown as Cypress.Chainable<void>;
 });
 
 /**
