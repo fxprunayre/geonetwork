@@ -8,6 +8,7 @@ import {
   HostListener,
   inject,
   input,
+  OnDestroy,
   Output,
   signal,
   viewChild,
@@ -21,16 +22,20 @@ import { Select, SelectChangeEvent } from 'primeng/select';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchFilterChange } from '../../search/search-store.model';
 import { AggregationBucket } from '../aggregation-bucket/aggregation-bucket';
+import { AggregationChart } from '../aggregation-chart/aggregation-chart';
 import { AggregationService } from '../aggregation-service';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationTree } from '../aggregation-tree/aggregation-tree';
 import { AggregationBucketType } from './aggregation.model';
+
+const CHART_LAYOUTS = ['bar', 'pie', 'treemap'] as const;
 
 @Component({
   selector: 'app-aggregation',
   standalone: true,
   imports: [
     AggregationBucket,
+    AggregationChart,
     AggregationTree,
     ButtonModule,
     FormsModule,
@@ -42,7 +47,7 @@ import { AggregationBucketType } from './aggregation.model';
   providers: [AggregationTranslatePipe, DecimalPipe],
   templateUrl: './aggregation.html',
 })
-export class Aggregation extends SearchBase {
+export class Aggregation extends SearchBase implements OnDestroy {
   keyName = input.required<string>();
   displayType = input<AggregationLayout | undefined>();
 
@@ -71,8 +76,14 @@ export class Aggregation extends SearchBase {
         this.search.aggregations()[this.keyName()],
         this.search.aggregationsConfig(),
       );
+
+      if (this.isChartLayout()) {
+        // AggregationChart is self-driven via its own effect(); no call needed here.
+      }
     });
   }
+
+  ngOnDestroy(): void {}
 
   displayFilter = computed(() => {
     return this.buckets().length > this.DISPLAY_FILTER_THRESHOLD;
@@ -81,6 +92,16 @@ export class Aggregation extends SearchBase {
   isInputFilter = computed(() => {
     return this.displayFilter() && ['checkbox', 'button', 'card'].includes(this.layout());
   });
+
+  isChartLayout = computed(() => {
+    return (CHART_LAYOUTS as readonly string[]).includes(this.layout());
+  });
+
+  activeKeysList = computed(() =>
+    this.buckets()
+      .filter((b) => this.search.isFilterActive(this.keyName(), b.key))
+      .map((b) => String(b.key)),
+  );
 
   buckets = computed(() => {
     let buckets = this.aggregationService.getBuckets(this.search.aggregations()[this.keyName()]);
@@ -97,9 +118,9 @@ export class Aggregation extends SearchBase {
   });
 
   layout = computed(() => {
-    return (
-      this.displayType() || this.search.aggregations()[this.keyName()].meta?.layout || 'checkbox'
-    );
+    const configuredLayout = this.search.aggregations()[this.keyName()]?.meta
+      ?.layout as AggregationLayout;
+    return this.displayType() || configuredLayout || 'checkbox';
   });
 
   placeholder = computed(() => {
@@ -155,6 +176,15 @@ export class Aggregation extends SearchBase {
     } else if (!event.add) {
       this.search.removeFilter(this.keyName(), event.values[0]);
     }
+  }
+
+  onChartBucketClick(key: string) {
+    const isActive = this.search.isFilterActive(this.keyName(), key);
+    this.filter({
+      field: this.keyName(),
+      values: [key],
+      add: !isActive,
+    });
   }
 
   // FIXME: ShadowDOM:

@@ -108,6 +108,36 @@
       </ng-template>
     </p-select>
   }
+  @case ('bar') {
+    <app-aggregation-chart
+      [buckets]="buckets()"
+      [activeKeys]="activeKeysList()"
+      [layout]="'bar'"
+      [keyName]="keyName()"
+      (bucketClicked)="onChartBucketClick($event)"
+      class="block w-full"
+    />
+  }
+  @case ('pie') {
+    <app-aggregation-chart
+      [buckets]="buckets()"
+      [activeKeys]="activeKeysList()"
+      [layout]="'pie'"
+      [keyName]="keyName()"
+      (bucketClicked)="onChartBucketClick($event)"
+      class="block w-full"
+    />
+  }
+  @case ('treemap') {
+    <app-aggregation-chart
+      [buckets]="buckets()"
+      [activeKeys]="activeKeysList()"
+      [layout]="'treemap'"
+      [keyName]="keyName()"
+      (bucketClicked)="onChartBucketClick($event)"
+      class="block w-full"
+    />
+  }
 }
 
 @if (search.hasMoreTerms(keyName()) || search.hasExpandedTerms(keyName())) {

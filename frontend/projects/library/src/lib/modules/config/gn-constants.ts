@@ -76,7 +76,8 @@ export const RESOURCE_TYPE_AGGREGATION: elasticsearch.AggregationsAggregationCon
     exclude: 'map/.*|publication-.*',
   },
   meta: {
-    collapsed: true,
+    collapsed: false,
+    // layout: 'treemap',
     decorator: {
       type: 'icon',
       map: {
@@ -296,7 +297,7 @@ export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
           exclude: 'publication-.*',
         },
         meta: {
-          layout: 'card',
+          layout: 'bar',
           decorator: {
             type: 'icon',
             prefix: '',
