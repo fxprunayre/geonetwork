@@ -28,7 +28,7 @@ import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationTree } from '../aggregation-tree/aggregation-tree';
 import { AggregationBucketType } from './aggregation.model';
 
-const CHART_LAYOUTS = ['bar', 'pie', 'treemap'] as const;
+const CHART_LAYOUTS = ['bar', 'pie', 'treemap', 'nightingale'] as const;
 
 @Component({
   selector: 'app-aggregation',

@@ -138,6 +138,16 @@
       class="block w-full"
     />
   }
+  @case ('nightingale') {
+    <app-aggregation-chart
+      [buckets]="buckets()"
+      [activeKeys]="activeKeysList()"
+      [layout]="'nightingale'"
+      [keyName]="keyName()"
+      (bucketClicked)="onChartBucketClick($event)"
+      class="block w-full"
+    />
+  }
 }
 
 @if (search.hasMoreTerms(keyName()) || search.hasExpandedTerms(keyName())) {

@@ -21,7 +21,7 @@ export type Decorator = {
   expression?: string;
 };
 
-export type AggregationChartLayout = 'bar' | 'pie' | 'treemap';
+export type AggregationChartLayout = 'bar' | 'pie' | 'treemap' | 'nightingale';
 export type AggregationLayout =
   | 'checkbox'
   | 'select'

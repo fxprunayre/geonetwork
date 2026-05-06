@@ -77,7 +77,7 @@ export const RESOURCE_TYPE_AGGREGATION: elasticsearch.AggregationsAggregationCon
   },
   meta: {
     collapsed: false,
-    // layout: 'treemap',
+    layout: 'nightingale',
     decorator: {
       type: 'icon',
       map: {

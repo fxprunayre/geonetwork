@@ -98,9 +98,17 @@ export class AggregationChart implements OnDestroy {
     const option: echarts.EChartsOption =
       this.layout() === 'pie'
         ? this.buildPieOption(allBuckets, labels, activeSet, primaryColor, secondaryColor)
-        : this.layout() === 'treemap'
-          ? this.buildTreemapOption(allBuckets, labels, activeSet, primaryColor, secondaryColor)
-          : this.buildBarOption(allBuckets, compactLabels, activeSet, primaryColor, secondaryColor);
+        : this.layout() === 'nightingale'
+          ? this.buildNightingaleOption(allBuckets, labels, activeSet, primaryColor, secondaryColor)
+          : this.layout() === 'treemap'
+            ? this.buildTreemapOption(allBuckets, labels, activeSet, primaryColor, secondaryColor)
+            : this.buildBarOption(
+                allBuckets,
+                compactLabels,
+                activeSet,
+                primaryColor,
+                secondaryColor,
+              );
 
     this.chartInstance.setOption(option, true);
     this.chartInstance.off('click');
@@ -110,6 +118,63 @@ export class AggregationChart implements OnDestroy {
         this.bucketClicked.emit(String(key));
       }
     });
+  }
+
+  private buildTreemapOption(
+    buckets: AggregationBucketType[],
+    labels: (string | number)[],
+    activeSet: Set<string>,
+    primaryColor: string,
+    secondaryColor: string,
+  ): echarts.EChartsOption {
+    return {
+      tooltip: { trigger: 'item', extraCssText: 'z-index: 9999;' },
+      series: [
+        {
+          type: 'treemap',
+          width: '100%',
+          height: '100%',
+          roam: false,
+          nodeClick: false,
+          breadcrumb: { show: false },
+          label: {
+            show: true,
+            formatter: (params: any) => this.truncateLabel(params.name, 18),
+            fontSize: 11,
+            overflow: 'truncate',
+          },
+          data: buckets.map((b, i) => ({
+            value: b.doc_count,
+            name: String(labels[i]),
+            key: b.key,
+            itemStyle: {
+              color:
+                activeSet.size === 0 || activeSet.has(String(b.key))
+                  ? primaryColor
+                  : secondaryColor,
+              opacity: activeSet.size === 0 || activeSet.has(String(b.key)) ? 1 : 0.4,
+            },
+          })),
+        },
+      ],
+    };
+  }
+
+  private buildNightingaleOption(
+    buckets: AggregationBucketType[],
+    labels: (string | number)[],
+    activeSet: Set<string>,
+    primaryColor: string,
+    secondaryColor: string,
+  ): echarts.EChartsOption {
+    const base = this.buildPieOption(buckets, labels, activeSet, primaryColor, secondaryColor);
+    const series = (base.series as any[])[0];
+    series.roseType = 'area';
+    series.radius = ['10%', '70%'];
+    series.itemStyle = {
+      borderRadius: 5,
+    };
+    return base;
   }
 
   private buildPieOption(
@@ -158,46 +223,6 @@ export class AggregationChart implements OnDestroy {
     };
   }
 
-  private buildTreemapOption(
-    buckets: AggregationBucketType[],
-    labels: (string | number)[],
-    activeSet: Set<string>,
-    primaryColor: string,
-    secondaryColor: string,
-  ): echarts.EChartsOption {
-    return {
-      tooltip: { trigger: 'item', extraCssText: 'z-index: 9999;' },
-      series: [
-        {
-          type: 'treemap',
-          width: '100%',
-          height: '100%',
-          roam: false,
-          nodeClick: false,
-          breadcrumb: { show: false },
-          label: {
-            show: true,
-            formatter: (params: any) => this.truncateLabel(params.name, 18),
-            fontSize: 11,
-            overflow: 'truncate',
-          },
-          data: buckets.map((b, i) => ({
-            value: b.doc_count,
-            name: String(labels[i]),
-            key: b.key,
-            itemStyle: {
-              color:
-                activeSet.size === 0 || activeSet.has(String(b.key))
-                  ? primaryColor
-                  : secondaryColor,
-              opacity: activeSet.size === 0 || activeSet.has(String(b.key)) ? 1 : 0.4,
-            },
-          })),
-        },
-      ],
-    };
-  }
-
   private buildBarOption(
     buckets: AggregationBucketType[],
     compactLabels: string[],
@@ -219,15 +244,10 @@ export class AggregationChart implements OnDestroy {
       series: [
         {
           type: 'bar',
-          barCategoryGap: '60%',
-          barWidth: 6,
           itemStyle: { borderRadius: [0, 5, 5, 0] },
           label: {
             show: true,
-            position: [0, 0],
-            offset: [0, -12],
-            fontSize: 12,
-            overflow: 'truncate',
+            position: 'insideLeft',
             formatter: (params: any) => compactLabels[params.dataIndex] ?? '',
           },
           data: buckets.map((b) => ({
