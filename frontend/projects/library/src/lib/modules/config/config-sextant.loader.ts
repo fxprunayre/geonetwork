@@ -144,7 +144,7 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
     creationYearForResource: {
       histogram: {
         field: 'creationYearForResource',
-        interval: 5,
+        interval: 1,
         min_doc_count: 1,
       },
       //   terms: {
@@ -154,6 +154,7 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
       //   },
       meta: {
         layout: 'bar',
+        refreshPolicy: 'none',
       },
     },
   },

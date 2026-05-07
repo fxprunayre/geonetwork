@@ -13,8 +13,12 @@ import {
 } from '@angular/core';
 import type { BarSeriesOption, PieSeriesOption, TreemapSeriesOption } from 'echarts/charts';
 import { BarChart, PieChart, TreemapChart } from 'echarts/charts';
-import type { GridComponentOption, TooltipComponentOption } from 'echarts/components';
-import { GridComponent, TooltipComponent } from 'echarts/components';
+import type {
+  DataZoomComponentOption,
+  GridComponentOption,
+  TooltipComponentOption,
+} from 'echarts/components';
+import { DataZoomComponent, GridComponent, TooltipComponent } from 'echarts/components';
 import type { ComposeOption } from 'echarts/core';
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
@@ -23,12 +27,21 @@ import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggr
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationBucketType } from '../aggregation/aggregation.model';
 
-echarts.use([BarChart, PieChart, TreemapChart, GridComponent, TooltipComponent, CanvasRenderer]);
+echarts.use([
+  BarChart,
+  PieChart,
+  TreemapChart,
+  DataZoomComponent,
+  GridComponent,
+  TooltipComponent,
+  CanvasRenderer,
+]);
 
 type EChartsOption = ComposeOption<
   | BarSeriesOption
   | PieSeriesOption
   | TreemapSeriesOption
+  | DataZoomComponentOption
   | GridComponentOption
   | TooltipComponentOption
 >;
@@ -67,8 +80,10 @@ export class AggregationChart implements OnDestroy {
   layout = input.required<AggregationChartLayout>();
   keyName = input.required<string>();
   decorator = input<Decorator | undefined>();
+  refreshPolicy = input<'none' | undefined>();
 
   @Output() bucketClicked = new EventEmitter<string>();
+  @Output() rangeSelected = new EventEmitter<string[]>();
 
   /** Height grows with content for bar and treemap layouts; pie/nightingale keep a fixed footprint. */
   hostHeight = computed(() => {
@@ -122,6 +137,7 @@ export class AggregationChart implements OnDestroy {
   private chartInstance: ReturnType<typeof echarts.init> | null = null;
   private chartResizeObserver: ResizeObserver | null = null;
   private observedElement: HTMLElement | null = null;
+  private dataZoomDebounce: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
     effect(() => {
@@ -176,6 +192,8 @@ export class AggregationChart implements OnDestroy {
 
     const primaryColor = this.themeColor('--p-primary-500', '#2563eb');
     const secondaryColor = this.themeColor('--p-primary-300', '#93c5fd');
+    const visibleBarRange =
+      this.layout() === 'bar' ? this.getCurrentBarZoomRange(allBuckets.length) : undefined;
 
     const baseOption: EChartsOption =
       this.layout() === 'pie'
@@ -190,6 +208,7 @@ export class AggregationChart implements OnDestroy {
                 activeSet,
                 primaryColor,
                 secondaryColor,
+                visibleBarRange,
               );
 
     const option = this.applyAppFont(baseOption);
@@ -202,6 +221,82 @@ export class AggregationChart implements OnDestroy {
         this.bucketClicked.emit(String(key));
       }
     });
+    this.chartInstance.off('datazoom');
+    if (this.layout() === 'bar') {
+      this.chartInstance.on('datazoom', () => {
+        this.updateBarLabelContrastForVisibleRange(
+          allBuckets,
+          compactLabels,
+          activeSet,
+          primaryColor,
+          secondaryColor,
+        );
+        if (this.dataZoomDebounce !== null) clearTimeout(this.dataZoomDebounce);
+        this.dataZoomDebounce = setTimeout(() => {
+          this.emitZoomRange(allBuckets);
+        }, 400);
+      });
+    }
+  }
+
+  private emitZoomRange(buckets: AggregationBucketType[]) {
+    if (!this.chartInstance) return;
+    const opt = this.chartInstance.getOption() as any;
+    const dz = opt?.dataZoom?.[0];
+    if (!dz) return;
+    const lo = Math.round(dz.startValue ?? 0);
+    const hi = Math.round(dz.endValue ?? buckets.length - 1);
+    const keys = buckets.slice(Math.min(lo, hi), Math.max(lo, hi) + 1).map((b) => String(b.key));
+    if (keys.length > 0) {
+      this.rangeSelected.emit(keys);
+    }
+  }
+
+  private getCurrentBarZoomRange(bucketCount: number): { start: number; end: number } | undefined {
+    if (!this.chartInstance || bucketCount <= 0) return undefined;
+    const opt = this.chartInstance.getOption() as any;
+    const dz = opt?.dataZoom?.[0];
+    if (!dz) return undefined;
+
+    const start = Math.max(0, Math.min(bucketCount - 1, Math.round(dz.startValue ?? 0)));
+    const end = Math.max(0, Math.min(bucketCount - 1, Math.round(dz.endValue ?? bucketCount - 1)));
+    return { start, end };
+  }
+
+  private updateBarLabelContrastForVisibleRange(
+    buckets: AggregationBucketType[],
+    compactLabels: string[],
+    activeSet: Set<string>,
+    primaryColor: string,
+    secondaryColor: string,
+  ) {
+    if (!this.chartInstance) return;
+
+    const visibleRange = this.getCurrentBarZoomRange(buckets.length);
+    const data = this.buildBarSeriesData(
+      buckets,
+      activeSet,
+      primaryColor,
+      secondaryColor,
+      visibleRange,
+    );
+
+    this.chartInstance.setOption(
+      {
+        series: [
+          {
+            type: 'bar',
+            label: {
+              show: true,
+              position: 'insideLeft',
+              formatter: (params: any) => compactLabels[params.dataIndex] ?? '',
+            },
+            data,
+          },
+        ],
+      } as any,
+      false,
+    );
   }
 
   private applyAppFont(option: EChartsOption): EChartsOption {
@@ -342,13 +437,32 @@ export class AggregationChart implements OnDestroy {
     activeSet: Set<string>,
     primaryColor: string,
     secondaryColor: string,
+    visibleRange?: { start: number; end: number },
   ): EChartsOption {
-    const maxValue = Math.max(...buckets.map((b) => b.doc_count), 0);
-    const lowBarThreshold = maxValue * 0.12;
+    const handleColor = this.themeColor('--p-primary-300', '#3b82f6');
+    const handleBorderColor = this.themeColor('--p-primary-500', '#1d4ed8');
+    const fillerColor = this.themeColor('--p-primary-100', '#bfdbfe');
+    const borderColor = this.themeColor('--p-surface-300', '#d1d5db');
+    const bgColor = '#FFFFFF';
+    const textColor = this.themeColor('--p-primary-500', '#6b7280');
+
+    // When refreshPolicy is 'none', buckets don't change after filtering,
+    // so we drive the slider position from the active selection.
+    let sliderStartValue: number | undefined;
+    let sliderEndValue: number | undefined;
+    if (this.refreshPolicy() === 'none' && activeSet.size > 0) {
+      const activeIndices = buckets
+        .map((b, i) => (activeSet.has(String(b.key)) ? i : -1))
+        .filter((i) => i >= 0);
+      if (activeIndices.length > 0) {
+        sliderStartValue = Math.min(...activeIndices);
+        sliderEndValue = Math.max(...activeIndices);
+      }
+    }
 
     return {
       tooltip: { trigger: 'item' },
-      grid: { left: 8, right: 8, top: 20, bottom: 8, containLabel: false },
+      grid: { left: 8, right: 8, top: 20, bottom: 50, containLabel: false },
       xAxis: { type: 'value', splitLine: { show: false } },
       yAxis: {
         type: 'category',
@@ -357,6 +471,26 @@ export class AggregationChart implements OnDestroy {
         axisTick: { show: false },
         axisLabel: { show: false },
       },
+      dataZoom: [
+        {
+          type: 'slider',
+          show: buckets.length > 5,
+          yAxisIndex: 0,
+          ...(sliderStartValue !== undefined ? { startValue: sliderStartValue } : {}),
+          ...(sliderEndValue !== undefined ? { endValue: sliderEndValue } : {}),
+          textStyle: { color: textColor },
+          borderColor,
+          backgroundColor: bgColor,
+          handleStyle: { color: handleColor, borderColor: handleBorderColor },
+          moveHandleStyle: { color: handleColor, opacity: 0.6 },
+          fillerColor: fillerColor + '55',
+          emphasis: {
+            handleLabel: { show: false },
+            handleStyle: { color: handleBorderColor, borderColor: handleBorderColor },
+            moveHandleStyle: { color: handleBorderColor },
+          },
+        },
+      ],
       series: [
         {
           type: 'bar',
@@ -366,30 +500,57 @@ export class AggregationChart implements OnDestroy {
             position: 'insideLeft',
             formatter: (params: any) => compactLabels[params.dataIndex] ?? '',
           },
-          data: buckets.map((b) => {
-            const isLowBar = b.doc_count <= lowBarThreshold;
-            return {
-              value: b.doc_count,
-              key: b.key,
-              label: {
-                color: isLowBar ? '#0f172a' : '#ffffff',
-                textBorderWidth: 1,
-                textBorderColor: isLowBar ? '#ffffff' : '',
-              },
-              itemStyle: {
-                color:
-                  activeSet.size === 0 || activeSet.has(String(b.key))
-                    ? primaryColor
-                    : secondaryColor,
-              },
-            };
-          }),
+          data: this.buildBarSeriesData(
+            buckets,
+            activeSet,
+            primaryColor,
+            secondaryColor,
+            visibleRange,
+          ),
         },
       ],
     };
   }
 
+  private buildBarSeriesData(
+    buckets: AggregationBucketType[],
+    activeSet: Set<string>,
+    primaryColor: string,
+    secondaryColor: string,
+    visibleRange?: { start: number; end: number },
+  ) {
+    const rangeStart = Math.max(0, Math.min(visibleRange?.start ?? 0, buckets.length - 1));
+    const rangeEnd = Math.max(
+      rangeStart,
+      Math.min(visibleRange?.end ?? buckets.length - 1, buckets.length - 1),
+    );
+    const visibleBuckets = buckets.slice(rangeStart, rangeEnd + 1);
+    const visibleMax = Math.max(...visibleBuckets.map((b) => b.doc_count), 0);
+    const lowBarThreshold = visibleMax * 0.12;
+
+    return buckets.map((b) => {
+      const isLowBar = b.doc_count <= lowBarThreshold;
+      return {
+        value: b.doc_count,
+        key: b.key,
+        label: {
+          color: isLowBar ? '#0f172a' : '#ffffff',
+          textBorderWidth: 1,
+          textBorderColor: isLowBar ? '#ffffff' : '',
+        },
+        itemStyle: {
+          color:
+            activeSet.size === 0 || activeSet.has(String(b.key)) ? primaryColor : secondaryColor,
+        },
+      };
+    });
+  }
+
   private dispose() {
+    if (this.dataZoomDebounce !== null) {
+      clearTimeout(this.dataZoomDebounce);
+      this.dataZoomDebounce = null;
+    }
     if (this.chartInstance) {
       this.chartInstance.dispose();
       this.chartInstance = null;

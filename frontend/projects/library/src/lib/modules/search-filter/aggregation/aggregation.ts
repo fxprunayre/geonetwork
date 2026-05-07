@@ -171,6 +171,10 @@ export class Aggregation extends SearchBase implements OnDestroy {
     return this.search.aggregations()[this.keyName()]?.meta?.decorator;
   });
 
+  refreshPolicy = computed<'none' | undefined>(() => {
+    return this.search.aggregations()[this.keyName()]?.meta?.refreshPolicy;
+  });
+
   placeholder = computed(() => {
     return `${this.translateService.instant('search.aggregations.' + this.keyName())}`;
   });
@@ -233,6 +237,17 @@ export class Aggregation extends SearchBase implements OnDestroy {
       values: [key],
       add: !isActive,
     });
+  }
+
+  onChartRangeSelect(keys: string[]) {
+    this.search.clearFilter(this.keyName());
+    if (keys.length > 0) {
+      this.filter({
+        field: this.keyName(),
+        values: keys,
+        add: true,
+      });
+    }
   }
 
   // FIXME: ShadowDOM:

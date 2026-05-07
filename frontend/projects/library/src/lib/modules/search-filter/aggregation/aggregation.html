@@ -115,7 +115,9 @@
       [layout]="'bar'"
       [keyName]="keyName()"
       [decorator]="decorator()"
+      [refreshPolicy]="refreshPolicy()"
       (bucketClicked)="onChartBucketClick($event)"
+      (rangeSelected)="onChartRangeSelect($event)"
       class="block w-full"
     />
   }
