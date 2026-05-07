@@ -175,6 +175,14 @@ export class Aggregation extends SearchBase implements OnDestroy {
     return this.search.aggregations()[this.keyName()]?.meta?.refreshPolicy;
   });
 
+  isHistogram = computed(() => {
+    const aggregationConfig = this.aggregationService.getAggregationConfig(
+      this.keyName(),
+      this.search.aggregationsConfig(),
+    );
+    return typeof aggregationConfig?.histogram?.interval === 'number';
+  });
+
   placeholder = computed(() => {
     return `${this.translateService.instant('search.aggregations.' + this.keyName())}`;
   });
