@@ -8,9 +8,9 @@
  * Do not edit the class manually.
  */
 import { OgcApiRecordsFacetSummaryDto } from './ogcApiRecordsFacetSummaryDto';
+import { OgcApiRecordsLinkDto } from './ogcApiRecordsLinkDto';
 import { OgcApiRecordsLinkTemplateDto } from './ogcApiRecordsLinkTemplateDto';
 import { OgcApiRecordsRecordGeoJSONDto } from './ogcApiRecordsRecordGeoJSONDto';
-import { OgcApiRecordsLinkDto } from './ogcApiRecordsLinkDto';
 
 export interface OgcApiRecordsGetRecords200ResponseDto {
   type: OgcApiRecordsGetRecords200ResponseDto.TypeEnum;

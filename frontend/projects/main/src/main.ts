@@ -1,8 +1,8 @@
-import { createApplication } from '@angular/platform-browser';
 import { createCustomElement } from '@angular/elements';
-import { getAppConfig } from './app/app.config';
-import { App } from './app/app';
+import { createApplication } from '@angular/platform-browser';
 import { loadAppConfig } from 'gn-library';
+import { App } from './app/app';
+import { getAppConfig } from './app/app.config';
 
 loadAppConfig().then((config: any) => {
   //bootstrapApplication(App, getAppConfig(config)).catch((err) => console.error(err));

@@ -9,28 +9,18 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
+import { HttpClient, HttpContext, HttpEvent, HttpParams, HttpResponse } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpParams,
-  HttpResponse,
-  HttpEvent,
-  HttpParameterCodec,
-  HttpContext,
-} from '@angular/common/http';
-import { CustomHttpParameterCodec } from '../encoder';
 import { Observable } from 'rxjs';
 
 // @ts-ignore
-import { OgcApiRecordsExceptionDto } from '../model/ogcApiRecordsExceptionDto';
 // @ts-ignore
 import { OgcApiRecordsRecordGeoJSONDto } from '../model/ogcApiRecordsRecordGeoJSONDto';
 
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
-import { Configuration } from '../configuration';
 import { BaseService } from '../api.base.service';
+import { Configuration } from '../configuration';
+import { BASE_PATH } from '../variables';
 
 @Injectable({
   providedIn: 'root',

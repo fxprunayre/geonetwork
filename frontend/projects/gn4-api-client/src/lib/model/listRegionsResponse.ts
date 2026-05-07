@@ -7,8 +7,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { RegionResponse } from './regionResponse';
 import { CategoryResponse } from './categoryResponse';
+import { RegionResponse } from './regionResponse';
 
 export interface ListRegionsResponse {
   categories?: { [key: string]: CategoryResponse };

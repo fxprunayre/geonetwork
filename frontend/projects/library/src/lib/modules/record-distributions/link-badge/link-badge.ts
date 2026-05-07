@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { NgIcon } from '@ng-icons/core';
 import { Link } from 'gn-api-client';
 import { DistributionService } from '../distribution-service';
-import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-link-badge',

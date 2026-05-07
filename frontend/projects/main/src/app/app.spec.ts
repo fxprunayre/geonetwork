@@ -1,13 +1,13 @@
-import { TestBed } from '@angular/core/testing';
-import { App } from './app';
-import {
-  provideMockTranslateService,
-  createMockSearchService,
-  APPLICATION_CONFIGURATION,
-  DEFAULT_TEST_CONFIG,
-} from 'gn-library';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import {
+  APPLICATION_CONFIGURATION,
+  createMockSearchService,
+  DEFAULT_TEST_CONFIG,
+  provideMockTranslateService,
+} from 'gn-library';
+import { App } from './app';
 import { routes } from './app.routes';
 
 describe('App', () => {

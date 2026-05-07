@@ -7,9 +7,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { HttpHeaders, HttpParams, HttpParameterCodec } from '@angular/common/http';
-import { CustomHttpParameterCodec } from './encoder';
+import { HttpHeaders, HttpParameterCodec, HttpParams } from '@angular/common/http';
 import { Configuration } from './configuration';
+import { CustomHttpParameterCodec } from './encoder';
 
 export class BaseService {
   protected basePath = 'http://localhost:8080/geonetwork/srv/api';

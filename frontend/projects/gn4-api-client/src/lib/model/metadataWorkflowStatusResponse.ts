@@ -7,9 +7,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { User } from './user';
 import { MetadataStatusDto } from './metadataStatusDto';
 import { StatusValue } from './statusValue';
+import { User } from './user';
 
 export interface MetadataWorkflowStatusResponse {
   currentStatus?: MetadataStatusDto;

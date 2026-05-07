@@ -7,18 +7,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OgcApiRecordsThumbnailsDto } from './ogcApiRecordsThumbnailsDto';
-import { OgcApiRecordsThemeDto } from './ogcApiRecordsThemeDto';
-import { OgcApiRecordsRecordCommonPropertiesExternalIdsInnerDto } from './ogcApiRecordsRecordCommonPropertiesExternalIdsInnerDto';
+import { Contact } from './contact';
+import { Extent } from './extent';
+import { IndexRecord } from './indexRecord';
 import { Language } from './language';
 import { OgcApiRecordsFormatDto } from './ogcApiRecordsFormatDto';
-import { Extent } from './extent';
-import { OgcApiRecordsLinkTemplateDto } from './ogcApiRecordsLinkTemplateDto';
-import { OgcApiRecordsRecordGeoJSONDto } from './ogcApiRecordsRecordGeoJSONDto';
-import { IndexRecord } from './indexRecord';
 import { OgcApiRecordsLinkDto } from './ogcApiRecordsLinkDto';
+import { OgcApiRecordsLinkTemplateDto } from './ogcApiRecordsLinkTemplateDto';
+import { OgcApiRecordsRecordCommonPropertiesExternalIdsInnerDto } from './ogcApiRecordsRecordCommonPropertiesExternalIdsInnerDto';
+import { OgcApiRecordsRecordGeoJSONDto } from './ogcApiRecordsRecordGeoJSONDto';
 import { OgcApiRecordsSchemeDto } from './ogcApiRecordsSchemeDto';
-import { Contact } from './contact';
+import { OgcApiRecordsThemeDto } from './ogcApiRecordsThemeDto';
+import { OgcApiRecordsThumbnailsDto } from './ogcApiRecordsThumbnailsDto';
 
 export interface OgcApiRecordsCatalogDto {
   /**

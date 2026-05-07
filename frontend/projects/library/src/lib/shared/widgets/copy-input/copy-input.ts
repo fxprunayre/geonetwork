@@ -1,10 +1,10 @@
 import { Component, Input, inject } from '@angular/core';
-import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCopy } from '@ng-icons/font-awesome/solid';
-import { Toast } from 'primeng/toast';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
+import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
+import { Toast } from 'primeng/toast';
 
 @Component({
   selector: 'app-copy-input',

@@ -1,9 +1,9 @@
 import { Component, input } from '@angular/core';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
-import { Chip } from 'primeng/chip';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidChevronRight } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Chip } from 'primeng/chip';
+import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
   selector: 'app-record-field-type',

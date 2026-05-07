@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, computed, ElementRef, signal, ViewChild } from '@angular/core';
 import { NgStyle } from '@angular/common';
-import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
+import { AfterViewInit, Component, computed, ElementRef, signal, ViewChild } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidChevronDown, faSolidChevronUp } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
 
 @Component({
   selector: 'app-show-more-toggle',

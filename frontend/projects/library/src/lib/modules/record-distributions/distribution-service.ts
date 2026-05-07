@@ -1,16 +1,5 @@
 import { computed, inject, Injectable } from '@angular/core';
-import { APPLICATION_CONFIGURATION } from '../config/config.loader';
-import { ConfigService } from '../config/config-service';
-import { Link } from 'gn-api-client';
 import { faBrandBitbucket, faBrandGithub, faBrandGitlab } from '@ng-icons/font-awesome/brands';
-import {
-  simpleApacheparquet,
-  simpleDoi,
-  simpleEsri,
-  simpleMarkdown,
-  simpleRss,
-  simpleZenodo,
-} from '@ng-icons/simple-icons';
 import {
   faSolidCloudArrowDown,
   faSolidDroplet,
@@ -24,6 +13,17 @@ import {
   faSolidTable,
   faSolidTableCellsLarge,
 } from '@ng-icons/font-awesome/solid';
+import {
+  simpleApacheparquet,
+  simpleDoi,
+  simpleEsri,
+  simpleMarkdown,
+  simpleRss,
+  simpleZenodo,
+} from '@ng-icons/simple-icons';
+import { Link } from 'gn-api-client';
+import { ConfigService } from '../config/config-service';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 
 @Injectable({
   providedIn: 'root',

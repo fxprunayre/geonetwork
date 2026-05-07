@@ -7,21 +7,21 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ProcessStep } from './processStep';
-import { SpecificationConformance } from './specificationConformance';
-import { FeatureType } from './featureType';
-import { IndexingErrorMsg } from './indexingErrorMsg';
-import { ResourceDate } from './resourceDate';
-import { Overview } from './overview';
-import { Maintenance } from './maintenance';
-import { RecordLink } from './recordLink';
-import { ResourceIdentifier } from './resourceIdentifier';
+import { CrsDetails } from './crsDetails';
 import { DateRange } from './dateRange';
 import { DateRangeDetails } from './dateRangeDetails';
-import { CrsDetails } from './crsDetails';
-import { Thesaurus } from './thesaurus';
-import { Measure } from './measure';
+import { FeatureType } from './featureType';
+import { IndexingErrorMsg } from './indexingErrorMsg';
 import { Link } from './link';
+import { Maintenance } from './maintenance';
+import { Measure } from './measure';
+import { Overview } from './overview';
+import { ProcessStep } from './processStep';
+import { RecordLink } from './recordLink';
+import { ResourceDate } from './resourceDate';
+import { ResourceIdentifier } from './resourceIdentifier';
+import { SpecificationConformance } from './specificationConformance';
+import { Thesaurus } from './thesaurus';
 import { VerticalRange } from './verticalRange';
 
 export interface IndexRecord {

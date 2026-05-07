@@ -7,9 +7,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OgcApiRecordsLinkTemplateDto } from './ogcApiRecordsLinkTemplateDto';
 import { OgcApiRecordsCatalogDto } from './ogcApiRecordsCatalogDto';
 import { OgcApiRecordsLinkDto } from './ogcApiRecordsLinkDto';
+import { OgcApiRecordsLinkTemplateDto } from './ogcApiRecordsLinkTemplateDto';
 
 export interface OgcApiRecordsGetCollections200ResponseDto {
   links: Array<OgcApiRecordsLinkDto>;

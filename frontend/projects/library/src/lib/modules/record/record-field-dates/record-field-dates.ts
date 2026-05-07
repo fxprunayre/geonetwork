@@ -1,7 +1,5 @@
+import { DatePipe } from '@angular/common';
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
-import { TranslateService } from '@ngx-translate/core';
-import { ResourceDate } from 'gn-api-client';
 import { provideIcons } from '@ng-icons/core';
 import { faLightbulb, faPaperPlane } from '@ng-icons/font-awesome/regular';
 import {
@@ -16,7 +14,9 @@ import {
   faSolidShareNodes,
   faSolidXmark,
 } from '@ng-icons/font-awesome/solid';
-import { DatePipe } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { ResourceDate } from 'gn-api-client';
+import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
   selector: 'app-record-field-dates',

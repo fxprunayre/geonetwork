@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResultsSorterComponent } from './results-sorter';
 import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
-import { provideMockSearchService } from '../../search/search-store.mock.spec';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
+import { provideMockSearchService } from '../../search/search-store.mock.spec';
+import { ResultsSorterComponent } from './results-sorter';
 
 describe('ResultsSorterComponent', () => {
   let component: ResultsSorterComponent;

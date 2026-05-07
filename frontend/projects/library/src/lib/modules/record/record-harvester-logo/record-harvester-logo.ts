@@ -1,8 +1,8 @@
 import { Component, computed, inject } from '@angular/core';
-import { Card } from 'primeng/card';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Card } from 'primeng/card';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
   selector: 'app-record-harvester-logo',

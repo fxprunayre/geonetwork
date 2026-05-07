@@ -11,11 +11,27 @@ import {
   Output,
   viewChild,
 } from '@angular/core';
-import * as echarts from 'echarts';
+import type { BarSeriesOption, PieSeriesOption, TreemapSeriesOption } from 'echarts/charts';
+import { BarChart, PieChart, TreemapChart } from 'echarts/charts';
+import type { GridComponentOption, TooltipComponentOption } from 'echarts/components';
+import { GridComponent, TooltipComponent } from 'echarts/components';
+import type { ComposeOption } from 'echarts/core';
+import * as echarts from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
 import { AggregationChartLayout, Decorator } from 'gn-api-client';
 import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationBucketType } from '../aggregation/aggregation.model';
+
+echarts.use([BarChart, PieChart, TreemapChart, GridComponent, TooltipComponent, CanvasRenderer]);
+
+type EChartsOption = ComposeOption<
+  | BarSeriesOption
+  | PieSeriesOption
+  | TreemapSeriesOption
+  | GridComponentOption
+  | TooltipComponentOption
+>;
 
 @Component({
   selector: 'app-aggregation-chart',
@@ -103,7 +119,7 @@ export class AggregationChart implements OnDestroy {
   private translatePipe = inject(AggregationTranslatePipe);
   chartContainer = viewChild<ElementRef<HTMLElement>>('chartContainer');
 
-  private chartInstance: echarts.ECharts | null = null;
+  private chartInstance: ReturnType<typeof echarts.init> | null = null;
   private chartResizeObserver: ResizeObserver | null = null;
   private observedElement: HTMLElement | null = null;
 
@@ -161,7 +177,7 @@ export class AggregationChart implements OnDestroy {
     const primaryColor = this.themeColor('--p-primary-500', '#2563eb');
     const secondaryColor = this.themeColor('--p-primary-300', '#93c5fd');
 
-    const option: echarts.EChartsOption =
+    const baseOption: EChartsOption =
       this.layout() === 'pie'
         ? this.buildPieOption(allBuckets, labels, activeSet, primaryColor, secondaryColor)
         : this.layout() === 'nightingale'
@@ -176,6 +192,8 @@ export class AggregationChart implements OnDestroy {
                 secondaryColor,
               );
 
+    const option = this.applyAppFont(baseOption);
+
     this.chartInstance.setOption(option, true);
     this.chartInstance.off('click');
     this.chartInstance.on('click', (params: any) => {
@@ -186,13 +204,35 @@ export class AggregationChart implements OnDestroy {
     });
   }
 
+  private applyAppFont(option: EChartsOption): EChartsOption {
+    const fontFamily = this.themeColor('--app-font-family-sans', "'Inter', sans-serif");
+    const tooltip = option.tooltip as TooltipComponentOption | undefined;
+
+    return {
+      ...option,
+      textStyle: {
+        ...(option['textStyle'] || {}),
+        fontFamily,
+      },
+      tooltip: tooltip
+        ? {
+            ...tooltip,
+            textStyle: {
+              ...(tooltip['textStyle'] || {}),
+              fontFamily,
+            },
+          }
+        : tooltip,
+    };
+  }
+
   private buildTreemapOption(
     buckets: AggregationBucketType[],
     labels: (string | number)[],
     activeSet: Set<string>,
     primaryColor: string,
     secondaryColor: string,
-  ): echarts.EChartsOption {
+  ): EChartsOption {
     const palette = [
       this.themeColor('--p-primary-700', '#1d4ed8'),
       this.themeColor('--p-primary-600', '#2563eb'),
@@ -239,7 +279,7 @@ export class AggregationChart implements OnDestroy {
     activeSet: Set<string>,
     primaryColor: string,
     secondaryColor: string,
-  ): echarts.EChartsOption {
+  ): EChartsOption {
     const base = this.buildPieOption(buckets, labels, activeSet, primaryColor, secondaryColor);
     const series = (base.series as any[])[0];
     series.roseType = 'area';
@@ -256,7 +296,7 @@ export class AggregationChart implements OnDestroy {
     activeSet: Set<string>,
     primaryColor: string,
     secondaryColor: string,
-  ): echarts.EChartsOption {
+  ): EChartsOption {
     return {
       tooltip: { trigger: 'item', extraCssText: 'z-index: 9999;' },
       color: [
@@ -302,7 +342,10 @@ export class AggregationChart implements OnDestroy {
     activeSet: Set<string>,
     primaryColor: string,
     secondaryColor: string,
-  ): echarts.EChartsOption {
+  ): EChartsOption {
+    const maxValue = Math.max(...buckets.map((b) => b.doc_count), 0);
+    const lowBarThreshold = maxValue * 0.12;
+
     return {
       tooltip: { trigger: 'item' },
       grid: { left: 8, right: 8, top: 20, bottom: 8, containLabel: false },
@@ -323,16 +366,24 @@ export class AggregationChart implements OnDestroy {
             position: 'insideLeft',
             formatter: (params: any) => compactLabels[params.dataIndex] ?? '',
           },
-          data: buckets.map((b) => ({
-            value: b.doc_count,
-            key: b.key,
-            itemStyle: {
-              color:
-                activeSet.size === 0 || activeSet.has(String(b.key))
-                  ? primaryColor
-                  : secondaryColor,
-            },
-          })),
+          data: buckets.map((b) => {
+            const isLowBar = b.doc_count <= lowBarThreshold;
+            return {
+              value: b.doc_count,
+              key: b.key,
+              label: {
+                color: isLowBar ? '#0f172a' : '#ffffff',
+                textBorderWidth: 1,
+                textBorderColor: isLowBar ? '#ffffff' : '',
+              },
+              itemStyle: {
+                color:
+                  activeSet.size === 0 || activeSet.has(String(b.key))
+                    ? primaryColor
+                    : secondaryColor,
+              },
+            };
+          }),
         },
       ],
     };

@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
-import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
 import { DistributionService } from '../distribution-service';
 
 @Component({

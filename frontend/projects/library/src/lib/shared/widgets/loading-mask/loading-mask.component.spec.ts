@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/angular';
-import { LoadingMask } from './loading-mask.component';
 import { inputBinding } from '@angular/core';
+import { render, screen } from '@testing-library/angular';
 import { provideMockTranslateService } from '../../translate-service.mock.spec';
+import { LoadingMask } from './loading-mask.component';
 
 describe('"Loading mask', () => {
   it('should show mask when loading', async () => {

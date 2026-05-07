@@ -7,9 +7,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Link } from './link';
 import { PageableObject } from './pageableObject';
 import { SortObject } from './sortObject';
-import { Link } from './link';
 
 export interface PageLink {
   content?: Array<Link>;

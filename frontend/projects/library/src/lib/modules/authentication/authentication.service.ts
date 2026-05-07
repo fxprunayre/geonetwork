@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { MeResponse } from 'gn4-api-client';
+import { Observable } from 'rxjs';
 
 export interface AuthenticationProvider {
   id: string;

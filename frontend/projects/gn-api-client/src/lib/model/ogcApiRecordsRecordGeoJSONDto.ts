@@ -7,12 +7,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OgcApiRecordsRecordGeoJSONPropertiesDto } from './ogcApiRecordsRecordGeoJSONPropertiesDto';
-import { JsonNullableOgcApiRecordsTimeDto } from './jsonNullableOgcApiRecordsTimeDto';
-import { OgcApiRecordsLinkTemplateDto } from './ogcApiRecordsLinkTemplateDto';
-import { JsonNullableOgcApiRecordsGeometryGeoJSONDto } from './jsonNullableOgcApiRecordsGeometryGeoJSONDto';
 import { IndexRecord } from './indexRecord';
+import { JsonNullableOgcApiRecordsGeometryGeoJSONDto } from './jsonNullableOgcApiRecordsGeometryGeoJSONDto';
+import { JsonNullableOgcApiRecordsTimeDto } from './jsonNullableOgcApiRecordsTimeDto';
 import { OgcApiRecordsLinkDto } from './ogcApiRecordsLinkDto';
+import { OgcApiRecordsLinkTemplateDto } from './ogcApiRecordsLinkTemplateDto';
+import { OgcApiRecordsRecordGeoJSONPropertiesDto } from './ogcApiRecordsRecordGeoJSONPropertiesDto';
 
 /**
  * An array of records that are part of this catalog that are encoded in-line with the catalog.

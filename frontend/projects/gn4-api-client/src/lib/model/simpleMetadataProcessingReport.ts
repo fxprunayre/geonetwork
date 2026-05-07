@@ -7,8 +7,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Report } from './report';
 import { InfoReport } from './infoReport';
+import { Report } from './report';
 
 export interface SimpleMetadataProcessingReport {
   ellapsedTimeInSeconds?: number;

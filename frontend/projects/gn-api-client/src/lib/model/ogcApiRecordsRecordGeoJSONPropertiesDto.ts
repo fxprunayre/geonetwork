@@ -7,12 +7,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OgcApiRecordsThumbnailsDto } from './ogcApiRecordsThumbnailsDto';
-import { OgcApiRecordsThemeDto } from './ogcApiRecordsThemeDto';
-import { OgcApiRecordsRecordCommonPropertiesExternalIdsInnerDto } from './ogcApiRecordsRecordCommonPropertiesExternalIdsInnerDto';
+import { Contact } from './contact';
 import { Language } from './language';
 import { OgcApiRecordsFormatDto } from './ogcApiRecordsFormatDto';
-import { Contact } from './contact';
+import { OgcApiRecordsRecordCommonPropertiesExternalIdsInnerDto } from './ogcApiRecordsRecordCommonPropertiesExternalIdsInnerDto';
+import { OgcApiRecordsThemeDto } from './ogcApiRecordsThemeDto';
+import { OgcApiRecordsThumbnailsDto } from './ogcApiRecordsThumbnailsDto';
 
 export interface OgcApiRecordsRecordGeoJSONPropertiesDto {
   /**

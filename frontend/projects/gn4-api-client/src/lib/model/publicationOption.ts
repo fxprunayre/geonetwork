@@ -7,8 +7,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ReservedOperation } from './reservedOperation';
 import { ReservedGroup } from './reservedGroup';
+import { ReservedOperation } from './reservedOperation';
 
 export interface PublicationOption {
   additionalPublications?: { [key: string]: Array<ReservedOperation> };

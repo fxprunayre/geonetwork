@@ -7,8 +7,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ProcessStepSource } from './processStepSource';
 import { Contact } from './contact';
+import { ProcessStepSource } from './processStepSource';
 
 export interface ProcessStep {
   descriptionObject?: { [key: string]: string };
