@@ -75,7 +75,9 @@ import { FilterPanelLayout } from '../search/search';
                   [placeholder]="search | searchWelcomeTextPipe: 'resourceType' : 3"
                 />
 
-                @if (filterPanelMode() == 'drawer' || filterPanelMode() == 'side') {
+                @if (
+                  effectiveFilterPanelMode() == 'drawer' || effectiveFilterPanelMode() == 'side'
+                ) {
                   <app-search-active-filters-button [(visible)]="visible" />
                 }
 
@@ -88,7 +90,7 @@ import { FilterPanelLayout } from '../search/search';
         <ng-content />
       </div>
       @if (withSearch()) {
-        @switch (filterPanelMode()) {
+        @switch (effectiveFilterPanelMode()) {
           @case ('drawer') {
             <p-drawer
               [(visible)]="visible"
@@ -158,6 +160,13 @@ export class PageLayout extends SearchBase implements AfterViewInit, OnDestroy {
 
   filterPanelMode = model<FilterPanelLayout>('side');
 
+  effectiveFilterPanelMode = computed<FilterPanelLayout>(() => {
+    if (this.filterPanelMode() === 'side' && this.isSmallViewport()) {
+      return 'drawer';
+    }
+    return this.filterPanelMode();
+  });
+
   visible = false;
 
   router = inject(Router);
@@ -167,8 +176,11 @@ export class PageLayout extends SearchBase implements AfterViewInit, OnDestroy {
   backgroundImageUrl = computed(() => this.appConfiguration().config?.backgroundImageUrl || '');
 
   scrollY = signal(0);
+  viewportWidth = signal(typeof window !== 'undefined' ? window.innerWidth : 1024);
   titleSectionHeight = signal(0);
   headerRowHeight = signal(0);
+
+  isSmallViewport = computed(() => this.viewportWidth() < 640);
 
   stickyTop = computed(() => {
     // 112px is min-h-28 (7rem)
@@ -184,7 +196,13 @@ export class PageLayout extends SearchBase implements AfterViewInit, OnDestroy {
     this.scrollY.set(window.scrollY);
   }
 
+  @HostListener('window:resize')
+  onResize() {
+    this.viewportWidth.set(window.innerWidth);
+  }
+
   ngAfterViewInit() {
+    this.viewportWidth.set(window.innerWidth);
     this.measureHeights();
     this.resizeObserver = new ResizeObserver(() => {
       this.measureHeights();
