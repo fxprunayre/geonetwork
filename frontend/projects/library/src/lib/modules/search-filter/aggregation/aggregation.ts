@@ -13,9 +13,10 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { AggregationLayout } from 'gn-api-client';
+import { AggregationLayout, Decorator } from 'gn-api-client';
 import { ButtonModule } from 'primeng/button';
 import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { Select, SelectChangeEvent } from 'primeng/select';
@@ -62,6 +63,8 @@ export class Aggregation extends SearchBase implements OnDestroy {
   decimalPipe = inject(DecimalPipe);
   elementRef = inject(ElementRef);
   multiSelect = viewChild(MultiSelect);
+  translationChange = toSignal(this.translateService.onTranslationChange);
+  langChange = toSignal(this.translateService.onLangChange);
 
   selectedDropdownOptions = signal<AggregationBucketType[]>([]);
 
@@ -104,6 +107,9 @@ export class Aggregation extends SearchBase implements OnDestroy {
   );
 
   buckets = computed(() => {
+    this.translationChange();
+    this.langChange();
+
     let buckets = this.aggregationService.getBuckets(this.search.aggregations()[this.keyName()]);
     const aggregationConfig = this.aggregationService.getAggregationConfig(
       this.keyName(),
@@ -159,6 +165,10 @@ export class Aggregation extends SearchBase implements OnDestroy {
     const configuredLayout = this.search.aggregations()[this.keyName()]?.meta
       ?.layout as AggregationLayout;
     return this.displayType() || configuredLayout || 'checkbox';
+  });
+
+  decorator = computed<Decorator | undefined>(() => {
+    return this.search.aggregations()[this.keyName()]?.meta?.decorator;
   });
 
   placeholder = computed(() => {

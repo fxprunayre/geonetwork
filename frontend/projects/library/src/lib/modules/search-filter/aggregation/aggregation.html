@@ -114,6 +114,7 @@
       [activeKeys]="activeKeysList()"
       [layout]="'bar'"
       [keyName]="keyName()"
+      [decorator]="decorator()"
       (bucketClicked)="onChartBucketClick($event)"
       class="block w-full"
     />
@@ -124,6 +125,7 @@
       [activeKeys]="activeKeysList()"
       [layout]="'pie'"
       [keyName]="keyName()"
+      [decorator]="decorator()"
       (bucketClicked)="onChartBucketClick($event)"
       class="block w-full"
     />
@@ -134,6 +136,7 @@
       [activeKeys]="activeKeysList()"
       [layout]="'treemap'"
       [keyName]="keyName()"
+      [decorator]="decorator()"
       (bucketClicked)="onChartBucketClick($event)"
       class="block w-full"
     />
@@ -144,6 +147,7 @@
       [activeKeys]="activeKeysList()"
       [layout]="'nightingale'"
       [keyName]="keyName()"
+      [decorator]="decorator()"
       (bucketClicked)="onChartBucketClick($event)"
       class="block w-full"
     />

@@ -8,6 +8,7 @@
 
 @for (aggregation of aggregations(); track $index) {
   @if (search.hasAggregationBuckets(aggregation)) {
+    @let layout = search.aggregations()[aggregation].meta?.layout || 'card';
     <section
       class="flex flex-col justify-center items-center py-12 overflow-hidden odd:bg-surface-50 shadow-md"
     >
@@ -18,8 +19,10 @@
         <app-aggregation
           scope="home"
           [keyName]="aggregation"
-          displayType="card"
-          class="my-12 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6"
+          [displayType]="layout"
+          [class.sm:grid-cols-3]="layout === 'card'"
+          [class.md:grid-cols-4]="layout === 'card'"
+          class="my-12 grid grid-cols-1 gap-6"
           (onSelected)="setRouteForAggregation($event)"
         ></app-aggregation>
       </div>

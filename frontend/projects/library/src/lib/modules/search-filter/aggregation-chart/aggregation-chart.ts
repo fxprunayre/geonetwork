@@ -12,15 +12,37 @@ import {
   viewChild,
 } from '@angular/core';
 import * as echarts from 'echarts';
-import { AggregationChartLayout } from 'gn-api-client';
+import { AggregationChartLayout, Decorator } from 'gn-api-client';
+import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationBucketType } from '../aggregation/aggregation.model';
 
 @Component({
   selector: 'app-aggregation-chart',
   standalone: true,
+  imports: [AggregationBucketDecorator],
   providers: [AggregationTranslatePipe],
-  template: `<div class="h-full w-full" #chartContainer></div>`,
+  template: `
+    <div class="relative h-full w-full overflow-hidden">
+      @if (showSurfaceBackground() && backgroundImage()) {
+        <div
+          class="pointer-events-none absolute inset-0 z-0 bg-cover bg-center opacity-20"
+          [style.background-image]="'url(' + backgroundImage() + ')'"
+        ></div>
+      }
+      @if (showSurfaceBackground() && showBackgroundIcon()) {
+        <div
+          class="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-15 text-[8rem]"
+        >
+          <app-aggregation-bucket-decorator
+            [bucket]="backgroundBucket()"
+            [decorator]="decorator()"
+          />
+        </div>
+      }
+      <div class="absolute inset-0 z-10" #chartContainer></div>
+    </div>
+  `,
   host: { '[style.height]': 'hostHeight()' },
 })
 export class AggregationChart implements OnDestroy {
@@ -28,14 +50,54 @@ export class AggregationChart implements OnDestroy {
   activeKeys = input<string[]>([]);
   layout = input.required<AggregationChartLayout>();
   keyName = input.required<string>();
+  decorator = input<Decorator | undefined>();
 
   @Output() bucketClicked = new EventEmitter<string>();
 
-  /** Height grows with the number of bars (28 px per bar, capped at 480 px, min 224 px). Pie/treemap are fixed. */
+  /** Height grows with content for bar and treemap layouts; pie/nightingale keep a fixed footprint. */
   hostHeight = computed(() => {
-    if (this.layout() !== 'bar') return '224px';
-    const px = Math.min(Math.max(this.buckets().length * 28, 224), 480);
+    if (this.layout() === 'bar') {
+      const px = Math.min(Math.max(this.buckets().length * 28, 224), 780);
+      return `${px}px`;
+    }
+
+    if (this.layout() === 'treemap') {
+      const px = Math.min(Math.max(this.buckets().length * 40, 324), 640);
+      return `${px}px`;
+    }
+
+    const px = 424;
     return `${px}px`;
+  });
+
+  showSurfaceBackground = computed(() => this.layout() !== 'bar');
+
+  backgroundBucket = computed<{ key: string | number; doc_count: number }>(() => {
+    const buckets = this.buckets();
+    const defaultBucket = buckets[0] ?? { key: '', doc_count: 0 };
+    const activeKey = this.activeKeys()[0];
+
+    if (!activeKey) {
+      return defaultBucket;
+    }
+
+    const matchingBucket = buckets.find((b) => String(b.key) === activeKey);
+    return matchingBucket ?? defaultBucket;
+  });
+
+  backgroundImage = computed(() => {
+    const decorator = this.decorator();
+    if (!decorator || decorator.type !== 'img' || !decorator.map) {
+      return '';
+    }
+
+    const key = String(this.backgroundBucket().key);
+    return decorator.map[key] || '';
+  });
+
+  showBackgroundIcon = computed(() => {
+    const decorator = this.decorator();
+    return decorator?.type === 'icon' && !!this.backgroundBucket().key;
   });
 
   private translatePipe = inject(AggregationTranslatePipe);
@@ -51,6 +113,10 @@ export class AggregationChart implements OnDestroy {
       this.activeKeys();
       this.layout();
       this.keyName();
+      this.decorator();
+      this.backgroundImage();
+      this.showBackgroundIcon();
+      this.showSurfaceBackground();
       this.observeContainer();
       requestAnimationFrame(() => this.renderChart());
     });
@@ -90,7 +156,7 @@ export class AggregationChart implements OnDestroy {
     const labels = allBuckets.map(
       (b) => b.displayLabel ?? this.translatePipe.transform(b.key, this.keyName()),
     );
-    const compactLabels = labels.map((l) => this.truncateLabel(String(l), 22));
+    const compactLabels = labels.map((l) => this.truncateLabel(String(l), 42));
 
     const primaryColor = this.themeColor('--p-primary-500', '#2563eb');
     const secondaryColor = this.themeColor('--p-primary-300', '#93c5fd');
@@ -127,6 +193,15 @@ export class AggregationChart implements OnDestroy {
     primaryColor: string,
     secondaryColor: string,
   ): echarts.EChartsOption {
+    const palette = [
+      this.themeColor('--p-primary-700', '#1d4ed8'),
+      this.themeColor('--p-primary-600', '#2563eb'),
+      this.themeColor('--p-primary-500', '#3b82f6'),
+      this.themeColor('--p-primary-400', '#60a5fa'),
+      this.themeColor('--p-primary-300', '#93c5fd'),
+      this.themeColor('--p-primary-200', '#bfdbfe'),
+    ];
+
     return {
       tooltip: { trigger: 'item', extraCssText: 'z-index: 9999;' },
       series: [
@@ -141,6 +216,7 @@ export class AggregationChart implements OnDestroy {
             show: true,
             formatter: (params: any) => this.truncateLabel(params.name, 18),
             fontSize: 11,
+            color: '#fff',
             overflow: 'truncate',
           },
           data: buckets.map((b, i) => ({
@@ -148,11 +224,8 @@ export class AggregationChart implements OnDestroy {
             name: String(labels[i]),
             key: b.key,
             itemStyle: {
-              color:
-                activeSet.size === 0 || activeSet.has(String(b.key))
-                  ? primaryColor
-                  : secondaryColor,
-              opacity: activeSet.size === 0 || activeSet.has(String(b.key)) ? 1 : 0.4,
+              color: palette[i % palette.length],
+              opacity: activeSet.size === 0 || activeSet.has(String(b.key)) ? 1 : 0.3,
             },
           })),
         },
