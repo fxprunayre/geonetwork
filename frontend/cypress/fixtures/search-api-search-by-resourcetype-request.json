@@ -81,6 +81,9 @@
       },
       "meta": {
         "collapsed": true,
+        "layout": "tree",
+        "translateOnLoad": true,
+        "orderByTranslation": true,
         "displayFilter": true,
         "filterByTranslation": true,
         "caseInsensitiveInclude": true
@@ -126,14 +129,13 @@
       }
     },
     "creationYearForResource": {
-      "terms": {
+      "histogram": {
         "field": "creationYearForResource",
-        "size": 40,
-        "order": {
-          "_key": "desc"
-        }
+        "interval": 1,
+        "min_doc_count": 1
       },
       "meta": {
+        "layout": "bar",
         "collapsed": true
       }
     },
@@ -145,6 +147,7 @@
       },
       "meta": {
         "collapsed": true,
+        "layout": "nightingale",
         "decorator": {
           "type": "icon",
           "map": {

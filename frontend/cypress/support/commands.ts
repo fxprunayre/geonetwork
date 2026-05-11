@@ -77,9 +77,7 @@ Cypress.Commands.add('initApp', (profile = '') => {
   cy.intercept('GET', '**/srv/api/i18n/packages/gnui*', { fixture: 'home-api-i18n-gnui.json' }).as(
     'apiI18nGnui',
   );
-  cy.intercept('POST', '**/srv/api/registries/vocabularies/keyword?id=**', { body: {} }).as(
-    'apiKeywordById',
-  );
+  cy.intercept('POST', '**/srv/api/registries/vocabularies/keyword?id=**').as('apiKeywordById');
   cy.intercept('GET', '**/viewer/sxt-viewer.js').as('apiMapViewerScript');
   cy.intercept(
     'GET',

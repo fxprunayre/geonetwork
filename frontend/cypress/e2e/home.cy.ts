@@ -7,10 +7,10 @@ describe('Home Page', () => {
   });
 
   it('should initilialize the app by loading the configuration, the translations and run a global search', () => {
-    cy.wait('@apiI18nGnui');
-    cy.get('@apiI18nGnui.all').should('have.length', 1);
     cy.wait('@apiUiConfig');
     cy.get('@apiUiConfig.all').should('have.length', 1);
+    cy.wait('@apiI18nGnui');
+    cy.get('@apiI18nGnui.all').should('have.length', 1);
     cy.wait('@apiHomeSearch');
     cy.get('@apiHomeSearch.all').should('have.length', 1);
   });
