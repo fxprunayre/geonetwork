@@ -24,7 +24,6 @@ import { AggregationChartLayout, Decorator } from 'gn-api-client';
 import { SearchBase } from 'gn-library';
 import { ButtonModule } from 'primeng/button';
 import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
-import { AggregationService } from '../aggregation-service';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationBucketType } from '../aggregation/aggregation.model';
 import { buildBarOption, buildBarSeriesData } from './options/bar-option';
@@ -97,8 +96,6 @@ export class AggregationChart extends SearchBase implements OnDestroy {
   @Output() bucketClicked = new EventEmitter<string>();
   @Output() rangeSelected = new EventEmitter<string[]>();
 
-  aggregationService = inject(AggregationService);
-
   /** Height grows with content for bar and treemap layouts; pie/nightingale keep a fixed footprint. */
   hostHeight = computed(() => {
     if (this.layout() === 'bar') {
@@ -159,11 +156,7 @@ export class AggregationChart extends SearchBase implements OnDestroy {
     return (
       this.layout() === 'bar' &&
       this.isHistogram() &&
-      this.aggregationService.hasActiveFilter(
-        this.keyName(),
-        this.search.aggregations(),
-        this.search.isFilterActive.bind(this.search),
-      )
+      (this.activeKeys().length > 0 || this.isBarRangeFiltered())
     );
   });
 
