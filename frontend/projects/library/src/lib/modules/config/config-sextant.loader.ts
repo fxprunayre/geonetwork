@@ -154,7 +154,7 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
       //   },
       meta: {
         layout: 'bar',
-        refreshPolicy: 'none',
+        // refreshPolicy: 'none',
       },
     },
   },

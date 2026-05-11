@@ -237,10 +237,12 @@ export const SearchStore = signalStore(
                 .pipe(
                   tapResponse({
                     next: (response) => {
+                      const currentFilters = store.filters();
                       const aggregationToKeep = Object.fromEntries(
-                        Object.entries(store.aggregations()).filter(
-                          ([key, agg]) => agg?.meta?.refreshPolicy === 'none',
-                        ),
+                        Object.entries(store.aggregations()).filter(([key, agg]) => {
+                          const hasActiveFilter = (currentFilters[key]?.values?.length || 0) > 0;
+                          return agg?.meta?.refreshPolicy === 'none' && hasActiveFilter;
+                        }),
                       );
 
                       const aggregations = {
