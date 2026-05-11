@@ -243,6 +243,7 @@
       "recordType-n": "Metadata",
       "recordType-s": "Directory",
       "recordType-y": "Template",
+      "resetRange": "Reset range",
       "resourceType": "Resource type",
       "tag.default": "Keywords",
       "th_dcsmm-area_tree.key": "Marine regions",

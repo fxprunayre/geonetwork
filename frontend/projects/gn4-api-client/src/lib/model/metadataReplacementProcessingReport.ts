@@ -7,9 +7,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Report } from './report';
 import { InfoReport } from './infoReport';
 import { ReplaceReport } from './replaceReport';
+import { Report } from './report';
 
 export interface MetadataReplacementProcessingReport {
   ellapsedTimeInSeconds?: number;

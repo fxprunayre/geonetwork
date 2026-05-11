@@ -8,18 +8,18 @@
  * Do not edit the class manually.
  */
 import { Associated } from './associated';
-import { Parent } from './parent';
-import { Dataset } from './dataset';
-import { Service } from './service';
-import { Thumbnail } from './thumbnail';
-import { Fcat } from './fcat';
-import { Related } from './related';
 import { Children } from './children';
+import { Dataset } from './dataset';
+import { Fcat } from './fcat';
 import { Hasfeaturecats } from './hasfeaturecats';
 import { Hassource } from './hassource';
 import { Online } from './online';
+import { Parent } from './parent';
+import { Related } from './related';
 import { RelatedSource } from './relatedSource';
+import { Service } from './service';
 import { Siblings } from './siblings';
+import { Thumbnail } from './thumbnail';
 
 export interface RelatedResponse {
   associated?: Associated;

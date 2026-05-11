@@ -7,9 +7,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { UserSecurity } from './userSecurity';
 import { Address } from './address';
 import { GrantedAuthority } from './grantedAuthority';
+import { UserSecurity } from './userSecurity';
 
 export interface User {
   accountNonExpired?: boolean;

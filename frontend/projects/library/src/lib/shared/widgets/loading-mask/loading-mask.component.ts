@@ -1,6 +1,6 @@
 import { Component, input, signal } from '@angular/core';
-import { ProgressSpinner } from 'primeng/progressspinner';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ProgressSpinner } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-loading-mask',

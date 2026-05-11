@@ -1,17 +1,17 @@
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { signal } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { render, screen } from '@testing-library/angular';
+import { userEvent } from '@testing-library/user-event';
 import {
   APPLICATION_CONFIGURATION,
-  provideMockSearchService,
   DEFAULT_TEST_CONFIG,
+  provideMockSearchService,
   provideMockTranslateService,
   SearchStore,
 } from 'gn-library';
-import { Search } from './search';
-import { provideRouter } from '@angular/router';
 import { routes } from '../../app.routes';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { fireEvent, render, screen } from '@testing-library/angular';
-import { userEvent } from '@testing-library/user-event';
-import { signal } from '@angular/core';
+import { Search } from './search';
 
 describe('Search', () => {
   it('should provide a search box', async () => {

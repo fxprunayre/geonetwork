@@ -13,6 +13,9 @@ export class AggregationService {
   translateService = inject(TranslateService);
   private readonly appConfiguration = inject(APPLICATION_CONFIGURATION, { optional: true });
 
+  private alreadyLoadedTranslations = new Set<string>();
+  private inFlightRequests = new Map<string, Promise<void>>();
+
   /**
    * Interprets aggregation configuration which can be either a string (field name)
    * or a full aggregation configuration object. A default terms aggregation is created
@@ -94,8 +97,6 @@ export class AggregationService {
     return aggregations;
   }
 
-  private alreadyLoadedTranslations = new Set<string>();
-
   loadTranslations(
     aggregations: Record<string, elasticsearch.AggregationsAggregate>,
     aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
@@ -148,25 +149,53 @@ export class AggregationService {
       const idsArray = Array.from(bucketKeySet);
       const BATCH_SIZE = 30;
 
+      const requestKey = `${currentLang}-${thesaurus}-${idsArray.sort().join(',')}`;
+
+      // Avoid duplicate in-flight requests for the same data
+      if (this.inFlightRequests.has(requestKey)) {
+        return;
+      }
+
       for (let i = 0; i < idsArray.length; i += BATCH_SIZE) {
         const batch = idsArray.slice(i, i + BATCH_SIZE);
-        // Call service per batch; type the response to avoid implicit any
-        this.registriesService
-          .getKeywordByIds(Array.from(batch).join(','), thesaurus, [currentLang])
-          .subscribe((keywords) => {
-            const newTranslations: Record<string, string> = {};
-            Object.entries(keywords).forEach(
-              ([key, value]: [string, { label?: string; definition?: string }]) => {
-                newTranslations[key] = value.label || key;
-                if (value.definition) {
-                  newTranslations[`${key}-definition`] = value.definition;
-                }
-                this.alreadyLoadedTranslations.add(`${currentLang}-${key}`);
+        const batchRequestKey = `${currentLang}-${thesaurus}-${batch.sort().join(',')}`;
+
+        // Avoid duplicate in-flight requests for this batch
+        if (this.inFlightRequests.has(batchRequestKey)) {
+          continue;
+        }
+
+        // Create a promise to track in-flight state
+        const batchPromise = new Promise<void>((resolve) => {
+          // Call service per batch; type the response to avoid implicit any
+          const subscription = this.registriesService
+            .getKeywordByIds(Array.from(batch).join(','), thesaurus, [currentLang])
+            .subscribe(
+              (keywords) => {
+                const newTranslations: Record<string, string> = {};
+                Object.entries(keywords).forEach(
+                  ([key, value]: [string, { label?: string; definition?: string }]) => {
+                    newTranslations[key] = value.label || key;
+                    if (value.definition) {
+                      newTranslations[`${key}-definition`] = value.definition;
+                    }
+                    this.alreadyLoadedTranslations.add(`${currentLang}-${key}`);
+                  },
+                );
+
+                this.translateService.setTranslation(currentLang, newTranslations, true);
+                this.inFlightRequests.delete(batchRequestKey);
+                resolve();
+              },
+              (error) => {
+                console.error('Error loading translations for batch', batch, error);
+                this.inFlightRequests.delete(batchRequestKey);
+                resolve();
               },
             );
+        });
 
-            this.translateService.setTranslation(currentLang, newTranslations, true);
-          });
+        this.inFlightRequests.set(batchRequestKey, batchPromise);
       }
     }
   }
@@ -204,5 +233,28 @@ export class AggregationService {
       }
       return aggregation;
     });
+  }
+
+  hasActiveFilter(
+    keyName: string,
+    aggregations: Record<string, elasticsearch.AggregationsAggregate>,
+    isFilterActive: (key: string, bucketKey: string) => boolean,
+  ): boolean {
+    const buckets = this.getBuckets(aggregations[keyName]);
+    for (const bucket of buckets) {
+      if (isFilterActive(keyName, bucket.key)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  hasBuckets(
+    key: string,
+    aggregations: Record<string, elasticsearch.AggregationsAggregate>,
+  ): boolean {
+    const agg = aggregations[key];
+    const buckets = this.getBuckets(agg);
+    return buckets.length > 0;
   }
 }

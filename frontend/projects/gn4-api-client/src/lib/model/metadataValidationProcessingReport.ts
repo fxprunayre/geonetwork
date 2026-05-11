@@ -7,8 +7,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { SchematronValidationReport } from './schematronValidationReport';
 import { InfoReport } from './infoReport';
+import { SchematronValidationReport } from './schematronValidationReport';
 
 export interface MetadataValidationProcessingReport {
   ellapsedTimeInSeconds?: number;

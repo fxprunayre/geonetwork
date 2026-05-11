@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { AggregationsPanel, SearchActiveFilters } from 'gn-library';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AggregationsPanel } from 'gn-library';
 
 @Component({
   selector: 'app-search-filters',

@@ -245,6 +245,7 @@
       "recordType-n": "Fiche",
       "recordType-s": "Annuaire",
       "recordType-y": "Modèle",
+      "resetRange": "Réinitialiser la plage",
       "resourceType": "Type de ressource",
       "tag.default": "Mots-clés",
       "th_dcsmm-area_tree.key": "Sous-régions marines",

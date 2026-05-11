@@ -1,5 +1,5 @@
-import { inject, Pipe, PipeTransform } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SearchStoreType } from '../search-store';
 

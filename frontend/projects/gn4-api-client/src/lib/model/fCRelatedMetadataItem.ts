@@ -7,9 +7,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Description } from './description';
 import { FeatureType } from './featureType';
 import { MultilingualValue } from './multilingualValue';
-import { Description } from './description';
 
 export interface FCRelatedMetadataItem {
   description: Description;

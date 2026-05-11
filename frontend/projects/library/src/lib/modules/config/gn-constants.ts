@@ -76,7 +76,8 @@ export const RESOURCE_TYPE_AGGREGATION: elasticsearch.AggregationsAggregationCon
     exclude: 'map/.*|publication-.*',
   },
   meta: {
-    collapsed: true,
+    collapsed: false,
+    layout: 'nightingale',
     decorator: {
       type: 'icon',
       map: {
@@ -296,7 +297,7 @@ export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
           exclude: 'publication-.*',
         },
         meta: {
-          layout: 'card',
+          layout: 'nightingale',
           decorator: {
             type: 'icon',
             prefix: '',
@@ -358,7 +359,7 @@ export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
         terms: {
           field: 'th_httpinspireeceuropaeutheme-theme_tree.key',
           size: 34,
-          order: { _key: 'asc' },
+          // order: { _key: 'asc' },
         },
         meta: {
           collapsed: true,
@@ -392,9 +393,9 @@ export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
           size: 30,
         },
         meta: {
+          layout: 'bar',
           thesaurus: 'dcsmm.area',
           translateOnLoad: true,
-          layout: 'card',
         },
       },
     },
@@ -418,7 +419,7 @@ export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
         },
         meta: {
           translateOnLoad: true,
-          layout: 'card',
+          layout: 'treemap',
         },
       },
     },

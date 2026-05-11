@@ -1,11 +1,11 @@
 import { computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { tapResponse } from '@ngrx/operators';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { MeResponse } from 'gn4-api-client';
 import { pipe } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
-import { tapResponse } from '@ngrx/operators';
-import { MeResponse } from 'gn4-api-client';
 import { AuthenticationService } from './authentication.service';
 
 type AuthState = {

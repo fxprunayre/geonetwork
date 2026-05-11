@@ -7,8 +7,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { MultilingualValue } from './multilingualValue';
 import { Description } from './description';
+import { MultilingualValue } from './multilingualValue';
 
 export interface RelatedSiblingMetadataItem {
   associationType: string;

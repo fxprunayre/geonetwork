@@ -54,7 +54,7 @@
         "exclude": "publication-.*"
       },
       "meta": {
-        "layout": "card",
+        "layout": "nightingale",
         "decorator": {
           "type": "icon",
           "prefix": "",
@@ -98,10 +98,7 @@
     "th_httpinspireeceuropaeutheme-theme_tree.key": {
       "terms": {
         "field": "th_httpinspireeceuropaeutheme-theme_tree.key",
-        "size": 34,
-        "order": {
-          "_key": "asc"
-        }
+        "size": 34
       },
       "meta": {
         "collapsed": true,
@@ -131,9 +128,9 @@
         "size": 30
       },
       "meta": {
+        "layout": "bar",
         "thesaurus": "dcsmm.area",
-        "translateOnLoad": true,
-        "layout": "card"
+        "translateOnLoad": true
       }
     },
     "th_dcsmm-descripteur_tree.key": {
@@ -153,7 +150,7 @@
       },
       "meta": {
         "translateOnLoad": true,
-        "layout": "card"
+        "layout": "treemap"
       }
     },
     "th_NVS-OD1_tree.key": {

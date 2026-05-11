@@ -41,6 +41,9 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
       },
       meta: {
         collapsed: true,
+        layout: 'tree',
+        translateOnLoad: true,
+        orderByTranslation: true,
       },
     },
   },
@@ -142,10 +145,19 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
   },
   createDateYear: {
     creationYearForResource: {
-      terms: {
+      histogram: {
         field: 'creationYearForResource',
-        size: 40,
-        order: { _key: 'desc' },
+        interval: 1,
+        min_doc_count: 1,
+      },
+      //   terms: {
+      //     field: 'creationYearForResource',
+      //     size: 20,
+      //     order: { _key: 'desc' },
+      //   },
+      meta: {
+        layout: 'bar',
+        // refreshPolicy: 'none',
       },
     },
   },

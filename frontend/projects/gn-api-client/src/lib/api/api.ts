@@ -1,22 +1,22 @@
 export * from './capabilities.service';
-import { CapabilitiesService } from './capabilities.service';
 export * from './collection.service';
-import { CollectionService } from './collection.service';
 export * from './collections.service';
-import { CollectionsService } from './collections.service';
 export * from './conformance.service';
-import { ConformanceService } from './conformance.service';
 export * from './indexingController.service';
-import { IndexingControllerService } from './indexingController.service';
 export * from './meApi.service';
-import { MeApiService } from './meApi.service';
 export * from './record.service';
-import { RecordService } from './record.service';
 export * from './records.service';
-import { RecordsService } from './records.service';
 export * from './searchController.service';
-import { SearchControllerService } from './searchController.service';
 export * from './sortables.service';
+import { CapabilitiesService } from './capabilities.service';
+import { CollectionService } from './collection.service';
+import { CollectionsService } from './collections.service';
+import { ConformanceService } from './conformance.service';
+import { IndexingControllerService } from './indexingController.service';
+import { MeApiService } from './meApi.service';
+import { RecordService } from './record.service';
+import { RecordsService } from './records.service';
+import { SearchControllerService } from './searchController.service';
 import { SortablesService } from './sortables.service';
 export const APIS = [
   CapabilitiesService,

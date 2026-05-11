@@ -1,18 +1,16 @@
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  OnInit,
-  OnDestroy,
-  inject,
   ElementRef,
+  OnDestroy,
+  OnInit,
   computed,
-  AfterViewInit,
+  inject,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { APPLICATION_CONFIGURATION, DEFAULT_MAP_CONTEXT } from 'gn-library';
+import { APPLICATION_CONFIGURATION, DEFAULT_MAP_CONTEXT, Gn4MapCommand } from 'gn-library';
 import { Subscription } from 'rxjs';
-import { Gn4MapCommand } from 'gn-library';
 
 @Component({
   selector: 'app-map',

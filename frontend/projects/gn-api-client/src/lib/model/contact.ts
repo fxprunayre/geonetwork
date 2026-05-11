@@ -8,9 +8,9 @@
  * Do not edit the class manually.
  */
 import { OgcApiRecordsAddressDto } from './ogcApiRecordsAddressDto';
-import { OgcApiRecordsPhoneDto } from './ogcApiRecordsPhoneDto';
 import { OgcApiRecordsEmailDto } from './ogcApiRecordsEmailDto';
 import { OgcApiRecordsLinkDto } from './ogcApiRecordsLinkDto';
+import { OgcApiRecordsPhoneDto } from './ogcApiRecordsPhoneDto';
 
 /**
  * Identification of, and means of communication with, person responsible for the resource.

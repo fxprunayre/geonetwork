@@ -95,7 +95,7 @@ describe('Search', () => {
     cy.get('app-search-active-filters-button p-button').first().click();
     cy.wait('@apiMainSearch');
     cy.get(
-      'app-aggregations-panel app-aggregation > div > app-aggregation-bucket p-checkbox input[type="checkbox"]',
+      'app-aggregations-panel [data-testid="aggregation-panel-tag.default"] app-aggregation > div > app-aggregation-bucket p-checkbox input[type="checkbox"]',
     )
       .first()
       .then((checkbox) => {

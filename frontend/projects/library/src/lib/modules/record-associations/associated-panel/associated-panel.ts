@@ -1,7 +1,7 @@
 import { Component, computed, input, output, TemplateRef } from '@angular/core';
-import { AssociatedRecords } from '.././associated-records/associated-records';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
+import { AssociatedRecords } from '.././associated-records/associated-records';
 
 @Component({
   selector: 'app-associated-panel',

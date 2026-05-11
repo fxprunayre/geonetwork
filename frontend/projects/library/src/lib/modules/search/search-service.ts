@@ -83,9 +83,10 @@ export class SearchService {
     for (const field of Object.keys(filters)) {
       let isFiltersAgg = false;
       const matchedFilters: elasticsearch.QueryDslQueryContainer[] = [];
+      let aggDef: elasticsearch.AggregationsAggregationContainer | undefined;
 
       if (aggregationsConfig) {
-        const aggDef = this.aggregationService.getAggregationConfig(field, aggregationsConfig);
+        aggDef = this.aggregationService.getAggregationConfig(field, aggregationsConfig);
         if (aggDef && aggDef['filters'] && aggDef['filters']['filters']) {
           isFiltersAgg = true;
           const aggFilters = aggDef['filters']['filters'] as Record<
@@ -110,6 +111,34 @@ export class SearchService {
           });
         }
       } else {
+        const histogramInterval = aggDef?.histogram?.interval;
+        const isHistogramWithCustomInterval =
+          typeof histogramInterval === 'number' && histogramInterval !== 1;
+
+        if (isHistogramWithCustomInterval) {
+          const rangeFilters = filters[field].values
+            .map((value) => Number(value))
+            .filter((value) => Number.isFinite(value))
+            .map((from) => ({
+              range: {
+                [field]: {
+                  gte: from,
+                  lt: from + histogramInterval,
+                },
+              },
+            }));
+
+          if (rangeFilters.length > 0) {
+            must.push({
+              bool: {
+                should: rangeFilters,
+                minimum_should_match: 1,
+              },
+            });
+            continue;
+          }
+        }
+
         const termQuery = {
           terms: {
             [field]: filters[field].values,

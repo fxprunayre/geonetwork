@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {
-  SearchContextDirective,
   ResultsNumberComponent,
-  SearchInput,
-  ResultsView,
   ResultsSorterComponent,
+  ResultsView,
+  SearchContextDirective,
+  SearchInput,
 } from 'gn-library';
 
 @Component({

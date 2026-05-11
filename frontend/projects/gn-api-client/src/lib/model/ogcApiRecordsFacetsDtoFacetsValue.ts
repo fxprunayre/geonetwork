@@ -7,8 +7,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { OgcApiRecordsFacetHistogramDto } from './ogcApiRecordsFacetHistogramDto';
 import { OgcApiRecordsFacetFilterDto } from './ogcApiRecordsFacetFilterDto';
+import { OgcApiRecordsFacetHistogramDto } from './ogcApiRecordsFacetHistogramDto';
 import { OgcApiRecordsFacetTermsDto } from './ogcApiRecordsFacetTermsDto';
 
 /**
