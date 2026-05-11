@@ -205,4 +205,27 @@ export class AggregationService {
       return aggregation;
     });
   }
+
+  hasActiveFilter(
+    keyName: string,
+    aggregations: Record<string, elasticsearch.AggregationsAggregate>,
+    isFilterActive: (key: string, bucketKey: string) => boolean,
+  ): boolean {
+    const buckets = this.getBuckets(aggregations[keyName]);
+    for (const bucket of buckets) {
+      if (isFilterActive(keyName, bucket.key)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  hasBuckets(
+    key: string,
+    aggregations: Record<string, elasticsearch.AggregationsAggregate>,
+  ): boolean {
+    const agg = aggregations[key];
+    const buckets = this.getBuckets(agg);
+    return buckets.length > 0;
+  }
 }

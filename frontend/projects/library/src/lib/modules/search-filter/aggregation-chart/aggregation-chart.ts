@@ -9,15 +9,22 @@ import {
   input,
   OnDestroy,
   Output,
+  signal,
   viewChild,
 } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidXmark } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
 import { BarChart, PieChart, TreemapChart } from 'echarts/charts';
 import type { TooltipComponentOption } from 'echarts/components';
 import { DataZoomComponent, GridComponent, TooltipComponent } from 'echarts/components';
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { AggregationChartLayout, Decorator } from 'gn-api-client';
+import { SearchBase } from 'gn-library';
+import { ButtonModule } from 'primeng/button';
 import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
+import { AggregationService } from '../aggregation-service';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationBucketType } from '../aggregation/aggregation.model';
 import { buildBarOption, buildBarSeriesData } from './options/bar-option';
@@ -39,32 +46,46 @@ echarts.use([
 @Component({
   selector: 'app-aggregation-chart',
   standalone: true,
-  imports: [AggregationBucketDecorator],
+  imports: [AggregationBucketDecorator, ButtonModule, TranslatePipe, NgIcon],
   providers: [AggregationTranslatePipe],
+  viewProviders: [provideIcons({ faSolidXmark })],
   template: `
-    <div class="relative h-full w-full overflow-hidden">
-      @if (showSurfaceBackground() && backgroundImage()) {
-        <div
-          class="pointer-events-none absolute inset-0 z-0 bg-cover bg-center opacity-20"
-          [style.background-image]="'url(' + backgroundImage() + ')'"
-        ></div>
-      }
-      @if (showSurfaceBackground() && showBackgroundIcon()) {
-        <div
-          class="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-15 text-[8rem]"
-        >
-          <app-aggregation-bucket-decorator
-            [bucket]="backgroundBucket()"
-            [decorator]="decorator()"
-          />
+    <div class="flex h-full w-full flex-col overflow-hidden">
+      @if (showRangeResetButton()) {
+        <div class="z-20 flex justify-end pb-1">
+          <button
+            class="p-button p-button-secondary p-button-outlined"
+            (click)="resetHistogramRange()"
+            [title]="'search.aggregations.resetRange' | translate"
+          >
+            <ng-icon name="faSolidXmark" />
+          </button>
         </div>
       }
-      <div class="absolute inset-0 z-10" #chartContainer></div>
+      <div class="relative min-h-0 flex-1 overflow-hidden">
+        @if (showSurfaceBackground() && backgroundImage()) {
+          <div
+            class="pointer-events-none absolute inset-0 z-0 bg-cover bg-center opacity-20"
+            [style.background-image]="'url(' + backgroundImage() + ')'"
+          ></div>
+        }
+        @if (showSurfaceBackground() && showBackgroundIcon()) {
+          <div
+            class="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-15 text-[8rem]"
+          >
+            <app-aggregation-bucket-decorator
+              [bucket]="backgroundBucket()"
+              [decorator]="decorator()"
+            />
+          </div>
+        }
+        <div class="absolute inset-0 z-10" #chartContainer></div>
+      </div>
     </div>
   `,
   host: { '[style.height]': 'hostHeight()' },
 })
-export class AggregationChart implements OnDestroy {
+export class AggregationChart extends SearchBase implements OnDestroy {
   buckets = input.required<AggregationBucketType[]>();
   activeKeys = input<string[]>([]);
   layout = input.required<AggregationChartLayout>();
@@ -75,6 +96,8 @@ export class AggregationChart implements OnDestroy {
 
   @Output() bucketClicked = new EventEmitter<string>();
   @Output() rangeSelected = new EventEmitter<string[]>();
+
+  aggregationService = inject(AggregationService);
 
   /** Height grows with content for bar and treemap layouts; pie/nightingale keep a fixed footprint. */
   hostHeight = computed(() => {
@@ -130,8 +153,22 @@ export class AggregationChart implements OnDestroy {
   private observedElement: HTMLElement | null = null;
   private dataZoomDebounce: ReturnType<typeof setTimeout> | null = null;
   private currentBarZoomRange: BarVisibleRange | undefined;
+  private isBarRangeFiltered = signal(false);
+
+  showRangeResetButton = computed(() => {
+    return (
+      this.layout() === 'bar' &&
+      this.isHistogram() &&
+      this.aggregationService.hasActiveFilter(
+        this.keyName(),
+        this.search.aggregations(),
+        this.search.isFilterActive.bind(this.search),
+      )
+    );
+  });
 
   constructor() {
+    super();
     effect(() => {
       this.buckets();
       this.activeKeys();
@@ -227,6 +264,9 @@ export class AggregationChart implements OnDestroy {
     this.chartInstance.setOption(option, true);
     if (this.layout() === 'bar' && this.isHistogram()) {
       this.currentBarZoomRange = this.getCurrentBarZoomRange(allBuckets.length);
+      this.updateRangeResetButtonState(allBuckets.length);
+    } else {
+      this.isBarRangeFiltered.set(false);
     }
     this.chartInstance.off('click');
     this.chartInstance.on('click', (params: any) => {
@@ -241,6 +281,7 @@ export class AggregationChart implements OnDestroy {
         const eventRange = this.getBarZoomRangeFromEvent(params, allBuckets.length);
         if (eventRange) {
           this.currentBarZoomRange = eventRange;
+          this.updateRangeResetButtonState(allBuckets.length);
         }
         this.updateBarLabelContrastForVisibleRange(
           allBuckets,
@@ -264,10 +305,29 @@ export class AggregationChart implements OnDestroy {
     if (!range) return;
     const lo = range.start;
     const hi = range.end;
+
+    // Full-range zoom means "no range filter".
+    if (lo <= 0 && hi >= buckets.length - 1) {
+      this.rangeSelected.emit([]);
+      return;
+    }
+
     const keys = buckets.slice(Math.min(lo, hi), Math.max(lo, hi) + 1).map((b) => String(b.key));
     if (keys.length > 0) {
       this.rangeSelected.emit(keys);
     }
+  }
+
+  resetHistogramRange() {
+    if (!this.chartInstance) return;
+
+    this.chartInstance.dispatchAction({
+      type: 'dataZoom',
+      start: 0,
+      end: 100,
+    });
+    this.rangeSelected.emit([]);
+    this.isBarRangeFiltered.set(false);
   }
 
   private getCurrentBarZoomRange(bucketCount: number): BarVisibleRange | undefined {
@@ -297,6 +357,16 @@ export class AggregationChart implements OnDestroy {
     const start = Math.max(0, Math.min(bucketCount - 1, Math.floor(minRaw)));
     const end = Math.max(0, Math.min(bucketCount - 1, Math.ceil(maxRaw)));
     return { start, end };
+  }
+
+  private updateRangeResetButtonState(bucketCount: number) {
+    if (!this.currentBarZoomRange || bucketCount <= 0) {
+      this.isBarRangeFiltered.set(false);
+      return;
+    }
+
+    const range = this.currentBarZoomRange;
+    this.isBarRangeFiltered.set(!(range.start <= 0 && range.end >= bucketCount - 1));
   }
 
   private updateBarLabelContrastForVisibleRange(

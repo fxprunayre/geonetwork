@@ -67,20 +67,16 @@ export class AggregationsPanel extends SearchBase {
     return Object.keys(this.aggregations) || [];
   });
 
-  hasBuckets = (key: string) => {
-    const agg = this.aggregations[key];
-    const buckets = this.aggregationService.getBuckets(agg);
-    return buckets.length > 0;
+  hasActiveFilter = (keyName: string) => {
+    return this.aggregationService.hasActiveFilter(
+      keyName,
+      this.search.aggregations(),
+      this.search.isFilterActive.bind(this.search),
+    );
   };
 
-  hasActiveFilter = (keyName: string) => {
-    let buckets = this.aggregationService.getBuckets(this.search.aggregations()[keyName]);
-    for (const bucket of buckets) {
-      if (this.search.isFilterActive(keyName, bucket.key)) {
-        return true;
-      }
-    }
-    return false;
+  hasBuckets = (key: string) => {
+    return this.aggregationService.hasBuckets(key, this.search.aggregations());
   };
 
   getAggregationMetaLabel(key: string): string | null {
