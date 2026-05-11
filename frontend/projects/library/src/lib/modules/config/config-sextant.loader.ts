@@ -41,6 +41,9 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
       },
       meta: {
         collapsed: true,
+        layout: 'tree',
+        translateOnLoad: true,
+        orderByTranslation: true,
       },
     },
   },
