@@ -1,8 +1,14 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpParams,
+  HttpXsrfTokenExtractor,
+} from '@angular/common/http';
 import { Injectable, computed, inject } from '@angular/core';
 import { MeResponse, MeService, SiteService } from 'gn4-api-client';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { AuthenticationProvider, AuthenticationService } from './authentication.service';
 
@@ -14,11 +20,24 @@ export class Gn4AuthenticationService implements AuthenticationService {
   private siteService = inject(SiteService);
   private meService = inject(MeService);
   private appConfiguration = inject(APPLICATION_CONFIGURATION);
+  private tokenExtractor = inject(HttpXsrfTokenExtractor);
+
   catalogueUrl = computed(() => this.appConfiguration().catalogueUrl);
 
-  signIn(username: string, password: string): Observable<MeResponse> {
-    const body = new HttpParams().set('username', username).set('password', password);
+  private ensureAuthenticatedUser(userInfo: MeResponse): MeResponse {
+    const username = userInfo.username?.trim();
+    if (!username) {
+      throw new Error('Login failed');
+    }
+    return userInfo;
+  }
 
+  signIn(username: string, password: string): Observable<MeResponse> {
+    const token = this.tokenExtractor.getToken() || '';
+    const body = new HttpParams()
+      .set('username', username)
+      .set('password', password)
+      .set('_csrf', token);
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
     return this.http
@@ -29,12 +48,26 @@ export class Gn4AuthenticationService implements AuthenticationService {
       })
       .pipe(
         map((response) => {
+          // If no CSRF token or no CORS error, the server return redirect with failure in URL
           if (response.url && response.url.includes('failure=true')) {
             throw new Error('Login failed');
           }
           return response;
         }),
         switchMap(() => this.getUserInfo()),
+        map((userInfo) => this.ensureAuthenticatedUser(userInfo)),
+        catchError((error: unknown) => {
+          const isCorsOrNetworkError = error instanceof HttpErrorResponse && error.status === 0;
+
+          if (isCorsOrNetworkError) {
+            return this.getUserInfo().pipe(
+              map((userInfo) => this.ensureAuthenticatedUser(userInfo)),
+              catchError(() => throwError(() => new Error('Login failed'))),
+            );
+          }
+
+          return throwError(() => error);
+        }),
       );
   }
 
