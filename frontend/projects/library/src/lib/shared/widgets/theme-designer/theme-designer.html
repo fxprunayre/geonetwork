@@ -26,17 +26,25 @@
       />
     </p-float-label>
     <p-float-label>
-      <label for="bannerTextColor">{{
-        'config.theme.designer.field.bannerTextColor' | translate
+      <label for="bannerTitle">{{ 'config.theme.designer.field.bannerTitle' | translate }}</label>
+      <input type="text" id="bannerTitle" class="w-full" pInputText [(ngModel)]="bannerTitle" />
+    </p-float-label>
+    <p-float-label>
+      <label for="bannerSubTitle">{{
+        'config.theme.designer.field.bannerSubTitle' | translate
       }}</label>
       <input
         type="text"
-        id="bannerTextColor"
+        id="bannerSubTitle"
         class="w-full"
         pInputText
-        [(ngModel)]="bannerTextColor"
+        [(ngModel)]="bannerSubTitle"
       />
     </p-float-label>
+    <app-color-picker
+      [label]="'config.theme.designer.field.bannerTextColor' | translate"
+      [(color)]="bannerTextColor"
+    />
   </section>
 
   <section class="flex flex-col gap-10">

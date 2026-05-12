@@ -22,11 +22,11 @@ import { Menu } from 'primeng/menu';
 import { Panel } from 'primeng/panel';
 import { TextareaModule } from 'primeng/textarea';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
-import { CopyInput } from '../../shared/widgets/copy-input/copy-input';
-import { ThemeDesigner } from '../../shared/widgets/theme-designer/theme-designer';
-import { APPLICATION_CONFIGURATION } from './config.loader';
-import { DEFAULT_THEME } from './default-theme';
-import { App, Apps } from './model/gnConfig';
+import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
+import { ThemeDesigner } from '../../../shared/widgets/theme-designer/theme-designer';
+import { APPLICATION_CONFIGURATION } from '../config.loader';
+import { DEFAULT_THEME } from '../default-theme';
+import { App, Apps } from '../model/gnConfig';
 
 @Component({
   selector: 'app-config-editor',

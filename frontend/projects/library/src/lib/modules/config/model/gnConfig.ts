@@ -6,6 +6,8 @@ export interface AppsConfiguration {
   apps: Apps;
   proxyUrl?: string;
   bannerBackground?: string; // URL or CSS color
+  bannerTitle?: string;
+  bannerSubTitle?: string;
   bannerTextColor?: string;
   font?: string;
   theme?: Preset;

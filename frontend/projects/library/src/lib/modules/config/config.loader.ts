@@ -116,10 +116,14 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
     appConfig.config.proxyUrl = `${apiUrl}/proxy?url=`;
     appConfig.config.bannerBackground =
       appConfig.config.bannerBackground || environment.backgroundUrl || '';
+
     document.documentElement.style.setProperty(
       '--app-background-text-color',
       appConfig.config.bannerTextColor || '#ffffff',
     );
+
+    appConfig.config.bannerTitle = appConfig.config.bannerTitle ?? '';
+    appConfig.config.bannerSubTitle = appConfig.config.bannerSubTitle ?? '';
 
     if (appConfig.config.font) {
       document.documentElement.style.setProperty('--app-font-family-sans', appConfig.config.font);

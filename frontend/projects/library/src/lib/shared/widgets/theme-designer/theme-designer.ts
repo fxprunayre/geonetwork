@@ -52,6 +52,8 @@ export class ThemeDesigner implements OnInit {
   font = signal('Inter');
   borderRadius = signal(0);
   bannerBackground = signal('');
+  bannerTitle = signal('');
+  bannerSubTitle = signal('');
 
   themePropertiesByColor = {
     primary: 'myprimary',
@@ -67,6 +69,12 @@ export class ThemeDesigner implements OnInit {
     const config = this.appConfig().config;
     if (config?.bannerBackground) {
       this.bannerBackground.set(config.bannerBackground);
+    }
+    if (config?.bannerTitle) {
+      this.bannerTitle.set(config.bannerTitle);
+    }
+    if (config?.bannerSubTitle) {
+      this.bannerSubTitle.set(config.bannerSubTitle);
     }
     if (config?.bannerTextColor) {
       this.bannerTextColor.set(config.bannerTextColor);
@@ -133,6 +141,8 @@ export class ThemeDesigner implements OnInit {
     if (currentConfig.config) {
       currentConfig.config.theme = t;
       currentConfig.config.bannerBackground = this.bannerBackground();
+      currentConfig.config.bannerTitle = this.bannerTitle();
+      currentConfig.config.bannerSubTitle = this.bannerSubTitle();
       currentConfig.config.bannerTextColor = this.bannerTextColor();
       currentConfig.config.font = this.font();
       (this.appConfig as any).set({ ...currentConfig });
