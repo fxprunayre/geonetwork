@@ -1,3 +1,4 @@
+import { elasticsearch } from 'gn-api-client';
 import { DEFAULT_THEME } from './default-theme';
 import {
   DEFAULT_APPS_CONFIGURATION,
@@ -21,6 +22,18 @@ import {
 } from './model/gn4config';
 import { AppsConfiguration } from './model/gnConfig';
 
+export function migrateGn4AggregationConfig(
+  gn4AggConfig: Record<string, elasticsearch.AggregationsAggregationContainer>,
+): (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[] {
+  // Filter entries with property gnBuildFilterForRange
+  const filteredEntries = Object.entries(gn4AggConfig).filter(
+    ([, value]) => !(value as any).gnBuildFilterForRange,
+  );
+  return filteredEntries.map(([key, value]) => ({
+    [key]: value,
+  }));
+}
+
 export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration {
   const conf: AppsConfiguration = {
     apps: {},
@@ -41,9 +54,7 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
       conf.apps.search = {
         enabled: searchConfig.enabled ?? true,
         aggregations: searchConfig.facetConfig
-          ? Object.entries(searchConfig.facetConfig).map(([key, value]) => ({
-              [key]: value,
-            }))
+          ? migrateGn4AggregationConfig(searchConfig.facetConfig)
           : DEFAULT_SEARCH_APP_CONFIGURATION.aggregations,
         sort: searchConfig.sortbyValues
           ? searchConfig.sortbyValues.map((sortOpt) => {

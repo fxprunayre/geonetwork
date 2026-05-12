@@ -35,6 +35,41 @@
     "title": "Cite dataset",
     "title_error": "Error"
   },
+  "config": {
+    "editor": {
+      "advancedProperties": "Advanced Properties (JSON)",
+      "appsMenu": "Apps",
+      "embedApplication": "Embed this application",
+      "enabled": "Enabled",
+      "fullJson": "Full JSON",
+      "rawConfiguration": "Raw Configuration",
+      "themeConfiguration": "Theme Configuration",
+      "title": "App configuration"
+    },
+    "theme": {
+      "designer": {
+        "field": {
+          "apply": "Apply",
+          "backgroundColor": "Background",
+          "backgroundImageUrl": "Background URL",
+          "backgroundTextColor": "Background text color",
+          "borderRadius": "Radius",
+          "dangerColor": "Danger",
+          "font": "Font",
+          "infoColor": "Info",
+          "primaryColor": "Primary",
+          "successColor": "Success",
+          "surfaceColor": "Surface",
+          "warningColor": "Warning"
+        },
+        "section": {
+          "colorsAndRadius": "Colors and radius",
+          "font": "Font",
+          "header": "Header"
+        }
+      }
+    }
+  },
   "copy": {
     "detail_success": "Successfully copied to clipboard",
     "title": "Copy",
@@ -308,6 +343,10 @@
   },
   "success": "Success",
   "user": {
+    "boardMenu": {
+      "configuration": "App configuration",
+      "preferences": "User preferences"
+    },
     "bookmarks": "Bookmarks",
     "contributions": "contributions",
     "dashboard": {

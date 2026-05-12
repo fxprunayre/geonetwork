@@ -35,6 +35,41 @@
     "title": "Cite dataset",
     "title_error": "Fout"
   },
+  "config": {
+    "editor": {
+      "advancedProperties": "Geavanceerde eigenschappen (JSON)",
+      "appsMenu": "Apps",
+      "embedApplication": "Deze applicatie insluiten",
+      "enabled": "Ingeschakeld",
+      "fullJson": "Volledige JSON",
+      "rawConfiguration": "Onbewerkte configuratie",
+      "themeConfiguration": "Themaconfiguratie",
+      "title": "App-configuratie"
+    },
+    "theme": {
+      "designer": {
+        "field": {
+          "apply": "Toepassen",
+          "backgroundColor": "Achtergrond",
+          "backgroundImageUrl": "Achtergrond-URL",
+          "backgroundTextColor": "Tekstkleur op achtergrond",
+          "borderRadius": "Straal",
+          "dangerColor": "Gevaar",
+          "font": "Lettertype",
+          "infoColor": "Info",
+          "primaryColor": "Primair",
+          "successColor": "Succes",
+          "surfaceColor": "Oppervlak",
+          "warningColor": "Waarschuwing"
+        },
+        "section": {
+          "colorsAndRadius": "Kleuren en straal",
+          "font": "Lettertype",
+          "header": "Kop"
+        }
+      }
+    }
+  },
   "copy": {
     "detail_success": "Successfully copied to clipboard",
     "title": "Copy",
@@ -309,6 +344,10 @@
   },
   "success": "Succes",
   "user": {
+    "boardMenu": {
+      "configuration": "App-configuratie",
+      "preferences": "Gebruikersvoorkeuren"
+    },
     "bookmark": "My bookmarks",
     "bookmarks": "Favorieten",
     "contributions": "bijdragen",

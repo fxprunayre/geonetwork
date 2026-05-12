@@ -17,10 +17,11 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
       [class.bg-primary-400]="!backgroundImageUrl()"
       [class.bg-black]="backgroundImageUrl()"
       [style.background-image]="backgroundImageUrl() ? 'url(' + backgroundImageUrl() + ')' : null"
+      style="color: var(--app-background-text-color, #ffffff)"
     >
       <div class="mx-auto max-w-7xl flex flex-col lg:gap-2">
         <div class="grow mb-4 flex flex-row gap-2 ">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl text-white font-bold grow">
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold grow">
             {{ record().resourceTitleObject?.['default'] }}
           </h1>
 
@@ -36,7 +37,7 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
           <app-record-field-type
             [record]="record()"
             [withSpatialType]="true"
-            class="text-xl text-white grow"
+            class="text-xl grow"
           />
 
           <app-record-distribution-badges
