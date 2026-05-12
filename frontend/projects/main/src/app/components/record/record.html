@@ -5,8 +5,8 @@
   (onRecordClick)="handleRecordClick($event)"
 >
   <ng-template #backButton>
-    <button pButton (click)="goBack()" [title]="'search.backToResults' | translate">
+    <p-button (click)="goBack()" [title]="'search.backToResults' | translate">
       <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
-    </button>
+    </p-button>
   </ng-template>
 </app-record-view>

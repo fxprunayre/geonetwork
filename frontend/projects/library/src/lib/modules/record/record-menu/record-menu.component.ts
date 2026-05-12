@@ -1,5 +1,5 @@
 import { Component, computed, effect, ElementRef, inject, OnInit, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidEllipsisVertical,
   faSolidPenToSquare,
@@ -15,6 +15,8 @@ import { MenubarModule } from 'primeng/menubar';
 import { DeleteConfirmationDialog } from '../../../shared/widgets/delete-confirmation-dialog/delete-confirmation-dialog';
 import { AssociatedRecordsSummary } from '../../record-associations/associated-records-summary/associated-records-summary';
 
+import { ButtonModule } from 'primeng/button';
+import { TieredMenu } from 'primeng/tieredmenu';
 import { IconStyleService } from '../../../shared/icon-style-service';
 import { AuthStore } from '../../authentication/auth.store';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
@@ -27,7 +29,15 @@ import { RecordFieldBase } from '../record-field-base/record-field-base';
   selector: 'app-record-menu',
   templateUrl: './record-menu.component.html',
   standalone: true,
-  imports: [MenubarModule, TranslatePipe, DeleteConfirmationDialog, AssociatedRecordsSummary],
+  imports: [
+    MenubarModule,
+    TranslatePipe,
+    DeleteConfirmationDialog,
+    AssociatedRecordsSummary,
+    TieredMenu,
+    ButtonModule,
+    NgIcon,
+  ],
   viewProviders: [
     provideIcons({
       faSolidEllipsisVertical,
@@ -108,6 +118,9 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
     ];
 
     if (this.authStore.isAuthenticated() && this.record().info?.edit) {
+      arr.push({
+        separator: true,
+      });
       arr.push({
         label: this.translate.instant('record.action.edit'),
         title: this.translate.instant('record.action.editTitle'),

@@ -3,12 +3,19 @@ import { Component, computed, inject, input, TemplateRef } from '@angular/core';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { RecordMenuComponent } from '../record-menu/record-menu.component';
 
 @Component({
   selector: 'app-record-view-title',
-  imports: [NgTemplateOutlet, RecordDistributionBadges, RecordFieldType, RecordMenuComponent],
+  imports: [
+    NgTemplateOutlet,
+    RecordDistributionBadges,
+    RecordFieldType,
+    RecordMenuComponent,
+    RecordFieldCodelist,
+  ],
   template: `
     <ng-template #defaultBackButton />
 
@@ -24,9 +31,6 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold grow">
             {{ record().resourceTitleObject?.['default'] }}
           </h1>
-
-          <app-record-menu [record]="record()" />
-
           <div>
             <ng-container
               *ngTemplateOutlet="backButtonTplRef() || defaultBackButton"
@@ -34,17 +38,17 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
           </div>
         </div>
         <div class="flex flex-row gap-3 items-center">
-          <app-record-field-type
-            [record]="record()"
-            [withSpatialType]="true"
-            class="text-xl grow"
-          />
+          <app-record-field-type [record]="record()" [withSpatialType]="true" class="text-xl" />
+
+          <app-record-field-codelist [record]="record()" codelist="cl_status" class="grow" />
 
           <app-record-distribution-badges
             [record]="record()"
             [types]="['api', 'download']"
             [layout]="'badge'"
           />
+
+          <app-record-menu [record]="record()" />
         </div>
       </div>
     </div>

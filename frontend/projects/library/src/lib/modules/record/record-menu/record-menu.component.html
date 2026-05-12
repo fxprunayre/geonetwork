@@ -1,10 +1,7 @@
-<p-menubar
-  [model]="items()"
-  (click)="$event.stopPropagation()"
-  [pt]="{
-    rootList: { class: '!min-w-42 !left-auto !right-0' },
-  }"
-></p-menubar>
+<p-button [title]="'record.action.manageTitle' | translate" (click)="menu.toggle($event)">
+  <ng-icon name="faSolidEllipsisVertical" pButtonIcon />
+</p-button>
+<p-tieredmenu #menu [popup]="true" [model]="items()"></p-tieredmenu>
 
 @if (canDelete()) {
   <app-delete-confirmation-dialog
