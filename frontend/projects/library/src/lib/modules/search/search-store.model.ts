@@ -60,3 +60,11 @@ export interface SearchRequestParameters
   extends SearchFilterParameters, SearchRequestPageParameters {
   layout: SearchAppLayout;
 }
+
+export interface SearchStoreContract {
+  [key: string]: unknown;
+}
+
+export interface SearchRegistry<TStore extends SearchStoreContract = SearchStoreContract> {
+  [searchId: string]: TStore;
+}

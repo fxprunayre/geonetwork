@@ -7,8 +7,13 @@ import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { Datasource } from '../data/datasource.model';
 import { AggregationService } from '../search-filter/aggregation-service';
 import { SEARCH_SOURCE } from './search-constant';
-import { SearchRegistry, SearchStoreType } from './search-store';
-import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './search-store.model';
+import {
+  SearchFilter,
+  SearchRegistry,
+  SearchRequestParameters,
+  SearchStoreContract,
+  TRACK_TOTAL_HITS,
+} from './search-store.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +30,7 @@ export class SearchService {
 
   aggregationService = inject(AggregationService);
 
-  register(searchId: string, searchStore: SearchStoreType) {
+  register<TStore extends SearchStoreContract>(searchId: string, searchStore: TStore) {
     if (this.store[searchId]) {
       console.log(`Search ${searchId} already registered. Reusing it.`);
       // throw new Error(
@@ -36,9 +41,9 @@ export class SearchService {
     }
   }
 
-  getSearch(searchId: string): SearchStoreType {
+  getSearch<TStore extends SearchStoreContract = SearchStoreContract>(searchId: string): TStore {
     if (this.store[searchId]) {
-      return this.store[searchId];
+      return this.store[searchId] as TStore;
     } else {
       throw new Error(
         `Search ${searchId} not found. Available search contexts are: ${Object.keys(this.store).join(', ')}`,

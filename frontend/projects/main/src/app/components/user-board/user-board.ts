@@ -22,6 +22,7 @@ import {
   ResultsView,
   SearchContextDirective,
   SearchService,
+  SearchStoreType,
   TranslationsService,
   UserFullNamePipe,
 } from 'gn-library';
@@ -84,7 +85,7 @@ export class UserBoard {
   translationsService = inject(TranslationsService);
 
   search = computed(() => {
-    return this.searchService.getSearch('user-records');
+    return this.searchService.getSearch<SearchStoreType>('user-records');
   });
 
   aggregations = computed(() => {

@@ -16,6 +16,6 @@ export class SearchBase implements OnInit {
   search: SearchStoreType = {} as SearchStoreType;
 
   ngOnInit() {
-    this.search = this.searchService.getSearch(this.scope());
+    this.search = this.searchService.getSearch<SearchStoreType>(this.scope());
   }
 }

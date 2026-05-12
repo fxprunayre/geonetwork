@@ -21,8 +21,8 @@ import { DataZoomComponent, GridComponent, TooltipComponent } from 'echarts/comp
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { AggregationChartLayout, Decorator } from 'gn-api-client';
-import { SearchBase } from 'gn-library';
 import { ButtonModule } from 'primeng/button';
+import { SearchBase } from '../../search/search-base/search-base';
 import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationBucketType } from '../aggregation/aggregation.model';

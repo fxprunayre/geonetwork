@@ -558,7 +558,3 @@ export const SearchStore = signalStore(
 );
 
 export type SearchStoreType = InstanceType<typeof SearchStore>;
-
-export interface SearchRegistry {
-  [searchId: string]: SearchStoreType;
-}

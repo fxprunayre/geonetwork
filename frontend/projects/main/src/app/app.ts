@@ -13,6 +13,7 @@ import {
   SearchApp,
   SearchContextDirective,
   SearchService,
+  SearchStoreType,
 } from 'gn-library';
 import { ScrollTop } from 'primeng/scrolltop';
 import { Toast } from 'primeng/toast';
@@ -64,7 +65,7 @@ export class App extends BaseComponent implements OnInit {
     super();
     this.translate.addLangs(['en']);
     this.translate.onLangChange.subscribe((event) => {
-      this.searchService.getSearch('main').setLanguage(event.lang);
+      this.searchService.getSearch<SearchStoreType>('main').setLanguage(event.lang);
     });
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
