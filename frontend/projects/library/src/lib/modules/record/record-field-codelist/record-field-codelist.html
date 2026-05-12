@@ -1,9 +1,19 @@
-@for (codelist of values(); track $index) {
-  <p>
-    @if (codelist.link) {
-      <a [href]="codelist.link" target="_blank">{{ codelist.default | translate }}</a>
+@for (value of values(); track $index) {
+  @if (decorator(); as clDecorator) {
+    @if (clDecorator.type === 'badge') {
+      <p-chip
+        [label]="value.default | translate"
+        [title]="codelist() | translate"
+        [ngStyle]="getChipStyle(clDecorator.map[value.key])"
+      />
     } @else {
-      {{ codelist.default | translate }}
+      <p [title]="codelist() | translate">
+        {{ value.default | translate }}
+      </p>
     }
-  </p>
+  } @else {
+    <p [title]="codelist() | translate">
+      {{ value.default | translate }}
+    </p>
+  }
 }
