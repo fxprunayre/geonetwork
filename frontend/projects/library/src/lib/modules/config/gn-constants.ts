@@ -452,7 +452,7 @@ export const DEFAULT_APPS_CONFIGURATION: AppsConfiguration = {
     record: DEFAULT_RECORD_DETAILS_APP_CONFIGURATION,
   },
   proxyUrl: '/geonetwork/proxy?url=',
-  backgroundImageUrl: '',
-  backgroundTextColor: '#ffffff',
+  bannerBackground: '',
+  bannerTextColor: '#ffffff',
   theme: DEFAULT_THEME,
 };

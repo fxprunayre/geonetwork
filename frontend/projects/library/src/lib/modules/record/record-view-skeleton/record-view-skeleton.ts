@@ -1,15 +1,16 @@
+import { NgStyle } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Skeleton } from 'primeng/skeleton';
+import { ThemingService } from '../../../shared/theming-service';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 
 @Component({
   selector: 'app-record-view-skeleton',
-  imports: [Skeleton],
+  imports: [Skeleton, NgStyle],
   template: `<div
       class="w-full bg-cover bg-bottom bg-no-repeat px-6 py-8"
-      [class.bg-primary-400]="!backgroundImageUrl()"
-      [class.bg-black]="backgroundImageUrl()"
-      [style.background-image]="backgroundImageUrl() ? 'url(' + backgroundImageUrl() + ')' : null"
+      [class.bg-primary-400]="!bannerBackground()"
+      [ngStyle]="bannerBackgroundStyle()"
       style="color: var(--app-background-text-color, #ffffff)"
     >
       <div class="mx-auto max-w-7xl flex flex-col lg:gap-2">
@@ -48,6 +49,11 @@ import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 })
 export class RecordViewSkeleton {
   appConfiguration = inject(APPLICATION_CONFIGURATION);
+  themingService = inject(ThemingService);
 
-  backgroundImageUrl = computed(() => this.appConfiguration().config?.backgroundImageUrl || '');
+  bannerBackground = computed(() => this.appConfiguration().config?.bannerBackground || '');
+
+  bannerBackgroundStyle = computed(() =>
+    this.themingService.getBannerBackgroundStyle(this.bannerBackground()),
+  );
 }

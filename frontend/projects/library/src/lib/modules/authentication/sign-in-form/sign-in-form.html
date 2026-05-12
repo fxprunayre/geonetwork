@@ -1,8 +1,7 @@
 <div
   class="h-full px-6 py-20 md:px-20 lg:px-80 flex items-center justify-center backdrop-blur-3xl bg-cover! bg-center! bg-no-repeat!"
-  [class.bg-primary-400]="!backgroundImageUrl()"
-  [class.bg-black]="backgroundImageUrl()"
-  [style.background-image]="backgroundImageUrl() ? 'url(' + backgroundImageUrl() + ')' : null"
+  [class.bg-primary-400]="!bannerBackground()"
+  [ngStyle]="bannerBackgroundStyle()"
   style="color: var(--app-background-text-color, #ffffff)"
 >
   <div

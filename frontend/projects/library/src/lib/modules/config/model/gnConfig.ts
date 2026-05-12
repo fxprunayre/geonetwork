@@ -5,8 +5,8 @@ import { DistributionConfig } from './gn4config';
 export interface AppsConfiguration {
   apps: Apps;
   proxyUrl?: string;
-  backgroundImageUrl?: string;
-  backgroundTextColor?: string;
+  bannerBackground?: string; // URL or CSS color
+  bannerTextColor?: string;
   font?: string;
   theme?: Preset;
 }

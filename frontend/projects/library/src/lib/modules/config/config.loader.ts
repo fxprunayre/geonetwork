@@ -114,11 +114,11 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
 
     appConfig.catalogueUrl = apiUrl;
     appConfig.config.proxyUrl = `${apiUrl}/proxy?url=`;
-    appConfig.config.backgroundImageUrl =
-      appConfig.config.backgroundImageUrl || environment.backgroundUrl || '';
+    appConfig.config.bannerBackground =
+      appConfig.config.bannerBackground || environment.backgroundUrl || '';
     document.documentElement.style.setProperty(
       '--app-background-text-color',
-      appConfig.config.backgroundTextColor || '#ffffff',
+      appConfig.config.bannerTextColor || '#ffffff',
     );
 
     if (appConfig.config.font) {

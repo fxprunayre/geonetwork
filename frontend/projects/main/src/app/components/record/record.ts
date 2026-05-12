@@ -40,7 +40,7 @@ export class RecordComponent {
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
 
-  backgroundImageUrl = computed(() => this.appConfiguration().config?.backgroundImageUrl || '');
+  bannerBackground = computed(() => this.appConfiguration().config?.bannerBackground || '');
 
   constructor() {
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {

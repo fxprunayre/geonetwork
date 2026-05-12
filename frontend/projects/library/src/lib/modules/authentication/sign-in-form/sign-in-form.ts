@@ -19,6 +19,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
+import { ThemingService } from '../../../shared/theming-service';
 import { CatalogueLogo } from '../../catalogue/catalogue-logo/catalogue-logo';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { AuthStore } from '../auth.store';
@@ -59,6 +60,7 @@ export class SignInFormComponent {
   private authService = inject(AuthenticationService);
   private translateService = inject(TranslateService);
   private route = inject(ActivatedRoute);
+  private themingService = inject(ThemingService);
   readonly store = inject(AuthStore);
 
   signinFailure = computed(() => !!this.store.error());
@@ -87,7 +89,11 @@ export class SignInFormComponent {
 
   hasOnlyOneProvider = computed(() => this.authenticationProviders().length === 1);
 
-  backgroundImageUrl = computed(() => this.appConfiguration().config?.backgroundImageUrl || '');
+  bannerBackground = computed(() => this.appConfiguration().config?.bannerBackground || '');
+
+  bannerBackgroundStyle = computed(() =>
+    this.themingService.getBannerBackgroundStyle(this.bannerBackground()),
+  );
 
   loginModel = signal<LoginData>({
     email: '',

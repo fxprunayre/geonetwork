@@ -18,7 +18,7 @@ export class Search extends SearchBase {
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
 
-  backgroundImageUrl = computed(() => this.appConfiguration().config?.backgroundImageUrl || '');
+  bannerBackground = computed(() => this.appConfiguration().config?.bannerBackground || '');
 
   resultsLayoutOptions = computed(
     () => this.appConfiguration().config?.apps.search?.resultsLayoutOptions || [],

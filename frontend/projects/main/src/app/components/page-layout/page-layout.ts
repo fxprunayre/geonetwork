@@ -1,4 +1,4 @@
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -27,6 +27,7 @@ import {
   SearchInput,
   SearchWelcomeTextPipe,
   SpaceSelector,
+  ThemingService,
 } from 'gn-library';
 import { Button } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
@@ -44,6 +45,7 @@ import { SearchFilters } from '../search-filters/search-filters';
     NgIcon,
     Button,
     NgClass,
+    NgStyle,
     NgTemplateOutlet,
     TranslatePipe,
     SpaceSelector,
@@ -58,11 +60,8 @@ import { SearchFilters } from '../search-filters/search-filters';
         <div
           #headerRow
           class="top-0 z-10 w-full header-row bg-cover bg-bottom bg-no-repeat px-6 py-8"
-          [class.bg-primary-400]="!backgroundImageUrl()"
-          [class.bg-black]="backgroundImageUrl()"
-          [style.background-image]="
-            backgroundImageUrl() ? 'url(' + backgroundImageUrl() + ')' : null
-          "
+          [class.bg-primary-400]="!bannerBackground()"
+          [ngStyle]="bannerBackgroundStyle()"
           style="color: var(--app-background-text-color, #ffffff)"
         >
           <div class="mx-auto max-w-7xl flex flex-col lg:gap-2">
@@ -173,8 +172,13 @@ export class PageLayout extends SearchBase implements AfterViewInit, OnDestroy {
   router = inject(Router);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
+  themingService = inject(ThemingService);
 
-  backgroundImageUrl = computed(() => this.appConfiguration().config?.backgroundImageUrl || '');
+  bannerBackground = computed(() => this.appConfiguration().config?.bannerBackground || '');
+
+  bannerBackgroundStyle = computed(() =>
+    this.themingService.getBannerBackgroundStyle(this.bannerBackground()),
+  );
 
   scrollY = signal(0);
   viewportWidth = signal(typeof window !== 'undefined' ? window.innerWidth : 1024);

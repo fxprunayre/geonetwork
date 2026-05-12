@@ -1,5 +1,6 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input, TemplateRef } from '@angular/core';
+import { ThemingService } from '../../../shared/theming-service';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
@@ -11,6 +12,7 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
   selector: 'app-record-view-title',
   imports: [
     NgTemplateOutlet,
+    NgStyle,
     RecordDistributionBadges,
     RecordFieldType,
     RecordMenuComponent,
@@ -21,9 +23,8 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
 
     <div
       class="w-full bg-cover bg-bottom bg-no-repeat px-6 py-8"
-      [class.bg-primary-400]="!backgroundImageUrl()"
-      [class.bg-black]="backgroundImageUrl()"
-      [style.background-image]="backgroundImageUrl() ? 'url(' + backgroundImageUrl() + ')' : null"
+      [class.bg-primary-400]="!bannerBackground()"
+      [ngStyle]="bannerBackgroundStyle()"
       style="color: var(--app-background-text-color, #ffffff)"
     >
       <div class="mx-auto max-w-7xl flex flex-col lg:gap-2">
@@ -58,6 +59,11 @@ export class RecordViewTitle extends RecordFieldBase {
   backButtonTplRef = input<TemplateRef<unknown>>();
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
+  themingService = inject(ThemingService);
 
-  backgroundImageUrl = computed(() => this.appConfiguration().config?.backgroundImageUrl || '');
+  bannerBackground = computed(() => this.appConfiguration().config?.bannerBackground || '');
+
+  bannerBackgroundStyle = computed(() =>
+    this.themingService.getBannerBackgroundStyle(this.bannerBackground()),
+  );
 }
