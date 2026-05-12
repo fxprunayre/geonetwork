@@ -1,15 +1,29 @@
 @if (record().logo; as logo) {
-  <p-card
-    [header]="'record.field.catalogue.title' | translate"
-    [subheader]="record().harvesterUuid ? ('source-' + record().harvesterUuid | translate) : ''"
-    [title]="'record.field.catalogue.help' | translate"
-  >
-    <p class="place-items-center">
+  @if (layout() === 'avatar') {
+    <p
+      [title]="'record.field.catalogue.help' | translate"
+      class="flex flex-row items-center gap-2 text-center"
+    >
+      {{ catalogueName() }}
       <img
         [src]="apiBase() + logo"
         [alt]="'record.field.catalogue.logo.alt' | translate"
-        class="w-full h-full object-contain my-4"
+        class="h-12 my-4"
       />
     </p>
-  </p-card>
+  } @else {
+    <p-card
+      [header]="'record.field.catalogue.title' | translate"
+      [subheader]="catalogueName()"
+      [title]="'record.field.catalogue.help' | translate"
+    >
+      <p class="place-items-center">
+        <img
+          [src]="apiBase() + logo"
+          [alt]="'record.field.catalogue.logo.alt' | translate"
+          class="w-full h-full object-contain my-4"
+        />
+      </p>
+    </p-card>
+  }
 }
