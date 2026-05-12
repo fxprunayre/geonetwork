@@ -3,6 +3,7 @@
   [class.bg-primary-400]="!backgroundImageUrl()"
   [class.bg-black]="backgroundImageUrl()"
   [style.background-image]="backgroundImageUrl() ? 'url(' + backgroundImageUrl() + ')' : null"
+  style="color: var(--app-background-text-color, #ffffff)"
 >
   <div
     class="px-8 md:px-12 lg:px-20 py-12 flex flex-col items-center gap-12 w-full backdrop-blur-2xl rounded-(--p-border-radius-lg) bg-white/10 border border-white/10 max-w-md"
@@ -10,14 +11,14 @@
     <div class="flex flex-col items-center gap-4 w-full">
       <app-catalogue-logo />
       <div class="flex flex-col gap-2 w-full">
-        <div class="text-center text-3xl font-medium text-white leading-tight">
+        <div class="text-center text-3xl font-medium leading-tight">
           {{ 'auth.signin.title' | translate }}
         </div>
 
         @if (hasSignup()) {
           <div class="text-center">
-            <span class="text-white/80">{{ 'auth.signin.noAccount' | translate }} </span>
-            <a class="text-white/80 cursor-pointer hover:text-white/90 underline">{{
+            <span class="opacity-80">{{ 'auth.signin.noAccount' | translate }} </span>
+            <a class="opacity-80 cursor-pointer hover:opacity-90 underline">{{
               'auth.signin.signup' | translate
             }}</a>
           </div>
@@ -25,7 +26,7 @@
       </div>
     </div>
     @if (hasDatabaseProvider()) {
-      <form (submit)="onSubmit($event)" class="flex flex-col items-center gap-8 w-full text-white">
+      <form (submit)="onSubmit($event)" class="flex flex-col items-center gap-8 w-full">
         <div class="flex flex-col gap-6 w-full">
           <p-iconfield icon-position="left">
             <p-inputicon>
@@ -79,7 +80,7 @@
       </form>
 
       @if (hasForgotPassword()) {
-        <a class="text-white/80 cursor-pointer hover:text-white/90">{{
+        <a class="opacity-80 cursor-pointer hover:opacity-90">{{
           'auth.signin.forgotPassword' | translate
         }}</a>
       }

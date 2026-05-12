@@ -453,5 +453,6 @@ export const DEFAULT_APPS_CONFIGURATION: AppsConfiguration = {
   },
   proxyUrl: '/geonetwork/proxy?url=',
   backgroundImageUrl: '',
+  backgroundTextColor: '#ffffff',
   theme: DEFAULT_THEME,
 };

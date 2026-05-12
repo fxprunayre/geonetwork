@@ -1,33 +1,85 @@
-<div class="flex flex-col gap-10 my-6">
-  <app-color-picker [label]="'Primary'" [(color)]="primaryColor" />
-  <app-color-picker [label]="'Surface'" [(color)]="surfaceColor" />
-  <app-color-picker [label]="'Info'" [(color)]="infoColor" />
-  <app-color-picker [label]="'success'" [(color)]="successColor" />
-  <app-color-picker [label]="'warning'" [(color)]="warningColor" />
-  <app-color-picker [label]="'danger'" [(color)]="dangerColor" />
-  <app-color-picker [label]="'Background'" [(color)]="backgroundColor" />
+<div class="flex flex-col gap-8 my-6">
+  <section class="flex flex-col gap-10">
+    <h3 class="text-sm font-semibold text-primary-500">
+      {{ 'config.theme.designer.section.font' | translate }}
+    </h3>
+    <p-float-label>
+      <label for="font">{{ 'config.theme.designer.field.font' | translate }}</label>
+      <input type="text" id="font" class="w-full" pInputText [(ngModel)]="font" />
+    </p-float-label>
+  </section>
 
-  <p-float-label>
-    <label for="borderRadius">Radius</label>
-    <p-inputnumber id="borderRadius" [min]="0" [max]="50" [(ngModel)]="borderRadius" />
-  </p-float-label>
-  <p-float-label>
-    <label for="font">Font</label>
-    <input type="text" id="font" class="w-full" pInputText [(ngModel)]="font" />
-  </p-float-label>
-  <p-float-label>
-    <label for="backgroundImageUrl">Background URL</label>
-    <input
-      type="text"
-      id="backgroundImageUrl"
-      class="w-full"
-      pInputText
-      [(ngModel)]="backgroundImageUrl"
+  <section class="flex flex-col gap-10">
+    <h3 class="text-sm font-semibold text-primary-500">
+      {{ 'config.theme.designer.section.header' | translate }}
+    </h3>
+    <p-float-label>
+      <label for="backgroundImageUrl">{{
+        'config.theme.designer.field.backgroundImageUrl' | translate
+      }}</label>
+      <input
+        type="text"
+        id="backgroundImageUrl"
+        class="w-full"
+        pInputText
+        [(ngModel)]="backgroundImageUrl"
+      />
+    </p-float-label>
+    <p-float-label>
+      <label for="backgroundTextColor">{{
+        'config.theme.designer.field.backgroundTextColor' | translate
+      }}</label>
+      <input
+        type="text"
+        id="backgroundTextColor"
+        class="w-full"
+        pInputText
+        [(ngModel)]="backgroundTextColor"
+      />
+    </p-float-label>
+  </section>
+
+  <section class="flex flex-col gap-10">
+    <h3 class="text-sm font-semibold text-primary-500">
+      {{ 'config.theme.designer.section.colorsAndRadius' | translate }}
+    </h3>
+    <app-color-picker
+      [label]="'config.theme.designer.field.primaryColor' | translate"
+      [(color)]="primaryColor"
     />
-  </p-float-label>
+    <app-color-picker
+      [label]="'config.theme.designer.field.surfaceColor' | translate"
+      [(color)]="surfaceColor"
+    />
+    <app-color-picker
+      [label]="'config.theme.designer.field.infoColor' | translate"
+      [(color)]="infoColor"
+    />
+    <app-color-picker
+      [label]="'config.theme.designer.field.successColor' | translate"
+      [(color)]="successColor"
+    />
+    <app-color-picker
+      [label]="'config.theme.designer.field.warningColor' | translate"
+      [(color)]="warningColor"
+    />
+    <app-color-picker
+      [label]="'config.theme.designer.field.dangerColor' | translate"
+      [(color)]="dangerColor"
+    />
+    <app-color-picker
+      [label]="'config.theme.designer.field.backgroundColor' | translate"
+      [(color)]="backgroundColor"
+    />
+
+    <p-float-label>
+      <label for="borderRadius">{{ 'config.theme.designer.field.borderRadius' | translate }}</label>
+      <p-inputnumber id="borderRadius" [min]="0" [max]="50" [(ngModel)]="borderRadius" />
+    </p-float-label>
+  </section>
 
   <button (click)="setTheme()" pButton type="button">
     <ng-icon name="faSolidPaintRoller" pButtonIcon></ng-icon>
-    <span pButtonLabel>Apply</span>
+    <span pButtonLabel>{{ 'config.theme.designer.field.apply' | translate }}</span>
   </button>
 </div>

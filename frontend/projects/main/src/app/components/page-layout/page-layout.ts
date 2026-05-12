@@ -63,6 +63,7 @@ import { FilterPanelLayout } from '../search/search';
           [style.background-image]="
             backgroundImageUrl() ? 'url(' + backgroundImageUrl() + ')' : null
           "
+          style="color: var(--app-background-text-color, #ffffff)"
         >
           <div class="mx-auto max-w-7xl flex flex-col lg:gap-2">
             <ng-container *ngTemplateOutlet="header || defaultHeader" />

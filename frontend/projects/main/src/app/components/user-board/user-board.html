@@ -2,7 +2,7 @@
   <app-page-layout [withSearch]="false">
     <ng-template #header>
       <section class="flex flex-row pb-6 mb-6 items-center">
-        <h1 class="grow text-white">
+        <h1 class="grow">
           {{ 'user.welcome' | translate: { name: (user() | userFullName) } }}
         </h1>
         <app-user-board-menu />
@@ -12,12 +12,12 @@
       <section class="">
         <div class="flex flex-row">
           <h1
-            class="text-white text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight max-w-2xl mx-auto md:mx-0"
+            class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight max-w-2xl mx-auto md:mx-0"
           >
             {{ 'user.dashboard.title' | translate }}
           </h1>
         </div>
-        <p class="text-white mt-4 mb-8 max-w-xl mx-auto md:mx-0">
+        <p class="mt-4 mb-8 max-w-xl mx-auto md:mx-0">
           {{ 'user.dashboard.subtitle' | translate }}
         </p>
       </section>

@@ -64,9 +64,9 @@ const ICONS = {
     >
       <p-tabs value="preferences">
         <p-tablist>
-          <p-tab value="preferences">User preferences</p-tab>
+          <p-tab value="preferences">{{ 'user.boardMenu.preferences' | translate }}</p-tab>
           @if (userRole() === 'Administrator') {
-            <p-tab value="configuration">App configuration</p-tab>
+            <p-tab value="configuration">{{ 'user.boardMenu.configuration' | translate }}</p-tab>
           }
         </p-tablist>
         <p-tabpanels>

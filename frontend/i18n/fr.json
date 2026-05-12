@@ -36,6 +36,41 @@
     "title": "Citer l'ensemble de données",
     "title_error": "Erreur"
   },
+  "config": {
+    "editor": {
+      "advancedProperties": "Propriétés avancées (JSON)",
+      "appsMenu": "Applications",
+      "embedApplication": "Intégrer cette application",
+      "enabled": "Activé",
+      "fullJson": "JSON complet",
+      "rawConfiguration": "Configuration brute",
+      "themeConfiguration": "Configuration du thème",
+      "title": "Configuration de l'application"
+    },
+    "theme": {
+      "designer": {
+        "field": {
+          "apply": "Appliquer",
+          "backgroundColor": "Arrière-plan",
+          "backgroundImageUrl": "URL de l'arrière-plan",
+          "backgroundTextColor": "Couleur du texte sur l'arrière-plan",
+          "borderRadius": "Rayon",
+          "dangerColor": "Danger",
+          "font": "Police",
+          "infoColor": "Info",
+          "primaryColor": "Primaire",
+          "successColor": "Succès",
+          "surfaceColor": "Surface",
+          "warningColor": "Avertissement"
+        },
+        "section": {
+          "colorsAndRadius": "Couleurs et rayon",
+          "font": "Police",
+          "header": "En-tête"
+        }
+      }
+    }
+  },
   "copy": {
     "detail_success": "Copie réussie dans le presse-papiers",
     "title": "Copie",
@@ -310,6 +345,10 @@
   },
   "success": "Succès",
   "user": {
+    "boardMenu": {
+      "configuration": "Configuration de l'application",
+      "preferences": "Préférences utilisateur"
+    },
     "bookmarks": "Favoris",
     "contributions": "contributions",
     "dashboard": {

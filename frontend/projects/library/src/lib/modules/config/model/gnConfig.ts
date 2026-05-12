@@ -6,6 +6,8 @@ export interface AppsConfiguration {
   apps: Apps;
   proxyUrl?: string;
   backgroundImageUrl?: string;
+  backgroundTextColor?: string;
+  font?: string;
   theme?: Preset;
 }
 

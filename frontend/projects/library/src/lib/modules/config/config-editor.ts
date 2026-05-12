@@ -15,11 +15,14 @@ import {
   faSolidMap,
   faSolidPaintRoller,
 } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { Menu } from 'primeng/menu';
+import { Panel } from 'primeng/panel';
 import { TextareaModule } from 'primeng/textarea';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { CopyInput } from '../../shared/widgets/copy-input/copy-input';
 import { ThemeDesigner } from '../../shared/widgets/theme-designer/theme-designer';
 import { APPLICATION_CONFIGURATION } from './config.loader';
 import { DEFAULT_THEME } from './default-theme';
@@ -32,13 +35,15 @@ import { App, Apps } from './model/gnConfig';
     NgClass,
     TitleCasePipe,
     FormsModule,
-
     ToggleSwitchModule,
     TextareaModule,
     IftaLabelModule,
+    CopyInput,
     ThemeDesigner,
     Menu,
     NgIconComponent,
+    Panel,
+    TranslatePipe,
   ],
   viewProviders: [
     provideIcons({
@@ -76,7 +81,9 @@ import { App, Apps } from './model/gnConfig';
         <div class="flex-1 w-3/4 pl-2 overflow-y-auto">
           @if (selectedApp(); as appName) {
             <div class="flex flex-col gap-4">
-              <div class="text-xl font-bold mb-2">{{ appName | titlecase }} Configuration</div>
+              <div class="text-xl font-bold mb-2">
+                {{ appName | titlecase }} {{ 'config.editor.title' | translate }}
+              </div>
 
               <div class="flex items-center gap-2 mb-2">
                 <p-toggleswitch
@@ -84,7 +91,7 @@ import { App, Apps } from './model/gnConfig';
                   (ngModelChange)="updateAppEnabled(appName, $event)"
                 >
                 </p-toggleswitch>
-                <label>Enabled</label>
+                <label>{{ 'config.editor.enabled' | translate }}</label>
               </div>
 
               <p-iftalabel>
@@ -96,17 +103,23 @@ import { App, Apps } from './model/gnConfig';
                   rows="20"
                   style="resize: none; width: 100%; font-family: monospace; font-size: 0.875rem;"
                 ></textarea>
-                <label [for]="appName + '-config'">Advanced Properties (JSON)</label>
+                <label [for]="appName + '-config'">{{
+                  'config.editor.advancedProperties' | translate
+                }}</label>
               </p-iftalabel>
             </div>
           } @else if (selectedTab() === 'theme') {
             <div class="flex flex-col gap-4">
-              <div class="text-xl font-bold mb-2">Theme Configuration</div>
+              <div class="text-xl font-bold mb-2">
+                {{ 'config.editor.themeConfiguration' | translate }}
+              </div>
               <app-theme-designer [theme]="theme()" />
             </div>
           } @else if (selectedTab() === 'raw') {
             <div class="flex flex-col gap-4">
-              <div class="text-xl font-bold mb-2">Raw Configuration</div>
+              <div class="text-xl font-bold mb-2">
+                {{ 'config.editor.rawConfiguration' | translate }}
+              </div>
               <p-iftalabel>
                 <textarea
                   pTextarea
@@ -116,8 +129,16 @@ import { App, Apps } from './model/gnConfig';
                   rows="25"
                   style="resize: none; width: 100%; font-family: monospace; font-size: 0.875rem;"
                 ></textarea>
-                <label for="raw-config">Full JSON</label>
+                <label for="raw-config">{{ 'config.editor.fullJson' | translate }}</label>
               </p-iftalabel>
+
+              <div class="text-xl font-bold mt-4">
+                {{ 'config.editor.embedApplication' | translate }}
+              </div>
+              <app-copy-input [value]="embedSnippet()" layout="buttonWithIcon"></app-copy-input>
+              <p-panel class="bg-neutral-900! text-neutral-200! w-full overflow-auto">
+                <pre class="">{{ embedSnippet() }}</pre>
+              </p-panel>
             </div>
           }
         </div>
@@ -216,6 +237,20 @@ export class ConfigEditorComponent {
   });
 
   appConfigJson = computed(() => JSON.stringify(this.appConfig(), null, 2));
+  embedSnippet = computed(() => {
+    const escapedConfig = JSON.stringify(this.appConfig()).replace(/"/g, '&quot;');
+    const assetBaseUrl = this.getEmbedAssetBaseUrl();
+    const catalogueUrl = this.appConfig().catalogueUrl;
+    return [
+      `<script src="${assetBaseUrl}/main.js" type="module"></script>`,
+      `<link rel="stylesheet" href="${assetBaseUrl}/styles.css" />`,
+      `<sextant-app url="${catalogueUrl}" config="${escapedConfig}"></sextant-app>`,
+    ].join('\n');
+  });
+
+  private getEmbedAssetBaseUrl(): string {
+    return `${this.appConfig().catalogueUrl}/dist/webcomponent/browser`;
+  }
 
   getAppConfigJson(appName: keyof Apps): string {
     const app = this.appConfig().config?.apps?.[appName];

@@ -2,6 +2,7 @@ import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidPaintRoller } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 import { Preset } from '@primeuix/themes/types';
@@ -21,7 +22,16 @@ import { ColorPicker } from '../color-picker/color-picker';
   selector: 'app-theme-designer',
   standalone: true,
   viewProviders: [provideIcons({ faSolidPaintRoller })],
-  imports: [ButtonModule, NgIcon, FormsModule, InputText, FloatLabel, ColorPicker, InputNumber],
+  imports: [
+    ButtonModule,
+    NgIcon,
+    FormsModule,
+    InputText,
+    FloatLabel,
+    ColorPicker,
+    InputNumber,
+    TranslatePipe,
+  ],
   templateUrl: './theme-designer.html',
 })
 export class ThemeDesigner implements OnInit {
@@ -38,6 +48,7 @@ export class ThemeDesigner implements OnInit {
   warningColor = signal('#F59E0B');
   dangerColor = signal('#EF4444');
   backgroundColor = signal('#f1f5f9');
+  backgroundTextColor = signal('#ffffff');
   font = signal('Inter');
   borderRadius = signal(0);
   backgroundImageUrl = signal('');
@@ -57,6 +68,9 @@ export class ThemeDesigner implements OnInit {
     if (config?.backgroundImageUrl) {
       this.backgroundImageUrl.set(config.backgroundImageUrl);
     }
+    if (config?.backgroundTextColor) {
+      this.backgroundTextColor.set(config.backgroundTextColor);
+    }
   }
 
   initFromCssVariables() {
@@ -69,6 +83,12 @@ export class ThemeDesigner implements OnInit {
     });
 
     this.font.set(this.themingService.getCssVariable('--app-font-family-sans'));
+    const backgroundTextColor = this.themingService
+      .getCssVariable('--app-background-text-color')
+      .trim();
+    if (backgroundTextColor) {
+      this.backgroundTextColor.set(backgroundTextColor);
+    }
     this.borderRadius.set(
       parseInt(this.themingService.getCssVariable('--p-border-radius-md'), 10) || 0,
     );
@@ -113,9 +133,15 @@ export class ThemeDesigner implements OnInit {
     if (currentConfig.config) {
       currentConfig.config.theme = t;
       currentConfig.config.backgroundImageUrl = this.backgroundImageUrl();
+      currentConfig.config.backgroundTextColor = this.backgroundTextColor();
+      currentConfig.config.font = this.font();
       (this.appConfig as any).set({ ...currentConfig });
     }
 
     this.themingService.updateCssVariable('--app-font-family-sans', this.font());
+    this.themingService.updateCssVariable(
+      '--app-background-text-color',
+      this.backgroundTextColor(),
+    );
   }
 }

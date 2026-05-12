@@ -96,8 +96,14 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
         });
 
   return confPromise.then((conf) => {
-    const migratedConfig = migrateSextantConfig(conf);
-    appConfig.config = migrateGn4Config(migratedConfig);
+    // If conf contains keys config, it is a new configuration
+    if ('config' in conf) {
+      appConfig.config = conf.config as AppsConfiguration;
+    } else {
+      // Otherwise, it is a raw Gn4 UI configuration that needs to be migrated
+      const migratedConfig = migrateSextantConfig(conf);
+      appConfig.config = migrateGn4Config(migratedConfig);
+    }
 
     if (languageOverride) {
       appConfig.config.apps.i18n = {
@@ -108,7 +114,17 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
 
     appConfig.catalogueUrl = apiUrl;
     appConfig.config.proxyUrl = `${apiUrl}/proxy?url=`;
-    appConfig.config.backgroundImageUrl = environment.backgroundUrl;
+    appConfig.config.backgroundImageUrl =
+      appConfig.config.backgroundImageUrl || environment.backgroundUrl || '';
+    document.documentElement.style.setProperty(
+      '--app-background-text-color',
+      appConfig.config.backgroundTextColor || '#ffffff',
+    );
+
+    if (appConfig.config.font) {
+      document.documentElement.style.setProperty('--app-font-family-sans', appConfig.config.font);
+    }
+
     console.log(appConfig);
     appConfigLoading = false;
     return appConfig;
