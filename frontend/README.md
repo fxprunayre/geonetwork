@@ -214,6 +214,12 @@ RewriteRule ^ ./index.html
 npx madge --circular --extensions ts .
 ```
 
+If build return:
+```
+Entry point gn-library has a circular dependency on itself.
+```
+Search for `from 'gn-library'` in the module.
+
 
 ### Build error
 
