@@ -9,16 +9,21 @@
     <div
       class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none"
     ></div>
+
+    <div class="absolute bottom-2 right-0 z-10">
+      <p-button variant="outlined" size="small" (click)="toggleContent()">
+        <ng-icon pButtonIcon [name]="'faSolidChevronDown'" />
+        <span pButtonLabel="">{{ 'shared.show-more-toggle.more' | translate }}</span>
+      </p-button>
+    </div>
   }
 </div>
 
-@if (needsToggle()) {
-  <div class="my-6 text-right">
+@if (isExpanded() && needsToggle()) {
+  <div class="mt-2 mb-2 text-right">
     <p-button variant="outlined" size="small" (click)="toggleContent()">
-      <ng-icon pButtonIcon [name]="isExpanded() ? 'faSolidChevronUp' : 'faSolidChevronDown'" />
-      <span pButtonLabel="">{{
-        'shared.show-more-toggle.' + (isExpanded() ? 'less' : 'more') | translate
-      }}</span>
+      <ng-icon pButtonIcon [name]="'faSolidChevronUp'" />
+      <span pButtonLabel="">{{ 'shared.show-more-toggle.less' | translate }}</span>
     </p-button>
   </div>
 }
