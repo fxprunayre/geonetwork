@@ -24,7 +24,8 @@ import { Button, ButtonIcon } from 'primeng/button';
 import { Message } from 'primeng/message';
 import { Popover } from 'primeng/popover';
 import { ProgressBar } from 'primeng/progressbar';
-import { Datasource, DuckDbService } from '../duck-db-service';
+import { Datasource } from '../datasource.model';
+import { DuckDbService } from '../duck-db-service';
 
 @Component({
   selector: 'app-perspective',

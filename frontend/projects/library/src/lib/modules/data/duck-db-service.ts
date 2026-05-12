@@ -6,22 +6,7 @@ import perspective_viewer from '@perspective-dev/viewer';
 import { IndexRecord } from 'gn-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { SearchService } from '../search/search-service';
-
-export interface Datasource {
-  url: string;
-  format:
-    | 'csv'
-    | 'parquet'
-    | 'json'
-    | 'geojson'
-    | 'gml'
-    | 'wfs'
-    | 'arrow'
-    | 'gdal'
-    | 'xlsx'
-    | 'xls';
-  layer?: string;
-}
+import { Datasource } from './datasource.model';
 
 export interface DatasourceLoadingProgress {
   status:

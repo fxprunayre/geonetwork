@@ -30,8 +30,8 @@ import {
 } from 'gn-library';
 import { Button } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
+import { FilterPanelLayout } from '../../shared/models/search-layout.model';
 import { SearchFilters } from '../search-filters/search-filters';
-import { FilterPanelLayout } from '../search/search';
 
 @Component({
   selector: 'app-page-layout',

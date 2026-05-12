@@ -5,7 +5,8 @@ import { NgIcon } from '@ng-icons/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
 import { DatasourceSelect } from '../datasource-select/datasource-select';
-import { Datasource, DuckDbService } from '../duck-db-service';
+import { Datasource } from '../datasource.model';
+import { DuckDbService } from '../duck-db-service';
 import { Perspective } from '../perspective/perspective';
 
 @Component({
@@ -33,31 +34,28 @@ export class ExplorePanel {
   queryParams = toSignal(this.route.queryParams);
 
   constructor() {
-    effect(
-      () => {
-        const sources = this.datasources();
-        const qp = this.queryParams();
-        const active = this.activeTab();
-        if (active !== 'explore') {
-          return;
-        }
+    effect(() => {
+      const sources = this.datasources();
+      const qp = this.queryParams();
+      const active = this.activeTab();
+      if (active !== 'explore') {
+        return;
+      }
 
-        if (sources.length > 0) {
-          const currentDs = untracked(() => this.datasource());
-          const dsUrl = qp ? qp['datasource'] : null;
+      if (sources.length > 0) {
+        const currentDs = untracked(() => this.datasource());
+        const dsUrl = qp ? qp['datasource'] : null;
 
-          if (dsUrl) {
-            const matched = sources.find((s) => s.url === dsUrl);
-            if (matched && matched !== currentDs) {
-              this.datasource.set(matched);
-            }
-          } else if (sources.length === 1 && !currentDs) {
-            this.datasource.set(sources[0]);
+        if (dsUrl) {
+          const matched = sources.find((s) => s.url === dsUrl);
+          if (matched && matched !== currentDs) {
+            this.datasource.set(matched);
           }
+        } else if (sources.length === 1 && !currentDs) {
+          this.datasource.set(sources[0]);
         }
-      },
-      { allowSignalWrites: true },
-    );
+      }
+    });
 
     effect(() => {
       const selectedDs = this.datasource();

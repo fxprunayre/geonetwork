@@ -4,7 +4,7 @@ import { elasticsearch, IndexRecord, Link, RelatedItemType } from 'gn-api-client
 import { SearchService as ApiSearchService } from 'gn4-api-client';
 import { map, Observable } from 'rxjs';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
-import { Datasource } from '../data/duck-db-service';
+import { Datasource } from '../data/datasource.model';
 import { AggregationService } from '../search-filter/aggregation-service';
 import { SEARCH_SOURCE } from './search-constant';
 import { SearchRegistry, SearchStoreType } from './search-store';

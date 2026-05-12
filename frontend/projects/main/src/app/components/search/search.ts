@@ -2,10 +2,9 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { APPLICATION_CONFIGURATION, ResultsView, SearchBase } from 'gn-library';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
+import { FilterPanelLayout } from '../../shared/models/search-layout.model';
 import { PageLayout } from '../page-layout/page-layout';
 import { ResultsInfo } from '../results-info/results-info';
-
-export type FilterPanelLayout = 'drawer' | 'side' | 'top';
 
 @Component({
   selector: 'app-search',

@@ -2,7 +2,7 @@ import { Component, input, model } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Select } from 'primeng/select';
-import { Datasource } from '../duck-db-service';
+import { Datasource } from '../datasource.model';
 
 @Component({
   selector: 'app-datasource-select',
