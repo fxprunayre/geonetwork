@@ -7,6 +7,7 @@ import {
   I18nApp,
   RecordDetailsApp,
   SearchApp,
+  SearchAppLayout,
 } from './model/gnConfig';
 
 export const DEFAULT_SPACE = 'srv';
@@ -240,6 +241,8 @@ export const DEFAULT_SEARCH_APP_SORTOPTIONS = [
   'resourceTitleObject.default.sort',
 ];
 
+export const DEFAULT_SEARCH_LAYOUT_OPTIONS: SearchAppLayout[] = ['list', 'grid'];
+
 export const DEFAULT_SEARCH_APP_CONFIGURATION: SearchApp = {
   enabled: true,
   aggregations: DEFAULT_SEARCH_APP_AGGREGATIONS,
@@ -247,7 +250,7 @@ export const DEFAULT_SEARCH_APP_CONFIGURATION: SearchApp = {
   hitsPerPageOptions: [20, 100],
   sort: DEFAULT_SEARCH_APP_SORTOPTIONS,
   currentSort: DEFAULT_SEARCH_APP_SORTOPTIONS[0],
-  resultsLayoutOptions: ['grid', 'list'],
+  resultsLayoutOptions: DEFAULT_SEARCH_LAYOUT_OPTIONS,
 };
 
 export const DEFAULT_RECORD_DETAILS_DISTRIBUTION_CONFIGURATION = {

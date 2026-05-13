@@ -11,6 +11,7 @@
     [filter]="[{ query_string: { query: '+isTemplate:n' } }]"
     [sort]="searchConfig().sort"
     [currentSort]="searchConfig().currentSort"
+    [layoutOptions]="searchConfig().resultsLayoutOptions"
     [language]="searchLanguage()"
   >
     <app-map [class.hidden]="!isMapActive()" class="h-full w-full block"></app-map>
