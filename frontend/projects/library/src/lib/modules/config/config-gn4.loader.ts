@@ -152,7 +152,9 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
       context: DEFAULT_MAP_CONTEXT,
     };
   }
-
+  conf.apps.menu = {
+    enabled: true,
+  };
   console.log(conf);
   return conf;
 }

@@ -87,9 +87,11 @@ export class MenuComponent implements OnInit {
 
   isExpandedOnHover = signal(false);
 
+  appConfig = inject(APPLICATION_CONFIGURATION);
+  isMenuEnabled = computed(() => this.appConfig().config?.apps.menu?.enabled ?? true);
+
   readonly authStore = inject(AuthStore);
   readonly catalogueStore = inject(CatalogueStore);
-  appConfig = inject(APPLICATION_CONFIGURATION);
   styleService = inject(IconStyleService);
   translateService = inject(TranslateService);
   translationsService = inject(TranslationsService);

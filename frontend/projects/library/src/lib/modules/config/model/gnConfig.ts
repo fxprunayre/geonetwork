@@ -14,6 +14,7 @@ export interface AppsConfiguration {
 }
 
 export interface Apps {
+  menu?: Menu;
   i18n?: I18nApp;
   authentication?: AuthenticationApp;
   home?: HomeApp;
@@ -25,6 +26,8 @@ export interface Apps {
 export interface App {
   enabled: boolean;
 }
+
+export interface Menu extends App {}
 
 export interface I18nApp extends App {
   languages: {

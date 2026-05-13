@@ -441,6 +441,9 @@ export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
 
 export const DEFAULT_APPS_CONFIGURATION: AppsConfiguration = {
   apps: {
+    menu: {
+      enabled: true,
+    },
     home: DEFAULT_HOME_APP_CONFIGURATION,
     i18n: DEFAULT_HEADER_APP_CONFIGURATION,
     authentication: DEFAULT_AUTHENTICATION_APP_CONFIGURATION,
