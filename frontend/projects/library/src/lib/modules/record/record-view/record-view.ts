@@ -1,5 +1,15 @@
-import { Component, computed, inject, input, output, TemplateRef } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  inject,
+  input,
+  output,
+  TemplateRef,
+} from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { Title } from '@angular/platform-browser';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RelatedItemType } from 'gn-api-client';
 import { Message } from 'primeng/message';
@@ -39,6 +49,7 @@ export class RecordView {
   onRecordClick = output<string>();
 
   searchService = inject(SearchService);
+  private readonly titleService = inject(Title);
 
   recordResource = rxResource({
     params: () => ({ uuid: this.uuid() }),
@@ -76,4 +87,20 @@ export class RecordView {
       (this.recordResource.error() as Error)?.message ??
       (this.recordResource.error() ? 'record.view.notFoundOrNotShared' : undefined),
   );
+
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+    const initialTitle = this.titleService.getTitle();
+
+    effect(() => {
+      const rec = this.record();
+      if (rec?.resourceTitleObject?.['default']) {
+        this.titleService.setTitle(rec.resourceTitleObject['default']);
+      }
+    });
+
+    destroyRef.onDestroy(() => {
+      this.titleService.setTitle(initialTitle);
+    });
+  }
 }
