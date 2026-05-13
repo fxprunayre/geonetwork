@@ -27,10 +27,10 @@ describe('Navigation menu', () => {
 
     // Collapse
     cy.get('@toggleBtn').trigger('mouseout');
-    cy.get('@toggleBtn').parent().find('img[alt="Logo"]').should('not.be.visible');
+    cy.get('@toggleBtn').parent().find('app-catalogue-logo').should('not.be.visible');
   });
 
-  it('should navigate to the Home', () => {
+  it('should navigate to the Browse', () => {
     cy.get('@menuItems').eq(1).click();
     cy.url().should('match', new RegExp(Cypress.config().baseUrl + '(/|/#/)$'));
   });

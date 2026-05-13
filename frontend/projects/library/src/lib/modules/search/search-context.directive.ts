@@ -42,6 +42,10 @@ export class SearchContextDirective implements OnInit {
   }
 
   ngOnInit(): void {
+    const configLayout =
+      this.appConfig().config?.apps.search?.resultsLayoutOptions?.[0] ||
+      DEFAULT_SEARCH_LAYOUT_OPTIONS[0];
+
     this.searchStore.init(
       this.scope(),
       this.aggregations(),
@@ -51,8 +55,8 @@ export class SearchContextDirective implements OnInit {
       this.sort() || [DEFAULT_SORT],
       this.currentSort() || DEFAULT_SORT,
       this.language() || DEFAULT_LANGUAGE,
+      this.layoutOptions()?.[0] || (configLayout as SearchAppLayout),
     );
-    this.searchStore.setLayout(this.layoutOptions()?.[0] || DEFAULT_SEARCH_LAYOUT_OPTIONS[0]);
     this.searchService.register(this.scope(), this.searchStore);
   }
 }

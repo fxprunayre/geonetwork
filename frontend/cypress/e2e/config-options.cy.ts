@@ -36,7 +36,7 @@ describe('Application config options', () => {
     // Verify our items are absent
     cy.get('app-menu').within(() => {
       // With our override, the visible menu items should be just toggle
-      cy.get('[role="menuitem"]').contains('Home').should('not.exist');
+      cy.get('[role="menuitem"]').contains('Browse').should('not.exist');
       cy.get('[role="menuitem"]').contains('Search').should('not.exist');
       cy.get('[role="menuitem"]').contains('Map').should('not.exist');
       cy.get('[role="menuitem"]').contains('Sign in').should('not.exist');
@@ -52,7 +52,7 @@ describe('Application config options', () => {
 
     // Verify our items are present
     cy.get('app-menu').within(() => {
-      cy.get('[role="menuitem"]').contains('Home').should('exist');
+      cy.get('[role="menuitem"]').contains('Browse').should('exist');
       cy.get('[role="menuitem"]').contains('Search').should('exist');
       cy.get('[role="menuitem"]').contains('Map').should('exist');
       cy.get('[role="menuitem"]').contains('Sign in').should('exist');

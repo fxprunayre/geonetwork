@@ -10,18 +10,21 @@ describe('Record page', () => {
     cy.visitPage(`record/${SURVAL_UUID}`);
     cy.wait('@apiMainSearchGetRecord');
     cy.wait('@getPermalink');
+    cy.get('app-record-menu button')
+      .click()
+      .then(() => {
+        cy.get('a[title="Permalink to the record"]')
+          .should('have.text', 'Share')
+          .should('be.visible')
+          .should('have.attr', 'href')
+          .and('include', `https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea`);
 
-    cy.get('a[title="Permalink to the record"]')
-      .should('have.text', 'Share')
-      .should('be.visible')
-      .should('have.attr', 'href')
-      .and('include', `https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea`);
-
-    cy.get('a[title="Download the record in XML format"]')
-      .should('have.text', 'Metadata (XML)')
-      .should('be.visible')
-      .should('have.attr', 'href')
-      .and('include', `/srv/api/records/${SURVAL_UUID}/formatters/xml`);
+        cy.get('a[title="Download the record in XML format"]')
+          .should('have.text', 'Metadata (XML)')
+          .should('be.visible')
+          .should('have.attr', 'href')
+          .and('include', `/srv/api/records/${SURVAL_UUID}/formatters/xml`);
+      });
   });
 
   it('should display the record header information', () => {
@@ -444,7 +447,7 @@ describe('Record page', () => {
     cy.wait('@apiMainSearchGetRecord');
     cy.url().should('include', `/record/${SURVAL_UUID}`);
 
-    cy.get('button[title="Back to results"]').click();
+    cy.get('p-button[title="Back to results"] button').click();
 
     cy.url().should('include', '/search');
     cy.get('app-result-item-list').should('have.length.at.least', 1);

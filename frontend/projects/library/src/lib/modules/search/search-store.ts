@@ -187,6 +187,7 @@ export const SearchStore = signalStore(
           sort: string[],
           currentSort: string,
           language: string,
+          layout: SearchAppLayout,
         ) {
           console.log(`Initializing search store with id: ${searchId}`, aggregationsConfig);
           patchState(store, {
@@ -199,6 +200,7 @@ export const SearchStore = signalStore(
             sort: sort || DEFAULT_SORT_OPTIONS,
             currentSort: currentSort || DEFAULT_SORT,
             language: language || DEFAULT_LANGUAGE,
+            layout,
           });
 
           if (store.routing()) {
