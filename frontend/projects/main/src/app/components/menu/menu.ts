@@ -22,6 +22,7 @@ import {
   APPLICATION_CONFIGURATION,
   AuthStore,
   CatalogueLogo,
+  CatalogueStore,
   DASHBOARD_ROUTE_PATH,
   Gn4UrlService,
   IconStyleService,
@@ -56,7 +57,6 @@ const ICONS = {
 @Component({
   selector: 'app-menu',
   imports: [
-    CatalogueLogo,
     FormsModule,
     Menu,
     NgIcon,
@@ -68,6 +68,7 @@ const ICONS = {
     TextareaModule,
     UserAvatar,
     UserFullNamePipe,
+    CatalogueLogo,
   ],
   providers: [MessageService],
   standalone: true,
@@ -87,6 +88,7 @@ export class MenuComponent implements OnInit {
   isExpandedOnHover = signal(false);
 
   readonly authStore = inject(AuthStore);
+  readonly catalogueStore = inject(CatalogueStore);
   appConfig = inject(APPLICATION_CONFIGURATION);
   styleService = inject(IconStyleService);
   translateService = inject(TranslateService);
@@ -110,8 +112,8 @@ export class MenuComponent implements OnInit {
     const appsConfig = this.appConfig().config?.apps;
     return [
       {
-        label: this.translateService.instant('menu.home'),
-        title: this.isIconMode() ? this.translateService.instant('menu.home') : '',
+        label: this.translateService.instant('menu.browse'),
+        title: this.isIconMode() ? this.translateService.instant('menu.browse') : '',
         visible: appsConfig?.home?.enabled ?? true,
         icon: 'faCompass',
         routerLink: '/',

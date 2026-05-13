@@ -2,7 +2,11 @@ import { InjectionToken, WritableSignal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { migrateGn4Config } from './config-gn4.loader';
 import { migrateSextantConfig } from './config-sextant.loader';
-import { DEFAULT_HEADER_APP_CONFIGURATION, DEFAULT_SPACE } from './gn-constants';
+import {
+  DEFAULT_APPS_CONFIGURATION,
+  DEFAULT_HEADER_APP_CONFIGURATION,
+  DEFAULT_SPACE,
+} from './gn-constants';
 import { SEXTANT_GN4_UI_CONFIGURATION } from './gn4constants';
 import { UiConfiguration } from './model/gn4config';
 import { AppsConfiguration } from './model/gnConfig';
@@ -122,8 +126,10 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
       appConfig.config.bannerTextColor || '#ffffff',
     );
 
-    appConfig.config.bannerTitle = appConfig.config.bannerTitle ?? '';
-    appConfig.config.bannerSubTitle = appConfig.config.bannerSubTitle ?? '';
+    appConfig.config.bannerTitle =
+      appConfig.config.bannerTitle ?? DEFAULT_APPS_CONFIGURATION.bannerTitle;
+    appConfig.config.bannerSubTitle =
+      appConfig.config.bannerSubTitle ?? DEFAULT_APPS_CONFIGURATION.bannerSubTitle;
 
     if (appConfig.config.font) {
       document.documentElement.style.setProperty('--app-font-family-sans', appConfig.config.font);

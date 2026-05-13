@@ -6,6 +6,7 @@ import {
   APPLICATION_CONFIGURATION,
   AuthStore,
   BaseComponent,
+  CatalogueStore,
   DEFAULT_LANGUAGE,
   DEFAULT_SEARCH_APP_CONFIGURATION,
   MAP_SLUG,
@@ -45,6 +46,7 @@ export class App extends BaseComponent implements OnInit {
   private router = inject(Router);
   private searchService = inject(SearchService);
   private authStore = inject(AuthStore);
+  private catalogueStore = inject(CatalogueStore);
   appConfig = inject(APPLICATION_CONFIGURATION);
 
   protected readonly title = signal('main');

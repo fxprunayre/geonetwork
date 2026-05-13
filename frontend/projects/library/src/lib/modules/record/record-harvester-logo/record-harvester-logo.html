@@ -1,29 +1,3 @@
-@if (record().logo; as logo) {
-  @if (layout() === 'avatar') {
-    <p
-      [title]="'record.field.catalogue.help' | translate"
-      class="flex flex-row items-center gap-2 text-center"
-    >
-      {{ catalogueName() }}
-      <img
-        [src]="apiBase() + logo"
-        [alt]="'record.field.catalogue.logo.alt' | translate"
-        class="h-12 my-4"
-      />
-    </p>
-  } @else {
-    <p-card
-      [header]="'record.field.catalogue.title' | translate"
-      [subheader]="catalogueName()"
-      [title]="'record.field.catalogue.help' | translate"
-    >
-      <p class="place-items-center">
-        <img
-          [src]="apiBase() + logo"
-          [alt]="'record.field.catalogue.logo.alt' | translate"
-          class="w-full h-full object-contain my-4"
-        />
-      </p>
-    </p-card>
-  }
+@if (catalogueUuid()) {
+  <app-catalogue-logo [layout]="layout()" [catalogueUuid]="catalogueUuid()" />
 }

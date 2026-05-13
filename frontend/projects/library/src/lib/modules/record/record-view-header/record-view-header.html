@@ -21,11 +21,12 @@
 
   <div class="flex flex-row gap-3 items-center border-t-2 border-surface-50 p-4">
     <div class="grow flex flex-row gap-2 font-medium text-surface-700 items-center">
-      <app-record-field-resource-last-update [record]="record()" class="grow" />
+      <div class="grow flex flex-col gap-1">
+        <app-record-field-resource-last-update [record]="record()" />
+        <app-record-field-doi [record]="record()" />
+      </div>
 
-      <app-record-harvester-logo [record]="record()" layout="avatar" />
+      <app-record-harvester-logo [record]="record()" layout="logoWithLabel" />
     </div>
-
-    <app-record-field-doi [record]="record()" />
   </div>
 </div>

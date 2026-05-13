@@ -13,6 +13,7 @@ export * from './lib/modules/authentication/sign-in-form/sign-in-form';
 export * from './lib/modules/authentication/user-avatar/user-avatar';
 export * from './lib/modules/authentication/version-aware-authentication.service';
 export * from './lib/modules/catalogue/catalogue-logo/catalogue-logo';
+export * from './lib/modules/catalogue/catalogue.store';
 export * from './lib/modules/config/config-editor/config-editor';
 export * from './lib/modules/config/config.loader';
 export * from './lib/modules/config/default-theme';
@@ -40,6 +41,7 @@ export * from './lib/modules/record/record-field-resource-last-update/record-fie
 export * from './lib/modules/record/record-field-title/record-field-title';
 export * from './lib/modules/record/record-field-type/record-field-type';
 export * from './lib/modules/record/record-field-vocabulary/record-field-vocabulary';
+export * from './lib/modules/record/record-harvester-logo/record-harvester-logo';
 export * from './lib/modules/record/record-menu/record-menu.component';
 export * from './lib/modules/record/record-view/record-view';
 export * from './lib/modules/record/record-view/record-view-content';

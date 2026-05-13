@@ -32,8 +32,10 @@
         </a>
         <app-catalogue-logo
           [class.hidden]="isIconMode()"
-          class="transition-all"
-        ></app-catalogue-logo>
+          class="transition-all w-20"
+          layout="logo"
+          [catalogueUuid]="catalogueStore.siteId()"
+        />
       </div>
     </ng-template>
 

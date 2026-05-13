@@ -1,28 +1,26 @@
-import { Component, computed, inject, input } from '@angular/core';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { Card } from 'primeng/card';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { Component, computed, input } from '@angular/core';
+import { CatalogueLogo } from '../../catalogue/catalogue-logo/catalogue-logo';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 
 @Component({
   selector: 'app-record-harvester-logo',
-  templateUrl: './record-harvester-logo.html',
   standalone: true,
-  imports: [Card, TranslatePipe],
+  imports: [CatalogueLogo],
+  template: `
+    @if (catalogueUuid()) {
+      <app-catalogue-logo [layout]="layout()" [catalogueUuid]="catalogueUuid()">
+      </app-catalogue-logo>
+    }
+  `,
 })
 export class RecordHarvesterLogo extends RecordFieldBase {
-  layout = input<'avatar' | 'default'>('default');
+  layout = input<'logo' | 'logoWithLabel' | 'default'>('default');
 
-  appConfiguration = inject(APPLICATION_CONFIGURATION);
-  translateService = inject(TranslateService);
-
-  apiBase = computed(() => this.appConfiguration().catalogueUrl);
-
-  catalogueName = computed(() =>
+  catalogueUuid = computed(() =>
     this.record().harvesterUuid
-      ? this.translateService.instant('source-' + this.record().harvesterUuid)
+      ? this.record().harvesterUuid
       : this.record().sourceCatalogue
-        ? this.translateService.instant('source-' + this.record().sourceCatalogue)
+        ? this.record().sourceCatalogue
         : '',
   );
 }
