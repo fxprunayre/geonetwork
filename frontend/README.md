@@ -2,33 +2,93 @@
 
 ## User interface configuration
 
+The user interface functionality and layout can be extensively configured using a central JSON configuration object. 
+
+This configuration object defines the behavior of various modules (apps) and global UI settings:
+
+* **Global Settings:** Properties like `proxyUrl`, `bannerBackground`, `bannerTitle`, `bannerSubTitle`, and `theme`.
+* **Apps/Modules Configurations:**
+  * `home`: Settings for the home page (e.g., featured records, statistics).
+  * `search`: Search capabilities, facets, sorting options, and pagination settings.
+  * `record`: Record details view layout and visible metadata sections.
+  * `map`: Map configuration, including default projections and background layers.
+  * `menu`: Navigation menu links and availability.
+  * `authentication`: Login and user profile settings.
+  * `i18n`: Internationalization and language settings.
+
+**How to provide the configuration:**
+
+Via the `config` property of the `<sextant-app>` Web Component:
+
+1. **Configuration ID:** The app retrieves the configuration using a specific configuration identifier using `srv/api/ui/{configId}`
+2. **Inline Configuration:** You can pass a JSON configuration string directly to the application. This overrides the default layout and backend configuration natively.
+
+
 
 ## Theming
 
-Application theme is defined in [app.theme.ts](projects/main/src/app/app.theme.ts). It relies on https://primeng.org/theming.
+The application theme is defined in [`app.theme.ts`](projects/main/src/app/app.theme.ts) and is built on top of the [PrimeNG Theming framework](https://primeng.org/theming).
 
-Different levels of theming are available:
-* Theme configuration in `app.theme.ts` (colors, components default styles, etc.)
-    * primitive for colors, radius
-    * semantic for color scheme
-    * components for component specific styles
-* [Scoped tokens](https://primeng.org/theming#scopedtokens) can then be used in components if a particular style needs to be overridden
-* [Pass through](https://primeng.org/passthrough) can be used to pass arbitrary attributes to underlying DOM elements (eg. adding CSS classes) (see `search-input`)
+The current theme uses the **PrimeUIX Aura preset** as its foundation. For more details on the Aura preset, see the [PrimeUIX repository](https://github.com/primefaces/primeuix/tree/main/packages/themes/src/presets/aura).
 
-The current theme is based on PrimeUIX Aura preset. See https://github.com/primefaces/primeuix/tree/main/packages/themes/src/presets/aura
+### Customization Levels
 
-Font family is set to "Inter" and can be customized with `--app-font-family-sans`.
+You can customize the application style at different levels depending on your needs:
+
+1. **Global Theme Configuration (`app.theme.ts`)**:
+   Modify the core setup to change the look and feel globally.
+   - **Primitive:** Base tokens for raw values like colors and border radii.
+   - **Semantic:** Abstractions like color schemes (e.g., primary, surface) adaptable for light/dark modes.
+   - **Components:** Default styles applied at the component level across the app.
+
+2. **Scoped Tokens**:
+   Use [PrimeNG Scoped Tokens](https://primeng.org/theming#scopedtokens) within specific angular components to override global styles locally without affecting the rest of the application.
+
+3. **Pass Through (PT)**:
+   Use the [PrimeNG Pass Through](https://primeng.org/passthrough) feature to pass arbitrary attributes or CSS classes directly to underlying DOM elements of PrimeNG components (e.g., see the `search-input` implementation).
+
+### Typography
+
+The default font family is set to **"Inter"**.
+You can customize it by overriding the CSS variable `--app-font-family-sans` in your styles.
 
 
 ## Embedding
 
 See [`test-wc.html`](test-wc.html)
 
+To embed the application as a Web Component in any HTML page, import the built javascript and css files and use the `<sextant-app>` tag:
+
 ```html
-<script src="dist/main/browser/polyfills-5CFQRCPP.js" type="module"></script>
-<script src="dist/main/browser/main-FNWGVB2Y.js" type="module"></script>
-<link rel="stylesheet" href="dist/main/browser/styles-GMSYAROY.css" />
+<script src="dist/webcomponent/browser/main.js" type="module"></script>
+<link rel="stylesheet" href="dist/webcomponent/browser/styles.css" />
+
 <sextant-app></sextant-app>
+```
+
+### Properties
+
+The `<sextant-app>` Web Component accepts the following properties (attributes):
+
+* `url`: (Optional) The base URL of the GeoNetwork API catalogue (e.g., `https://mycatalogue.com/geonetwork`). Falls back to the environment configuration if not provided.
+* `language`: (Optional) The default language to use, typically in 3-letter ISO code format (e.g., `eng`, `fre`).
+* `space`: (Optional) The specific configuration space ID to load (e.g. `srv`, `inspire`).
+* `config`: (Optional) A JSON string holding an inline configuration object to override the default application settings or a configuration ID.
+
+### Examples
+
+**Basic embedding with specific URL and language:**
+```html
+<sextant-app url="https://demo.geocat.live/catalogue" language="fre"></sextant-app>
+```
+
+**Embedding with specific space and inline configuration:**
+```html
+<sextant-app 
+  url="/catalogue"
+  space="my-space"
+  config='{"configuration": "{\"search\": {\"hitsPerPage\": 20}}" }'>
+</sextant-app>
 ```
 
 ### WebComponent mode
