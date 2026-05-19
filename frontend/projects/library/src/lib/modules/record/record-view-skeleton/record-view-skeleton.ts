@@ -51,7 +51,7 @@ export class RecordViewSkeleton {
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   themingService = inject(ThemingService);
 
-  bannerBackground = computed(() => this.appConfiguration().config?.bannerBackground || '');
+  bannerBackground = computed(() => this.appConfiguration().config?.apps?.banner?.background || '');
 
   bannerBackgroundStyle = computed(() =>
     this.themingService.getBannerBackgroundStyle(this.bannerBackground()),

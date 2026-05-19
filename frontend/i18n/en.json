@@ -50,13 +50,17 @@
       "designer": {
         "field": {
           "apply": "Apply",
+          "apps": {
+            "banner": {
+              "background": "Banner background (URL or color)",
+              "subTitle": "Banner subtitle",
+              "textColor": "Banner text color",
+              "title": "Banner title"
+            }
+          },
           "backgroundColor": "Background",
           "backgroundImageUrl": "Background URL",
           "backgroundTextColor": "Background text color",
-          "bannerBackground": "Banner background (URL or color)",
-          "bannerSubTitle": "Banner subtitle",
-          "bannerTextColor": "Banner text color",
-          "bannerTitle": "Banner title",
           "borderRadius": "Radius",
           "dangerColor": "Danger",
           "font": "Font",

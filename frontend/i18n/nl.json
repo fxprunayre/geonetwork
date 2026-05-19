@@ -50,13 +50,17 @@
       "designer": {
         "field": {
           "apply": "Toepassen",
+          "apps": {
+            "banner": {
+              "background": "Bannerachtergrond (URL of kleur)",
+              "subTitle": "Bannerondertitel",
+              "textColor": "Bannertekstkleur",
+              "title": "Bannertitel"
+            }
+          },
           "backgroundColor": "Achtergrond",
           "backgroundImageUrl": "Achtergrond-URL",
           "backgroundTextColor": "Tekstkleur op achtergrond",
-          "bannerBackground": "Bannerachtergrond (URL of kleur)",
-          "bannerSubTitle": "Bannerondertitel",
-          "bannerTextColor": "Bannertekstkleur",
-          "bannerTitle": "Bannertitel",
           "borderRadius": "Straal",
           "dangerColor": "Gevaar",
           "font": "Lettertype",

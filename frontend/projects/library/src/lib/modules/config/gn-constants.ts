@@ -458,11 +458,14 @@ export const DEFAULT_APPS_CONFIGURATION: AppsConfiguration = {
       context: DEFAULT_MAP_CONTEXT,
     },
     record: DEFAULT_RECORD_DETAILS_APP_CONFIGURATION,
+    banner: {
+      enabled: true,
+      background: '',
+      title: 'home.title',
+      subTitle: 'home.subtitle',
+      textColor: '#ffffff',
+    },
   },
   proxyUrl: '/geonetwork/proxy?url=',
-  bannerBackground: '',
-  bannerTitle: 'home.title',
-  bannerSubTitle: 'home.subtitle',
-  bannerTextColor: '#ffffff',
   theme: DEFAULT_THEME,
 };

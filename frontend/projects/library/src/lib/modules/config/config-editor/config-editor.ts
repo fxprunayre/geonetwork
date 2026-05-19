@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { faCompass } from '@ng-icons/font-awesome/regular';
 import {
+  faSolidBars,
   faSolidCode,
   faSolidCube,
   faSolidFile,
   faSolidGear,
   faSolidHouse,
+  faSolidImage,
   faSolidLanguage,
   faSolidLock,
   faSolidMagnifyingGlass,
@@ -17,11 +19,14 @@ import {
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
+import { FloatLabel } from 'primeng/floatlabel';
 import { IftaLabelModule } from 'primeng/iftalabel';
+import { InputText } from 'primeng/inputtext';
 import { Menu } from 'primeng/menu';
 import { Panel } from 'primeng/panel';
 import { TextareaModule } from 'primeng/textarea';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { ColorPicker } from '../../../shared/widgets/color-picker/color-picker';
 import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
 import { ThemeDesigner } from '../../../shared/widgets/theme-designer/theme-designer';
 import { APPLICATION_CONFIGURATION } from '../config.loader';
@@ -43,6 +48,9 @@ import { App, Apps } from '../model/gnConfig';
     Menu,
     NgIconComponent,
     Panel,
+    FloatLabel,
+    InputText,
+    ColorPicker,
     TranslatePipe,
   ],
   viewProviders: [
@@ -58,6 +66,8 @@ import { App, Apps } from '../model/gnConfig';
       faSolidLock,
       faSolidFile,
       faSolidGear,
+      faSolidBars,
+      faSolidImage,
     }),
   ],
   template: `
@@ -81,7 +91,8 @@ import { App, Apps } from '../model/gnConfig';
         <div class="flex-1 w-3/4 pl-2 overflow-y-auto">
           @if (selectedApp(); as appName) {
             <div class="flex flex-col gap-4">
-              <div class="text-xl font-bold mb-2">
+              <div class="text-xl font-bold mb-2 flex items-center">
+                <ng-icon [name]="iconMap[appName]" class="mr-2"></ng-icon>
                 {{ appName | titlecase }} {{ 'config.editor.title' | translate }}
               </div>
 
@@ -93,6 +104,58 @@ import { App, Apps } from '../model/gnConfig';
                 </p-toggleswitch>
                 <label>{{ 'config.editor.enabled' | translate }}</label>
               </div>
+
+              @if (appName === 'banner') {
+                <div class="flex flex-col gap-6 mt-4 mb-4">
+                  <p-float-label>
+                    <label for="bannerBackground">{{
+                      'config.theme.designer.field.apps.banner.background' | translate
+                    }}</label>
+                    <input
+                      type="text"
+                      id="bannerBackground"
+                      class="w-full"
+                      pInputText
+                      [ngModel]="apps.banner?.background"
+                      (ngModelChange)="updateBannerProperty('background', $event)"
+                    />
+                  </p-float-label>
+
+                  <p-float-label>
+                    <label for="bannerTitle">{{
+                      'config.theme.designer.field.apps.banner.title' | translate
+                    }}</label>
+                    <input
+                      type="text"
+                      id="bannerTitle"
+                      class="w-full"
+                      pInputText
+                      [ngModel]="apps.banner?.title"
+                      (ngModelChange)="updateBannerProperty('title', $event)"
+                    />
+                  </p-float-label>
+
+                  <p-float-label>
+                    <label for="bannerSubTitle">{{
+                      'config.theme.designer.field.apps.banner.subTitle' | translate
+                    }}</label>
+                    <input
+                      type="text"
+                      id="bannerSubTitle"
+                      class="w-full"
+                      pInputText
+                      [ngModel]="apps.banner?.subTitle"
+                      (ngModelChange)="updateBannerProperty('subTitle', $event)"
+                    />
+                  </p-float-label>
+
+                  <app-color-picker
+                    [label]="'config.theme.designer.field.apps.banner.textColor' | translate"
+                    [color]="apps.banner?.textColor || '#ffffff'"
+                    (colorChange)="updateBannerProperty('textColor', $event)"
+                  ></app-color-picker>
+                </div>
+              }
 
               <p-iftalabel>
                 <textarea
@@ -110,14 +173,16 @@ import { App, Apps } from '../model/gnConfig';
             </div>
           } @else if (selectedTab() === 'theme') {
             <div class="flex flex-col gap-4">
-              <div class="text-xl font-bold mb-2">
+              <div class="text-xl font-bold mb-2 flex items-center">
+                <ng-icon name="faSolidPaintRoller" class="mr-2"></ng-icon>
                 {{ 'config.editor.themeConfiguration' | translate }}
               </div>
               <app-theme-designer [theme]="theme()" />
             </div>
           } @else if (selectedTab() === 'raw') {
             <div class="flex flex-col gap-4">
-              <div class="text-xl font-bold mb-2">
+              <div class="text-xl font-bold mb-2 flex items-center">
+                <ng-icon name="faSolidCode" class="mr-2"></ng-icon>
                 {{ 'config.editor.rawConfiguration' | translate }}
               </div>
               <p-iftalabel>
@@ -170,6 +235,8 @@ export class ConfigEditorComponent {
 
     // Sort logic: home, search, map, record first, then others, alphabetically
     const predefinedOrder: (keyof Apps)[] = [
+      'banner',
+      'menu',
       'home',
       'search',
       'map',
@@ -190,25 +257,27 @@ export class ConfigEditorComponent {
     });
   });
 
+  iconMap: Record<string, string> = {
+    home: 'faCompass',
+    search: 'faSolidMagnifyingGlass',
+    map: 'faSolidMap',
+    i18n: 'faSolidLanguage',
+    authentication: 'faSolidLock',
+    record: 'faSolidFile',
+    menu: 'faSolidBars',
+    banner: 'faSolidImage',
+  };
+
   menuItems = computed<MenuItem[]>(() => {
     const apps = this.appNames();
     const currentTab = this.selectedTab();
-
-    const iconMap: Record<string, string> = {
-      home: 'faCompass',
-      search: 'faSolidMagnifyingGlass',
-      map: 'faSolidMap',
-      i18n: 'faSolidLanguage',
-      authentication: 'faSolidLock',
-      record: 'faSolidFile',
-    };
 
     return [
       {
         label: 'Apps',
         items: apps.map((appName) => ({
           label: appName.charAt(0).toUpperCase() + appName.slice(1),
-          icon: iconMap[appName] || 'faSolidGear',
+          icon: this.iconMap[appName] || 'faSolidGear',
           command: () => this.selectedTab.set(appName),
           styleClass:
             currentTab === appName ? 'bg-primary-100/50 dark:bg-primary-900/50 font-bold' : '',
@@ -274,6 +343,18 @@ export class ConfigEditorComponent {
     }
 
     this.appConfig.set({ ...currentConfig });
+  }
+
+  updateBannerProperty(property: string, value: string) {
+    const config = this.appConfig().config;
+    if (config?.apps?.banner) {
+      (config.apps.banner as any)[property] = value;
+      (this.appConfig as any).set({ ...this.appConfig(), config });
+
+      if (property === 'textColor') {
+        document.documentElement.style.setProperty('--app-background-text-color', value);
+      }
+    }
   }
 
   updateAppConfig(appName: keyof Apps, jsonStr: string) {

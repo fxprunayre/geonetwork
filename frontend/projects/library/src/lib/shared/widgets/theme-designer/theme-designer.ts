@@ -48,13 +48,9 @@ export class ThemeDesigner implements OnInit {
   warningColor = signal('#F59E0B');
   dangerColor = signal('#EF4444');
   backgroundColor = signal('#f1f5f9');
-  bannerTextColor = signal('#ffffff');
   font = signal('Inter');
   borderRadius = signal(0);
-  bannerBackground = signal('');
   bannerTitle = signal('');
-  bannerSubTitle = signal('');
-
   themePropertiesByColor = {
     primary: 'myprimary',
     info: 'sky',
@@ -67,18 +63,6 @@ export class ThemeDesigner implements OnInit {
   ngOnInit() {
     this.initFromCssVariables();
     const config = this.appConfig().config;
-    if (config?.bannerBackground) {
-      this.bannerBackground.set(config.bannerBackground);
-    }
-    if (config?.bannerTitle) {
-      this.bannerTitle.set(config.bannerTitle);
-    }
-    if (config?.bannerSubTitle) {
-      this.bannerSubTitle.set(config.bannerSubTitle);
-    }
-    if (config?.bannerTextColor) {
-      this.bannerTextColor.set(config.bannerTextColor);
-    }
   }
 
   initFromCssVariables() {
@@ -91,12 +75,6 @@ export class ThemeDesigner implements OnInit {
     });
 
     this.font.set(this.themingService.getCssVariable('--app-font-family-sans'));
-    const bannerTextColor = this.themingService
-      .getCssVariable('--app-background-text-color')
-      .trim();
-    if (bannerTextColor) {
-      this.bannerTextColor.set(bannerTextColor);
-    }
     this.borderRadius.set(
       parseInt(this.themingService.getCssVariable('--p-border-radius-md'), 10) || 0,
     );
@@ -138,17 +116,12 @@ export class ThemeDesigner implements OnInit {
     });
 
     const currentConfig = this.appConfig() as ApplicationConfiguration;
-    if (currentConfig.config) {
+    if (currentConfig.config && currentConfig.config.apps?.banner) {
       currentConfig.config.theme = t;
-      currentConfig.config.bannerBackground = this.bannerBackground();
-      currentConfig.config.bannerTitle = this.bannerTitle();
-      currentConfig.config.bannerSubTitle = this.bannerSubTitle();
-      currentConfig.config.bannerTextColor = this.bannerTextColor();
       currentConfig.config.font = this.font();
       (this.appConfig as any).set({ ...currentConfig });
     }
 
     this.themingService.updateCssVariable('--app-font-family-sans', this.font());
-    this.themingService.updateCssVariable('--app-background-text-color', this.bannerTextColor());
   }
 }

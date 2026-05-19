@@ -141,18 +141,26 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
       appConfig.catalogueUrl = apiUrl;
 
       appConfig.config.proxyUrl = `${apiUrl}/proxy?url=`;
-      appConfig.config.bannerBackground =
-        appConfig.config.bannerBackground || environment.backgroundUrl || '';
+
+      if (!appConfig.config.apps) {
+        appConfig.config.apps = {};
+      }
+      if (!appConfig.config.apps.banner) {
+        appConfig.config.apps.banner = { enabled: true };
+      }
+
+      appConfig.config.apps.banner!.background =
+        appConfig.config.apps.banner!.background || environment.backgroundUrl || '';
 
       document.documentElement.style.setProperty(
         '--app-background-text-color',
-        appConfig.config.bannerTextColor || '#ffffff',
+        appConfig.config.apps.banner!.textColor || '#ffffff',
       );
 
-      appConfig.config.bannerTitle =
-        appConfig.config.bannerTitle ?? DEFAULT_APPS_CONFIGURATION.bannerTitle;
-      appConfig.config.bannerSubTitle =
-        appConfig.config.bannerSubTitle ?? DEFAULT_APPS_CONFIGURATION.bannerSubTitle;
+      appConfig.config.apps.banner!.title =
+        appConfig.config.apps.banner!.title ?? DEFAULT_APPS_CONFIGURATION.apps?.banner?.title;
+      appConfig.config.apps.banner!.subTitle =
+        appConfig.config.apps.banner!.subTitle ?? DEFAULT_APPS_CONFIGURATION.apps?.banner?.subTitle;
 
       if (appConfig.config.font) {
         document.documentElement.style.setProperty('--app-font-family-sans', appConfig.config.font);

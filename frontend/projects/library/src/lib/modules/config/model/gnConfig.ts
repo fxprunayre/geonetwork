@@ -5,10 +5,6 @@ import { DistributionConfig } from './gn4config';
 export interface AppsConfiguration {
   apps: Apps;
   proxyUrl?: string;
-  bannerBackground?: string; // URL or CSS color
-  bannerTitle?: string;
-  bannerSubTitle?: string;
-  bannerTextColor?: string;
   font?: string;
   theme?: Preset;
 }
@@ -21,10 +17,18 @@ export interface Apps {
   search?: SearchApp;
   record?: RecordDetailsApp;
   map?: MapApp;
+  banner?: BannerApp;
 }
 
 export interface App {
   enabled: boolean;
+}
+
+export interface BannerApp extends App {
+  background?: string; // URL or CSS color
+  title?: string;
+  subTitle?: string;
+  textColor?: string;
 }
 
 export interface Menu extends App {}

@@ -173,7 +173,7 @@ export class MenuComponent implements OnInit {
 
   dt: MenuDesignTokens = {
     root: {
-      borderRadius: '0',
+      // borderRadius: '0',
     },
     list: {
       gap: '6px',

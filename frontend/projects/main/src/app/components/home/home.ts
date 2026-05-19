@@ -17,9 +17,9 @@ export class Home {
     () => this.appConfiguration().config?.apps?.home?.aggregations || [],
   );
 
-  bannerTitle = computed(() => this.appConfiguration().config?.bannerTitle || '');
+  bannerTitle = computed(() => this.appConfiguration().config?.apps?.banner?.title || '');
 
-  bannerSubTitle = computed(() => this.appConfiguration().config?.bannerSubTitle || '');
+  bannerSubTitle = computed(() => this.appConfiguration().config?.apps?.banner?.subTitle || '');
 
   language = signal<string | undefined>(DEFAULT_LANGUAGE);
 

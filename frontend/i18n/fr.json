@@ -51,13 +51,17 @@
       "designer": {
         "field": {
           "apply": "Appliquer",
+          "apps": {
+            "banner": {
+              "background": "Arriere-plan de la bannière (URL ou couleur)",
+              "subTitle": "Sous-titre de la bannière",
+              "textColor": "Couleur du texte de la bannière",
+              "title": "Titre de la bannière"
+            }
+          },
           "backgroundColor": "Arrière-plan",
           "backgroundImageUrl": "URL de l'arrière-plan",
           "backgroundTextColor": "Couleur du texte sur l'arrière-plan",
-          "bannerBackground": "Arriere-plan de la bannière (URL ou couleur)",
-          "bannerSubTitle": "Sous-titre de la bannière",
-          "bannerTextColor": "Couleur du texte de la bannière",
-          "bannerTitle": "Titre de la bannière",
           "borderRadius": "Rayon",
           "dangerColor": "Danger",
           "font": "Police",

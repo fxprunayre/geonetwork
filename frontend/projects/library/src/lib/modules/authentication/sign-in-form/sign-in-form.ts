@@ -89,7 +89,7 @@ export class SignInFormComponent {
 
   hasOnlyOneProvider = computed(() => this.authenticationProviders().length === 1);
 
-  bannerBackground = computed(() => this.appConfiguration().config?.bannerBackground || '');
+  bannerBackground = computed(() => this.appConfiguration().config?.apps?.banner?.background || '');
 
   bannerBackgroundStyle = computed(() =>
     this.themingService.getBannerBackgroundStyle(this.bannerBackground()),
