@@ -60,6 +60,23 @@ function parseInlineConfig(configValue: string): UiConfiguration | undefined {
   }
 }
 
+function deepMerge(target: any, source: any): any {
+  if (target === undefined || target === null) return source;
+  if (source === undefined || source === null) return target;
+  if (typeof target !== 'object' || Array.isArray(target)) return source;
+  if (typeof source !== 'object' || Array.isArray(source)) return source;
+
+  const merged = { ...target };
+  for (const key of Object.keys(source)) {
+    if (source[key] instanceof Object && !Array.isArray(source[key])) {
+      merged[key] = deepMerge(target[key], source[key]);
+    } else {
+      merged[key] = source[key];
+    }
+  }
+  return merged;
+}
+
 export function loadAppConfig(options: LoadAppConfigOptions = {}) {
   appConfigLoading = true;
 
@@ -109,30 +126,39 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
       appConfig.config = migrateGn4Config(migratedConfig);
     }
 
-    if (languageOverride) {
-      appConfig.config.apps.i18n = {
-        ...(appConfig.config.apps.i18n || DEFAULT_HEADER_APP_CONFIGURATION),
-        language: languageOverride,
-      };
+    if (inlineConfig && appConfig.config) {
+      appConfig.config = deepMerge(DEFAULT_APPS_CONFIGURATION, appConfig.config);
     }
 
-    appConfig.catalogueUrl = apiUrl;
-    appConfig.config.proxyUrl = `${apiUrl}/proxy?url=`;
-    appConfig.config.bannerBackground =
-      appConfig.config.bannerBackground || environment.backgroundUrl || '';
+    if (appConfig.config) {
+      if (languageOverride) {
+        appConfig.config.apps.i18n = {
+          ...(appConfig.config.apps.i18n || DEFAULT_HEADER_APP_CONFIGURATION),
+          language: languageOverride,
+        };
+      }
 
-    document.documentElement.style.setProperty(
-      '--app-background-text-color',
-      appConfig.config.bannerTextColor || '#ffffff',
-    );
+      appConfig.catalogueUrl = apiUrl;
 
-    appConfig.config.bannerTitle =
-      appConfig.config.bannerTitle ?? DEFAULT_APPS_CONFIGURATION.bannerTitle;
-    appConfig.config.bannerSubTitle =
-      appConfig.config.bannerSubTitle ?? DEFAULT_APPS_CONFIGURATION.bannerSubTitle;
+      appConfig.config.proxyUrl = `${apiUrl}/proxy?url=`;
+      appConfig.config.bannerBackground =
+        appConfig.config.bannerBackground || environment.backgroundUrl || '';
 
-    if (appConfig.config.font) {
-      document.documentElement.style.setProperty('--app-font-family-sans', appConfig.config.font);
+      document.documentElement.style.setProperty(
+        '--app-background-text-color',
+        appConfig.config.bannerTextColor || '#ffffff',
+      );
+
+      appConfig.config.bannerTitle =
+        appConfig.config.bannerTitle ?? DEFAULT_APPS_CONFIGURATION.bannerTitle;
+      appConfig.config.bannerSubTitle =
+        appConfig.config.bannerSubTitle ?? DEFAULT_APPS_CONFIGURATION.bannerSubTitle;
+
+      if (appConfig.config.font) {
+        document.documentElement.style.setProperty('--app-font-family-sans', appConfig.config.font);
+      }
+    } else {
+      appConfig.catalogueUrl = apiUrl;
     }
 
     console.log(appConfig);

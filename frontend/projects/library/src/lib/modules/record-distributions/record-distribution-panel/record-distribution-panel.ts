@@ -1,4 +1,4 @@
-import { KeyValuePipe } from '@angular/common';
+import { KeyValuePipe, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -36,6 +36,7 @@ import { RecordDistributionFieldBase } from '../record-distribution-field-base/r
     KeyValuePipe,
     LinkBadge,
     NgIcon,
+    NgTemplateOutlet,
     TranslatePipe,
   ],
   viewProviders: [

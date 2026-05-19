@@ -83,6 +83,20 @@ export class App extends BaseComponent implements OnInit {
 
   override ngOnInit() {
     super.ngOnInit();
+
+    const config = this.appConfig().config;
+
+    // Evaluate which app should be the default route if we are at root
+    if (window.location.hash === '#/' || window.location.hash === '') {
+      if (config?.apps.home?.enabled === false) {
+        if (config?.apps.search?.enabled !== false) {
+          this.router.navigate(['/' + SEARCH_SLUG]);
+        } else if (config?.apps.map?.enabled !== false) {
+          this.router.navigate(['/' + MAP_SLUG]);
+        }
+      }
+    }
+
     this.router.initialNavigation();
   }
 }
