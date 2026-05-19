@@ -6,9 +6,9 @@ import {
   APPLICATION_CONFIGURATION,
   AuthStore,
   BaseComponent,
-  CatalogueStore,
   DEFAULT_LANGUAGE,
   DEFAULT_SEARCH_APP_CONFIGURATION,
+  DEFAULT_SEARCH_APP_HITS_PER_PAGE_OPTIONS,
   MAP_SLUG,
   SEARCH_SLUG,
   SearchApp,
@@ -46,7 +46,6 @@ export class App extends BaseComponent implements OnInit {
   private router = inject(Router);
   private searchService = inject(SearchService);
   private authStore = inject(AuthStore);
-  private catalogueStore = inject(CatalogueStore);
   appConfig = inject(APPLICATION_CONFIGURATION);
 
   protected readonly title = signal('main');
@@ -57,7 +56,10 @@ export class App extends BaseComponent implements OnInit {
     () => this.appConfig().config?.apps.search || DEFAULT_SEARCH_APP_CONFIGURATION,
   );
 
-  searchPageSize = computed(() => this.searchConfig().hitsPerPageOptions[0] || 10);
+  searchPageSize = computed(
+    () =>
+      this.searchConfig().hitsPerPageOptions?.[0] || DEFAULT_SEARCH_APP_HITS_PER_PAGE_OPTIONS[0],
+  );
 
   searchLanguage = signal<string | undefined>(
     this.appConfig().config?.apps.i18n?.language || DEFAULT_LANGUAGE,

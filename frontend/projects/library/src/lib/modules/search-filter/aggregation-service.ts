@@ -201,6 +201,9 @@ export class AggregationService {
   }
 
   getActive(aggregationsConfig: (string | Record<string, any>)[]) {
+    if (!aggregationsConfig) {
+      return [];
+    }
     return aggregationsConfig
       .map(this.parseAggregationConfig)
       .filter((aggregation) => {

@@ -243,11 +243,13 @@ export const DEFAULT_SEARCH_APP_SORTOPTIONS = [
 
 export const DEFAULT_SEARCH_LAYOUT_OPTIONS: SearchAppLayout[] = ['list', 'grid'];
 
+export const DEFAULT_SEARCH_APP_HITS_PER_PAGE_OPTIONS = [20, 100];
+
 export const DEFAULT_SEARCH_APP_CONFIGURATION: SearchApp = {
   enabled: true,
   aggregations: DEFAULT_SEARCH_APP_AGGREGATIONS,
   topTabFilter: 'resourceType',
-  hitsPerPageOptions: [20, 100],
+  hitsPerPageOptions: DEFAULT_SEARCH_APP_HITS_PER_PAGE_OPTIONS,
   sort: DEFAULT_SEARCH_APP_SORTOPTIONS,
   currentSort: DEFAULT_SEARCH_APP_SORTOPTIONS[0],
   resultsLayoutOptions: DEFAULT_SEARCH_LAYOUT_OPTIONS,

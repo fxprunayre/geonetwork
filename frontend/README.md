@@ -83,13 +83,97 @@ The `<sextant-app>` Web Component accepts the following properties (attributes):
 ```
 
 **Embedding with specific space and inline configuration:**
+
+#### Target a space to reduce search scope
+
 ```html
-<sextant-app 
-  url="/catalogue"
-  space="my-space"
-  config='{"configuration": "{\"search\": {\"hitsPerPage\": 20}}" }'>
-</sextant-app>
+<sextant-app
+  url="/geonetwork"
+  space="AMBIO"
+  config='{}'
+></sextant-app>
 ```
+
+#### Disable home and menu to focus on search
+
+```html
+<sextant-app
+  url="/geonetwork"
+  space="AMBIO"
+  config='{"config": {"apps": {"home": {"enabled": false}, "menu": {"enabled": false}}}}'
+></sextant-app>
+```
+
+#### Changing results layout
+
+```html
+<sextant-app
+  url="/geonetwork"
+  space="AMBIO"
+  config='{"config": {"apps": {
+    "home": {"enabled": false}, 
+    "menu": {"enabled": false}, 
+    "search": {"resultsLayoutOptions": ["grid"]}
+  }}}'
+></sextant-app>
+```
+
+
+#### Customizing the banner
+
+```html
+<sextant-app
+  url="/geonetwork"
+  space="AMBIO"
+  config='{"config": {
+    "apps": {
+      "menu": {"enabled": false}, 
+      "home": {"enabled": false}, 
+      "map": {"enabled": false}, 
+      "search": {"resultsLayoutOptions": ["grid"]}
+    },
+    "bannerBackground":"#FFF","bannerTitle":"","bannerSubTitle":"","bannerTextColor":"#333","font":"Courier"
+  }}'
+></sextant-app>
+```
+
+
+#### Customizing colors
+
+```html
+<sextant-app
+  url="/geonetwork"
+  space="AMBIO"
+  config='{"config": {
+    "apps": {
+      "menu": {"enabled": false}, 
+      "home": {"enabled": false}, 
+      "map": {"enabled": false}, 
+      "search": {"resultsLayoutOptions": ["grid"]}
+    },
+    "theme": {
+      "primitive":{
+        "myprimary":{"50":"#f2fafe","100":"#c2e9f8","200":"#91d7f3","300":"#61c6ee","400":"#30b4e8","500":"#00a3e3","600":"#008bc1","700":"#00729f","800":"#005a7d","900":"#00415b","950":"#002939"}
+      },
+      "semantic":{
+        "colorScheme":{
+          "light":{
+            "primary":{"color":"{myprimary.500}"}
+          },
+          "text":{
+            "color":"{myprimary.800}",
+            "hoverColor":"{surface.800}"
+          }
+        }
+      }
+    },
+    "bannerBackground":"#FFF","bannerTitle":"","bannerSubTitle":"","bannerTextColor":"#333","font":"Courier"
+  }}'
+></sextant-app>
+```
+
+
+
 
 ### WebComponent mode
 
