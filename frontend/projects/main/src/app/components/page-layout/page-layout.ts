@@ -33,7 +33,6 @@ import { Button } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
 import { filter, map } from 'rxjs';
 import { FilterPanelLayout } from '../../shared/models/search-layout.model';
-import { MenuComponent } from '../menu/menu';
 import { SearchFilters } from '../search-filters/search-filters';
 
 @Component({
@@ -50,7 +49,6 @@ import { SearchFilters } from '../search-filters/search-filters';
     NgStyle,
     NgTemplateOutlet,
     TranslatePipe,
-    MenuComponent,
   ],
   viewProviders: [provideIcons({ faSolidFilter, faSolidXmark })],
   template: `

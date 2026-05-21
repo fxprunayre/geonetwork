@@ -1771,21 +1771,560 @@
               </table>
             </div>
             <div class="frame frame-default frame-type-html frame-layout-0" id="c6308">
-              <!-- <gn-app
-                config="odatis"
-                language="fre"
-                portal="ODATIS-DYNALIT-BIOINFORMATIQUE"
-                url="https://sextant.ifremer.fr/geonetwork"
-              >
-              </gn-app>
-              <script src="http://localhost:8080/geonetwork/catalog/webcomponents/webcomponents.js"></script> -->
-
-              <script src="/test/webcomponent/browser/main.js" type="module"></script>
-              <link rel="stylesheet" href="/test/webcomponent/browser/styles.css" />
-
+              <script src="../sextant-app.js" type="module"></script>
+              <link rel="stylesheet" href="../styles.css" />
               <sextant-app
                 url="/geonetwork"
-                config='{"config":{"apps":{"search":{"enabled":true,"aggregations":[{"groupPublishedId":{"terms":{"field":"groupPublishedId","size":300,"include":".*","exclude":"1"},"meta":{"field":"groupPublishedId","orderByTranslation":true,"filterByTranslation":true,"displayFilter":true,"collapsed":true,"layout":"multiselect","caseInsensitiveInclude":true}}},{"th_sextant-theme_tree.key":{"terms":{"field":"th_sextant-theme_tree.key","size":300,"order":{"_key":"asc"},"include":".*"},"meta":{"collapsed":true,"layout":"tree","translateOnLoad":true,"orderByTranslation":true,"displayFilter":true,"filterByTranslation":true,"caseInsensitiveInclude":true}}},{"th_httpinspireeceuropaeutheme-theme_tree.key":{"terms":{"field":"th_httpinspireeceuropaeutheme-theme_tree.key","size":34,"order":{"_key":"asc"}},"meta":{"collapsed":true,"translateOnLoad":true,"orderByTranslation":true,"decorator":{"type":"icon","prefix":"iti-","expression":"http://inspire.ec.europa.eu/theme/(.*)"}}}},{"tag.default":{"terms":{"field":"tag.default","size":15},"meta":{"collapsed":true}}},{"OrgForResource":{"terms":{"field":"OrgForResource","include":".*","size":15},"meta":{"caseInsensitiveInclude":true,"collapsed":true}}},{"creationYearForResource":{"histogram":{"field":"creationYearForResource","interval":1,"min_doc_count":1},"meta":{"layout":"bar","collapsed":true}}},{"resourceType":{"terms":{"field":"resourceType","size":10,"exclude":"map/.*|publication-.*"},"meta":{"collapsed":true,"layout":"nightingale","decorator":{"type":"icon","map":{"dataset":"faSolidDatabase","map":"faSolidMap","featureCatalog":"faSolidTable","document":"faSolidCopy","service":"faSolidCloud","series":"faSolidCopy","nonGeographicDataset":"faSolidChartColumn","publication":"faSolidBook"}}}}},{"availableInServices":{"filters":{"filters":{"availableInViewService":{"query_string":{"query":"+linkProtocol:/OGC:WMS|OGC:OWS-C|OGC Web Map Service|OGC:WMTS|ESRI:REST/"}},"availableInDownloadService":{"query_string":{"query":"+linkProtocol:/WWW:DOWNLOAD|WWW:DOWNLOAD.*|WWW:OPENDAP|WWW:FTP|OGC:WFS|OGC Web Feature Service|OGC:WCS|MYO:MOTU-SUB|FILE|COPYFILE|DB|KML/"}}}},"meta":{"collapsed":true}}}],"sort":["-popularity","_score","-revisionDateForResource,-publicationDateForResource,-creationDateForResource","resourceTitleObject.default.sort"],"currentSort":"-popularity","hitsPerPageOptions":[20,100],"resultsLayoutOptions":["grid","list"],"topTabFilter":"resourceType"},"map":{"enabled":true,"context":{"layers":[{"type":"xyz","id":"basemap-osm","url":"https://tile.openstreetmap.org/{z}/{x}/{y}.png","visibility":true,"opacity":1,"label":"OpenStreetMap","attributions":"© OpenStreetMap contributors","extras":{"basemap":true}}],"view":{"center":[-4.56243,0],"zoom":1}}},"i18n":{"enabled":true,"languages":{"eng":"en","fre":"fr"},"language":"eng"},"record":{"enabled":true,"mainThesaurus":[],"distribution":{"layout":"","sections":[{"filter":"protocol:OGC:WMS|OGC:WMTS|ESRI:.*|atom.*|REST|OGC API Maps|OGC API Records|application/vnd.ogc.wms_xml","title":"api"},{"filter":"protocol:OGC:WFS|OGC:WCS|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE:.*|OGC API Features|OGC API Coverages","title":"download"},{"filter":"function:legend","title":"mapLegend"},{"filter":"function:featureCatalogue","title":"featureCatalog"},{"filter":"function:dataQualityReport","title":"quality"},{"filter":"-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE:.*|application/vnd.ogc AND -function:legend|featureCatalogue|dataQualityReport","title":"links"}]}},"home":{"enabled":true,"aggregations":[{"resourceType":{"terms":{"field":"resourceType","size":9,"exclude":"publication-.*"},"meta":{"layout":"nightingale","decorator":{"type":"icon","prefix":"","map":{"dataset":"faSolidDatabase","map":"faSolidMap","featureCatalog":"faSolidTable","document":"faSolidCopy","service":"faSolidCloud","series":"faSolidCopy","nonGeographicDataset":"faSolidChartColumn","publication":"faSolidBook"}}}}},{"th_sextant-theme_tree.key":{"terms":{"field":"th_sextant-theme_tree.key","size":9,"include":"[^^]+"},"meta":{"orderByTranslation":true,"translateOnLoad":true,"layout":"card","decorator":{"type":"img","map":{"https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1":"https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/hyperspectrale-la-reunion/1603154-3-fre-FR/Hyperspectrale-La-Reunion.png","https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947":"https://sextant.ifremer.fr/geonetwork/srv/api/records/d90bc6fa-5416-4064-97b6-8f671de3e407/attachments/zfhi.jpg","https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463":"https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/habitats-physiques/1595588-2-fre-FR/Habitats-physiques.png","https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921":"https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bathymetrie-emodnet/1595576-2-fre-FR/Bathymetrie-Emodnet.png","https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b":"https://sextant.ifremer.fr/geonetwork/srv/api/records/d275ec6a-603b-4170-add2-9b52ce190793/attachments/165.JPG","https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9":"https://sextant.ifremer.fr/documentation/emodnet_chemistry/images/2023/mlf_density_nb_l_other.png","https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f":"https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bigood/1595612-3-fre-FR/BIGOOD.png"}}}}},{"th_httpinspireeceuropaeutheme-theme_tree.key":{"terms":{"field":"th_httpinspireeceuropaeutheme-theme_tree.key","size":34},"meta":{"collapsed":true,"translateOnLoad":true,"orderByTranslation":true,"decorator":{"type":"icon","prefix":"iti-","expression":"http://inspire.ec.europa.eu/theme/(.*)"}}}},{"th_simm-reglementaire_tree.key":{"terms":{"field":"th_simm-reglementaire_tree.key","size":9},"meta":{"thesaurus":"simm.reglementaire","translateOnLoad":true,"layout":"card"}}},{"th_dcsmm-area_tree.key":{"terms":{"field":"th_dcsmm-area_tree.key","size":30},"meta":{"layout":"bar","thesaurus":"dcsmm.area","translateOnLoad":true}}},{"th_dcsmm-descripteur_tree.key":{"terms":{"field":"th_dcsmm-descripteur_tree.key","size":30},"meta":{"translateOnLoad":true,"layout":"card"}}},{"th_odatis_centre_donnees_tree.key":{"terms":{"field":"th_odatis_centre_donnees_tree.key","size":30},"meta":{"translateOnLoad":true,"layout":"treemap"}}},{"th_NVS-OD1_tree.key":{"terms":{"field":"th_NVS-OD1_tree.key","size":30},"meta":{"thesaurus":"NVS.OD1","translateOnLoad":true,"layout":"card"}}}]},"authentication":{"enabled":true},"menu":{"enabled":false}},"proxyUrl":"/geonetwork/proxy?url=","theme":{"primitive":{"myprimary":{"50":"#f2fafe","100":"#c2e9f8","200":"#91d7f3","300":"#61c6ee","400":"#30b4e8","500":"#00a3e3","600":"#008bc1","700":"#00729f","800":"#005a7d","900":"#00415b","950":"#002939"},"emerald":{"50":"{myprimary.50}","100":"{myprimary.100}","200":"{myprimary.200}","300":"{myprimary.300}","400":"{myprimary.400}","500":"{myprimary.500}","600":"{myprimary.600}","700":"{myprimary.700}","800":"{myprimary.800}","900":"{myprimary.900}","950":"{myprimary.950}"},"sky":{"50":"#f7f7f8","100":"#d7d9db","200":"#b7babf","300":"#979ca2","400":"#787d86","500":"#585f69","600":"#4b5159","700":"#3e434a","800":"#30343a","900":"#23262a","950":"#16181a"},"green":{"50":"#f7fcfe","100":"#dbeff9","200":"#bee2f4","300":"#a1d5ef","400":"#84c9ea","500":"#67bce5","600":"#58a0c3","700":"#4884a0","800":"#39677e","900":"#294b5c","950":"#1a2f39"},"orange":{"50":"#fffcf5","100":"#fdf3cf","200":"#fce9a9","300":"#fbdf84","400":"#f9d65e","500":"#f8cc38","600":"#d3ad30","700":"#ae8f27","800":"#88701f","900":"#635216","950":"#3e330e"},"red":{"50":"#fcf4f4","100":"#f1c9c9","200":"#e69e9e","300":"#da7373","400":"#cf4848","500":"#c41d1d","600":"#a71919","700":"#891414","800":"#6c1010","900":"#4e0c0c","950":"#310707"},"slate":{"50":"#f7f7f8","100":"#d7d9db","200":"#b7babf","300":"#979ca2","400":"#787d86","500":"#585f69","600":"#4b5159","700":"#3e434a","800":"#30343a","900":"#23262a","950":"#16181a"},"borderRadius":{"none":"0","xs":"1.5px","sm":"3px","md":"6px","lg":"12px","xl":"18px"}},"semantic":{"colorScheme":{"light":{"primary":{"color":"{myprimary.500}","contrastColor":"#ffffff","hoverColor":"{myprimary.600}","activeColor":"{myprimary.700}"},"text":{"color":"{surface.800}","hoverColor":"{surface.800}","mutedColor":"{surface.500}","hoverMutedColor":"{surface.600}"},"content":{"background":"{surface.0}","hoverBackground":"{surface.100}","borderColor":"{surface.200}","color":"{surface.800}","hoverColor":"{text.hover.color}"},"surface":{"50":"#f7f7f8","100":"#d7d9db","200":"#b7babf","300":"#979ca2","400":"#787d86","500":"#585f69","600":"#4b5159","700":"#3e434a","800":"#30343a","900":"#23262a","950":"#16181a"}}}},"components":{"button":{"colorScheme":{"light":{"root":{}}}},"chip":{},"tabs":{},"accordion":{"header":{}}}},"bannerBackground":"#FFF","bannerTitle":"","bannerSubTitle":"","bannerTextColor":"#333","font":"\"Inter\", sans-serif"},"space":"srv","catalogueUrl":"/geonetwork"}'
+                config='
+{
+  "config": {
+    "apps": {
+      "banner": {
+        "enabled": true,
+        "background": "#FFF",
+        "title": "",
+        "subTitle": "",
+        "textColor": "#333"
+      },
+      "search": {
+        "enabled": true,
+        "aggregations": [
+          {
+            "groupPublishedId": {
+              "terms": {
+                "field": "groupPublishedId",
+                "size": 300,
+                "include": ".*",
+                "exclude": "1"
+              },
+              "meta": {
+                "field": "groupPublishedId",
+                "orderByTranslation": true,
+                "filterByTranslation": true,
+                "displayFilter": true,
+                "collapsed": true,
+                "layout": "multiselect",
+                "caseInsensitiveInclude": true
+              }
+            }
+          },
+          {
+            "th_sextant-theme_tree.key": {
+              "terms": {
+                "field": "th_sextant-theme_tree.key",
+                "size": 300,
+                "order": {
+                  "_key": "asc"
+                },
+                "include": ".*"
+              },
+              "meta": {
+                "collapsed": true,
+                "layout": "tree",
+                "translateOnLoad": true,
+                "orderByTranslation": true,
+                "displayFilter": true,
+                "filterByTranslation": true,
+                "caseInsensitiveInclude": true
+              }
+            }
+          },
+          {
+            "th_httpinspireeceuropaeutheme-theme_tree.key": {
+              "terms": {
+                "field": "th_httpinspireeceuropaeutheme-theme_tree.key",
+                "size": 34,
+                "order": {
+                  "_key": "asc"
+                }
+              },
+              "meta": {
+                "collapsed": true,
+                "translateOnLoad": true,
+                "orderByTranslation": true,
+                "decorator": {
+                  "type": "icon",
+                  "prefix": "iti-",
+                  "expression": "http://inspire.ec.europa.eu/theme/(.*)"
+                }
+              }
+            }
+          },
+          {
+            "tag.default": {
+              "terms": {
+                "field": "tag.default",
+                "size": 15
+              },
+              "meta": {
+                "collapsed": true
+              }
+            }
+          },
+          {
+            "OrgForResource": {
+              "terms": {
+                "field": "OrgForResource",
+                "include": ".*",
+                "size": 15
+              },
+              "meta": {
+                "caseInsensitiveInclude": true,
+                "collapsed": true
+              }
+            }
+          },
+          {
+            "creationYearForResource": {
+              "histogram": {
+                "field": "creationYearForResource",
+                "interval": 1,
+                "min_doc_count": 1
+              },
+              "meta": {
+                "layout": "bar",
+                "collapsed": true
+              }
+            }
+          },
+          {
+            "resourceType": {
+              "terms": {
+                "field": "resourceType",
+                "size": 10,
+                "exclude": "map/.*|publication-.*"
+              },
+              "meta": {
+                "collapsed": true,
+                "layout": "nightingale",
+                "decorator": {
+                  "type": "icon",
+                  "map": {
+                    "dataset": "faSolidDatabase",
+                    "map": "faSolidMap",
+                    "featureCatalog": "faSolidTable",
+                    "document": "faSolidCopy",
+                    "service": "faSolidCloud",
+                    "series": "faSolidCopy",
+                    "nonGeographicDataset": "faSolidChartColumn",
+                    "publication": "faSolidBook"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "availableInServices": {
+              "filters": {
+                "filters": {
+                  "availableInViewService": {
+                    "query_string": {
+                      "query": "+linkProtocol:/OGC:WMS|OGC:OWS-C|OGC Web Map Service|OGC:WMTS|ESRI:REST/"
+                    }
+                  },
+                  "availableInDownloadService": {
+                    "query_string": {
+                      "query": "+linkProtocol:/WWW:DOWNLOAD|WWW:DOWNLOAD.*|WWW:OPENDAP|WWW:FTP|OGC:WFS|OGC Web Feature Service|OGC:WCS|MYO:MOTU-SUB|FILE|COPYFILE|DB|KML/"
+                    }
+                  }
+                }
+              },
+              "meta": {
+                "collapsed": true
+              }
+            }
+          }
+        ],
+        "sort": [
+          "-popularity",
+          "_score",
+          "-revisionDateForResource,-publicationDateForResource,-creationDateForResource",
+          "resourceTitleObject.default.sort"
+        ],
+        "currentSort": "-popularity",
+        "hitsPerPageOptions": [
+          20,
+          100
+        ],
+        "resultsLayoutOptions": [
+          "grid",
+          "list"
+        ],
+        "topTabFilter": "resourceType"
+      },
+      "map": {
+        "enabled": true,
+        "context": {
+          "layers": [
+            {
+              "type": "xyz",
+              "id": "basemap-osm",
+              "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+              "visibility": true,
+              "opacity": 1,
+              "label": "OpenStreetMap",
+              "attributions": "© OpenStreetMap contributors",
+              "extras": {
+                "basemap": true
+              }
+            }
+          ],
+          "view": {
+            "center": [
+              -4.56243,
+              0
+            ],
+            "zoom": 1
+          }
+        }
+      },
+      "i18n": {
+        "enabled": true,
+        "languages": {
+          "eng": "en",
+          "fre": "fr"
+        },
+        "language": "eng"
+      },
+      "record": {
+        "enabled": true,
+        "mainThesaurus": [],
+        "distribution": {
+          "layout": "",
+          "sections": [
+            {
+              "filter": "protocol:OGC:WMS|OGC:WMTS|ESRI:.*|atom.*|REST|OGC API Maps|OGC API Records|application/vnd.ogc.wms_xml",
+              "title": "api"
+            },
+            {
+              "filter": "protocol:OGC:WFS|OGC:WCS|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE:.*|OGC API Features|OGC API Coverages",
+              "title": "download"
+            },
+            {
+              "filter": "function:legend",
+              "title": "mapLegend"
+            },
+            {
+              "filter": "function:featureCatalogue",
+              "title": "featureCatalog"
+            },
+            {
+              "filter": "function:dataQualityReport",
+              "title": "quality"
+            },
+            {
+              "filter": "-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE:.*|application/vnd.ogc AND -function:legend|featureCatalogue|dataQualityReport",
+              "title": "links"
+            }
+          ]
+        }
+      },
+      "home": {
+        "enabled": true,
+        "aggregations": [
+          {
+            "resourceType": {
+              "terms": {
+                "field": "resourceType",
+                "size": 9,
+                "exclude": "publication-.*"
+              },
+              "meta": {
+                "layout": "nightingale",
+                "decorator": {
+                  "type": "icon",
+                  "prefix": "",
+                  "map": {
+                    "dataset": "faSolidDatabase",
+                    "map": "faSolidMap",
+                    "featureCatalog": "faSolidTable",
+                    "document": "faSolidCopy",
+                    "service": "faSolidCloud",
+                    "series": "faSolidCopy",
+                    "nonGeographicDataset": "faSolidChartColumn",
+                    "publication": "faSolidBook"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "th_sextant-theme_tree.key": {
+              "terms": {
+                "field": "th_sextant-theme_tree.key",
+                "size": 9,
+                "include": "[^^]+"
+              },
+              "meta": {
+                "orderByTranslation": true,
+                "translateOnLoad": true,
+                "layout": "card",
+                "decorator": {
+                  "type": "img",
+                  "map": {
+                    "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/hyperspectrale-la-reunion/1603154-3-fre-FR/Hyperspectrale-La-Reunion.png",
+                    "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947": "https://sextant.ifremer.fr/geonetwork/srv/api/records/d90bc6fa-5416-4064-97b6-8f671de3e407/attachments/zfhi.jpg",
+                    "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/habitats-physiques/1595588-2-fre-FR/Habitats-physiques.png",
+                    "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bathymetrie-emodnet/1595576-2-fre-FR/Bathymetrie-Emodnet.png",
+                    "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b": "https://sextant.ifremer.fr/geonetwork/srv/api/records/d275ec6a-603b-4170-add2-9b52ce190793/attachments/165.JPG",
+                    "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/images/2023/mlf_density_nb_l_other.png",
+                    "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bigood/1595612-3-fre-FR/BIGOOD.png"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "th_httpinspireeceuropaeutheme-theme_tree.key": {
+              "terms": {
+                "field": "th_httpinspireeceuropaeutheme-theme_tree.key",
+                "size": 34
+              },
+              "meta": {
+                "collapsed": true,
+                "translateOnLoad": true,
+                "orderByTranslation": true,
+                "decorator": {
+                  "type": "icon",
+                  "prefix": "iti-",
+                  "expression": "http://inspire.ec.europa.eu/theme/(.*)"
+                }
+              }
+            }
+          },
+          {
+            "th_simm-reglementaire_tree.key": {
+              "terms": {
+                "field": "th_simm-reglementaire_tree.key",
+                "size": 9
+              },
+              "meta": {
+                "thesaurus": "simm.reglementaire",
+                "translateOnLoad": true,
+                "layout": "card"
+              }
+            }
+          },
+          {
+            "th_dcsmm-area_tree.key": {
+              "terms": {
+                "field": "th_dcsmm-area_tree.key",
+                "size": 30
+              },
+              "meta": {
+                "layout": "bar",
+                "thesaurus": "dcsmm.area",
+                "translateOnLoad": true
+              }
+            }
+          },
+          {
+            "th_dcsmm-descripteur_tree.key": {
+              "terms": {
+                "field": "th_dcsmm-descripteur_tree.key",
+                "size": 30
+              },
+              "meta": {
+                "translateOnLoad": true,
+                "layout": "card"
+              }
+            }
+          },
+          {
+            "th_odatis_centre_donnees_tree.key": {
+              "terms": {
+                "field": "th_odatis_centre_donnees_tree.key",
+                "size": 30
+              },
+              "meta": {
+                "translateOnLoad": true,
+                "layout": "treemap"
+              }
+            }
+          },
+          {
+            "th_NVS-OD1_tree.key": {
+              "terms": {
+                "field": "th_NVS-OD1_tree.key",
+                "size": 30
+              },
+              "meta": {
+                "thesaurus": "NVS.OD1",
+                "translateOnLoad": true,
+                "layout": "card"
+              }
+            }
+          }
+        ]
+      },
+      "authentication": {
+        "enabled": true
+      },
+      "menu": {
+        "enabled": false
+      }
+    },
+    "proxyUrl": "/geonetwork/proxy?url=",
+    "theme": {
+      "primitive": {
+        "myprimary": {
+          "50": "#f2fafe",
+          "100": "#c2e9f8",
+          "200": "#91d7f3",
+          "300": "#61c6ee",
+          "400": "#30b4e8",
+          "500": "#00a3e3",
+          "600": "#008bc1",
+          "700": "#00729f",
+          "800": "#005a7d",
+          "900": "#00415b",
+          "950": "#002939"
+        },
+        "emerald": {
+          "50": "{myprimary.50}",
+          "100": "{myprimary.100}",
+          "200": "{myprimary.200}",
+          "300": "{myprimary.300}",
+          "400": "{myprimary.400}",
+          "500": "{myprimary.500}",
+          "600": "{myprimary.600}",
+          "700": "{myprimary.700}",
+          "800": "{myprimary.800}",
+          "900": "{myprimary.900}",
+          "950": "{myprimary.950}"
+        },
+        "sky": {
+          "50": "#f7f7f8",
+          "100": "#d7d9db",
+          "200": "#b7babf",
+          "300": "#979ca2",
+          "400": "#787d86",
+          "500": "#585f69",
+          "600": "#4b5159",
+          "700": "#3e434a",
+          "800": "#30343a",
+          "900": "#23262a",
+          "950": "#16181a"
+        },
+        "green": {
+          "50": "#f7fcfe",
+          "100": "#dbeff9",
+          "200": "#bee2f4",
+          "300": "#a1d5ef",
+          "400": "#84c9ea",
+          "500": "#67bce5",
+          "600": "#58a0c3",
+          "700": "#4884a0",
+          "800": "#39677e",
+          "900": "#294b5c",
+          "950": "#1a2f39"
+        },
+        "orange": {
+          "50": "#fffcf5",
+          "100": "#fdf3cf",
+          "200": "#fce9a9",
+          "300": "#fbdf84",
+          "400": "#f9d65e",
+          "500": "#f8cc38",
+          "600": "#d3ad30",
+          "700": "#ae8f27",
+          "800": "#88701f",
+          "900": "#635216",
+          "950": "#3e330e"
+        },
+        "red": {
+          "50": "#fcf4f4",
+          "100": "#f1c9c9",
+          "200": "#e69e9e",
+          "300": "#da7373",
+          "400": "#cf4848",
+          "500": "#c41d1d",
+          "600": "#a71919",
+          "700": "#891414",
+          "800": "#6c1010",
+          "900": "#4e0c0c",
+          "950": "#310707"
+        },
+        "slate": {
+          "50": "#f7f7f8",
+          "100": "#d7d9db",
+          "200": "#b7babf",
+          "300": "#979ca2",
+          "400": "#787d86",
+          "500": "#585f69",
+          "600": "#4b5159",
+          "700": "#3e434a",
+          "800": "#30343a",
+          "900": "#23262a",
+          "950": "#16181a"
+        },
+        "borderRadius": {
+          "none": "0",
+          "xs": "1.5px",
+          "sm": "3px",
+          "md": "6px",
+          "lg": "12px",
+          "xl": "18px"
+        }
+      },
+      "semantic": {
+        "colorScheme": {
+          "light": {
+            "primary": {
+              "color": "{myprimary.500}",
+              "contrastColor": "#ffffff",
+              "hoverColor": "{myprimary.600}",
+              "activeColor": "{myprimary.700}"
+            },
+            "text": {
+              "color": "{surface.800}",
+              "hoverColor": "{surface.800}",
+              "mutedColor": "{surface.500}",
+              "hoverMutedColor": "{surface.600}"
+            },
+            "content": {
+              "background": "{surface.0}",
+              "hoverBackground": "{surface.100}",
+              "borderColor": "{surface.200}",
+              "color": "{surface.800}",
+              "hoverColor": "{text.hover.color}"
+            },
+            "surface": {
+              "50": "#f7f7f8",
+              "100": "#d7d9db",
+              "200": "#b7babf",
+              "300": "#979ca2",
+              "400": "#787d86",
+              "500": "#585f69",
+              "600": "#4b5159",
+              "700": "#3e434a",
+              "800": "#30343a",
+              "900": "#23262a",
+              "950": "#16181a"
+            }
+          }
+        }
+      },
+      "components": {
+        "button": {
+          "colorScheme": {
+            "light": {
+              "root": {}
+            }
+          }
+        },
+        "chip": {},
+        "tabs": {},
+        "accordion": {
+          "header": {}
+        }
+      }
+    },
+    "font": "\"Inter\", sans-serif"
+  },
+  "space": "ODATIS",
+  "catalogueUrl": "/geonetwork"
+}'
               ></sextant-app>
             </div>
           </div>
@@ -2082,7 +2621,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-    <script src="https://www.odatis-ocean.fr//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e5f5c6d440448a1"></script>
+    <!-- <script src="https://www.odatis-ocean.fr//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4e5f5c6d440448a1"></script> -->
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://www.odatis-ocean.fr/typo3conf/ext/odatis_template/Resources/Public/JavaScript/Dist/scripts.js?1668597844"></script>
     <script

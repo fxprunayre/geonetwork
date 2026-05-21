@@ -60,10 +60,22 @@ See [`test-wc.html`](test-wc.html)
 To embed the application as a Web Component in any HTML page, import the built javascript and css files and use the `<sextant-app>` tag:
 
 ```html
-<script src="dist/webcomponent/browser/main.js" type="module"></script>
+<script src="sextant-app.js" type="module"></script>
 <link rel="stylesheet" href="dist/webcomponent/browser/styles.css" />
 
 <sextant-app></sextant-app>
+```
+
+### Bundle Name Configuration
+
+The generated web component entry bundle name is configured from `bundleName` in the Angular environment files `projects/library/src/environments/environment*.ts`.
+
+Build scripts call `scripts/rename-main-bundle.js`, which reads `bundleName` and renames the generated `main*.js` bundle accordingly.
+
+If you change `bundleName`, update your embedding snippet to load the same file name:
+
+```html
+<script src="<your-bundle-name>.js" type="module"></script>
 ```
 
 ### Properties
@@ -90,9 +102,30 @@ The `<sextant-app>` Web Component accepts the following properties (attributes):
 <sextant-app
   url="/geonetwork"
   space="AMBIO"
-  config='{}'
 ></sextant-app>
 ```
+
+#### Configure language
+
+```html
+<sextant-app
+  url="/geonetwork"
+  space="AMBIO"
+  language="fre"
+></sextant-app>
+```
+
+#### Use a registered UI configuration
+
+```html
+<sextant-app
+  url="/geonetwork"
+  space="AMBIO"
+  language="fre"
+  config="sextant-home"
+></sextant-app>
+```
+
 
 #### Disable home and menu to focus on search
 

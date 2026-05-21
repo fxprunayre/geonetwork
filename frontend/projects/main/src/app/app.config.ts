@@ -37,11 +37,14 @@ import { environment } from '../../../library/src/environments/environment';
 import { routes } from './app.routes';
 
 export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
+  const bundleFileName = environment.bundleName.endsWith('.js')
+    ? environment.bundleName
+    : `${environment.bundleName}.js`;
   let scriptBaseUrl = '';
   const scripts = document.getElementsByTagName('script');
   for (let i = 0; i < scripts.length; i++) {
     const src = scripts[i].src;
-    if (src && src.match(/(\/webcomponent\/browser|sextant.ifremer.fr\/.*)\/main\.js/)) {
+    if (src && src.includes(`/${bundleFileName}`)) {
       scriptBaseUrl = src.substring(0, src.lastIndexOf('/') + 1);
       break;
     }
