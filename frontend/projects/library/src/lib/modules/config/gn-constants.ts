@@ -248,11 +248,12 @@ export const DEFAULT_SEARCH_APP_HITS_PER_PAGE_OPTIONS = [20, 100];
 export const DEFAULT_SEARCH_APP_CONFIGURATION: SearchApp = {
   enabled: true,
   aggregations: DEFAULT_SEARCH_APP_AGGREGATIONS,
-  topTabFilter: 'resourceType',
+  topTabAggregation: 'resourceType',
   hitsPerPageOptions: DEFAULT_SEARCH_APP_HITS_PER_PAGE_OPTIONS,
   sort: DEFAULT_SEARCH_APP_SORTOPTIONS,
   currentSort: DEFAULT_SEARCH_APP_SORTOPTIONS[0],
   resultsLayoutOptions: DEFAULT_SEARCH_LAYOUT_OPTIONS,
+  filterPosition: 'side',
 };
 
 export const DEFAULT_RECORD_DETAILS_DISTRIBUTION_CONFIGURATION = {

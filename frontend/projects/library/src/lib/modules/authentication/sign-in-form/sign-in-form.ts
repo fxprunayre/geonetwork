@@ -21,6 +21,7 @@ import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
 import { ThemingService } from '../../../shared/theming-service';
 import { CatalogueLogo } from '../../catalogue/catalogue-logo/catalogue-logo';
+import { CatalogueStore } from '../../catalogue/catalogue.store';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { AuthStore } from '../auth.store';
 import { AuthenticationService } from '../authentication.service';
@@ -61,6 +62,7 @@ export class SignInFormComponent {
   private translateService = inject(TranslateService);
   private route = inject(ActivatedRoute);
   private themingService = inject(ThemingService);
+  readonly catalogueStore = inject(CatalogueStore);
   readonly store = inject(AuthStore);
 
   signinFailure = computed(() => !!this.store.error());

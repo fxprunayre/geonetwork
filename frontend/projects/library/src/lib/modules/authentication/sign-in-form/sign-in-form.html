@@ -8,7 +8,7 @@
     class="px-8 md:px-12 lg:px-20 py-12 flex flex-col items-center gap-12 w-full backdrop-blur-2xl rounded-(--p-border-radius-lg) bg-white/10 border border-white/10 max-w-md"
   >
     <div class="flex flex-col items-center gap-4 w-full">
-      <app-catalogue-logo />
+      <app-catalogue-logo class="w-20" layout="logo" [catalogueUuid]="catalogueStore.siteId()" />
       <div class="flex flex-col gap-2 w-full">
         <div class="text-center text-3xl font-medium leading-tight">
           {{ 'auth.signin.title' | translate }}

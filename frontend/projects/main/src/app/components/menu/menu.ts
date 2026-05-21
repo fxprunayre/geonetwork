@@ -1,4 +1,13 @@
-import { Component, computed, ElementRef, inject, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -34,9 +43,10 @@ import {
   UserFullNamePipe,
 } from 'gn-library';
 import { MenuItem, MessageService, SharedModule } from 'primeng/api';
+import { Button } from 'primeng/button';
 import { Menu } from 'primeng/menu';
 import { TextareaModule } from 'primeng/textarea';
-import { Toast } from 'primeng/toast';
+import { TieredMenu } from 'primeng/tieredmenu';
 
 const ICONS = {
   faSolidHouse,
@@ -59,12 +69,13 @@ const ICONS = {
   imports: [
     FormsModule,
     Menu,
+    TieredMenu,
+    Button,
     NgIcon,
     RecordAddMenu,
     RouterLink,
     RouterLinkActive,
     SharedModule,
-    Toast,
     TextareaModule,
     UserAvatar,
     UserFullNamePipe,
@@ -83,6 +94,7 @@ const ICONS = {
   ],
 })
 export class MenuComponent implements OnInit {
+  layout = input<'menu' | 'tieredmenu'>('menu');
   @ViewChild(RecordAddMenu) recordAddButton: RecordAddMenu | undefined;
 
   isExpandedOnHover = signal(false);
@@ -158,6 +170,15 @@ export class MenuComponent implements OnInit {
         },
         ...this.itemConfig(),
       },
+      // {
+      //   label: this.user()?.username,
+      //   title: this.translateService.instant('menu.dashboard'),
+      //   visible: this.isAuthenticated(),
+      //   icon: 'faSolidTachometerAlt',
+      //   routerLink: DASHBOARD_ROUTE_PATH,
+      //   routerLinkActiveOptions: { exact: false },
+      //   ...this.itemConfig(),
+      // },
       {
         label: this.translateService.instant('menu.signout'),
         title: this.isIconMode() ? this.translateService.instant('menu.signout') : '',
@@ -173,7 +194,7 @@ export class MenuComponent implements OnInit {
 
   dt: MenuDesignTokens = {
     root: {
-      // borderRadius: '0',
+      borderRadius: '0',
     },
     list: {
       gap: '6px',
@@ -186,13 +207,13 @@ export class MenuComponent implements OnInit {
     colorScheme: {
       light: {
         root: {
-          background: 'var(--p-primary-500)',
-          borderColor: 'var(--p-primary-500)',
-          color: 'var(--p-surface-50)',
+          // background: 'var(--p-primary-500)',
+          // borderColor: 'var(--p-primary-500)',
+          color: 'var(--p-primary-500)',
         },
         item: {
-          color: 'var(--p-surface-50)',
-          icon: { color: 'var(--p-surface-50)' },
+          color: 'var(--p-primary-500)',
+          icon: { color: 'var(--p-primary-500)' },
         },
       },
     },

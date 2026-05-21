@@ -8,7 +8,7 @@
         (ngModelChange)="handleChange(bucket().key, $event)"
       ></p-checkbox>
       <label
-        class="ml-2 line-clamp-1"
+        class="ml-2 line-clamp-1 break-words break-all"
         [for]="keyName() + '_' + bucket().key"
         [pTooltip]="label()"
         tooltipPosition="right"

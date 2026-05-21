@@ -1,73 +1,83 @@
 @if (isMenuEnabled()) {
-  <nav class="m-2" (mouseenter)="expandMenu()" (mouseleave)="collapseMenu()">
-    <p-menu
-      [model]="items()"
-      class="h-full"
-      [pt]="{
-        root: '!min-w-fit h-full transition-all duration-300 ease-in-out',
-        itemContent: 'text-2xl',
-        itemLabel: {
-          class: {
-            'line-clamp-1': true,
-            'transition-all': true,
-            'duration-300': true,
-            'ease-in-out': true,
-            'max-w-0': isIconMode(),
-            'opacity-0': isIconMode(),
-            'ml-0': isIconMode(),
-            'max-w-50': !isIconMode(),
-            'opacity-100': !isIconMode(),
-            'ml-2': !isIconMode(),
+  <nav
+    class="border-e border-surface-100 h-full"
+    (mouseenter)="expandMenu()"
+    (mouseleave)="collapseMenu()"
+  >
+    @if (layout() === 'menu') {
+      <p-menu
+        [model]="items()"
+        class="h-full"
+        [pt]="{
+          root: '!min-w-fit h-full transition-all duration-300 ease-in-out !border-none',
+          itemContent: 'text-2xl justify-center',
+          itemLabel: {
+            class: {
+              'line-clamp-1': true,
+              'transition-all': true,
+              'duration-300': true,
+              'ease-in-out': true,
+              'max-w-0': isIconMode(),
+              'opacity-0': isIconMode(),
+              'ml-0': isIconMode(),
+              'max-w-50': !isIconMode(),
+              'opacity-100': !isIconMode(),
+              'ml-2': !isIconMode(),
+            },
           },
-        },
-      }"
-      [dt]="dt"
-    >
-      <ng-template #start>
-        <div class="p-menu-list flex flex-row! header-row">
-          <a class="p-menu-item-link" role="menuitem" (click)="toggleMenu()">
-            <ng-icon
-              [name]="isIconMode() ? 'faSolidBars' : 'faSolidEllipsisVertical'"
-              class="md:text-2xl"
-            ></ng-icon>
-          </a>
-          <app-catalogue-logo
-            [class.hidden]="isIconMode()"
-            class="transition-all w-20"
-            layout="logo"
-            [catalogueUuid]="catalogueStore.siteId()"
-          />
-        </div>
-      </ng-template>
+        }"
+        [dt]="dt"
+      >
+        <ng-template #start>
+          <div class="p-menu-list flex flex-row! header-row">
+            <a class="p-menu-item-link" role="menuitem" (click)="toggleMenu()">
+              <ng-icon
+                [name]="isIconMode() ? 'faSolidBars' : 'faSolidEllipsisVertical'"
+                class="md:text-2xl"
+              ></ng-icon>
+            </a>
+            <app-catalogue-logo
+              [class.hidden]="isIconMode()"
+              class="transition-all w-20"
+              layout="logo"
+              [catalogueUuid]="catalogueStore.siteId()"
+            />
+          </div>
+        </ng-template>
 
-      <ng-template pTemplate="end">
-        @if (isAuthenticated()) {
-          <ul class="p-menu-list">
-            <li
-              class="p-menu-item-link"
-              role="menuitem"
-              routerLinkActive="p-menu-item-link-active"
-              [routerLinkActiveOptions]="{ exact: false }"
-            >
-              <a [routerLink]="[DASHBOARD_ROUTE_PATH]" class="flex flex-row gap-4">
-                <app-user-avatar />
+        <ng-template pTemplate="end">
+          @if (isAuthenticated()) {
+            <ul class="p-menu-list">
+              <li
+                class="p-menu-item-link"
+                role="menuitem"
+                routerLinkActive="p-menu-item-link-active"
+                [routerLinkActiveOptions]="{ exact: false }"
+              >
+                <a [routerLink]="[DASHBOARD_ROUTE_PATH]" class="flex flex-row gap-4">
+                  <app-user-avatar />
 
-                <span
-                  class="transition-all flex flex-col items-start w-full"
-                  [class.hidden]="isIconMode()"
-                >
-                  <span class="font-bold wrap-break-word"> {{ user() | userFullName }}</span>
-                  <span class="text-sm">{{ userRole() }}</span>
-                </span>
-              </a>
-            </li>
-          </ul>
-        }
-      </ng-template>
-    </p-menu>
+                  <span
+                    class="transition-all flex flex-col items-start w-full"
+                    [class.hidden]="isIconMode()"
+                  >
+                    <span class="font-bold wrap-break-word"> {{ user() | userFullName }}</span>
+                    <span class="text-sm">{{ userRole() }}</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          }
+        </ng-template>
+      </p-menu>
+    } @else if (layout() === 'tieredmenu') {
+      <p-button type="button" (click)="tieredMenu.toggle($event)" variant="text" icon="faSolidBars">
+        <ng-icon name="faSolidBars" class="text-2xl"></ng-icon>
+      </p-button>
+
+      <p-tieredMenu #tieredMenu [model]="items()" [popup]="true" />
+    }
 
     <app-record-add-button />
   </nav>
-
-  <p-toast />
 }

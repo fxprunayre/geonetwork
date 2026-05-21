@@ -39,10 +39,10 @@
     @if (!search.hasResults()) {
       <app-no-result-found></app-no-result-found>
     } @else {
-      <div class="card">
+      <div>
         @switch (layout()) {
           @case ('list') {
-            <div class="results-list grid gap-4">
+            <div class="results-list grid grid-cols-1 gap-4">
               @for (result of search.results(); track $index) {
                 <app-result-item-list
                   [result]="result"

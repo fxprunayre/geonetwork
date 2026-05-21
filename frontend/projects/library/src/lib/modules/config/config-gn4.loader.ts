@@ -81,12 +81,13 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
               })
               .filter((layout) => layout !== undefined)
           : DEFAULT_SEARCH_APP_CONFIGURATION.resultsLayoutOptions,
+        filterPosition: DEFAULT_SEARCH_APP_CONFIGURATION.filterPosition,
       };
       if (searchConfig.facetTabField && searchConfig.facetConfig[searchConfig.facetTabField]) {
-        conf.apps.search.topTabFilter = searchConfig.facetTabField;
+        conf.apps.search.topTabAggregation = searchConfig.facetTabField;
         conf.apps.search.filter = searchConfig.filters;
-      } else if (DEFAULT_SEARCH_APP_CONFIGURATION.topTabFilter) {
-        conf.apps.search.topTabFilter = DEFAULT_SEARCH_APP_CONFIGURATION.topTabFilter;
+      } else if (DEFAULT_SEARCH_APP_CONFIGURATION.topTabAggregation) {
+        conf.apps.search.topTabAggregation = DEFAULT_SEARCH_APP_CONFIGURATION.topTabAggregation;
       }
     } else if (modKey === 'header') {
       const headerConfig = module as Header;

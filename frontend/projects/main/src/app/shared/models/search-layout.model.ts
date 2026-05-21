@@ -1,1 +1,1 @@
-export type FilterPanelLayout = 'drawer' | 'side' | 'top';
+export type FilterPanelLayout = 'drawer' | 'side' | 'side-fixed' | 'top';

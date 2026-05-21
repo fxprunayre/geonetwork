@@ -50,7 +50,6 @@ export interface HomeApp extends App {
 export type SearchAppLayout = 'list' | 'grid' | 'table';
 
 export interface SearchApp extends App {
-  topTabFilter?: string;
   filter?: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
   aggregations: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
   advanced?: SearchAppAdvanced;
@@ -58,6 +57,8 @@ export interface SearchApp extends App {
   currentSort?: string;
   hitsPerPageOptions: number[];
   resultsLayoutOptions?: SearchAppLayout[];
+  topTabAggregation?: string;
+  filterPosition?: 'drawer' | 'side' | 'side-fixed' | 'top';
 }
 
 export interface SearchAppAdvanced {

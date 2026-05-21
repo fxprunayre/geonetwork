@@ -11,6 +11,7 @@ import {
 } from 'gn-library';
 import { ButtonModule } from 'primeng/button';
 import { Card } from 'primeng/card';
+import { SearchFilters } from '../search-filters/search-filters';
 
 @Component({
   selector: 'app-results-info',
@@ -24,6 +25,7 @@ import { Card } from 'primeng/card';
     ResultsNumberComponent,
     Card,
     ResultLayoutSwitcher,
+    SearchFilters,
   ],
   templateUrl: './results-info.html',
 })
@@ -31,5 +33,7 @@ export class ResultsInfo {
   layout = model<SearchAppLayout>('list');
   @Input() layoutOptions: SearchAppLayout[] = [];
 
-  topTabFilter = inject(APPLICATION_CONFIGURATION)().config?.apps.search?.topTabFilter;
+  appConfig = inject(APPLICATION_CONFIGURATION)().config;
+  topTabFilter = this.appConfig?.apps.search?.topTabAggregation;
+  filterPosition = this.appConfig?.apps.search?.filterPosition || 'side';
 }

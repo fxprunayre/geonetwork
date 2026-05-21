@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, linkedSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { APPLICATION_CONFIGURATION, ResultsView, SearchBase } from 'gn-library';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
@@ -11,12 +11,14 @@ import { ResultsInfo } from '../results-info/results-info';
   imports: [ResultsInfo, ResultsView, FormsModule, OverlayBadgeModule, PageLayout],
   standalone: true,
   templateUrl: './search.html',
-  styleUrl: './search.scss',
 })
 export class Search extends SearchBase {
-  filterPanelMode = signal<FilterPanelLayout>('side');
-
   appConfiguration = inject(APPLICATION_CONFIGURATION);
+
+  filterPosition = linkedSignal<FilterPanelLayout>(
+    () =>
+      (this.appConfiguration().config?.apps?.search?.filterPosition as FilterPanelLayout) || 'side',
+  );
 
   bannerBackground = computed(() => this.appConfiguration().config?.apps?.banner?.background || '');
 

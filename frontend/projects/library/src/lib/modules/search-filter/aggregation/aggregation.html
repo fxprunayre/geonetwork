@@ -10,7 +10,7 @@
       *ngTemplateOutlet="defaultFilterTemplate; context: { $implicit: this }"
     ></ng-container>
     @for (bucket of buckets(); track bucket.key) {
-      <div class="flex items-center mb-2">
+      <div class="flex items-center w-full min-w-0 mb-2">
         <app-aggregation-bucket
           [scope]="scope()"
           [keyName]="keyName()"

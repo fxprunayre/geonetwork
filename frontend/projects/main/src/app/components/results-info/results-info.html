@@ -7,6 +7,13 @@
         <app-result-layout-switcher [options]="layoutOptions" [(layout)]="layout" />
       }
     </div>
+
+    @if (filterPosition === 'top') {
+      <div>
+        <app-search-filters />
+      </div>
+    }
+
     <div>
       @if (topTabFilter) {
         <app-aggregation
