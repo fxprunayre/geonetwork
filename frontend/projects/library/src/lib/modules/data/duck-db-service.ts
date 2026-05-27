@@ -96,6 +96,7 @@ export class DuckDbService {
         `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-datagrid@${perspectiveVersion}/dist/cdn/perspective-viewer-datagrid.js`,
         `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-d3fc@${perspectiveVersion}/dist/cdn/perspective-viewer-d3fc.js`,
         `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers@${perspectiveVersion}/dist/cdn/perspective-viewer-openlayers.js`,
+        `https://cdn.jsdelivr.net/npm/@perspective-dev/workspace@${perspectiveVersion}/dist/cdn/perspective-workspace.js`,
       ];
       const wasmUrls = [
         `https://cdn.jsdelivr.net/npm/@perspective-dev/server@${perspectiveVersion}/dist/wasm/perspective-server.wasm`,

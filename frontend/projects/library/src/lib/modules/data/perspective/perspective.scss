@@ -1,5 +1,9 @@
 @import '@perspective-dev/viewer/dist/css/themes.css';
 
+perspective-workspace {
+  height: 80vh;
+}
+
 perspective-viewer,
 perspective-workspace {
   font-family: var(--app-font-family-sans, 'Inter', sans-serif);

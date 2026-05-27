@@ -31,7 +31,7 @@ import { DuckDbService } from '../duck-db-service';
     }),
   ],
   template: `
-    <div #viewerContainer class="relative min-h-dvh h-full flex flex-col">
+    <div #viewerContainer class="relative h-full min-h-0 overflow-hidden flex flex-col">
       <div class="flex flex-row items-center justify-items-end w-full gap-4 my-4">
         <div class="flex flex-row items-center gap-4 grow">
           @if (progress().status !== 'completed' && progress().status !== 'idle') {
@@ -90,10 +90,7 @@ import { DuckDbService } from '../duck-db-service';
           }
         </div>
       </div>
-      <perspective-viewer
-        #perspectiveViewer
-        class="w-full h-full grow min-h-0 border border-surface-300 rounded-md"
-      />
+      <perspective-workspace #perspectiveWorkspace theme="GeoNetwork" class="w-full grow" />
     </div>
   `,
   styleUrl: './perspective.scss',
@@ -102,7 +99,7 @@ import { DuckDbService } from '../duck-db-service';
 export class Perspective implements OnDestroy {
   datasource = input<Datasource | undefined>();
 
-  @ViewChild('perspectiveViewer') perspectiveViewer!: ElementRef<any>;
+  @ViewChild('perspectiveWorkspace') perspectiveWorkspace!: ElementRef<any>;
 
   private duckDbService = inject(DuckDbService);
   private renderer = inject(Renderer2);
@@ -115,17 +112,19 @@ export class Perspective implements OnDestroy {
   error: string | undefined;
 
   private worker: any;
+  private table: any;
+  private workspaceLoaded = false;
+  private readonly tableName = 'data';
 
   constructor() {
     effect(async () => {
       const ds = this.datasource();
-      console.log('Datasource effect ran with datasource:', ds);
       if (ds) {
-        this.initialize();
-        this.clearPreviousDataIfAny();
+        await this.initialize();
+        await this.clearPreviousDataIfAny();
 
         await this.duckDbService.loadDatasource(ds);
-        this.loadDataIntoPerspective();
+        await this.loadDataIntoPerspective();
       }
     });
   }
@@ -134,9 +133,13 @@ export class Perspective implements OnDestroy {
     this.duckDbService.cancelDownload();
   }
 
-  private clearPreviousDataIfAny(): void {
-    if (this.perspectiveViewer?.nativeElement && this.worker) {
-      this.perspectiveViewer.nativeElement.load(this.worker.table([]));
+  private async clearPreviousDataIfAny(): Promise<void> {
+    if (this.table?.delete) {
+      await this.table.delete();
+      this.table = undefined;
+    }
+    if (this.perspectiveWorkspace?.nativeElement?.clear) {
+      await this.perspectiveWorkspace.nativeElement.clear();
     }
   }
 
@@ -171,6 +174,11 @@ export class Perspective implements OnDestroy {
   private async loadDataIntoPerspective() {
     this.worker = this.worker || (await perspective.worker());
 
+    if (!this.workspaceLoaded && this.perspectiveWorkspace?.nativeElement?.load) {
+      await this.perspectiveWorkspace.nativeElement.load(this.worker);
+      this.workspaceLoaded = true;
+    }
+
     const countResult = await this.duckDbService.runQuery('SELECT count(*) as count FROM data');
     this.totalCount.set(Number(countResult[0]?.count || 0));
     this.isTruncated.set(this.totalCount() > this.limit);
@@ -187,14 +195,16 @@ export class Perspective implements OnDestroy {
       throw new Error('Unexpected result format from DuckDbService');
     }
 
-    const table = this.worker.table(this.sanitizeData(result));
-    this.perspectiveViewer.nativeElement.load(table);
-    this.perspectiveViewer.nativeElement.restore({
+    this.table = this.worker.table(this.sanitizeData(result), { name: this.tableName });
+    await this.perspectiveWorkspace.nativeElement.addViewer({
+      table: this.tableName,
       settings: true,
+      theme: 'GeoNetwork',
     });
+    await this.perspectiveWorkspace.nativeElement.flush?.();
   }
 
-  ngOnDestroy() {
-    this.clearPreviousDataIfAny();
+  async ngOnDestroy() {
+    await this.clearPreviousDataIfAny();
   }
 }

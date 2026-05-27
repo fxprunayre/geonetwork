@@ -23,7 +23,7 @@
             class="text-primary font-semibold text-base md:text-lg line-clamp-1 min-w-0"
           />
           <div class="flex gap-2 items-center shrink-0">
-            <app-record-field-type [record]="result" />
+            <app-record-field-type [record]="result" class="uppercase font-bold text-xs" />
             @if (externalUrl()) {
               <ng-container *ngTemplateOutlet="externalUrlIcon" />
             }
@@ -55,7 +55,7 @@
 
       <div class="flex flex-col p-6 justify-start items-start gap-2 w-full">
         <div class="flex justify-between items-start w-full">
-          <app-record-field-type [record]="result" />
+          <app-record-field-type [record]="result" class="uppercase font-bold text-xs" />
           <div>
             <div class="flex gap-3 justify-around">
               <app-record-distribution-badges
