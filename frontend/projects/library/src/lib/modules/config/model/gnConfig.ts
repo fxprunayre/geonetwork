@@ -72,4 +72,5 @@ export interface MapApp extends App {
 export interface RecordDetailsApp extends App {
   distribution?: DistributionConfig;
   mainThesaurus?: string[];
+  mapLayerDisplayTarget?: 'main-map-tab' | 'explore-embedded-map';
 }

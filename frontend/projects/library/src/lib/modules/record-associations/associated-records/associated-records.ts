@@ -10,7 +10,6 @@ import {
   faSolidCrosshairs,
   faSolidDatabase,
   faSolidDiagramNext,
-  faSolidExpand,
   faSolidFlask,
   faSolidGavel,
   faSolidGears,
@@ -27,17 +26,16 @@ import {
   faSolidShuffle,
   faSolidSitemap,
 } from '@ng-icons/font-awesome/solid';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
-import { Button } from 'primeng/button';
 import { DataView } from 'primeng/dataview';
-import { Drawer } from 'primeng/drawer';
+import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { ResultItemList } from '../../search-results/result-item-list/result-item-list';
 import { getAssociationLabel } from '../association-utils';
 
 @Component({
   selector: 'app-associated-records',
-  imports: [Button, DataView, Drawer, NgIcon, NgTemplateOutlet, ResultItemList, TranslatePipe],
+  imports: [DataView, FullScreenPanel, NgIcon, NgTemplateOutlet, ResultItemList],
   providers: [
     provideIcons({
       faSolidBook,
@@ -48,7 +46,6 @@ import { getAssociationLabel } from '../association-utils';
       faSolidCrosshairs,
       faSolidDatabase,
       faSolidDiagramNext,
-      faSolidExpand,
       faSolidFlask,
       faSolidGavel,
       faSolidGears,
@@ -76,8 +73,6 @@ export class AssociatedRecords {
   onRecordClick = output<string>();
 
   translateService = inject(TranslateService);
-
-  isFullScreen = false;
 
   pageSize = 10;
 
@@ -164,7 +159,6 @@ export class AssociatedRecords {
   });
 
   handleRecordClick(uuid: string) {
-    this.isFullScreen = false;
     this.onRecordClick.emit(uuid);
   }
 }

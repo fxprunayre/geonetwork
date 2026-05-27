@@ -156,6 +156,5 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
   conf.apps.menu = {
     enabled: true,
   };
-  console.log(conf);
   return conf;
 }

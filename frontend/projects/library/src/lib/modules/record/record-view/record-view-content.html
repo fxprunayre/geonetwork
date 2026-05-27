@@ -153,7 +153,7 @@
             'record.view.section.dataAccess' | translate
           }}</p-tab>
         }
-        @if (record.info?.hasDatasource) {
+        @if (showExploreTab()) {
           <p-tab value="explore" class="text-lg">{{
             'record.view.section.explore' | translate
           }}</p-tab>
@@ -269,7 +269,7 @@
           </div>
         </p-tabpanel>
 
-        @if (record.info?.hasDatasource) {
+        @if (showExploreTab()) {
           <p-tabpanel value="explore">
             <app-explore-panel [record]="record" [activeTab]="tab()" />
           </p-tabpanel>

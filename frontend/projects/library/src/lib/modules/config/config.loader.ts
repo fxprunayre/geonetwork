@@ -169,7 +169,7 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
       appConfig.catalogueUrl = apiUrl;
     }
 
-    console.log(appConfig);
+    console.log('Application config:', appConfig);
     appConfigLoading = false;
     return appConfig;
   });

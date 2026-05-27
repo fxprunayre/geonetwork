@@ -16,8 +16,9 @@ import { Link } from 'gn-api-client';
 import { Button } from 'primeng/button';
 import { Skeleton } from 'primeng/skeleton';
 import { SplitButton } from 'primeng/splitbutton';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
-import { MAP_ROUTE_PATH } from '../../search/search-constant';
+import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../../search/search-constant';
 
 export interface Gn4MapCommand {
   uuid?: string;
@@ -78,6 +79,7 @@ export class AddLayerToMap extends RecordFieldBase {
   link = input.required<Link>();
 
   private router = inject(Router);
+  private appConfiguration = inject(APPLICATION_CONFIGURATION);
 
   status = signal<'idle' | 'loading' | 'found' | 'not-found' | 'error'>('idle');
 
@@ -114,6 +116,10 @@ export class AddLayerToMap extends RecordFieldBase {
       return matches.map((layer) => layer.title || layer.name).join(', ');
     }
   });
+
+  mapLayerDisplayTarget = computed(
+    () => this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget || 'main-map-tab',
+  );
 
   constructor() {
     super();
@@ -177,9 +183,16 @@ export class AddLayerToMap extends RecordFieldBase {
         return cmd;
       });
     if (command.length > 0) {
-      this.router.navigate([MAP_ROUTE_PATH], {
-        queryParams: { add: JSON.stringify(command) },
-      });
+      if (this.mapLayerDisplayTarget() === 'explore-embedded-map') {
+        this.router.navigate([RECORD_ROUTE_PATH, this.record().uuid, 'explore'], {
+          queryParams: { wmsAdd: JSON.stringify(command) },
+          queryParamsHandling: 'merge',
+        });
+      } else {
+        this.router.navigate([MAP_ROUTE_PATH], {
+          queryParams: { add: JSON.stringify(command) },
+        });
+      }
       // const commandParameter = 'add=' + JSON.stringify(command);
 
       //   window.open(

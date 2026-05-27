@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -12,12 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import {
-  faSolidCompress,
-  faSolidExpand,
-  faSolidTriangleExclamation,
-  faSolidXmark,
-} from '@ng-icons/font-awesome/solid';
+import { faSolidTriangleExclamation, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { TranslateModule } from '@ngx-translate/core';
 import perspective from '@perspective-dev/client';
 import { Button, ButtonIcon } from 'primeng/button';
@@ -29,31 +23,16 @@ import { DuckDbService } from '../duck-db-service';
 
 @Component({
   selector: 'app-perspective',
-  imports: [Button, ButtonIcon, Message, NgClass, NgIcon, Popover, ProgressBar, TranslateModule],
+  imports: [Button, ButtonIcon, Message, NgIcon, Popover, ProgressBar, TranslateModule],
   viewProviders: [
     provideIcons({
-      faSolidExpand,
-      faSolidCompress,
       faSolidXmark,
       faSolidTriangleExclamation,
     }),
   ],
   template: `
-    <div
-      #viewerContainer
-      class="transition-all duration-300"
-      [ngClass]="{
-        'fixed inset-0 z-100 h-screen w-screen bg-white p-4': isFullScreen(),
-        'relative min-h-dvh h-full': !isFullScreen(),
-      }"
-    >
-      <div
-        class="flex flex-row items-center justify-items-end w-full gap-4"
-        [ngClass]="{
-          'float-right': isFullScreen(),
-          'my-4': !isFullScreen(),
-        }"
-      >
+    <div #viewerContainer class="relative min-h-dvh h-full flex flex-col">
+      <div class="flex flex-row items-center justify-items-end w-full gap-4 my-4">
         <div class="flex flex-row items-center gap-4 grow">
           @if (progress().status !== 'completed' && progress().status !== 'idle') {
             @let errorOrCancel = progress().status === 'error' || progress().status === 'canceled';
@@ -110,16 +89,8 @@ import { DuckDbService } from '../duck-db-service';
             </p-message>
           }
         </div>
-
-        <p-button (click)="toggleFullScreen()">
-          @if (isFullScreen()) {
-            <ng-icon name="faSolidCompress" pButtonIcon />
-          } @else {
-            <ng-icon name="faSolidExpand" pButtonIcon />
-          }
-        </p-button>
       </div>
-      <perspective-viewer #perspectiveViewer class="w-full h-[93vh]" />
+      <perspective-viewer #perspectiveViewer class="w-full h-full grow min-h-0" />
     </div>
   `,
   styleUrl: './perspective.scss',
@@ -134,7 +105,6 @@ export class Perspective implements OnDestroy {
   private renderer = inject(Renderer2);
 
   progress = this.duckDbService.progress;
-  isFullScreen = signal(false);
   isTruncated = signal(false);
   totalCount = signal(0);
   loadedCount = signal(0);
@@ -146,6 +116,7 @@ export class Perspective implements OnDestroy {
   constructor() {
     effect(async () => {
       const ds = this.datasource();
+      console.log('Datasource effect ran with datasource:', ds);
       if (ds) {
         this.initialize();
         this.clearPreviousDataIfAny();
@@ -164,12 +135,6 @@ export class Perspective implements OnDestroy {
     if (this.perspectiveViewer?.nativeElement && this.worker) {
       this.perspectiveViewer.nativeElement.load(this.worker.table([]));
     }
-  }
-
-  toggleFullScreen(): void {
-    this.isFullScreen.update((v) => !v);
-    // Trigger resize event after transition to allow perspective to redraw correctly
-    setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
   }
 
   private async initialize(): Promise<any> {

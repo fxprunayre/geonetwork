@@ -131,6 +131,21 @@ export class RecordViewContent implements AfterViewInit {
     () => this.appConfiguration().config?.apps.record?.mainThesaurus || [],
   );
 
+  mapLayerDisplayTarget = computed(
+    () => this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget || 'main-map-tab',
+  );
+
+  hasWmsLink = computed(() => {
+    const links = this.record()?.link || [];
+    return links.some((link) => !!link?.protocol?.match('OGC:WMS|application/vnd.ogc.wms_xml'));
+  });
+
+  showExploreTab = computed(
+    () =>
+      !!this.record()?.info?.hasDatasource ||
+      (this.mapLayerDisplayTarget() === 'explore-embedded-map' && this.hasWmsLink()),
+  );
+
   contactRoles = computed(() => {
     const contacts = this.record()?.['contactForResource'] || [];
     const roles = new Set(contacts.map((c: any) => c.role).filter((r: any) => !!r));

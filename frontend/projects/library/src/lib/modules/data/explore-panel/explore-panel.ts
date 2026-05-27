@@ -1,9 +1,25 @@
-import { Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  ElementRef,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  untracked,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgIcon } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidMap, faSolidTable } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
+import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
+import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { DEFAULT_MAP_CONTEXT } from '../../config/gn-constants';
+import { Gn4MapCommand } from '../../record-distributions/add-layer-to-map/add-layer-to-map';
 import { DatasourceSelect } from '../datasource-select/datasource-select';
 import { Datasource } from '../datasource.model';
 import { DuckDbService } from '../duck-db-service';
@@ -11,17 +27,44 @@ import { Perspective } from '../perspective/perspective';
 
 @Component({
   selector: 'app-explore-panel',
-  imports: [DatasourceSelect, NgIcon, Perspective, TranslatePipe],
+  imports: [
+    Accordion,
+    AccordionContent,
+    AccordionHeader,
+    AccordionPanel,
+    DatasourceSelect,
+    FullScreenPanel,
+    NgIcon,
+    Perspective,
+    TranslatePipe,
+  ],
+  viewProviders: [provideIcons({ faSolidMap, faSolidTable })],
   templateUrl: './explore-panel.html',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ExplorePanel {
   record = input.required<IndexRecord>();
   activeTab = input<string>('explore');
   datasource = signal<Datasource | undefined>(undefined);
 
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
   duckdbService = inject(DuckDbService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  elementRef = inject(ElementRef);
+
+  viewer: any;
+  addedLayerIds = new Set<string>();
+
+  mapContext = computed(
+    () => this.appConfiguration().config?.apps?.map?.context || DEFAULT_MAP_CONTEXT,
+  );
+
+  mapLayerDisplayTarget = computed(
+    () => this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget || 'main-map-tab',
+  );
+
+  isEmbeddedWmsMapEnabled = computed(() => this.mapLayerDisplayTarget() === 'explore-embedded-map');
 
   datasources = computed(() => {
     const record = this.record();
@@ -32,6 +75,36 @@ export class ExplorePanel {
   });
 
   queryParams = toSignal(this.route.queryParams);
+
+  wmsCommands = computed<Gn4MapCommand[]>(() => {
+    const qp = this.queryParams();
+    const rawCommand = qp?.['wmsAdd'];
+    if (!rawCommand || !this.isEmbeddedWmsMapEnabled()) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(rawCommand) as Gn4MapCommand[];
+    } catch (e) {
+      console.warn('Error parsing WMS add commands', e);
+      return [];
+    }
+  });
+
+  hasWmsCommands = computed(() => this.wmsCommands().length > 0);
+
+  hasDatasourceSection = computed(() => this.datasources().length > 0);
+
+  activePanels = computed(() => {
+    const panels: string[] = [];
+    if (this.isEmbeddedWmsMapEnabled() && this.hasWmsCommands()) {
+      panels.push('map');
+    }
+    if (this.hasDatasourceSection()) {
+      panels.push('table-data');
+    }
+    return panels;
+  });
 
   constructor() {
     effect(() => {
@@ -69,6 +142,71 @@ export class ExplorePanel {
           });
         }
       }
+    });
+
+    effect(() => {
+      const active = this.activeTab();
+      const hasCommands = this.hasWmsCommands();
+      const enabled = this.isEmbeddedWmsMapEnabled();
+
+      if (active !== 'explore' || !enabled || !hasCommands) {
+        return;
+      }
+
+      this.ensureViewerReady().then(() => {
+        this.addLayersToEmbeddedMap(this.wmsCommands());
+      });
+    });
+  }
+
+  private async ensureViewerReady() {
+    if (this.viewer) {
+      return;
+    }
+
+    const scriptUrl = 'https://sextant.gitlab-pages.ifremer.fr/viewer/sxt-viewer.js';
+    if (!document.querySelector(`script[src="${scriptUrl}"]`)) {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = scriptUrl;
+      script.crossOrigin = 'anonymous';
+      document.body.appendChild(script);
+      await new Promise<void>((resolve) => {
+        script.onload = () => resolve();
+      });
+    }
+
+    await customElements.whenDefined('sxt-viewer');
+
+    this.viewer = this.elementRef.nativeElement.querySelector('sxt-viewer');
+    if (this.viewer) {
+      this.viewer.setContext(this.mapContext());
+    }
+  }
+
+  private addLayersToEmbeddedMap(commands: Gn4MapCommand[]) {
+    if (!this.viewer) {
+      return;
+    }
+
+    commands.forEach((cmd) => {
+      const layerId = `${cmd.url}#${cmd.name || ''}`;
+      if (this.addedLayerIds.has(layerId)) {
+        return;
+      }
+
+      setTimeout(() => {
+        this.viewer.addLayer({
+          type: 'wms',
+          id: layerId,
+          url: decodeURIComponent(cmd.url),
+          name: decodeURIComponent(cmd.name || ''),
+          label: decodeURIComponent(cmd.label || ''),
+          visibility: true,
+          attributions: '',
+        });
+        this.addedLayerIds.add(layerId);
+      }, 500);
     });
   }
 }

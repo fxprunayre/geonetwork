@@ -290,6 +290,8 @@ export const DEFAULT_RECORD_DETAILS_APP_CONFIGURATION: RecordDetailsApp = {
   enabled: true,
   mainThesaurus: [],
   distribution: DEFAULT_RECORD_DETAILS_DISTRIBUTION_CONFIGURATION,
+  mapLayerDisplayTarget: 'explore-embedded-map',
+  // mapLayerDisplayTarget: 'main-map-tab',
 };
 
 export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {

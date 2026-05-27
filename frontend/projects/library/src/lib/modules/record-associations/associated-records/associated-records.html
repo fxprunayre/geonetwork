@@ -7,29 +7,23 @@
 </ng-template>
 
 @if (relations().length > 0) {
-  <ng-template #title>
-    <div class="text-primary text-2xl font-medium my-4 flex items-center gap-2">
-      @let svg = icon();
-      @if (svg) {
-        <ng-icon [svg]="svg"></ng-icon>
-      }
-      {{ label() }}
-    </div>
-  </ng-template>
+  <div class="text-primary text-2xl font-medium my-4 flex items-center gap-2">
+    @let svg = icon();
+    @if (svg) {
+      <ng-icon [svg]="svg"></ng-icon>
+    }
+    {{ label() }}
+  </div>
 
-  <ng-template #content>
+  <app-full-screen-panel>
     <div class="w-full has-[>section:empty]:hidden">
-      @if (!isFullScreen) {
-        <ng-container *ngTemplateOutlet="title" />
-      }
-
       <section [class]="styleClass()">
         <p-dataview
           #dv
           [value]="relations()"
           [layout]="'grid'"
-          [rows]="isFullScreen ? relations().length : pageSize"
-          [paginator]="isFullScreen ? false : relations().length > pageSize"
+          [rows]="pageSize"
+          [paginator]="relations().length > pageSize"
           [dt]="{ paginator: { bottom: { border: { width: '0' } } } }"
         >
           <ng-template #grid let-items>
@@ -47,24 +41,5 @@
         </p-dataview>
       </section>
     </div>
-  </ng-template>
-
-  @if (!isFullScreen) {
-    @if (relations().length > pageSize) {
-      <p-button
-        (click)="isFullScreen = true"
-        link
-        styleClass="float-right"
-        [label]="'relations.seeAll' | translate"
-      />
-    }
-    <ng-container *ngTemplateOutlet="content" />
-  } @else {
-    <p-drawer [(visible)]="isFullScreen" position="full">
-      <ng-template #header>
-        <ng-container *ngTemplateOutlet="title" />
-      </ng-template>
-      <ng-container *ngTemplateOutlet="content" />
-    </p-drawer>
-  }
+  </app-full-screen-panel>
 }
