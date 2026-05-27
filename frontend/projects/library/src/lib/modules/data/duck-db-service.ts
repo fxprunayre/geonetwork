@@ -89,15 +89,17 @@ export class DuckDbService {
     if (this.perspectiveInitialized) return;
 
     try {
+      // Keep CDN assets pinned to the same version as npm packages to avoid wasm/js mismatch.
+      const perspectiveVersion = '4.4.1';
       const scriptUrls = [
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer/dist/cdn/perspective-viewer.js',
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-datagrid/dist/cdn/perspective-viewer-datagrid.js',
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-d3fc/dist/cdn/perspective-viewer-d3fc.js',
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers/dist/cdn/perspective-viewer-openlayers.js',
+        `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer@${perspectiveVersion}/dist/cdn/perspective-viewer.js`,
+        `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-datagrid@${perspectiveVersion}/dist/cdn/perspective-viewer-datagrid.js`,
+        `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-d3fc@${perspectiveVersion}/dist/cdn/perspective-viewer-d3fc.js`,
+        `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers@${perspectiveVersion}/dist/cdn/perspective-viewer-openlayers.js`,
       ];
       const wasmUrls = [
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/server/dist/wasm/perspective-server.wasm',
-        'https://cdn.jsdelivr.net/npm/@perspective-dev/viewer/dist/wasm/perspective-viewer.wasm',
+        `https://cdn.jsdelivr.net/npm/@perspective-dev/server@${perspectiveVersion}/dist/wasm/perspective-server.wasm`,
+        `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer@${perspectiveVersion}/dist/wasm/perspective-viewer.wasm`,
       ];
 
       await Promise.all([
@@ -256,10 +258,8 @@ export class DuckDbService {
   }
 
   async loadDatasource(ds: Datasource): Promise<void> {
-    console.log('Starting to load datasource:', ds);
     await this.clearPreviousDataIfAny();
 
-    console.log('Clear:', ds);
     this.loadingMode = 'duckdb';
     this.progress.set({
       status: 'connecting',
@@ -294,16 +294,13 @@ export class DuckDbService {
   }
 
   private async clearPreviousDataIfAny(): Promise<void> {
-    console.log('Clearing previous data if any');
     if (this.conn) {
       try {
         const dropResult = await this.conn.query('DROP TABLE IF EXISTS data');
-        console.log(dropResult);
       } catch (e) {
         console.warn('Failed to drop data table', e);
       }
     }
-    console.log('Cleared previous data if any');
   }
 
   private sanitizeFileName(ds: Datasource): string {

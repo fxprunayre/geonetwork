@@ -86,7 +86,8 @@
   },
   "data": {
     "datasource": {
-      "available": "{{count}} sources de données disponibles",
+      "available_one": "{{count}} source de données disponible",
+      "available_other": "{{count}} sources de données disponibles",
       "select": "Choisissez une source de données"
     }
   },

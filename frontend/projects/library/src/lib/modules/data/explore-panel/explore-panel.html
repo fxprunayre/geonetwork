@@ -28,21 +28,26 @@
           </div>
         </p-accordion-header>
         <p-accordion-content>
+          <div class="flex items-center gap-2 px-2">
+            <div class="w-1/4 flex items-center gap-2">
+              {{
+                (datasources().length === 1
+                  ? 'data.datasource.available_one'
+                  : 'data.datasource.available_other'
+                ) | translate: { count: datasources().length }
+              }}
+            </div>
+            <app-datasource-select
+              class="w-3/4 grow"
+              [datasources]="datasources()"
+              [(datasource)]="datasource"
+            />
+          </div>
+
           <app-full-screen-panel
             [contentClass]="'flex flex-col gap-3'"
             [fullScreenContentClass]="'flex-1 min-h-0 flex flex-col gap-3'"
           >
-            <div class="flex items-center gap-2 px-2">
-              <div class="w-1/4 flex items-center gap-2">
-                {{ 'data.datasource.available' | translate: { count: datasources().length } }}
-              </div>
-              <app-datasource-select
-                class="w-3/4 grow"
-                [datasources]="datasources()"
-                [(datasource)]="datasource"
-              />
-            </div>
-
             @if (datasource()) {
               <div class="grow min-h-0">
                 <app-perspective [datasource]="datasource()" />

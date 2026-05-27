@@ -90,7 +90,10 @@ import { DuckDbService } from '../duck-db-service';
           }
         </div>
       </div>
-      <perspective-viewer #perspectiveViewer class="w-full h-full grow min-h-0" />
+      <perspective-viewer
+        #perspectiveViewer
+        class="w-full h-full grow min-h-0 border border-surface-300 rounded-md"
+      />
     </div>
   `,
   styleUrl: './perspective.scss',

@@ -1,16 +1,7 @@
-import { AsyncPipe, NgTemplateOutlet, ViewportScroller } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  computed,
-  ElementRef,
-  inject,
-  input,
-  output,
-  TemplateRef,
-} from '@angular/core';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { Component, computed, inject, input, output, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import {
@@ -25,7 +16,6 @@ import { MarkdownPipe } from 'ngx-markdown';
 import { AccordionModule } from 'primeng/accordion';
 import { Chip } from 'primeng/chip';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
-import { filter } from 'rxjs';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
@@ -113,18 +103,14 @@ export const VALID_TABS = [
     }),
   ],
 })
-export class RecordViewContent implements AfterViewInit {
+export class RecordViewContent {
   record = input<IndexRecord | undefined>();
   tab = input<string>(DEFAULT_TAB);
   layout = input<'fieldset' | 'panel' | ''>('');
   backButtonTplRef = input<TemplateRef<unknown>>();
   headerTplRef = input<TemplateRef<unknown>>();
 
-  scroller = inject(ViewportScroller);
-  route = inject(ActivatedRoute);
-
   appConfiguration = inject(APPLICATION_CONFIGURATION);
-  el = inject(ElementRef);
   router = inject(Router);
 
   mainVocabularies = computed(
@@ -192,25 +178,6 @@ export class RecordViewContent implements AfterViewInit {
 
   handleRecordClick(uuid: string) {
     this.onRecordClick.emit(uuid);
-  }
-
-  ngAfterViewInit(): void {
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        if (event.urlAfterRedirects.includes(RECORD_ROUTE_PATH)) {
-          this.handleScrollOnNavigation();
-        }
-      });
-  }
-
-  private handleScrollOnNavigation() {
-    if (this.el.nativeElement.isConnected) {
-      setTimeout(
-        () => this.el.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }),
-        100,
-      );
-    }
   }
 
   getLineage(): string {
