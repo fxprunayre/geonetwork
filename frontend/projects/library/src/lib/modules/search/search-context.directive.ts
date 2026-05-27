@@ -39,6 +39,17 @@ export class SearchContextDirective implements OnInit {
         }
       });
     });
+
+    effect(() => {
+      const newFilter = this.filter();
+
+      untracked(() => {
+        const currentFilter = this.searchStore.filter();
+        if (JSON.stringify(newFilter) !== JSON.stringify(currentFilter)) {
+          this.searchStore.setFilter(newFilter);
+        }
+      });
+    });
   }
 
   ngOnInit(): void {

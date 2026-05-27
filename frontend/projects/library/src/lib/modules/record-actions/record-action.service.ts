@@ -38,6 +38,7 @@ export class RecordActionService {
     this.searchService
       .search({
         ...initialState,
+        filter: [],
         filters: { isTemplate: { field: 'isTemplate', values: ['y'] } },
         pageSize: 0,
       })

@@ -138,6 +138,8 @@
         "layerNotFoundButChooseAnother": "Layer '{{layerName}}' not found in the WMS service. Choose another layer from the service.",
         "unreachable": "The WMS service is unreachable."
       },
+      "bookmark": "Bookmark",
+      "bookmarkTitle": "Add to bookmarks",
       "deleteConfirmationMessage": "Are you sure you want to delete this record? This action cannot be undone.",
       "deleteConfirmationTitle": "Delete confirmation",
       "deleteError": "An error occurred while deleting the record.",
@@ -154,7 +156,9 @@
       "relatedRecordsWarning": "This record is associated with other resources:",
       "share": "Share",
       "shareHelp": "Permalink to the record",
-      "typeToConfirm": "Type \"{{word}}\" to confirm"
+      "typeToConfirm": "Type \"{{word}}\" to confirm",
+      "unbookmark": "Remove bookmark",
+      "unbookmarkTitle": "Remove from bookmarks"
     },
     "association": {
       "associated": "Associated with {{count}} resource(s)",
@@ -363,6 +367,7 @@
     "dashboard": {
       "allWork": "All of your work",
       "bookmarks": "Your bookmarks",
+      "loadingBookmarks": "Loading your bookmarks...",
       "noBookmarks": "You haven't added any records to your bookmarks yet.",
       "noWork": "You haven't contributed to any records yet.",
       "statistics": "Statistics",

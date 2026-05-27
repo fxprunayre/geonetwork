@@ -39,7 +39,7 @@ export const initialState: SearchState = {
   id: 'default',
   routing: false,
   filter: {
-    terms: {
+    term: {
       _isTemplate: 'n',
     },
   },
@@ -305,6 +305,14 @@ export const SearchStore = signalStore(
         ),
         setFullTextQuery(value: string) {
           patchState(store, { searchQuery: value });
+        },
+        setFilter(
+          filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+        ) {
+          patchState(store, {
+            currentPage: 0,
+            filter,
+          });
         },
         isFilterActive(field: string, value: string | number) {
           const filter = store.filters()[field];

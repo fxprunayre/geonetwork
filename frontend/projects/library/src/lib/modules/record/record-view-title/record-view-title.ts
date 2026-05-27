@@ -2,6 +2,7 @@ import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input, TemplateRef } from '@angular/core';
 import { ThemingService } from '../../../shared/theming-service';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { Bookmark } from '../../record-actions/bookmark/bookmark';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
@@ -17,6 +18,7 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
     RecordFieldType,
     RecordMenuComponent,
     RecordFieldCodelist,
+    Bookmark,
   ],
   template: `
     <ng-template #defaultBackButton />
@@ -29,9 +31,12 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
     >
       <div class="mx-auto max-w-7xl flex flex-col lg:gap-2">
         <div class="grow mb-4 flex flex-row gap-2 ">
-          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold grow">
-            {{ record().resourceTitleObject?.['default'] }}
-          </h1>
+          <div class="grow flex items-start gap-1.5">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold">
+              {{ record().resourceTitleObject?.['default'] }}
+            </h1>
+            <app-bookmark [record]="record()" />
+          </div>
           <div>
             <ng-container
               *ngTemplateOutlet="backButtonTplRef() || defaultBackButton"

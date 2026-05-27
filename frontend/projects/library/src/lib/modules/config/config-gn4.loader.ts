@@ -9,6 +9,7 @@ import {
   DEFAULT_MAP_CONTEXT,
   DEFAULT_RECORD_DETAILS_APP_CONFIGURATION,
   DEFAULT_SEARCH_APP_CONFIGURATION,
+  DEFAULT_USER_SELECTIONS_APP_CONFIGURATION,
 } from './gn-constants';
 import { DEFAULT_GN4_UI_CONFIGURATION } from './gn4constants';
 import {
@@ -146,6 +147,9 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
   if (!hasAuthentication) {
     conf.apps.authentication = DEFAULT_AUTHENTICATION_APP_CONFIGURATION;
   }
+
+  conf.apps.userSelections = DEFAULT_USER_SELECTIONS_APP_CONFIGURATION;
+
   const hasMap = Object.keys(gn4config.mods).includes('map');
   if (!hasMap) {
     conf.apps.map = {

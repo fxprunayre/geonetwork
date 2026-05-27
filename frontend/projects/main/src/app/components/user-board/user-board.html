@@ -65,23 +65,41 @@
         <app-aggregations-panel scope="user-records" />
       </div>
 
-      <div
-        class="col-span-2 border rounded-(--p-border-radius-md) border-surface-100 flex flex-col gap-4 p-4"
-      >
-        <div class="flex flex-row">
-          <div class="grow">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
-              {{ 'user.dashboard.bookmarks' | translate }}
-            </h2>
+      @if (isUserSelectionsEnabled()) {
+        <div
+          class="col-span-2 border rounded-(--p-border-radius-md) border-surface-100 flex flex-col gap-4 p-4"
+        >
+          <div class="flex flex-row">
+            <div class="grow">
+              <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
+                {{ 'user.dashboard.bookmarks' | translate }}
+              </h2>
+            </div>
           </div>
-        </div>
 
-        <section>
-          <p class="text-center text-lg text-surface-500 py-20">
-            {{ 'user.dashboard.noBookmarks' | translate }}
-          </p>
-        </section>
-      </div>
+          <section>
+            @if (bookmarksLoading()) {
+              <p class="text-center text-lg text-surface-500 py-20">
+                {{ 'user.dashboard.loadingBookmarks' | translate }}
+              </p>
+            } @else if (bookmarkedUuids().length === 0) {
+              <p class="text-center text-lg text-surface-500 py-20">
+                {{ 'user.dashboard.noBookmarks' | translate }}
+              </p>
+            } @else {
+              <div
+                appSearchContext="user-bookmarks"
+                [aggregations]="[]"
+                [filter]="bookmarkedRecordsFilter()"
+                [currentSort]="'-dateStamp'"
+                [language]="language()"
+              >
+                <app-results-view scope="user-bookmarks" [layout]="'table'" />
+              </div>
+            }
+          </section>
+        </div>
+      }
     </div>
   </app-page-layout>
 }

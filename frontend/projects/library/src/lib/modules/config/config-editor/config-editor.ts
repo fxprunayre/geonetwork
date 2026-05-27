@@ -1,10 +1,11 @@
-import { NgClass, TitleCasePipe } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { faCompass } from '@ng-icons/font-awesome/regular';
 import {
   faSolidBars,
+  faSolidBookmark,
   faSolidCode,
   faSolidCube,
   faSolidFile,
@@ -38,7 +39,6 @@ import { App, Apps } from '../model/gnConfig';
   standalone: true,
   imports: [
     NgClass,
-    TitleCasePipe,
     FormsModule,
     ToggleSwitchModule,
     TextareaModule,
@@ -68,6 +68,7 @@ import { App, Apps } from '../model/gnConfig';
       faSolidGear,
       faSolidBars,
       faSolidImage,
+      faSolidBookmark,
     }),
   ],
   template: `
@@ -93,7 +94,7 @@ import { App, Apps } from '../model/gnConfig';
             <div class="flex flex-col gap-4">
               <div class="text-xl font-bold mb-2 flex items-center">
                 <ng-icon [name]="iconMap[appName]" class="mr-2"></ng-icon>
-                {{ appName | titlecase }} {{ 'config.editor.title' | translate }}
+                {{ getAppDisplayLabel(appName) }} {{ 'config.editor.title' | translate }}
               </div>
 
               <div class="flex items-center gap-2 mb-2">
@@ -243,6 +244,7 @@ export class ConfigEditorComponent {
       'record',
       'i18n',
       'authentication',
+      'userSelections',
     ];
     const keys = Object.keys(apps) as Array<keyof Apps>;
 
@@ -263,9 +265,14 @@ export class ConfigEditorComponent {
     map: 'faSolidMap',
     i18n: 'faSolidLanguage',
     authentication: 'faSolidLock',
+    userSelections: 'faSolidBookmark',
     record: 'faSolidFile',
     menu: 'faSolidBars',
     banner: 'faSolidImage',
+  };
+
+  appLabelMap: Partial<Record<keyof Apps, string>> = {
+    userSelections: 'Bookmark',
   };
 
   menuItems = computed<MenuItem[]>(() => {
@@ -276,7 +283,7 @@ export class ConfigEditorComponent {
       {
         label: 'Apps',
         items: apps.map((appName) => ({
-          label: appName.charAt(0).toUpperCase() + appName.slice(1),
+          label: this.getAppDisplayLabel(appName),
           icon: this.iconMap[appName] || 'faSolidGear',
           command: () => this.selectedTab.set(appName),
           styleClass:
@@ -319,6 +326,10 @@ export class ConfigEditorComponent {
 
   private getEmbedAssetBaseUrl(): string {
     return `${this.appConfig().catalogueUrl}/dist/webcomponent/browser`;
+  }
+
+  getAppDisplayLabel(appName: keyof Apps): string {
+    return this.appLabelMap[appName] || appName.charAt(0).toUpperCase() + appName.slice(1);
   }
 
   getAppConfigJson(appName: keyof Apps): string {

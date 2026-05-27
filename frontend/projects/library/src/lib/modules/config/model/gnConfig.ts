@@ -13,6 +13,7 @@ export interface Apps {
   menu?: Menu;
   i18n?: I18nApp;
   authentication?: AuthenticationApp;
+  userSelections?: UserSelectionsApp;
   home?: HomeApp;
   search?: SearchApp;
   record?: RecordDetailsApp;
@@ -42,6 +43,8 @@ export interface I18nApp extends App {
 }
 
 export interface AuthenticationApp extends App {}
+
+export interface UserSelectionsApp extends App {}
 
 export interface HomeApp extends App {
   aggregations: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];

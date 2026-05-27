@@ -139,6 +139,8 @@
         "layerNotFoundButChooseAnother": "Layer '{{layerName}}' not found in the WMS service. Choose another layer from the service.",
         "unreachable": "The WMS service is unreachable."
       },
+      "bookmark": "Bladwijzer",
+      "bookmarkTitle": "Aan bladwijzers toevoegen",
       "deleteConfirmationMessage": "Are you sure you want to delete this record? This action cannot be undone.",
       "deleteConfirmationTitle": "Delete confirmation",
       "deleteError": "Er is een fout opgetreden bij het verwijderen van het record.",
@@ -155,7 +157,9 @@
       "relatedRecordsWarning": "Dit record is gekoppeld aan andere bronnen:",
       "share": "Share",
       "shareHelp": "Permalink to the record",
-      "typeToConfirm": "Type \"{{word}}\" to confirm"
+      "typeToConfirm": "Type \"{{word}}\" to confirm",
+      "unbookmark": "Bladwijzer verwijderen",
+      "unbookmarkTitle": "Uit bladwijzers verwijderen"
     },
     "association": {
       "associated": "Associated with {{count}} resource(s)",
@@ -365,6 +369,7 @@
     "dashboard": {
       "allWork": "Al uw werk",
       "bookmarks": "Uw favorieten",
+      "loadingBookmarks": "Uw favorieten laden...",
       "noBookmarks": "U heeft nog geen favoriete records opgeslagen.",
       "noWork": "U heeft nog geen bijgewerkte records.",
       "statistics": "Statistieken",

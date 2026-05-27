@@ -1,4 +1,6 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidArrowRightFromBracket,
@@ -26,7 +28,9 @@ import {
   TranslationsService,
   UserFullNamePipe,
 } from 'gn-library';
+import { UserselectionsService } from 'gn4-api-client';
 import { ButtonDirective } from 'primeng/button';
+import { catchError, filter, of } from 'rxjs';
 import { PageLayout } from '../page-layout/page-layout';
 import { UserBoardMenu } from '../user-board-menu/user-board-menu';
 
@@ -61,9 +65,11 @@ import { UserBoardMenu } from '../user-board-menu/user-board-menu';
 })
 export class UserBoard {
   readonly store = inject(AuthStore);
+  private readonly router = inject(Router);
   searchService = inject(SearchService);
   appConfig = inject(APPLICATION_CONFIGURATION);
   gn4UrlService = inject(Gn4UrlService);
+  userSelectionsService = inject(UserselectionsService);
 
   user = this.store.user;
 
@@ -96,10 +102,59 @@ export class UserBoard {
     return this.gn4UrlService.getEditorUrl('import');
   });
 
+  isUserSelectionsEnabled = computed(
+    () => this.appConfig().config?.apps?.userSelections?.enabled ?? true,
+  );
+
+  bookmarkedUuids = signal<string[]>([]);
+  bookmarksLoading = signal(false);
+  bookmarksRefreshTick = signal(0);
+
+  bookmarkedRecordsFilter = computed(() => [
+    {
+      terms: {
+        uuid: this.bookmarkedUuids(),
+      },
+    },
+  ]);
+
   constructor() {
     this.translate.onLangChange.subscribe((event) => {
       this.language.set(event.lang);
     });
+
+    effect((onCleanup) => {
+      this.bookmarksRefreshTick();
+      const appEnabled = this.isUserSelectionsEnabled();
+      const userId = Number(this.user()?.id);
+
+      if (!appEnabled || !userId) {
+        this.bookmarkedUuids.set([]);
+        this.bookmarksLoading.set(false);
+        return;
+      }
+
+      this.bookmarksLoading.set(true);
+      const sub = this.userSelectionsService
+        .getSelectionRecords(0, userId)
+        .pipe(catchError(() => of([] as string[])))
+        .subscribe((uuids) => {
+          this.bookmarkedUuids.set(uuids || []);
+          this.bookmarksLoading.set(false);
+        });
+
+      onCleanup(() => sub.unsubscribe());
+    });
+
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        filter((event) => event.urlAfterRedirects.startsWith('/dashboard')),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => {
+        this.bookmarksRefreshTick.update((v) => v + 1);
+      });
   }
 
   userRecordAggregationConfig = [

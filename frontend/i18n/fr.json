@@ -140,6 +140,8 @@
         "layerNotFoundButChooseAnother": "La couche '{{layerName}}' n'a pas été trouvée dans le service WMS. Choisir une autre couche dans le service.",
         "unreachable": "Le service WMS est inaccessible."
       },
+      "bookmark": "Ajouter aux favoris",
+      "bookmarkTitle": "Ajouter cette fiche aux favoris",
       "deleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer cette fiche ? Cette action ne peut pas être annulée.",
       "deleteConfirmationTitle": "Confirmation de suppression",
       "deleteError": "Une erreur s'est produite lors de la suppression de la fiche.",
@@ -156,7 +158,9 @@
       "relatedRecordsWarning": "Cette fiche est associée à d'autres ressources :",
       "share": "Partager",
       "shareHelp": "Lien permanent vers la fiche",
-      "typeToConfirm": "Tapez \"{{word}}\" pour confirmer"
+      "typeToConfirm": "Tapez \"{{word}}\" pour confirmer",
+      "unbookmark": "Retirer des favoris",
+      "unbookmarkTitle": "Retirer cette fiche des favoris"
     },
     "association": {
       "associated": "Associé à {{count}} ressource(s)",
@@ -365,6 +369,7 @@
     "dashboard": {
       "allWork": "Tout votre travail",
       "bookmarks": "Vos favoris",
+      "loadingBookmarks": "Chargement de vos favoris...",
       "noBookmarks": "Vous n'avez pas encore ajouté de fiches à vos favoris.",
       "noWork": "Vous n'avez encore contribué à aucune fiche.",
       "statistics": "Statistiques",

@@ -32,13 +32,11 @@ export class SearchService {
 
   register<TStore extends SearchStoreContract>(searchId: string, searchStore: TStore) {
     if (this.store[searchId]) {
-      console.log(`Search ${searchId} already registered. Reusing it.`);
-      // throw new Error(
-      //   `Search ${searchId} already registered. Choose another search id.`
-      // );
-    } else {
-      this.store[searchId] = searchStore;
+      console.log(`Search ${searchId} already registered. Replacing with latest store instance.`);
     }
+
+    // Always use the latest store instance for a scope.
+    this.store[searchId] = searchStore;
   }
 
   getSearch<TStore extends SearchStoreContract = SearchStoreContract>(searchId: string): TStore {

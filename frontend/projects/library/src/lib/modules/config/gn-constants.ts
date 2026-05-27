@@ -8,6 +8,7 @@ import {
   RecordDetailsApp,
   SearchApp,
   SearchAppLayout,
+  UserSelectionsApp,
 } from './model/gnConfig';
 
 export const DEFAULT_SPACE = 'srv';
@@ -15,6 +16,10 @@ export const DEFAULT_SPACE = 'srv';
 export const DEFAULT_LANGUAGE = 'eng';
 
 export const DEFAULT_AUTHENTICATION_APP_CONFIGURATION: AuthenticationApp = {
+  enabled: true,
+};
+
+export const DEFAULT_USER_SELECTIONS_APP_CONFIGURATION: UserSelectionsApp = {
   enabled: true,
 };
 
@@ -455,6 +460,7 @@ export const DEFAULT_APPS_CONFIGURATION: AppsConfiguration = {
     home: DEFAULT_HOME_APP_CONFIGURATION,
     i18n: DEFAULT_HEADER_APP_CONFIGURATION,
     authentication: DEFAULT_AUTHENTICATION_APP_CONFIGURATION,
+    userSelections: DEFAULT_USER_SELECTIONS_APP_CONFIGURATION,
     search: DEFAULT_SEARCH_APP_CONFIGURATION,
     map: {
       enabled: true,
