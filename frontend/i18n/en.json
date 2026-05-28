@@ -250,14 +250,18 @@
         "dataAccess": "Data access",
         "dataExplorer": "Data explorer",
         "dataModel": "Data model",
+        "datasetAccess": "Data access",
         "dates": "Dates",
         "description": "Description",
         "discussions": "Discussions",
+        "distributions": "Distributions",
         "explore": "Explore",
         "lineage": "Lineage",
         "publications": "Publications",
         "relatedResources": "Related resources",
+        "serviceAccess": "Service access",
         "similarResources": "Similar resources",
+        "softwareAccess": "Software download",
         "spatialInfo": "Spatial information",
         "usageAndAccess": "Usage and access"
       }

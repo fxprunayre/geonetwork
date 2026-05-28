@@ -134,6 +134,25 @@ export class RecordViewContent {
       (this.mapLayerDisplayTarget() === 'explore-embedded-map' && this.hasWmsLink()),
   );
 
+  dataAccessSectionLabelKey = computed(() => {
+    const resourceTypes = this.record()?.resourceType || [];
+    const normalizedTypes = resourceTypes.map((type) => (type || '').toLowerCase());
+
+    if (normalizedTypes.includes('software') || normalizedTypes.includes('application')) {
+      return 'record.view.section.softwareAccess';
+    }
+
+    if (normalizedTypes.includes('service')) {
+      return 'record.view.section.serviceAccess';
+    }
+
+    if (normalizedTypes.includes('dataset')) {
+      return 'record.view.section.datasetAccess';
+    }
+
+    return 'record.view.section.distributions';
+  });
+
   contactRoles = computed(() => {
     const contacts = this.record()?.['contactForResource'] || [];
     const roles = new Set(contacts.map((c: any) => c.role).filter((r: any) => !!r));

@@ -251,14 +251,18 @@
         "dataAccess": "Data toegang",
         "dataExplorer": "Data explorer",
         "dataModel": "Data model",
+        "datasetAccess": "Data toegang",
         "dates": "Datums",
         "description": "Beschrijving",
         "discussions": "Discussies",
+        "distributions": "Distributies",
         "explore": "Ontdek",
         "lineage": "Lineage",
         "publications": "Publicaties",
         "relatedResources": "Related resources",
+        "serviceAccess": "Service toegang",
         "similarResources": "Similar resources",
+        "softwareAccess": "Software downloaden",
         "spatialInfo": "Spatial informatie",
         "usageAndAccess": "Use and access"
       }

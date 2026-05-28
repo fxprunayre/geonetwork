@@ -252,14 +252,18 @@
         "dataAccess": "Accéder & télécharger",
         "dataExplorer": "Explorateur de données",
         "dataModel": "Modèle de données",
+        "datasetAccess": "Accès aux données",
         "dates": "Dates",
         "description": "Comprendre",
         "discussions": "Discussions",
+        "distributions": "Distributions",
         "explore": "Explorer",
         "lineage": "Provenance",
         "publications": "Publications",
         "relatedResources": "Ressources connexes",
+        "serviceAccess": "Accès au service",
         "similarResources": "Ressources similaires",
+        "softwareAccess": "Téléchargement du logiciel",
         "spatialInfo": "Informations spatiales",
         "usageAndAccess": "Utilisation et accès"
       }

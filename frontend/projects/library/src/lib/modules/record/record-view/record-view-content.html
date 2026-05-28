@@ -150,7 +150,7 @@
         }}</p-tab>
         @if (record.link && record.link.length > 0) {
           <p-tab value="data-access" class="text-lg">{{
-            'record.view.section.dataAccess' | translate
+            dataAccessSectionLabelKey() | translate
           }}</p-tab>
         }
         @if (showExploreTab()) {
