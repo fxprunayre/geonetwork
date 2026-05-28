@@ -303,32 +303,6 @@ export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
   enabled: true,
   aggregations: [
     {
-      resourceType: {
-        terms: {
-          field: 'resourceType',
-          size: 9,
-          exclude: 'publication-.*',
-        },
-        meta: {
-          layout: 'nightingale',
-          decorator: {
-            type: 'icon',
-            prefix: '',
-            map: {
-              dataset: 'faSolidDatabase',
-              map: 'faSolidMap',
-              featureCatalog: 'faSolidTable',
-              document: 'faSolidCopy',
-              service: 'faSolidCloud',
-              series: 'faSolidCopy',
-              nonGeographicDataset: 'faSolidChartColumn',
-              publication: 'faSolidBook',
-            },
-          },
-        },
-      },
-    },
-    {
       'th_sextant-theme_tree.key': {
         terms: {
           field: 'th_sextant-theme_tree.key',
@@ -362,6 +336,32 @@ export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
                 'https://sextant.ifremer.fr/documentation/emodnet_chemistry/images/2023/mlf_density_nb_l_other.png',
               'https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f':
                 'https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bigood/1595612-3-fre-FR/BIGOOD.png',
+            },
+          },
+        },
+      },
+    },
+    {
+      resourceType: {
+        terms: {
+          field: 'resourceType',
+          size: 9,
+          exclude: 'publication-.*',
+        },
+        meta: {
+          layout: 'nightingale',
+          decorator: {
+            type: 'icon',
+            prefix: '',
+            map: {
+              dataset: 'faSolidDatabase',
+              map: 'faSolidMap',
+              featureCatalog: 'faSolidTable',
+              document: 'faSolidCopy',
+              service: 'faSolidCloud',
+              series: 'faSolidCopy',
+              nonGeographicDataset: 'faSolidChartColumn',
+              publication: 'faSolidBook',
             },
           },
         },
