@@ -24,7 +24,9 @@ import { RecordFieldBase } from '../../record/record-field-base/record-field-bas
     @if (isVisible()) {
       <p-button
         [text]="true"
-        [disabled]="isSubmitting() || isStatusLoading()"
+        [disabled]="
+          isSubmitting() || isStatusLoading() || isSelectionListLoading() || !isSelectionAvailable()
+        "
         [title]="buttonTitleKey() | translate"
         [styleClass]="buttonClass()"
         (onClick)="toggleBookmark()"
@@ -43,11 +45,19 @@ export class Bookmark extends RecordFieldBase {
 
   isSubmitting = signal(false);
   isStatusLoading = signal(false);
+  isSelectionListLoading = signal(false);
+  isSelectionAvailable = signal(true);
+  hasWarnedMissingSelection = signal(false);
   isBookmarked = signal(false);
 
   isVisible = computed(() => {
     const appEnabled = this.appConfiguration().config?.apps?.userSelections?.enabled ?? true;
-    return appEnabled && this.authStore.isAuthenticated();
+    return (
+      appEnabled &&
+      this.authStore.isAuthenticated() &&
+      !this.isSelectionListLoading() &&
+      this.isSelectionAvailable()
+    );
   });
 
   buttonTitleKey = computed(() =>
@@ -79,10 +89,50 @@ export class Bookmark extends RecordFieldBase {
 
     effect((onCleanup) => {
       const appEnabled = this.appConfiguration().config?.apps?.userSelections?.enabled ?? true;
+      const isAuthenticated = this.authStore.isAuthenticated();
+
+      if (!appEnabled || !isAuthenticated) {
+        this.isSelectionListLoading.set(false);
+        this.isSelectionAvailable.set(true);
+        this.hasWarnedMissingSelection.set(false);
+        return;
+      }
+
+      this.isSelectionListLoading.set(true);
+      const sub = this.userSelectionsService
+        .getSelectionList()
+        .pipe(catchError(() => of([])))
+        .subscribe((selectionList) => {
+          const hasPreferredList = (selectionList || []).some(
+            (selection) => selection?.id === this.preferredListId,
+          );
+
+          this.isSelectionAvailable.set(hasPreferredList);
+          this.isSelectionListLoading.set(false);
+
+          if (!hasPreferredList) {
+            this.isBookmarked.set(false);
+            if (!this.hasWarnedMissingSelection()) {
+              console.warn(
+                `[Bookmark] Preferred selection list with id ${this.preferredListId} is missing. Bookmark action has been disabled.`,
+              );
+              this.hasWarnedMissingSelection.set(true);
+            }
+          } else {
+            this.hasWarnedMissingSelection.set(false);
+          }
+        });
+
+      onCleanup(() => sub.unsubscribe());
+    });
+
+    effect((onCleanup) => {
+      const appEnabled = this.appConfiguration().config?.apps?.userSelections?.enabled ?? true;
       const userId = Number(this.authStore.user()?.id);
       const recordUuid = this.record().uuid;
+      const isSelectionAvailable = this.isSelectionAvailable();
 
-      if (!appEnabled || !userId || !recordUuid) {
+      if (!appEnabled || !userId || !recordUuid || !isSelectionAvailable) {
         this.isBookmarked.set(false);
         this.isStatusLoading.set(false);
         return;
@@ -105,7 +155,14 @@ export class Bookmark extends RecordFieldBase {
     const userId = Number(this.authStore.user()?.id);
     const recordUuid = this.record().uuid;
 
-    if (!userId || !recordUuid || this.isSubmitting() || this.isStatusLoading()) {
+    if (
+      !userId ||
+      !recordUuid ||
+      this.isSubmitting() ||
+      this.isStatusLoading() ||
+      this.isSelectionListLoading() ||
+      !this.isSelectionAvailable()
+    ) {
       return;
     }
 
