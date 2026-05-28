@@ -105,10 +105,12 @@ export class DownloadData implements OnInit {
 
           return {
             label: displayLabel,
-            menuItems: this.formats().map((f) => ({
-              label: this.getFriendlyFormatName(f),
-              command: () => this.downloadWfs(f, wfs, typeName),
-            })),
+            menuItems: this.formats()
+              .map((f) => ({
+                label: this.getFriendlyFormatName(f),
+                command: () => this.downloadWfs(f, wfs, typeName),
+              }))
+              .sort((a, b) => a.label.localeCompare(b.label)),
           };
         });
 
@@ -131,13 +133,6 @@ export class DownloadData implements OnInit {
     if (f.includes('geopackage') || f.includes('gpkg')) return 'GeoPackage';
     if (f.includes('excel') || f.includes('xls')) return 'Excel';
     return format;
-  }
-
-  download() {
-    const url = this.link().urlObject?.['default'];
-    if (url) {
-      window.open(url, '_blank');
-    }
   }
 
   downloadWfs(format: string, wfs: any, typeName: string) {
