@@ -171,7 +171,8 @@
       "parent": "Part of {{count}} resource(s)",
       "services": "{{count}} services",
       "siblings": "{{count}} siblings",
-      "sources": "Derived from {{count}} resource(s)"
+      "sources": "Derived from {{count}} resource(s)",
+      "versions": "{{count}} versions"
     },
     "field": {
       "abstract": "Overview",
@@ -223,6 +224,7 @@
           "quality": "Quality"
         }
       },
+      "edition": "Edition: ",
       "lastUpdated": "Last updated on ",
       "lineage": "Lineage",
       "otherConstraints": "Other constraints",
@@ -235,6 +237,13 @@
       "resourceType": "Resource type",
       "useConstraints": "Use constraints",
       "useLimitation": "Use limitation"
+    },
+    "versions": {
+      "allVersions": "All versions",
+      "current": "Current",
+      "newerVersionAvailable": "Newer version available",
+      "pastVersions": "Past versions",
+      "versionChain": "Version history"
     },
     "view": {
       "notFoundOrNotShared": "Record with identifier {{uuid}} was not found or is not shared with you. Try to sign in or do another search.",
@@ -261,7 +270,7 @@
         "relatedResources": "Related resources",
         "serviceAccess": "Service access",
         "similarResources": "Similar resources",
-        "softwareAccess": "Software download",
+        "softwareAccess": "Software access",
         "spatialInfo": "Spatial information",
         "usageAndAccess": "Usage and access"
       }

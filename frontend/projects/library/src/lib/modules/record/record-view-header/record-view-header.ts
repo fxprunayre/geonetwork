@@ -1,13 +1,15 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
 import { RecordFieldOverviewComponent } from '../record-field-overview/record-field-overview.component';
+import { RecordFieldResourceEdition } from '../record-field-resource-edition/record-field-resource-edition';
 import { RecordFieldResourceLastUpdate } from '../record-field-resource-last-update/record-field-resource-last-update';
 import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
 import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
+import { RecordVersions } from '../record-versions/record-versions';
 
 @Component({
   selector: 'app-record-view-header',
@@ -16,8 +18,10 @@ import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-l
     MarkdownPipe,
     RecordFieldDoi,
     RecordFieldOverviewComponent,
+    RecordFieldResourceEdition,
     RecordFieldResourceLastUpdate,
     RecordFieldVocabulary,
+    RecordVersions,
     ShowMoreToggle,
     RecordHarvesterLogo,
   ],
@@ -25,4 +29,5 @@ import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-l
 })
 export class RecordViewHeader extends RecordFieldBase {
   vocabularies = input<string[]>([]);
+  onRecordClick = output<string>();
 }

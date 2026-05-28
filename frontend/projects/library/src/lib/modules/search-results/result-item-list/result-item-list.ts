@@ -16,6 +16,8 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldCredit } from '../../record/record-field-credit/record-field-credit';
 import { RecordFieldOverviewComponent } from '../../record/record-field-overview/record-field-overview.component';
+import { RecordFieldResourceEdition } from '../../record/record-field-resource-edition/record-field-resource-edition';
+import { RecordFieldResourceLastUpdate } from '../../record/record-field-resource-last-update/record-field-resource-last-update';
 import { RecordFieldTitle } from '../../record/record-field-title/record-field-title';
 import { RecordFieldType } from '../../record/record-field-type/record-field-type';
 import { RECORD_ROUTE_PATH } from '../../search/search-constant';
@@ -36,6 +38,8 @@ import { RECORD_ROUTE_PATH } from '../../search/search-constant';
     RouterLink,
     SkeletonModule,
     TranslatePipe,
+    RecordFieldResourceLastUpdate,
+    RecordFieldResourceEdition,
   ],
   viewProviders: [
     provideIcons({
@@ -51,7 +55,7 @@ import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 export class ResultItemList {
   protected readonly RECORD_ROUTE_PATH = RECORD_ROUTE_PATH;
   result = input<IndexRecord>();
-  layout = input<'default' | 'compact'>('default');
+  layout = input<'default' | 'compact' | 'version'>('default');
   onRecordClick = output<string>();
 
   externalUrl = computed(() => {

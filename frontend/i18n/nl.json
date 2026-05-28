@@ -172,7 +172,8 @@
       "parent": "Part of {{count}} resource(s)",
       "services": "{{count}} services",
       "siblings": "{{count}} siblings",
-      "sources": "Derived from {{count}} resource(s)"
+      "sources": "Derived from {{count}} resource(s)",
+      "versions": "{{count}} versions"
     },
     "field": {
       "abstract": "Overview",
@@ -224,6 +225,7 @@
           "quality": "Quality"
         }
       },
+      "edition": "Editie: ",
       "lastUpdated": "Last updated on ",
       "lineage": "Lineage",
       "otherConstraints": "Other constraints",
@@ -236,6 +238,13 @@
       "resourceType": "Resource type",
       "useConstraints": "Use constraints",
       "useLimitation": "Use limitation"
+    },
+    "versions": {
+      "allVersions": "Alle versies",
+      "current": "Huidige",
+      "newerVersionAvailable": "Nieuwere versie beschikbaar",
+      "pastVersions": "Vorige versies",
+      "versionChain": "Versiegeschiedenis"
     },
     "view": {
       "notFoundOrNotShared": "Record met identificatie {{uuid}} is niet gevonden of wordt niet met u gedeeld. Probeer in te loggen of probeer een andere zoekopdracht.",

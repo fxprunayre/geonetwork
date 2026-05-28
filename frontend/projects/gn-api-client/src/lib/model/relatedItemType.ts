@@ -20,5 +20,6 @@ export const RelatedItemType = {
   Hasfeaturecats: 'hasfeaturecats',
   Sources: 'sources',
   Hassources: 'hassources',
+  Versions: 'versions',
 } as const;
 export type RelatedItemType = (typeof RelatedItemType)[keyof typeof RelatedItemType];

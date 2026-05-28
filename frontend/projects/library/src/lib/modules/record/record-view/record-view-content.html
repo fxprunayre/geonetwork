@@ -1,7 +1,11 @@
 <ng-template #defaultHeader let-record="record">
   <app-record-view-title [record]="record" [backButtonTplRef]="backButtonTplRef()">
   </app-record-view-title>
-  <app-record-view-header [record]="record" [vocabularies]="mainVocabularies()">
+  <app-record-view-header
+    [record]="record"
+    [vocabularies]="mainVocabularies()"
+    (onRecordClick)="handleRecordClick($event)"
+  >
   </app-record-view-header>
 </ng-template>
 

@@ -173,7 +173,8 @@
       "parent": "Faisant partie de {{ count }} ressources",
       "services": "{{count}} services",
       "siblings": "{{count}} frères et sœurs",
-      "sources": "Dérivé de {{count}} ressource(s)"
+      "sources": "Dérivé de {{count}} ressource(s)",
+      "versions": "{{count}} versions"
     },
     "field": {
       "abstract": "Aperçu",
@@ -225,6 +226,7 @@
           "quality": "Qualité"
         }
       },
+      "edition": "Édition : ",
       "lastUpdated": "Mis à jour le",
       "lineage": "Généalogie",
       "otherConstraints": "Autres contraintes",
@@ -237,6 +239,13 @@
       "resourceType": "Type de resource",
       "useConstraints": "Utiliser des contraintes",
       "useLimitation": "Limitation d'utilisation"
+    },
+    "versions": {
+      "allVersions": "Toutes les versions",
+      "current": "Actuelle",
+      "newerVersionAvailable": "Version plus récente disponible",
+      "pastVersions": "Versions précédente",
+      "versionChain": "Historique des versions"
     },
     "view": {
       "notFoundOrNotShared": "La fiche avec l'identifiant {{uuid}} n'a pas été trouvée ou n'est pas partagée avec vous. Essayez de vous connecter ou effectuez une autre recherche.",

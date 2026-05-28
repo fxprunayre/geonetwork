@@ -69,6 +69,7 @@ export class RecordView {
           RelatedItemType.Fcats,
           RelatedItemType.Hasfeaturecats,
           RelatedItemType.Associated,
+          RelatedItemType.Versions,
         ])
         .pipe(
           map((result) => {

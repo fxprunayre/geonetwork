@@ -42,6 +42,28 @@
           />
         </div>
       </div>
+    } @else if (layout() === 'version') {
+      <div
+        class="hidden md:block w-20 h-20 shrink-0 relative rounded-l-(--p-border-radius-md) border-r border-surface-100"
+      >
+        <app-record-field-overview
+          [field]="result.overview?.[0]"
+          [preview]="false"
+          styleClass="absolute inset-0 w-full h-full object-cover rounded-l-(--p-border-radius-md)"
+        />
+      </div>
+
+      <div class="flex flex-col p-3 md:p-4 justify-center gap-2 w-full min-w-0 overflow-hidden">
+        <app-record-field-title
+          [record]="result"
+          class="text-primary font-semibold text-base line-clamp-1 min-w-0"
+        />
+
+        <div class="flex justify-between items-center gap-2 w-full">
+          <app-record-field-resource-last-update [record]="result" class="text-xs" />
+          <app-record-field-resource-edition [record]="result" class="text-xs" />
+        </div>
+      </div>
     } @else {
       <div
         class="w-full aspect-video md:w-1/3 h-64 md:h-54 relative rounded-t-(--p-border-radius-md) md:rounded-tr-none md:rounded-l-(--p-border-radius-md) md:border-r border-surface-100"

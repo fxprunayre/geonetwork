@@ -23,5 +23,6 @@ export const RelatedItemType = {
   Related: 'related',
   Onlines: 'onlines',
   Thumbnails: 'thumbnails',
+  Versions: 'versions',
 } as const;
 export type RelatedItemType = (typeof RelatedItemType)[keyof typeof RelatedItemType];

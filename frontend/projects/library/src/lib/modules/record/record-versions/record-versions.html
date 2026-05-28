@@ -1,0 +1,59 @@
+@if (hasVersions()) {
+  <div class="flex items-center gap-1">
+    <ng-icon name="faSolidCodeBranch" class="text-surface-500 shrink-0" />
+
+    @if (isLatest()) {
+      <span
+        class="cursor-pointer text-primary font-medium hover:underline"
+        (click)="togglePopover($event)"
+      >
+        {{ 'record.versions.pastVersions' | translate }}
+      </span>
+    } @else {
+      <a
+        class="text-orange-500 font-medium hover:underline"
+        [routerLink]="['/', RECORD_ROUTE_PATH, latestVersion()?.uuid]"
+      >
+        {{ 'record.versions.newerVersionAvailable' | translate }}
+      </a>
+      <span class="text-surface-400">·</span>
+      <span class="cursor-pointer text-surface-500 hover:underline" (click)="togglePopover($event)">
+        {{ 'record.versions.allVersions' | translate }}
+      </span>
+    }
+
+    <p-popover #popover appendTo="body">
+      <div
+        class="flex flex-col gap-4 w-[min(50vw,56rem)] max-h-96 overflow-y-auto overflow-x-hidden pr-7"
+      >
+        <div class="text-primary text-2xl font-medium flex items-center gap-2">
+          {{ 'record.versions.versionChain' | translate }}
+        </div>
+        @for (version of versions(); track version.uuid) {
+          @if (version.uuid === record().uuid) {
+            <div>
+              <p-overlaybadge
+                [value]="'record.versions.current' | translate"
+                severity="contrast"
+                size="small"
+                class="block w-full"
+              >
+                <app-result-item-list
+                  [result]="version"
+                  layout="version"
+                  (onRecordClick)="handleRecordClick($event)"
+                />
+              </p-overlaybadge>
+            </div>
+          } @else {
+            <app-result-item-list
+              [result]="version"
+              layout="version"
+              (onRecordClick)="handleRecordClick($event)"
+            />
+          }
+        }
+      </div>
+    </p-popover>
+  </div>
+}
