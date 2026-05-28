@@ -69,9 +69,10 @@ export class MapComponent implements OnInit, OnDestroy {
             const commands = JSON.parse(params['add']) as Gn4MapCommand[];
             if (this.viewer) {
               commands.forEach((cmd) => {
+                const layerType = cmd.type || 'wms';
                 this.viewer.addLayer({
-                  type: 'wms',
-                  id: cmd.url + '#' + cmd.name,
+                  type: layerType,
+                  id: layerType + ':' + cmd.url + '#' + cmd.name,
                   url: decodeURIComponent(cmd.url),
                   name: decodeURIComponent(cmd.name || ''),
                   label: decodeURIComponent(cmd.label || ''),

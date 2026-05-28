@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { WmsEndpoint } from '@camptocamp/ogc-client';
+import { WmsEndpoint, WmtsEndpoint } from '@camptocamp/ogc-client';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidExclamation } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -21,6 +21,7 @@ import { RecordFieldBase } from '../../record/record-field-base/record-field-bas
 import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../../search/search-constant';
 
 export interface Gn4MapCommand {
+  type?: 'wms' | 'wmts';
   uuid?: string;
   url: string;
   name?: string;
@@ -83,6 +84,11 @@ export class AddLayerToMap extends RecordFieldBase {
 
   status = signal<'idle' | 'loading' | 'found' | 'not-found' | 'error'>('idle');
 
+  serviceType = computed<'wms' | 'wmts'>(() => {
+    const protocol = this.link().protocol || '';
+    return protocol.includes('OGC:WMTS') ? 'wmts' : 'wms';
+  });
+
   serviceUrl = computed(() => {
     return this.link().urlObject?.['default'] || null;
   });
@@ -126,6 +132,7 @@ export class AddLayerToMap extends RecordFieldBase {
     effect(() => {
       const url = this.serviceUrl();
       const layerName = this.linkName();
+      const serviceType = this.serviceType();
 
       if (!url) {
         this.status.set('idle');
@@ -134,10 +141,13 @@ export class AddLayerToMap extends RecordFieldBase {
 
       this.status.set('loading');
 
-      new WmsEndpoint(url)
+      const endpoint = serviceType === 'wmts' ? new WmtsEndpoint(url) : new WmsEndpoint(url);
+
+      endpoint
         .isReady()
         .then((endpoint: any) => {
-          const layers = endpoint.getFlattenedLayers();
+          const layers =
+            serviceType === 'wmts' ? endpoint.getLayers() : endpoint.getFlattenedLayers();
           this.serviceLayers.set(layers);
 
           if (!layers) {
@@ -173,6 +183,7 @@ export class AddLayerToMap extends RecordFieldBase {
       .filter((link) => link.urlObject)
       .map((link) => {
         const cmd: Gn4MapCommand = {
+          type: this.serviceType(),
           url: encodeURIComponent(link.urlObject!['default']),
           uuid: this.record().uuid,
         };

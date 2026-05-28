@@ -190,14 +190,15 @@ export class ExplorePanel {
     }
 
     commands.forEach((cmd) => {
-      const layerId = `${cmd.url}#${cmd.name || ''}`;
+      const layerType = cmd.type || 'wms';
+      const layerId = `${layerType}:${cmd.url}#${cmd.name || ''}`;
       if (this.addedLayerIds.has(layerId)) {
         return;
       }
 
       setTimeout(() => {
         this.viewer.addLayer({
-          type: 'wms',
+          type: layerType,
           id: layerId,
           url: decodeURIComponent(cmd.url),
           name: decodeURIComponent(cmd.name || ''),

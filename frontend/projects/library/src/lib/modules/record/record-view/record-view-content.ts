@@ -123,7 +123,9 @@ export class RecordViewContent {
 
   hasWmsLink = computed(() => {
     const links = this.record()?.link || [];
-    return links.some((link) => !!link?.protocol?.match('OGC:WMS|application/vnd.ogc.wms_xml'));
+    return links.some(
+      (link) => !!link?.protocol?.match('OGC:WMS|OGC:WMTS|application/vnd.ogc.wms_xml'),
+    );
   });
 
   showExploreTab = computed(

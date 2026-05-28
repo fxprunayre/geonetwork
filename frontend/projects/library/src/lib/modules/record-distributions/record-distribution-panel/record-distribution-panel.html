@@ -39,7 +39,7 @@
           }
         </div>
         <div class="flex-none w-full md:w-auto">
-          @if (link.protocol?.match('OGC:WMS|application/vnd.ogc.wms_xml')) {
+          @if (link.protocol?.match('OGC:WMS|OGC:WMTS|application/vnd.ogc.wms_xml')) {
             <app-add-layer-to-map [record]="record()" [link]="link" />
           } @else if (isExplorable(link)) {
             <div class="flex flex-col md:flex-row gap-2">
