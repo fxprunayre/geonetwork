@@ -10,26 +10,28 @@ import { SearchBase } from '../../search/search-base/search-base';
   selector: 'app-search-active-filters-button',
   imports: [Button, ButtonIcon, InputGroup, InputGroupAddon, NgIcon, TranslatePipe],
   template: `<div>
-    <p-inputgroup
-      [dt]="{
-        colorScheme: {
-          light: { addon: { borderColor: 'none', background: 'bg-primary-500' } },
-        },
-      }"
-    >
+    <p-inputgroup>
       <p-inputgroup-addon>
         <p-button
           size="large"
+          [variant]="'text'"
           (click)="toggleState()"
           [title]="'search.filter.panel.open' | translate"
         >
           <ng-icon name="faSolidFilter" pButtonIcon></ng-icon>
+          <span pButtonLabel class="w-0">&nbsp;</span>
         </p-button>
       </p-inputgroup-addon>
       @if (search.activeFilterCount() > 0) {
         <p-inputgroup-addon>
-          <p-button size="large" (click)="search.reset()" [badge]="search.activeFilterCount() + ''">
+          <p-button
+            size="large"
+            [variant]="'text'"
+            (click)="search.reset()"
+            [badge]="search.activeFilterCount() + ''"
+          >
             <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
+            <span pButtonLabel class="w-0">&nbsp;</span>
           </p-button>
         </p-inputgroup-addon>
       }

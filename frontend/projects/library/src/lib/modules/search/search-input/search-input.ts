@@ -19,7 +19,9 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
 import { PrimeTemplate } from 'primeng/api';
 import { AutoComplete } from 'primeng/autocomplete';
-import { Button, ButtonIcon } from 'primeng/button';
+import { Button, ButtonIcon, ButtonLabel } from 'primeng/button';
+import { InputGroup } from 'primeng/inputgroup';
+import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { InputText } from 'primeng/inputtext';
 import { Popover } from 'primeng/popover';
 import { SearchBase } from '../search-base/search-base';
@@ -38,12 +40,15 @@ interface AutoCompleteCompleteEvent {
     Button,
     ButtonIcon,
     FormsModule,
+    InputGroup,
+    InputGroupAddon,
     InputText,
     NgIcon,
     NgTemplateOutlet,
     Popover,
     PrimeTemplate,
     TranslatePipe,
+    ButtonLabel,
   ],
   viewProviders: [provideIcons({ faSolidMagnifyingGlass, faSolidXmark })],
   templateUrl: './search-input.html',

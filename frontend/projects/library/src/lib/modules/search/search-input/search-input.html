@@ -1,66 +1,75 @@
 <ng-template #searchButton>
-  <p-button
-    (click)="searchOnClick()"
-    [title]="'search.button.title' | translate"
-    size="large"
-    data-testid="search-button"
-  >
-    <ng-icon name="faSolidMagnifyingGlass" pButtonIcon />
-  </p-button>
+  <p-inputgroup-addon>
+    <p-button
+      (click)="searchOnClick()"
+      [title]="'search.button.title' | translate"
+      size="large"
+      [variant]="'text'"
+      data-testid="search-button"
+    >
+      <ng-icon name="faSolidMagnifyingGlass" pButtonIcon />
+      <span pButtonLabel class="w-0">&nbsp;</span>
+    </p-button>
+  </p-inputgroup-addon>
 </ng-template>
 
-<div class="relative flex items-center gap-2 md:px-0">
+<div class="relative md:px-0">
   @if (autocompleteEnabled()) {
-    <p-auto-complete
-      [(ngModel)]="queryString"
-      [suggestions]="items()"
-      optionLabel="title"
-      [autofocus]="autofocus()"
-      [minQueryLength]="1"
-      (completeMethod)="onSearchWithText($event)"
-      (onSelect)="onItemSelect($event)"
-      (onClear)="clearQuery()"
-      [forceSelection]="false"
-      [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
-      (ngModelChange)="searchOnInputChange($event)"
-      (keyup.enter)="searchOnClick()"
-      [showClear]="true"
-      (click)="handleInputClick($event)"
-      scrollHeight="400px"
-      [pt]="{
-        pcInputText: { root: '!p-4 !text-2xl' },
-        pcOverlay: { root: 'w-full' },
-      }"
-      fluid
-      data-testid="search-input"
-      name="search"
-      class="w-full"
-    >
-      <ng-template let-item pTemplate="item">
-        <span [title]="item.title">{{ item.title }}</span>
-      </ng-template>
-      <ng-template pTemplate="clearicon">
-        <ng-icon name="faSolidXmark" />
-      </ng-template>
-    </p-auto-complete>
+    <p-inputgroup class="w-full">
+      <p-auto-complete
+        [(ngModel)]="queryString"
+        [suggestions]="items()"
+        optionLabel="title"
+        [autofocus]="autofocus()"
+        [minQueryLength]="1"
+        (completeMethod)="onSearchWithText($event)"
+        (onSelect)="onItemSelect($event)"
+        (onClear)="clearQuery()"
+        [forceSelection]="false"
+        [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
+        (ngModelChange)="searchOnInputChange($event)"
+        (keyup.enter)="searchOnClick()"
+        [showClear]="true"
+        (click)="handleInputClick($event)"
+        scrollHeight="400px"
+        size="large"
+        [pt]="{
+          pcOverlay: { root: 'w-full' },
+        }"
+        fluid
+        data-testid="search-input"
+        name="search"
+        class="w-full"
+      >
+        <ng-template let-item pTemplate="item">
+          <span [title]="item.title">{{ item.title }}</span>
+        </ng-template>
+        <ng-template pTemplate="clearicon">
+          <ng-icon name="faSolidXmark" />
+        </ng-template>
+      </p-auto-complete>
 
-    <ng-container *ngTemplateOutlet="searchButton" />
+      <ng-container *ngTemplateOutlet="searchButton" />
+    </p-inputgroup>
   } @else {
-    <input
-      type="text"
-      pInputText
-      autocomplete="off"
-      [autofocus]="autofocus()"
-      [dt]="searchBoxDesign"
-      [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
-      [ngModel]="queryString"
-      (ngModelChange)="searchOnInputChange($event)"
-      (keyup.enter)="searchOnClick()"
-      [pt]="{ root: 'w-full !p-4 !text-xl' }"
-      name="search"
-    />
+    <p-inputgroup class="w-full">
+      <input
+        type="text"
+        pInputText
+        autocomplete="off"
+        size="large"
+        [autofocus]="autofocus()"
+        [dt]="searchBoxDesign"
+        [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
+        [ngModel]="queryString"
+        (ngModelChange)="searchOnInputChange($event)"
+        (keyup.enter)="searchOnClick()"
+        [pt]="{ root: 'w-full !p-4 !text-xl' }"
+        name="search"
+      />
 
-    <ng-container *ngTemplateOutlet="searchButton" />
+      <ng-container *ngTemplateOutlet="searchButton" />
+    </p-inputgroup>
   }
 
   @if (popOverTemplate()) {
