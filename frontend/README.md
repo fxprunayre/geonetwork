@@ -210,6 +210,25 @@ The `<sextant-app>` Web Component accepts the following properties (attributes):
 
 ### WebComponent mode
 
+#### Authentication and Cookies (CAS/OpenID)
+
+The web component uses browser session cookies to restore authentication (for example via the `me` endpoint after CAS/OpenID redirect).
+
+In [`ApplicationConfig`](projects/main/src/app/app.config.ts), API clients are configured with `withCredentials` via the `API_WITH_CREDENTIALS` constant.
+
+Keep this enabled when:
+
+* the web component and GeoNetwork API are on different origins, and
+* you rely on session-based authentication (CAS, OpenID Connect, sign-in redirect).
+
+Server/browser prerequisites for cross-origin cookies:
+
+* CORS allows credentials (`Access-Control-Allow-Credentials: true`),
+* CORS allows the embedding origin (not `*`),
+* session cookies are compatible with cross-site requests (typically `SameSite=None; Secure`).
+
+If your deployment is strictly same-origin and does not need cookies on API calls, this can be disabled.
+
 #### Testing
 
 To test the app in a third party page, use:

@@ -36,6 +36,9 @@ import { providePrimeNG } from 'primeng/config';
 import { environment } from '../../../library/src/environments/environment';
 import { routes } from './app.routes';
 
+// Keep GN/GN4 session cookies on API calls, especially when the web component is embedded cross-origin.
+const API_WITH_CREDENTIALS = true;
+
 export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
   const bundleFileName = environment.bundleName.endsWith('.js')
     ? environment.bundleName
@@ -118,12 +121,14 @@ export const appConfig: ApplicationConfig = {
         const apiUrl = getWebComponentAttribute('url') || environment.geonetworkApiUrl;
         return new Configuration({
           basePath: apiUrl,
+          withCredentials: API_WITH_CREDENTIALS,
         });
       }),
       Gn4ApiModule.forRoot(() => {
         const apiUrl = getWebComponentAttribute('url') || environment.geonetworkApiUrl;
         return new Gn4Configuration({
           basePath: `${apiUrl}/${DEFAULT_SPACE}/api`,
+          withCredentials: API_WITH_CREDENTIALS,
         });
       }),
     ]),
