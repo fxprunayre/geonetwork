@@ -50,12 +50,13 @@ export function getWebComponentAttribute(name: string): string | null {
 
 function parseInlineConfig(configValue: string): UiConfiguration | undefined {
   try {
-    const parsed = JSON.parse(configValue);
+    const parsed = JSON.parse(configValue.trim());
     if (parsed?.configuration && typeof parsed.configuration === 'string') {
       return JSON.parse(parsed.configuration) as UiConfiguration;
     }
     return parsed as UiConfiguration;
-  } catch {
+  } catch (e) {
+    console.error('Failed to parse inline configuration, falling back to default', e);
     return undefined;
   }
 }
