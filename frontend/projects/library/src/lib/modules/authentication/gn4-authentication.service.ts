@@ -82,9 +82,24 @@ export class Gn4AuthenticationService implements AuthenticationService {
     return this.meService.getMe();
   }
 
+  private getRedirectUrlFromLocation(): string {
+    // With HashLocationStrategy, query params are stored after '#', eg '#/signin?redirectUrl=...'.
+    const hash = window.location.hash || '';
+    const hashQueryIndex = hash.indexOf('?');
+    if (hashQueryIndex >= 0) {
+      const hashParams = new URLSearchParams(hash.substring(hashQueryIndex + 1));
+      const hashRedirectUrl = hashParams.get('redirectUrl');
+      if (hashRedirectUrl) {
+        return hashRedirectUrl;
+      }
+    }
+
+    const searchParams = new URLSearchParams(window.location.search);
+    return searchParams.get('redirectUrl') || window.location.href;
+  }
+
   getAuthenticationProviders(): Observable<AuthenticationProvider[]> {
-    const params = new URLSearchParams(window.location.search);
-    let redirectUrl = params.get('redirectUrl') || window.location.href;
+    let redirectUrl = this.getRedirectUrlFromLocation();
     if (redirectUrl.startsWith('/')) {
       redirectUrl = window.location.origin + redirectUrl;
     }
