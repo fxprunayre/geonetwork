@@ -15,6 +15,7 @@ import { Card } from 'primeng/card';
 import { IftaLabel } from 'primeng/iftalabel';
 import { InputText } from 'primeng/inputtext';
 import { RECORD_ROUTE_PATH } from '../../search/search-constant';
+import { AddAllLayersToMap } from '../add-all-layers-to-map/add-all-layers-to-map';
 import { AddLayerToMap } from '../add-layer-to-map/add-layer-to-map';
 import { DownloadData } from '../download-data/download-data';
 import { LinkBadge } from '../link-badge/link-badge';
@@ -27,6 +28,7 @@ import { RecordDistributionFieldBase } from '../record-distribution-field-base/r
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
+    AddAllLayersToMap,
     AddLayerToMap,
     DownloadData,
     Button,
@@ -74,6 +76,14 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
     }
     return false;
   };
+
+  hasBulkWmsLinks = (links: Link[]) => {
+    return (
+      links.length > 1 &&
+      links.every((link) => !!link.protocol?.match('OGC:WMS|application/vnd.ogc.wms_xml'))
+    );
+  };
+
   exploreData = (link: Link) => {
     // TODO: Not sure how to link actions to routing which is app specific
     this.router.navigate([RECORD_ROUTE_PATH, this.record().uuid, 'explore'], {

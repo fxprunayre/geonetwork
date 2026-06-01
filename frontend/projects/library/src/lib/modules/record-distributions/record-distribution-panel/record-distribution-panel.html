@@ -77,6 +77,13 @@
                 ></ng-container>
               }
             }
+            @if (hasBulkWmsLinks(section.value)) {
+              <app-add-all-layers-to-map
+                class="flex justify-end"
+                [record]="record()"
+                [links]="section.value"
+              />
+            }
           </div>
         </p-accordion-content>
       </p-accordion-panel>

@@ -133,6 +133,7 @@
         "xTemplateAvailable": "{{count}} modèle(s) disponible(s)"
       },
       "addWms": {
+        "addAllToMap": "Ajouter toutes les couches à la carte",
         "addToMap": "Ajouter à la carte",
         "allLayersFound": "Toutes les couches disponibles dans le service : {{layerNames}}",
         "checking": "Vérification du service WMS...",

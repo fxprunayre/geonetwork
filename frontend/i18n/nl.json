@@ -131,6 +131,7 @@
         "xTemplateAvailable": "{{count}} sjablo(o)n(en) beschikbaar"
       },
       "addWms": {
+        "addAllToMap": "Add all to map",
         "addToMap": "Add to map",
         "allLayersFound": "All layers found in the endpoint: {{layerNames}}",
         "checking": "Checking WMS service...",

@@ -19,7 +19,7 @@ import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'pr
 import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_MAP_CONTEXT } from '../../config/gn-constants';
-import { Gn4MapCommand } from '../../record-distributions/add-layer-to-map/add-layer-to-map';
+import { Gn4MapCommand } from '../../record-distributions/map-service';
 import { DatasourceSelect } from '../datasource-select/datasource-select';
 import { Datasource } from '../datasource.model';
 import { DuckDbService } from '../duck-db-service';

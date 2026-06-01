@@ -7,30 +7,19 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { Router } from '@angular/router';
-import { WmsEndpoint, WmtsEndpoint } from '@camptocamp/ogc-client';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidExclamation } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Link } from 'gn-api-client';
 import { Button } from 'primeng/button';
-import { Skeleton } from 'primeng/skeleton';
 import { SplitButton } from 'primeng/splitbutton';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
-import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../../search/search-constant';
-
-export interface Gn4MapCommand {
-  type?: 'wms' | 'wmts';
-  uuid?: string;
-  url: string;
-  name?: string;
-  label?: string;
-}
+import { MapService } from '../map-service';
 
 @Component({
   selector: 'app-add-layer-to-map',
-  imports: [Button, NgIcon, Skeleton, SplitButton, TranslatePipe],
+  imports: [Button, NgIcon, SplitButton, TranslatePipe],
   viewProviders: [
     provideIcons({
       faSolidExclamation,
@@ -38,7 +27,14 @@ export interface Gn4MapCommand {
   ],
   template: `
     @if (status() === 'loading') {
-      <p-skeleton [title]="'record.action.addWms.checking' | translate" size="2rem" class="mr-2" />
+      <p-button
+        styleClass="w-full md:w-auto"
+        [label]="'record.action.addWms.checking' | translate"
+        size="small"
+        [outlined]="true"
+        [loading]="true"
+        [disabled]="true"
+      />
     } @else if (status() === 'error') {
       <p-button
         severity="warn"
@@ -79,8 +75,8 @@ export interface Gn4MapCommand {
 export class AddLayerToMap extends RecordFieldBase {
   link = input.required<Link>();
 
-  private router = inject(Router);
   private appConfiguration = inject(APPLICATION_CONFIGURATION);
+  private mapService = inject(MapService);
 
   status = signal<'idle' | 'loading' | 'found' | 'not-found' | 'error'>('idle');
 
@@ -131,8 +127,6 @@ export class AddLayerToMap extends RecordFieldBase {
     super();
     effect(() => {
       const url = this.serviceUrl();
-      const layerName = this.linkName();
-      const serviceType = this.serviceType();
 
       if (!url) {
         this.status.set('idle');
@@ -141,35 +135,19 @@ export class AddLayerToMap extends RecordFieldBase {
 
       this.status.set('loading');
 
-      const endpoint = serviceType === 'wmts' ? new WmtsEndpoint(url) : new WmsEndpoint(url);
-
-      endpoint
-        .isReady()
-        .then((endpoint: any) => {
-          const layers =
-            serviceType === 'wmts' ? endpoint.getLayers() : endpoint.getFlattenedLayers();
-          this.serviceLayers.set(layers);
+      this.mapService
+        .resolveEndpointLayers(this.link())
+        .then((layers) => {
+          this.serviceLayers.set(layers || []);
 
           if (!layers) {
             this.status.set('not-found');
             return;
           }
 
-          if (!layerName) {
-            this.status.set('not-found');
-            return;
-          }
-
-          const layerNames = layerName.split(',');
-          // Layer name is mandatory to execute isReady
-          const matches = layers.filter((layer: any) => layerNames.includes(layer.name));
-          this.matchingLayers.set(matches);
-
-          const allFound = layerNames.every((name: string) =>
-            matches.some((layer: any) => layer.name === name),
-          );
-
-          this.status.set(allFound ? 'found' : 'not-found');
+          const matches = this.mapService.matchRequestedLayers(layers, this.linkName());
+          this.matchingLayers.set(matches || []);
+          this.status.set(matches === null ? 'not-found' : 'found');
         })
         .catch((e: any) => {
           console.error(e);
@@ -179,37 +157,13 @@ export class AddLayerToMap extends RecordFieldBase {
   }
 
   addWmsLayers = (links: Link[], label?: string) => {
-    const command = links
-      .filter((link) => link.urlObject)
-      .map((link) => {
-        const cmd: Gn4MapCommand = {
-          type: this.serviceType(),
-          url: encodeURIComponent(link.urlObject!['default']),
-          uuid: this.record().uuid,
-        };
-        if (link.nameObject) {
-          cmd.name = encodeURIComponent(link.nameObject['default']);
-        }
-        cmd.label = encodeURIComponent(label || cmd.name || '');
-        return cmd;
-      });
-    if (command.length > 0) {
-      if (this.mapLayerDisplayTarget() === 'explore-embedded-map') {
-        this.router.navigate([RECORD_ROUTE_PATH, this.record().uuid, 'explore'], {
-          queryParams: { wmsAdd: JSON.stringify(command) },
-          queryParamsHandling: 'merge',
-        });
-      } else {
-        this.router.navigate([MAP_ROUTE_PATH], {
-          queryParams: { add: JSON.stringify(command) },
-        });
-      }
-      // const commandParameter = 'add=' + JSON.stringify(command);
+    const command = this.mapService.buildMapCommands(
+      links,
+      this.record().uuid,
+      this.serviceType(),
+      label,
+    );
 
-      //   window.open(
-      //     `https://sextant.ifremer.fr/geonetwork/srv/fre/catalog.search#/map?${commandParameter}`,
-      //     'map',
-      //   );
-    }
+    this.mapService.navigateToMap(command, this.record().uuid, this.mapLayerDisplayTarget());
   };
 }
