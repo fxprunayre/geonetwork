@@ -197,15 +197,18 @@ export class ExplorePanel {
       }
 
       setTimeout(() => {
-        this.viewer.addLayer({
-          type: layerType,
-          id: layerId,
-          url: decodeURIComponent(cmd.url),
-          name: decodeURIComponent(cmd.name || ''),
-          label: decodeURIComponent(cmd.label || ''),
-          visibility: true,
-          attributions: '',
-        });
+        this.viewer.addLayer(
+          {
+            type: layerType,
+            id: layerId,
+            url: decodeURIComponent(cmd.url),
+            name: decodeURIComponent(cmd.name || ''),
+            label: decodeURIComponent(cmd.label || ''),
+            visibility: true,
+            attributions: '',
+          },
+          true,
+        );
         this.addedLayerIds.add(layerId);
       }, 500);
     });

@@ -70,15 +70,18 @@ export class MapComponent implements OnInit, OnDestroy {
             if (this.viewer) {
               commands.forEach((cmd) => {
                 const layerType = cmd.type || 'wms';
-                this.viewer.addLayer({
-                  type: layerType,
-                  id: layerType + ':' + cmd.url + '#' + cmd.name,
-                  url: decodeURIComponent(cmd.url),
-                  name: decodeURIComponent(cmd.name || ''),
-                  label: decodeURIComponent(cmd.label || ''),
-                  visibility: true,
-                  attributions: '',
-                });
+                this.viewer.addLayer(
+                  {
+                    type: layerType,
+                    id: layerType + ':' + cmd.url + '#' + cmd.name,
+                    url: decodeURIComponent(cmd.url),
+                    name: decodeURIComponent(cmd.name || ''),
+                    label: decodeURIComponent(cmd.label || ''),
+                    visibility: true,
+                    attributions: '',
+                  },
+                  true,
+                );
               });
             }
           } catch (e) {
