@@ -687,18 +687,26 @@
           <div class="c_body">
             <header></header>
             <div class="embed-responsive">
-              <script src="/dist/webcomponent/browser/main.js" type="module"></script>
-              <link rel="stylesheet" href="/dist/webcomponent/browser/styles.css" />
-              <sextant-app url="https://sextant.ifremer.fr/geonetwork"></sextant-app>
-
-              <!-- <div
-                class="embed-api gn"
-                ng-app="gn_search_sextant"
-                ng-controller="GnCatController"
-                ng-include="'../../catalog/views/sextant/templates/index.html'"
-                sxt-size="auto"
-                sxt-size-diff="50"
-              ></div> -->
+              <script src="../sextant-app.js" type="module"></script>
+              <link rel="stylesheet" href="../styles.css" />
+              <sextant-app
+                url="https://sextant.ifremer.fr/geonetwork"
+                config='
+  {
+    "config": {
+      "apps": {
+        "banner": {
+          "enabled": false,
+          "background": "#FFF",
+          "title": "",
+          "subTitle": "",
+          "textColor": "#093564"
+        }
+      },
+      "font": "\"Source Sans Pro\",\"Helvetica Neue\",Helvetica,Arial,sans-serif"
+    }
+  }'
+              ></sextant-app>
             </div>
             <footer></footer>
           </div>
