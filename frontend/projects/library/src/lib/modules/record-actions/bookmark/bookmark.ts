@@ -24,6 +24,7 @@ import { RecordFieldBase } from '../../record/record-field-base/record-field-bas
     @if (isVisible()) {
       <p-button
         [text]="true"
+        [loading]="isSubmitting()"
         [disabled]="
           isSubmitting() || isStatusLoading() || isSelectionListLoading() || !isSelectionAvailable()
         "
@@ -67,21 +68,13 @@ export class Bookmark extends RecordFieldBase {
   iconName = computed(() => (this.isBookmarked() ? 'faSolidBookmark' : 'faBookmark'));
 
   buttonClass = computed(() => {
-    const baseClass = 'transition-colors';
+    const baseClass = 'transition-colors !text-inherit';
 
     if (this.isBookmarked()) {
-      return (
-        baseClass +
-        ' !text-primary-contrast hover:!bg-red-600 hover:!border-red-600 hover:!text-white'
-      );
+      return baseClass + ' hover:!bg-red-600 hover:!border-red-600 hover:!text-white';
     } else {
-      return (
-        baseClass +
-        ' !text-primary-contrast hover:!bg-primary hover:!border-primary hover:!text-white'
-      );
+      return baseClass + ' hover:!bg-primary hover:!border-primary hover:!text-white';
     }
-
-    return baseClass + ' !text-inherit !opacity-90 hover:!opacity-100';
   });
 
   constructor() {
