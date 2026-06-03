@@ -12,11 +12,20 @@ export interface Gn4MapCommand {
   label?: string;
 }
 
+export interface BulkWmsValidationResult {
+  validLinks: Link[];
+  matchedLayerLabels: string[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class MapService {
   private router = inject(Router);
+
+  hasBulkWmsLinks(links: Link[], minLinks = 2): boolean {
+    return links.length >= minLinks && links.every((link) => this.isWmsLink(link));
+  }
 
   isWmsLink(link: Link): boolean {
     return (
@@ -77,6 +86,28 @@ export class MapService {
     }
 
     return matchedLayers.map((layer: any) => layer.title || layer.name);
+  }
+
+  async validateBulkWmsLinks(links: Link[], minLinks = 2): Promise<BulkWmsValidationResult | null> {
+    const wmsLinks = links.filter((link) => this.isWmsLink(link));
+    if (!this.hasBulkWmsLinks(wmsLinks, minLinks)) {
+      return null;
+    }
+
+    const results = await Promise.all(wmsLinks.map((link) => this.resolveWmsLinkLabels(link)));
+    if (results.some((result) => result === null)) {
+      return null;
+    }
+
+    return {
+      validLinks: wmsLinks,
+      matchedLayerLabels: results.flatMap((result) => result!),
+    };
+  }
+
+  private async resolveWmsLinkLabels(link: Link): Promise<string[] | null> {
+    const layers = await this.resolveEndpointLayers(link);
+    return this.matchRequestedLayerLabels(layers, link.nameObject?.['default']);
   }
 
   buildMapCommands(

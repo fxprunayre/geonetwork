@@ -81,10 +81,9 @@ export class AddAllLayersToMap extends RecordFieldBase {
 
     effect(() => {
       const links = this.links();
-      const wmsLinks = links.filter((link) => this.mapService.isWmsLink(link));
       const runId = ++this.validationRun;
 
-      if (wmsLinks.length < 2) {
+      if (!this.mapService.hasBulkWmsLinks(links)) {
         this.validLinks.set([]);
         this.matchedLayers.set([]);
         this.status.set('idle');
@@ -93,27 +92,27 @@ export class AddAllLayersToMap extends RecordFieldBase {
 
       this.status.set('loading');
 
-      void this.checkAllLinks(runId, wmsLinks);
+      void this.checkAllLinks(runId, links);
     });
   }
 
   private async checkAllLinks(runId: number, links: Link[]): Promise<void> {
     try {
-      const results = await Promise.all(links.map((link) => this.resolveLink(link)));
+      const validation = await this.mapService.validateBulkWmsLinks(links);
 
       if (runId !== this.validationRun) {
         return;
       }
 
-      if (results.some((result) => result === null)) {
+      if (!validation) {
         this.validLinks.set([]);
         this.matchedLayers.set([]);
         this.status.set('idle');
         return;
       }
 
-      this.validLinks.set(links);
-      this.matchedLayers.set(results.flatMap((result) => result!.layers));
+      this.validLinks.set(validation.validLinks);
+      this.matchedLayers.set(validation.matchedLayerLabels);
       this.status.set('found');
     } catch (e) {
       console.error(e);
@@ -124,19 +123,6 @@ export class AddAllLayersToMap extends RecordFieldBase {
         this.status.set('error');
       }
     }
-  }
-
-  private async resolveLink(link: Link): Promise<{ layers: string[] } | null> {
-    const layers = await this.mapService.resolveEndpointLayers(link);
-    const labels = this.mapService.matchRequestedLayerLabels(layers, link.nameObject?.['default']);
-
-    if (!labels) {
-      return null;
-    }
-
-    return {
-      layers: labels,
-    };
   }
 
   addWmsLayers = (links: Link[], label?: string) => {

@@ -4,9 +4,9 @@
       @let label = 'record.field.distribution.sections.' + section.key | translate;
       <a
         pButton
-        [title]="label"
-        [routerLink]="['/record', record().uuid, 'data-access']"
-        (click)="$event.stopPropagation()"
+        [title]="getSectionTooltip(section.key, section.value, label)"
+        [routerLink]="getSectionRouterLink(section.key, section.value)"
+        (click)="onSectionClick($event, section.key, section.value)"
         severity="success"
         size="small"
       >
