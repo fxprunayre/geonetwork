@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   Component,
   computed,
@@ -13,7 +14,7 @@ import { Title } from '@angular/platform-browser';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RelatedItemType } from 'gn-api-client';
 import { Message } from 'primeng/message';
-import { map, of } from 'rxjs';
+import { catchError, map, of, throwError } from 'rxjs';
 import { SearchService } from '../../search/search-service';
 import { RecordViewSkeleton } from '../record-view-skeleton/record-view-skeleton';
 import { RecordViewContent } from './record-view-content';
@@ -40,6 +41,25 @@ import { RecordViewContent } from './record-view-content';
   `,
 })
 export class RecordView {
+  private readonly recordRelatedTypes = [
+    RelatedItemType.Parent,
+    RelatedItemType.Children,
+    RelatedItemType.Services,
+    RelatedItemType.Sources,
+    RelatedItemType.Hassources,
+    RelatedItemType.BrothersAndSisters,
+    RelatedItemType.Datasets,
+    RelatedItemType.Siblings,
+    RelatedItemType.Fcats,
+    RelatedItemType.Hasfeaturecats,
+    RelatedItemType.Associated,
+  ] as const;
+
+  private readonly recordRelatedTypesWithVersions = [
+    ...this.recordRelatedTypes,
+    RelatedItemType.Versions,
+  ] as const;
+
   uuid = input<string | null>();
   tab = input<string>('about');
   layout = input<'fieldset' | 'panel' | ''>('');
@@ -57,20 +77,18 @@ export class RecordView {
       const uuid = params.uuid;
       if (!uuid) return of(undefined);
       return this.searchService
-        .getById(uuid, [
-          RelatedItemType.Parent,
-          RelatedItemType.Children,
-          RelatedItemType.Services,
-          RelatedItemType.Sources,
-          RelatedItemType.Hassources,
-          RelatedItemType.BrothersAndSisters,
-          RelatedItemType.Datasets,
-          RelatedItemType.Siblings,
-          RelatedItemType.Fcats,
-          RelatedItemType.Hasfeaturecats,
-          RelatedItemType.Associated,
-          RelatedItemType.Versions,
-        ])
+        .getById(uuid, [...this.recordRelatedTypesWithVersions])
+        .pipe(
+          // Retry without "versions" when connected to older GeoNetwork APIs.
+          catchError((error: unknown) => {
+            const isUnsupportedVersionsError =
+              error instanceof HttpErrorResponse && error.status === 400;
+            if (!isUnsupportedVersionsError) {
+              return throwError(() => error);
+            }
+            return this.searchService.getById(uuid, [...this.recordRelatedTypes]);
+          }),
+        )
         .pipe(
           map((result) => {
             if (result == null) {
