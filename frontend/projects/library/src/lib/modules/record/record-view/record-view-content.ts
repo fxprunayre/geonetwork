@@ -1,7 +1,17 @@
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, inject, input, output, TemplateRef } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  output,
+  signal,
+  TemplateRef,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import { faImage } from '@ng-icons/font-awesome/regular';
 import {
@@ -112,6 +122,10 @@ export class RecordViewContent {
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   router = inject(Router);
+  route = inject(ActivatedRoute);
+  hostElement = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  private pendingScrollTarget = signal<string | undefined>(undefined);
 
   mainVocabularies = computed(
     () => this.appConfiguration().config?.apps.record?.mainThesaurus || [],
@@ -196,6 +210,28 @@ export class RecordViewContent {
   });
 
   onRecordClick = output<string>();
+
+  constructor() {
+    this.route.queryParamMap.subscribe((params) => {
+      this.pendingScrollTarget.set(params.get('scrollTo') ?? undefined);
+    });
+
+    effect(() => {
+      const sectionId = this.pendingScrollTarget();
+      if (!sectionId || this.tab() !== 'data-access') {
+        return;
+      }
+
+      setTimeout(() => {
+        const section = this.hostElement.nativeElement.querySelector<HTMLElement>(`#${sectionId}`);
+        if (!section) {
+          return;
+        }
+
+        section.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }, 100);
+    });
+  }
 
   handleRecordClick(uuid: string) {
     this.onRecordClick.emit(uuid);

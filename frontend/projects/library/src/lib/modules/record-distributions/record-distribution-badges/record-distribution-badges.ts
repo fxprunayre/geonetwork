@@ -1,6 +1,6 @@
 import { KeyValuePipe } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Params, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidCloudArrowDown,
@@ -57,6 +57,14 @@ export class RecordDistributionBadges extends RecordDistributionFieldBase {
       return null;
     }
     return ['/record', this.record().uuid, 'data-access'];
+  }
+
+  getSectionQueryParams(sectionKey: string): Params | undefined {
+    if (sectionKey.toLowerCase() !== 'download') {
+      return undefined;
+    }
+
+    return { scrollTo: 'distribution-section-download' };
   }
 
   getSectionTooltip(sectionKey: string, links: Link[], defaultLabel: string): string {

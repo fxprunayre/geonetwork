@@ -6,6 +6,7 @@
         pButton
         [title]="getSectionTooltip(section.key, section.value, label)"
         [routerLink]="getSectionRouterLink(section.key, section.value)"
+        [queryParams]="getSectionQueryParams(section.key)"
         (click)="onSectionClick($event, section.key, section.value)"
         severity="success"
         size="small"

@@ -61,7 +61,11 @@
 @if (distributionConfig()) {
   <p-accordion [value]="activePanels()" [multiple]="true">
     @for (section of linksBySections() | keyvalue; track $index) {
-      <p-accordion-panel [value]="$index" [attr.data-testid]="'distribution-panel-' + section.key">
+      <p-accordion-panel
+        [value]="$index"
+        [attr.data-testid]="'distribution-panel-' + section.key"
+        [attr.id]="'distribution-section-' + section.key"
+      >
         <p-accordion-header>
           <div class="flex items-center gap-2 text-primary! text-2xl!">
             <ng-icon [svg]="iconsByType[section.key]" />

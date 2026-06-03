@@ -8,9 +8,6 @@
   <div class="flex flex-col gap-3">
     @if (friendlyFormats().length > 0) {
       <div class="flex flex-col gap-1 items-start text-sm">
-        <span class="text-surface-600 dark:text-surface-400">{{
-          'record.field.distribution.download.formatsAvailable' | translate
-        }}</span>
         <div class="flex flex-wrap gap-1">
           @for (format of friendlyFormats(); track format) {
             <p-badge severity="success" [value]="format"></p-badge>
@@ -23,7 +20,9 @@
         <p-button
           class="w-full md:w-auto"
           size="small"
+          fluid="true"
           [outlined]="true"
+          [title]="'record.field.distribution.download.formatsAvailable' | translate"
           (click)="wfsMenu.toggle($event)"
         >
           <ng-icon pButtonIcon name="faSolidCloudArrowDown" class="mr-2" />
