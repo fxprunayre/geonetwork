@@ -15,7 +15,9 @@
     {{ label() }}
   </div>
 
-  <app-full-screen-panel>
+  @let hasPages = relations().length > pageSize;
+
+  <ng-template #resultsGridTemplate let-record>
     <div class="w-full has-[>section:empty]:hidden">
       <section [class]="styleClass()">
         <p-dataview
@@ -41,5 +43,12 @@
         </p-dataview>
       </section>
     </div>
-  </app-full-screen-panel>
+  </ng-template>
+  @if (hasPages) {
+    <app-full-screen-panel>
+      <ng-container *ngTemplateOutlet="resultsGridTemplate"></ng-container>
+    </app-full-screen-panel>
+  } @else {
+    <ng-container *ngTemplateOutlet="resultsGridTemplate"></ng-container>
+  }
 }
