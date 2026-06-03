@@ -2,11 +2,12 @@ import { NgClass } from '@angular/common';
 import { Component, effect, input, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCompress, faSolidExpand } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Button, ButtonIcon } from 'primeng/button';
 
 @Component({
   selector: 'app-full-screen-panel',
-  imports: [Button, ButtonIcon, NgClass, NgIcon],
+  imports: [Button, ButtonIcon, NgClass, NgIcon, TranslatePipe],
   viewProviders: [provideIcons({ faSolidExpand, faSolidCompress })],
   template: `
     <div
@@ -14,7 +15,17 @@ import { Button, ButtonIcon } from 'primeng/button';
       [ngClass]="isFullScreen() ? fullScreenContainerClass() : normalContainerClass()"
     >
       <div class="flex justify-end mb-2">
-        <p-button (click)="toggleFullScreen()" [rounded]="true" [text]="true" size="small">
+        <p-button
+          (click)="toggleFullScreen()"
+          [rounded]="true"
+          [text]="true"
+          size="small"
+          [title]="
+            isFullScreen()
+              ? ('shared.fullscreen.exit' | translate)
+              : ('shared.fullscreen.enter' | translate)
+          "
+        >
           @if (isFullScreen()) {
             <ng-icon name="faSolidCompress" pButtonIcon />
           } @else {

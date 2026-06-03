@@ -363,6 +363,10 @@
     "title_error": "Fout"
   },
   "shared": {
+    "fullscreen": {
+      "enter": "Volledig scherm",
+      "exit": "Volledig scherm verlaten"
+    },
     "show-more-toggle": {
       "less": "View less",
       "more": "Read more"

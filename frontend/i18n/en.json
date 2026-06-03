@@ -362,6 +362,10 @@
     "title_error": "Error"
   },
   "shared": {
+    "fullscreen": {
+      "enter": "Full screen",
+      "exit": "Exit full screen"
+    },
     "show-more-toggle": {
       "less": "View less",
       "more": "Read more"

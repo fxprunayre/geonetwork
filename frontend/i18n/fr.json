@@ -364,6 +364,10 @@
     "title_error": "Erreur"
   },
   "shared": {
+    "fullscreen": {
+      "enter": "Plein écran",
+      "exit": "Quitter le mode plein écran"
+    },
     "show-more-toggle": {
       "less": "Réduire",
       "more": "Lire la suite"
