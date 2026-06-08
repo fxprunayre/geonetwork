@@ -2,6 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { WmsEndpoint, WmtsEndpoint } from '@camptocamp/ogc-client';
 import { Link } from 'gn-api-client';
+import {
+  MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
+  MapLayerDisplayTarget,
+} from '../config/gn-constants';
 import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../search/search-constant';
 
 export interface Gn4MapCommand {
@@ -141,13 +145,13 @@ export class MapService {
   navigateToMap(
     commands: Gn4MapCommand[],
     recordUuid: string | undefined,
-    mapLayerDisplayTarget: string,
+    mapLayerDisplayTarget: MapLayerDisplayTarget,
   ): void {
     if (commands.length === 0 || !recordUuid) {
       return;
     }
 
-    if (mapLayerDisplayTarget === 'explore-embedded-map') {
+    if (mapLayerDisplayTarget === MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP) {
       void this.router.navigate([RECORD_ROUTE_PATH, recordUuid, 'explore'], {
         queryParams: { wmsAdd: JSON.stringify(commands) },
         queryParamsHandling: 'merge',

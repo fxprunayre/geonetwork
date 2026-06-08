@@ -1,5 +1,6 @@
 import { Preset } from '@primeuix/themes/types';
 import { elasticsearch } from 'gn-api-client';
+import type { MapLayerDisplayTarget } from '../gn-constants';
 import { DistributionConfig } from './gn4config';
 
 export interface AppsConfiguration {
@@ -75,5 +76,5 @@ export interface MapApp extends App {
 export interface RecordDetailsApp extends App {
   distribution?: DistributionConfig;
   mainThesaurus?: string[];
-  mapLayerDisplayTarget?: 'main-map-tab' | 'explore-embedded-map';
+  mapLayerDisplayTarget?: MapLayerDisplayTarget;
 }

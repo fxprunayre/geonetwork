@@ -15,6 +15,12 @@ export const DEFAULT_SPACE = 'srv';
 
 export const DEFAULT_LANGUAGE = 'eng';
 
+export const MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB = 'main-map-tab';
+export const MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP = 'explore-embedded-map';
+export type MapLayerDisplayTarget =
+  | typeof MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB
+  | typeof MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP;
+
 export const DEFAULT_AUTHENTICATION_APP_CONFIGURATION: AuthenticationApp = {
   enabled: true,
 };
@@ -295,8 +301,8 @@ export const DEFAULT_RECORD_DETAILS_APP_CONFIGURATION: RecordDetailsApp = {
   enabled: true,
   mainThesaurus: [],
   distribution: DEFAULT_RECORD_DETAILS_DISTRIBUTION_CONFIGURATION,
-  mapLayerDisplayTarget: 'explore-embedded-map',
-  // mapLayerDisplayTarget: 'main-map-tab',
+  mapLayerDisplayTarget: MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
+  // mapLayerDisplayTarget: MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
 };
 
 export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {

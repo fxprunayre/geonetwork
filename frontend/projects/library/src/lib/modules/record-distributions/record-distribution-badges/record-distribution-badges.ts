@@ -10,6 +10,7 @@ import {
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Link } from 'gn-api-client';
 import { ButtonIcon, ButtonLabel, ButtonModule } from 'primeng/button';
+import { MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB } from '../../config/gn-constants';
 import { MapService } from '../map-service';
 import { RecordDistributionFieldBase } from '../record-distribution-field-base/record-distribution-field-base';
 
@@ -105,7 +106,9 @@ export class RecordDistributionBadges extends RecordDistributionFieldBase {
   };
 
   private mapLayerDisplayTarget = computed(
-    () => this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget || 'main-map-tab',
+    () =>
+      this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget ||
+      MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
   );
 
   private shouldTriggerAddAllToMap(sectionKey: string, links: Link[]): boolean {

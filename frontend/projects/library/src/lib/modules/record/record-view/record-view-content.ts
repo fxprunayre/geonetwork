@@ -29,6 +29,10 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import {
+  MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
+  MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
+} from '../../config/gn-constants';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
 import { AssociatedPanel } from '../../record-associations/associated-panel/associated-panel';
@@ -132,7 +136,9 @@ export class RecordViewContent {
   );
 
   mapLayerDisplayTarget = computed(
-    () => this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget || 'main-map-tab',
+    () =>
+      this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget ||
+      MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
   );
 
   hasWmsLink = computed(() => {
@@ -145,7 +151,8 @@ export class RecordViewContent {
   showExploreTab = computed(
     () =>
       !!this.record()?.info?.hasDatasource ||
-      (this.mapLayerDisplayTarget() === 'explore-embedded-map' && this.hasWmsLink()),
+      (this.mapLayerDisplayTarget() === MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP &&
+        this.hasWmsLink()),
   );
 
   dataAccessSectionLabelKey = computed(() => {
