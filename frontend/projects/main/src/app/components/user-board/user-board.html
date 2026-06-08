@@ -22,84 +22,142 @@
         </p>
       </section>
     </ng-template>
+
     <div
-      class="mx-auto max-w-7xl w-full px-6 py-6 grid grid-cols-1 md:grid-cols-3 gap-4"
+      class="mx-auto max-w-7xl w-full py-4 gap-4"
       appSearchContext="user-records"
       [aggregations]="userRecordAggregationConfig"
       [currentSort]="'-dateStamp'"
       [filter]="[{ query_string: { query: userRecordQuery() } }]"
       [language]="language()"
     >
-      <div
-        class="col-span-2 border rounded-(--p-border-radius-md) border-surface-100 flex flex-col gap-4 p-4"
-      >
-        <div class="flex flex-row items-start gap-2">
-          <div class="grow">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
-              {{ 'user.dashboard.allWork' | translate }}
-            </h2>
-            <app-results-number scope="user-records" labelKey="user.contributions" class="" />
-          </div>
-          <app-record-add-button target="_blank" />
-          <a pButton [href]="importRecordUrl()" severity="secondary" target="_blank">
-            <ng-icon name="faSolidFileImport" pButtonIcon />
-            <span pButtonLabel>{{ 'record.action.importRecord' | translate }}</span>
-          </a>
-        </div>
-
-        <section>
-          @if (search().results().length === 0) {
-            <p class="text-center text-lg text-surface-500 py-20">
-              {{ 'user.dashboard.noWork' | translate }}
-            </p>
-          } @else {
-            <app-results-view scope="user-records" [layout]="'table'" />
+      <p-tabs value="0">
+        <p-tablist>
+          <p-tab value="0">{{ 'user.dashboard.allWork' | translate }}</p-tab>
+          @if (isUserSelectionsEnabled()) {
+            <p-tab value="1">{{ 'user.dashboard.bookmarks' | translate }}</p-tab>
           }
-        </section>
-      </div>
+        </p-tablist>
+        <p-tabpanels>
+          <p-tabpanel value="0" class="flex flex-row gap-4 w-full">
+            <div class="w-full flex flex-col gap-4">
+              <ng-template #allWorkResults>
+                <div class="w-full">
+                  <app-results-number scope="user-records" labelKey="user.contributions" class="" />
 
-      <div class="border rounded-(--p-border-radius-md) border-surface-100 flex flex-col gap-4 p-4">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
-          {{ 'user.dashboard.statistics' | translate }}
-        </h2>
-        <app-aggregations-panel scope="user-records" />
-      </div>
+                  @if (search().results().length === 0) {
+                    <p class="text-center text-lg text-surface-500 py-20">
+                      {{ 'user.dashboard.noWork' | translate }}
+                    </p>
+                  } @else {
+                    <app-results-view scope="user-records" [layout]="'table'" />
+                  }
+                </div>
+              </ng-template>
 
-      @if (isUserSelectionsEnabled()) {
-        <div
-          class="col-span-2 border rounded-(--p-border-radius-md) border-surface-100 flex flex-col gap-4 p-4"
-        >
-          <div class="flex flex-row">
-            <div class="grow">
-              <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-10">
-                {{ 'user.dashboard.bookmarks' | translate }}
-              </h2>
+              <app-search-panel-controls
+                scope="user-records"
+                [showFilterButton]="true"
+                [filterPanelMode]="effectiveFilterPanelMode()"
+                [(visible)]="filtersVisible"
+              />
+
+              @switch (effectiveFilterPanelMode()) {
+                @case ('drawer') {
+                  <p-drawer
+                    [(visible)]="filtersVisible"
+                    [header]="'search.filter.title' | translate"
+                    [modal]="false"
+                    position="right"
+                  >
+                    <app-aggregations-panel scope="user-records" />
+                  </p-drawer>
+
+                  <ng-container *ngTemplateOutlet="allWorkResults" />
+                }
+
+                @case ('side') {
+                  <div class="flex flex-row gap-4 w-full">
+                    <div
+                      class="transition-all duration-300 ease-in-out"
+                      [class.w-2/3]="filtersVisible()"
+                      [class.w-full]="!filtersVisible()"
+                    >
+                      <ng-container *ngTemplateOutlet="allWorkResults" />
+                    </div>
+
+                    <div
+                      class="w-full h-screen sticky top-0 self-start transition-all duration-300 ease-in-out min-w-0 max-w-100 border-primary-50 overflow-x-hidden"
+                      [class.sm:w-1/3]="filtersVisible()"
+                      [class.sm:opacity-100]="filtersVisible()"
+                      [class.border-l-2]="filtersVisible()"
+                      [class.shadow]="filtersVisible()"
+                      [class.overflow-y-auto]="filtersVisible()"
+                      [class.sm:w-0!]="!filtersVisible()"
+                      [class.sm:opacity-0]="!filtersVisible()"
+                      [class.border-none]="!filtersVisible()"
+                      [class.shadow-none]="!filtersVisible()"
+                    >
+                      <div
+                        class="flex items-center justify-between gap-3 p-4 border-b border-surface-200 bg-surface-0"
+                      >
+                        <div class="flex items-center gap-2 text-primary-500 text-xl font-semibold">
+                          <ng-icon name="faSolidFilter"></ng-icon>
+                          {{ 'search.filter.title' | translate }}
+                        </div>
+                        <p-button
+                          (click)="filtersVisible.set(!filtersVisible())"
+                          variant="text"
+                          rounded="true"
+                        >
+                          <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
+                        </p-button>
+                      </div>
+                      <div class="p-4">
+                        <app-aggregations-panel scope="user-records" />
+                      </div>
+                    </div>
+                  </div>
+                }
+                @default {
+                  <div class="w-full border rounded-(--p-border-radius-md) border-surface-100 p-4">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-6">
+                      <ng-icon name="faSolidFilter"></ng-icon>
+                      {{ 'search.filter.title' | translate }}
+                    </h2>
+                    <app-aggregations-panel scope="user-records" />
+                  </div>
+
+                  <ng-container *ngTemplateOutlet="allWorkResults" />
+                }
+              }
             </div>
-          </div>
-
-          <section>
-            @if (bookmarksLoading()) {
-              <p class="text-center text-lg text-surface-500 py-20">
-                {{ 'user.dashboard.loadingBookmarks' | translate }}
-              </p>
-            } @else if (bookmarkedUuids().length === 0) {
-              <p class="text-center text-lg text-surface-500 py-20">
-                {{ 'user.dashboard.noBookmarks' | translate }}
-              </p>
-            } @else {
-              <div
-                appSearchContext="user-bookmarks"
-                [aggregations]="[]"
-                [filter]="bookmarkedRecordsFilter()"
-                [currentSort]="'-dateStamp'"
-                [language]="language()"
-              >
-                <app-results-view scope="user-bookmarks" [layout]="'table'" />
-              </div>
+          </p-tabpanel>
+          <p-tabpanel value="1">
+            @if (isUserSelectionsEnabled()) {
+              @if (bookmarksLoading()) {
+                <p class="text-center text-lg text-surface-500 py-20">
+                  {{ 'user.dashboard.loadingBookmarks' | translate }}
+                </p>
+              } @else if (bookmarkedUuids().length === 0) {
+                <p class="text-center text-lg text-surface-500 py-20">
+                  {{ 'user.dashboard.noBookmarks' | translate }}
+                </p>
+              } @else {
+                <div
+                  appSearchContext="user-bookmarks"
+                  [aggregations]="[]"
+                  [filter]="bookmarkedRecordsFilter()"
+                  [currentSort]="'-dateStamp'"
+                  [language]="language()"
+                >
+                  <app-results-view scope="user-bookmarks" [layout]="'table'" />
+                </div>
+              }
             }
-          </section>
-        </div>
-      }
+          </p-tabpanel>
+        </p-tabpanels>
+      </p-tabs>
     </div>
   </app-page-layout>
 }

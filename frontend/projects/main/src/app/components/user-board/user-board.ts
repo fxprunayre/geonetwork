@@ -1,4 +1,5 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, computed, effect, HostListener, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -7,10 +8,12 @@ import {
   faSolidBookmark,
   faSolidCircleUser,
   faSolidFileImport,
+  faSolidFilter,
   faSolidGear,
   faSolidLock,
   faSolidLockOpen,
   faSolidPenToSquare,
+  faSolidXmark,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import {
@@ -19,7 +22,6 @@ import {
   AuthStore,
   DEFAULT_LANGUAGE,
   Gn4UrlService,
-  RecordAddButton,
   ResultsNumberComponent,
   ResultsView,
   SearchContextDirective,
@@ -29,25 +31,37 @@ import {
   UserFullNamePipe,
 } from 'gn-library';
 import { UserselectionsService } from 'gn4-api-client';
-import { ButtonDirective } from 'primeng/button';
+import { Button } from 'primeng/button';
+import { Drawer } from 'primeng/drawer';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
 import { catchError, filter, of } from 'rxjs';
+import { FilterPanelLayout } from '../../shared/models/search-layout.model';
 import { PageLayout } from '../page-layout/page-layout';
+import { SearchPanelControls } from '../search-panel-controls/search-panel-controls';
 import { UserBoardMenu } from '../user-board-menu/user-board-menu';
 
 @Component({
   selector: 'app-user-board',
+  standalone: true,
   imports: [
     NgIcon,
     TranslatePipe,
     PageLayout,
     SearchContextDirective,
-    RecordAddButton,
     ResultsNumberComponent,
     ResultsView,
-    ButtonDirective,
     AggregationsPanel,
+    SearchPanelControls,
     UserFullNamePipe,
     UserBoardMenu,
+    Drawer,
+    Button,
+    Tabs,
+    Tab,
+    TabPanels,
+    TabPanel,
+    TabList,
+    NgTemplateOutlet,
   ],
   viewProviders: [
     provideIcons({
@@ -56,9 +70,11 @@ import { UserBoardMenu } from '../user-board-menu/user-board-menu';
       faSolidFileImport,
       faSolidBookmark,
       faSolidGear,
+      faSolidFilter,
       faSolidArrowRightFromBracket,
       faSolidLockOpen,
       faSolidLock,
+      faSolidXmark,
     }),
   ],
   templateUrl: './user-board.html',
@@ -109,6 +125,24 @@ export class UserBoard {
   bookmarkedUuids = signal<string[]>([]);
   bookmarksLoading = signal(false);
   bookmarksRefreshTick = signal(0);
+  filtersVisible = signal(false);
+  viewportWidth = signal(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+  filterPosition = computed<FilterPanelLayout>(
+    () => (this.appConfig().config?.apps?.search?.filterPosition as FilterPanelLayout) || 'side',
+  );
+
+  isSmallViewport = computed(() => this.viewportWidth() < 640);
+
+  effectiveFilterPanelMode = computed<FilterPanelLayout>(() => {
+    if (
+      (this.filterPosition() === 'side' || this.filterPosition() === 'side-fixed') &&
+      this.isSmallViewport()
+    ) {
+      return 'drawer';
+    }
+    return this.filterPosition();
+  });
 
   bookmarkedRecordsFilter = computed(() => [
     {
@@ -155,6 +189,11 @@ export class UserBoard {
       .subscribe(() => {
         this.bookmarksRefreshTick.update((v) => v + 1);
       });
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.viewportWidth.set(window.innerWidth);
   }
 
   userRecordAggregationConfig = [

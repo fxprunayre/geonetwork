@@ -23,9 +23,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import {
   APPLICATION_CONFIGURATION,
   SEARCH_ROUTE_PATH,
-  SearchActiveFiltersButton,
   SearchBase,
-  SearchInput,
   SearchWelcomeTextPipe,
   ThemingService,
 } from 'gn-library';
@@ -34,12 +32,12 @@ import { Drawer } from 'primeng/drawer';
 import { filter, map } from 'rxjs';
 import { FilterPanelLayout } from '../../shared/models/search-layout.model';
 import { SearchFilters } from '../search-filters/search-filters';
+import { SearchPanelControls } from '../search-panel-controls/search-panel-controls';
 
 @Component({
   selector: 'app-page-layout',
   imports: [
-    SearchInput,
-    SearchActiveFiltersButton,
+    SearchPanelControls,
     SearchWelcomeTextPipe,
     Drawer,
     SearchFilters,
@@ -68,22 +66,14 @@ import { SearchFilters } from '../search-filters/search-filters';
             <ng-container *ngTemplateOutlet="header || defaultHeader" />
             @if (withSearch()) {
               <div class="flex flex-row items-center w-full">
-                <div class="flex-1 min-w-0 flex flex-row items-center gap-2">
-                  <app-search-input
-                    class="grow"
-                    [autocompleteEnabled]="true"
-                    (onSearch)="setRouteToSearch()"
-                    [placeholder]="search | searchWelcomeTextPipe: 'resourceType' : 3"
-                  />
-                  @if (
-                    isSearchActive() &&
-                    (effectiveFilterPanelMode() == 'drawer' || effectiveFilterPanelMode() == 'side')
-                  ) {
-                    <app-search-active-filters-button [(visible)]="visible" />
-                  }
-
-                  <!-- <app-menu class="print:hidden" layout="tieredmenu"/> -->
-                </div>
+                <app-search-panel-controls
+                  class="grow"
+                  [showFilterButton]="isSearchActive()"
+                  [filterPanelMode]="effectiveFilterPanelMode()"
+                  [placeholder]="search | searchWelcomeTextPipe: 'resourceType' : 3"
+                  [(visible)]="visible"
+                  (searchTriggered)="setRouteToSearch()"
+                />
 
                 <!-- Spacer to match the sidebar width and keep the search box aligned with the results -->
                 @if (isSearchActive()) {
