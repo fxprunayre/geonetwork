@@ -514,7 +514,16 @@ export class SearchService {
     );
   }
 
-  async autocompleteSearch(query: string) {
+  async autocompleteSearch(
+    query: string,
+    contextFilter?: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+  ) {
+    const filter = Array.isArray(contextFilter)
+      ? contextFilter
+      : contextFilter
+        ? [contextFilter]
+        : undefined;
+
     const request: elasticsearch.SearchRequest = {
       query: {
         bool: {
@@ -538,6 +547,7 @@ export class SearchService {
               },
             },
           ],
+          ...(filter ? { filter } : {}),
         },
       },
       size: 20,

@@ -99,7 +99,8 @@ export class SearchInput extends SearchBase {
     }
 
     try {
-      const results = await this.searchService.autocompleteSearch(query);
+      const scopedFilter = this.scope() === 'main' ? undefined : this.search.filter();
+      const results = await this.searchService.autocompleteSearch(query, scopedFilter);
       this.items.set(results);
     } catch (err) {
       console.error('Autocomplete error:', err);
