@@ -15,7 +15,7 @@ export class RecordFieldDoi extends RecordFieldBase {
       return undefined;
     }
     return links
-      .filter((l) => l.protocol?.toLowerCase() === 'doi')
+      .filter((l) => l.protocol?.toLowerCase().match(/doi|www:link-1.0-http--metadata-url/))
       .map((link) => {
         const url = link.urlObject?.['default'];
         return {
