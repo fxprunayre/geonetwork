@@ -108,6 +108,7 @@ export class SearchInput extends SearchBase {
   }
 
   searchOnClick() {
+    this.autocomplete()?.hide();
     this.onModelChange(this.queryString);
   }
 
