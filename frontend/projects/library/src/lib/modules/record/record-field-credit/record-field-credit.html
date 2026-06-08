@@ -4,7 +4,7 @@
     @for (c of creds; track $index; let last = $last) {
       @if (!displayFirstOnly() || $index === 0) {
         <ng-template #credit>
-          <span>
+          <span class="text-base">
             {{ c['default'] }}
           </span>
         </ng-template>

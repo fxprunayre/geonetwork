@@ -16,7 +16,7 @@
 
   <!-- Content Templates for Accordion Sections -->
   <ng-template #datesContent>
-    <app-record-field [label]="'record.field.resourceDate' | translate">
+    <app-record-field>
       <app-record-field-dates [record]="record" />
     </app-record-field>
   </ng-template>
@@ -79,7 +79,7 @@
   </ng-template>
 
   <ng-template #lineageContent>
-    <app-record-field [label]="'record.field.lineage'">
+    <app-record-field>
       <app-show-more-toggle>
         <p
           class="leading-relaxed markdown-content"
@@ -288,14 +288,7 @@
         }
 
         <p-tabpanel value="citation">
-          <div class="flex flex-col lg:flex-row lg:gap-4">
-            <div class="w-full lg:w-3/4">
-              <app-record-citation [uuid]="record.uuid!" [format]="'html'"></app-record-citation>
-            </div>
-            <div class="w-full lg:w-1/4">
-              <app-record-harvester-logo [record]="record" />
-            </div>
-          </div>
+          <app-record-citation [uuid]="record.uuid!" [format]="'html'"></app-record-citation>
         </p-tabpanel>
 
         <p-tabpanel value="discussions">
