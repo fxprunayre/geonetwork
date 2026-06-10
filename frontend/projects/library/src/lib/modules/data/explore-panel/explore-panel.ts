@@ -16,7 +16,6 @@ import { faSolidMap, faSolidTable } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
-import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import {
   DEFAULT_MAP_CONTEXT,
@@ -37,7 +36,6 @@ import { Perspective } from '../perspective/perspective';
     AccordionHeader,
     AccordionPanel,
     DatasourceSelect,
-    FullScreenPanel,
     NgIcon,
     Perspective,
     TranslatePipe,

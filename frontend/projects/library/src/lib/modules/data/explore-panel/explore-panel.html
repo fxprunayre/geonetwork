@@ -44,16 +44,9 @@
             />
           </div>
 
-          <app-full-screen-panel
-            [contentClass]="'flex flex-col gap-3'"
-            [fullScreenContentClass]="'flex-1 min-h-0 flex flex-col gap-3'"
-          >
-            @if (datasource()) {
-              <div class="grow min-h-0">
-                <app-perspective [datasource]="datasource()" />
-              </div>
-            }
-          </app-full-screen-panel>
+          @if (datasource()) {
+            <app-perspective [datasource]="datasource()" />
+          }
         </p-accordion-content>
       </p-accordion-panel>
     }

@@ -166,19 +166,6 @@ export const DEFAULT_SEARCH_APP_AGGREGATIONS: (
     'th_httpinspireeceuropaeutheme-theme_tree.key': INSPIRE_AGGREGATION,
   },
   {
-    'tag.default': {
-      terms: {
-        field: 'tag.default',
-        include: '.*',
-        size: 10,
-      },
-      meta: {
-        collapsed: true,
-        caseInsensitiveInclude: true,
-      },
-    },
-  },
-  {
     creationYearForResource: {
       terms: {
         field: 'creationYearForResource',
@@ -277,7 +264,7 @@ export const DEFAULT_RECORD_DETAILS_DISTRIBUTION_CONFIGURATION = {
     },
     {
       filter:
-        'protocol:OGC:WFS|OGC:WCS|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE:.*|OGC API Features|OGC API Coverages',
+        'protocol:OGC:WFS|OGC:WCS|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE|FILE:.*|OGC API Features|OGC API Coverages',
       title: 'download',
     },
     { filter: 'function:legend', title: 'mapLegend' },
@@ -291,7 +278,7 @@ export const DEFAULT_RECORD_DETAILS_DISTRIBUTION_CONFIGURATION = {
     },
     {
       filter:
-        '-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE:.*|application/vnd.ogc AND -function:legend|featureCatalogue|dataQualityReport',
+        '-protocol:OGC.*|REST|ESRI:.*|atom.*|.*DOWNLOAD.*|DB:.*|COPYFILE|NETWORK:LINK|FILE|FILE:.*|application/vnd.ogc AND -function:legend|featureCatalogue|dataQualityReport',
       title: 'links',
     },
   ],

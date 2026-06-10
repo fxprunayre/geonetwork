@@ -1,5 +1,5 @@
-import { NgClass } from '@angular/common';
-import { Component, effect, input, signal } from '@angular/core';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { Component, effect, input, signal, TemplateRef } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCompress, faSolidExpand } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -7,14 +7,19 @@ import { Button, ButtonIcon } from 'primeng/button';
 
 @Component({
   selector: 'app-full-screen-panel',
-  imports: [Button, ButtonIcon, NgClass, NgIcon, TranslatePipe],
+  imports: [Button, ButtonIcon, NgClass, NgIcon, TranslatePipe, NgTemplateOutlet],
   viewProviders: [provideIcons({ faSolidExpand, faSolidCompress })],
   template: `
     <div
       class="transition-all duration-300"
       [ngClass]="isFullScreen() ? fullScreenContainerClass() : normalContainerClass()"
     >
-      <div class="flex justify-end mb-2">
+      <div class="flex justify-between mb-2">
+        <div class="flex-1 min-w-0">
+          @if (toolbarTplRef()) {
+            <ng-container *ngTemplateOutlet="toolbarTplRef()!" />
+          }
+        </div>
         <p-button
           (click)="toggleFullScreen()"
           [rounded]="true"
@@ -47,6 +52,7 @@ export class FullScreenPanel {
   );
   contentClass = input('');
   fullScreenContentClass = input('flex-1 min-h-0');
+  toolbarTplRef = input<TemplateRef<unknown>>();
 
   isFullScreen = signal(false);
 

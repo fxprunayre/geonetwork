@@ -15,6 +15,7 @@ import { Datasource } from './datasource.model';
 export interface DatasourceLoadingProgress {
   status:
     | 'idle'
+    | 'initializing'
     | 'connecting'
     | 'size'
     | 'downloading'

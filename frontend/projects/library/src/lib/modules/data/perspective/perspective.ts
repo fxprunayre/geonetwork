@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
@@ -15,15 +16,93 @@ import { faSolidTriangleExclamation, faSolidXmark } from '@ng-icons/font-awesome
 import { TranslateModule } from '@ngx-translate/core';
 import perspective from '@perspective-dev/client';
 import { Button, ButtonIcon } from 'primeng/button';
+import { FileSelectEvent, FileUploadModule, FileUploadPassThrough } from 'primeng/fileupload';
 import { Message } from 'primeng/message';
 import { Popover } from 'primeng/popover';
 import { ProgressBar } from 'primeng/progressbar';
+import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { Datasource } from '../datasource.model';
 import { DuckDbService } from '../duck-db-service';
 
+const MEMO_DEMO_WORKSPACE = {
+  sizes: [0.25, 0.75],
+  detail: {
+    main: {
+      type: 'tab-area',
+      widgets: ['map'],
+      currentIndex: 0,
+    },
+  },
+  viewers: {
+    table: {
+      version: '4.4.1',
+      columns_config: {},
+      plugin: 'Datagrid',
+      plugin_config: {
+        columns: {},
+        scroll_lock: false,
+        edit_mode: 'SELECT_ROW_TREE',
+      },
+      settings: false,
+      table: 'data',
+      theme: null,
+      title: 'Individus',
+      group_by: ['Nom_deploi', 'Nom_indivi'],
+      split_by: [],
+      sort: [],
+      filter: [],
+      group_rollup_mode: 'rollup',
+      expressions: {},
+      columns: ['Date', 'Latitude', 'Longitude', 'Variables'],
+      aggregates: {
+        Date: 'last by index',
+        Longitude: 'high minus low',
+        Variables: 'dominant',
+        Latitude: 'high minus low',
+      },
+    },
+    map: {
+      version: '4.4.1',
+      columns_config: {},
+      plugin: 'Map Scatter',
+      plugin_config: {
+        center: [-1500901.6277789047, -3924407.7503462345],
+        zoom: 2,
+      },
+      settings: false,
+      table: 'data',
+      theme: null,
+      title: 'Map',
+      group_by: [],
+      split_by: ['Nom_indivi'],
+      sort: [['Nom_indivi', 'asc']],
+      filter: [['Nom_deploi', '==', 'ct139']],
+      group_rollup_mode: 'rollup',
+      expressions: {},
+      columns: ['Latitude', 'Longitude', null, null, 'Nom_deploi', 'Nom_indivi', 'Variables'],
+      aggregates: {},
+    },
+  },
+  master: {
+    widgets: ['table'],
+    sizes: [1],
+  },
+};
+
 @Component({
   selector: 'app-perspective',
-  imports: [Button, ButtonIcon, Message, NgIcon, Popover, ProgressBar, TranslateModule],
+  imports: [
+    Button,
+    ButtonIcon,
+    FileUploadModule,
+    FullScreenPanel,
+    Message,
+    NgIcon,
+    NgTemplateOutlet,
+    Popover,
+    ProgressBar,
+    TranslateModule,
+  ],
   viewProviders: [
     provideIcons({
       faSolidXmark,
@@ -31,66 +110,110 @@ import { DuckDbService } from '../duck-db-service';
     }),
   ],
   template: `
-    <div #viewerContainer class="relative h-full min-h-0 overflow-hidden flex flex-col">
-      <div class="flex flex-row items-center justify-items-end w-full gap-4 my-4">
-        <div class="flex flex-row items-center gap-4 grow">
-          @if (progress().status !== 'completed' && progress().status !== 'idle') {
-            @let errorOrCancel = progress().status === 'error' || progress().status === 'canceled';
-            <p-progressbar
-              [mode]="errorOrCancel ? 'determinate' : 'indeterminate'"
-              [style]="{ height: '6px' }"
-              class="basis-1/3"
-            />
-            <div class="basis-2/3 flex items-center gap-2">
-              {{ progress().status }}
-              @if (progress().status === 'error' && progress().errorMessage) {
-                <p-button (click)="op.toggle($event)" variant="text" severity="danger">
-                  <ng-icon name="faSolidTriangleExclamation" pButtonIcon></ng-icon>
-                </p-button>
-                <p-popover #op>
-                  {{ progress().errorMessage }}
-                </p-popover>
-              }
-
-              @if (progress().downloadedBytes) {
-                - {{ (progress().downloadedBytes / (1024 * 1024)).toFixed(2) }} MB
-                @if (progress().totalBytes > 0) {
-                  / {{ (progress().totalBytes / (1024 * 1024)).toFixed(2) }} MB
-                }
-              }
-              @if (!errorOrCancel) {
-                <p-button
-                  (click)="cancel()"
-                  [rounded]="true"
-                  [text]="true"
-                  severity="danger"
-                  size="small"
-                  title="Cancel download"
-                >
-                  <ng-icon name="faSolidXmark" pButtonIcon />
-                </p-button>
-              }
-            </div>
+    <ng-template #progressBarTemplate let-progress="progress">
+      @if (progress().status !== 'completed' && progress().status !== 'idle') {
+        @let errorOrCancel = progress().status === 'error' || progress().status === 'canceled';
+        <p-progressbar
+          [mode]="errorOrCancel ? 'determinate' : 'indeterminate'"
+          [style]="{ height: '3px' }"
+          class="w-full"
+        />
+        <div class="flex items-center gap-2">
+          {{ progress().status }}
+          @if (progress().status === 'error' && progress().errorMessage) {
+            <p-button (click)="op.toggle($event)" variant="text" severity="danger">
+              <ng-icon name="faSolidTriangleExclamation" pButtonIcon></ng-icon>
+            </p-button>
+            <p-popover #op>
+              {{ progress().errorMessage }}
+            </p-popover>
           }
 
-          @if (progress().status === 'completed' && isTruncated()) {
-            <p-message
-              [severity]="'warn'"
-              title="{{
-                'perspective.largeDataset'
-                  | translate: { count: loadedCount(), total: totalCount() }
-              }}"
+          @if (progress().downloadedBytes) {
+            - {{ (progress().downloadedBytes / (1024 * 1024)).toFixed(2) }} MB
+            @if (progress().totalBytes > 0) {
+              / {{ (progress().totalBytes / (1024 * 1024)).toFixed(2) }} MB
+            }
+          }
+          @if (!errorOrCancel) {
+            <p-button
+              (click)="cancel()"
+              [rounded]="true"
+              [text]="true"
+              severity="danger"
+              size="small"
+              title="Cancel download"
             >
-              <ng-icon name="faSolidTriangleExclamation" />
-              {{
-                'perspective.largeDataset'
-                  | translate: { count: loadedCount(), total: totalCount() }
-              }}
-            </p-message>
+              <ng-icon name="faSolidXmark" pButtonIcon />
+            </p-button>
           }
         </div>
-      </div>
-      <perspective-workspace #perspectiveWorkspace theme="GeoNetwork" class="w-full grow" />
+      }
+    </ng-template>
+
+    <div class="py-4">
+      <ng-container
+        *ngTemplateOutlet="
+          progressBarTemplate;
+          context: {
+            progress: progress,
+          }
+        "
+      ></ng-container>
+
+      @if (progress().status === 'completed') {
+        <ng-template #perspectiveToolbar>
+          <div class="flex flex-row gap-4">
+            @if (datasource()?.layer === 'sno_memo') {
+              <p-button
+                (click)="loadMemoDemoWorkspace()"
+                variant="outlined"
+                label="Load MEMO demo workspace"
+              />
+            }
+            <p-button (click)="exportWorkspace()" variant="outlined" label="Export workspace" />
+            <p-fileupload
+              mode="basic"
+              name="workspace[]"
+              chooseIcon="pi pi-upload"
+              accept="application/json"
+              maxFileSize="1000000"
+              (onSelect)="restoreWorkspace($event)"
+              [auto]="true"
+              [pt]="fileUploadPt"
+              chooseLabel="Restore workspace"
+            />
+          </div>
+        </ng-template>
+
+        <app-full-screen-panel
+          [contentClass]="'flex flex-col gap-3'"
+          [fullScreenContentClass]="'flex-1 min-h-0 flex flex-col gap-3'"
+          [toolbarTplRef]="perspectiveToolbar"
+        >
+          <div class="grow min-h-0">
+            <div #viewerContainer class="relative h-full min-h-0 overflow-hidden flex flex-col">
+              @if (progress().status === 'completed' && isTruncated()) {
+                <p-message
+                  [severity]="'warn'"
+                  title="{{
+                    'perspective.largeDataset'
+                      | translate: { count: loadedCount(), total: totalCount() }
+                  }}"
+                >
+                  <ng-icon name="faSolidTriangleExclamation" />
+                  {{
+                    'perspective.largeDataset'
+                      | translate: { count: loadedCount(), total: totalCount() }
+                  }}
+                </p-message>
+              }
+
+              <perspective-workspace #perspectiveWorkspace theme="GeoNetwork" class="w-full grow" />
+            </div>
+          </div>
+        </app-full-screen-panel>
+      }
     </div>
   `,
   styleUrl: './perspective.scss',
@@ -115,6 +238,10 @@ export class Perspective implements OnDestroy {
   private table: any;
   private workspaceLoaded = false;
   private readonly tableName = 'data';
+
+  fileUploadPt: FileUploadPassThrough = {
+    pcChooseButton: { root: 'p-button-outlined' },
+  };
 
   constructor() {
     effect(async () => {
@@ -145,6 +272,7 @@ export class Perspective implements OnDestroy {
 
   private async initialize(): Promise<any> {
     try {
+      this.duckDbService.progress.update((p) => ({ ...p, status: 'initializing' }));
       await Promise.all([
         this.duckDbService.init(),
         this.duckDbService.initializePerspective(this.renderer),
@@ -206,5 +334,36 @@ export class Perspective implements OnDestroy {
 
   async ngOnDestroy() {
     await this.clearPreviousDataIfAny();
+  }
+
+  loadMemoDemoWorkspace() {
+    this.perspectiveWorkspace.nativeElement.restore(MEMO_DEMO_WORKSPACE);
+  }
+
+  async exportWorkspace() {
+    const workspaceState = await this.perspectiveWorkspace.nativeElement.workspace.save();
+    const blob = new Blob([JSON.stringify(workspaceState, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'perspective_workspace.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  restoreWorkspace(event: FileSelectEvent) {
+    const file = event.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const workspaceState = JSON.parse(reader.result as string);
+          this.perspectiveWorkspace.nativeElement.restore(workspaceState);
+        } catch (e) {
+          console.error('Failed to restore workspace:', e);
+        }
+      };
+      reader.readAsText(file);
+    }
   }
 }
