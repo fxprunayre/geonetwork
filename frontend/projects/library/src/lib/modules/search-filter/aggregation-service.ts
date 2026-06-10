@@ -145,7 +145,7 @@ export class AggregationService {
 
       // TODO: OpenApi is not using inBody, so passing large number of ids may hit URL length limits.
       // TODO: Modify OpenApi spec to use POST with body for this endpoint.
-      // Loop on batches of 50 ids
+      // Loop on batches of ids
       const idsArray = Array.from(bucketKeySet);
       const BATCH_SIZE = 30;
 
@@ -182,7 +182,6 @@ export class AggregationService {
                     this.alreadyLoadedTranslations.add(`${currentLang}-${key}`);
                   },
                 );
-
                 this.translateService.setTranslation(currentLang, newTranslations, true);
                 this.inFlightRequests.delete(batchRequestKey);
                 resolve();

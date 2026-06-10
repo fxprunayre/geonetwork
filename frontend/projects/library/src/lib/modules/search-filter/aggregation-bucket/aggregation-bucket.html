@@ -1,6 +1,6 @@
 @switch (layout()) {
   @case ('checkbox') {
-    <div class="flex items-center mb-2">
+    <div class="flex items-center mb-2" [pTooltip]="tooltip()">
       <p-checkbox
         [binary]="true"
         [inputId]="keyName() + '_' + bucket().key"
@@ -10,7 +10,6 @@
       <label
         class="ml-2 line-clamp-1 break-words break-all"
         [for]="keyName() + '_' + bucket().key"
-        [pTooltip]="label()"
         tooltipPosition="right"
       >
         <app-aggregation-bucket-decorator [bucket]="bucket()" [decorator]="decorator()" />
@@ -21,7 +20,7 @@
   @case ('button') {
     <p-button
       [pt]="{ host: { class: 'w-full' }, root: { class: 'w-full' } }"
-      [title]="label()"
+      [title]="tooltip()"
       [variant]="isActive() ? undefined : 'outlined'"
       [severity]="isActive() ? 'primary' : undefined"
       (click)="handleChange(bucket().key, !isActive())"
@@ -42,7 +41,7 @@
     <p-card
       class="w-full text-left"
       (click)="handleChange(bucket().key, !isActive())"
-      [title]="bucket().key | aggregationTranslate: keyName()"
+      [title]="tooltip()"
       [pt]="{
         header: 'bg-primary text-white',
         root: 'overflow-hidden relative aspect-square flex flex-col hover:shadow-xl! transition-shadow duration-300',
@@ -61,7 +60,7 @@
           </div>
         }
         <p class="font-bold text-3xl line-clamp-3 relative z-10">
-          {{ bucket().key | aggregationTranslate: keyName() }}
+          {{ label() }}
         </p>
         @if (!backgroundImage() && !isIconDecorator()) {
           <app-aggregation-bucket-decorator

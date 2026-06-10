@@ -73,6 +73,17 @@ export class AggregationBucket extends SearchBase {
     return `${this.aggregationTranslate.transform(this.bucket().key, this.keyName())}  (${this.decimalPipe.transform(this.bucket().doc_count, undefined, this.translateService.getCurrentLang())})`;
   });
 
+  tooltip = computed(() => {
+    this.translationChange();
+    this.langChange();
+    const definitionKeyWhenKeywordIsUsed = `${this.bucket().key}-definition`;
+    const definition = this.translateService.instant(definitionKeyWhenKeywordIsUsed);
+    if (definition && definition !== definitionKeyWhenKeywordIsUsed) {
+      return definition;
+    }
+    return this.label();
+  });
+
   isActive = computed(() => {
     return this.search.isFilterActive(this.keyName(), this.bucket().key);
   });
