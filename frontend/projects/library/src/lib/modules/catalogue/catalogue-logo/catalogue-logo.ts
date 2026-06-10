@@ -72,7 +72,7 @@ export class CatalogueLogo {
 
   logo = computed(() => {
     const uuid = this.catalogueUuid();
-    return uuid ? `/images/logos/${uuid}.png` : '';
+    return uuid ? `/srv/api/sources/${uuid}/logo` : '/srv/api/site/logo';
   });
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);

@@ -52,7 +52,6 @@ import { RecordFieldDates } from '../record-field-dates/record-field-dates';
 import { RecordFieldType } from '../record-field-type/record-field-type';
 import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
 import { RecordField } from '../record-field/record-field';
-import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
 import { RecordViewHeader } from '../record-view-header/record-view-header';
 import { RecordViewTitle } from '../record-view-title/record-view-title';
 
@@ -95,7 +94,6 @@ export const VALID_TABS = [
     RecordFieldDates,
     RecordFieldType,
     RecordFieldVocabulary,
-    RecordHarvesterLogo,
     RecordViewHeader,
     RecordViewTitle,
     ScrollSpy,
