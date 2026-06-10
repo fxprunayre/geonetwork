@@ -24,71 +24,6 @@ import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-
 import { Datasource } from '../datasource.model';
 import { DuckDbService } from '../duck-db-service';
 
-const MEMO_DEMO_WORKSPACE = {
-  sizes: [0.25, 0.75],
-  detail: {
-    main: {
-      type: 'tab-area',
-      widgets: ['map'],
-      currentIndex: 0,
-    },
-  },
-  viewers: {
-    table: {
-      version: '4.4.1',
-      columns_config: {},
-      plugin: 'Datagrid',
-      plugin_config: {
-        columns: {},
-        scroll_lock: false,
-        edit_mode: 'SELECT_ROW_TREE',
-      },
-      settings: false,
-      table: 'data',
-      theme: null,
-      title: 'Individus',
-      group_by: ['Nom_deploi', 'Nom_indivi'],
-      split_by: [],
-      sort: [],
-      filter: [],
-      group_rollup_mode: 'rollup',
-      expressions: {},
-      columns: ['Date', 'Latitude', 'Longitude', 'Variables'],
-      aggregates: {
-        Date: 'last by index',
-        Longitude: 'high minus low',
-        Variables: 'dominant',
-        Latitude: 'high minus low',
-      },
-    },
-    map: {
-      version: '4.4.1',
-      columns_config: {},
-      plugin: 'Map Scatter',
-      plugin_config: {
-        center: [-1500901.6277789047, -3924407.7503462345],
-        zoom: 2,
-      },
-      settings: false,
-      table: 'data',
-      theme: null,
-      title: 'Map',
-      group_by: [],
-      split_by: ['Nom_indivi'],
-      sort: [['Nom_indivi', 'asc']],
-      filter: [['Nom_deploi', '==', 'ct139']],
-      group_rollup_mode: 'rollup',
-      expressions: {},
-      columns: ['Latitude', 'Longitude', null, null, 'Nom_deploi', 'Nom_indivi', 'Variables'],
-      aggregates: {},
-    },
-  },
-  master: {
-    widgets: ['table'],
-    sizes: [1],
-  },
-};
-
 @Component({
   selector: 'app-perspective',
   imports: [
@@ -164,14 +99,15 @@ const MEMO_DEMO_WORKSPACE = {
       @if (progress().status === 'completed') {
         <ng-template #perspectiveToolbar>
           <div class="flex flex-row gap-4">
-            @if (datasource()?.layer === 'sno_memo') {
+            @let layer = datasource()?.layer;
+            @if (layer && visualisation[layer]) {
               <p-button
-                (click)="loadMemoDemoWorkspace()"
+                (click)="loadVisualisation(layer)"
                 variant="outlined"
-                label="Load MEMO demo workspace"
+                [label]="'Load ' + layer + ' visualisation'"
               />
             }
-            <p-button (click)="exportWorkspace()" variant="outlined" label="Export workspace" />
+            <p-button (click)="exportWorkspace()" variant="outlined" label="Export visualisation" />
             <p-fileupload
               mode="basic"
               name="workspace[]"
@@ -181,7 +117,7 @@ const MEMO_DEMO_WORKSPACE = {
               (onSelect)="restoreWorkspace($event)"
               [auto]="true"
               [pt]="fileUploadPt"
-              chooseLabel="Restore workspace"
+              chooseLabel="Restore visualisation"
             />
           </div>
         </ng-template>
@@ -196,6 +132,7 @@ const MEMO_DEMO_WORKSPACE = {
               @if (progress().status === 'completed' && isTruncated()) {
                 <p-message
                   [severity]="'warn'"
+                  closable
                   title="{{
                     'perspective.largeDataset'
                       | translate: { count: loadedCount(), total: totalCount() }
@@ -241,6 +178,166 @@ export class Perspective implements OnDestroy {
 
   fileUploadPt: FileUploadPassThrough = {
     pcChooseButton: { root: 'p-button-outlined' },
+  };
+
+  visualisation: Record<string, any> = {
+    IFR_LOCATION_PORTS: {
+      sizes: [0.25, 0.75],
+      detail: {
+        main: {
+          type: 'split-area',
+          orientation: 'horizontal',
+          children: [
+            {
+              type: 'tab-area',
+              widgets: ['PERSPECTIVE_GENERATED_ID_0'],
+              currentIndex: 0,
+            },
+            {
+              type: 'tab-area',
+              widgets: ['PERSPECTIVE_GENERATED_ID_1'],
+              currentIndex: 0,
+            },
+          ],
+          sizes: [0.5, 0.5],
+        },
+      },
+      viewers: {
+        PERSPECTIVE_GENERATED_ID_2: {
+          version: '4.4.1',
+          columns_config: {},
+          plugin: 'Datagrid',
+          plugin_config: {
+            columns: {},
+            scroll_lock: false,
+            edit_mode: 'SELECT_ROW_TREE',
+          },
+          settings: false,
+          table: 'data',
+          theme: null,
+          title: null,
+          group_by: ['Country', 'Status'],
+          split_by: [],
+          sort: [],
+          filter: [],
+          group_rollup_mode: 'rollup',
+          expressions: {},
+          columns: ['id'],
+          aggregates: {},
+        },
+        PERSPECTIVE_GENERATED_ID_0: {
+          version: '4.4.1',
+          columns_config: {},
+          plugin: 'Map Scatter',
+          plugin_config: {
+            center: [333110.2341381438, 2510973.7509061927],
+            zoom: 5,
+          },
+          settings: false,
+          table: 'data',
+          theme: null,
+          title: null,
+          group_by: [],
+          split_by: ['Country'],
+          sort: [],
+          filter: [['Country', '==', 'FRA']],
+          group_rollup_mode: 'rollup',
+          expressions: {},
+          columns: ['Longitude', 'Latitude', null, null, 'Name', 'LOCODE', 'Group', 'Status'],
+          aggregates: {},
+        },
+        PERSPECTIVE_GENERATED_ID_1: {
+          version: '4.4.1',
+          columns_config: {},
+          plugin: 'Sunburst',
+          plugin_config: {
+            sunburstLevel: {},
+          },
+          settings: false,
+          table: 'data',
+          theme: null,
+          title: null,
+          group_by: ['Status'],
+          split_by: [],
+          sort: [],
+          filter: [['Country', '==', 'FRA']],
+          group_rollup_mode: 'flat',
+          expressions: {},
+          columns: ['OGC_FID', 'Status', null],
+          aggregates: {
+            OGC_FID: 'count',
+          },
+        },
+      },
+      master: {
+        widgets: ['PERSPECTIVE_GENERATED_ID_2'],
+        sizes: [1],
+      },
+    },
+    sno_memo: {
+      sizes: [0.25, 0.75],
+      detail: {
+        main: {
+          type: 'tab-area',
+          widgets: ['map'],
+          currentIndex: 0,
+        },
+      },
+      viewers: {
+        table: {
+          version: '4.4.1',
+          columns_config: {},
+          plugin: 'Datagrid',
+          plugin_config: {
+            columns: {},
+            scroll_lock: false,
+            edit_mode: 'SELECT_ROW_TREE',
+          },
+          settings: false,
+          table: 'data',
+          theme: null,
+          title: 'Individus',
+          group_by: ['Nom_deploi', 'Nom_indivi'],
+          split_by: [],
+          sort: [],
+          filter: [],
+          group_rollup_mode: 'rollup',
+          expressions: {},
+          columns: ['Date', 'Latitude', 'Longitude', 'Variables'],
+          aggregates: {
+            Date: 'last by index',
+            Longitude: 'high minus low',
+            Variables: 'dominant',
+            Latitude: 'high minus low',
+          },
+        },
+        map: {
+          version: '4.4.1',
+          columns_config: {},
+          plugin: 'Map Scatter',
+          plugin_config: {
+            center: [-1500901.6277789047, -3924407.7503462345],
+            zoom: 2,
+          },
+          settings: false,
+          table: 'data',
+          theme: null,
+          title: 'Map',
+          group_by: [],
+          split_by: ['Nom_indivi'],
+          sort: [['Nom_indivi', 'asc']],
+          filter: [['Nom_deploi', '==', 'ct139']],
+          group_rollup_mode: 'rollup',
+          expressions: {},
+          columns: ['Latitude', 'Longitude', null, null, 'Nom_deploi', 'Nom_indivi', 'Variables'],
+          aggregates: {},
+        },
+      },
+      master: {
+        widgets: ['table'],
+        sizes: [1],
+      },
+    },
   };
 
   constructor() {
@@ -336,8 +433,8 @@ export class Perspective implements OnDestroy {
     await this.clearPreviousDataIfAny();
   }
 
-  loadMemoDemoWorkspace() {
-    this.perspectiveWorkspace.nativeElement.restore(MEMO_DEMO_WORKSPACE);
+  loadVisualisation(layer: string) {
+    this.perspectiveWorkspace.nativeElement.restore(this.visualisation[layer]);
   }
 
   async exportWorkspace() {
