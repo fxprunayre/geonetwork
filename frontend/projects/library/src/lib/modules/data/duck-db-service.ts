@@ -3,6 +3,10 @@ import * as duckdb from '@duckdb/duckdb-wasm';
 import { AsyncDuckDB, AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
 import perspective from '@perspective-dev/client';
 import perspective_viewer from '@perspective-dev/viewer';
+import '@perspective-dev/viewer-d3fc';
+import '@perspective-dev/viewer-datagrid';
+import '@perspective-dev/viewer-openlayers';
+import '@perspective-dev/workspace';
 import { IndexRecord } from 'gn-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { SearchService } from '../search/search-service';
@@ -89,22 +93,13 @@ export class DuckDbService {
     if (this.perspectiveInitialized) return;
 
     try {
-      // Keep CDN assets pinned to the same version as npm packages to avoid wasm/js mismatch.
       const perspectiveVersion = '4.4.1';
-      const scriptUrls = [
-        `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer@${perspectiveVersion}/dist/cdn/perspective-viewer.js`,
-        `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-datagrid@${perspectiveVersion}/dist/cdn/perspective-viewer-datagrid.js`,
-        `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-d3fc@${perspectiveVersion}/dist/cdn/perspective-viewer-d3fc.js`,
-        `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer-openlayers@${perspectiveVersion}/dist/cdn/perspective-viewer-openlayers.js`,
-        `https://cdn.jsdelivr.net/npm/@perspective-dev/workspace@${perspectiveVersion}/dist/cdn/perspective-workspace.js`,
-      ];
       const wasmUrls = [
         `https://cdn.jsdelivr.net/npm/@perspective-dev/server@${perspectiveVersion}/dist/wasm/perspective-server.wasm`,
         `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer@${perspectiveVersion}/dist/wasm/perspective-viewer.wasm`,
       ];
 
       await Promise.all([
-        ...scriptUrls.map((url) => this.loadScript(url, true, renderer)),
         perspective.init_server(fetch(wasmUrls[0])),
         perspective_viewer.init_client(fetch(wasmUrls[1])),
       ]);
@@ -115,22 +110,6 @@ export class DuckDbService {
       console.error(errorMessage, e);
       throw new Error(errorMessage);
     }
-  }
-
-  private loadScript(url: string, module = false, renderer: Renderer2): Promise<void> {
-    return new Promise((resolve, reject) => {
-      if (document.head.querySelector(`script[src="${url}"]`)) {
-        resolve();
-        return;
-      }
-      const script = renderer.createElement('script');
-      script.src = url;
-      script.type = module ? 'module' : 'text/javascript';
-      script.async = false;
-      script.onload = () => resolve();
-      script.onerror = (err: any) => reject(new Error(`Script load error: ${url}`, { cause: err }));
-      renderer.appendChild(document.head, script);
-    });
   }
 
   async getConnection(): Promise<AsyncDuckDBConnection> {
@@ -287,7 +266,9 @@ export class DuckDbService {
       this.loadingMode = 'browser';
     }
 
+    // Duckdb GDAL can not yet read WFS directly
     if (this.loadingMode === 'browser' || ds.format === 'wfs') {
+      // if (this.loadingMode === 'browser') {
       await this.browserDownloadMode(ds, signal);
     } else {
       await this.loadData(this.buildFileName(ds), undefined, ds, signal);
@@ -425,9 +406,18 @@ export class DuckDbService {
     }
   }
 
-  buildFromClause(reader: string, dataTable: string): string {
+  buildFromClause(
+    reader: string,
+    datasource: Datasource | undefined,
+    fileName: string,
+    hasNoData: boolean,
+  ): string {
+    const dataTable = `${datasource && hasNoData ? datasource.url : fileName}`;
     if (reader === 'read_xlsx') {
       return `${reader}('${dataTable}', header = true)`;
+      // TODO: Need duckdb update
+      // } else  if (datasource && datasource.format === 'wfs') {
+      //   return `${reader}('WFS:${datasource.url}', layer='${datasource.layer}')`;
     }
     return `${reader}('${dataTable}')`;
   }
@@ -472,10 +462,7 @@ export class DuckDbService {
       }
 
       if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
-      const fromClause = this.buildFromClause(
-        reader,
-        `${datasource && !data ? datasource.url : fileName}`,
-      );
+      const fromClause = this.buildFromClause(reader, datasource, fileName, !data);
 
       // await this.conn.query("SELECT * FROM st_drivers();").then(function(data) {
       //     const rows = data.toArray();
