@@ -5,7 +5,6 @@ import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-mo
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
 import { RecordFieldOverviewComponent } from '../record-field-overview/record-field-overview.component';
-import { RecordFieldResourceEdition } from '../record-field-resource-edition/record-field-resource-edition';
 import { RecordFieldResourceLastUpdate } from '../record-field-resource-last-update/record-field-resource-last-update';
 import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
 import { RecordHarvesterLogo } from '../record-harvester-logo/record-harvester-logo';
@@ -18,7 +17,6 @@ import { RecordVersions } from '../record-versions/record-versions';
     MarkdownPipe,
     RecordFieldDoi,
     RecordFieldOverviewComponent,
-    RecordFieldResourceEdition,
     RecordFieldResourceLastUpdate,
     RecordFieldVocabulary,
     RecordVersions,

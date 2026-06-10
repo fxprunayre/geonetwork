@@ -28,6 +28,7 @@ import {
 } from '@ng-icons/font-awesome/solid';
 import { TranslateService } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
+import { AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
 import { DataView } from 'primeng/dataview';
 import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { ResultItemList } from '../../search-results/result-item-list/result-item-list';
@@ -35,7 +36,16 @@ import { getAssociationLabel } from '../association-utils';
 
 @Component({
   selector: 'app-associated-records',
-  imports: [DataView, FullScreenPanel, NgIcon, NgTemplateOutlet, ResultItemList],
+  imports: [
+    AccordionPanel,
+    AccordionHeader,
+    AccordionContent,
+    DataView,
+    FullScreenPanel,
+    NgIcon,
+    NgTemplateOutlet,
+    ResultItemList,
+  ],
   providers: [
     provideIcons({
       faSolidBook,

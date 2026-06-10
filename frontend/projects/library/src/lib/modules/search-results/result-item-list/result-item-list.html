@@ -23,7 +23,11 @@
             class="text-primary font-semibold text-base md:text-lg line-clamp-1 min-w-0"
           />
           <div class="flex gap-2 items-center shrink-0">
-            <app-record-field-type [record]="result" class="uppercase font-bold text-xs" />
+            <app-record-field-type
+              [record]="result"
+              [mainTypeOnly]="true"
+              class="uppercase font-bold text-xs"
+            />
             @if (externalUrl()) {
               <ng-container *ngTemplateOutlet="externalUrlIcon" />
             }

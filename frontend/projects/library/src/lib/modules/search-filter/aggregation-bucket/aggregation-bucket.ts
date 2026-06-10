@@ -19,7 +19,6 @@ import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
   selector: 'app-aggregation-bucket',
   imports: [
     AggregationBucketDecorator,
-    AggregationTranslatePipe,
     Button,
     ButtonIcon,
     Card,

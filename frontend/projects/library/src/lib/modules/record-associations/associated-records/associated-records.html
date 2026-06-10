@@ -7,48 +7,57 @@
 </ng-template>
 
 @if (relations().length > 0) {
-  <div class="text-primary text-2xl font-medium my-4 flex items-center gap-2">
-    @let svg = icon();
-    @if (svg) {
-      <ng-icon [svg]="svg"></ng-icon>
-    }
-    {{ label() }}
-  </div>
+  <p-accordion-panel
+    [value]="type()"
+    [attr.data-testid]="'associated-panel-' + type()"
+    [attr.id]="'associated-section-' + type()"
+  >
+    <p-accordion-header>
+      <div class="flex items-center gap-2 text-primary! text-2xl!">
+        @let svg = icon();
+        @if (svg) {
+          <ng-icon [svg]="svg"></ng-icon>
+        }
+        {{ label() }}
+      </div>
+    </p-accordion-header>
+    <p-accordion-content>
+      @let hasPages = relations().length > pageSize;
 
-  @let hasPages = relations().length > pageSize;
-
-  <ng-template #resultsGridTemplate let-record>
-    <div class="w-full has-[>section:empty]:hidden">
-      <section [class]="styleClass()">
-        <p-dataview
-          #dv
-          [value]="relations()"
-          [layout]="'grid'"
-          [rows]="pageSize"
-          [paginator]="relations().length > pageSize"
-          [dt]="{ paginator: { bottom: { border: { width: '0' } } } }"
-        >
-          <ng-template #grid let-items>
-            <div class="grid grid-cols-1 gap-4">
-              @for (record of items; track $index) {
-                <ng-container
-                  *ngTemplateOutlet="
-                    resultTemplate() || defaultHitTemplate;
-                    context: { $implicit: record }
-                  "
-                />
-              }
-            </div>
-          </ng-template>
-        </p-dataview>
-      </section>
-    </div>
-  </ng-template>
-  @if (hasPages) {
-    <app-full-screen-panel>
-      <ng-container *ngTemplateOutlet="resultsGridTemplate"></ng-container>
-    </app-full-screen-panel>
-  } @else {
-    <ng-container *ngTemplateOutlet="resultsGridTemplate"></ng-container>
-  }
+      <ng-template #resultsGridTemplate let-record>
+        <div class="w-full has-[>section:empty]:hidden">
+          <section [class]="styleClass()">
+            <p-dataview
+              #dv
+              [value]="relations()"
+              [layout]="'grid'"
+              [rows]="pageSize"
+              [paginator]="relations().length > pageSize"
+              [dt]="{ paginator: { bottom: { border: { width: '0' } } } }"
+            >
+              <ng-template #grid let-items>
+                <div class="grid grid-cols-1 gap-4">
+                  @for (record of items; track $index) {
+                    <ng-container
+                      *ngTemplateOutlet="
+                        resultTemplate() || defaultHitTemplate;
+                        context: { $implicit: record }
+                      "
+                    />
+                  }
+                </div>
+              </ng-template>
+            </p-dataview>
+          </section>
+        </div>
+      </ng-template>
+      @if (hasPages) {
+        <app-full-screen-panel>
+          <ng-container *ngTemplateOutlet="resultsGridTemplate"></ng-container>
+        </app-full-screen-panel>
+      } @else {
+        <ng-container *ngTemplateOutlet="resultsGridTemplate"></ng-container>
+      }
+    </p-accordion-content>
+  </p-accordion-panel>
 }

@@ -4,6 +4,7 @@ import { AfterViewInit, Component, input, OnDestroy, signal } from '@angular/cor
 interface SectionItem {
   id: string;
   title: string;
+  element: HTMLElement;
 }
 
 @Component({
@@ -56,16 +57,21 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
 
   sections: SectionItem[] = [];
   activeSectionId = signal<string | null>(null);
-  private sectionElements: NodeListOf<HTMLElement> | undefined;
   private scrollContainer: HTMLElement | Window = window;
   private shadowDomContainer: HTMLElement | undefined;
   private ticking = false;
+  private initTimeoutId: ReturnType<typeof setTimeout> | null = null;
+  private instanceId = Math.random().toString(36).slice(2);
 
   ngAfterViewInit() {
-    setTimeout(() => this.initializeScrollSpy());
+    this.initTimeoutId = setTimeout(() => this.initializeScrollSpy(), 100);
   }
 
   ngOnDestroy(): void {
+    if (this.initTimeoutId) {
+      clearTimeout(this.initTimeoutId);
+      this.initTimeoutId = null;
+    }
     this.scrollContainer.removeEventListener('scroll', this.onScroll);
   }
 
@@ -90,33 +96,40 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
   }
 
   initializeScrollSpy(): void {
+    this.scrollContainer.removeEventListener('scroll', this.onScroll);
     this.scrollContainer = this.getScrollParent(this.target() || null);
     this.scrollContainer.addEventListener('scroll', this.onScroll);
+
     const target = this.target();
     if (!target) {
       this.sections = [];
-      this.sectionElements = undefined;
       this.activeSectionId.set(null);
       return;
     }
-    this.sectionElements = target.querySelectorAll(`${this.section()}`);
 
-    this.sections = Array.from(this.sectionElements).flatMap((section) => {
-      const h1 = section.querySelector(this.title());
-      const id = h1?.getAttribute('id');
+    this.sections = Array.from(target.querySelectorAll<HTMLElement>(`${this.section()}`)).flatMap(
+      (section, index) => {
+        const h1 = section.querySelector(this.title());
+        let id = h1?.getAttribute('id');
 
-      if (!id) {
-        console.warn(
-          `Scroll spy is skipping a section because its heading is missing an ID.`,
-          section,
-        );
-        return []; // Skip this section
-      }
+        if (!id && h1 instanceof HTMLElement) {
+          id = `scroll-spy-${this.instanceId}-${index}`;
+          h1.setAttribute('id', id);
+        }
 
-      const title = h1?.textContent?.trim() || section.getAttribute('data-spy-title') || id;
+        if (!id) {
+          console.warn(
+            `Scroll spy is skipping a section because its heading is missing an ID.`,
+            section,
+          );
+          return []; // Skip this section
+        }
 
-      return [{ id, title }];
-    });
+        const title = h1?.textContent?.trim() || section.getAttribute('data-spy-title') || id;
+
+        return [{ id, title, element: section }];
+      },
+    );
 
     if (this.sections.length > 0 && !this.activeSectionId()) {
       this.activeSectionId.set(this.sections[0].id);
@@ -124,24 +137,21 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
   }
 
   scrollTo(id: string): void {
+    const section = this.sections.find((entry) => entry.id === id);
+    if (!section) {
+      return;
+    }
+
+    const targetElement = section.element;
     const isWindow = this.scrollContainer instanceof Window;
 
     if (isWindow && !this.shadowDomContainer) {
-      const targetElement = document.getElementById(id);
-      if (!targetElement) {
-        return;
-      }
       window.scrollTo({
-        top: targetElement.offsetTop - 60,
+        top: window.scrollY + targetElement.getBoundingClientRect().top - 60,
         behavior: 'smooth',
       });
     } else {
       const container = this.shadowDomContainer || (this.scrollContainer as HTMLElement);
-      const targetElement = container.querySelector(`#${id}`);
-
-      if (!targetElement) {
-        return;
-      }
       const top =
         targetElement.getBoundingClientRect().top -
         container.getBoundingClientRect().top +
@@ -166,21 +176,47 @@ export class ScrollSpy implements OnDestroy, AfterViewInit {
     }
   };
 
+  isTopNav(): boolean {
+    return this.navPosition() === 'top';
+  }
+
+  isAsideNav(): boolean {
+    return this.navPosition() === 'aside';
+  }
+
+  isSectionActive(id: string): boolean {
+    return this.activeSectionId() === id;
+  }
+
+  sectionClass(id: string): string {
+    const classes = ['scroll-spy-tab'];
+    if (this.isTopNav()) {
+      classes.push('scroll-spy-tab-top');
+    }
+    if (this.isAsideNav()) {
+      classes.push('scroll-spy-tab-aside');
+    }
+    if (this.isSectionActive(id)) {
+      classes.push('scroll-spy-tab-active');
+    }
+    return classes.join(' ');
+  }
+
   private checkActiveSection(): void {
-    if (!this.sectionElements) return;
+    if (this.sections.length === 0) return;
 
     let currentActive: string | null = null;
     const headerOffset = 80;
 
-    this.sectionElements.forEach((section, idx) => {
-      const rect = section.getBoundingClientRect();
+    this.sections.forEach((section) => {
+      const rect = section.element.getBoundingClientRect();
       let containerTop = 0;
       if (this.scrollContainer instanceof HTMLElement) {
         containerTop = this.scrollContainer.getBoundingClientRect().top;
       }
 
       if (rect.top <= containerTop + headerOffset) {
-        currentActive = this.sections[idx].id;
+        currentActive = section.id;
       }
     });
 

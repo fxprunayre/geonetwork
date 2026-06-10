@@ -1,11 +1,12 @@
 import { Component, computed, input, output, TemplateRef } from '@angular/core';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
+import { Accordion } from 'primeng/accordion';
 import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
 import { AssociatedRecords } from '.././associated-records/associated-records';
 
 @Component({
   selector: 'app-associated-panel',
-  imports: [AssociatedRecords],
+  imports: [Accordion, AssociatedRecords],
   templateUrl: './associated-panel.html',
 })
 export class AssociatedPanel extends RecordFieldBase {

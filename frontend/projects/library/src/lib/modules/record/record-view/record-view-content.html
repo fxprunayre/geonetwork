@@ -14,10 +14,13 @@
     *ngTemplateOutlet="headerTplRef() || defaultHeader; context: { record: record }"
   ></ng-container>
 
-  <!-- Content Templates for Accordion Sections -->
   <ng-template #datesContent>
     <app-record-field>
       <app-record-field-dates [record]="record" />
+    </app-record-field>
+
+    <app-record-field [label]="'record.field.coverage.temporal'">
+      <app-record-field-coverage-temporal [record]="record" />
     </app-record-field>
   </ng-template>
 
@@ -26,23 +29,9 @@
   </ng-template>
 
   <ng-template #aboutContent>
-    <div class="flex flex-row gap-6">
-      <div class="w-3/4">
-        <app-record-field [label]="'record.field.credit'">
-          <app-record-field-credit [record]="record" [withSearchLink]="true" />
-        </app-record-field>
-      </div>
-    </div>
-    <app-associated-panel
-      [record]="record"
-      [include]="[RelatedItemType.Parent]"
-      (onRecordClick)="handleRecordClick($event)"
-    />
-    <app-associated-panel
-      [record]="record"
-      [include]="[RelatedItemType.Children]"
-      (onRecordClick)="handleRecordClick($event)"
-    />
+    <app-record-field [label]="'record.field.credit'">
+      <app-record-field-credit [record]="record" [withSearchLink]="true" />
+    </app-record-field>
   </ng-template>
 
   <ng-template #dataAccessContent>
@@ -58,7 +47,7 @@
     <app-data-model-panel [record]="record" />
   </ng-template>
 
-  <ng-template #licenseContent>
+  <ng-template #usageAndAccessContent>
     <app-record-field [label]="'record.field.useLimitation'">
       <app-record-field-constraints
         [record]="record"
@@ -97,9 +86,6 @@
   <ng-template #coverageContent>
     <app-record-field [label]="'record.field.coverage.spatial'">
       <app-record-field-coverage-spatial [record]="record" />
-    </app-record-field>
-    <app-record-field [label]="'record.field.coverage.temporal'">
-      <app-record-field-coverage-temporal [record]="record" />
     </app-record-field>
     <app-record-field [label]="'record.field.coverage.vertical'">
       <app-record-field-coverage-vertical [record]="record" />
@@ -177,17 +163,33 @@
 
       <p-tabpanels>
         <p-tabpanel value="about">
+          @let sectionVisibility = aboutSectionVisibility();
+
           @let sections =
             [
-              { label: 'about', tpl: aboutContent },
-              { label: 'dates', tpl: datesContent },
-              { label: 'classification', tpl: classificationContent },
-              { label: 'usageAndAccess', tpl: licenseContent },
-              { label: 'dataModel', tpl: dataModel, hidden: !record.info?.hasDataModel },
-              { label: 'coverage', tpl: coverageContent },
-              { label: 'spatialInfo', tpl: spatialInfoContent },
-              { label: 'lineage', tpl: lineageContent },
+              { label: 'about', tpl: aboutContent, hidden: !sectionVisibility.about },
+              { label: 'lineage', tpl: lineageContent, hidden: !sectionVisibility.lineage },
+              { label: 'dates', tpl: datesContent, hidden: !sectionVisibility.dates },
+              { label: 'coverage', tpl: coverageContent, hidden: !sectionVisibility.coverage },
+              {
+                label: 'spatialInfo',
+                tpl: spatialInfoContent,
+                hidden: !sectionVisibility.spatialInfo,
+              },
+              { label: 'dataModel', tpl: dataModel, hidden: !sectionVisibility.dataModel },
+              {
+                label: 'usageAndAccess',
+                tpl: usageAndAccessContent,
+                hidden: !sectionVisibility.usageAndAccess,
+              },
+              {
+                label: 'classification',
+                tpl: classificationContent,
+                hidden: !sectionVisibility.classification,
+              },
             ];
+
+          @let contactAfterSection = 'usageAndAccess';
 
           <div class="flex flex-row gap-4">
             <div class="md:w-3/4" #spyTarget>
@@ -198,21 +200,21 @@
                       | translate: { resourceType: record.resourceType };
 
                   @if (section.hidden !== true) {
-                    @if (section.label === 'lineage') {
-                      <p-accordion-panel
-                        [value]="section.label"
-                        [attr.data-testid]="'accordion-panel-' + section.label"
-                      >
-                        <p-accordion-header class="text-primary! text-2xl!">{{
-                          sectionLabel
-                        }}</p-accordion-header>
-                        <p-accordion-content>
-                          <ng-container
-                            *ngTemplateOutlet="section.tpl; context: { record: record }"
-                          />
-                        </p-accordion-content>
-                      </p-accordion-panel>
+                    <p-accordion-panel
+                      [value]="section.label"
+                      [attr.data-testid]="'accordion-panel-' + section.label"
+                    >
+                      <p-accordion-header class="text-primary! text-2xl!">{{
+                        sectionLabel
+                      }}</p-accordion-header>
+                      <p-accordion-content>
+                        <ng-container
+                          *ngTemplateOutlet="section.tpl; context: { record: record }"
+                        />
+                      </p-accordion-content>
+                    </p-accordion-panel>
 
+                    @if (section.label === contactAfterSection) {
                       @for (role of contactRoles(); track role) {
                         <p-accordion-panel
                           [value]="'contact-' + role"
@@ -231,20 +233,6 @@
                           </p-accordion-content>
                         </p-accordion-panel>
                       }
-                    } @else {
-                      <p-accordion-panel
-                        [value]="section.label"
-                        [attr.data-testid]="'accordion-panel-' + section.label"
-                      >
-                        <p-accordion-header class="text-primary! text-2xl!">{{
-                          sectionLabel
-                        }}</p-accordion-header>
-                        <p-accordion-content>
-                          <ng-container
-                            *ngTemplateOutlet="section.tpl; context: { record: record }"
-                          />
-                        </p-accordion-content>
-                      </p-accordion-panel>
                     }
                   }
                 }
@@ -281,9 +269,20 @@
 
         @if (recordHasAssociatedRecords()) {
           <p-tabpanel value="associated-resources">
-            <ng-container
-              *ngTemplateOutlet="relatedContent; context: { record: record }"
-            ></ng-container>
+            <div class="flex flex-row gap-4">
+              <div class="w-full md:w-3/4" #associatedResourcesSpyTarget>
+                <ng-container
+                  *ngTemplateOutlet="relatedContent; context: { record: record }"
+                ></ng-container>
+              </div>
+              <div class="hidden md:block md:w-1/4 sticky top-10 self-start">
+                <app-scroll-spy
+                  [target]="associatedResourcesSpyTarget"
+                  [section]="'p-accordion > * > p-accordion-panel'"
+                  [title]="'p-accordion-header'"
+                />
+              </div>
+            </div>
           </p-tabpanel>
         }
 

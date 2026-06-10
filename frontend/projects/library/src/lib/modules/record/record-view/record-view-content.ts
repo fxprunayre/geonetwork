@@ -199,7 +199,95 @@ export class RecordViewContent {
     return nonExcludedTypes.length > 0;
   });
 
+  private hasContent(value: unknown): boolean {
+    if (value == null) {
+      return false;
+    }
+    if (typeof value === 'string') {
+      return value.trim().length > 0;
+    }
+    if (Array.isArray(value)) {
+      return value.some((entry) => this.hasContent(entry));
+    }
+    if (typeof value === 'object') {
+      return Object.values(value as Record<string, unknown>).some((entry) =>
+        this.hasContent(entry),
+      );
+    }
+    return true;
+  }
+
+  private hasRelatedItems(type: RelatedItemType): boolean {
+    const related = this.record()?.related;
+    if (!related) {
+      return false;
+    }
+    return (related[type as keyof typeof related]?.length || 0) > 0;
+  }
+
+  aboutSectionVisibility = computed(() => {
+    const record = this.record();
+    if (!record) {
+      return {
+        about: false,
+        lineage: false,
+        dates: false,
+        coverage: false,
+        spatialInfo: false,
+        dataModel: false,
+        usageAndAccess: false,
+        classification: false,
+      };
+    }
+
+    const hasAbout = this.hasContent((record as any).resourceCreditObject);
+
+    const hasLineage =
+      this.hasContent(this.getLineage()) ||
+      this.hasRelatedItems(RelatedItemType.Sources) ||
+      this.hasRelatedItems(RelatedItemType.Hassources);
+
+    const hasDates = this.hasContent([
+      (record as any).resourceDate,
+      (record as any).resourceTemporalExtentDetails,
+    ]);
+
+    const hasCoverage = this.hasContent([
+      (record as any).geom,
+      (record as any).extentDescription,
+      (record as any).extentIdentifier,
+      (record as any).verticalRange,
+    ]);
+
+    const hasSpatialInfo = this.hasContent([
+      record.resourceType,
+      record.resolutionDistance,
+      record.resolutionScaleDenominator,
+      record.coordinateSystem,
+    ]);
+
+    const hasUsageAndAccess = this.hasContent([
+      (record as any).MD_LegalConstraintsUseLimitationObject,
+      (record as any).cl_accessConstraints,
+      (record as any).MD_LegalConstraintsOtherConstraintsObject,
+    ]);
+
+    const hasClassification = this.hasContent([(record as any).allKeywords]);
+
+    return {
+      about: hasAbout,
+      lineage: hasLineage,
+      dates: hasDates,
+      coverage: hasCoverage,
+      spatialInfo: hasSpatialInfo,
+      dataModel: !!record.info?.hasDataModel,
+      usageAndAccess: hasUsageAndAccess,
+      classification: hasClassification,
+    };
+  });
+
   expandedSections = computed(() => {
+    const visibility = this.aboutSectionVisibility();
     const staticSections = [
       'about',
       'dates',
@@ -209,7 +297,7 @@ export class RecordViewContent {
       'spatialInfo',
       'lineage',
       'classification',
-    ];
+    ].filter((section) => visibility[section as keyof typeof visibility]);
     const contactSections = this.contactRoles().map((role: any) => 'contact-' + role);
     return [...staticSections, ...contactSections];
   });

@@ -1,6 +1,6 @@
 @if (record().resourceType) {
-  <div class="justify-items-center text-secondary-500">
-    @for (type of record().resourceType; track $index) {
+  <div class="flex flex-row gap-2 items-center text-secondary-500">
+    @for (type of selectedResourceType(); track $index) {
       <p-chip class="">
         <ng-icon [name]="getResourceTypeIcon(type)" class="mr-1" />
         <span>{{ type | translate }}</span>

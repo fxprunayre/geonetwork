@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   faSolidBook,
@@ -38,6 +38,7 @@ import { RecordFieldBase } from '../record-field-base/record-field-base';
 })
 export class RecordFieldType extends RecordFieldBase {
   withSpatialType = input<boolean>(false);
+  mainTypeOnly = input<boolean>(false);
 
   private readonly resourceTypeIconMap: Record<string, string> = {
     dataset: 'faSolidDatabase',
@@ -58,6 +59,11 @@ export class RecordFieldType extends RecordFieldBase {
     video: 'faSolidCloud',
     stereoModel: 'faSolidCube',
   };
+
+  selectedResourceType = computed(() => {
+    const types = this.record().resourceType || [];
+    return this.mainTypeOnly() ? [types[0]] : types;
+  });
 
   getResourceTypeIcon(type: string): string {
     return this.resourceTypeIconMap[type] || 'faSolidDatabase';

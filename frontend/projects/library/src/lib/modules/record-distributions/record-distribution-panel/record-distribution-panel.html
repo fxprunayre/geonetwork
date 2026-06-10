@@ -5,10 +5,11 @@
         <div class="flex-none">
           <app-link-badge [link]="link" />
         </div>
-        <div class="flex-1 min-w-0">
-          @let label = link.nameObject?.['default'] || link.urlObject?.['default'];
-          @let isNetworkLink = ['NETWORK:LINK', 'COPYFILE'].includes(link.protocol || '');
 
+        @let label = link.nameObject?.['default'] || link.urlObject?.['default'];
+        @let isNetworkLink = ['NETWORK:LINK', 'COPYFILE', 'FILE'].includes(link.protocol || '');
+
+        <div class="flex-1 min-w-0">
           @if (isNetworkLink) {
             <p-iftalabel>
               <label>{{ label }}</label>
@@ -41,6 +42,8 @@
         <div class="flex-none w-full md:w-auto">
           @if (link.protocol?.match('OGC:WMS|OGC:WMTS|application/vnd.ogc.wms_xml')) {
             <app-add-layer-to-map [record]="record()" [link]="link" />
+          } @else if (isNetworkLink) {
+            <app-copy-input [value]="link.urlObject?.['default']" [layout]="'icon'" />
           } @else if (isExplorable(link)) {
             <div class="flex flex-col md:flex-row gap-2">
               <p-button

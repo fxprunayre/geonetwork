@@ -14,6 +14,7 @@ import { Button } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { IftaLabel } from 'primeng/iftalabel';
 import { InputText } from 'primeng/inputtext';
+import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
 import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 import { AddAllLayersToMap } from '../add-all-layers-to-map/add-all-layers-to-map';
 import { AddLayerToMap } from '../add-layer-to-map/add-layer-to-map';
@@ -30,9 +31,10 @@ import { RecordDistributionFieldBase } from '../record-distribution-field-base/r
     AccordionPanel,
     AddAllLayersToMap,
     AddLayerToMap,
-    DownloadData,
     Button,
     Card,
+    CopyInput,
+    DownloadData,
     IftaLabel,
     InputText,
     KeyValuePipe,

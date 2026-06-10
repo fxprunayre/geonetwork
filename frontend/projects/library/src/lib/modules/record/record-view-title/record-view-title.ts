@@ -44,7 +44,11 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
           </div>
         </div>
         <div class="flex flex-row gap-3 items-center">
-          <app-record-field-type [record]="record()" [withSpatialType]="true" />
+          <app-record-field-type
+            [record]="record()"
+            [withSpatialType]="true"
+            [mainTypeOnly]="true"
+          />
 
           <app-record-field-codelist [record]="record()" codelist="cl_status" class="grow" />
 
