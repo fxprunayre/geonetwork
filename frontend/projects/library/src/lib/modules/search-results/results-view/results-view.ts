@@ -1,6 +1,10 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, ContentChild, inject, input, output, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidPlugCircleExclamation } from '@ng-icons/font-awesome/solid';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MessageModule } from 'primeng/message';
 import { SearchAppLayout } from '../../config/model/gnConfig';
 import { SearchBase } from '../../search/search-base/search-base';
 import { NoResultFound } from '../no-result-found/no-result-found';
@@ -19,7 +23,11 @@ import { ResultsPaginatorComponent } from '../results-paginator/results-paginato
     ResultItemList,
     ResultItemTable,
     ResultsPaginatorComponent,
+    TranslatePipe,
+    MessageModule,
+    NgIcon,
   ],
+  providers: [provideIcons({ faSolidPlugCircleExclamation })],
   templateUrl: './results-view.html',
 })
 export class ResultsView extends SearchBase {

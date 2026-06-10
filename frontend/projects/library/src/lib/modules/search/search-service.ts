@@ -406,6 +406,9 @@ export class SearchService {
             Record<string, elasticsearch.AggregationsAggregate>
           >,
         ) => {
+          if (!response || !response.hits || !response.hits.hits) {
+            throw new Error('Search API returned invalid or empty content.');
+          }
           return {
             results: response.hits.hits.map((hit) => {
               return this.buildIndexRecord(hit);
@@ -430,6 +433,9 @@ export class SearchService {
             Record<string, elasticsearch.AggregationsAggregate>
           >,
         ) => {
+          if (!response || !response.hits || !response.hits.hits) {
+            throw new Error('Search API returned invalid or empty content.');
+          }
           return {
             results: response.hits.hits.map((hit) => {
               return this.buildIndexRecord(hit);

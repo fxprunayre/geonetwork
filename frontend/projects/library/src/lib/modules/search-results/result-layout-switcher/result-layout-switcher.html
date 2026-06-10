@@ -1,19 +1,21 @@
-<p-selectButton
-  [options]="options()"
-  [ngModel]="layout()"
-  (ngModelChange)="setLayout($event)"
-  [allowEmpty]="false"
->
-  <ng-template let-item #item>
-    <ng-icon
-      [title]="'results.layout.' + item | translate"
-      [name]="
-        item === 'list'
-          ? 'faSolidList'
-          : item === 'grid'
-            ? 'faSolidTableCellsLarge'
-            : 'faSolidTable'
-      "
-    />
-  </ng-template>
-</p-selectButton>
+@if (search.hasResults()) {
+  <p-selectButton
+    [options]="options()"
+    [ngModel]="layout()"
+    (ngModelChange)="setLayout($event)"
+    [allowEmpty]="false"
+  >
+    <ng-template let-item #item>
+      <ng-icon
+        [title]="'results.layout.' + item | translate"
+        [name]="
+          item === 'list'
+            ? 'faSolidList'
+            : item === 'grid'
+              ? 'faSolidTableCellsLarge'
+              : 'faSolidTable'
+        "
+      />
+    </ng-template>
+  </p-selectButton>
+}

@@ -43,14 +43,20 @@
             <div class="w-full flex flex-col gap-4">
               <ng-template #allWorkResults>
                 <div class="w-full">
-                  <app-results-number scope="user-records" labelKey="user.contributions" class="" />
+                  @if (!search().hasError()) {
+                    <app-results-number
+                      scope="user-records"
+                      labelKey="user.contributions"
+                      class=""
+                    />
 
-                  @if (search().results().length === 0) {
-                    <p class="text-center text-lg text-surface-500 py-20">
-                      {{ 'user.dashboard.noWork' | translate }}
-                    </p>
-                  } @else {
-                    <app-results-view scope="user-records" [layout]="'table'" />
+                    @if (search().results().length === 0) {
+                      <p class="text-center text-lg text-surface-500 py-20">
+                        {{ 'user.dashboard.noWork' | translate }}
+                      </p>
+                    } @else {
+                      <app-results-view scope="user-records" [layout]="'table'" />
+                    }
                   }
                 </div>
               </ng-template>

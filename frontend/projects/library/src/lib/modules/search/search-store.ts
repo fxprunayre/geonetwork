@@ -12,11 +12,13 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { TranslateService } from '@ngx-translate/core';
 import {
   AggregationsAggregationContainer,
   AggregationsStringTermsAggregate,
   elasticsearch,
 } from 'gn-api-client';
+import { MessageService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
 import { AuthStore } from '../authentication/auth.store';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
@@ -58,6 +60,7 @@ export const initialState: SearchState = {
   language: DEFAULT_LANGUAGE,
   isAppendMode: false,
   layout: 'list',
+  hasError: false,
 };
 
 export const SearchStore = signalStore(
@@ -116,6 +119,8 @@ export const SearchStore = signalStore(
       store,
       searchService = inject(SearchService),
       searchRouteService = inject(SearchRouteService),
+      messageService = inject(MessageService),
+      translateService = inject(TranslateService),
     ) => {
       const setRouting = () => {
         if (!store.routing()) {
@@ -221,7 +226,7 @@ export const SearchStore = signalStore(
             debounceTime(300),
             distinctUntilChanged(),
             tap(() => {
-              patchState(store, { isLoading: true });
+              patchState(store, { isLoading: true, hasError: false });
               setRouting();
             }),
             switchMap((searchFilterParameters) => {
@@ -258,7 +263,18 @@ export const SearchStore = signalStore(
                         totalCount: response.totalCount,
                       });
                     },
-                    error: console.error,
+                    error: (err) => {
+                      console.error(err);
+                      patchState(store, { hasError: true });
+                      messageService.add({
+                        severity: 'error',
+                        summary: translateService.instant('shared.error') || 'Error',
+                        detail:
+                          translateService.instant('search.notAvailable') ||
+                          'Search is currently not available.',
+                        life: 10000,
+                      });
+                    },
                     finalize: () => patchState(store, { isLoading: false }),
                   }),
                 );
@@ -271,7 +287,7 @@ export const SearchStore = signalStore(
             filter(() => store.totalCount() > 0),
             distinctUntilChanged(),
             tap(() => {
-              patchState(store, { isLoading: true });
+              patchState(store, { isLoading: true, hasError: false });
               setRouting();
             }),
             switchMap((searchRequestPageParameters) => {
@@ -296,7 +312,18 @@ export const SearchStore = signalStore(
                         totalCount: response.totalCount,
                         isAppendMode: false,
                       }),
-                    error: console.error,
+                    error: (err) => {
+                      console.error(err);
+                      patchState(store, { hasError: true });
+                      messageService.add({
+                        severity: 'error',
+                        summary: translateService.instant('shared.error') || 'Error',
+                        detail:
+                          translateService.instant('search.notAvailable') ||
+                          'Search is currently not available.',
+                        life: 10000,
+                      });
+                    },
                     finalize: () => patchState(store, { isLoading: false }),
                   }),
                 );

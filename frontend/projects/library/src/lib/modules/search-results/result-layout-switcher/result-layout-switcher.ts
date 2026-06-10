@@ -5,6 +5,7 @@ import { faSolidList, faSolidTable, faSolidTableCellsLarge } from '@ng-icons/fon
 import { TranslatePipe } from '@ngx-translate/core';
 import { SelectButton } from 'primeng/selectbutton';
 import { SearchAppLayout } from '../../config/model/gnConfig';
+import { SearchBase } from '../../search/search-base/search-base';
 
 @Component({
   selector: 'app-result-layout-switcher',
@@ -13,7 +14,7 @@ import { SearchAppLayout } from '../../config/model/gnConfig';
   templateUrl: './result-layout-switcher.html',
   viewProviders: [provideIcons({ faSolidList, faSolidTableCellsLarge, faSolidTable })],
 })
-export class ResultLayoutSwitcher {
+export class ResultLayoutSwitcher extends SearchBase {
   options = input.required<SearchAppLayout[]>();
   layout = input.required<SearchAppLayout>();
   layoutChange = output<SearchAppLayout>();

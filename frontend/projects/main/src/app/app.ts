@@ -6,6 +6,7 @@ import {
   APPLICATION_CONFIGURATION,
   AuthStore,
   BaseComponent,
+  CatalogueStore,
   DEFAULT_LANGUAGE,
   DEFAULT_SEARCH_APP_CONFIGURATION,
   DEFAULT_SEARCH_APP_HITS_PER_PAGE_OPTIONS,
@@ -23,9 +24,14 @@ import { MapComponent } from './components/map/map';
 import { MenuComponent } from './components/menu/menu';
 import { Search } from './components/search/search';
 
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidPlugCircleExclamation } from '@ng-icons/font-awesome/solid';
+import { TranslateModule } from '@ngx-translate/core';
+import { MessageModule } from 'primeng/message';
+
 @Component({
   selector: 'app-root',
-  providers: [SearchService],
+  providers: [SearchService, provideIcons({ faSolidPlugCircleExclamation })],
   imports: [
     RouterOutlet,
     FormsModule,
@@ -35,6 +41,9 @@ import { Search } from './components/search/search';
     Toast,
     MapComponent,
     Search,
+    MessageModule,
+    TranslateModule,
+    NgIcon,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -47,6 +56,7 @@ export class App extends BaseComponent implements OnInit {
   private searchService = inject(SearchService);
   private authStore = inject(AuthStore);
   appConfig = inject(APPLICATION_CONFIGURATION);
+  catalogueStore = inject(CatalogueStore);
 
   protected readonly title = signal('main');
   isMapActive = signal(false);

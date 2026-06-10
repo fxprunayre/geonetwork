@@ -339,6 +339,7 @@
         }
       }
     },
+    "notAvailable": "La recherche n'est actuellement pas disponible.",
     "result": "résultat",
     "results": "résultats",
     "searchLink": "Rechercher {{value}}",
@@ -364,10 +365,12 @@
     "title_error": "Erreur"
   },
   "shared": {
+    "error": "Erreur",
     "fullscreen": {
       "enter": "Plein écran",
       "exit": "Quitter le mode plein écran"
     },
+    "serverDown": "Le serveur semble être hors ligne ou injoignable.",
     "show-more-toggle": {
       "less": "Réduire",
       "more": "Lire la suite"

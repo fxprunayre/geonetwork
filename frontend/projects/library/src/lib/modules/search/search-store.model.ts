@@ -40,6 +40,7 @@ export type SearchState = {
   isAppendMode: boolean;
   layout: SearchAppLayout;
   language: string;
+  hasError: boolean;
 };
 
 export interface SearchFilterParameters {

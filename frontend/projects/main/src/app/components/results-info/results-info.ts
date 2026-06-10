@@ -8,6 +8,7 @@ import {
   ResultsNumberComponent,
   ResultsSorterComponent,
   SearchAppLayout,
+  SearchBase,
 } from 'gn-library';
 import { ButtonModule } from 'primeng/button';
 import { Card } from 'primeng/card';
@@ -29,7 +30,7 @@ import { SearchFilters } from '../search-filters/search-filters';
   ],
   templateUrl: './results-info.html',
 })
-export class ResultsInfo {
+export class ResultsInfo extends SearchBase {
   layout = model<SearchAppLayout>('list');
   @Input() layoutOptions: SearchAppLayout[] = [];
 

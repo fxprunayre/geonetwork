@@ -337,6 +337,7 @@
         }
       }
     },
+    "notAvailable": "Search is currently not available.",
     "result": "result",
     "results": "results",
     "searchLink": "Search for {{value}}",
@@ -362,10 +363,12 @@
     "title_error": "Error"
   },
   "shared": {
+    "error": "Error",
     "fullscreen": {
       "enter": "Full screen",
       "exit": "Exit full screen"
     },
+    "serverDown": "Server seems to be down or unreachable.",
     "show-more-toggle": {
       "less": "View less",
       "more": "Read more"

@@ -338,6 +338,7 @@
         }
       }
     },
+    "notAvailable": "Zoeken is momenteel niet beschikbaar.",
     "result": "result",
     "results": "results",
     "searchLink": "Search for {{value}}",
@@ -363,10 +364,12 @@
     "title_error": "Fout"
   },
   "shared": {
+    "error": "Fout",
     "fullscreen": {
       "enter": "Volledig scherm",
       "exit": "Volledig scherm verlaten"
     },
+    "serverDown": "De server lijkt onbereikbaar te zijn.",
     "show-more-toggle": {
       "less": "View less",
       "more": "Read more"
