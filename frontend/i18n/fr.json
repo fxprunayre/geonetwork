@@ -249,7 +249,7 @@
       "versionChain": "Historique des versions"
     },
     "view": {
-      "notFoundOrNotShared": "La fiche avec l'identifiant {{uuid}} n'a pas été trouvée ou n'est pas partagée avec vous. Essayez de vous connecter ou effectuez une autre recherche.",
+      "notFoundOrNotShared": "La fiche avec l'identifiant {{uuid}} n'a pas été trouvée ou n'est pas partagée avec vous.",
       "section": {
         "about": "À propos",
         "associatedResources": "Resources associées",
@@ -372,10 +372,12 @@
       "exit": "Quitter le mode plein écran"
     },
     "serverDown": "Le serveur semble être hors ligne ou injoignable.",
+    "serverDownHint": "Cela peut être dû à une maintenance du serveur ou à des problèmes techniques. Veuillez réessayer plus tard ou contacter le support si le problème persiste.",
     "show-more-toggle": {
       "less": "Réduire",
       "more": "Lire la suite"
-    }
+    },
+    "signInOrDoAnotherSearch": "Essayez de vous connecter ou effectuez une autre recherche."
   },
   "space": {
     "main": "Tous"

@@ -74,6 +74,7 @@ export * from './lib/shared/history-service';
 export * from './lib/shared/icon-style-service';
 export * from './lib/shared/p-shadowdomstyle-component';
 export * from './lib/shared/theming-service';
+export * from './lib/shared/widgets/alert-panel/alert-panel';
 export * from './lib/shared/widgets/color-picker/color-picker';
 export * from './lib/shared/widgets/copy-input/copy-input';
 export * from './lib/shared/widgets/delete-confirmation-dialog/delete-confirmation-dialog';

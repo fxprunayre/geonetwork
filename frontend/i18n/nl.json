@@ -248,7 +248,7 @@
       "versionChain": "Versiegeschiedenis"
     },
     "view": {
-      "notFoundOrNotShared": "Record met identificatie {{uuid}} is niet gevonden of wordt niet met u gedeeld. Probeer in te loggen of probeer een andere zoekopdracht.",
+      "notFoundOrNotShared": "Record met identificatie {{uuid}} is niet gevonden of wordt niet met u gedeeld.",
       "section": {
         "about": "Over deze",
         "associatedResources": "Gerelateerde bronnen",
@@ -371,10 +371,12 @@
       "exit": "Volledig scherm verlaten"
     },
     "serverDown": "De server lijkt onbereikbaar te zijn.",
+    "serverDownHint": "Dit kan te wijten zijn aan serveronderhoud of technische problemen. Probeer het later opnieuw of neem contact op met de ondersteuning als het probleem aanhoudt.",
     "show-more-toggle": {
-      "less": "View less",
-      "more": "Read more"
-    }
+      "less": "Minder weergeven",
+      "more": "Meer lezen"
+    },
+    "signInOrDoAnotherSearch": "Probeer in te loggen of voer een andere zoekopdracht uit."
   },
   "space": {
     "main": "Alle"

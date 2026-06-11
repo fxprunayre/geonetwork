@@ -27,6 +27,7 @@ import { Search } from './components/search/search';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidPlugCircleExclamation } from '@ng-icons/font-awesome/solid';
 import { TranslateModule } from '@ngx-translate/core';
+import { AlertPanel } from 'gn-library';
 import { MessageModule } from 'primeng/message';
 
 @Component({
@@ -44,6 +45,7 @@ import { MessageModule } from 'primeng/message';
     MessageModule,
     TranslateModule,
     NgIcon,
+    AlertPanel,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

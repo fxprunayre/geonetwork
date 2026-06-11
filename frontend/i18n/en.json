@@ -247,7 +247,7 @@
       "versionChain": "Version history"
     },
     "view": {
-      "notFoundOrNotShared": "Record with identifier {{uuid}} was not found or is not shared with you. Try to sign in or do another search.",
+      "notFoundOrNotShared": "Record with identifier {{uuid}} was not found or is not shared with you.",
       "section": {
         "about": "About",
         "associatedResources": "Associated resources",
@@ -370,10 +370,12 @@
       "exit": "Exit full screen"
     },
     "serverDown": "Server seems to be down or unreachable.",
+    "serverDownHint": "This may be due to server maintenance or technical issues. Please try again later or contact support if the problem persists.",
     "show-more-toggle": {
       "less": "View less",
       "more": "Read more"
-    }
+    },
+    "signInOrDoAnotherSearch": "Try to sign in or do another search."
   },
   "space": {
     "main": "All"

@@ -1,13 +1,14 @@
-<main class="flex flex-row">
+<main class="flex flex-row h-screen">
   @if (catalogueStore.isServerDown()) {
-    <p-message severity="error" class="w-full flex flex-row items-center p-6 gap-4 m-6">
-      <div class="text-9xl mb-2">
-        <ng-icon name="faSolidPlugCircleExclamation" />
-      </div>
-      <div class="text-xl font-medium">
-        {{ 'shared.serverDown' | translate }}
-      </div>
-    </p-message>
+    <div class="w-full flex p-8 items-center justify-center h-full">
+      <app-alert-panel
+        severity="error"
+        icon="faSolidPlugCircleExclamation"
+        [title]="'shared.serverDown' | translate"
+        [hint]="'shared.serverDownHint' | translate"
+      >
+      </app-alert-panel>
+    </div>
   } @else {
     <app-menu class="sticky top-0 h-screen self-start z-40 print:hidden" />
     <!-- <app-menu class="absolute top-0 m-2 self-start print:hidden"/> -->

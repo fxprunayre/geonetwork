@@ -11,10 +11,12 @@ import {
 } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
+import { provideIcons } from '@ng-icons/core';
+import { faSolidLock } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RelatedItemType } from 'gn-api-client';
-import { Message } from 'primeng/message';
 import { catchError, map, of, throwError } from 'rxjs';
+import { AlertPanel } from '../../../shared/widgets/alert-panel/alert-panel';
 import { SearchService } from '../../search/search-service';
 import { RecordViewSkeleton } from '../record-view-skeleton/record-view-skeleton';
 import { RecordViewContent } from './record-view-content';
@@ -22,12 +24,21 @@ import { RecordViewContent } from './record-view-content';
 @Component({
   selector: 'app-record-view',
   standalone: true,
-  imports: [Message, RecordViewContent, RecordViewSkeleton, TranslatePipe],
+  imports: [RecordViewContent, RecordViewSkeleton, TranslatePipe, AlertPanel],
+  viewProviders: [provideIcons({ faSolidLock })],
   template: `
     @if (recordResource.isLoading()) {
       <app-record-view-skeleton />
     } @else if (recordStatus()) {
-      <p-message severity="error">{{ recordStatus() | translate }}</p-message>
+      <div class="p-8 pb-32 h-[450px]">
+        <app-alert-panel
+          severity="error"
+          icon="faSolidLock"
+          [title]="recordStatus()! | translate: { uuid: uuid() }"
+          [hint]="'shared.signInOrDoAnotherSearch' | translate"
+        >
+        </app-alert-panel>
+      </div>
     } @else {
       <app-record-view-content
         [record]="record()"
