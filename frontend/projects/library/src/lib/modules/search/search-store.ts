@@ -13,11 +13,7 @@ import {
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  AggregationsAggregationContainer,
-  AggregationsStringTermsAggregate,
-  elasticsearch,
-} from 'gn-api-client';
+import { AggregationsStringTermsAggregate, elasticsearch } from 'gn-api-client';
 import { MessageService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
 import { AuthStore } from '../authentication/auth.store';
@@ -440,23 +436,31 @@ export const SearchStore = signalStore(
           return (aggregationValues as AggregationsStringTermsAggregate).sum_other_doc_count! > 0;
         },
         loadMoreTerms(field: string, size: number = 10) {
-          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as (
-            | string
-            | Record<string, elasticsearch.AggregationsAggregationContainer>
-          )[];
-          const aggregation = aggregationsConfig.find((agg) => {
-            if (typeof agg === 'string') {
-              return agg === field;
-            } else {
-              return Object.keys(agg)[0] === field;
-            }
-          }) as Record<string, AggregationsAggregationContainer>;
+          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as any[];
+          const configIndex = aggregationsConfig.findIndex((agg) =>
+            typeof agg === 'string' ? agg === field : Object.keys(agg)[0] === field,
+          );
 
-          if (!aggregation || !aggregation[field].terms) {
+          if (configIndex === -1) return;
+
+          let aggObj = aggregationsConfig[configIndex];
+          if (typeof aggObj === 'string') {
+            aggObj = { [field]: { terms: { field: field, size: DEFAULT_AGGREGATION_SIZE } } };
+            aggregationsConfig[configIndex] = aggObj;
+          }
+
+          const aggField = aggObj[field];
+          if (!aggField.terms) {
             return;
           }
 
-          aggregation[field].terms.size = (aggregation[field].terms.size || 10) + size;
+          if (!aggField.meta) aggField.meta = {};
+          if (aggField.meta.initialSize === undefined) {
+            aggField.meta.initialSize = aggField.terms.size || DEFAULT_AGGREGATION_SIZE;
+          }
+
+          aggField.terms.size = (aggField.terms.size || DEFAULT_AGGREGATION_SIZE) + size;
+          aggField.meta.expanded = true;
 
           searchService
             .updateAggregation(field, {
@@ -479,57 +483,42 @@ export const SearchStore = signalStore(
             });
         },
         hasExpandedTerms(field: string): boolean {
-          const aggregationsConfig = store.aggregationsConfig() as (
-            | string
-            | Record<string, elasticsearch.AggregationsAggregationContainer>
-          )[];
-          const aggregation = aggregationsConfig.find((agg) => {
-            if (typeof agg === 'string') {
-              return agg === field;
-            } else {
-              return Object.keys(agg)[0] === field;
-            }
-          }) as Record<string, AggregationsAggregationContainer>;
-
-          if (!aggregation) {
-            return false;
-          }
-
-          const layout = aggregation[field].meta?.layout || 'checkbox';
-          if (
-            !aggregation[field].terms ||
-            layout !== 'checkbox' // tree, select, card do not support load more/less
-          ) {
-            return false;
-          }
-
-          return (
-            (aggregation[field].terms.size || DEFAULT_AGGREGATION_SIZE) > DEFAULT_AGGREGATION_SIZE
+          const aggregationsConfig = store.aggregationsConfig() as any[];
+          const aggObj = aggregationsConfig.find((agg) =>
+            typeof agg === 'string' ? agg === field : Object.keys(agg)[0] === field,
           );
+
+          if (!aggObj || typeof aggObj === 'string') {
+            return false;
+          }
+
+          return !!aggObj[field].meta?.expanded;
         },
         loadLessTerms(field: string, size: number = 10) {
-          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as (
-            | string
-            | Record<string, elasticsearch.AggregationsAggregationContainer>
-          )[];
-          const aggregation = aggregationsConfig.find((agg) => {
-            if (typeof agg === 'string') {
-              return agg === field;
-            } else {
-              return Object.keys(agg)[0] === field;
-            }
-          }) as Record<string, AggregationsAggregationContainer>;
+          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as any[];
+          const configIndex = aggregationsConfig.findIndex((agg) =>
+            typeof agg === 'string' ? agg === field : Object.keys(agg)[0] === field,
+          );
 
-          if (!aggregation || !aggregation[field].terms) {
+          if (configIndex === -1) return;
+
+          let aggObj = aggregationsConfig[configIndex];
+          if (typeof aggObj === 'string' || !aggObj[field].terms) {
             return;
           }
 
-          const currentSize = aggregation[field].terms.size || DEFAULT_AGGREGATION_SIZE;
+          const aggField = aggObj[field];
+          const currentSize = aggField.terms.size || DEFAULT_AGGREGATION_SIZE;
+          const initialSize = aggField.meta?.initialSize || DEFAULT_AGGREGATION_SIZE;
+
           let newSize = currentSize - size;
-          if (newSize < DEFAULT_AGGREGATION_SIZE) {
-            newSize = DEFAULT_AGGREGATION_SIZE;
+          if (newSize <= initialSize) {
+            newSize = initialSize;
+            if (aggField.meta) {
+              aggField.meta.expanded = false;
+            }
           }
-          aggregation[field].terms.size = newSize;
+          aggField.terms.size = newSize;
 
           searchService
             .updateAggregation(field, {

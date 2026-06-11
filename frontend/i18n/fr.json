@@ -294,6 +294,7 @@
       "availableInServices-availableInDownloadService": "Service de téléchargement",
       "availableInServices-availableInViewService": "Service de visualisation",
       "cl_status.key": "Statut de la ressource",
+      "cl_topic.key": "Thèmes",
       "creationYearForResource": "Année de création",
       "groupPublishedId": "Catalogues",
       "isHarvested": "Moissonné",

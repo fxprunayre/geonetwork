@@ -292,6 +292,7 @@
       "availableInServices-availableInDownloadService": "Download service",
       "availableInServices-availableInViewService": "View service",
       "cl_status.key": "Resource status",
+      "cl_topic.key": "Themes",
       "creationYearForResource": "Creation year",
       "groupPublishedId": "Groups",
       "isHarvested": "Harvested",
