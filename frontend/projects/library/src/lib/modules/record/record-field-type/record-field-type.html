@@ -2,8 +2,14 @@
   <div class="flex flex-row gap-2 items-center text-secondary-500">
     @for (type of selectedResourceType(); track $index) {
       <p-chip class="">
-        <ng-icon [name]="getResourceTypeIcon(type)" class="mr-1" />
-        <span>{{ type | translate }}</span>
+        <ng-icon
+          [name]="getResourceTypeIcon(type)"
+          [title]="type | translate"
+          [class.mr-1]="layout() !== 'icon'"
+        />
+        @if (layout() !== 'icon') {
+          <span>{{ type | translate }}</span>
+        }
       </p-chip>
     }
     @let spatialType = record()['cl_spatialRepresentationType'];
@@ -11,8 +17,14 @@
       @for (type of spatialType; track $index) {
         <ng-icon name="faSolidChevronRight" />
         <p-chip>
-          <ng-icon [name]="getSpatialTypeIcon(type.key)" class="mr-1" />
-          <span>{{ type.default }}</span>
+          <ng-icon
+            [name]="getSpatialTypeIcon(type.key)"
+            [title]="type.default"
+            [class.mr-1]="layout() !== 'icon'"
+          />
+          @if (layout() !== 'icon') {
+            <span>{{ type.default }}</span>
+          }
         </p-chip>
       }
     }

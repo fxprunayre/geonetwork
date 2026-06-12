@@ -37,6 +37,7 @@ import { RecordFieldBase } from '../record-field-base/record-field-base';
   templateUrl: './record-field-type.html',
 })
 export class RecordFieldType extends RecordFieldBase {
+  layout = input<'icon' | ''>('');
   withSpatialType = input<boolean>(false);
   mainTypeOnly = input<boolean>(false);
 
