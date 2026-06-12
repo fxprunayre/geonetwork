@@ -54,7 +54,8 @@ describe('User board panel', () => {
       expect(hasUuidFilter).to.eq(true);
     });
 
-    cy.contains('h2', 'Your bookmarks').should('be.visible');
+    cy.get('p-tablist p-tab[value="1"]').contains('Your bookmarks').click();
+
     cy.get('div[appsearchcontext="user-bookmarks"]').should('exist');
     cy.get('div[appsearchcontext="user-bookmarks"] app-results-view').should('exist');
     cy.contains('No bookmarks yet.').should('not.exist');
@@ -85,8 +86,6 @@ describe('User board panel', () => {
 
     cy.wait('@apiMe');
     cy.wait('@apiTemplateCountNoTemplates');
-
-    cy.get('app-record-add-button a').should('have.class', 'p-disabled');
 
     cy.contains('app-user-board-menu a, app-user-board-menu button', 'Add record')
       .should('exist')

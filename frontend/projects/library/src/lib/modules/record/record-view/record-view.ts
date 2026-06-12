@@ -94,29 +94,42 @@ export class RecordView {
           catchError((error: unknown) => {
             const isUnsupportedVersionsError =
               error instanceof HttpErrorResponse && error.status === 400;
-            if (!isUnsupportedVersionsError) {
-              return throwError(() => error);
+            if (isUnsupportedVersionsError) {
+              return this.searchService.getById(uuid, [...this.recordRelatedTypes]);
             }
-            return this.searchService.getById(uuid, [...this.recordRelatedTypes]);
+            if (
+              error instanceof HttpErrorResponse &&
+              (error.status === 404 || error.status === 403)
+            ) {
+              return of(null);
+            }
+            return throwError(() => error);
           }),
         )
         .pipe(
           map((result) => {
-            if (result == null) {
-              throw new Error('record.view.notFoundOrNotShared');
-            }
             return result;
           }),
         );
     },
   });
 
-  record = computed(() => this.recordResource.value());
-  recordStatus = computed(
-    () =>
-      (this.recordResource.error() as Error)?.message ??
-      (this.recordResource.error() ? 'record.view.notFoundOrNotShared' : undefined),
-  );
+  record = computed(() => {
+    const data = this.recordResource.value();
+    return data === null ? undefined : data;
+  });
+
+  recordStatus = computed(() => {
+    const error = this.recordResource.error() as Error;
+    if (error) {
+      return error.message ?? 'record.view.notFoundOrNotShared';
+    }
+    const data = this.recordResource.value();
+    if (data === null) {
+      return 'record.view.notFoundOrNotShared';
+    }
+    return undefined;
+  });
 
   constructor() {
     const destroyRef = inject(DestroyRef);

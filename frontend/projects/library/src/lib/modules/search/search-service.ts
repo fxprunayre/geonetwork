@@ -508,6 +508,10 @@ export class SearchService {
             Record<string, elasticsearch.AggregationsAggregate>
           >,
         ) => {
+          if (!response || !response.hits) {
+            throw new Error('Search API returned invalid or empty content.');
+          }
+
           const hits = response.hits.hits;
 
           if (hits.length === 0) {

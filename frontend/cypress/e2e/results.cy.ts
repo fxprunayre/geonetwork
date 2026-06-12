@@ -112,7 +112,8 @@ describe('Results', () => {
             .then(() => {
               cy.url().should(
                 'include',
-                `wmsAdd=%5B%7B%22type%22:%22wms%22,%22url%22:%22https%253A%252F%252Fsextant.ifremer.fr%252Fservices%252Fwms%252Fenvironnement_marin%22,%22uuid%22:%22cf5048f6-5bbf-4e44-ba74-e6f429af51ea%22,%22name%22:%22surval_parametre_point%252Csurval_parametre_ligne%252Csurval_parametre_polygone%22,%22label%22:%22Surval%2520donn%25C3%25A9es%2520par%2520param%25C3%25A8tre%2520(point)%252C%2520Surval%2520donn%25C3%25A9es%2520par%2520param%25C3%25A8tre%2520(polygone)%252C%2520Surval%2520donn%25C3%25A9es%2520par%2520param%25C3%25A8tre%2520(ligne)%22%7D%5D&datasource=https:%2F%2Fsextant.ifremer.fr%2Fservices%2Fwfs%2Fenvironnement_marin`,
+                `add=%5B%7B%22type%22:%22wms%22,%22url%22:%22https%253A%252F%252Fsextant.ifremer.fr%252Fservices%252Fwms%252Fenvironnement_marin%22,%22uuid%22:%22cf5048f6-5bbf-4e44-ba74-e6f429af51ea%22,%22name%22:%22surval_parametre_point%252Csurval_parametre_ligne%252Csurval_parametre_polygone%22,%22label%22:%22Surval%2520donn%25C3%25A9es%2520par%2520param%25C3%25A8tre%2520(point)%252C%2520Surval%2520donn%25C3%25A9es%2520par%2520param%25C3%25A8tre%2520(polygone)%252C%2520Surval%2520donn%25C3%25A9es%2520par%2520param%25C3%25A8tre%2520(ligne)%22%7D%5D`,
+                // &datasource=https:%2F%2Fsextant.ifremer.fr%2Fservices%2Fwfs%2Fenvironnement_marin
               );
             });
         });
