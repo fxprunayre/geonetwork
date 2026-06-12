@@ -394,16 +394,31 @@ export class DuckDbService {
         }
       }
 
+      const isCsv =
+        inferredExt === 'csv' || ds.format === 'csv' || fileUrl.toLowerCase().includes('.csv');
+      const finalBuffer = isCsv ? this.ensureUtf8Encoding(buffer) : buffer;
+
       const finalFileName = inferredExt
         ? this.buildFileName(ds, inferredExt)
         : this.buildFileName(ds);
-      await this.loadData(finalFileName, buffer, ds, signal);
+      await this.loadData(finalFileName, finalBuffer, ds, signal);
     } catch (e: any) {
       if (e.name === 'AbortError' || signal.aborted) {
         this.progress.update((p) => ({ ...p, status: 'canceled' }));
       } else {
         console.warn(`Failed to load from URL: ${e?.message || e}`);
       }
+    }
+  }
+
+  private ensureUtf8Encoding(buffer: ArrayBuffer): ArrayBuffer {
+    try {
+      new TextDecoder('utf-8', { fatal: true }).decode(buffer);
+      return buffer;
+    } catch (e) {
+      console.warn('File is not valid UTF-8. Attempting to convert from ISO-8859-1 to UTF-8.');
+      const text = new TextDecoder('iso-8859-1').decode(buffer);
+      return new TextEncoder().encode(text).buffer;
     }
   }
 
@@ -415,10 +430,7 @@ export class DuckDbService {
   ): string {
     const dataTable = `${datasource && hasNoData ? datasource.url : fileName}`;
     if (reader === 'read_xlsx') {
-      return `${reader}('${dataTable}', header = true)`;
-      // TODO: Need duckdb update
-      // } else  if (datasource && datasource.format === 'wfs') {
-      //   return `${reader}('WFS:${datasource.url}', layer='${datasource.layer}')`;
+      return `${reader}('${dataTable}', header = true, all_varchar = true)`;
     }
     return `${reader}('${dataTable}')`;
   }
