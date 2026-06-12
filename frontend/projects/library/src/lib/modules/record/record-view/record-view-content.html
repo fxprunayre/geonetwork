@@ -32,7 +32,33 @@
     <app-record-field [label]="'record.field.credit'">
       <app-record-field-credit [record]="record" [withSearchLink]="true" />
     </app-record-field>
+
+    @let lineage = getLineage();
+
+    @if (lineage) {
+      <app-record-field [label]="'record.field.lineage'">
+        <app-show-more-toggle>
+          <p class="leading-relaxed markdown-content" [innerHTML]="lineage | markdown | async"></p>
+        </app-show-more-toggle>
+      </app-record-field>
+    }
   </ng-template>
+
+  <!--<ng-template #lineageContent>
+    <app-record-field>
+      <app-show-more-toggle>
+        <p
+          class="leading-relaxed markdown-content"
+          [innerHTML]="getLineage() | markdown | async"
+        ></p>
+      </app-show-more-toggle>
+    </app-record-field>
+    <app-associated-panel
+      [record]="record"
+      [include]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
+      (onRecordClick)="handleRecordClick($event)"
+    />
+  </ng-template>-->
 
   <ng-template #dataAccessContent>
     <app-record-distribution-panel [record]="record" />
@@ -65,22 +91,6 @@
         type="MD_LegalConstraintsOtherConstraintsObject"
       />
     </app-record-field>
-  </ng-template>
-
-  <ng-template #lineageContent>
-    <app-record-field>
-      <app-show-more-toggle>
-        <p
-          class="leading-relaxed markdown-content"
-          [innerHTML]="getLineage() | markdown | async"
-        ></p>
-      </app-show-more-toggle>
-    </app-record-field>
-    <app-associated-panel
-      [record]="record"
-      [include]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
-      (onRecordClick)="handleRecordClick($event)"
-    />
   </ng-template>
 
   <ng-template #coverageContent>
@@ -168,7 +178,6 @@
           @let sections =
             [
               { label: 'about', tpl: aboutContent, hidden: !sectionVisibility.about },
-              { label: 'lineage', tpl: lineageContent, hidden: !sectionVisibility.lineage },
               { label: 'dates', tpl: datesContent, hidden: !sectionVisibility.dates },
               { label: 'coverage', tpl: coverageContent, hidden: !sectionVisibility.coverage },
               {

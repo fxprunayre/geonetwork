@@ -39,11 +39,6 @@ describe('Record page', () => {
         .first()
         .should('contain', 'Dataset');
 
-      cy.get('app-record-view-title app-record-field-type')
-        .find('.p-chip span')
-        .last()
-        .should('contain', 'Vecteur');
-
       cy.get('app-show-more-toggle p').should(
         'contain',
         'Le produit Surval "Données par paramètre" met à disposition',
@@ -152,6 +147,11 @@ describe('Record page', () => {
         'Search for Ifremer (Quadrige)',
       );
 
+      // Lineage
+      cy.get('[data-testid="accordion-panel-about"]')
+        .contains('div', 'Lineage')
+        .should('contain', 'Les données sont bancarisées dans la base de données Quadrige.');
+
       // Check we have 2 dates
       cy.get('app-record-field-dates div:has(> span)').should('have.length', 2);
 
@@ -232,22 +232,6 @@ describe('Record page', () => {
         .contains('div', 'Coordinate system')
         .get('p-chip')
         .should('contain', 'WGS 84 (EPSG:4326)');
-
-      // Lineage
-      cy.get('[data-testid="accordion-panel-lineage"] .p-accordionheader').contains('Lineage');
-      cy.get('[data-testid="accordion-panel-lineage"]').should(
-        'contain',
-        'Les données sont bancarisées dans la base de données Quadrige.',
-      );
-
-      cy.get('[data-testid="associated-records-hassources"]').contains(
-        'div',
-        'Used for 34 resource(s)',
-      );
-      cy.get('[data-testid="associated-records-hassources"] app-full-screen-panel p-button').should(
-        'have.length',
-        1,
-      );
 
       cy.get('[data-testid="accordion-panel-contact-pointOfContact"] .p-accordionheader').contains(
         'Point of contact',

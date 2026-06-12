@@ -61,6 +61,35 @@ describe('User board panel', () => {
     cy.contains('No bookmarks yet.').should('not.exist');
   });
 
+  it('should display user contributions results as table with resource type as icon, title and updated column', () => {
+    cy.visitPage('dashboard');
+
+    cy.wait('@apiMe');
+    cy.wait('@apiUserRecordsSearch');
+
+    cy.get('div[appsearchcontext="user-records"] app-results-view').should('exist');
+    cy.get('div[appsearchcontext="user-records"] p-table').should('exist');
+
+    cy.get('div[appsearchcontext="user-records"] p-table th')
+      .eq(0)
+      .should('contain', 'Resource type');
+    cy.get('div[appsearchcontext="user-records"] p-table th').eq(1).should('contain', 'Title');
+    cy.get('div[appsearchcontext="user-records"] p-table th').eq(2).should('contain', 'Updated');
+
+    cy.get('div[appsearchcontext="user-records"] p-table tbody tr')
+      .first()
+      .within(() => {
+        // First column: Resource type as icon
+        cy.get('td').eq(0).find('app-record-field-type ng-icon').should('exist');
+
+        // Second column: Title
+        cy.get('td').eq(1).find('app-record-field-title').should('exist');
+
+        // Third column: Updated date
+        cy.get('td').eq(2).find('span.text-sm').should('exist');
+      });
+  });
+
   it('should disable add record buttons when there are no templates', () => {
     cy.intercept('POST', '**/search/records/_search*', (req) => {
       const body = Cypress._.isString(req.body) ? JSON.parse(req.body) : req.body;

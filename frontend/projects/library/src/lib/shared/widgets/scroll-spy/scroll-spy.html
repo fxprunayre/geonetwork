@@ -12,7 +12,7 @@
   </div>
 </ng-template>
 
-<div [class]="isAsideNav() ? 'flex gap-8' : ''">
+<div [class]="isAsideNav() ? 'flex' : ''">
   @if (isTopNav()) {
     <nav class="sticky top-0 z-10 bg-white/95 w-full p-2">
       <ng-container *ngTemplateOutlet="navigation" />
@@ -22,7 +22,7 @@
     <ng-content />
   </main>
   @if (isAsideNav()) {
-    <aside class="hidden md:inline w-40 p-4 sticky top-4 h-full">
+    <aside class="hidden md:inline w-60 p-4 sticky top-4 h-full">
       <ng-container *ngTemplateOutlet="navigation" />
     </aside>
   }

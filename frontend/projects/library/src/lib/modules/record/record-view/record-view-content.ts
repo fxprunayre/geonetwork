@@ -178,10 +178,7 @@ export class RecordViewContent {
     return Array.from(roles);
   });
 
-  excludedTypesForAssociatedTab: RelatedItemType[] = [
-    RelatedItemType.Sources,
-    RelatedItemType.Hassources,
-  ];
+  excludedTypesForAssociatedTab: RelatedItemType[] = [];
 
   recordHasAssociatedRecords = computed(() => {
     const record = this.record();
@@ -240,12 +237,15 @@ export class RecordViewContent {
       };
     }
 
-    const hasAbout = this.hasContent((record as any).resourceCreditObject);
+    const hasAbout = this.hasContent([
+      (record as any).resourceCreditObject,
+      (record as any).lineageObject,
+    ]);
 
-    const hasLineage =
-      this.hasContent(this.getLineage()) ||
-      this.hasRelatedItems(RelatedItemType.Sources) ||
-      this.hasRelatedItems(RelatedItemType.Hassources);
+    // const hasLineage =
+    //   this.hasContent(this.getLineage()) ||
+    //   this.hasRelatedItems(RelatedItemType.Sources) ||
+    //   this.hasRelatedItems(RelatedItemType.Hassources);
 
     const hasDates = this.hasContent([
       (record as any).resourceDate,
@@ -276,7 +276,7 @@ export class RecordViewContent {
 
     return {
       about: hasAbout,
-      lineage: hasLineage,
+      // lineage: hasLineage,
       dates: hasDates,
       coverage: hasCoverage,
       spatialInfo: hasSpatialInfo,

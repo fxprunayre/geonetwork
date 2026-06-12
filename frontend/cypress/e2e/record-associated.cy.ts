@@ -18,5 +18,15 @@ describe('Record page - Associated resources', () => {
       'div',
       'Composed of 8 resource(s)',
     );
+
+    cy.get('[data-testid="associated-records-hassources"]').contains(
+      'div',
+      'Used for 34 resource(s)',
+    );
+
+    cy.get('[data-testid="associated-records-hassources"] app-full-screen-panel p-button').should(
+      'have.length',
+      1,
+    );
   });
 });
