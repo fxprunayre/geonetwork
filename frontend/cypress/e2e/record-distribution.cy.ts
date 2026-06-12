@@ -23,6 +23,12 @@ describe('Record page - Distribution', () => {
       .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
       .find('ng-icon')
       .should('have.attr', 'title', 'OGC:WFS');
+
+    cy.get('[data-testid="distribution-panel-download"]')
+      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
+      .find('span')
+      .should('contain', 'WFS');
+
     cy.get('[data-testid="distribution-panel-download"]')
       .contains('a', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
       .should('have.attr', 'href', 'https://sextant.ifremer.fr/services/wfs/environnement_marin')
