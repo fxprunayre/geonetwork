@@ -45,8 +45,8 @@ export const DEFAULT_MAP_CONTEXT = {
     },
   ],
   view: {
-    center: [-4.56243, 0],
-    zoom: 1,
+    extent: [-180, -90, 180, 90],
+    maxZoom: 12,
   },
 };
 
@@ -289,7 +289,7 @@ export const DEFAULT_RECORD_DETAILS_APP_CONFIGURATION: RecordDetailsApp = {
   mainThesaurus: [],
   distribution: DEFAULT_RECORD_DETAILS_DISTRIBUTION_CONFIGURATION,
   mapLayerDisplayTarget: MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
-  // mapLayerDisplayTarget: MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
+  coverageSpatialDisplayType: 'dynamicMap',
 };
 
 export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {

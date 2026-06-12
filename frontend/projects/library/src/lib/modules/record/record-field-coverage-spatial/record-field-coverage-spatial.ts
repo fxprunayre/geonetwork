@@ -1,23 +1,57 @@
-import { Component, computed, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  viewChildren,
+  ViewEncapsulation,
+} from '@angular/core';
+import { createMapFromContext } from '@geospatial-sdk/openlayers';
 import { TranslateService } from '@ngx-translate/core';
+import { transformExtent } from 'ol/proj';
+import Fill from 'ol/style/Fill';
+import Stroke from 'ol/style/Stroke';
+import Style from 'ol/style/Style';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { DEFAULT_SPACE } from '../../config/gn-constants';
+import { DEFAULT_MAP_CONTEXT, DEFAULT_SPACE } from '../../config/gn-constants';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordinate/record-field-coverage-coordinate';
 
 @Component({
   selector: 'app-record-field-coverage-spatial',
   imports: [RecordFieldCoverageCoordinate],
+  encapsulation: ViewEncapsulation.None,
+  styles: `
+    @import 'ol/ol.css';
+    app-record-field-coverage-spatial .ol-control button {
+      background-color: var(--p-primary-500, #093564);
+      color: white;
+    }
+    app-record-field-coverage-spatial .ol-control button:hover,
+    app-record-field-coverage-spatial .ol-control button:focus {
+      background-color: var(--p-primary-600, #082d55);
+    }
+  `,
   template: `
     @for (bbox of geoms(); track $index) {
       @if (bbox) {
         <div class="relative w-3/5 mx-auto m-12">
-          <img
-            [src]="overviewUrl()"
-            [alt]="altText()"
-            [title]="altText()"
-            class="w-full rounded border border-gray-200 shadow-sm"
-          />
+          @if (
+            appConfiguration().config?.apps?.record?.coverageSpatialDisplayType === 'dynamicMap'
+          ) {
+            <div
+              class="w-full h-75 bg-slate-100 rounded border border-gray-200 shadow-sm"
+              #map
+            ></div>
+          } @else {
+            <img
+              [src]="overviewUrl()"
+              [alt]="altText()"
+              [title]="altText()"
+              class="w-full rounded border border-gray-200 shadow-sm"
+            />
+          }
 
           <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <app-record-field-coverage-coordinate
@@ -55,7 +89,7 @@ import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordina
     }
   `,
 })
-export class RecordFieldCoverageSpatial extends RecordFieldBase {
+export class RecordFieldCoverageSpatial extends RecordFieldBase implements AfterViewInit {
   translateService = inject(TranslateService);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
@@ -131,5 +165,78 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase {
       points.push(points[0]);
     }
     return `POLYGON((${points.join(', ')}))`;
+  }
+
+  maps = viewChildren<ElementRef<HTMLDivElement>>('map');
+
+  // Convert hex color to rgba with alpha
+  hexToRgba(hex: string, alpha: number): string {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  ngAfterViewInit() {
+    const mapElements = this.maps();
+
+    this.geoms().forEach((bbox: any, index: number) => {
+      const mapElement = mapElements[index]?.nativeElement;
+      if (mapElement) {
+        // Deep clone so multiple bbox maps on the same page don't append to a single reference
+        const mapContext: any = JSON.parse(JSON.stringify(DEFAULT_MAP_CONTEXT));
+        mapContext.layers.push({
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: bbox.geom,
+              },
+            ],
+          },
+        });
+        const map = createMapFromContext(mapContext, mapElement);
+
+        setTimeout(() => {
+          map.updateSize();
+
+          const computedStyle = getComputedStyle(document.documentElement);
+          const rawPrimaryColor =
+            computedStyle.getPropertyValue('--p-primary-500').trim() ||
+            computedStyle.getPropertyValue('--p-primary-color').trim() ||
+            '#093564';
+
+          const primaryColor = rawPrimaryColor.startsWith('#') ? rawPrimaryColor : '#093564';
+          const fillRgba = this.hexToRgba(primaryColor, 0.5);
+
+          const layers = map.getLayers().getArray();
+          const geojsonLayer: any = layers[layers.length - 1];
+          if (geojsonLayer && typeof geojsonLayer.setStyle === 'function') {
+            geojsonLayer.setStyle(
+              new Style({
+                stroke: new Stroke({
+                  color: 'white',
+                  width: 2,
+                }),
+                fill: new Fill({
+                  color: fillRgba,
+                }),
+              }),
+            );
+          }
+
+          const extentIn3857 = transformExtent(
+            [bbox.west, bbox.south, bbox.east, bbox.north],
+            'EPSG:4326',
+            'EPSG:3857',
+          );
+
+          map.getView().fit(extentIn3857, { padding: [10, 10, 10, 10], maxZoom: 12 });
+        }, 100);
+      }
+    });
   }
 }

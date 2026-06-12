@@ -77,4 +77,5 @@ export interface RecordDetailsApp extends App {
   distribution?: DistributionConfig;
   mainThesaurus?: string[];
   mapLayerDisplayTarget?: MapLayerDisplayTarget;
+  coverageSpatialDisplayType?: 'image' | 'dynamicMap';
 }
