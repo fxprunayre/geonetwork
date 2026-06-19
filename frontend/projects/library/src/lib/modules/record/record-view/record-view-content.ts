@@ -253,6 +253,7 @@ export class RecordViewContent {
     ]);
 
     const hasCoverage = this.hasContent([
+      (record as any).shape,
       (record as any).geom,
       (record as any).extentDescription,
       (record as any).extentIdentifier,

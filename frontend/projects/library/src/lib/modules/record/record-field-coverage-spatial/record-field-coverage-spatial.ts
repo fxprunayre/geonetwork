@@ -4,12 +4,17 @@ import {
   computed,
   ElementRef,
   inject,
+  input,
   viewChildren,
   ViewEncapsulation,
 } from '@angular/core';
 import { createMapFromContext } from '@geospatial-sdk/openlayers';
 import { TranslateService } from '@ngx-translate/core';
+import GeoJSON from 'ol/format/GeoJSON';
+import WKT from 'ol/format/WKT';
+import GeometryCollection from 'ol/geom/GeometryCollection';
 import { transformExtent } from 'ol/proj';
+import CircleStyle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
@@ -34,62 +39,70 @@ import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordina
     }
   `,
   template: `
-    @for (bbox of geoms(); track $index) {
-      @if (bbox) {
-        <div class="relative w-3/5 mx-auto m-12">
-          @if (
-            appConfiguration().config?.apps?.record?.coverageSpatialDisplayType === 'dynamicMap'
-          ) {
-            <div
-              class="w-full h-75 bg-slate-100 rounded border border-gray-200 shadow-sm"
-              #map
-            ></div>
-          } @else {
-            <img
-              [src]="overviewUrl()"
-              [alt]="altText()"
-              [title]="altText()"
-              class="w-full rounded border border-gray-200 shadow-sm"
-            />
-          }
+    <div class="flex flex-col gap-2">
+      @for (bbox of displayedGeoms(); track $index) {
+        @if (bbox) {
+          <div class="relative w-4/5 mx-auto m-8">
+            @if (
+              appConfiguration().config?.apps?.record?.coverageSpatialDisplayType === 'dynamicMap'
+            ) {
+              <div
+                class="w-full h-75 bg-slate-100 rounded border border-gray-200 shadow-sm"
+                #map
+              ></div>
+            } @else {
+              <img
+                [src]="overviewUrl(bbox.wkt)"
+                [alt]="altText()"
+                [title]="altText()"
+                class="w-full rounded border border-gray-200 shadow-sm"
+              />
+            }
 
-          <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <app-record-field-coverage-coordinate
-              [value]="bbox.north"
-              label="record.field.coverage.north"
-              class="block w-32"
-            ></app-record-field-coverage-coordinate>
-          </div>
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <app-record-field-coverage-coordinate
+                [value]="bbox.north"
+                label="record.field.coverage.north"
+                class="block w-32"
+              ></app-record-field-coverage-coordinate>
+            </div>
 
-          <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2">
-            <app-record-field-coverage-coordinate
-              [value]="bbox.west"
-              label="record.field.coverage.west"
-              class="block w-32"
-            ></app-record-field-coverage-coordinate>
-          </div>
+            <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2">
+              <app-record-field-coverage-coordinate
+                [value]="bbox.west"
+                label="record.field.coverage.west"
+                class="block w-32"
+              ></app-record-field-coverage-coordinate>
+            </div>
 
-          <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2">
-            <app-record-field-coverage-coordinate
-              [value]="bbox.east"
-              label="record.field.coverage.east"
-              class="block w-32"
-            ></app-record-field-coverage-coordinate>
-          </div>
+            <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2">
+              <app-record-field-coverage-coordinate
+                [value]="bbox.east"
+                label="record.field.coverage.east"
+                class="block w-32"
+              ></app-record-field-coverage-coordinate>
+            </div>
 
-          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
-            <app-record-field-coverage-coordinate
-              [value]="bbox.south"
-              label="record.field.coverage.south"
-              class="block w-32"
-            ></app-record-field-coverage-coordinate>
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
+              <app-record-field-coverage-coordinate
+                [value]="bbox.south"
+                label="record.field.coverage.south"
+                class="block w-32"
+              ></app-record-field-coverage-coordinate>
+            </div>
           </div>
-        </div>
+        }
       }
-    }
+    </div>
   `,
 })
 export class RecordFieldCoverageSpatial extends RecordFieldBase implements AfterViewInit {
+  allGeomsInOneMap = input(true);
+
+  geoJsonFormat = new GeoJSON();
+
+  wktFormat = new WKT();
+
   translateService = inject(TranslateService);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
@@ -115,39 +128,41 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
   });
 
   geoms = computed(() => {
-    const geometries = this.record()?.geom;
-    if (!geometries) {
+    const shapes = this.toArray(this.record()?.shape);
+    if (shapes.length > 0) {
+      const shapeGeometries =
+        shapes
+          .map((shape: any) => this.getShapeBoundsAndWkt(shape))
+          .filter((g: any) => g !== undefined) || [];
+      if (shapeGeometries.length > 0) {
+        return shapeGeometries;
+      }
+    }
+
+    const geometries = this.toArray(this.record()?.geom);
+    if (geometries.length === 0) {
       return [];
     }
+
     return (
       geometries
         .map((geom: any) => {
-          const coordinates = geom?.['coordinates'];
-          if (coordinates && Array.isArray(coordinates) && coordinates.length > 0) {
-            const ring = coordinates[0];
-            if (Array.isArray(ring) && ring.length > 0) {
-              const lats = ring.map((c: any) => c[1]);
-              const lons = ring.map((c: any) => c[0]);
-
-              return {
-                north: Math.max(...lats),
-                south: Math.min(...lats),
-                east: Math.max(...lons),
-                west: Math.min(...lons),
-                wkt: this.convertGeomToWKT(coordinates[0]),
-                geom: geom,
-              };
-            }
-          }
-          return undefined;
+          return this.getGeomBoundsAndWkt(geom);
         })
         .filter((g: any) => g !== undefined) || []
     );
   });
 
-  overviewUrl = computed(() => {
-    return `${this.overviewBaseUrl()}${this.geoms()[0]?.wkt}`;
-  });
+  toArray<T>(value: T | T[] | undefined | null): T[] {
+    if (value === undefined || value === null) {
+      return [];
+    }
+    return Array.isArray(value) ? value : [value];
+  }
+
+  overviewUrl(wkt: string): string {
+    return `${this.overviewBaseUrl()}${wkt}`;
+  }
 
   geometryCollection = computed(() => {
     const wktGeoms = this.geoms().map((g: any) => g.wkt);
@@ -158,6 +173,30 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
     return `${this.overviewBaseUrl()}${this.geometryCollection()}`;
   });
 
+  displayedGeoms = computed(() => {
+    const geometries = this.geoms();
+    if (geometries.length === 0) {
+      return [];
+    }
+    if (!this.allGeomsInOneMap()) {
+      return geometries;
+    }
+
+    return [
+      {
+        north: Math.max(...geometries.map((g: any) => g.north)),
+        south: Math.min(...geometries.map((g: any) => g.south)),
+        east: Math.max(...geometries.map((g: any) => g.east)),
+        west: Math.min(...geometries.map((g: any) => g.west)),
+        wkt: this.geometryCollection(),
+        geom: {
+          type: 'GeometryCollection',
+          geometries: geometries.map((g: any) => g.geom),
+        },
+      },
+    ];
+  });
+
   convertGeomToWKT(ring: any[]): string {
     const points = ring.map((coord: any) => `${coord[0]} ${coord[1]}`);
     // Ensure the polygon is closed by repeating the first point at the end
@@ -165,6 +204,123 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
       points.push(points[0]);
     }
     return `POLYGON((${points.join(', ')}))`;
+  }
+
+  getGeomBoundsAndWkt(geom: any): any {
+    if (!geom || !geom.type) {
+      return undefined;
+    }
+
+    if (geom.type === 'Point') {
+      const coordinates = geom?.coordinates;
+      if (
+        !Array.isArray(coordinates) ||
+        coordinates.length < 2 ||
+        typeof coordinates[0] !== 'number' ||
+        typeof coordinates[1] !== 'number'
+      ) {
+        return undefined;
+      }
+
+      const lon = coordinates[0];
+      const lat = coordinates[1];
+      return {
+        north: lat,
+        south: lat,
+        east: lon,
+        west: lon,
+        wkt: `POINT(${lon} ${lat})`,
+        geom,
+      };
+    }
+
+    if (geom.type === 'Polygon') {
+      const coordinates = geom?.coordinates;
+      if (!Array.isArray(coordinates) || coordinates.length === 0) {
+        return undefined;
+      }
+
+      const ring = coordinates[0];
+      if (!Array.isArray(ring) || ring.length === 0) {
+        return undefined;
+      }
+
+      const lats = ring.map((c: any) => c[1]);
+      const lons = ring.map((c: any) => c[0]);
+
+      return {
+        north: Math.max(...lats),
+        south: Math.min(...lats),
+        east: Math.max(...lons),
+        west: Math.min(...lons),
+        wkt: this.convertGeomToWKT(ring),
+        geom,
+      };
+    }
+
+    return undefined;
+  }
+
+  getShapeBoundsAndWkt(shapeGeoJson: any): any {
+    const geometry = this.readShapeGeometry(shapeGeoJson);
+    if (!geometry) {
+      return undefined;
+    }
+
+    const [west, south, east, north] = geometry.getExtent();
+    return {
+      north,
+      south,
+      east,
+      west,
+      wkt: this.wktFormat.writeGeometry(geometry),
+      geom: this.geoJsonFormat.writeGeometryObject(geometry),
+    };
+  }
+
+  readShapeGeometry(shape: any): any {
+    if (!shape || typeof shape !== 'object') {
+      return undefined;
+    }
+
+    if (shape.type === 'Feature') {
+      try {
+        const featureOrFeatures: any = this.geoJsonFormat.readFeature(shape);
+        const feature = Array.isArray(featureOrFeatures) ? featureOrFeatures[0] : featureOrFeatures;
+        return feature?.getGeometry?.();
+      } catch {
+        return undefined;
+      }
+    }
+
+    if (shape.type === 'FeatureCollection') {
+      try {
+        const geometries = this.geoJsonFormat
+          .readFeatures(shape)
+          .map((feature: any) => feature.getGeometry())
+          .filter((geometry: any) => geometry);
+
+        if (geometries.length === 0) {
+          return undefined;
+        }
+        if (geometries.length === 1) {
+          return geometries[0];
+        }
+        return new GeometryCollection(geometries);
+      } catch {
+        return undefined;
+      }
+    }
+
+    if (shape.type) {
+      try {
+        return this.geoJsonFormat.readGeometry(shape);
+      } catch {
+        return undefined;
+      }
+    }
+
+    return undefined;
   }
 
   maps = viewChildren<ElementRef<HTMLDivElement>>('map');
@@ -180,7 +336,7 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
   ngAfterViewInit() {
     const mapElements = this.maps();
 
-    this.geoms().forEach((bbox: any, index: number) => {
+    this.displayedGeoms().forEach((bbox: any, index: number) => {
       const mapElement = mapElements[index]?.nativeElement;
       if (mapElement) {
         // Deep clone so multiple bbox maps on the same page don't append to a single reference
@@ -208,8 +364,13 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
             computedStyle.getPropertyValue('--p-primary-500').trim() ||
             computedStyle.getPropertyValue('--p-primary-color').trim() ||
             '#093564';
+          const rawPrimaryColor900 =
+            computedStyle.getPropertyValue('--p-primary-900').trim() || '#000000';
 
           const primaryColor = rawPrimaryColor.startsWith('#') ? rawPrimaryColor : '#093564';
+          const primaryColor900 = rawPrimaryColor900.startsWith('#')
+            ? rawPrimaryColor900
+            : '#000000';
           const fillRgba = this.hexToRgba(primaryColor, 0.5);
 
           const layers = map.getLayers().getArray();
@@ -218,21 +379,32 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
             geojsonLayer.setStyle(
               new Style({
                 stroke: new Stroke({
-                  color: 'white',
+                  color: primaryColor900,
                   width: 2,
                 }),
                 fill: new Fill({
                   color: fillRgba,
                 }),
+                image: new CircleStyle({
+                  radius: 6,
+                  fill: new Fill({
+                    color: fillRgba,
+                  }),
+                  stroke: new Stroke({
+                    color: primaryColor900,
+                    width: 2,
+                  }),
+                }),
               }),
             );
           }
 
-          const extentIn3857 = transformExtent(
-            [bbox.west, bbox.south, bbox.east, bbox.north],
-            'EPSG:4326',
-            'EPSG:3857',
-          );
+          const hasCollapsedExtent = bbox.west === bbox.east && bbox.south === bbox.north;
+          const fitExtent = hasCollapsedExtent
+            ? [bbox.west - 0.1, bbox.south - 0.1, bbox.east + 0.1, bbox.north + 0.1]
+            : [bbox.west, bbox.south, bbox.east, bbox.north];
+
+          const extentIn3857 = transformExtent(fitExtent, 'EPSG:4326', 'EPSG:3857');
 
           map.getView().fit(extentIn3857, { padding: [10, 10, 10, 10], maxZoom: 12 });
         }, 100);

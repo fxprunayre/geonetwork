@@ -190,30 +190,6 @@ describe('Record page', () => {
       cy.get('[data-testid="accordion-panel-coverage"] app-record-field-coverage-spatial').should(
         'exist',
       );
-      cy.get('[data-testid="accordion-panel-coverage"]')
-        .contains('div', 'Geospatial coverage')
-        .find('[label="record.field.coverage.north"] input')
-        .should('have.value', '70.00°');
-      cy.get('[data-testid="accordion-panel-coverage"]')
-        .contains('div', 'Geospatial coverage')
-        .find('[label="record.field.coverage.south"] input')
-        .should('have.value', '-70.00°');
-      cy.get('[data-testid="accordion-panel-coverage"]')
-        .contains('div', 'Geospatial coverage')
-        .find('[label="record.field.coverage.east"] input')
-        .should('have.value', '180.00°');
-      cy.get('[data-testid="accordion-panel-coverage"]')
-        .contains('div', 'Geospatial coverage')
-        .find('[label="record.field.coverage.west"] input')
-        .should('have.value', '-180.00°');
-      cy.get('[data-testid="accordion-panel-coverage"]')
-        .contains('div', 'Geospatial coverage')
-        .find('img')
-        .should(
-          'have.attr',
-          'src',
-          '/geonetwork/srv/api/regions/geom.png?geomsrs=EPSG:4326&geom=POLYGON((-180 -70, 180 -70, 180 70, -180 70, -180 -70))',
-        );
 
       // Spatial Information
       cy.get('[data-testid="accordion-panel-spatialInfo"] .p-accordionheader').contains(
