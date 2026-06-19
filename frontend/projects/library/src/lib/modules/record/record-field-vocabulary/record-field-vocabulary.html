@@ -1,5 +1,8 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
   @for (vocabulary of vocabularies(); track $index) {
-    <app-keyword-list [vocabulary]="vocabulary" />
+    @let keywordCount = vocabulary.keywords ? vocabulary.keywords.length : 0;
+    @if (keywordCount > 0) {
+      <app-keyword-list [vocabulary]="vocabulary" />
+    }
   }
 </div>
