@@ -1,4 +1,4 @@
-@if ((isEmbeddedWmsMapEnabled() && hasWmsCommands()) || hasDatasourceSection()) {
+@if ((isEmbeddedWmsMapEnabled() && hasWmsCommands()) || hasDatasourceSection() || hasDataModel()) {
   <p-accordion [value]="activePanels()" [multiple]="true">
     @if (isEmbeddedWmsMapEnabled() && hasWmsCommands()) {
       <p-accordion-panel value="map">
@@ -23,7 +23,7 @@
       <p-accordion-panel value="table-data">
         <p-accordion-header>
           <div class="flex items-center gap-2 text-primary! text-2xl!">
-            <ng-icon name="faSolidTable" />
+            <ng-icon name="faSolidTableList" />
             <span>{{ 'exploreData' | translate }}</span>
           </div>
         </p-accordion-header>
@@ -47,6 +47,19 @@
           @if (datasource()) {
             <app-perspective [datasource]="datasource()" />
           }
+        </p-accordion-content>
+      </p-accordion-panel>
+    }
+    @if (hasDataModel()) {
+      <p-accordion-panel value="data-model">
+        <p-accordion-header>
+          <div class="flex items-center gap-2 text-primary! text-2xl!">
+            <ng-icon name="faSolidTable" />
+            <span>{{ 'record.view.section.dataModel' | translate }}</span>
+          </div>
+        </p-accordion-header>
+        <p-accordion-content>
+          <app-data-model-panel [record]="record()" />
         </p-accordion-content>
       </p-accordion-panel>
     }

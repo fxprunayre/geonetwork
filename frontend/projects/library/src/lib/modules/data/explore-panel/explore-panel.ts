@@ -12,7 +12,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidMap, faSolidTable } from '@ng-icons/font-awesome/solid';
+import { faSolidMap, faSolidTable, faSolidTableList } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
@@ -23,6 +23,7 @@ import {
   MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
 } from '../../config/gn-constants';
 import { Gn4MapCommand } from '../../record-distributions/map-service';
+import { DataModelPanel } from '../../record/datamodel/data-model-panel/data-model-panel';
 import { DatasourceSelect } from '../datasource-select/datasource-select';
 import { Datasource } from '../datasource.model';
 import { DuckDbService } from '../duck-db-service';
@@ -36,11 +37,12 @@ import { Perspective } from '../perspective/perspective';
     AccordionHeader,
     AccordionPanel,
     DatasourceSelect,
+    DataModelPanel,
     NgIcon,
     Perspective,
     TranslatePipe,
   ],
-  viewProviders: [provideIcons({ faSolidMap, faSolidTable })],
+  viewProviders: [provideIcons({ faSolidMap, faSolidTable, faSolidTableList })],
   templateUrl: './explore-panel.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -101,6 +103,11 @@ export class ExplorePanel {
 
   hasDatasourceSection = computed(() => this.datasources().length > 0);
 
+  hasDataModel = computed(() => {
+    const record = this.record();
+    return !!record.info?.hasDataModel;
+  });
+
   activePanels = computed(() => {
     const panels: string[] = [];
     if (this.isEmbeddedWmsMapEnabled() && this.hasWmsCommands()) {
@@ -108,6 +115,9 @@ export class ExplorePanel {
     }
     if (this.hasDatasourceSection()) {
       panels.push('table-data');
+    }
+    if (this.hasDataModel()) {
+      panels.push('data-model');
     }
     return panels;
   });

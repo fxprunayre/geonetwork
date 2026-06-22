@@ -150,7 +150,8 @@ export class RecordViewContent {
     () =>
       !!this.record()?.info?.hasDatasource ||
       (this.mapLayerDisplayTarget() === MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP &&
-        this.hasWmsLink()),
+        this.hasWmsLink()) ||
+      !!this.record()?.info?.hasDataModel,
   );
 
   dataAccessSectionLabelKey = computed(() => {
