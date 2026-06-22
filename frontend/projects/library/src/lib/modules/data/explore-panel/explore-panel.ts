@@ -17,7 +17,6 @@ import { SelectButton } from 'primeng/selectbutton';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import {
   DEFAULT_MAP_CONTEXT,
-  MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
   MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
 } from '../../config/gn-constants';
 import { Gn4MapCommand } from '../../record-distributions/map-service';
@@ -77,7 +76,8 @@ export class ExplorePanel {
   );
 
   isEmbeddedWmsMapEnabled = computed(
-    () => this.mapLayerDisplayTarget() === MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
+    () => true,
+    // this.mapLayerDisplayTarget() === MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
   );
 
   datasources = computed(() => {
@@ -157,7 +157,6 @@ export class ExplorePanel {
       })
       .filter((entry): entry is DatavizSource => !!entry);
 
-    // Prevent duplicate entries when a record exposes repeated URLs.
     return Array.from(new Map(datavizLinks.map((entry) => [entry.url, entry])).values());
   });
 
@@ -223,6 +222,12 @@ export class ExplorePanel {
       const sources = this.datasources();
       const qp = this.queryParams();
       const active = this.activeTab();
+
+      console.log(qp);
+      this.selectedPanel.set(
+        qp && qp['wmsAdd'] ? 'map' : qp && qp['datasource'] ? 'table-data' : this.activePanels()[0],
+      );
+
       if (active !== 'explore') {
         return;
       }

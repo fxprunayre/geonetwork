@@ -14,21 +14,23 @@
   </ng-template>
 
   <ng-template #tableDataPanelContent>
-    <div class="flex items-center gap-2 px-2">
-      <div class="w-1/4 flex items-center gap-2">
-        {{
-          (datasources().length === 1
-            ? 'data.datasource.available_one'
-            : 'data.datasource.available_other'
-          ) | translate: { count: datasources().length }
-        }}
+    @if (datasources().length > 1) {
+      <div class="flex items-center gap-2 px-2">
+        <div class="w-1/4 flex items-center gap-2">
+          {{
+            (datasources().length === 1
+              ? 'data.datasource.available_one'
+              : 'data.datasource.available_other'
+            ) | translate: { count: datasources().length }
+          }}
+        </div>
+        <app-datasource-select
+          class="w-3/4 grow"
+          [datasources]="datasources()"
+          [(datasource)]="datasource"
+        />
       </div>
-      <app-datasource-select
-        class="w-3/4 grow"
-        [datasources]="datasources()"
-        [(datasource)]="datasource"
-      />
-    </div>
+    }
 
     @if (datasource()) {
       <app-perspective [datasource]="datasource()" />
@@ -36,21 +38,23 @@
   </ng-template>
 
   <ng-template #datavizPanelContent>
-    <div class="flex items-center gap-2 px-2">
-      <div class="w-1/4 flex items-center gap-2">
-        {{
-          (datavizSources().length === 1
-            ? 'data.dataviz.available_one'
-            : 'data.dataviz.available_other'
-          ) | translate: { count: datavizSources().length }
-        }}
+    @if (datavizSources().length > 1) {
+      <div class="flex items-center gap-2 px-2">
+        <div class="w-1/4 flex items-center gap-2">
+          {{
+            (datavizSources().length === 1
+              ? 'data.dataviz.available_one'
+              : 'data.dataviz.available_other'
+            ) | translate: { count: datavizSources().length }
+          }}
+        </div>
+        <app-dataviz-select
+          class="w-3/4 grow"
+          [datavizSources]="datavizSources()"
+          [(dataviz)]="selectedDataviz"
+        />
       </div>
-      <app-dataviz-select
-        class="w-3/4 grow"
-        [datavizSources]="datavizSources()"
-        [(dataviz)]="selectedDataviz"
-      />
-    </div>
+    }
 
     @if (selectedDataviz()) {
       <app-dataviz-panel [url]="datavizUrl()" />
@@ -61,7 +65,6 @@
     <app-data-model-panel [record]="record()" />
   </ng-template>
 
-  <!-- Accordion Layout -->
   @if (layout() === 'accordion') {
     <p-accordion [value]="activePanels()" [multiple]="true">
       @if (isEmbeddedWmsMapEnabled() && hasEmbeddedWmsLayers()) {
@@ -122,34 +125,37 @@
     </p-accordion>
   }
 
-  <!-- SelectButton Layout -->
   @if (layout() === 'selectbutton') {
     <div class="flex flex-col gap-4">
-      <p-selectButton [options]="panelOptions()" optionValue="value" [(ngModel)]="selectedPanel">
-        <ng-template #item let-item>
-          <div class="flex items-center gap-2">
-            <ng-icon [name]="item.icon" />
-            <span>{{ item.label | translate }}</span>
-          </div>
-        </ng-template>
-      </p-selectButton>
+      @if (panelOptions().length > 1) {
+        <p-selectButton
+          [options]="panelOptions()"
+          optionValue="value"
+          [(ngModel)]="selectedPanel"
+          [allowEmpty]="false"
+          fluid
+        >
+          <ng-template #item let-item>
+            <div class="flex items-center gap-2">
+              <ng-icon [name]="item.icon" />
+              <span>{{ item.label | translate }}</span>
+            </div>
+          </ng-template>
+        </p-selectButton>
+      }
 
-      <!-- Map Panel Content -->
       @if (selectedPanel() === 'map' && isEmbeddedWmsMapEnabled() && hasEmbeddedWmsLayers()) {
         <ng-container [ngTemplateOutlet]="mapPanelContent"></ng-container>
       }
 
-      <!-- Table Data Panel Content -->
       @if (selectedPanel() === 'table-data' && hasDatasourceSection()) {
         <ng-container [ngTemplateOutlet]="tableDataPanelContent"></ng-container>
       }
 
-      <!-- Dataviz Panel Content -->
       @if (selectedPanel() === 'dataviz' && hasDatavizSection()) {
         <ng-container [ngTemplateOutlet]="datavizPanelContent"></ng-container>
       }
 
-      <!-- Data Model Panel Content -->
       @if (selectedPanel() === 'data-model' && hasDataModel()) {
         <ng-container [ngTemplateOutlet]="dataModelPanelContent"></ng-container>
       }
