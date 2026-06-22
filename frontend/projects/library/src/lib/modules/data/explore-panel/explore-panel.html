@@ -1,105 +1,158 @@
 @if (
-  (isEmbeddedWmsMapEnabled() && hasWmsCommands()) ||
+  (isEmbeddedWmsMapEnabled() && hasEmbeddedWmsLayers()) ||
   hasDatasourceSection() ||
   hasDatavizSection() ||
   hasDataModel()
 ) {
-  <p-accordion [value]="activePanels()" [multiple]="true">
-    @if (isEmbeddedWmsMapEnabled() && hasWmsCommands()) {
-      <p-accordion-panel value="map">
-        <p-accordion-header>
-          <div class="flex items-center gap-2 text-primary! text-2xl!">
-            <ng-icon name="faSolidMap" />
-            <span>{{ 'map' | translate }}</span>
-          </div>
-        </p-accordion-header>
-        <p-accordion-content>
-          <app-full-screen-panel
-            [contentClass]="'h-240 border border-surface-300 rounded-md overflow-hidden'"
-            [fullScreenContentClass]="'flex-1 min-h-0 border border-surface-300 rounded-md overflow-hidden'"
-          >
-            <sxt-viewer class="block w-full h-full"></sxt-viewer>
-          </app-full-screen-panel>
-        </p-accordion-content>
-      </p-accordion-panel>
-    }
+  <ng-template #mapPanelContent>
+    <app-map-panel
+      [mapContext]="mapContext()"
+      [commands]="embeddedWmsCommands()"
+      [focusCommands]="wmsCommands()"
+      [isActive]="activeTab() === 'explore'"
+    />
+  </ng-template>
 
-    @if (hasDatasourceSection()) {
-      <p-accordion-panel value="table-data">
-        <p-accordion-header>
-          <div class="flex items-center gap-2 text-primary! text-2xl!">
-            <ng-icon name="faSolidTableList" />
-            <span>{{ 'exploreData' | translate }}</span>
-          </div>
-        </p-accordion-header>
-        <p-accordion-content>
-          <div class="flex items-center gap-2 px-2">
-            <div class="w-1/4 flex items-center gap-2">
-              {{
-                (datasources().length === 1
-                  ? 'data.datasource.available_one'
-                  : 'data.datasource.available_other'
-                ) | translate: { count: datasources().length }
-              }}
+  <ng-template #tableDataPanelContent>
+    <div class="flex items-center gap-2 px-2">
+      <div class="w-1/4 flex items-center gap-2">
+        {{
+          (datasources().length === 1
+            ? 'data.datasource.available_one'
+            : 'data.datasource.available_other'
+          ) | translate: { count: datasources().length }
+        }}
+      </div>
+      <app-datasource-select
+        class="w-3/4 grow"
+        [datasources]="datasources()"
+        [(datasource)]="datasource"
+      />
+    </div>
+
+    @if (datasource()) {
+      <app-perspective [datasource]="datasource()" />
+    }
+  </ng-template>
+
+  <ng-template #datavizPanelContent>
+    <div class="flex items-center gap-2 px-2">
+      <div class="w-1/4 flex items-center gap-2">
+        {{
+          (datavizSources().length === 1
+            ? 'data.dataviz.available_one'
+            : 'data.dataviz.available_other'
+          ) | translate: { count: datavizSources().length }
+        }}
+      </div>
+      <app-dataviz-select
+        class="w-3/4 grow"
+        [datavizSources]="datavizSources()"
+        [(dataviz)]="selectedDataviz"
+      />
+    </div>
+
+    @if (selectedDataviz()) {
+      <app-dataviz-panel [url]="datavizUrl()" />
+    }
+  </ng-template>
+
+  <ng-template #dataModelPanelContent>
+    <app-data-model-panel [record]="record()" />
+  </ng-template>
+
+  <!-- Accordion Layout -->
+  @if (layout() === 'accordion') {
+    <p-accordion [value]="activePanels()" [multiple]="true">
+      @if (isEmbeddedWmsMapEnabled() && hasEmbeddedWmsLayers()) {
+        <p-accordion-panel value="map">
+          <p-accordion-header>
+            <div class="flex items-center gap-2 text-primary! text-2xl!">
+              <ng-icon name="faSolidMap" />
+              <span>{{ 'map' | translate }}</span>
             </div>
-            <app-datasource-select
-              class="w-3/4 grow"
-              [datasources]="datasources()"
-              [(datasource)]="datasource"
-            />
-          </div>
+          </p-accordion-header>
+          <p-accordion-content>
+            <ng-container [ngTemplateOutlet]="mapPanelContent"></ng-container>
+          </p-accordion-content>
+        </p-accordion-panel>
+      }
 
-          @if (datasource()) {
-            <app-perspective [datasource]="datasource()" />
-          }
-        </p-accordion-content>
-      </p-accordion-panel>
-    }
-
-    @if (hasDatavizSection()) {
-      <p-accordion-panel value="dataviz">
-        <p-accordion-header>
-          <div class="flex items-center gap-2 text-primary! text-2xl!">
-            <ng-icon name="faSolidFile" />
-            <span>{{ 'data.dataviz.title' | translate }}</span>
-          </div>
-        </p-accordion-header>
-        <p-accordion-content>
-          <div class="flex items-center gap-2 px-2">
-            <div class="w-1/4 flex items-center gap-2">
-              {{
-                (datavizSources().length === 1
-                  ? 'data.dataviz.available_one'
-                  : 'data.dataviz.available_other'
-                ) | translate: { count: datavizSources().length }
-              }}
+      @if (hasDatasourceSection()) {
+        <p-accordion-panel value="table-data">
+          <p-accordion-header>
+            <div class="flex items-center gap-2 text-primary! text-2xl!">
+              <ng-icon name="faSolidTableList" />
+              <span>{{ 'exploreData' | translate }}</span>
             </div>
-            <app-dataviz-select
-              class="w-3/4 grow"
-              [datavizSources]="datavizSources()"
-              [(dataviz)]="selectedDataviz"
-            />
-          </div>
+          </p-accordion-header>
+          <p-accordion-content>
+            <ng-container [ngTemplateOutlet]="tableDataPanelContent"></ng-container>
+          </p-accordion-content>
+        </p-accordion-panel>
+      }
 
-          @if (selectedDataviz()) {
-            <app-dataviz-panel [url]="datavizUrl()" />
-          }
-        </p-accordion-content>
-      </p-accordion-panel>
-    }
+      @if (hasDatavizSection()) {
+        <p-accordion-panel value="dataviz">
+          <p-accordion-header>
+            <div class="flex items-center gap-2 text-primary! text-2xl!">
+              <ng-icon name="faSolidFile" />
+              <span>{{ 'data.dataviz.title' | translate }}</span>
+            </div>
+          </p-accordion-header>
+          <p-accordion-content>
+            <ng-container [ngTemplateOutlet]="datavizPanelContent"></ng-container>
+          </p-accordion-content>
+        </p-accordion-panel>
+      }
 
-    @if (hasDataModel()) {
-      <p-accordion-panel value="data-model">
-        <p-accordion-header>
-          <div class="flex items-center gap-2 text-primary! text-2xl!">
-            <ng-icon name="faSolidTable" />
-            <span>{{ 'record.view.section.dataModel' | translate }}</span>
+      @if (hasDataModel()) {
+        <p-accordion-panel value="data-model">
+          <p-accordion-header>
+            <div class="flex items-center gap-2 text-primary! text-2xl!">
+              <ng-icon name="faSolidTable" />
+              <span>{{ 'record.view.section.dataModel' | translate }}</span>
+            </div>
+          </p-accordion-header>
+          <p-accordion-content>
+            <ng-container [ngTemplateOutlet]="dataModelPanelContent"></ng-container>
+          </p-accordion-content>
+        </p-accordion-panel>
+      }
+    </p-accordion>
+  }
+
+  <!-- SelectButton Layout -->
+  @if (layout() === 'selectbutton') {
+    <div class="flex flex-col gap-4">
+      <p-selectButton [options]="panelOptions()" optionValue="value" [(ngModel)]="selectedPanel">
+        <ng-template #item let-item>
+          <div class="flex items-center gap-2">
+            <ng-icon [name]="item.icon" />
+            <span>{{ item.label | translate }}</span>
           </div>
-        </p-accordion-header>
-        <p-accordion-content>
-          <app-data-model-panel [record]="record()" />
-        </p-accordion-content>
-      </p-accordion-panel>
-    }
-  </p-accordion>
+        </ng-template>
+      </p-selectButton>
+
+      <!-- Map Panel Content -->
+      @if (selectedPanel() === 'map' && isEmbeddedWmsMapEnabled() && hasEmbeddedWmsLayers()) {
+        <ng-container [ngTemplateOutlet]="mapPanelContent"></ng-container>
+      }
+
+      <!-- Table Data Panel Content -->
+      @if (selectedPanel() === 'table-data' && hasDatasourceSection()) {
+        <ng-container [ngTemplateOutlet]="tableDataPanelContent"></ng-container>
+      }
+
+      <!-- Dataviz Panel Content -->
+      @if (selectedPanel() === 'dataviz' && hasDatavizSection()) {
+        <ng-container [ngTemplateOutlet]="datavizPanelContent"></ng-container>
+      }
+
+      <!-- Data Model Panel Content -->
+      @if (selectedPanel() === 'data-model' && hasDataModel()) {
+        <ng-container [ngTemplateOutlet]="dataModelPanelContent"></ng-container>
+      }
+    </div>
+  }
 }

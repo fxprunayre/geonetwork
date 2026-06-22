@@ -288,7 +288,7 @@ export const DEFAULT_RECORD_DETAILS_APP_CONFIGURATION: RecordDetailsApp = {
   enabled: true,
   mainThesaurus: [],
   distribution: DEFAULT_RECORD_DETAILS_DISTRIBUTION_CONFIGURATION,
-  mapLayerDisplayTarget: MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
+  mapLayerDisplayTarget: MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
   coverageSpatialDisplayType: 'dynamicMap',
 };
 

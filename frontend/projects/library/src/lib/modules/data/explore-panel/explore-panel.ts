@@ -1,15 +1,7 @@
-import {
-  CUSTOM_ELEMENTS_SCHEMA,
-  Component,
-  ElementRef,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-  untracked,
-} from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -19,8 +11,9 @@ import {
   faSolidTableList,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
-import { IndexRecord } from 'gn-api-client';
+import { IndexRecord, Link } from 'gn-api-client';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
+import { SelectButton } from 'primeng/selectbutton';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import {
   DEFAULT_MAP_CONTEXT,
@@ -35,6 +28,7 @@ import { ExploreDatavizPanel } from '../dataviz-panel/dataviz-panel';
 import { DatavizSelect } from '../dataviz-select/dataviz-select';
 import { DatavizSource } from '../dataviz.model';
 import { DuckDbService } from '../duck-db-service';
+import { MapPanel } from '../map-panel/map-panel';
 import { Perspective } from '../perspective/perspective';
 
 @Component({
@@ -48,28 +42,29 @@ import { Perspective } from '../perspective/perspective';
     DatasourceSelect,
     DatavizSelect,
     ExploreDatavizPanel,
+    FormsModule,
+    MapPanel,
+    NgTemplateOutlet,
     NgIcon,
     Perspective,
+    SelectButton,
     TranslatePipe,
   ],
   viewProviders: [provideIcons({ faSolidFile, faSolidMap, faSolidTable, faSolidTableList })],
   templateUrl: './explore-panel.html',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ExplorePanel {
   record = input.required<IndexRecord>();
   activeTab = input<string>('explore');
+  layout = input<'accordion' | 'selectbutton'>('selectbutton');
   datasource = signal<Datasource | undefined>(undefined);
   selectedDataviz = signal<DatavizSource | undefined>(undefined);
+  selectedPanel = signal<string>('');
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   duckdbService = inject(DuckDbService);
   route = inject(ActivatedRoute);
   router = inject(Router);
-  elementRef = inject(ElementRef);
-
-  viewer: any;
-  addedLayerIds = new Set<string>();
 
   mapContext = computed(
     () => this.appConfiguration().config?.apps?.map?.context || DEFAULT_MAP_CONTEXT,
@@ -95,6 +90,34 @@ export class ExplorePanel {
 
   queryParams = toSignal(this.route.queryParams);
 
+  embeddedWmsCommands = computed<Gn4MapCommand[]>(() => {
+    if (!this.isEmbeddedWmsMapEnabled()) {
+      return [];
+    }
+
+    const links = this.record()?.link || [];
+    return links
+      .filter((link) => this.isEmbeddedWmsLink(link))
+      .map((link) => {
+        const rawUrl = link.urlObject?.['default'];
+        if (!rawUrl) {
+          return null;
+        }
+
+        const isWmts = (link.protocol || '').includes('OGC:WMTS');
+        const name = link.nameObject?.['default'] || '';
+        const label = link.descriptionObject?.['default'] || link.nameObject?.['default'] || name;
+
+        return {
+          type: isWmts ? 'wmts' : 'wms',
+          url: encodeURIComponent(rawUrl),
+          name: name ? encodeURIComponent(name) : undefined,
+          label: label ? encodeURIComponent(label) : undefined,
+        } as Gn4MapCommand;
+      })
+      .filter((cmd): cmd is Gn4MapCommand => !!cmd);
+  });
+
   wmsCommands = computed<Gn4MapCommand[]>(() => {
     const qp = this.queryParams();
     const rawCommand = qp?.['wmsAdd'];
@@ -110,7 +133,7 @@ export class ExplorePanel {
     }
   });
 
-  hasWmsCommands = computed(() => this.wmsCommands().length > 0);
+  hasEmbeddedWmsLayers = computed(() => this.embeddedWmsCommands().length > 0);
 
   hasDatasourceSection = computed(() => this.datasources().length > 0);
 
@@ -151,7 +174,7 @@ export class ExplorePanel {
 
   activePanels = computed(() => {
     const panels: string[] = [];
-    if (this.isEmbeddedWmsMapEnabled() && this.hasWmsCommands()) {
+    if (this.isEmbeddedWmsMapEnabled() && this.hasEmbeddedWmsLayers()) {
       panels.push('map');
     }
     if (this.hasDatasourceSection()) {
@@ -166,7 +189,36 @@ export class ExplorePanel {
     return panels;
   });
 
+  panelOptions = computed(() => {
+    const options: { label: string; value: string; icon: string }[] = [];
+    if (this.isEmbeddedWmsMapEnabled() && this.hasEmbeddedWmsLayers()) {
+      options.push({ label: 'map', value: 'map', icon: 'faSolidMap' });
+    }
+    if (this.hasDatasourceSection()) {
+      options.push({ label: 'exploreData', value: 'table-data', icon: 'faSolidTableList' });
+    }
+    if (this.hasDatavizSection()) {
+      options.push({ label: 'data.dataviz.title', value: 'dataviz', icon: 'faSolidFile' });
+    }
+    if (this.hasDataModel()) {
+      options.push({
+        label: 'record.view.section.dataModel',
+        value: 'data-model',
+        icon: 'faSolidTable',
+      });
+    }
+    return options;
+  });
+
   constructor() {
+    effect(() => {
+      const layout = this.layout();
+      const panels = this.activePanels();
+      if (layout === 'selectbutton' && panels.length > 0 && !this.selectedPanel()) {
+        this.selectedPanel.set(panels[0]);
+      }
+    });
+
     effect(() => {
       const sources = this.datasources();
       const qp = this.queryParams();
@@ -249,74 +301,13 @@ export class ExplorePanel {
         }
       }
     });
-
-    effect(() => {
-      const active = this.activeTab();
-      const hasCommands = this.hasWmsCommands();
-      const enabled = this.isEmbeddedWmsMapEnabled();
-
-      if (active !== 'explore' || !enabled || !hasCommands) {
-        return;
-      }
-
-      this.ensureViewerReady().then(() => {
-        this.addLayersToEmbeddedMap(this.wmsCommands());
-      });
-    });
   }
 
-  private async ensureViewerReady() {
-    if (this.viewer) {
-      return;
-    }
-
-    const scriptUrl = 'https://sextant.gitlab-pages.ifremer.fr/viewer/sxt-viewer.js';
-    if (!document.querySelector(`script[src="${scriptUrl}"]`)) {
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = scriptUrl;
-      script.crossOrigin = 'anonymous';
-      document.body.appendChild(script);
-      await new Promise<void>((resolve) => {
-        script.onload = () => resolve();
-      });
-    }
-
-    await customElements.whenDefined('sxt-viewer');
-
-    this.viewer = this.elementRef.nativeElement.querySelector('sxt-viewer');
-    if (this.viewer) {
-      this.viewer.setContext(this.mapContext());
-    }
-  }
-
-  private addLayersToEmbeddedMap(commands: Gn4MapCommand[]) {
-    if (!this.viewer) {
-      return;
-    }
-
-    commands.forEach((cmd) => {
-      const layerType = cmd.type || 'wms';
-      const layerId = `${layerType}:${cmd.url}#${cmd.name || ''}`;
-      if (this.addedLayerIds.has(layerId)) {
-        return;
-      }
-
-      setTimeout(() => {
-        this.viewer.addLayer(
-          {
-            type: layerType,
-            id: layerId,
-            url: decodeURIComponent(cmd.url),
-            name: decodeURIComponent(cmd.name || ''),
-            label: decodeURIComponent(cmd.label || ''),
-            visibility: true,
-            attributions: '',
-          },
-          true,
-        );
-        this.addedLayerIds.add(layerId);
-      }, 500);
-    });
+  private isEmbeddedWmsLink(link: Link): boolean {
+    const protocol = link.protocol || '';
+    return (
+      !!link.urlObject?.['default'] &&
+      !!protocol.match('OGC:WMS|OGC:WMTS|application/vnd.ogc.wms_xml')
+    );
   }
 }
