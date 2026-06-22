@@ -1,0 +1,21 @@
+@if (safeUrl()) {
+  <div class="flex justify-end mb-2">
+    <p-button (click)="openDatavizInNewWindow()" [rounded]="true" [text]="true" size="small">
+      <ng-icon pButtonIcon name="faSolidArrowUpRightFromSquare" />
+      <span pButtonLabel>{{ 'data.dataviz.openInNewWindow' | translate }}</span>
+    </p-button>
+  </div>
+
+  <div class="h-240 border border-surface-300 rounded-md overflow-hidden">
+    <iframe
+      class="block w-full h-full"
+      [src]="safeUrl()"
+      title="Dataviz viewer"
+      loading="lazy"
+      referrerpolicy="no-referrer"
+      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+    ></iframe>
+  </div>
+} @else {
+  <p class="text-sm text-surface-600 dark:text-surface-400">Invalid data visualization URL.</p>
+}

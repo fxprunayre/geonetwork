@@ -1,0 +1,15 @@
+<p-select
+  [placeholder]="'data.dataviz.select' | translate"
+  [options]="datavizSources()"
+  optionLabel="name"
+  [(ngModel)]="dataviz"
+  class="w-full"
+>
+  <ng-template let-source #item>
+    <div class="flex items-center gap-2">
+      <div>
+        {{ source.name }}
+      </div>
+    </div>
+  </ng-template>
+</p-select>

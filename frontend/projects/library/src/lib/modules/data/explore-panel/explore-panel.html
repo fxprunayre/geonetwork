@@ -1,4 +1,9 @@
-@if ((isEmbeddedWmsMapEnabled() && hasWmsCommands()) || hasDatasourceSection() || hasDataModel()) {
+@if (
+  (isEmbeddedWmsMapEnabled() && hasWmsCommands()) ||
+  hasDatasourceSection() ||
+  hasDatavizSection() ||
+  hasDataModel()
+) {
   <p-accordion [value]="activePanels()" [multiple]="true">
     @if (isEmbeddedWmsMapEnabled() && hasWmsCommands()) {
       <p-accordion-panel value="map">
@@ -50,6 +55,39 @@
         </p-accordion-content>
       </p-accordion-panel>
     }
+
+    @if (hasDatavizSection()) {
+      <p-accordion-panel value="dataviz">
+        <p-accordion-header>
+          <div class="flex items-center gap-2 text-primary! text-2xl!">
+            <ng-icon name="faSolidFile" />
+            <span>{{ 'data.dataviz.title' | translate }}</span>
+          </div>
+        </p-accordion-header>
+        <p-accordion-content>
+          <div class="flex items-center gap-2 px-2">
+            <div class="w-1/4 flex items-center gap-2">
+              {{
+                (datavizSources().length === 1
+                  ? 'data.dataviz.available_one'
+                  : 'data.dataviz.available_other'
+                ) | translate: { count: datavizSources().length }
+              }}
+            </div>
+            <app-dataviz-select
+              class="w-3/4 grow"
+              [datavizSources]="datavizSources()"
+              [(dataviz)]="selectedDataviz"
+            />
+          </div>
+
+          @if (selectedDataviz()) {
+            <app-dataviz-panel [url]="datavizUrl()" />
+          }
+        </p-accordion-content>
+      </p-accordion-panel>
+    }
+
     @if (hasDataModel()) {
       <p-accordion-panel value="data-model">
         <p-accordion-header>

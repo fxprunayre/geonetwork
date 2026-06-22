@@ -146,11 +146,20 @@ export class RecordViewContent {
     );
   });
 
+  hasDatavizLink = computed(() => {
+    const links = this.record()?.link || [];
+    return links.some(
+      (link) =>
+        link?.protocol === 'WWW:LINK:JUPYTER-NOTEBOOK' || link?.protocol === 'WWW:LINK:DATAVIZ',
+    );
+  });
+
   showExploreTab = computed(
     () =>
       !!this.record()?.info?.hasDatasource ||
       (this.mapLayerDisplayTarget() === MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP &&
         this.hasWmsLink()) ||
+      this.hasDatavizLink() ||
       !!this.record()?.info?.hasDataModel,
   );
 
@@ -342,7 +351,7 @@ export class RecordViewContent {
     if (this.record()?.uuid) {
       if (this.tab() === 'explore' && tab !== 'explore') {
         this.router.navigate([RECORD_ROUTE_PATH, this.record()!.uuid, tab], {
-          queryParams: { datasource: null },
+          queryParams: { datasource: null, dataviz: null, notebook: null },
           queryParamsHandling: 'merge',
         });
       } else {

@@ -88,6 +88,14 @@
       "available_one": "{{count}} data source available",
       "available_other": "{{count}} data sources available",
       "select": "Choose a datasource"
+    },
+    "dataviz": {
+      "available_one": "{{count}} data visualization available",
+      "available_other": "{{count}} data visualizations available",
+      "open": "Open visualization",
+      "openInNewWindow": "Open in new window",
+      "select": "Choose a visualization",
+      "title": "Data visualization"
     }
   },
   "delete": "Delete",

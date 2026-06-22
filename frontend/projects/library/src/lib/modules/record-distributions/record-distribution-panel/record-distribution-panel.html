@@ -44,6 +44,16 @@
             <app-add-layer-to-map [record]="record()" [link]="link" />
           } @else if (isNetworkLink) {
             <app-copy-input [value]="link.urlObject?.['default']" [layout]="'icon'" />
+          } @else if (isDatavizLink(link)) {
+            <div class="flex flex-col md:flex-row gap-2">
+              <p-button
+                styleClass="w-full md:w-auto"
+                (click)="openDataviz(link)"
+                [label]="'data.dataviz.open' | translate"
+                size="small"
+                [outlined]="true"
+              />
+            </div>
           } @else if (isExplorable(link)) {
             <div class="flex flex-col md:flex-row gap-2">
               <p-button

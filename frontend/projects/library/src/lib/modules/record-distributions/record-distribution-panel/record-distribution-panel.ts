@@ -79,6 +79,10 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
     return false;
   };
 
+  isDatavizLink = (link: Link) => {
+    return link.protocol === 'WWW:LINK:JUPYTER-NOTEBOOK' || link.protocol === 'WWW:LINK:DATAVIZ';
+  };
+
   hasBulkWmsLinks = (links: Link[]) => {
     return (
       links.length > 1 &&
@@ -90,6 +94,13 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
     // TODO: Not sure how to link actions to routing which is app specific
     this.router.navigate([RECORD_ROUTE_PATH, this.record().uuid, 'explore'], {
       queryParams: { datasource: link.urlObject?.['default'] },
+    });
+  };
+
+  openDataviz = (link: Link) => {
+    this.router.navigate([RECORD_ROUTE_PATH, this.record().uuid, 'explore'], {
+      queryParams: { dataviz: link.urlObject?.['default'], notebook: null },
+      queryParamsHandling: 'merge',
     });
   };
 }

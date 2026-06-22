@@ -89,6 +89,14 @@
       "available_one": "{{count}} source de données disponible",
       "available_other": "{{count}} sources de données disponibles",
       "select": "Choisissez une source de données"
+    },
+    "dataviz": {
+      "available_one": "{{count}} visualisation de données disponible",
+      "available_other": "{{count}} visualisations de données disponibles",
+      "open": "Ouvrir la visualisation",
+      "openInNewWindow": "Ouvrir dans une nouvelle fenêtre",
+      "select": "Choisissez une visualisation",
+      "title": "Visualisation de données"
     }
   },
   "delete": "Supprimer",

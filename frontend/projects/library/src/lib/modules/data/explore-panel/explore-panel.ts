@@ -12,7 +12,12 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidMap, faSolidTable, faSolidTableList } from '@ng-icons/font-awesome/solid';
+import {
+  faSolidFile,
+  faSolidMap,
+  faSolidTable,
+  faSolidTableList,
+} from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
@@ -26,6 +31,9 @@ import { Gn4MapCommand } from '../../record-distributions/map-service';
 import { DataModelPanel } from '../../record/datamodel/data-model-panel/data-model-panel';
 import { DatasourceSelect } from '../datasource-select/datasource-select';
 import { Datasource } from '../datasource.model';
+import { ExploreDatavizPanel } from '../dataviz-panel/dataviz-panel';
+import { DatavizSelect } from '../dataviz-select/dataviz-select';
+import { DatavizSource } from '../dataviz.model';
 import { DuckDbService } from '../duck-db-service';
 import { Perspective } from '../perspective/perspective';
 
@@ -36,13 +44,15 @@ import { Perspective } from '../perspective/perspective';
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
-    DatasourceSelect,
     DataModelPanel,
+    DatasourceSelect,
+    DatavizSelect,
+    ExploreDatavizPanel,
     NgIcon,
     Perspective,
     TranslatePipe,
   ],
-  viewProviders: [provideIcons({ faSolidMap, faSolidTable, faSolidTableList })],
+  viewProviders: [provideIcons({ faSolidFile, faSolidMap, faSolidTable, faSolidTableList })],
   templateUrl: './explore-panel.html',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -50,6 +60,7 @@ export class ExplorePanel {
   record = input.required<IndexRecord>();
   activeTab = input<string>('explore');
   datasource = signal<Datasource | undefined>(undefined);
+  selectedDataviz = signal<DatavizSource | undefined>(undefined);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   duckdbService = inject(DuckDbService);
@@ -103,6 +114,36 @@ export class ExplorePanel {
 
   hasDatasourceSection = computed(() => this.datasources().length > 0);
 
+  datavizSources = computed<DatavizSource[]>(() => {
+    const links = this.record()?.link || [];
+    const datavizLinks = links
+      .filter(
+        (link) =>
+          link?.protocol === 'WWW:LINK:DATAVIZ' || link?.protocol === 'WWW:LINK:JUPYTER-NOTEBOOK',
+      )
+      .map((link) => {
+        const url = link.urlObject?.['default'];
+        if (!url) {
+          return null;
+        }
+        return {
+          url,
+          name: link.nameObject?.['default'] || link.descriptionObject?.['default'] || url,
+          protocol: link.protocol || 'WWW:LINK:DATAVIZ',
+        };
+      })
+      .filter((entry): entry is DatavizSource => !!entry);
+
+    // Prevent duplicate entries when a record exposes repeated URLs.
+    return Array.from(new Map(datavizLinks.map((entry) => [entry.url, entry])).values());
+  });
+
+  datavizUrl = computed(() => {
+    return this.selectedDataviz()?.url;
+  });
+
+  hasDatavizSection = computed(() => this.datavizSources().length > 0);
+
   hasDataModel = computed(() => {
     const record = this.record();
     return !!record.info?.hasDataModel;
@@ -115,6 +156,9 @@ export class ExplorePanel {
     }
     if (this.hasDatasourceSection()) {
       panels.push('table-data');
+    }
+    if (this.hasDatavizSection()) {
+      panels.push('dataviz');
     }
     if (this.hasDataModel()) {
       panels.push('data-model');
@@ -153,6 +197,52 @@ export class ExplorePanel {
         if (!qp || qp['datasource'] !== selectedDs.url) {
           this.router.navigate([], {
             queryParams: { datasource: selectedDs.url },
+            queryParamsHandling: 'merge',
+            replaceUrl: true,
+          });
+        }
+      }
+    });
+
+    effect(() => {
+      const sources = this.datavizSources();
+      const qp = this.queryParams();
+      const active = this.activeTab();
+      if (active !== 'explore') {
+        return;
+      }
+
+      if (sources.length === 0) {
+        if (untracked(() => this.selectedDataviz())) {
+          this.selectedDataviz.set(undefined);
+        }
+        return;
+      }
+
+      const current = untracked(() => this.selectedDataviz());
+      const selectedFromUrl = qp?.['dataviz'] || qp?.['notebook'];
+      if (typeof selectedFromUrl === 'string') {
+        const matched = sources.find((source) => source.url === selectedFromUrl);
+        if (matched && matched !== current) {
+          this.selectedDataviz.set(matched);
+        } else if (
+          !matched &&
+          (!current || !sources.some((source) => source.url === current.url))
+        ) {
+          this.selectedDataviz.set(sources[0]);
+        }
+      } else if (!current || !sources.some((source) => source.url === current.url)) {
+        this.selectedDataviz.set(sources[0]);
+      }
+    });
+
+    effect(() => {
+      const dataviz = this.selectedDataviz();
+      if (dataviz) {
+        const qp = untracked(() => this.queryParams());
+        if (!qp || qp['dataviz'] !== dataviz.url) {
+          this.router.navigate([], {
+            queryParams: { dataviz: dataviz.url, notebook: null },
             queryParamsHandling: 'merge',
             replaceUrl: true,
           });
