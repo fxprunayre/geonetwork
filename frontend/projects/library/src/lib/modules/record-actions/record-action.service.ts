@@ -67,7 +67,7 @@ export class RecordActionService {
           this.messageService.add({
             severity: 'success',
             summary: this.translate.instant('success'),
-            detail: this.translate.instant('record.action.deleteSuccess'),
+            detail: this.translate.instant('record.action.delete.deleteSuccess'),
           });
           if (window.history.length > 1) {
             this.location.back();
@@ -80,7 +80,7 @@ export class RecordActionService {
           this.messageService.add({
             severity: 'error',
             summary: this.translate.instant('error'),
-            detail: this.translate.instant('record.action.deleteError'),
+            detail: this.translate.instant('record.action.delete.deleteError'),
           });
         },
       }),

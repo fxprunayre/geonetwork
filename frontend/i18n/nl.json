@@ -155,17 +155,31 @@
       "deleteError": "Er is een fout opgetreden bij het verwijderen van het record.",
       "deleteSuccess": "Record deleted successfully.",
       "deleteTitle": "Delete this record",
-      "edit": "Bewerken",
-      "editTitle": "Edit record",
+      "edit": {
+        "help": "Bewerk dit record",
+        "label": "Bewerken"
+      },
       "externalUrl": "Bekijk externe bron",
       "importRecord": "Record importeren",
       "manageTitle": "Manage this record",
       "menu": "Quick actions",
-      "metadataDownload": "Metadata (XML)",
-      "metadataDownloadHelp": "Download the record in XML format",
+      "metadataDownload": {
+        "help": "Download the record in XML format",
+        "label": "Metadata (XML)"
+      },
+      "permalink": {
+        "help": "Permalink naar het record",
+        "label": "Permalink"
+      },
       "relatedRecordsWarning": "Dit record is gekoppeld aan andere bronnen:",
-      "share": "Share",
-      "shareHelp": "Permalink to the record",
+      "sharing": {
+        "help": "Beheer deelopties voor het record",
+        "label": "Delen",
+        "publish": "Publiceren",
+        "publishHelp": "Publiceer dit record. Dit maakt het openbaar toegankelijk.",
+        "unpublish": "Publicatie intrekken",
+        "unpublishHelp": "Trek de publicatie van dit record in. Dit maakt het privé en verwijdert de openbare toegang."
+      },
       "typeToConfirm": "Type \"{{word}}\" to confirm",
       "unbookmark": "Bladwijzer verwijderen",
       "unbookmarkTitle": "Uit bladwijzers verwijderen"

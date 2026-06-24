@@ -1,13 +1,13 @@
 <p-button [title]="'record.action.manageTitle' | translate" (click)="menu.toggle($event)">
   <ng-icon name="faSolidEllipsisVertical" pButtonIcon />
 </p-button>
-<p-tieredmenu #menu [popup]="true" [model]="items()"></p-tieredmenu>
+<p-tieredmenu #menu [popup]="true" [model]="items()" appendTo="self"></p-tieredmenu>
 
 @if (canDelete()) {
   <app-delete-confirmation-dialog
     [(visible)]="displayConfirmation"
-    [title]="'record.action.deleteConfirmationTitle' | translate"
-    [message]="'record.action.deleteConfirmationMessage' | translate"
+    [title]="'record.action.delete.deleteConfirmationTitle' | translate"
+    [message]="'record.action.delete.deleteConfirmationMessage' | translate"
     [confirmInputLabel]="'record.action.typeToConfirm' | translate: { word: confirmationWord }"
     [confirmWord]="confirmationWord"
     (onConfirm)="deleteRecord()"

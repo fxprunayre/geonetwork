@@ -5,6 +5,7 @@ import { migrateSextantConfig } from './config-sextant.loader';
 import {
   DEFAULT_APPS_CONFIGURATION,
   DEFAULT_HEADER_APP_CONFIGURATION,
+  DEFAULT_SHARING_APP_CONFIGURATION,
   DEFAULT_SPACE,
 } from './gn-constants';
 import { SEXTANT_GN4_UI_CONFIGURATION } from './gn4constants';
@@ -148,6 +149,9 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
       }
       if (!appConfig.config.apps.banner) {
         appConfig.config.apps.banner = { enabled: true };
+      }
+      if (!appConfig.config.apps.sharing) {
+        appConfig.config.apps.sharing = DEFAULT_SHARING_APP_CONFIGURATION;
       }
 
       appConfig.config.apps.banner!.background =

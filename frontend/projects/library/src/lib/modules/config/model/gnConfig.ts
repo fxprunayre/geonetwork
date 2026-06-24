@@ -14,6 +14,7 @@ export interface Apps {
   menu?: Menu;
   i18n?: I18nApp;
   authentication?: AuthenticationApp;
+  sharing?: SharingApp;
   userSelections?: UserSelectionsApp;
   home?: HomeApp;
   search?: SearchApp;
@@ -44,6 +45,12 @@ export interface I18nApp extends App {
 }
 
 export interface AuthenticationApp extends App {}
+
+export type SharingMode = 'none' | 'simple' | 'advanced';
+
+export interface SharingApp extends App {
+  sharingMode: SharingMode;
+}
 
 export interface UserSelectionsApp extends App {}
 

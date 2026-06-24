@@ -10,17 +10,12 @@ import { TranslationsService } from '../../i18n/translations-service';
 import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
 
 @Component({
-  selector: 'app-record-edit-button',
+  selector: 'app-record-sharing-button',
   template: `
     @if (isAuthenticated()) {
-      <a
-        pButton
-        [attr.href]="editorUrl()"
-        [title]="'record.action.edit.help' | translate"
-        target="_blank"
-      >
+      <a pButton [title]="'record.action.sharing.title' | translate" target="_blank">
         <ng-icon name="faSolidPenToSquare" pButtonIcon></ng-icon>
-        <span pButtonLabel>{{ 'record.action.edit.label' | translate }}</span>
+        <span pButtonLabel>{{ 'record.action.sharing.label' | translate }}</span>
       </a>
     }
   `,
@@ -32,7 +27,7 @@ import { RecordFieldBase } from '../../record/record-field-base/record-field-bas
     }),
   ],
 })
-export class RecordEditButton extends RecordFieldBase {
+export class RecordSharingButton extends RecordFieldBase {
   private readonly translate = inject(TranslateService);
   private readonly translationsService = inject(TranslationsService);
   private authStore = inject(AuthStore);
@@ -44,13 +39,5 @@ export class RecordEditButton extends RecordFieldBase {
 
   isAuthenticated = computed(() => {
     return this.authStore.isAuthenticated();
-  });
-
-  editorUrl = computed(() => {
-    const uuid = this.record().uuid;
-    if (!uuid) {
-      return '';
-    }
-    return this.gn4UrlService.getEditorUrl(`metadata/${uuid}`);
   });
 }

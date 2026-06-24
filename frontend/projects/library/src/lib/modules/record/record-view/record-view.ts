@@ -47,6 +47,7 @@ import { RecordViewContent } from './record-view-content';
         [backButtonTplRef]="backButtonTplRef()"
         [headerTplRef]="headerTplRef()"
         (onRecordClick)="onRecordClick.emit($event)"
+        (onSharingChanged)="refreshRecord()"
       />
     }
   `,
@@ -145,5 +146,9 @@ export class RecordView {
     destroyRef.onDestroy(() => {
       this.titleService.setTitle(initialTitle);
     });
+  }
+
+  refreshRecord() {
+    this.recordResource.reload();
   }
 }

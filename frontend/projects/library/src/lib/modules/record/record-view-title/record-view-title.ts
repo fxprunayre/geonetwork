@@ -1,5 +1,5 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, inject, input, TemplateRef } from '@angular/core';
+import { Component, computed, inject, input, output, TemplateRef } from '@angular/core';
 import { ThemingService } from '../../../shared/theming-service';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { Bookmark } from '../../record-actions/bookmark/bookmark';
@@ -54,7 +54,7 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
             [layout]="'badge'"
           />
 
-          <app-record-menu [record]="record()" />
+          <app-record-menu [record]="record()" (onSharingChanged)="onSharingChanged.emit()" />
         </div>
       </div>
     </div>
@@ -62,6 +62,7 @@ import { RecordMenuComponent } from '../record-menu/record-menu.component';
 })
 export class RecordViewTitle extends RecordFieldBase {
   backButtonTplRef = input<TemplateRef<unknown>>();
+  onSharingChanged = output<void>();
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   themingService = inject(ThemingService);

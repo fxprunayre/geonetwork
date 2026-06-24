@@ -1,5 +1,9 @@
 <ng-template #defaultHeader let-record="record">
-  <app-record-view-title [record]="record" [backButtonTplRef]="backButtonTplRef()">
+  <app-record-view-title
+    [record]="record"
+    [backButtonTplRef]="backButtonTplRef()"
+    (onSharingChanged)="onSharingChanged.emit()"
+  >
   </app-record-view-title>
   <app-record-view-header
     [record]="record"

@@ -149,22 +149,39 @@
       },
       "bookmark": "Bookmark",
       "bookmarkTitle": "Add to bookmarks",
-      "deleteConfirmationMessage": "Are you sure you want to delete this record? This action cannot be undone.",
-      "deleteConfirmationTitle": "Delete confirmation",
-      "deleteError": "An error occurred while deleting the record.",
-      "deleteSuccess": "Record deleted successfully.",
-      "deleteTitle": "Delete this record",
-      "edit": "Edit",
-      "editTitle": "Edit this record",
+      "delete": {
+        "deleteConfirmationMessage": "Are you sure you want to delete this record? This action cannot be undone.",
+        "deleteConfirmationTitle": "Delete confirmation",
+        "deleteError": "An error occurred while deleting the record.",
+        "deleteSuccess": "Record deleted successfully.",
+        "help": "Delete this record",
+        "label": "Delete"
+      },
+      "edit": {
+        "help": "Edit this record",
+        "label": "Edit"
+      },
       "externalUrl": "View external resource",
       "importRecord": "Import record",
       "manageTitle": "Manage this record",
       "menu": "Quick actions",
-      "metadataDownload": "Metadata (XML)",
-      "metadataDownloadHelp": "Download the record in XML format",
+      "metadataDownload": {
+        "help": "Download the record in XML format",
+        "label": "Metadata (XML)"
+      },
+      "permalink": {
+        "help": "Permalink to the record",
+        "label": "Permalink"
+      },
       "relatedRecordsWarning": "This record is associated with other resources:",
-      "share": "Share",
-      "shareHelp": "Permalink to the record",
+      "sharing": {
+        "help": "Manage sharing options for the record",
+        "label": "Share",
+        "publish": "Publish",
+        "publishHelp": "Publish this record. This will make it publicly accessible.",
+        "unpublish": "Unpublish",
+        "unpublishHelp": "Unpublish this record. This will make it private and remove it from public access."
+      },
       "typeToConfirm": "Type \"{{word}}\" to confirm",
       "unbookmark": "Remove bookmark",
       "unbookmarkTitle": "Remove from bookmarks"

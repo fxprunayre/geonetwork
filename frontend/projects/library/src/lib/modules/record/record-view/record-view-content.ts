@@ -314,6 +314,7 @@ export class RecordViewContent {
   });
 
   onRecordClick = output<string>();
+  onSharingChanged = output<void>();
 
   constructor() {
     this.route.queryParamMap.subscribe((params) => {
