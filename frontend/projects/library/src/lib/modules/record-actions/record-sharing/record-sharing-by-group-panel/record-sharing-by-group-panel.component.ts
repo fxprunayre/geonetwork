@@ -6,7 +6,6 @@ import { GroupPrivilege, RecordsService, SharingResponse } from 'gn4-api-client'
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { OverlayBadge } from 'primeng/overlaybadge';
 import { TableModule } from 'primeng/table';
 import { RecordFieldBase } from '../../../record/record-field-base/record-field-base';
 
@@ -115,15 +114,7 @@ interface SharingPrivilegeRow {
     </p-dialog>
   `,
   standalone: true,
-  imports: [
-    ButtonModule,
-    DialogModule,
-    InputTextModule,
-    OverlayBadge,
-    TableModule,
-    NgIcon,
-    TranslatePipe,
-  ],
+  imports: [ButtonModule, DialogModule, InputTextModule, TableModule, NgIcon, TranslatePipe],
   viewProviders: [
     provideIcons({
       faSolidCheck,
