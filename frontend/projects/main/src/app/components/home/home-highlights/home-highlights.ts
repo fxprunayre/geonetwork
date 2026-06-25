@@ -21,7 +21,7 @@ export class HomeHighlights extends SearchBase {
   searchRouteService = inject(SearchRouteService);
 
   aggregations = computed(() => {
-    return Object.keys(this.search.aggregations());
+    return Object.keys(this.search().aggregations());
   });
 
   setRouteForAggregation(filter: SearchFilter) {

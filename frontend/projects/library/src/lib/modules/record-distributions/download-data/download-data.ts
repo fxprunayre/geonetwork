@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import WFS from '@camptocamp/ogc-client/dist/wfs/endpoint.js';
+import { WfsEndpoint } from '@camptocamp/ogc-client';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCloudArrowDown } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -57,7 +57,7 @@ export class DownloadData implements OnInit {
       try {
         const url = this.link().urlObject?.['default'] || '';
         if (!url) return;
-        const wfs = new WFS(url);
+        const wfs = new WfsEndpoint(url);
         await wfs.isReady();
         const info = wfs.getServiceInfo();
         let outputFormats = info?.outputFormats || [

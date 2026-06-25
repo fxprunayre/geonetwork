@@ -18,15 +18,14 @@ export class SearchWelcomeText extends SearchBase {
 
   locale = signal(this.translateService.getCurrentLang());
 
-  override ngOnInit() {
-    super.ngOnInit();
+  ngOnInit() {
     this.translateService.onLangChange.subscribe((lang) => {
       this.locale.set(lang.lang);
     });
   }
 
   mainBuckets = computed(() => {
-    const mainBuckets = this.search.aggregations()[this.RESOURCE_TYPE_FIELD]?.buckets || [];
+    const mainBuckets = this.search().aggregations()[this.RESOURCE_TYPE_FIELD]?.buckets || [];
     if (Array.isArray(mainBuckets)) {
       return mainBuckets
         .slice(0, this.maxBucketsToShow())

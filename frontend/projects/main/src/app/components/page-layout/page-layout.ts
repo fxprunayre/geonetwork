@@ -70,7 +70,7 @@ import { SearchPanelControls } from '../search-panel-controls/search-panel-contr
                   class="grow"
                   [showFilterButton]="isSearchActive()"
                   [filterPanelMode]="effectiveFilterPanelMode()"
-                  [placeholder]="search | searchWelcomeTextPipe: 'resourceType' : 3"
+                  [placeholder]="search() | searchWelcomeTextPipe: 'resourceType' : 3"
                   [(visible)]="visible"
                   (searchTriggered)="setRouteToSearch()"
                 />

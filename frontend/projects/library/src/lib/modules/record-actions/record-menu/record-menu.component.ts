@@ -116,7 +116,7 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
     if (!uuid) {
       return '';
     }
-    return `${this.catalogueUrl()}/${DEFAULT_SPACE}/${this.currentLang()}/xml.metadata.get?uuid=${uuid}`;
+    return `${this.catalogueUrl()}/${DEFAULT_SPACE}/api/records/${uuid}/formatters/xml`;
   });
 
   readonly items = computed<MenuItem[]>(() => {

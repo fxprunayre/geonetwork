@@ -26,10 +26,10 @@ export class ResultsPaginatorComponent extends SearchBase {
         block: 'start',
       });
     }
-    this.search.setPage(event.page, event.rows);
+    this.search().setPage(event.page, event.rows);
   }
 
   loadMore() {
-    this.search.loadMore();
+    this.search().loadMore();
   }
 }

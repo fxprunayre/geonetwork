@@ -1,11 +1,11 @@
 <div #resultsContainer>
-  @if (search.isLoading()) {
-    <!-- <app-loading-mask [loading]="search.isLoading()" /> -->
+  @if (search().isLoading()) {
+    <!-- <app-loading-mask [loading]="search().isLoading()" /> -->
     <ng-template #defaultSearchProgressTemplate>
       @switch (layout()) {
         @case ('list') {
           <div class="results-list grid gap-4">
-            @for (i of [].constructor(search.pageSize()); track $index) {
+            @for (i of [].constructor(search().pageSize()); track $index) {
               <app-result-item-list />
             }
           </div>
@@ -14,14 +14,14 @@
           <div
             class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
           >
-            @for (i of [].constructor(search.pageSize()); track $index) {
+            @for (i of [].constructor(search().pageSize()); track $index) {
               <app-result-item-grid />
             }
           </div>
         }
         @case ('table') {
           <div class="results-list grid gap-4">
-            @for (i of [].constructor(search.pageSize()); track $index) {
+            @for (i of [].constructor(search().pageSize()); track $index) {
               <app-result-item-table />
             }
           </div>
@@ -36,7 +36,7 @@
       "
     ></ng-container>
   } @else {
-    @if (search.hasError()) {
+    @if (search().hasError()) {
       <div class="h-[400px]">
         <app-alert-panel
           severity="error"
@@ -46,14 +46,14 @@
         >
         </app-alert-panel>
       </div>
-    } @else if (!search.hasResults()) {
+    } @else if (!search().hasResults()) {
       <app-no-result-found></app-no-result-found>
     } @else {
       <div>
         @switch (layout()) {
           @case ('list') {
             <div class="results-list grid grid-cols-1 gap-4">
-              @for (result of search.results(); track $index) {
+              @for (result of search().results(); track $index) {
                 <app-result-item-list
                   [result]="result"
                   (onRecordClick)="handleRecordClick($event)"
@@ -65,7 +65,7 @@
             <div
               class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
             >
-              @for (result of search.results(); track $index) {
+              @for (result of search().results(); track $index) {
                 <app-result-item-grid
                   [result]="result"
                   (onRecordClick)="handleRecordClick($event)"
@@ -75,7 +75,7 @@
           }
           @case ('table') {
             <app-result-item-table
-              [results]="search.results()"
+              [results]="search().results()"
               (onRecordClick)="handleRecordClick($event)"
             />
           }

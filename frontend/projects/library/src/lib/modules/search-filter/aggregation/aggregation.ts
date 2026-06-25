@@ -72,12 +72,12 @@ export class Aggregation extends SearchBase implements OnDestroy {
     super();
     effect(() => {
       this.selectedDropdownOptions.set(
-        this.buckets().filter((bucket) => this.search.isFilterActive(this.keyName(), bucket.key)),
+        this.buckets().filter((bucket) => this.search().isFilterActive(this.keyName(), bucket.key)),
       );
       this.aggregationService.loadAggregationTranslation(
         this.keyName(),
-        this.search.aggregations()[this.keyName()],
-        this.search.aggregationsConfig(),
+        this.search().aggregations()[this.keyName()],
+        this.search().aggregationsConfig(),
       );
 
       if (this.isChartLayout()) {
@@ -102,7 +102,7 @@ export class Aggregation extends SearchBase implements OnDestroy {
 
   activeKeysList = computed(() =>
     this.buckets()
-      .filter((b) => this.search.isFilterActive(this.keyName(), b.key))
+      .filter((b) => this.search().isFilterActive(this.keyName(), b.key))
       .map((b) => String(b.key)),
   );
 
@@ -110,10 +110,10 @@ export class Aggregation extends SearchBase implements OnDestroy {
     this.translationChange();
     this.langChange();
 
-    let buckets = this.aggregationService.getBuckets(this.search.aggregations()[this.keyName()]);
+    let buckets = this.aggregationService.getBuckets(this.search().aggregations()[this.keyName()]);
     const aggregationConfig = this.aggregationService.getAggregationConfig(
       this.keyName(),
-      this.search.aggregationsConfig(),
+      this.search().aggregationsConfig(),
     );
     const histogramInterval = aggregationConfig?.histogram?.interval;
     if (buckets) {
@@ -162,23 +162,23 @@ export class Aggregation extends SearchBase implements OnDestroy {
   }
 
   layout = computed(() => {
-    const configuredLayout = this.search.aggregations()[this.keyName()]?.meta
+    const configuredLayout = this.search().aggregations()[this.keyName()]?.meta
       ?.layout as AggregationLayout;
     return this.displayType() || configuredLayout || 'checkbox';
   });
 
   decorator = computed<Decorator | undefined>(() => {
-    return this.search.aggregations()[this.keyName()]?.meta?.decorator;
+    return this.search().aggregations()[this.keyName()]?.meta?.decorator;
   });
 
   refreshPolicy = computed<'none' | undefined>(() => {
-    return this.search.aggregations()[this.keyName()]?.meta?.refreshPolicy;
+    return this.search().aggregations()[this.keyName()]?.meta?.refreshPolicy;
   });
 
   isHistogram = computed(() => {
     const aggregationConfig = this.aggregationService.getAggregationConfig(
       this.keyName(),
-      this.search.aggregationsConfig(),
+      this.search().aggregationsConfig(),
     );
     return typeof aggregationConfig?.histogram?.interval === 'number';
   });
@@ -219,7 +219,7 @@ export class Aggregation extends SearchBase implements OnDestroy {
   }
 
   handleMultiSelectClear() {
-    this.search.clearFilter(this.keyName());
+    this.search().clearFilter(this.keyName());
   }
 
   filter(event: SearchFilterChange, clear: boolean = false) {
@@ -229,17 +229,17 @@ export class Aggregation extends SearchBase implements OnDestroy {
     }
 
     if (event.values.length === 0) {
-      this.search.clearFilter(this.keyName());
+      this.search().clearFilter(this.keyName());
     } else if (event.add) {
       const clearFilters = this.layout() === 'tree';
-      this.search.addFilter(this.keyName(), event.values, clearFilters);
+      this.search().addFilter(this.keyName(), event.values, clearFilters);
     } else if (!event.add) {
-      this.search.removeFilter(this.keyName(), event.values[0]);
+      this.search().removeFilter(this.keyName(), event.values[0]);
     }
   }
 
   onChartBucketClick(key: string) {
-    const isActive = this.search.isFilterActive(this.keyName(), key);
+    const isActive = this.search().isFilterActive(this.keyName(), key);
     this.filter({
       field: this.keyName(),
       values: [key],
@@ -248,7 +248,7 @@ export class Aggregation extends SearchBase implements OnDestroy {
   }
 
   onChartRangeSelect(keys: string[]) {
-    this.search.clearFilter(this.keyName());
+    this.search().clearFilter(this.keyName());
     if (keys.length > 0) {
       this.filter({
         field: this.keyName(),

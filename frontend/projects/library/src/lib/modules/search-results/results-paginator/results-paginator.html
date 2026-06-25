@@ -1,22 +1,22 @@
-@if (this.search.totalCount() > this.search.pageSize()) {
+@if (this.search().totalCount() > this.search().pageSize()) {
   @if (layoutMode() === 'paginator') {
     <div class="paginator-container border-top-1 pt-4 mt-4">
       <p-paginator
-        [first]="this.search.currentPage() * this.search.pageSize()"
-        [rows]="this.search.pageSize()"
-        [totalRecords]="this.search.totalCount()"
+        [first]="this.search().currentPage() * this.search().pageSize()"
+        [rows]="this.search().pageSize()"
+        [totalRecords]="this.search().totalCount()"
         [rowsPerPageOptions]="pageSizeOptions()"
         [showJumpToPageDropdown]="false"
         (onPageChange)="onPageChange($event)"
       >
       </p-paginator>
     </div>
-  } @else if (layoutMode() === 'loadMore' && this.search.hasMore()) {
+  } @else if (layoutMode() === 'loadMore' && this.search().hasMore()) {
     <div class="paginator-container flex justify-content-center pt-4 mt-4">
       <p-button
         [label]="'loadMore' | translate"
         (onClick)="loadMore()"
-        [loading]="this.search.isLoading()"
+        [loading]="this.search().isLoading()"
       ></p-button>
     </div>
   }

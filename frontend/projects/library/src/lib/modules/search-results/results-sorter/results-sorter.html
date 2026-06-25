@@ -1,9 +1,9 @@
-@if (search.hasResults()) {
+@if (search().hasResults()) {
   <div class="card flex justify-end">
     <p-select
       [options]="sortOptions()"
       optionValue="value"
-      [ngModel]="search.currentSort()"
+      [ngModel]="search().currentSort()"
       (onChange)="onSortChange($event.value)"
       [showClear]="false"
       size="small"

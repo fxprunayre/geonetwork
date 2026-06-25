@@ -6,9 +6,9 @@ import { SearchBase } from '../../search/search-base/search-base';
 @Component({
   selector: 'app-results-number',
   imports: [DecimalPipe, TranslatePipe],
-  template: ` @if (search.hasResults()) {
+  template: ` @if (search().hasResults()) {
     <span class="text-primary-400" data-testid="search-results-number"
-      >{{ search.totalCount() | number }} {{ labelKey() | translate }}</span
+      >{{ search().totalCount() | number }} {{ labelKey() | translate }}</span
     >
   }`,
 })

@@ -111,7 +111,7 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
             key: part,
             data: { key: bucket.key },
             label: `${label}  (${this.decimalPipe.transform(bucket.doc_count, undefined, this.translateService.getCurrentLang())})`,
-            checked: this.search.isFilterActive(this.keyName(), bucket.key),
+            checked: this.search().isFilterActive(this.keyName(), bucket.key),
             children: [],
           };
           currentLevel.push(existingNode);
@@ -132,7 +132,7 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
       });
     };
 
-    const aggregationMeta = this.search.aggregations()[this.keyName()]?.meta;
+    const aggregationMeta = this.search().aggregations()[this.keyName()]?.meta;
     if (aggregationMeta?.orderByTranslation) {
       orderTree(root);
     }
