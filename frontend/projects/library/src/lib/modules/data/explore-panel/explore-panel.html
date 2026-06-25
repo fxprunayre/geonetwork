@@ -33,7 +33,11 @@
     }
 
     @if (datasource()) {
-      <app-perspective [datasource]="datasource()" />
+      @defer (on immediate) {
+        <app-perspective [datasource]="datasource()" />
+      } @placeholder {
+        <div class="flex items-center justify-center p-8 text-muted-color">…</div>
+      }
     }
   </ng-template>
 

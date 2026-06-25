@@ -14,7 +14,6 @@ import {
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidTriangleExclamation, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { TranslateModule } from '@ngx-translate/core';
-import perspective from '@perspective-dev/client';
 import { Button, ButtonIcon } from 'primeng/button';
 import { FileSelectEvent, FileUploadModule, FileUploadPassThrough } from 'primeng/fileupload';
 import { Message } from 'primeng/message';
@@ -397,6 +396,7 @@ export class Perspective implements OnDestroy {
   }
 
   private async loadDataIntoPerspective() {
+    const { perspective } = await import('./perspective-init');
     this.worker = this.worker || (await perspective.worker());
 
     if (!this.workspaceLoaded && this.perspectiveWorkspace?.nativeElement?.load) {

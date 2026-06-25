@@ -1,12 +1,5 @@
 import { inject, Injectable, Renderer2, signal } from '@angular/core';
-import * as duckdb from '@duckdb/duckdb-wasm';
-import { AsyncDuckDB, AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
-import perspective from '@perspective-dev/client';
-import perspective_viewer from '@perspective-dev/viewer';
-import '@perspective-dev/viewer-d3fc';
-import '@perspective-dev/viewer-datagrid';
-import '@perspective-dev/viewer-openlayers';
-import '@perspective-dev/workspace';
+import type { AsyncDuckDB, AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
 import { IndexRecord } from 'gn-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { SearchService } from '../search/search-service';
@@ -68,6 +61,7 @@ export class DuckDbService {
   async init(): Promise<void> {
     if (this.initialized) return;
     try {
+      const duckdb = await import('@duckdb/duckdb-wasm');
       const logger = new duckdb.ConsoleLogger();
       const bundles = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
       const worker = await this.createWorkerFromUrl(bundles.mainWorker as string);
@@ -95,6 +89,10 @@ export class DuckDbService {
 
     try {
       const perspectiveVersion = '4.4.1';
+
+      // Dynamically load all perspective modules (side-effect imports register custom elements)
+      const { perspective, perspective_viewer } = await import('./perspective/perspective-init');
+
       const wasmUrls = [
         `https://cdn.jsdelivr.net/npm/@perspective-dev/server@${perspectiveVersion}/dist/wasm/perspective-server.wasm`,
         `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer@${perspectiveVersion}/dist/wasm/perspective-viewer.wasm`,
