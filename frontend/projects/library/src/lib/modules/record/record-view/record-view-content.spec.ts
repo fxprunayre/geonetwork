@@ -1,6 +1,14 @@
+vi.mock('@perspective-dev/viewer-d3fc', () => ({}));
+vi.mock('@perspective-dev/viewer-datagrid', () => ({}));
+vi.mock('@perspective-dev/viewer-openlayers', () => ({}));
+vi.mock('@perspective-dev/workspace', () => ({}));
+vi.mock('@perspective-dev/client', () => ({ default: { init_server: vi.fn() } }));
+vi.mock('@perspective-dev/viewer', () => ({ default: { init_client: vi.fn() } }));
+
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs';
 
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
@@ -15,7 +23,11 @@ describe('RecordViewContent', () => {
       imports: [RecordViewContent],
       providers: [
         { provide: APPLICATION_CONFIGURATION, useValue: signal(DEFAULT_TEST_CONFIG) },
-        { provide: Router, useValue: { navigate: jasmine.createSpy('navigate') } },
+        {
+          provide: ActivatedRoute,
+          useValue: { parent: null, queryParams: of({}), queryParamMap: of({ get: () => null }) },
+        },
+        { provide: Router, useValue: { navigate: vi.fn() } },
       ],
     }).compileComponents();
 

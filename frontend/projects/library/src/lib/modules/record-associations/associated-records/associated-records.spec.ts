@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMarkdown } from 'ngx-markdown';
-import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock';
 
 import { AssociatedRecords } from './associated-records';
 

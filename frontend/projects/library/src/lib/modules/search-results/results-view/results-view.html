@@ -32,7 +32,7 @@
     <ng-container
       *ngTemplateOutlet="
         searchProgressTemplate || defaultSearchProgressTemplate;
-        context: { $implicit: search }
+        context: { $implicit: search() }
       "
     ></ng-container>
   } @else {

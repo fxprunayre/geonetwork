@@ -1,6 +1,7 @@
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { APPLICATION_CONFIGURATION } from '../../../modules/config/config.loader';
 import { DEFAULT_THEME } from '../../../modules/config/default-theme';
 import { ThemeDesigner } from './theme-designer';
@@ -11,7 +12,7 @@ describe('ThemeDesigner', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ThemeDesigner],
+      imports: [ThemeDesigner, TranslateModule.forRoot()],
       providers: [
         {
           provide: APPLICATION_CONFIGURATION,

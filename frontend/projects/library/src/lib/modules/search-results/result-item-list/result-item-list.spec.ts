@@ -5,10 +5,10 @@ import { signal } from '@angular/core';
 import { Configuration as GnConfiguration } from 'gn-api-client';
 import { Configuration as Gn4Configuration } from 'gn4-api-client';
 import { provideMarkdown } from 'ngx-markdown';
-import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
-import { provideMockSearchService } from '../../search/search-store.mock.spec';
+import { provideMockSearchService } from '../../search/search-store.mock';
 import { ResultItemList } from './result-item-list';
 
 describe('ResultItemList', () => {

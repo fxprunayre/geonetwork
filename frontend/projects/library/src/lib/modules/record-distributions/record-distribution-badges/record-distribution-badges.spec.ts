@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { signal } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { Configuration as GnConfiguration } from 'gn-api-client';
 import { Configuration as Gn4Configuration } from 'gn4-api-client';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
@@ -13,7 +14,7 @@ describe('RecordDistributionBadges', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RecordDistributionBadges],
+      imports: [RecordDistributionBadges, TranslateModule.forRoot()],
       providers: [
         { provide: APPLICATION_CONFIGURATION, useValue: signal(DEFAULT_TEST_CONFIG) },
         { provide: GnConfiguration, useValue: new GnConfiguration() },

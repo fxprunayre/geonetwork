@@ -1,4 +1,3 @@
-/// <reference types="jasmine" />
 import { signal } from '@angular/core';
 import { IndexRecord } from 'gn-api-client';
 import { Observable, of } from 'rxjs';
@@ -35,6 +34,7 @@ export const createMockSearchStore = (): SearchStoreType => {
     searchFilterParameters: signal({} as any),
     searchRequestPageParameters: signal({} as any),
     hasMore: signal(true),
+    hasError: signal(false),
     hasResults: signal(true),
     isEmpty: signal(false),
     totalPages: signal(1),
@@ -44,37 +44,37 @@ export const createMockSearchStore = (): SearchStoreType => {
     results$: of(mockSearchResults) as Observable<any>,
 
     // --- MOCK METHODS (Must return Spies) ---
-    init: jasmine.createSpy('init'),
+    init: vi.fn(),
 
     // rxMethods return void, but are spied upon
-    search: jasmine.createSpy('search').and.callFake((params: any) => {
+    search: vi.fn().mockImplementation((params: any) => {
       console.log('Mock search called with params:', params);
     }),
-    paging: jasmine.createSpy('paging').and.callFake((params: any) => {
+    paging: vi.fn().mockImplementation((params: any) => {
       /* do nothing */
     }),
 
-    setFullTextQuery: jasmine.createSpy('setFullTextQuery'),
-    isFilterActive: jasmine.createSpy('isFilterActive').and.returnValue(false),
-    addFilter: jasmine.createSpy('addFilter'),
-    clearFilter: jasmine.createSpy('clearFilter'),
-    removeFilter: jasmine.createSpy('removeFilter'),
-    reset: jasmine.createSpy('reset'),
-    more: jasmine.createSpy('more'),
-    setPage: jasmine.createSpy('setPage'),
-    next: jasmine.createSpy('next'),
-    previous: jasmine.createSpy('previous'),
-    setRouting: jasmine.createSpy('setRouting'),
-    subscribeToRouteChange: jasmine.createSpy('subscribeToRouteChange'),
-    setSort: jasmine.createSpy('setSort'),
+    setFullTextQuery: vi.fn(),
+    isFilterActive: vi.fn().mockReturnValue(false),
+    addFilter: vi.fn(),
+    clearFilter: vi.fn(),
+    removeFilter: vi.fn(),
+    reset: vi.fn(),
+    more: vi.fn(),
+    setPage: vi.fn(),
+    next: vi.fn(),
+    previous: vi.fn(),
+    setRouting: vi.fn(),
+    subscribeToRouteChange: vi.fn(),
+    setSort: vi.fn(),
     hasMoreTerms: signal((keyName: string) => false),
     hasExpandedTerms: signal((keyName: string) => false),
-    loadMoreTerms: jasmine.createSpy('loadMoreTerms'),
-    loadLessTerms: jasmine.createSpy('loadLessTerms'),
+    loadMoreTerms: vi.fn(),
+    loadLessTerms: vi.fn(),
     hasActiveFilters: signal(false),
     activeFilterCount: signal(0),
     sort: signal([]),
-    setSortOption: jasmine.createSpy('setSortOption'),
+    setSortOption: vi.fn(),
     currentSort: signal({ code: 'relevance', field: '_score' }),
   };
 
@@ -82,20 +82,19 @@ export const createMockSearchStore = (): SearchStoreType => {
 };
 
 export function provideMockSearchService(mockStore?: SearchStoreType) {
-  let mockSearchService: jasmine.SpyObj<SearchService>;
-  mockSearchService = jasmine.createSpyObj('SearchService', [
-    'getSearch',
-    'search',
-    'page',
-    'getSupportedDatasource',
-  ]);
-  mockSearchService.getSearch.and.returnValue(mockStore ?? createMockSearchStore());
-  mockSearchService.search.and.returnValue(
+  let mockSearchService = {
+    getSearch: vi.fn().mockName('SearchService.getSearch'),
+    search: vi.fn().mockName('SearchService.search'),
+    page: vi.fn().mockName('SearchService.page'),
+    getSupportedDatasource: vi.fn().mockName('SearchService.getSupportedDatasource'),
+  };
+  mockSearchService.getSearch.mockReturnValue(mockStore ?? createMockSearchStore());
+  mockSearchService.search.mockReturnValue(
     of({ results: mockSearchResults, aggregations: {}, totalCount: mockTotalCount }),
   );
-  mockSearchService.page.and.returnValue(
+  mockSearchService.page.mockReturnValue(
     of({ results: mockSearchResults, aggregations: {}, totalCount: mockTotalCount }),
   );
-  mockSearchService.getSupportedDatasource.and.returnValue([]);
+  mockSearchService.getSupportedDatasource.mockReturnValue([]);
   return { provide: SearchService, useValue: mockSearchService };
 }

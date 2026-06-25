@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
 import { of } from 'rxjs';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
@@ -16,6 +17,7 @@ describe('SignInFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
+        MessageService,
         { provide: AuthenticationService, useValue: { getAuthenticationProviders: () => of([]) } },
         { provide: ActivatedRoute, useValue: { parent: null } },
         { provide: APPLICATION_CONFIGURATION, useValue: signal(DEFAULT_TEST_CONFIG) },

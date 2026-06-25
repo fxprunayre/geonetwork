@@ -2,7 +2,7 @@ import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { elasticsearch } from 'gn-api-client';
 import { SearchService as ApiSearchService, RegistriesService } from 'gn4-api-client';
-import { provideMockTranslateService } from '../../shared/translate-service.mock.spec';
+import { provideMockTranslateService } from '../../shared/translate-service.mock';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../config/fixtures';
 import { SearchService } from './search-service';
@@ -18,11 +18,15 @@ describe('SearchService', () => {
         { provide: APPLICATION_CONFIGURATION, useValue: signal(DEFAULT_TEST_CONFIG as any) },
         {
           provide: ApiSearchService,
-          useValue: jasmine.createSpyObj('ApiSearchService', ['search']),
+          useValue: {
+            search: vi.fn().mockName('ApiSearchService.search'),
+          },
         },
         {
           provide: RegistriesService,
-          useValue: jasmine.createSpyObj('RegistriesService', ['getKeywords']),
+          useValue: {
+            getKeywords: vi.fn().mockName('RegistriesService.getKeywords'),
+          },
         },
       ],
     });

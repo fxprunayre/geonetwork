@@ -3,10 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { signal } from '@angular/core';
 import { RegistriesService } from 'gn4-api-client';
 import { of } from 'rxjs';
-import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
-import { provideMockSearchService } from '../../search/search-store.mock.spec';
+import { provideMockSearchService } from '../../search/search-store.mock';
 import { KeywordList } from './keyword-list';
 
 describe('KeywordList', () => {
@@ -14,8 +14,10 @@ describe('KeywordList', () => {
   let fixture: ComponentFixture<KeywordList>;
 
   beforeEach(async () => {
-    let mockRegistriesService = jasmine.createSpyObj('RegistriesService', ['searchKeywords']);
-    mockRegistriesService.searchKeywords.and.returnValue(of([]));
+    let mockRegistriesService = {
+      searchKeywords: vi.fn().mockName('RegistriesService.searchKeywords'),
+    };
+    mockRegistriesService.searchKeywords.mockReturnValue(of([]));
 
     await TestBed.configureTestingModule({
       providers: [
