@@ -174,6 +174,10 @@
       },
       "relatedRecordsWarning": "Cette fiche est associée à d'autres ressources :",
       "sharing": {
+        "byGroup": {
+          "help": "Partager cette fiche avec des groupes spécifiques. Cela la rendra accessible uniquement aux groupes sélectionnés.",
+          "label": "Partager par groupe"
+        },
         "help": "Gérer les options de partage de la fiche",
         "label": "Partager",
         "publish": "Publier",

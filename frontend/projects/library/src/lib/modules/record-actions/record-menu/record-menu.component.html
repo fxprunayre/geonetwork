@@ -15,3 +15,11 @@
     <app-associated-records-summary [record]="record()" />
   </app-delete-confirmation-dialog>
 }
+
+@if (isByGroupSharing()) {
+  <app-record-sharing-by-group-panel
+    [(visible)]="displayByGroupSharingPanel"
+    [record]="record()"
+    (onConfirm)="onByGroupSharingSaved()"
+  />
+}

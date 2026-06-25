@@ -32,7 +32,7 @@ export const DEFAULT_USER_SELECTIONS_APP_CONFIGURATION: UserSelectionsApp = {
 
 export const DEFAULT_SHARING_APP_CONFIGURATION: SharingApp = {
   enabled: true,
-  sharingMode: 'simple',
+  sharingMode: 'byGroup',
 };
 
 export const DEFAULT_MAP_CONTEXT = {

@@ -46,7 +46,7 @@ export interface I18nApp extends App {
 
 export interface AuthenticationApp extends App {}
 
-export type SharingMode = 'none' | 'simple' | 'advanced';
+export type SharingMode = 'none' | 'simple' | 'byGroup' | 'byWorkflow';
 
 export interface SharingApp extends App {
   sharingMode: SharingMode;

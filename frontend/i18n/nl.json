@@ -173,6 +173,10 @@
       },
       "relatedRecordsWarning": "Dit record is gekoppeld aan andere bronnen:",
       "sharing": {
+        "byGroup": {
+          "help": "Deel dit record met specifieke groepen. Dit maakt het alleen toegankelijk voor de geselecteerde groepen.",
+          "label": "Delen per groep"
+        },
         "help": "Beheer deelopties voor het record",
         "label": "Delen",
         "publish": "Publiceren",
@@ -180,17 +184,17 @@
         "unpublish": "Publicatie intrekken",
         "unpublishHelp": "Trek de publicatie van dit record in. Dit maakt het privé en verwijdert de openbare toegang."
       },
-      "typeToConfirm": "Type \"{{word}}\" to confirm",
+      "typeToConfirm": "Typ \"{{word}}\" om te bevestigen",
       "unbookmark": "Bladwijzer verwijderen",
       "unbookmarkTitle": "Uit bladwijzers verwijderen"
     },
     "association": {
-      "associated": "Associated with {{count}} resource(s)",
-      "brothersAndSisters": "{{count}} Siblings",
-      "children": "Composed of {{count}} resource(s)",
+      "associated": "Gekoppeld aan {{count}} bron(nen)",
+      "brothersAndSisters": "{{count}} broers en zussen",
+      "children": "Bestaat uit {{count}} bron(nen)",
       "datasets": "{{count}} datasets",
-      "fcats": "{{count}}  data models",
-      "hasfeaturecats": "{{count}} associated data",
+      "fcats": "{{count}} datamodellen",
+      "hasfeaturecats": "{{count}} gekoppelde gegevens",
       "hassources": "Used for {{count}} resource(s)",
       "parent": "Part of {{count}} resource(s)",
       "services": "{{count}} services",

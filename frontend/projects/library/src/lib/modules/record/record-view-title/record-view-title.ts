@@ -3,11 +3,11 @@ import { Component, computed, inject, input, output, TemplateRef } from '@angula
 import { ThemingService } from '../../../shared/theming-service';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { Bookmark } from '../../record-actions/bookmark/bookmark';
+import { RecordMenuComponent } from '../../record-actions/record-menu/record-menu.component';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
 import { RecordFieldType } from '../record-field-type/record-field-type';
-import { RecordMenuComponent } from '../record-menu/record-menu.component';
 
 @Component({
   selector: 'app-record-view-title',

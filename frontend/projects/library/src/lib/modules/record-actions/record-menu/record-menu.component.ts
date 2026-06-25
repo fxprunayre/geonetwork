@@ -23,8 +23,8 @@ import { RecordsService } from 'gn4-api-client';
 import { MenuItem } from 'primeng/api';
 
 import { MenubarModule } from 'primeng/menubar';
-import { DeleteConfirmationDialog } from '../../../shared/widgets/delete-confirmation-dialog/delete-confirmation-dialog';
 import { AssociatedRecordsSummary } from '../../record-associations/associated-records-summary/associated-records-summary';
+import { DeleteConfirmationDialog } from '../record-deletion/delete-confirmation-dialog/delete-confirmation-dialog';
 
 import { ButtonModule } from 'primeng/button';
 import { TieredMenu } from 'primeng/tieredmenu';
@@ -33,8 +33,10 @@ import { AuthStore } from '../../authentication/auth.store';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_SPACE } from '../../config/gn-constants';
 import { Gn4UrlService } from '../../config/gn4-url.service';
-import { RecordActionService } from '../../record-actions/record-action.service';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { SharingMode } from '../../config/model/gnConfig';
+import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
+import { RecordActionService } from '../record-action.service';
+import { RecordSharingByGroupPanelComponent } from '../record-sharing/record-sharing-by-group-panel/record-sharing-by-group-panel.component';
 import { RecordSharingService } from '../record-sharing/record-sharing.services';
 
 @Component({
@@ -46,6 +48,7 @@ import { RecordSharingService } from '../record-sharing/record-sharing.services'
     TranslatePipe,
     DeleteConfirmationDialog,
     AssociatedRecordsSummary,
+    RecordSharingByGroupPanelComponent,
     TieredMenu,
     ButtonModule,
     NgIcon,
@@ -73,11 +76,16 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
 
   readonly appConfiguration = inject(APPLICATION_CONFIGURATION);
   readonly catalogueUrl = computed(() => this.appConfiguration().catalogueUrl);
+  readonly sharingMode = computed<SharingMode>(
+    () => this.appConfiguration().config?.apps?.sharing?.sharingMode ?? 'none',
+  );
+  isByGroupSharing = computed(() => this.sharingMode() === 'byGroup');
 
   shareUrl = signal('');
   currentLang = signal(this.translate.getCurrentLang());
 
   displayConfirmation = false;
+  displayByGroupSharingPanel = false;
   confirmationWord = 'DELETE';
   onSharingChanged = output<void>();
 
@@ -140,6 +148,9 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
         isPublishedToAll,
         translate: (key) => this.translate.instant(key),
         onChanged: () => this.onSharingChanged.emit(),
+        onByGroupRequested: () => {
+          this.displayByGroupSharingPanel = true;
+        },
       });
       if (sharingMenuItem) {
         arr.push(sharingMenuItem);
@@ -180,6 +191,11 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
 
     this.displayConfirmation = false;
     this.recordActionService.deleteRecord(uuid).subscribe();
+  }
+
+  onByGroupSharingSaved() {
+    this.displayByGroupSharingPanel = false;
+    this.onSharingChanged.emit();
   }
 
   ngOnInit(): void {
