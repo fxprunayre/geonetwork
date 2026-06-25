@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, input, OnChanges, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidDownload, faSolidQuoteRight } from '@ng-icons/font-awesome/solid';
@@ -41,7 +41,7 @@ interface FormatOption {
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
   providers: [MessageService],
 })
-export class RecordCitation implements OnChanges {
+export class RecordCitation {
   uuid = input.required<string>();
   format = input('html');
   private readonly messageService = inject(MessageService);
@@ -61,11 +61,6 @@ export class RecordCitation implements OnChanges {
   currentFormat = signal<string>('html');
   citationAvailable = signal(false);
   loading = signal(false);
-
-  ngOnChanges() {
-    //if (!this.uuid()) return;
-    //this.loadFormats();
-  }
 
   private fetchCitation(
     output: 'html' | 'json' | 'txt' | 'xml' | 'jsonld' | 'pdf' | 'testpdf' | undefined,

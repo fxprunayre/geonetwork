@@ -55,7 +55,7 @@ export class RecordFieldDates extends RecordFieldBase implements OnInit {
     this.currentLocale = this.translateService.getCurrentLang();
   }
 
-  icons: { [key: string]: any } = {
+  icons: Record<string, any> = {
     creation: faLightbulb,
     publication: faSolidBullhorn,
     revision: faSolidPen,

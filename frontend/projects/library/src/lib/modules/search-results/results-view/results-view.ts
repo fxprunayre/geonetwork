@@ -32,11 +32,11 @@ import { ResultsPaginatorComponent } from '../results-paginator/results-paginato
 })
 export class ResultsView extends SearchBase {
   layout = input<SearchAppLayout>('grid');
-  onRecordClick = output<string>();
+  recordClick = output<string>();
 
   @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<any> | undefined;
 
   handleRecordClick(uuid: string) {
-    this.onRecordClick.emit(uuid);
+    this.recordClick.emit(uuid);
   }
 }

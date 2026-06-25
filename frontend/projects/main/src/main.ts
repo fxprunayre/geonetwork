@@ -4,7 +4,7 @@ import { loadAppConfig } from 'gn-library';
 import { App } from './app/app';
 import { getAppConfig } from './app/app.config';
 
-loadAppConfig().then((config: any) => {
+loadAppConfig().then((config) => {
   //bootstrapApplication(App, getAppConfig(config)).catch((err) => console.error(err));
   createApplication(getAppConfig(config))
     .then((app) => {

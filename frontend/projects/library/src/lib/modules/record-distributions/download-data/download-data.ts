@@ -150,7 +150,7 @@ export class DownloadData implements OnInit {
       }
       url.searchParams.set('outputFormat', format);
       window.open(url.toString(), '_blank');
-    } catch (e) {
+    } catch {
       window.open(urlStr, '_blank');
     }
   }

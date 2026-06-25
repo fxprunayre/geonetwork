@@ -13,11 +13,10 @@ import { Aggregation } from './aggregation';
   imports: [Aggregation],
 })
 class TestHostComponent {
-  field: string = 'resourceType';
+  field = 'resourceType';
 }
 
 describe('AggregationComponent', () => {
-  let testHostComponent: TestHostComponent;
   let hostFixture: ComponentFixture<TestHostComponent>;
   let aggregationComponent: Aggregation;
 
@@ -32,7 +31,6 @@ describe('AggregationComponent', () => {
     }).compileComponents();
 
     hostFixture = TestBed.createComponent(TestHostComponent);
-    testHostComponent = hostFixture.componentInstance;
     const componentDebugEl: DebugElement = hostFixture.debugElement.query(
       By.directive(Aggregation),
     );

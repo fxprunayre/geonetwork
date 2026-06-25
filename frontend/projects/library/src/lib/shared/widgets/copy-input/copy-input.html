@@ -26,13 +26,25 @@
   }
 
   @case ('text') {
-    <span class="cursor-pointer text-primary font-bold" (click)="copyToClipboard()">
+    <span
+      class="cursor-pointer text-primary font-bold"
+      tabindex="0"
+      (click)="copyToClipboard()"
+      (keydown.enter)="copyToClipboard()"
+      (keydown.space)="copyToClipboard(); $event.preventDefault()"
+    >
       {{ 'copy.title' | translate }}
     </span>
   }
 
   @default {
-    <span class="cursor-pointer underline" (click)="copyToClipboard()">
+    <span
+      class="cursor-pointer underline"
+      tabindex="0"
+      (click)="copyToClipboard()"
+      (keydown.enter)="copyToClipboard()"
+      (keydown.space)="copyToClipboard(); $event.preventDefault()"
+    >
       {{ 'copy.title' | translate }}
     </span>
   }

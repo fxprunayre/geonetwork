@@ -2,9 +2,9 @@ import { computed } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { SearchFilter } from './search-store.model';
 
-export type FilterState = {
+export interface FilterState {
   filters: Record<string, SearchFilter>;
-};
+}
 
 export const initialFilterState: FilterState = {
   filters: {},
@@ -30,11 +30,7 @@ export const FilterStore = signalStore(
       }
       return filter.values.some((v) => v == value);
     },
-    addFilter(
-      field: string,
-      value: string | number | (string | number)[],
-      clear: boolean = false,
-    ): void {
+    addFilter(field: string, value: string | number | (string | number)[], clear = false): void {
       const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
       const targetFilter = currentFilters[field];
       const valuesToAdd = Array.isArray(value) ? value : [value];

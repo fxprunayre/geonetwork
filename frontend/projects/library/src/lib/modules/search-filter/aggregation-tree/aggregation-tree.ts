@@ -40,7 +40,7 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
   buckets = input<AggregationBucketType[]>();
 
   @Output()
-  onSelected = new EventEmitter<SearchFilterChange>();
+  selected = new EventEmitter<SearchFilterChange>();
 
   translateService = inject(TranslateService);
   aggregationTranslatePipe = inject(AggregationTranslatePipe);
@@ -87,9 +87,9 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
     buckets.forEach((bucket) => {
       const parts = (bucket.key as string).split(this.separator());
       let currentLevel = root;
-      let parentLabel: string = '';
+      let parentLabel = '';
 
-      parts.forEach((part, index) => {
+      parts.forEach((part, _index) => {
         let existingNode = currentLevel.find((node) => node.key === part);
         const translatedLabel = this.aggregationTranslatePipe.transform(
           part,
@@ -102,7 +102,7 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
           // and we remove leading "/" for top nodes
           if (parentLabel && label.startsWith(parentLabel)) {
             label = label.replace(parentLabel, '');
-            label = label.replace(/^[\s\/]+/, '');
+            label = label.replace(/^[\s/]+/, '');
           } else if (!parentLabel && label.startsWith('/')) {
             label = label.substring(1);
           }
@@ -175,7 +175,7 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
         return;
       }
       const selectedKeys = nodes.map((node) => node.data.key);
-      this.onSelected.emit({
+      this.selected.emit({
         field: this.keyName(),
         values: selectedKeys,
         add: true,

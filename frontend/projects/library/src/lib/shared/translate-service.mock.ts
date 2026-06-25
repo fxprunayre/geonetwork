@@ -15,15 +15,15 @@ export function provideMockTranslateService(): Provider {
   return {
     provide: TranslateService,
     useValue: {
-      get: (key: string | string[], interpolateParams?: object): Observable<any> => {
+      get: (key: string | string[], _interpolateParams?: object): Observable<any> => {
         if (Array.isArray(key)) {
           return of(key.join(' '));
         }
         return of(translations[key.toString()] || key.toString());
       },
       instant: (key: string) => translations[key.toString()] || key.toString(),
-      getParsedResult: (translations: any, key: any, interpolateParams?: any) => key,
-      use: (lang: string) => of(undefined),
+      getParsedResult: (translations: any, key: any, _interpolateParams?: any) => key,
+      use: (_lang: string) => of(undefined),
       getCurrentLang: () => 'en',
       onLangChange: mockEvent,
       onFallbackLangChange: mockEvent,

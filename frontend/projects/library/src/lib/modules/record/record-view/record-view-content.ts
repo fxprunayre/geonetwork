@@ -313,8 +313,8 @@ export class RecordViewContent {
     return [...staticSections, ...contactSections];
   });
 
-  onRecordClick = output<string>();
-  onSharingChanged = output<void>();
+  recordClick = output<string>();
+  sharingChanged = output<void>();
 
   constructor() {
     this.route.queryParamMap.subscribe((params) => {
@@ -339,7 +339,7 @@ export class RecordViewContent {
   }
 
   handleRecordClick(uuid: string) {
-    this.onRecordClick.emit(uuid);
+    this.recordClick.emit(uuid);
   }
 
   getLineage(): string {

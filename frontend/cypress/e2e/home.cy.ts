@@ -20,8 +20,7 @@ describe('Home Page', () => {
       const total = interception.response?.body.hits.total.value;
 
       cy.get('app-aggregation').as('homeAggregation');
-      const attr = cy
-        .get('@homeAggregation')
+      cy.get('@homeAggregation')
         .invoke('attr', 'keyname')
         .then((keyname) => {
           if (keyname) {

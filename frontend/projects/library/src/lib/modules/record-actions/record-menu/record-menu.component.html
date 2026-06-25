@@ -10,7 +10,7 @@
     [message]="'record.action.delete.deleteConfirmationMessage' | translate"
     [confirmInputLabel]="'record.action.typeToConfirm' | translate: { word: confirmationWord }"
     [confirmWord]="confirmationWord"
-    (onConfirm)="deleteRecord()"
+    (confirm)="deleteRecord()"
   >
     <app-associated-records-summary [record]="record()" />
   </app-delete-confirmation-dialog>
@@ -20,6 +20,6 @@
   <app-record-sharing-by-group-panel
     [(visible)]="displayByGroupSharingPanel"
     [record]="record()"
-    (onConfirm)="onByGroupSharingSaved()"
+    (confirmed)="onByGroupSharingSaved()"
   />
 }

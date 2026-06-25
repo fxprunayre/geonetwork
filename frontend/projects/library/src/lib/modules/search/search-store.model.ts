@@ -7,18 +7,18 @@ export const DEFAULT_SORT = '_score';
 export const DEFAULT_SORT_OPTIONS = [DEFAULT_SORT];
 export const DEFAULT_AGGREGATION_SIZE = 10;
 
-export type SearchFilter = {
+export interface SearchFilter {
   field: string;
   values: (string | number)[];
-};
+}
 
-export type SearchFilterChange = {
+export interface SearchFilterChange {
   field: string;
   values: (string | number)[];
   add: boolean;
-};
+}
 
-export type SearchState = {
+export interface SearchState {
   id: string;
   routing: boolean;
   searchQuery: string;
@@ -35,7 +35,7 @@ export type SearchState = {
   layout: SearchAppLayout;
   language: string;
   hasError: boolean;
-};
+}
 
 export interface SearchFilterParameters {
   searchQuery: string;
@@ -56,10 +56,9 @@ export interface SearchRequestParameters
   layout: SearchAppLayout;
 }
 
-export interface SearchStoreContract {
-  [key: string]: unknown;
-}
+export type SearchStoreContract = Record<string, unknown>;
 
-export interface SearchRegistry<TStore extends SearchStoreContract = SearchStoreContract> {
-  [searchId: string]: TStore;
-}
+export type SearchRegistry<TStore extends SearchStoreContract = SearchStoreContract> = Record<
+  string,
+  TStore
+>;

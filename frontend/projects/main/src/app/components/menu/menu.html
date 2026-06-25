@@ -30,7 +30,14 @@
       >
         <ng-template #start>
           <div class="p-menu-list flex flex-row! header-row">
-            <a class="p-menu-item-link" role="menuitem" (click)="toggleMenu()">
+            <a
+              class="p-menu-item-link"
+              role="menuitem"
+              (click)="toggleMenu()"
+              (keydown.enter)="toggleMenu()"
+              (keydown.space)="toggleMenu()"
+              tabindex="0"
+            >
               <ng-icon
                 [name]="isIconMode() ? 'faSolidBars' : 'faSolidEllipsisVertical'"
                 class="md:text-2xl"

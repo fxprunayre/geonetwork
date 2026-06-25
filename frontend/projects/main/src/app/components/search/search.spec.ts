@@ -38,7 +38,7 @@ describe('Search', () => {
 
     console.log(searchBox);
     // screen.debug();
-    const hitsNumber = await screen.findByTestId('search-results-number');
+    await screen.findByTestId('search-results-number');
     // expect(hitsNumber?.innerText).toBe('10 results');
   });
 });

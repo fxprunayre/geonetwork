@@ -75,8 +75,8 @@ export const SearchStore = signalStore(
       searchFilterParameters: computed(() => {
         store.aggStore.aggregationsConfigTrigger();
         authStore.isAuthenticated();
-        apiConfiguration().space;
-        apiConfiguration().catalogueUrl;
+        const _space = apiConfiguration().space;
+        const _catalogueUrl = apiConfiguration().catalogueUrl;
         return {
           searchQuery: store.searchQuery(),
           filter: store.filter(),
@@ -175,7 +175,7 @@ export const SearchStore = signalStore(
           | Record<string, elasticsearch.AggregationsAggregationContainer>
         )[],
         size: number,
-        routing: boolean = false,
+        routing = false,
         filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
         sort: string[],
         currentSort: string,
@@ -330,11 +330,7 @@ export const SearchStore = signalStore(
       isFilterActive(field: string, value: string | number) {
         return store.filterStore.isFilterActive(field, value);
       },
-      addFilter(
-        field: string,
-        value: string | number | (string | number)[],
-        clear: boolean = false,
-      ): void {
+      addFilter(field: string, value: string | number | (string | number)[], clear = false): void {
         store.filterStore.addFilter(field, value, clear);
         patchState(store, { currentPage: 0 });
       },
@@ -350,7 +346,7 @@ export const SearchStore = signalStore(
         store.filterStore.reset();
         patchState(store, { searchQuery: '' });
       },
-      more(pageSize: number) {
+      more(_pageSize: number) {
         patchState(store, { currentPage: store.currentPage() + store.pageSize() });
       },
       loadMore() {
@@ -365,13 +361,13 @@ export const SearchStore = signalStore(
       hasMoreTerms(field: string): boolean {
         return store.aggStore.hasMoreTerms(field);
       },
-      loadMoreTerms(field: string, size: number = 10) {
+      loadMoreTerms(field: string, size = 10) {
         store.aggStore.loadMoreTerms(field, store.searchFilterParameters(), size);
       },
       hasExpandedTerms(field: string): boolean {
         return store.aggStore.hasExpandedTerms(field);
       },
-      loadLessTerms(field: string, size: number = 10) {
+      loadLessTerms(field: string, size = 10) {
         store.aggStore.loadLessTerms(field, store.searchFilterParameters(), size);
       },
       setPage(currentPage: number, pageSize: number) {
@@ -397,7 +393,7 @@ export const SearchStore = signalStore(
           | string
           | Record<string, elasticsearch.AggregationsAggregationContainer>
         )[],
-        silent: boolean = false,
+        silent = false,
       ) {
         store.aggStore.setAggregationsConfig(aggregationsConfig, silent);
       },

@@ -14,7 +14,7 @@
       <td>
         <a
           [routerLink]="[RECORD_ROUTE_PATH, result.uuid]"
-          (click)="onRecordClick.emit(result.uuid)"
+          (click)="recordClick.emit(result.uuid)"
           class="font-bold hover:underline cursor-pointer text-primary"
         >
           <app-record-field-title [record]="result" />

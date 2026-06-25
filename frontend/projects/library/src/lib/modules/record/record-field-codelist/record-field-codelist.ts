@@ -4,10 +4,10 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { Chip } from 'primeng/chip';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 
-type CodelistDecorator = {
+interface CodelistDecorator {
   type: 'badge';
   map: Record<string, string>; // Maps to PrimeNG CSS variable names
-};
+}
 
 @Component({
   selector: 'app-record-field-codelist',

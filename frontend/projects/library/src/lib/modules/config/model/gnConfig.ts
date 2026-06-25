@@ -34,16 +34,16 @@ export interface BannerApp extends App {
   textColor?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface Menu extends App {}
 
 export interface I18nApp extends App {
-  languages: {
-    [iso3code: string]: string;
-  };
+  languages: Record<string, string>;
   language: string;
   detection?: 'browser' | 'url' | 'html' | 'none';
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface AuthenticationApp extends App {}
 
 export type SharingMode = 'none' | 'simple' | 'byGroup' | 'byWorkflow';
@@ -52,6 +52,7 @@ export interface SharingApp extends App {
   sharingMode: SharingMode;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface UserSelectionsApp extends App {}
 
 export interface HomeApp extends App {

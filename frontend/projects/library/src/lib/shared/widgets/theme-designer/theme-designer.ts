@@ -62,7 +62,6 @@ export class ThemeDesigner implements OnInit {
 
   ngOnInit() {
     this.initFromCssVariables();
-    const config = this.appConfig().config;
   }
 
   initFromCssVariables() {

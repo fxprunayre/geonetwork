@@ -54,7 +54,7 @@ import { RecordFieldType } from '../record-field-type/record-field-type';
             [layout]="'badge'"
           />
 
-          <app-record-menu [record]="record()" (onSharingChanged)="onSharingChanged.emit()" />
+          <app-record-menu [record]="record()" (sharingChanged)="sharingChanged.emit()" />
         </div>
       </div>
     </div>
@@ -62,7 +62,7 @@ import { RecordFieldType } from '../record-field-type/record-field-type';
 })
 export class RecordViewTitle extends RecordFieldBase {
   backButtonTplRef = input<TemplateRef<unknown>>();
-  onSharingChanged = output<void>();
+  sharingChanged = output<void>();
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   themingService = inject(ThemingService);

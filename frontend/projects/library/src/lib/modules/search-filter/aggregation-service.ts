@@ -168,7 +168,7 @@ export class AggregationService {
         // Create a promise to track in-flight state
         const batchPromise = new Promise<void>((resolve) => {
           // Call service per batch; type the response to avoid implicit any
-          const subscription = this.registriesService
+          this.registriesService
             .getKeywordByIds(Array.from(batch).join(','), thesaurus, [currentLang])
             .subscribe(
               (keywords) => {

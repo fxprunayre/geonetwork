@@ -28,7 +28,7 @@ import { RecordActionService } from '../../record-action.service';
         [message]="'record.action.deleteConfirmationMessage' | translate"
         [confirmInputLabel]="'record.action.typeToConfirm' | translate: { word: confirmationWord }"
         [confirmWord]="confirmationWord"
-        (onConfirm)="deleteRecord()"
+        (confirmed)="deleteRecord()"
       >
         <app-associated-records-summary [record]="record()" />
       </app-delete-confirmation-dialog>

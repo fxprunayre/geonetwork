@@ -92,7 +92,7 @@ export class UserBoard {
   userName = computed(() => {
     const u = this.user();
     if (!u) return '';
-    return `${u.name} ${u.username}` || u.email || '';
+    return u.name + ' ' + u.username || u.email || '';
   });
 
   userRecordQuery = computed(() => {

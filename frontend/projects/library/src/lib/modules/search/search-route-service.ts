@@ -23,8 +23,8 @@ export class SearchRouteService {
     return `"${filter.values.join('" OR "')}"`;
   }
 
-  setRoute(store: SearchRequestParameters, pageSize: number) {
-    let urlParams = this.convertSearchToRouteParams(store);
+  setRoute(store: SearchRequestParameters, _pageSize: number) {
+    const urlParams = this.convertSearchToRouteParams(store);
 
     this.router.navigate([SEARCH_ROUTE_PATH], { queryParams: urlParams });
   }

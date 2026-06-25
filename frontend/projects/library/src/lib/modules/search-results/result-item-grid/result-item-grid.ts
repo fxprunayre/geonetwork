@@ -42,7 +42,7 @@ import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 export class ResultItemGrid {
   protected readonly RECORD_ROUTE_PATH = RECORD_ROUTE_PATH;
   result = input<IndexRecord>();
-  onRecordClick = output<string>();
+  recordClick = output<string>();
 
   externalUrl = computed(() => {
     const r = this.result();
@@ -54,6 +54,6 @@ export class ResultItemGrid {
     if (!result) return;
     const id = result.info?._id;
     if (!id) return;
-    this.onRecordClick.emit(id);
+    this.recordClick.emit(id);
   }
 }

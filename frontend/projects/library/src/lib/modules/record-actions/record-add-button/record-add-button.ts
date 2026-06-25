@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidPlus } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -41,7 +41,7 @@ import { RecordActionService } from '../record-action.service';
     </span>
   `,
 })
-export class RecordAddButton {
+export class RecordAddButton implements OnInit {
   target = input<string>('_blank');
   severity = input<ButtonSeverity>('primary');
 

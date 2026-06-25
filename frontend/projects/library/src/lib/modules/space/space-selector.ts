@@ -44,6 +44,7 @@ import { TranslationsService } from '../i18n/translations-service';
               @if (item.icon) {
                 <img
                   [src]="apiBase() + '/images/harvesting/' + item.icon"
+                  [alt]="item.label || ''"
                   class="m-w-full h-20 object-contain my-4"
                 />
               }

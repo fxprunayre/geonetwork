@@ -80,7 +80,7 @@ export class AssociatedRecords {
   relations = input<IndexRecord[]>([]);
   styleClass = input<string>('');
   resultTemplate = input<TemplateRef<unknown>>();
-  onRecordClick = output<string>();
+  recordClick = output<string>();
 
   translateService = inject(TranslateService);
 
@@ -169,6 +169,6 @@ export class AssociatedRecords {
   });
 
   handleRecordClick(uuid: string) {
-    this.onRecordClick.emit(uuid);
+    this.recordClick.emit(uuid);
   }
 }

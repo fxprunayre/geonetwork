@@ -84,7 +84,7 @@ export class App extends BaseComponent implements OnInit {
     });
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
+      .subscribe((event: NavigationEnd) => {
         const url = event.urlAfterRedirects;
         this.isMapActive.set(url.startsWith('/' + MAP_SLUG));
         this.isSearchActive.set(url.startsWith('/' + SEARCH_SLUG));

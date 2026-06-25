@@ -13,10 +13,10 @@ import { FilterPanelLayout } from '../../shared/models/search-layout.model';
         [scope]="scope()"
         [autocompleteEnabled]="autocompleteEnabled()"
         [placeholder]="placeholder()"
-        (onSearch)="searchTriggered.emit()"
+        (searchEvent)="searchTriggered.emit()"
       />
 
-      @if (showFilterButton() && (filterPanelMode() == 'drawer' || filterPanelMode() == 'side')) {
+      @if (showFilterButton() && (filterPanelMode() === 'drawer' || filterPanelMode() === 'side')) {
         <app-search-active-filters-button [(visible)]="visible" [scope]="scope()" />
       }
     </div>

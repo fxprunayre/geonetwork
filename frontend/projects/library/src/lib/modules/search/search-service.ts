@@ -50,7 +50,7 @@ export class SearchService {
   }
 
   escapeSpecialCharacters(queryString: string) {
-    return queryString.replace(/(\+|-|&&|\|\||!|\{|\}|\[|\]|\^|\~|\?|:|\\{1}|\(|\)|\/)/g, '\\$1');
+    return queryString.replace(/(\+|-|&&|\|\||!|\{|\}|\[|\]|\^|~|\?|:|\\{1}|\(|\)|\/)/g, '\\$1');
   }
 
   buildQuery(
@@ -162,11 +162,8 @@ export class SearchService {
     };
   }
 
-  buildSearchRequest(
-    searchRequestParameters: SearchRequestParameters,
-    withAggregation: boolean = true,
-  ) {
-    let request: elasticsearch.SearchRequest = {
+  buildSearchRequest(searchRequestParameters: SearchRequestParameters, withAggregation = true) {
+    const request: elasticsearch.SearchRequest = {
       from: searchRequestParameters.currentPage * searchRequestParameters.pageSize,
       size: searchRequestParameters.pageSize,
       track_total_hits: TRACK_TOTAL_HITS,
@@ -192,7 +189,7 @@ export class SearchService {
     aggregationName: string,
     searchRequestParameters: SearchRequestParameters,
   ) {
-    let request: elasticsearch.SearchRequest = {
+    const request: elasticsearch.SearchRequest = {
       from: 0,
       size: 0,
       track_total_hits: TRACK_TOTAL_HITS,
@@ -263,7 +260,6 @@ export class SearchService {
   }
 
   isMultiLingualField(obj: any, fieldName: string): boolean {
-    const keys = Object.keys(obj);
     const isMultiLingualField =
       fieldName.endsWith('Object') ||
       fieldName.startsWith('cl_') ||
@@ -371,7 +367,7 @@ export class SearchService {
         const layerName = link.nameObject?.['default'] || '';
         acc.push({ url, format: 'wfs', layer: layerName });
       } else if (protocol.startsWith('WWW:DOWNLOAD')) {
-        const formatMapping: { [key: string]: Datasource['format'] } = {
+        const formatMapping: Record<string, Datasource['format']> = {
           arrow: 'arrow',
           parquet: 'parquet',
           csv: 'csv',
@@ -395,7 +391,7 @@ export class SearchService {
 
   search(searchRequestParameters: SearchRequestParameters): Observable<{
     results: IndexRecord[];
-    aggregations: Record<string, elasticsearch.AggregationsAggregate> | {};
+    aggregations: Record<string, elasticsearch.AggregationsAggregate> | Record<string, never>;
     totalCount: number;
   }> {
     return this.searchService.search(this.buildSearchRequest(searchRequestParameters)).pipe(
@@ -451,7 +447,7 @@ export class SearchService {
     aggregationName: string,
     searchRequestParameters: SearchRequestParameters,
   ): Observable<{
-    aggregations: Record<string, elasticsearch.AggregationsAggregate> | {};
+    aggregations: Record<string, elasticsearch.AggregationsAggregate> | Record<string, never>;
   }> {
     return this.searchService
       .search(this.buildAggregationRequest(aggregationName, searchRequestParameters))
@@ -491,7 +487,7 @@ export class SearchService {
   }
 
   getById(id: string, relatedTypes?: RelatedItemType[]): Observable<IndexRecord | null> {
-    let searchRequest: elasticsearch.SearchRequest = {
+    const searchRequest: elasticsearch.SearchRequest = {
       query: {
         term: {
           _id: id,

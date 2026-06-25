@@ -16,11 +16,7 @@ interface AggregationBucket {
 export class SearchWelcomeTextPipe implements PipeTransform {
   private translateService = inject(TranslateService);
 
-  transform(
-    search: SearchStoreType | undefined,
-    field: string | undefined,
-    limit: number = 3,
-  ): string {
+  transform(search: SearchStoreType | undefined, field: string | undefined, limit = 3): string {
     if (!search) {
       return '';
     }

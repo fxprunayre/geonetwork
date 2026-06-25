@@ -77,7 +77,7 @@ export class SearchInput extends SearchBase {
     },
   };
 
-  onSearch = output();
+  searchEvent = output();
   queryString = '';
   items = signal<IndexRecord[]>([]);
   value: any;
@@ -132,7 +132,7 @@ export class SearchInput extends SearchBase {
 
   onModelChange(queryString: string) {
     this.search().setFullTextQuery(queryString);
-    this.onSearch.emit();
+    this.searchEvent.emit();
   }
 
   handleInputClick(event: MouseEvent) {

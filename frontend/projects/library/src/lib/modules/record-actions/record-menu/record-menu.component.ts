@@ -87,7 +87,7 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
   displayConfirmation = false;
   displayByGroupSharingPanel = false;
   confirmationWord = 'DELETE';
-  onSharingChanged = output<void>();
+  sharingChanged = output<void>();
 
   canDelete = computed(() => this.authStore.isAuthenticated() && this.record().info?.edit);
 
@@ -147,7 +147,7 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
         uuid: this.record().uuid,
         isPublishedToAll,
         translate: (key) => this.translate.instant(key),
-        onChanged: () => this.onSharingChanged.emit(),
+        onChanged: () => this.sharingChanged.emit(),
         onByGroupRequested: () => {
           this.displayByGroupSharingPanel = true;
         },
@@ -195,7 +195,7 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
 
   onByGroupSharingSaved() {
     this.displayByGroupSharingPanel = false;
-    this.onSharingChanged.emit();
+    this.sharingChanged.emit();
   }
 
   ngOnInit(): void {

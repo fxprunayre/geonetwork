@@ -13,7 +13,7 @@ export class AssociatedPanel extends RecordFieldBase {
   include = input<RelatedItemType[]>([]);
   exclude = input<RelatedItemType[]>([]);
   resultTemplate = input<TemplateRef<unknown>>();
-  onRecordClick = output<string>();
+  recordClick = output<string>();
 
   relations = computed<Record<string, IndexRecord[]>>(() => {
     const relations = JSON.parse(JSON.stringify(this.record().related || {}));
@@ -33,6 +33,6 @@ export class AssociatedPanel extends RecordFieldBase {
   });
 
   handleRecordClick(uuid: string) {
-    this.onRecordClick.emit(uuid);
+    this.recordClick.emit(uuid);
   }
 }

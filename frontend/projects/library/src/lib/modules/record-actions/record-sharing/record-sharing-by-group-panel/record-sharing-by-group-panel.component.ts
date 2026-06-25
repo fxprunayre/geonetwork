@@ -124,7 +124,7 @@ interface SharingPrivilegeRow {
 })
 export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
   visible = model.required<boolean>();
-  onConfirm = output<void>();
+  confirmed = output<void>();
 
   private readonly recordsService = inject(RecordsService);
   private readonly translate = inject(TranslateService);
@@ -217,7 +217,7 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
     if (this.isFormInvalid()) {
       return;
     }
-    this.onConfirm.emit();
+    this.confirmed.emit();
     this.close();
   }
 

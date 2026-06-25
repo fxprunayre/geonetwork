@@ -19,7 +19,7 @@ describe('ActiveFilters', () => {
           useValue: {
             instant: (key: string) => key.toUpperCase(),
             getCurrentLang: () => 'en',
-            getParsedResult: (translations: any, key: string, interpolateParams?: any) => key,
+            getParsedResult: (translations: any, key: string, _interpolateParams?: any) => key,
             get: (key: string) => of(key),
             onTranslationChange: of(),
             onLangChange: of(),

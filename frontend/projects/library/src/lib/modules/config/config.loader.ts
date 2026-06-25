@@ -22,13 +22,11 @@ export const APPLICATION_CONFIGURATION = new InjectionToken<
   WritableSignal<ApplicationConfiguration>
 >('app.config');
 
-let appConfig: ApplicationConfiguration = {
+const appConfig: ApplicationConfiguration = {
   config: undefined,
   space: DEFAULT_SPACE,
   catalogueUrl: '/',
 };
-
-let appConfigLoading = false;
 
 export interface LoadAppConfigOptions {
   apiUrl?: string;
@@ -79,11 +77,11 @@ function deepMerge(target: any, source: any): any {
   return merged;
 }
 
-export function loadAppConfig(options: LoadAppConfigOptions = {}) {
-  appConfigLoading = true;
-
+export function loadAppConfig(
+  options: LoadAppConfigOptions = {},
+): Promise<ApplicationConfiguration> {
   // Default to environment url, but allow override from web component attribute
-  let apiUrl = options.apiUrl || getWebComponentAttribute('url') || environment.geonetworkApiUrl;
+  const apiUrl = options.apiUrl || getWebComponentAttribute('url') || environment.geonetworkApiUrl;
   const webComponentSpace = options.space || getWebComponentAttribute('space');
   const languageOverride = options.language || getWebComponentAttribute('language') || undefined;
   const configOverride = options.config || getWebComponentAttribute('config') || undefined;
@@ -175,7 +173,6 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
     }
 
     console.log('Application config:', appConfig);
-    appConfigLoading = false;
     return appConfig;
   });
 }

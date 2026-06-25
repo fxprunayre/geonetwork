@@ -32,10 +32,7 @@ export function buildBarSeriesData(
   secondaryColor: string,
   visibleRange?: BarVisibleRange,
 ) {
-  const { lowBarThreshold, visibleMax, lowBarThresholdFromPercentile } = computeLowBarThreshold(
-    buckets,
-    visibleRange,
-  );
+  const { lowBarThreshold } = computeLowBarThreshold(buckets, visibleRange);
 
   return buckets.map((b) => {
     const isLowBar = b.doc_count <= lowBarThreshold;

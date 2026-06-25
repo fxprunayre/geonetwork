@@ -52,7 +52,7 @@ export class RecordActionService {
     return this.gn4UrlService.getEditorUrl('create');
   }
 
-  openCreateRecord(target: string = '_blank') {
+  openCreateRecord(target = '_blank') {
     if (!this.hasTemplates()) {
       return;
     }

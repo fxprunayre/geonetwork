@@ -6,7 +6,7 @@ import { Component, ElementRef, inject, OnDestroy, OnInit } from '@angular/core'
  * Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element'.
  */
 @Component({
-  selector: 'p-shadowdomstyle-component',
+  selector: 'app-shadowdomstyle-component',
   template: '<div></div>',
 })
 export class PrimeShadowdomstyleComponent implements OnInit, OnDestroy {
@@ -35,7 +35,7 @@ export class PrimeShadowdomstyleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.observer && this.observer.disconnect();
+    if (this.observer) this.observer.disconnect();
   }
 
   private injectPrimeNGStyles(): void {

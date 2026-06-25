@@ -54,8 +54,9 @@ export class RecordComponent {
         tab = DEFAULT_TAB;
       }
       this.tab.set(tab);
-      this.contentRef &&
+      if (this.contentRef) {
         this.contentRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
     });
   }
 

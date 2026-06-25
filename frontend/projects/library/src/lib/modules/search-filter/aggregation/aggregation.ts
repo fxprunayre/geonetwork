@@ -8,7 +8,6 @@ import {
   HostListener,
   inject,
   input,
-  OnDestroy,
   Output,
   signal,
   viewChild,
@@ -48,12 +47,12 @@ const CHART_LAYOUTS = ['bar', 'pie', 'treemap', 'nightingale'] as const;
   providers: [AggregationTranslatePipe, DecimalPipe],
   templateUrl: './aggregation.html',
 })
-export class Aggregation extends SearchBase implements OnDestroy {
+export class Aggregation extends SearchBase {
   keyName = input.required<string>();
   displayType = input<AggregationLayout | undefined>();
 
   @Output()
-  onSelected = new EventEmitter<SearchFilterChange>();
+  selected = new EventEmitter<SearchFilterChange>();
 
   DISPLAY_FILTER_THRESHOLD = 10;
 
@@ -86,8 +85,6 @@ export class Aggregation extends SearchBase implements OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {}
-
   displayFilter = computed(() => {
     return this.buckets().length > this.DISPLAY_FILTER_THRESHOLD;
   });
@@ -110,7 +107,9 @@ export class Aggregation extends SearchBase implements OnDestroy {
     this.translationChange();
     this.langChange();
 
-    let buckets = this.aggregationService.getBuckets(this.search().aggregations()[this.keyName()]);
+    const buckets = this.aggregationService.getBuckets(
+      this.search().aggregations()[this.keyName()],
+    );
     const aggregationConfig = this.aggregationService.getAggregationConfig(
       this.keyName(),
       this.search().aggregationsConfig(),
@@ -222,9 +221,9 @@ export class Aggregation extends SearchBase implements OnDestroy {
     this.search().clearFilter(this.keyName());
   }
 
-  filter(event: SearchFilterChange, clear: boolean = false) {
-    if (this.onSelected.observed) {
-      this.onSelected.emit(event);
+  filter(event: SearchFilterChange, _clear = false) {
+    if (this.selected.observed) {
+      this.selected.emit(event);
       return;
     }
 

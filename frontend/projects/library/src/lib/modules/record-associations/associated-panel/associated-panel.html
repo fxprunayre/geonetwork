@@ -4,7 +4,7 @@
       <app-associated-records
         [type]="type"
         [relations]="relations()[type]"
-        (onRecordClick)="handleRecordClick($event)"
+        (recordClick)="handleRecordClick($event)"
         [attr.data-testid]="'associated-records-' + type"
       />
     }

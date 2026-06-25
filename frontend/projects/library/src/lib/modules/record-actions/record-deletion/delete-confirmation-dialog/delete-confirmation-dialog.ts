@@ -65,13 +65,13 @@ export class DeleteConfirmationDialog {
   confirmButtonLabel = input<string>();
   cancelButtonLabel = input<string>();
 
-  onConfirm = output<void>();
+  confirmed = output<void>();
 
   userConfirmationWord = '';
 
   confirm() {
     if (this.userConfirmationWord === this.confirmWord()) {
-      this.onConfirm.emit();
+      this.confirmed.emit();
       this.close();
     }
   }

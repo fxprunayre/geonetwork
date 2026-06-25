@@ -84,7 +84,7 @@ export class DuckDbService {
     }
   }
 
-  async initializePerspective(renderer: Renderer2): Promise<any> {
+  async initializePerspective(_renderer: Renderer2): Promise<any> {
     if (this.perspectiveInitialized) return;
 
     try {
@@ -220,7 +220,7 @@ export class DuckDbService {
 
   getFileType(contentType: string | null): string | null {
     if (!contentType) return null;
-    const typeMap: { [key: string]: string } = {
+    const typeMap: Record<string, string> = {
       csv: 'csv',
       parquet: 'parquet',
       'text/xml; subtype=gml/2.1.2': 'gdal',
@@ -277,7 +277,7 @@ export class DuckDbService {
   private async clearPreviousDataIfAny(): Promise<void> {
     if (this.conn) {
       try {
-        const dropResult = await this.conn.query('DROP TABLE IF EXISTS data');
+        await this.conn.query('DROP TABLE IF EXISTS data');
       } catch (e) {
         console.warn('Failed to drop data table', e);
       }
@@ -285,8 +285,8 @@ export class DuckDbService {
   }
 
   private sanitizeFileName(ds: Datasource): string {
-    let name = ds.url.split('/').pop() || 'data';
-    return name.replace(/[^a-zA-Z0-9_\-\.]/g, '_');
+    const name = ds.url.split('/').pop() || 'data';
+    return name.replace(/[^a-zA-Z0-9_\-.]/g, '_');
   }
 
   private buildFileName(ds: Datasource, extension?: string): string {
@@ -413,7 +413,7 @@ export class DuckDbService {
     try {
       new TextDecoder('utf-8', { fatal: true }).decode(buffer);
       return buffer;
-    } catch (e) {
+    } catch {
       console.warn('File is not valid UTF-8. Attempting to convert from ISO-8859-1 to UTF-8.');
       const text = new TextDecoder('iso-8859-1').decode(buffer);
       return new TextEncoder().encode(text).buffer;
@@ -452,7 +452,7 @@ export class DuckDbService {
       this.progress.update((p) => ({ ...p, status: 'format', progress: p.progress + 10 }));
 
       const ext = datasource?.format || fileName.split('.').pop()?.toLowerCase() || '';
-      const readerMap: { [key: string]: string } = {
+      const readerMap: Record<string, string> = {
         csv: 'read_csv_auto',
         parquet: 'parquet_scan',
         arrows: 'read_arrow',
@@ -506,7 +506,7 @@ export class DuckDbService {
     const data = (await (result as any).toArray?.()) ?? [];
 
     return data.map((row: any) => {
-      const newRow: { [key: string]: any } = {};
+      const newRow: Record<string, any> = {};
       for (const [key, value] of Object.entries(row.toJSON())) {
         newRow[key] = typeof value === 'bigint' ? Number(value) : value;
       }

@@ -51,7 +51,7 @@ export const createMockSearchStore = (): SearchStoreType => {
     search: vi.fn().mockImplementation((params: any) => {
       console.log('Mock search called with params:', params);
     }),
-    paging: vi.fn().mockImplementation((params: any) => {
+    paging: vi.fn().mockImplementation((_params: any) => {
       /* do nothing */
     }),
 
@@ -68,8 +68,8 @@ export const createMockSearchStore = (): SearchStoreType => {
     setRouting: vi.fn(),
     subscribeToRouteChange: vi.fn(),
     setSort: vi.fn(),
-    hasMoreTerms: signal((keyName: string) => false),
-    hasExpandedTerms: signal((keyName: string) => false),
+    hasMoreTerms: signal((_keyName: string) => false),
+    hasExpandedTerms: signal((_keyName: string) => false),
     loadMoreTerms: vi.fn(),
     loadLessTerms: vi.fn(),
     hasActiveFilters: signal(false),
@@ -83,7 +83,7 @@ export const createMockSearchStore = (): SearchStoreType => {
 };
 
 export function provideMockSearchService(mockStore?: SearchStoreType) {
-  let mockSearchService = {
+  const mockSearchService = {
     getSearch: vi.fn().mockName('SearchService.getSearch'),
     search: vi.fn().mockName('SearchService.search'),
     page: vi.fn().mockName('SearchService.page'),

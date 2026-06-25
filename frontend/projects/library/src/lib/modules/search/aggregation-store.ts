@@ -8,11 +8,11 @@ import {
   SearchRequestParameters,
 } from './search-store.model';
 
-export type AggregationState = {
+export interface AggregationState {
   aggregations: Record<string, elasticsearch.AggregationsAggregate>;
   aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
   aggregationsConfigTrigger: number;
-};
+}
 
 export const initialAggregationState: AggregationState = {
   aggregations: {},
@@ -48,12 +48,8 @@ export const AggregationStore = signalStore(
       }
       return !!aggObj[field]?.meta?.expanded;
     },
-    loadMoreTerms(
-      field: string,
-      searchFilterParameters: SearchFilterParameters,
-      size: number = 10,
-    ) {
-      let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as any[];
+    loadMoreTerms(field: string, searchFilterParameters: SearchFilterParameters, size = 10) {
+      const aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as any[];
       const configIndex = aggregationsConfig.findIndex((agg) =>
         typeof agg === 'string' ? agg === field : Object.keys(agg)[0] === field,
       );
@@ -96,18 +92,14 @@ export const AggregationStore = signalStore(
           error: console.error,
         });
     },
-    loadLessTerms(
-      field: string,
-      searchFilterParameters: SearchFilterParameters,
-      size: number = 10,
-    ) {
-      let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as any[];
+    loadLessTerms(field: string, searchFilterParameters: SearchFilterParameters, size = 10) {
+      const aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as any[];
       const configIndex = aggregationsConfig.findIndex((agg) =>
         typeof agg === 'string' ? agg === field : Object.keys(agg)[0] === field,
       );
       if (configIndex === -1) return;
 
-      let aggObj = aggregationsConfig[configIndex];
+      const aggObj = aggregationsConfig[configIndex];
       if (typeof aggObj === 'string' || !aggObj[field].terms) {
         return;
       }
@@ -151,7 +143,7 @@ export const AggregationStore = signalStore(
         | string
         | Record<string, elasticsearch.AggregationsAggregationContainer>
       )[],
-      silent: boolean = false,
+      silent = false,
     ) {
       patchState(store, {
         aggregationsConfig,

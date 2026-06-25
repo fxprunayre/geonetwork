@@ -14,7 +14,7 @@ describe('KeywordList', () => {
   let fixture: ComponentFixture<KeywordList>;
 
   beforeEach(async () => {
-    let mockRegistriesService = {
+    const mockRegistriesService = {
       searchKeywords: vi.fn().mockName('RegistriesService.searchKeywords'),
     };
     mockRegistriesService.searchKeywords.mockReturnValue(of([]));

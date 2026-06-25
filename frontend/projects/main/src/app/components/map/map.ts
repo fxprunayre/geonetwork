@@ -30,7 +30,7 @@ export class MapComponent implements OnInit, OnDestroy {
     () => this.appConfiguration().config?.apps?.map?.context || DEFAULT_MAP_CONTEXT,
   );
 
-  viewer: any;
+  viewer: unknown;
 
   ngOnInit() {
     const scriptUrl = 'https://sextant.gitlab-pages.ifremer.fr/viewer/sxt-viewer.js';
@@ -52,7 +52,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.viewer = this.elementRef.nativeElement.querySelector('sxt-viewer');
     if (this.viewer) {
-      this.viewer.setContext(this.mapContext());
+      (this.viewer as any).setContext(this.mapContext());
       this.monitorRoute();
     }
   }
@@ -70,7 +70,7 @@ export class MapComponent implements OnInit, OnDestroy {
             if (this.viewer) {
               commands.forEach((cmd) => {
                 const layerType = cmd.type || 'wms';
-                this.viewer.addLayer(
+                (this.viewer as any).addLayer(
                   {
                     type: layerType,
                     id: layerType + ':' + cmd.url + '#' + cmd.name,

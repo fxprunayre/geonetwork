@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, RendererFactory2, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 export interface IconDefinition {
@@ -11,14 +11,8 @@ export interface IconDefinition {
   providedIn: 'root',
 })
 export class IconStyleService {
-  private renderer: Renderer2;
-
-  constructor(
-    rendererFactory: RendererFactory2,
-    @Inject(DOCUMENT) private document: Document,
-  ) {
-    this.renderer = rendererFactory.createRenderer(null, null);
-  }
+  private renderer = inject(RendererFactory2).createRenderer(null, null);
+  private document = inject(DOCUMENT);
 
   /**
    * Utility to register icons as CSS classes when primeng component

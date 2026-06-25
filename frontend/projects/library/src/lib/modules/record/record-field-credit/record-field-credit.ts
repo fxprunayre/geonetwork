@@ -11,7 +11,7 @@ import { RecordFieldBase } from '../record-field-base/record-field-base';
 export class RecordFieldCredit extends RecordFieldBase {
   displayFirstOnly = input<boolean>(false);
 
-  credits = computed<Array<{ [key: string]: string }> | undefined>(() => {
+  credits = computed<Record<string, string>[] | undefined>(() => {
     return this.record()?.resourceCreditObject;
   });
 }

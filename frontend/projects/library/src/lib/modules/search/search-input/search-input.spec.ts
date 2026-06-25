@@ -11,7 +11,7 @@ import { SearchInput } from './search-input';
 describe('SearchInput', () => {
   let mockStore: SearchStoreType;
 
-  const onSearch = vi.fn();
+  const onSearchEvent = vi.fn();
 
   const renderSearchInput = (bindings?: any[]) => {
     mockStore = createMockSearchStore();
@@ -27,7 +27,7 @@ describe('SearchInput', () => {
   };
 
   beforeEach(() => {
-    onSearch.mockClear();
+    onSearchEvent.mockClear();
   });
 
   const getInputElement = () => {
@@ -57,9 +57,9 @@ describe('SearchInput', () => {
   });
 
   it('should trigger search when user type', async () => {
-    const result = await renderSearchInput([outputBinding('onSearch', onSearch)]);
+    const result = await renderSearchInput([outputBinding('searchEvent', onSearchEvent)]);
     result.fixture.componentInstance.onModelChange('surval');
-    expect(onSearch).toHaveBeenCalled();
+    expect(onSearchEvent).toHaveBeenCalled();
   });
 
   it('should update the search store when user types', async () => {
@@ -74,9 +74,9 @@ describe('SearchInput', () => {
   it('should not trigger search when user type if searchOnInput=false', async () => {
     const result = await renderSearchInput([
       inputBinding('searchOnInput', () => false),
-      outputBinding('onSearch', onSearch),
+      outputBinding('searchEvent', onSearchEvent),
     ]);
     result.fixture.componentInstance.searchOnInputChange('surval');
-    expect(onSearch).not.toHaveBeenCalled();
+    expect(onSearchEvent).not.toHaveBeenCalled();
   });
 });

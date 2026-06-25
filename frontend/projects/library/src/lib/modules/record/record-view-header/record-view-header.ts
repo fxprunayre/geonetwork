@@ -27,5 +27,5 @@ import { RecordVersions } from '../record-versions/record-versions';
 })
 export class RecordViewHeader extends RecordFieldBase {
   vocabularies = input<string[]>([]);
-  onRecordClick = output<string>();
+  recordClick = output<string>();
 }

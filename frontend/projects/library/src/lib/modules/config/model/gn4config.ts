@@ -81,9 +81,7 @@ export interface Header {
   topCustomMenu: any[];
 }
 
-export interface Languages {
-  [key: string]: string;
-}
+export type Languages = Record<string, string>;
 
 export interface CookieWarning {
   enabled: boolean;
@@ -177,10 +175,13 @@ export interface SearchOptions {
   language: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ScoreConfig {}
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface AutocompleteConfig {}
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface MoreLikeThisConfig {}
 
 export interface SortbyValue {
@@ -313,6 +314,7 @@ export interface DisabledTools {
   scaleLine: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface GraticuleOgcService {}
 
 export interface MapViewer {

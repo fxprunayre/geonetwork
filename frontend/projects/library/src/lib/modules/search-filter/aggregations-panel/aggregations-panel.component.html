@@ -15,11 +15,11 @@
     @for (key of aggregationKeys(); track $index) {
       @if (hasBuckets(key)) {
         <div class="grid grid-cols-1 gap-4 mb-12">
-          <label class="w-full text-primary">
+          <span class="w-full text-primary">
             <ng-container
               *ngTemplateOutlet="labelTemplate || defaultLabelTemplate; context: { $implicit: key }"
             ></ng-container>
-          </label>
+          </span>
           <app-aggregation [scope]="scope()" [keyName]="key"></app-aggregation>
         </div>
       }

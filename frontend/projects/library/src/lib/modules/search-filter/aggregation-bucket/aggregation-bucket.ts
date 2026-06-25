@@ -40,7 +40,7 @@ export class AggregationBucket extends SearchBase {
   index = input(0);
 
   @Output()
-  onSelected = new EventEmitter<SearchFilterChange>();
+  selected = new EventEmitter<SearchFilterChange>();
 
   aggregationTranslate = inject(AggregationTranslatePipe);
   translateService = inject(TranslateService);
@@ -128,7 +128,7 @@ export class AggregationBucket extends SearchBase {
   tabSelected = output<string>();
 
   handleChange(bucketValue: string | number, addValue: boolean) {
-    this.onSelected.emit({
+    this.selected.emit({
       field: this.keyName(),
       values: [bucketValue],
       add: addValue,

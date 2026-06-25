@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, input, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -10,9 +18,8 @@ export class RecordField implements AfterViewInit, OnDestroy {
   label = input<string>('');
   isEmpty = signal(false);
 
+  private el = inject(ElementRef);
   private observer: MutationObserver | undefined;
-
-  constructor(private el: ElementRef) {}
 
   ngAfterViewInit() {
     const section = this.el.nativeElement.querySelector('section');

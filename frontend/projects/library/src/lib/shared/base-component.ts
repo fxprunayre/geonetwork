@@ -8,8 +8,8 @@ import { PrimeShadowdomstyleComponent } from './p-shadowdomstyle-component';
   providers: [],
 })
 export class BaseComponent extends PrimeShadowdomstyleComponent implements OnInit, OnChanges {
-  @Input() url: string = '/geonetwork';
-  @Input() space: string = 'srv';
+  @Input() url = '/geonetwork';
+  @Input() space = 'srv';
   @Input() language?: string;
   @Input() config?: string;
 

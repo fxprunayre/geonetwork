@@ -10,6 +10,6 @@ import { faSolidMagnifyingGlass } from '@ng-icons/font-awesome/solid';
   templateUrl: './no-result-found.html',
 })
 export class NoResultFound {
-  @Input() title: string = 'No results found';
-  @Input() message: string = 'Try adjusting your search terms or filters';
+  @Input() title = 'No results found';
+  @Input() message = 'Try adjusting your search terms or filters';
 }

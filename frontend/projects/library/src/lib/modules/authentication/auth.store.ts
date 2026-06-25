@@ -8,11 +8,11 @@ import { pipe } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 
-type AuthState = {
+interface AuthState {
   user: MeResponse | null;
   isLoading: boolean;
   error: any | null;
-};
+}
 
 const initialState: AuthState = {
   user: null,
