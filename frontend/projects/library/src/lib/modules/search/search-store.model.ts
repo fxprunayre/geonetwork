@@ -24,13 +24,7 @@ export type SearchState = {
   searchQuery: string;
   // A general filter string that can be used to apply additional filtering
   filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
-  // Aggregation to display on top of the search results
-  topFilter?: string;
-  filters: Record<string, SearchFilter>;
   results: IndexRecord[];
-  aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
-  aggregationsConfigTrigger: number;
-  aggregations: Record<string, elasticsearch.AggregationsAggregate>;
   sort: string[];
   currentSort: string;
   isLoading: boolean;
@@ -46,8 +40,8 @@ export type SearchState = {
 export interface SearchFilterParameters {
   searchQuery: string;
   filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
-  filters: Record<string, SearchFilter>;
-  aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
+  filters?: Record<string, SearchFilter>;
+  aggregationsConfig?: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
   currentSort: string;
   language?: string;
 }

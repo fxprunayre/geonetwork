@@ -13,7 +13,7 @@ export const createMockSearchStore = (): SearchStoreType => {
     id: signal(initialState.id),
     routing: signal(initialState.routing),
     searchQuery: signal(initialState.searchQuery),
-    filters: signal(initialState.filters),
+    filters: signal({}),
     results: signal(mockSearchResults as any[]), // Mock the results signal
     totalCount: signal(mockTotalCount), // Mock the total count
     pageSize: signal(initialState.pageSize),
@@ -28,7 +28,8 @@ export const createMockSearchStore = (): SearchStoreType => {
         },
       },
     }),
-    aggregationsConfig: signal(initialState.aggregationsConfig),
+    aggregationsConfig: signal([]),
+    aggregationsConfigTrigger: signal(0),
 
     // COMPUTED SELECTORS (Must be mocked as signals based on mock data)
     searchFilterParameters: signal({} as any),

@@ -173,7 +173,7 @@ export class SearchService {
       query: this.buildQuery(
         searchRequestParameters.searchQuery,
         searchRequestParameters.filter,
-        searchRequestParameters.filters,
+        searchRequestParameters.filters ?? {},
         searchRequestParameters.aggregationsConfig,
       ),
       _source: SEARCH_SOURCE,
@@ -199,7 +199,7 @@ export class SearchService {
       query: this.buildQuery(
         searchRequestParameters.searchQuery,
         searchRequestParameters.filter,
-        searchRequestParameters.filters,
+        searchRequestParameters.filters ?? {},
         searchRequestParameters.aggregationsConfig,
       ),
     };

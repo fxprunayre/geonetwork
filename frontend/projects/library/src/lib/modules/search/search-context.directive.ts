@@ -3,6 +3,9 @@ import { elasticsearch, IndexRecord } from 'gn-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { DEFAULT_LANGUAGE, DEFAULT_SEARCH_LAYOUT_OPTIONS } from '../config/gn-constants';
 import { SearchAppLayout } from '../config/model/gnConfig';
+import { AggregationStore } from './aggregation-store';
+import { FilterStore } from './filter-store';
+import { SearchRouteSyncService } from './search-route-sync.service';
 import { SearchService } from './search-service';
 import { SearchStore } from './search-store';
 import { DEFAULT_PAGE_SIZE, DEFAULT_SORT } from './search-store.model';
@@ -10,7 +13,7 @@ import { DEFAULT_PAGE_SIZE, DEFAULT_SORT } from './search-store.model';
 @Directive({
   selector: '[appSearchContext]',
   standalone: true,
-  providers: [SearchStore],
+  providers: [SearchStore, FilterStore, AggregationStore, SearchRouteSyncService],
 })
 export class SearchContextDirective implements OnInit {
   scope = input<string>('', { alias: 'appSearchContext' });

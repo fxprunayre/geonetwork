@@ -1,6 +1,5 @@
 import { computed, inject, untracked } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from '@angular/router';
 import { tapResponse } from '@ngrx/operators';
 import {
   patchState,
@@ -13,17 +12,19 @@ import {
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { TranslateService } from '@ngx-translate/core';
-import { AggregationsStringTermsAggregate, elasticsearch } from 'gn-api-client';
+import { elasticsearch } from 'gn-api-client';
 import { MessageService } from 'primeng/api';
 import { debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
 import { AuthStore } from '../authentication/auth.store';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { DEFAULT_LANGUAGE } from '../config/gn-constants';
 import { SearchAppLayout } from '../config/model/gnConfig';
+import { AggregationStore } from './aggregation-store';
+import { FilterStore } from './filter-store';
 import { SearchRouteService } from './search-route-service';
+import { SearchRouteSyncService } from './search-route-sync.service';
 import { SearchService } from './search-service';
 import {
-  DEFAULT_AGGREGATION_SIZE,
   DEFAULT_PAGE_SIZE,
   DEFAULT_SORT,
   DEFAULT_SORT_OPTIONS,
@@ -42,11 +43,7 @@ export const initialState: SearchState = {
     },
   },
   searchQuery: '',
-  filters: {},
   results: [],
-  aggregationsConfig: [],
-  aggregationsConfigTrigger: 0,
-  aggregations: {},
   sort: DEFAULT_SORT_OPTIONS,
   currentSort: DEFAULT_SORT,
   isLoading: false,
@@ -61,29 +58,31 @@ export const initialState: SearchState = {
 
 export const SearchStore = signalStore(
   withState(initialState),
-  withProps(({ results }) => ({
-    activeRoute: inject(ActivatedRoute),
-    router: inject(Router),
-    results$: toObservable(results),
+  withProps((store) => ({
+    filterStore: inject(FilterStore),
+    aggStore: inject(AggregationStore),
+    routeSync: inject(SearchRouteSyncService),
+    searchService: inject(SearchService),
+    searchRouteService: inject(SearchRouteService),
+    messageService: inject(MessageService),
+    translateService: inject(TranslateService),
+    results$: toObservable(store.results),
   })),
   withComputed((store) => {
     const authStore = inject(AuthStore);
     const apiConfiguration = inject(APPLICATION_CONFIGURATION);
     return {
       searchFilterParameters: computed(() => {
-        // Trigger update when aggregationsConfigTrigger changes
-        store.aggregationsConfigTrigger();
-        // Trigger update when authentication state changes
+        store.aggStore.aggregationsConfigTrigger();
         authStore.isAuthenticated();
-        // Trigger update when space or catalogueUrl changes
         apiConfiguration().space;
         apiConfiguration().catalogueUrl;
         return {
           searchQuery: store.searchQuery(),
           filter: store.filter(),
-          filters: store.filters(),
+          filters: store.filterStore.filters(),
           currentSort: store.currentSort(),
-          aggregationsConfig: untracked(store.aggregationsConfig),
+          aggregationsConfig: untracked(store.aggStore.aggregationsConfig),
           language: store.language(),
         } as SearchFilterParameters;
       }),
@@ -97,484 +96,313 @@ export const SearchStore = signalStore(
       hasResults: computed(() => store.results().length > 0),
       isEmpty: computed(() => store.results().length === 0),
       totalPages: computed(() => Math.ceil(store.totalCount() / store.pageSize())),
-      hasActiveFilters: computed(() => {
-        return Object.keys(store.filters()).length > 0;
-      }),
-      activeFilterCount: computed(() => {
-        let count = 0;
-        for (const [, filter] of Object.entries(store.filters())) {
-          count += filter.values.length;
-        }
-        return count;
-      }),
+      hasActiveFilters: computed(() => store.filterStore.hasActiveFilters()),
+      activeFilterCount: computed(() => store.filterStore.activeFilterCount()),
+      aggregations: computed(() => store.aggStore.aggregations()),
+      aggregationsConfig: computed(() => store.aggStore.aggregationsConfig()),
+      aggregationsConfigTrigger: computed(() => store.aggStore.aggregationsConfigTrigger()),
+      filters: computed(() => store.filterStore.filters()),
     };
   }),
 
-  withMethods(
-    (
-      store,
-      searchService = inject(SearchService),
-      searchRouteService = inject(SearchRouteService),
-      messageService = inject(MessageService),
-      translateService = inject(TranslateService),
-    ) => {
-      const setRouting = () => {
-        if (!store.routing()) {
+  withMethods((store) => {
+    const setRouting = () => {
+      if (!store.routing()) {
+        return;
+      }
+
+      if (
+        !store.routeSync.searchRouteService.shouldUpdateStateFromRoute(store.routeSync.router.url)
+      ) {
+        return;
+      }
+
+      store.routeSync.searchRouteService.setRoute(
+        {
+          currentPage: store.currentPage() || 0,
+          pageSize: store.pageSize(),
+          currentSort: store.currentSort(),
+          searchQuery: store.searchQuery(),
+          filter: store.filter(),
+          filters: store.filterStore.filters(),
+          layout: store.layout(),
+        } as SearchRequestParameters,
+        store.pageSize(),
+      );
+    };
+
+    const subscribeToRouteChange = () => {
+      if (!store.routing()) {
+        return;
+      }
+
+      store.routeSync.activeRoute.queryParams.subscribe((params) => {
+        if (
+          !store.routeSync.searchRouteService.shouldUpdateStateFromRoute(store.routeSync.router.url)
+        ) {
           return;
         }
 
-        if (!searchRouteService.shouldUpdateStateFromRoute(store.router.url)) {
-          return;
-        }
-
-        searchRouteService.setRoute(
-          {
-            currentPage: store.currentPage() || 0,
-            pageSize: store.pageSize(),
-            currentSort: store.currentSort(),
-            searchQuery: store.searchQuery(),
-            filter: store.filter(),
-            filters: store.filters(),
-            layout: store.layout(),
-          } as SearchRequestParameters,
+        const newState = store.routeSync.searchRouteService.convertRouteParamsToSearch(
+          params,
           store.pageSize(),
+          store.currentSort(),
+          store.layout(),
         );
-      };
 
-      const subscribeToRouteChange = () => {
-        if (!store.routing()) {
+        const currentState = {
+          currentPage: store.currentPage(),
+          pageSize: store.pageSize(),
+          searchQuery: store.searchQuery(),
+          filters: store.filterStore.filters(),
+          currentSort: store.currentSort(),
+          layout: store.layout(),
+        };
+
+        if (JSON.stringify(newState) === JSON.stringify(currentState)) {
           return;
         }
 
-        store.activeRoute.queryParams.subscribe((params) => {
-          if (!searchRouteService.shouldUpdateStateFromRoute(store.router.url)) {
-            return;
-          }
+        patchState(store, newState);
+      });
+    };
 
-          const newState = searchRouteService.convertRouteParamsToSearch(
-            params,
-            store.pageSize(),
-            store.currentSort(),
-            store.layout(),
-          );
-
-          const currentState = {
-            currentPage: store.currentPage(),
-            pageSize: store.pageSize(),
-            searchQuery: store.searchQuery(),
-            filters: store.filters(),
-            currentSort: store.currentSort(),
-            layout: store.layout(),
-          };
-
-          if (JSON.stringify(newState) === JSON.stringify(currentState)) {
-            return;
-          }
-
-          patchState(store, newState);
+    return {
+      init(
+        searchId: string,
+        aggregationsConfig: (
+          | string
+          | Record<string, elasticsearch.AggregationsAggregationContainer>
+        )[],
+        size: number,
+        routing: boolean = false,
+        filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+        sort: string[],
+        currentSort: string,
+        language: string,
+        layout: SearchAppLayout,
+      ) {
+        console.log(`Initializing search store with id: ${searchId}`, aggregationsConfig);
+        store.aggStore.setAggregationsConfig(aggregationsConfig);
+        patchState(store, {
+          id: searchId,
+          pageSize: size,
+          routing,
+          filter,
+          sort: sort || DEFAULT_SORT_OPTIONS,
+          currentSort: currentSort || DEFAULT_SORT,
+          language: language || DEFAULT_LANGUAGE,
+          layout,
         });
-      };
 
-      return {
-        init(
-          searchId: string,
-          aggregationsConfig: (
-            | string
-            | Record<string, elasticsearch.AggregationsAggregationContainer>
-          )[],
-          size: number,
-          routing: boolean = false,
-          filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
-          sort: string[],
-          currentSort: string,
-          language: string,
-          layout: SearchAppLayout,
-        ) {
-          console.log(`Initializing search store with id: ${searchId}`, aggregationsConfig);
-          patchState(store, {
-            id: searchId,
-            aggregationsConfig,
-            aggregationsConfigTrigger: store.aggregationsConfigTrigger() + 1,
-            pageSize: size,
-            routing,
-            filter,
-            sort: sort || DEFAULT_SORT_OPTIONS,
-            currentSort: currentSort || DEFAULT_SORT,
-            language: language || DEFAULT_LANGUAGE,
-            layout,
-          });
-
-          if (store.routing()) {
-            subscribeToRouteChange();
-          }
-        },
-        setLayout(layout: SearchAppLayout) {
-          patchState(store, { layout });
-          if (store.routing()) {
+        if (store.routing()) {
+          subscribeToRouteChange();
+        }
+      },
+      setLayout(layout: SearchAppLayout) {
+        patchState(store, { layout });
+        if (store.routing()) {
+          setRouting();
+        }
+      },
+      setLanguage(language: string) {
+        patchState(store, { language: language });
+      },
+      search: rxMethod<SearchFilterParameters>(
+        pipe(
+          debounceTime(300),
+          distinctUntilChanged(),
+          tap(() => {
+            patchState(store, { isLoading: true, hasError: false });
             setRouting();
-          }
-        },
-        setLanguage(language: string) {
-          patchState(store, { language: language });
-        },
-        search: rxMethod<SearchFilterParameters>(
-          pipe(
-            debounceTime(300),
-            distinctUntilChanged(),
-            tap(() => {
-              patchState(store, { isLoading: true, hasError: false });
-              setRouting();
-            }),
-            switchMap((searchFilterParameters) => {
-              patchState(store, {
-                currentPage: 0,
-                pageSize: store.pageSize(),
-                results: [],
-              });
-              return searchService
-                .search({
-                  ...searchFilterParameters,
-                  currentPage: store.currentPage() || 0,
-                  pageSize: store.pageSize(),
-                } as SearchRequestParameters)
-                .pipe(
-                  tapResponse({
-                    next: (response) => {
-                      const currentFilters = store.filters();
-                      const aggregationToKeep = Object.fromEntries(
-                        Object.entries(store.aggregations()).filter(([key, agg]) => {
-                          const hasActiveFilter = (currentFilters[key]?.values?.length || 0) > 0;
-                          return agg?.meta?.refreshPolicy === 'none' && hasActiveFilter;
-                        }),
-                      );
-
-                      const aggregations = {
-                        ...response.aggregations,
-                        ...aggregationToKeep,
-                      };
-
-                      patchState(store, {
-                        results: response.results,
-                        aggregations: aggregations,
-                        totalCount: response.totalCount,
-                      });
-                    },
-                    error: (err) => {
-                      console.error(err);
-                      patchState(store, { hasError: true });
-                      messageService.add({
-                        severity: 'error',
-                        summary: translateService.instant('shared.error') || 'Error',
-                        detail:
-                          translateService.instant('search.notAvailable') ||
-                          'Search is currently not available.',
-                        life: 10000,
-                      });
-                    },
-                    finalize: () => patchState(store, { isLoading: false }),
-                  }),
-                );
-            }),
-          ),
-        ),
-
-        paging: rxMethod<SearchRequestPageParameters>(
-          pipe(
-            filter(() => store.totalCount() > 0),
-            distinctUntilChanged(),
-            tap(() => {
-              patchState(store, { isLoading: true, hasError: false });
-              setRouting();
-            }),
-            switchMap((searchRequestPageParameters) => {
-              patchState(store, {
-                currentPage: searchRequestPageParameters.currentPage,
-                pageSize: searchRequestPageParameters.pageSize,
-              });
-
-              return searchService
-                .page({
-                  ...store.searchFilterParameters(),
-                  ...searchRequestPageParameters,
-                } as SearchRequestParameters)
-                .pipe(
-                  tapResponse({
-                    next: (response) =>
-                      patchState(store, {
-                        results: store.isAppendMode()
-                          ? [...store.results(), ...response.results]
-                          : response.results,
-                        aggregations: store.aggregations(),
-                        totalCount: response.totalCount,
-                        isAppendMode: false,
-                      }),
-                    error: (err) => {
-                      console.error(err);
-                      patchState(store, { hasError: true });
-                      messageService.add({
-                        severity: 'error',
-                        summary: translateService.instant('shared.error') || 'Error',
-                        detail:
-                          translateService.instant('search.notAvailable') ||
-                          'Search is currently not available.',
-                        life: 10000,
-                      });
-                    },
-                    finalize: () => patchState(store, { isLoading: false }),
-                  }),
-                );
-            }),
-          ),
-        ),
-        setFullTextQuery(value: string) {
-          patchState(store, { searchQuery: value });
-        },
-        setFilter(
-          filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
-        ) {
-          patchState(store, {
-            currentPage: 0,
-            filter,
-          });
-        },
-        isFilterActive(field: string, value: string | number) {
-          const filter = store.filters()[field];
-          if (!filter) {
-            return false;
-          }
-          // Handle number/string comparison properly. Integer values may be stored as strings in filters from URL.
-          return filter.values.some((v) => v == value);
-        },
-        addFilter(
-          field: string,
-          value: string | number | (string | number)[],
-          clear: boolean = false,
-        ): void {
-          const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
-          let targetFilter = currentFilters[field];
-
-          const valuesToAdd = Array.isArray(value) ? value : [value];
-
-          if (targetFilter) {
-            if (clear) {
-              targetFilter.values = [];
-            }
-            targetFilter.values.push(...valuesToAdd);
-            targetFilter.values = [...new Set(targetFilter.values)];
-          } else {
-            currentFilters[field] = { field: field, values: valuesToAdd };
-          }
-          patchState(store, {
-            currentPage: 0,
-            filters: currentFilters,
-          });
-        },
-        clearFilter(field: string): void {
-          const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
-          delete currentFilters[field];
-          patchState(store, {
-            currentPage: 0,
-            filters: currentFilters,
-          });
-        },
-        removeFilter(field: string, value: string | number): void {
-          const currentFilters = JSON.parse(JSON.stringify(store.filters())) || {};
-          let targetFilter = currentFilters[field];
-
-          if (targetFilter) {
-            let currentValues = targetFilter.values;
-            // Handle number/string comparison properly. Integer values may be stored as strings in filters from URL.
-            let clickedFilterIndex = currentValues.findIndex((v: string | number) => v == value);
-
-            if (clickedFilterIndex > -1) {
-              currentValues.splice(clickedFilterIndex, 1);
-            }
-
-            // No more values for this filter
-            if (currentValues.length === 0) {
-              delete currentFilters[field];
-            }
-
+          }),
+          switchMap((searchFilterParameters) => {
             patchState(store, {
               currentPage: 0,
-              filters: currentFilters,
+              pageSize: store.pageSize(),
+              results: [],
             });
-          }
-        },
-        reset() {
-          patchState(store, {
-            searchQuery: '',
-            filters: {},
-          });
-        },
-        more(pageSize: number) {
-          patchState(store, { currentPage: store.currentPage() + store.pageSize() });
-        },
-        loadMore() {
-          patchState(store, {
-            isAppendMode: true,
-            currentPage: store.currentPage() + 1,
-          });
-        },
-        hasAggregationBuckets(field: string): boolean {
-          const aggregationValues = store.aggregations()[field];
+            return store.searchService
+              .search({
+                ...searchFilterParameters,
+                currentPage: store.currentPage() || 0,
+                pageSize: store.pageSize(),
+              } as SearchRequestParameters)
+              .pipe(
+                tapResponse({
+                  next: (response) => {
+                    const currentFilters = store.filterStore.filters();
+                    const aggregationToKeep = Object.fromEntries(
+                      Object.entries(store.aggStore.aggregations()).filter(([key, agg]) => {
+                        const hasActiveFilter = (currentFilters[key]?.values?.length || 0) > 0;
+                        return agg?.meta?.refreshPolicy === 'none' && hasActiveFilter;
+                      }),
+                    );
 
-          if (!aggregationValues) {
-            return false;
-          }
+                    const aggregations = {
+                      ...response.aggregations,
+                      ...aggregationToKeep,
+                    };
 
-          const buckets = (aggregationValues as any).buckets;
-          return buckets !== undefined && buckets.length > 0;
-        },
-        hasMoreTerms(field: string): boolean {
-          const aggregationValues = store.aggregations()[field];
+                    patchState(store, {
+                      results: response.results,
+                      totalCount: response.totalCount,
+                    });
+                    store.aggStore.setAggregations(aggregations);
+                  },
+                  error: (err) => {
+                    console.error(err);
+                    patchState(store, { hasError: true });
+                    store.messageService.add({
+                      severity: 'error',
+                      summary: store.translateService.instant('shared.error') || 'Error',
+                      detail:
+                        store.translateService.instant('search.notAvailable') ||
+                        'Search is currently not available.',
+                      life: 10000,
+                    });
+                  },
+                  finalize: () => patchState(store, { isLoading: false }),
+                }),
+              );
+          }),
+        ),
+      ),
 
-          if (!aggregationValues) {
-            return false;
-          }
-
-          return (aggregationValues as AggregationsStringTermsAggregate).sum_other_doc_count! > 0;
-        },
-        loadMoreTerms(field: string, size: number = 10) {
-          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as any[];
-          const configIndex = aggregationsConfig.findIndex((agg) =>
-            typeof agg === 'string' ? agg === field : Object.keys(agg)[0] === field,
-          );
-
-          if (configIndex === -1) return;
-
-          let aggObj = aggregationsConfig[configIndex];
-          if (typeof aggObj === 'string') {
-            aggObj = { [field]: { terms: { field: field, size: DEFAULT_AGGREGATION_SIZE } } };
-            aggregationsConfig[configIndex] = aggObj;
-          }
-
-          const aggField = aggObj[field];
-          if (!aggField.terms) {
-            return;
-          }
-
-          if (!aggField.meta) aggField.meta = {};
-          if (aggField.meta.initialSize === undefined) {
-            aggField.meta.initialSize = aggField.terms.size || DEFAULT_AGGREGATION_SIZE;
-          }
-
-          aggField.terms.size = (aggField.terms.size || DEFAULT_AGGREGATION_SIZE) + size;
-          aggField.meta.expanded = true;
-
-          searchService
-            .updateAggregation(field, {
-              ...store.searchFilterParameters(),
-              aggregationsConfig,
-            } as SearchRequestParameters)
-            .subscribe({
-              next: (response) => {
-                const aggregations = {
-                  ...store.aggregations(),
-                  ...response.aggregations,
-                };
-
-                patchState(store, {
-                  aggregationsConfig: aggregationsConfig,
-                  aggregations: aggregations,
-                });
-              },
-              error: console.error,
+      paging: rxMethod<SearchRequestPageParameters>(
+        pipe(
+          filter(() => store.totalCount() > 0),
+          distinctUntilChanged(),
+          tap(() => {
+            patchState(store, { isLoading: true, hasError: false });
+            setRouting();
+          }),
+          switchMap((searchRequestPageParameters) => {
+            patchState(store, {
+              currentPage: searchRequestPageParameters.currentPage,
+              pageSize: searchRequestPageParameters.pageSize,
             });
-        },
-        hasExpandedTerms(field: string): boolean {
-          const aggregationsConfig = store.aggregationsConfig() as any[];
-          const aggObj = aggregationsConfig.find((agg) =>
-            typeof agg === 'string' ? agg === field : Object.keys(agg)[0] === field,
-          );
 
-          if (!aggObj || typeof aggObj === 'string') {
-            return false;
-          }
-
-          return !!aggObj[field].meta?.expanded;
-        },
-        loadLessTerms(field: string, size: number = 10) {
-          let aggregationsConfig = JSON.parse(JSON.stringify(store.aggregationsConfig())) as any[];
-          const configIndex = aggregationsConfig.findIndex((agg) =>
-            typeof agg === 'string' ? agg === field : Object.keys(agg)[0] === field,
-          );
-
-          if (configIndex === -1) return;
-
-          let aggObj = aggregationsConfig[configIndex];
-          if (typeof aggObj === 'string' || !aggObj[field].terms) {
-            return;
-          }
-
-          const aggField = aggObj[field];
-          const currentSize = aggField.terms.size || DEFAULT_AGGREGATION_SIZE;
-          const initialSize = aggField.meta?.initialSize || DEFAULT_AGGREGATION_SIZE;
-
-          let newSize = currentSize - size;
-          if (newSize <= initialSize) {
-            newSize = initialSize;
-            if (aggField.meta) {
-              aggField.meta.expanded = false;
-            }
-          }
-          aggField.terms.size = newSize;
-
-          searchService
-            .updateAggregation(field, {
-              ...store.searchFilterParameters(),
-              aggregationsConfig,
-            } as SearchRequestParameters)
-            .subscribe({
-              next: (response) => {
-                const aggregations = {
-                  ...store.aggregations(),
-                  ...response.aggregations,
-                };
-
-                patchState(store, {
-                  aggregationsConfig: aggregationsConfig,
-                  aggregations: aggregations,
-                });
-              },
-              error: console.error,
-            });
-        },
-        setPage(currentPage: number, pageSize: number) {
-          let results = JSON.parse(JSON.stringify(store.results()));
-          if (results) {
-            results = [];
-          }
-          patchState(store, { currentPage, pageSize, results });
-        },
-        next() {
-          patchState(store, { currentPage: store.currentPage() + store.pageSize() });
-        },
-        previous() {
-          patchState(store, { currentPage: store.currentPage() - store.pageSize() });
-        },
-        setRouting,
-        subscribeToRouteChange,
-        setSort(currentSort: string) {
-          patchState(store, { currentSort });
-        },
-        setAggregationsConfig(
-          aggregationsConfig: (
-            | string
-            | Record<string, elasticsearch.AggregationsAggregationContainer>
-          )[],
-          silent: boolean = false,
-        ) {
-          patchState(store, {
-            aggregationsConfig,
-            aggregationsConfigTrigger: silent
-              ? store.aggregationsConfigTrigger()
-              : store.aggregationsConfigTrigger() + 1,
-          });
-        },
-      };
-    },
-  ),
+            return store.searchService
+              .page({
+                ...store.searchFilterParameters(),
+                ...searchRequestPageParameters,
+              } as SearchRequestParameters)
+              .pipe(
+                tapResponse({
+                  next: (response) =>
+                    patchState(store, {
+                      results: store.isAppendMode()
+                        ? [...store.results(), ...response.results]
+                        : response.results,
+                      totalCount: response.totalCount,
+                      isAppendMode: false,
+                    }),
+                  error: (err) => {
+                    console.error(err);
+                    patchState(store, { hasError: true });
+                    store.messageService.add({
+                      severity: 'error',
+                      summary: store.translateService.instant('shared.error') || 'Error',
+                      detail:
+                        store.translateService.instant('search.notAvailable') ||
+                        'Search is currently not available.',
+                      life: 10000,
+                    });
+                  },
+                  finalize: () => patchState(store, { isLoading: false }),
+                }),
+              );
+          }),
+        ),
+      ),
+      setFullTextQuery(value: string) {
+        patchState(store, { searchQuery: value });
+      },
+      setFilter(
+        filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+      ) {
+        patchState(store, {
+          currentPage: 0,
+          filter,
+        });
+      },
+      isFilterActive(field: string, value: string | number) {
+        return store.filterStore.isFilterActive(field, value);
+      },
+      addFilter(
+        field: string,
+        value: string | number | (string | number)[],
+        clear: boolean = false,
+      ): void {
+        store.filterStore.addFilter(field, value, clear);
+        patchState(store, { currentPage: 0 });
+      },
+      clearFilter(field: string): void {
+        store.filterStore.clearFilter(field);
+        patchState(store, { currentPage: 0 });
+      },
+      removeFilter(field: string, value: string | number): void {
+        store.filterStore.removeFilter(field, value);
+        patchState(store, { currentPage: 0 });
+      },
+      reset() {
+        store.filterStore.reset();
+        patchState(store, { searchQuery: '' });
+      },
+      more(pageSize: number) {
+        patchState(store, { currentPage: store.currentPage() + store.pageSize() });
+      },
+      loadMore() {
+        patchState(store, {
+          isAppendMode: true,
+          currentPage: store.currentPage() + 1,
+        });
+      },
+      hasAggregationBuckets(field: string): boolean {
+        return store.aggStore.hasAggregationBuckets(field);
+      },
+      hasMoreTerms(field: string): boolean {
+        return store.aggStore.hasMoreTerms(field);
+      },
+      loadMoreTerms(field: string, size: number = 10) {
+        store.aggStore.loadMoreTerms(field, store.searchFilterParameters(), size);
+      },
+      hasExpandedTerms(field: string): boolean {
+        return store.aggStore.hasExpandedTerms(field);
+      },
+      loadLessTerms(field: string, size: number = 10) {
+        store.aggStore.loadLessTerms(field, store.searchFilterParameters(), size);
+      },
+      setPage(currentPage: number, pageSize: number) {
+        let results = JSON.parse(JSON.stringify(store.results()));
+        if (results) {
+          results = [];
+        }
+        patchState(store, { currentPage, pageSize, results });
+      },
+      next() {
+        patchState(store, { currentPage: store.currentPage() + store.pageSize() });
+      },
+      previous() {
+        patchState(store, { currentPage: store.currentPage() - store.pageSize() });
+      },
+      setRouting,
+      subscribeToRouteChange,
+      setSort(currentSort: string) {
+        patchState(store, { currentSort });
+      },
+      setAggregationsConfig(
+        aggregationsConfig: (
+          | string
+          | Record<string, elasticsearch.AggregationsAggregationContainer>
+        )[],
+        silent: boolean = false,
+      ) {
+        store.aggStore.setAggregationsConfig(aggregationsConfig, silent);
+      },
+    };
+  }),
   withHooks({
     onInit({ search, searchFilterParameters, paging, searchRequestPageParameters }) {
       search(searchFilterParameters);
