@@ -38,7 +38,7 @@ import { Aggregation } from '../aggregation/aggregation';
   templateUrl: './aggregations-panel.component.html',
 })
 export class AggregationsPanel extends SearchBase {
-  @ContentChild('labelTemplate') labelTemplate: TemplateRef<any> | undefined;
+  @ContentChild('labelTemplate') labelTemplate: TemplateRef<unknown> | undefined;
 
   aggregationService = inject(AggregationService);
   panelType = input<'accordion' | 'none'>('accordion');

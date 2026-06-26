@@ -71,7 +71,7 @@ export class Gn4AuthenticationService implements AuthenticationService {
       );
   }
 
-  signOut(): Observable<any> {
+  signOut(): Observable<unknown> {
     const redirectUrl = document.baseURI || window.location.origin;
     window.location.href =
       this.catalogueUrl() + '/signout?redirectUrl=' + encodeURIComponent(redirectUrl);

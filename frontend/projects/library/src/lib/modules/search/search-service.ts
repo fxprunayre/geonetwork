@@ -242,9 +242,9 @@ export class SearchService {
         const remainingSiblings: IndexRecord[] = [];
         parsedRelated[key].forEach((record) => {
           // properties are merged in the record in buildIndexRecord
-          const r = record as any;
-          if (r.associationType && r.initiativeType) {
-            const siblingKey = `siblings_${r.associationType}_${r.initiativeType}`;
+          const r = record;
+          if (r['associationType'] && r['initiativeType']) {
+            const siblingKey = `siblings_${r['associationType']}_${r['initiativeType']}`;
             if (!parsedRelated[siblingKey]) {
               parsedRelated[siblingKey] = [];
             }
@@ -259,7 +259,7 @@ export class SearchService {
     return parsedRelated;
   }
 
-  isMultiLingualField(obj: any, fieldName: string): boolean {
+  isMultiLingualField(obj: unknown, fieldName: string): boolean {
     const isMultiLingualField =
       fieldName.endsWith('Object') ||
       fieldName.startsWith('cl_') ||
@@ -293,7 +293,7 @@ export class SearchService {
       }
     }
 
-    const traverse = (obj: any, fieldName: string) => {
+    const traverse = (obj: unknown, fieldName: string) => {
       if (!obj || typeof obj !== 'object') return;
 
       const keys = Object.keys(obj);
@@ -301,8 +301,9 @@ export class SearchService {
       if (this.isMultiLingualField(obj, fieldName)) {
         if (keys.includes('default')) {
           const targetKey = 'lang' + iso3Lang;
-          if (obj[targetKey]) {
-            obj['default'] = obj[targetKey];
+          const dict = obj as Record<string, unknown>;
+          if (dict[targetKey]) {
+            dict['default'] = dict[targetKey];
             return;
           }
         }
@@ -313,11 +314,12 @@ export class SearchService {
         return;
       }
 
+      const dict = obj as Record<string, unknown>;
       keys.forEach((key) => {
-        const value = obj[key];
+        const value = dict[key];
         if (Array.isArray(value)) {
           value.forEach((item) => traverse(item, key));
-        } else if (typeof value === 'object') {
+        } else if (typeof value === 'object' && value !== null) {
           traverse(value, key);
         }
       });
@@ -537,7 +539,7 @@ export class SearchService {
             {
               multi_match: {
                 query,
-                type: 'bool_prefix' as any,
+                type: 'bool_prefix',
                 fields: [
                   'resourceTitleObject.*^6',
                   'resourceAbstractObject.*^5',
@@ -561,10 +563,12 @@ export class SearchService {
       _source: ['resourceTitleObject.*', 'resourceType'],
     };
 
-    const response: any = await this.searchService.search(request).toPromise();
+    const response = (await this.searchService.search(request).toPromise()) as
+      | elasticsearch.SearchResponse<IndexRecord>
+      | undefined;
 
     return (
-      response?.hits?.hits?.map((hit: any) => {
+      response?.hits?.hits?.map((hit: elasticsearch.SearchHit<IndexRecord>) => {
         const title = hit._source?.resourceTitleObject?.['default'];
         return {
           title,

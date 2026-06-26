@@ -18,7 +18,12 @@ export class IconStyleService {
    * Utility to register icons as CSS classes when primeng component
    * does not allow using NgIcon. eg. Menu
    */
-  createIconsStyle(styleId: string, items: MenuItem[] | undefined, iconMap: any, rootNode?: Node) {
+  createIconsStyle(
+    styleId: string,
+    items: MenuItem[] | undefined,
+    iconMap: Record<string, string | undefined>,
+    rootNode?: Node,
+  ) {
     if (!items) return;
 
     const usedIcons = new Set<string>();
@@ -42,7 +47,7 @@ export class IconStyleService {
           className: icon,
           svgContent: iconMap[icon as keyof typeof iconMap],
         }))
-        .filter((def: any) => def.svgContent),
+        .filter((def): def is { className: string; svgContent: string } => !!def.svgContent),
       rootNode,
     );
   }

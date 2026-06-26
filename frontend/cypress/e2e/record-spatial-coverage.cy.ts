@@ -22,7 +22,10 @@ describe('Record spatial coverage', () => {
     }).as('apiUiConfig');
   };
 
-  const mockRecordSpatial = (spatial: { shape?: any; geom?: any }) => {
+  const mockRecordSpatial = (spatial: {
+    shape?: Record<string, unknown> | Record<string, unknown>[];
+    geom?: Record<string, unknown>;
+  }) => {
     return cy.fixture('search-api-get-record-response.json').then((responseBody) => {
       const response = Cypress._.cloneDeep(responseBody);
       const source = response.hits.hits[0]._source;

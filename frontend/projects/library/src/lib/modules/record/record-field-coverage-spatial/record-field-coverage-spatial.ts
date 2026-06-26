@@ -10,8 +10,14 @@ import {
 } from '@angular/core';
 import { createMapFromContext } from '@geospatial-sdk/openlayers';
 import { TranslateService } from '@ngx-translate/core';
-import GeoJSON from 'ol/format/GeoJSON';
+import type Feature from 'ol/Feature';
+import GeoJSON, {
+  type GeoJSONFeature,
+  type GeoJSONFeatureCollection,
+  type GeoJSONGeometry,
+} from 'ol/format/GeoJSON';
 import WKT from 'ol/format/WKT';
+import type Geometry from 'ol/geom/Geometry';
 import GeometryCollection from 'ol/geom/GeometryCollection';
 import { transformExtent } from 'ol/proj';
 import CircleStyle from 'ol/style/Circle';
@@ -22,6 +28,15 @@ import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_MAP_CONTEXT, DEFAULT_SPACE } from '../../config/gn-constants';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordinate/record-field-coverage-coordinate';
+
+interface SpatialBounds {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+  wkt: string;
+  geom: GeoJSONGeometry;
+}
 
 @Component({
   selector: 'app-record-field-coverage-spatial',
@@ -132,8 +147,10 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
     if (shapes.length > 0) {
       const shapeGeometries =
         shapes
-          .map((shape: any) => this.getShapeBoundsAndWkt(shape))
-          .filter((g: any) => g !== undefined) || [];
+          .map((shape: GeoJSONFeature | GeoJSONFeatureCollection | GeoJSONGeometry) =>
+            this.getShapeBoundsAndWkt(shape),
+          )
+          .filter((g: SpatialBounds | undefined) => g !== undefined) || [];
       if (shapeGeometries.length > 0) {
         return shapeGeometries;
       }
@@ -146,10 +163,10 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
 
     return (
       geometries
-        .map((geom: any) => {
+        .map((geom: GeoJSONGeometry) => {
           return this.getGeomBoundsAndWkt(geom);
         })
-        .filter((g: any) => g !== undefined) || []
+        .filter((g: SpatialBounds | undefined) => g !== undefined) || []
     );
   });
 
@@ -165,7 +182,7 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
   }
 
   geometryCollection = computed(() => {
-    const wktGeoms = this.geoms().map((g: any) => g.wkt);
+    const wktGeoms = this.geoms().map((g: SpatialBounds) => g.wkt);
     return `GEOMETRYCOLLECTION(${wktGeoms.join(',')})`;
   });
 
@@ -184,21 +201,21 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
 
     return [
       {
-        north: Math.max(...geometries.map((g: any) => g.north)),
-        south: Math.min(...geometries.map((g: any) => g.south)),
-        east: Math.max(...geometries.map((g: any) => g.east)),
-        west: Math.min(...geometries.map((g: any) => g.west)),
+        north: Math.max(...geometries.map((g: SpatialBounds) => g.north)),
+        south: Math.min(...geometries.map((g: SpatialBounds) => g.south)),
+        east: Math.max(...geometries.map((g: SpatialBounds) => g.east)),
+        west: Math.min(...geometries.map((g: SpatialBounds) => g.west)),
         wkt: this.geometryCollection(),
         geom: {
           type: 'GeometryCollection',
-          geometries: geometries.map((g: any) => g.geom),
+          geometries: geometries.map((g: SpatialBounds) => g.geom),
         },
       },
     ];
   });
 
-  convertGeomToWKT(ring: any[]): string {
-    const points = ring.map((coord: any) => `${coord[0]} ${coord[1]}`);
+  convertGeomToWKT(ring: number[][]): string {
+    const points = ring.map((coord: number[]) => `${coord[0]} ${coord[1]}`);
     // Ensure the polygon is closed by repeating the first point at the end
     if (points[0] !== points[points.length - 1]) {
       points.push(points[0]);
@@ -206,7 +223,7 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
     return `POLYGON((${points.join(', ')}))`;
   }
 
-  getGeomBoundsAndWkt(geom: any): any {
+  getGeomBoundsAndWkt(geom: GeoJSONGeometry): SpatialBounds | undefined {
     if (!geom || !geom.type) {
       return undefined;
     }
@@ -245,8 +262,8 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
         return undefined;
       }
 
-      const lats = ring.map((c: any) => c[1]);
-      const lons = ring.map((c: any) => c[0]);
+      const lats = ring.map((c: number[]) => c[1]);
+      const lons = ring.map((c: number[]) => c[0]);
 
       return {
         north: Math.max(...lats),
@@ -261,7 +278,9 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
     return undefined;
   }
 
-  getShapeBoundsAndWkt(shapeGeoJson: any): any {
+  getShapeBoundsAndWkt(
+    shapeGeoJson: GeoJSONFeature | GeoJSONFeatureCollection | GeoJSONGeometry,
+  ): SpatialBounds | undefined {
     const geometry = this.readShapeGeometry(shapeGeoJson);
     if (!geometry) {
       return undefined;
@@ -278,14 +297,16 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
     };
   }
 
-  readShapeGeometry(shape: any): any {
+  readShapeGeometry(
+    shape: GeoJSONFeature | GeoJSONFeatureCollection | GeoJSONGeometry,
+  ): Geometry | undefined {
     if (!shape || typeof shape !== 'object') {
       return undefined;
     }
 
     if (shape.type === 'Feature') {
       try {
-        const featureOrFeatures: any = this.geoJsonFormat.readFeature(shape);
+        const featureOrFeatures = this.geoJsonFormat.readFeature(shape);
         const feature = Array.isArray(featureOrFeatures) ? featureOrFeatures[0] : featureOrFeatures;
         return feature?.getGeometry?.();
       } catch {
@@ -297,8 +318,8 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
       try {
         const geometries = this.geoJsonFormat
           .readFeatures(shape)
-          .map((feature: any) => feature.getGeometry())
-          .filter((geometry: any) => geometry);
+          .map((feature: Feature<Geometry>) => feature.getGeometry())
+          .filter((geometry: Geometry | undefined): geometry is Geometry => !!geometry);
 
         if (geometries.length === 0) {
           return undefined;
@@ -336,11 +357,11 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
   ngAfterViewInit() {
     const mapElements = this.maps();
 
-    this.displayedGeoms().forEach((bbox: any, index: number) => {
+    this.displayedGeoms().forEach((bbox: SpatialBounds, index: number) => {
       const mapElement = mapElements[index]?.nativeElement;
       if (mapElement) {
         // Deep clone so multiple bbox maps on the same page don't append to a single reference
-        const mapContext: any = JSON.parse(JSON.stringify(DEFAULT_MAP_CONTEXT));
+        const mapContext = JSON.parse(JSON.stringify(DEFAULT_MAP_CONTEXT));
         mapContext.layers.push({
           type: 'geojson',
           data: {
@@ -374,9 +395,14 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
           const fillRgba = this.hexToRgba(primaryColor, 0.5);
 
           const layers = map.getLayers().getArray();
-          const geojsonLayer: any = layers[layers.length - 1];
-          if (geojsonLayer && typeof geojsonLayer.setStyle === 'function') {
-            geojsonLayer.setStyle(
+          const geojsonLayer: unknown = layers[layers.length - 1];
+          if (
+            geojsonLayer &&
+            typeof geojsonLayer === 'object' &&
+            'setStyle' in geojsonLayer &&
+            typeof (geojsonLayer as Record<string, unknown>)['setStyle'] === 'function'
+          ) {
+            (geojsonLayer as { setStyle: (style: Style) => void }).setStyle(
               new Style({
                 stroke: new Stroke({
                   color: primaryColor900,

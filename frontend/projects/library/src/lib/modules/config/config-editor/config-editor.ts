@@ -341,7 +341,7 @@ export class ConfigEditorComponent {
   getAppConfigJson(appName: keyof Apps): string {
     const app = this.appConfig().config?.apps?.[appName];
     if (!app) return '{}';
-    const { enabled: _enabled, ...rest } = app as any;
+    const { enabled: _enabled, ...rest } = app as App & Record<string, unknown>;
     return JSON.stringify(rest, null, 2);
   }
 
@@ -354,7 +354,7 @@ export class ConfigEditorComponent {
       if (!currentConfig.config.apps) {
         currentConfig.config.apps = {};
       }
-      (currentConfig.config.apps as any)[appName] = { enabled: isEnabled } as App;
+      (currentConfig.config.apps as Record<string, App>)[appName] = { enabled: isEnabled };
     } else {
       (currentConfig.config.apps[appName] as App).enabled = isEnabled;
     }
@@ -365,8 +365,8 @@ export class ConfigEditorComponent {
   updateBannerProperty(property: string, value: string) {
     const config = this.appConfig().config;
     if (config?.apps?.banner) {
-      (config.apps.banner as any)[property] = value;
-      (this.appConfig as any).set({ ...this.appConfig(), config });
+      (config.apps.banner as unknown as Record<string, string>)[property] = value;
+      this.appConfig.set({ ...this.appConfig(), config });
 
       if (property === 'textColor') {
         document.documentElement.style.setProperty('--app-background-text-color', value);
@@ -381,7 +381,7 @@ export class ConfigEditorComponent {
       const app = currentConfig.config?.apps?.[appName];
       if (app) {
         const enabled = app.enabled;
-        (currentConfig.config!.apps as any)[appName] = { ...parsed, enabled };
+        (currentConfig.config!.apps as Record<string, App>)[appName] = { ...parsed, enabled };
         this.appConfig.set({ ...currentConfig });
       }
     } catch {

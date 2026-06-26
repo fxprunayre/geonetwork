@@ -21,11 +21,11 @@ module.exports = tseslint.config(
         'error',
         { type: 'attribute', prefix: 'app', style: 'camelCase' },
       ],
+      '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'error',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
-      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
   {

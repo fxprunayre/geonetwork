@@ -11,7 +11,7 @@ export interface AuthenticationProvider {
 export abstract class AuthenticationService {
   abstract signIn(username: string, password: string): Observable<MeResponse>;
 
-  abstract signOut(): Observable<any>;
+  abstract signOut(): Observable<unknown>;
 
   abstract getUserInfo(): Observable<MeResponse>;
 

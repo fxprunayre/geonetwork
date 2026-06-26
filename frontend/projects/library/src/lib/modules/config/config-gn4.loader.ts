@@ -29,7 +29,7 @@ export function migrateGn4AggregationConfig(
 ): (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[] {
   // Filter entries with property gnBuildFilterForRange
   const filteredEntries = Object.entries(gn4AggConfig).filter(
-    ([, value]) => !(value as any).gnBuildFilterForRange,
+    ([, value]) => !(value as Record<string, unknown>)['gnBuildFilterForRange'],
   );
   return filteredEntries.map(([key, value]) => ({
     [key]: value,

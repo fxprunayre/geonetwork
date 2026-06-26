@@ -50,7 +50,7 @@ export const CatalogueStore = signalStore(
             siteService.getSiteOrPortalDescription('body').pipe(
               tapResponse({
                 next: (response) => {
-                  const settings = response as any;
+                  const settings = response as Record<string, string>;
                   const name = settings['system/site/name'] || 'GeoNetwork';
                   const organization = settings['system/site/organization'] || '';
                   const siteId = settings['system/site/siteId'] || '';

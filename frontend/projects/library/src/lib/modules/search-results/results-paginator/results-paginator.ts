@@ -18,7 +18,7 @@ export class ResultsPaginatorComponent extends SearchBase {
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   pageSizeOptions = computed(() => this.appConfiguration().config?.apps.search?.hitsPerPageOptions);
 
-  onPageChange(event: any) {
+  onPageChange(event: { page?: number; rows?: number }) {
     const containerRef = this.resultsContainerRef();
     if (containerRef) {
       containerRef.scrollIntoView({
@@ -26,7 +26,7 @@ export class ResultsPaginatorComponent extends SearchBase {
         block: 'start',
       });
     }
-    this.search().setPage(event.page, event.rows);
+    this.search().setPage(event.page ?? 0, event.rows ?? 0);
   }
 
   loadMore() {

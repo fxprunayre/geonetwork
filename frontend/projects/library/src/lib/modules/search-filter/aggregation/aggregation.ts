@@ -117,9 +117,12 @@ export class Aggregation extends SearchBase {
     const histogramInterval = aggregationConfig?.histogram?.interval;
     if (buckets) {
       return buckets.map((bucket) => {
-        const displayLabel = this.getBucketDisplayLabel(bucket.key, histogramInterval);
+        const displayLabel = this.getBucketDisplayLabel(
+          bucket['key'] as string | number,
+          histogramInterval,
+        );
         return {
-          key: bucket.key,
+          key: bucket['key'],
           label: `${displayLabel} (${this.decimalPipe.transform(bucket.doc_count, undefined, this.translateService.getCurrentLang())})`,
           displayLabel,
           doc_count: bucket.doc_count,
@@ -197,15 +200,15 @@ export class Aggregation extends SearchBase {
   handleMultiSelectChange(event: MultiSelectChangeEvent) {
     const isSelected =
       event.itemValue &&
-      event.value.find((item: any) => {
-        return item.key === event.itemValue.key;
+      event.value.find((item: { key: string }) => {
+        return item.key === (event.itemValue as { key: string }).key;
       }) !== undefined;
 
-    const values = [];
+    const values: string[] = [];
     if (event.itemValue) {
-      values.push(event.itemValue.key);
+      values.push((event.itemValue as { key: string }).key);
     } else if (event.value.length > 0) {
-      event.value.forEach((item: any) => {
+      event.value.forEach((item: { key: string }) => {
         values.push(item.key);
       });
     }

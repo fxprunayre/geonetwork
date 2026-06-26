@@ -115,7 +115,7 @@ export class SpaceSelector implements OnInit {
   }
 
   selectSpace(item: MenuItem): void {
-    item.command?.({} as any);
+    item.command?.({} as Parameters<NonNullable<MenuItem['command']>>[0]);
     this.popover?.hide();
   }
 }

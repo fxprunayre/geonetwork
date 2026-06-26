@@ -16,14 +16,17 @@ import { Gn4MapCommand } from '../../record-distributions/map-service';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MapPanel {
-  mapContext = input.required<any>();
+  mapContext = input.required<Record<string, unknown>>();
   commands = input<Gn4MapCommand[]>([]);
   focusCommands = input<Gn4MapCommand[]>([]);
   isActive = input<boolean>(true);
 
   private elementRef = inject(ElementRef);
 
-  private viewer: any;
+  private viewer: {
+    setContext: (ctx: Record<string, unknown>) => void;
+    addLayer: (layer: Record<string, unknown>, focus: boolean) => void;
+  } | null = null;
   private addedLayerIds = new Set<string>();
 
   constructor() {
@@ -94,7 +97,7 @@ export class MapPanel {
       }
 
       setTimeout(() => {
-        this.viewer.addLayer(
+        this.viewer?.addLayer(
           {
             type: layerType,
             id: layerId,

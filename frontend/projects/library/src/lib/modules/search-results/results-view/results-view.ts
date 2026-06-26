@@ -34,7 +34,7 @@ export class ResultsView extends SearchBase {
   layout = input<SearchAppLayout>('grid');
   recordClick = output<string>();
 
-  @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<any> | undefined;
+  @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<unknown> | undefined;
 
   handleRecordClick(uuid: string) {
     this.recordClick.emit(uuid);

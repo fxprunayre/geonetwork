@@ -14,7 +14,7 @@ import { AssociationLabelPipe } from '../association-label.pipe';
             @for (item of relatedRecordsSummary(); track item.type) {
               <li class="font-bold mb-2">{{ item.type | associationLabel: item.count }}</li>
               <ul class="list-none pl-4 space-y-1 mb-4">
-                @for (rec of item.records; track rec.uuid) {
+                @for (rec of item.records; track $index) {
                   <li class="font-normal text-sm">{{ getTitle(rec) }}</li>
                 }
               </ul>
@@ -28,19 +28,24 @@ import { AssociationLabelPipe } from '../association-label.pipe';
   imports: [Message, TranslatePipe, AssociationLabelPipe],
 })
 export class AssociatedRecordsSummary {
-  record = input.required<any>();
+  record = input.required<Record<string, unknown>>();
 
   hasRelatedRecords = computed(() => {
     return this.relatedRecordsSummary().length > 0;
   });
 
-  getTitle(record: any): string {
-    return record.resourceTitleObject?.default || record.uuid;
+  getTitle(record: Record<string, unknown>): string {
+    return (
+      (record['resourceTitleObject'] as Record<string, string>)?.['default'] ||
+      (record['uuid'] as string)
+    );
   }
 
   relatedRecordsSummary = computed(() => {
-    const related = this.record().related;
-    const summary: { type: string; count: number; records: any[] }[] = [];
+    const related = this.record()['related'] as
+      | Record<string, Record<string, unknown>[]>
+      | undefined;
+    const summary: { type: string; count: number; records: Record<string, unknown>[] }[] = [];
     if (!related) {
       return summary;
     }

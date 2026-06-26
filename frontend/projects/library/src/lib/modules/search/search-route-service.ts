@@ -68,7 +68,7 @@ export class SearchRouteService {
     pageSize: number,
     currentSort: string,
     currentLayout: string,
-  ): any {
+  ): Record<string, unknown> {
     const filter: Record<string, SearchFilter> = {};
     const nonFilterParams = ['from', 'size', 'q', 'sort', 'layout'];
 

@@ -135,13 +135,13 @@ export class DownloadData implements OnInit {
     return format;
   }
 
-  downloadWfs(format: string, wfs: any, typeName: string) {
+  downloadWfs(format: string, wfs: { getVersion?: () => string }, typeName: string) {
     const urlStr = this.link().urlObject?.['default'] || '';
     try {
       const url = new URL(urlStr);
       url.searchParams.set('request', 'GetFeature');
       url.searchParams.set('service', 'WFS');
-      url.searchParams.set('version', wfs?.getVersion() || '2.0.0');
+      url.searchParams.set('version', wfs.getVersion?.() || '2.0.0');
       if (typeName) {
         // Use typeName parameter
         url.searchParams.set('typeName', typeName);

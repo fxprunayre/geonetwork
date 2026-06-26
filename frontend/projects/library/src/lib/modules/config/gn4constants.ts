@@ -648,7 +648,7 @@ export const DEFAULT_GN4_UI_CONFIGURATION: UiConfiguration = {
           //   }
         },
       },
-      filters: null,
+      filters: {} as Record<string, unknown>,
       // filters: [{
       //     "query_string": {
       //       "query": "+resourceType:service"

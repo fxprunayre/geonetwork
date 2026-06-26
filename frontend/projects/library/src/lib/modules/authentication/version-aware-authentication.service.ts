@@ -25,7 +25,7 @@ export class VersionAwareAuthenticationService implements AuthenticationService 
     return this.activeService$.pipe(switchMap((service) => service.signIn(username, password)));
   }
 
-  signOut(): Observable<any> {
+  signOut(): Observable<unknown> {
     return this.activeService$.pipe(switchMap((service) => service.signOut()));
   }
 

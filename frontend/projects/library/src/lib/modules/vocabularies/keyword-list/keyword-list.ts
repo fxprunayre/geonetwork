@@ -96,15 +96,19 @@ export class KeywordList extends SearchBase {
             undefined,
             params.link,
           ),
-        )) as any[];
-        return res.length > 0 ? (res[0] as any)?.definition : null;
+        )) as { definition?: string }[];
+        return res.length > 0 ? res[0]?.definition : null;
       } catch {
         return null;
       }
     },
   });
 
-  async openPopover(event: MouseEvent, keyword: Keyword, pop: any) {
+  async openPopover(
+    event: MouseEvent,
+    keyword: Keyword,
+    pop: { toggle: (event: MouseEvent) => void },
+  ) {
     this.activeKeyword.set(keyword);
     pop.toggle(event);
   }

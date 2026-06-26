@@ -64,7 +64,7 @@ export class RecordCitation {
 
   private fetchCitation(
     output: 'html' | 'json' | 'txt' | 'xml' | 'jsonld' | 'pdf' | 'testpdf' | undefined,
-    params?: Record<string, any>,
+    params?: Record<string, string>,
     accept?:
       | 'text/html'
       | 'text/plain'
@@ -92,8 +92,10 @@ export class RecordCitation {
 
   loadFormats() {
     this.fetchCitation('json', { format: '?' }).subscribe({
-      next: (resp: any) => {
-        const arr: string[] = Array.isArray(resp) ? resp : (resp?.formats ?? []);
+      next: (resp: unknown) => {
+        const arr: string[] = Array.isArray(resp)
+          ? resp
+          : ((resp as { formats?: string[] })?.formats ?? []);
 
         this.formats.set(
           arr.map((f: string) => ({
@@ -109,7 +111,7 @@ export class RecordCitation {
         const initial = arr.includes('html') ? 'html' : arr[0];
         this.getCitation(initial);
       },
-      error: (err: any) => {
+      error: (err: unknown) => {
         console.log(err);
 
         this.messageService.add({
@@ -135,11 +137,11 @@ export class RecordCitation {
     const accept = this.mapAccept(fmt);
 
     this.fetchCitation(output, params, accept).subscribe({
-      next: (resp: any) => {
+      next: (resp: string | object) => {
         this.citationText.set(typeof resp === 'string' ? resp : JSON.stringify(resp));
         this.loading.set(false);
       },
-      error: (err: any) => {
+      error: (err: unknown) => {
         console.log(err);
         this.messageService.add({
           severity: 'error',

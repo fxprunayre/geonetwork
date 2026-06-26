@@ -42,7 +42,7 @@ export class GnAuthenticationService implements AuthenticationService {
       );
   }
 
-  signOut(): Observable<any> {
+  signOut(): Observable<unknown> {
     return from(
       fetch(this.catalogueUrl() + '/api/user/signout', {
         method: 'GET',

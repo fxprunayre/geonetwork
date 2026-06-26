@@ -123,7 +123,7 @@ export function buildBarOption(
         label: {
           show: true,
           position: 'insideLeft',
-          formatter: (params: any) => compactLabels[params.dataIndex] ?? '',
+          formatter: (params: { dataIndex: number }) => compactLabels[params.dataIndex] ?? '',
         },
         data: buildBarSeriesData(buckets, activeSet, primaryColor, secondaryColor, visibleRange),
       },

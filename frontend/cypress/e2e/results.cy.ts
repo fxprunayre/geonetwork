@@ -1,6 +1,9 @@
 import { SURVAL_UUID } from '../support/utils';
 
-const checkResultItem = (hit: any, layout: 'grid' | 'list') => {
+const checkResultItem = (
+  hit: { _id: string; _source: Record<string, unknown> },
+  layout: 'grid' | 'list',
+) => {
   const recordHrefRegex = new RegExp(`^(?:\\/#/|#/|/)record/${hit._id}$`);
 
   cy.get('a').should('have.attr', 'href').and('match', recordHrefRegex);

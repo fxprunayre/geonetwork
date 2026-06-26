@@ -59,7 +59,7 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
   selection = signal<TreeNode[] | undefined>(undefined);
   selection$ = toObservable(this.selection);
 
-  onNodeSelectionChange(node: TreeNode<any> | TreeNode<any>[] | null | undefined) {
+  onNodeSelectionChange(node: TreeNode<unknown> | TreeNode<unknown>[] | null | undefined) {
     // Node propagation occurs, observable selection is updated
     this.selection.update(() => {
       if (Array.isArray(node)) {

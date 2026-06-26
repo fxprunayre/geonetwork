@@ -80,7 +80,7 @@ export class SearchInput extends SearchBase {
   searchEvent = output();
   queryString = '';
   items = signal<IndexRecord[]>([]);
-  value: any;
+  value: string | undefined;
 
   constructor() {
     super();

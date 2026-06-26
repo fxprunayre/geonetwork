@@ -12,6 +12,22 @@ import { ActivatedRoute } from '@angular/router';
 import { APPLICATION_CONFIGURATION, DEFAULT_MAP_CONTEXT, Gn4MapCommand } from 'gn-library';
 import { Subscription } from 'rxjs';
 
+interface ViewerElement extends HTMLElement {
+  setContext(context: unknown): void;
+  addLayer(
+    layer: {
+      type: string;
+      id: string;
+      url: string;
+      name: string;
+      label: string;
+      visibility: boolean;
+      attributions: string;
+    },
+    focus: boolean,
+  ): void;
+}
+
 @Component({
   selector: 'app-map',
   imports: [],
@@ -52,7 +68,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
     this.viewer = this.elementRef.nativeElement.querySelector('sxt-viewer');
     if (this.viewer) {
-      (this.viewer as any).setContext(this.mapContext());
+      (this.viewer as ViewerElement).setContext(this.mapContext());
       this.monitorRoute();
     }
   }
@@ -70,7 +86,7 @@ export class MapComponent implements OnInit, OnDestroy {
             if (this.viewer) {
               commands.forEach((cmd) => {
                 const layerType = cmd.type || 'wms';
-                (this.viewer as any).addLayer(
+                (this.viewer as ViewerElement).addLayer(
                   {
                     type: layerType,
                     id: layerType + ':' + cmd.url + '#' + cmd.name,

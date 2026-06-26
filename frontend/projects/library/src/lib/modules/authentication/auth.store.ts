@@ -11,7 +11,7 @@ import { AuthenticationService } from './authentication.service';
 interface AuthState {
   user: MeResponse | null;
   isLoading: boolean;
-  error: any | null;
+  error: unknown | null;
 }
 
 const initialState: AuthState = {

@@ -92,7 +92,12 @@ export class DistributionService {
       const sectionFilter = this.configService.parseFilterExpression(section.filter);
 
       for (const link of links!) {
-        if (this.configService.testExpressionFilters(sectionFilter, link)) {
+        if (
+          this.configService.testExpressionFilters(
+            sectionFilter,
+            link as unknown as Record<string, string | undefined>,
+          )
+        ) {
           if (!linksBySections[section.title]) {
             linksBySections[section.title] = [];
           }

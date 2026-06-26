@@ -60,7 +60,7 @@ export class RecordActionService {
     window.open(this.getCreateRecordUrl(), target);
   }
 
-  deleteRecord(uuid: string): Observable<any> {
+  deleteRecord(uuid: string): Observable<unknown> {
     return this.recordsService.deleteRecord(uuid).pipe(
       tap({
         next: () => {

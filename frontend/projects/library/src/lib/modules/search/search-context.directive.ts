@@ -18,8 +18,8 @@ import { DEFAULT_PAGE_SIZE, DEFAULT_SORT } from './search-store.model';
 export class SearchContextDirective implements OnInit {
   scope = input<string>('', { alias: 'appSearchContext' });
   routing = input<boolean>(false);
-  filter = input<any>({});
-  aggregations = input<any>({});
+  filter = input<unknown>({});
+  aggregations = input<unknown[]>([]);
   size = input<number>(DEFAULT_PAGE_SIZE);
   sort = input<string[] | undefined>([DEFAULT_SORT]);
   currentSort = input<string | undefined>(DEFAULT_SORT);
@@ -38,7 +38,12 @@ export class SearchContextDirective implements OnInit {
       untracked(() => {
         const currentAggregations = this.searchStore.aggregationsConfig();
         if (JSON.stringify(newAggregations) !== JSON.stringify(currentAggregations)) {
-          this.searchStore.setAggregationsConfig(newAggregations);
+          this.searchStore.setAggregationsConfig(
+            newAggregations as (
+              | string
+              | Record<string, elasticsearch.AggregationsAggregationContainer>
+            )[],
+          );
         }
       });
     });
@@ -49,7 +54,11 @@ export class SearchContextDirective implements OnInit {
       untracked(() => {
         const currentFilter = this.searchStore.filter();
         if (JSON.stringify(newFilter) !== JSON.stringify(currentFilter)) {
-          this.searchStore.setFilter(newFilter);
+          this.searchStore.setFilter(
+            newFilter as
+              | elasticsearch.QueryDslQueryContainer
+              | elasticsearch.QueryDslQueryContainer[],
+          );
         }
       });
     });
@@ -62,10 +71,15 @@ export class SearchContextDirective implements OnInit {
 
     this.searchStore.init(
       this.scope(),
-      this.aggregations(),
+      this.aggregations() as (
+        | string
+        | Record<string, elasticsearch.AggregationsAggregationContainer>
+      )[],
       this.size(),
       this.routing(),
-      this.filter(),
+      this.filter() as
+        | elasticsearch.QueryDslQueryContainer
+        | elasticsearch.QueryDslQueryContainer[],
       this.sort() || [DEFAULT_SORT],
       this.currentSort() || DEFAULT_SORT,
       this.language() || DEFAULT_LANGUAGE,

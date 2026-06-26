@@ -1,8 +1,10 @@
 import { signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IndexRecord } from 'gn-api-client';
 import { Observable, of } from 'rxjs';
 import { SearchService } from './search-service';
 import { SearchStoreType, initialState } from './search-store';
+import { SearchFilterParameters, SearchRequestPageParameters } from './search-store.model';
 
 // Define a consistent mock response for the searchService calls
 const mockSearchResults: IndexRecord[] = [];
@@ -14,7 +16,7 @@ export const createMockSearchStore = (): SearchStoreType => {
     routing: signal(initialState.routing),
     searchQuery: signal(initialState.searchQuery),
     filters: signal({}),
-    results: signal(mockSearchResults as any[]), // Mock the results signal
+    results: signal(mockSearchResults as IndexRecord[]), // Mock the results signal
     totalCount: signal(mockTotalCount), // Mock the total count
     pageSize: signal(initialState.pageSize),
     currentPage: signal(initialState.currentPage),
@@ -32,8 +34,8 @@ export const createMockSearchStore = (): SearchStoreType => {
     aggregationsConfigTrigger: signal(0),
 
     // COMPUTED SELECTORS (Must be mocked as signals based on mock data)
-    searchFilterParameters: signal({} as any),
-    searchRequestPageParameters: signal({} as any),
+    searchFilterParameters: signal({} as SearchFilterParameters),
+    searchRequestPageParameters: signal({} as SearchRequestPageParameters),
     hasMore: signal(true),
     hasError: signal(false),
     hasResults: signal(true),
@@ -41,17 +43,17 @@ export const createMockSearchStore = (): SearchStoreType => {
     totalPages: signal(1),
 
     // PROPS (MOCKING OBSERVABLES that the store uses internally)
-    activeRoute: {} as any, // Mocked as empty or as needed
-    results$: of(mockSearchResults) as Observable<any>,
+    activeRoute: {} as unknown as ActivatedRoute, // Mocked as empty or as needed
+    results$: of(mockSearchResults) as Observable<IndexRecord[]>,
 
     // --- MOCK METHODS (Must return Spies) ---
     init: vi.fn(),
 
     // rxMethods return void, but are spied upon
-    search: vi.fn().mockImplementation((params: any) => {
+    search: vi.fn().mockImplementation((params: SearchFilterParameters) => {
       console.log('Mock search called with params:', params);
     }),
-    paging: vi.fn().mockImplementation((_params: any) => {
+    paging: vi.fn().mockImplementation((_params: SearchRequestPageParameters) => {
       /* do nothing */
     }),
 
@@ -79,7 +81,7 @@ export const createMockSearchStore = (): SearchStoreType => {
     currentSort: signal({ code: 'relevance', field: '_score' }),
   };
 
-  return mockStore as any;
+  return mockStore as unknown as SearchStoreType;
 };
 
 export function provideMockSearchService(mockStore?: SearchStoreType) {

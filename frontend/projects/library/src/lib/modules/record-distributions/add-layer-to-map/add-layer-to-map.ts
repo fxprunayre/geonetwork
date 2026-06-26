@@ -94,20 +94,20 @@ export class AddLayerToMap extends RecordFieldBase {
     return this.link().nameObject?.['default'] || null;
   });
 
-  serviceLayers = signal<any[]>([]);
+  serviceLayers = signal<{ title?: string; name?: string }[]>([]);
 
   layerList = computed(() => {
     return this.serviceLayers().map((layer) => ({
       label: layer.title || layer.name,
       command: () => {
         const linkCopy = { ...this.link() };
-        linkCopy.nameObject = { default: layer.name };
+        linkCopy.nameObject = { default: layer.name || '' };
         this.addWmsLayers([linkCopy], layer.title || layer.name);
       },
     }));
   });
 
-  matchingLayers = signal<any[]>([]);
+  matchingLayers = signal<{ title?: string; name?: string }[]>([]);
 
   matchingLayersLabel = computed(() => {
     const matches = this.matchingLayers();
@@ -141,7 +141,7 @@ export class AddLayerToMap extends RecordFieldBase {
       this.mapService
         .resolveEndpointLayers(this.link())
         .then((layers) => {
-          this.serviceLayers.set(layers || []);
+          this.serviceLayers.set((layers || []) as { title?: string; name?: string }[]);
 
           if (!layers) {
             this.status.set('not-found');
@@ -149,10 +149,10 @@ export class AddLayerToMap extends RecordFieldBase {
           }
 
           const matches = this.mapService.matchRequestedLayers(layers, this.linkName());
-          this.matchingLayers.set(matches || []);
+          this.matchingLayers.set((matches || []) as { title?: string; name?: string }[]);
           this.status.set(matches === null ? 'not-found' : 'found');
         })
-        .catch((e: any) => {
+        .catch((e: unknown) => {
           console.error(e);
           this.status.set('error');
         });

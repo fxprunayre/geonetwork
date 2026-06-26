@@ -35,8 +35,8 @@ export interface LoadAppConfigOptions {
   config?: string;
 }
 
-export function parseGn4Config(conf: any): UiConfiguration {
-  return JSON.parse(conf.configuration) as UiConfiguration;
+export function parseGn4Config(conf: Record<string, unknown>): UiConfiguration {
+  return JSON.parse(conf['configuration'] as string) as UiConfiguration;
 }
 
 export function getWebComponentAttribute(name: string): string | null {
@@ -60,16 +60,22 @@ function parseInlineConfig(configValue: string): UiConfiguration | undefined {
   }
 }
 
-function deepMerge(target: any, source: any): any {
-  if (target === undefined || target === null) return source;
-  if (source === undefined || source === null) return target;
+function deepMerge(
+  target: Record<string, unknown> | undefined | null,
+  source: Record<string, unknown> | undefined | null,
+): Record<string, unknown> {
+  if (target === undefined || target === null) return source as Record<string, unknown>;
+  if (source === undefined || source === null) return target as Record<string, unknown>;
   if (typeof target !== 'object' || Array.isArray(target)) return source;
   if (typeof source !== 'object' || Array.isArray(source)) return source;
 
   const merged = { ...target };
   for (const key of Object.keys(source)) {
     if (source[key] instanceof Object && !Array.isArray(source[key])) {
-      merged[key] = deepMerge(target[key], source[key]);
+      merged[key] = deepMerge(
+        target[key] as Record<string, unknown>,
+        source[key] as Record<string, unknown>,
+      );
     } else {
       merged[key] = source[key];
     }
@@ -127,7 +133,10 @@ export function loadAppConfig(
     }
 
     if (inlineConfig && appConfig.config) {
-      appConfig.config = deepMerge(DEFAULT_APPS_CONFIGURATION, appConfig.config);
+      appConfig.config = deepMerge(
+        DEFAULT_APPS_CONFIGURATION as unknown as Record<string, unknown>,
+        appConfig.config as unknown as Record<string, unknown>,
+      ) as unknown as AppsConfiguration;
     }
 
     if (appConfig.config) {

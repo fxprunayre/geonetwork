@@ -23,11 +23,11 @@ export class InMemoryLocationStrategy extends LocationStrategy {
     return this._baseHref + internal;
   }
 
-  override pushState(state: any, title: string, url: string, queryParams: string): void {
+  override pushState(state: unknown, title: string, url: string, queryParams: string): void {
     this._path = url + (queryParams ? '?' + queryParams : '');
   }
 
-  override replaceState(state: any, title: string, url: string, queryParams: string): void {
+  override replaceState(state: unknown, title: string, url: string, queryParams: string): void {
     this._path = url + (queryParams ? '?' + queryParams : '');
   }
 

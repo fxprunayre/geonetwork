@@ -78,7 +78,7 @@ export interface SearchAppAdvanced {
 }
 
 export interface MapApp extends App {
-  context: any;
+  context: unknown;
 }
 
 export interface RecordDetailsApp extends App {

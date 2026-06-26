@@ -1,5 +1,5 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { inputBinding, outputBinding, signal } from '@angular/core';
+import { Binding, inputBinding, outputBinding, signal } from '@angular/core';
 import { render, screen } from '@testing-library/angular';
 import { provideMockTranslateService } from '../../../shared/translate-service.mock';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
@@ -13,7 +13,7 @@ describe('SearchInput', () => {
 
   const onSearchEvent = vi.fn();
 
-  const renderSearchInput = (bindings?: any[]) => {
+  const renderSearchInput = (bindings?: Binding[]) => {
     mockStore = createMockSearchStore();
     return render(SearchInput, {
       providers: [

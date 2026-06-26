@@ -39,7 +39,7 @@ import { InspireThemeStylesComponent } from './inspire-theme-styles';
   ],
 })
 export class AggregationBucketDecorator {
-  bucket = input.required<any>();
+  bucket = input.required<{ key?: string | number }>();
   isActive = input<boolean>(false);
   decorator = input.required<Decorator | undefined>();
 
@@ -61,8 +61,10 @@ export class AggregationBucketDecorator {
       const bucket = this.bucket();
       const key = bucket?.key;
       return (
-        decorator.prefix +
-        (decorator.expression ? key.replace(new RegExp(decorator.expression), '$1') : key)
+        decorator.prefix! +
+        (decorator.expression
+          ? String(key ?? '').replace(new RegExp(decorator.expression), '$1')
+          : String(key ?? ''))
       );
     }
     return '';
@@ -91,7 +93,7 @@ export class AggregationBucketDecorator {
       return custom;
     }
 
-    return key;
+    return String(key ?? '');
   });
 
   image = computed(() => {
@@ -100,7 +102,7 @@ export class AggregationBucketDecorator {
     const key = bucket?.key;
 
     if (decorator && decorator.type === 'img') {
-      return decorator.map?.[key] || '';
+      return decorator.map?.[key ?? ''] || '';
     }
     return '';
   });

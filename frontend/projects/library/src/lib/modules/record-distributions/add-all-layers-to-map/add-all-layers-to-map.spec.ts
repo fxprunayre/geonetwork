@@ -36,7 +36,7 @@ describe('AddAllLayersToMap', () => {
 
     fixture = TestBed.createComponent(AddAllLayersToMap);
     component = fixture.componentInstance;
-    fixture.componentRef.setInput('record', { uuid: 'record-1' } as any);
+    fixture.componentRef.setInput('record', { uuid: 'record-1' } as Record<string, string>);
     fixture.componentRef.setInput('links', [
       {
         protocol: 'OGC:WMS',

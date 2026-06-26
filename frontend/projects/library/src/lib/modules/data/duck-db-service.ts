@@ -77,14 +77,14 @@ export class DuckDbService {
       // INSTALL arrow FROM community; LOAD arrow;
 
       this.initialized = true;
-    } catch (e: any) {
-      const errorMessage = `DuckDB initialization failed: ${e?.message || e}`;
+    } catch (e: unknown) {
+      const errorMessage = `DuckDB initialization failed: ${(e as Error)?.message || e}`;
       console.error(errorMessage, e);
       throw new Error(errorMessage);
     }
   }
 
-  async initializePerspective(_renderer: Renderer2): Promise<any> {
+  async initializePerspective(_renderer: Renderer2): Promise<void> {
     if (this.perspectiveInitialized) return;
 
     try {
@@ -104,8 +104,8 @@ export class DuckDbService {
       ]);
 
       this.perspectiveInitialized = true;
-    } catch (e: any) {
-      const errorMessage = `Perspective initialization failed: ${e?.message || e}`;
+    } catch (e: unknown) {
+      const errorMessage = `Perspective initialization failed: ${(e as Error)?.message || e}`;
       console.error(errorMessage, e);
       throw new Error(errorMessage);
     }
@@ -134,8 +134,8 @@ export class DuckDbService {
       if (!response.ok) {
         throw new Error(`Direct fetch failed: ${response.status}`);
       }
-    } catch (e: any) {
-      if (e.name === 'AbortError' || signal.aborted) throw e;
+    } catch (e: unknown) {
+      if ((e as Error).name === 'AbortError' || signal.aborted) throw e;
       console.warn('Direct HEAD request failed. Switching to browser loading mode.', e);
       isDirect = false;
 
@@ -143,8 +143,8 @@ export class DuckDbService {
       try {
         if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
         response = await this.tryFetch(fileUrl, { method: 'HEAD', signal });
-      } catch (proxyError: any) {
-        if (proxyError.name === 'AbortError' || signal.aborted) throw proxyError;
+      } catch (proxyError: unknown) {
+        if ((proxyError as Error).name === 'AbortError' || signal.aborted) throw proxyError;
         // Even proxy failed. We can't determine size.
         console.warn('Proxy HEAD also failed', proxyError);
         return false;
@@ -254,8 +254,8 @@ export class DuckDbService {
     let isHeadOk = false;
     try {
       isHeadOk = await this.checkDatasourceSize(ds.url, signal);
-    } catch (e: any) {
-      if (e.name === 'AbortError') {
+    } catch (e: unknown) {
+      if ((e as Error).name === 'AbortError') {
         this.progress.update((p) => ({ ...p, status: 'canceled' }));
         return;
       }
@@ -400,11 +400,11 @@ export class DuckDbService {
         ? this.buildFileName(ds, inferredExt)
         : this.buildFileName(ds);
       await this.loadData(finalFileName, finalBuffer, ds, signal);
-    } catch (e: any) {
-      if (e.name === 'AbortError' || signal.aborted) {
+    } catch (e: unknown) {
+      if ((e as Error).name === 'AbortError' || signal.aborted) {
         this.progress.update((p) => ({ ...p, status: 'canceled' }));
       } else {
-        console.warn(`Failed to load from URL: ${e?.message || e}`);
+        console.warn(`Failed to load from URL: ${(e as Error)?.message || e}`);
       }
     }
   }
@@ -489,24 +489,27 @@ export class DuckDbService {
       console.log(`Loaded ${countResult.get(0)?.['count']} records into DuckDB.`);
 
       this.progress.update((p) => ({ ...p, status: 'completed', progress: 100 }));
-    } catch (error: any) {
-      const isAbort = error.name === 'AbortError' || signal?.aborted;
+    } catch (error: unknown) {
+      const isAbort = (error as Error).name === 'AbortError' || signal?.aborted;
       this.progress.update((p) => ({
         ...p,
         status: isAbort ? 'canceled' : 'error',
-        errorMessage: isAbort ? undefined : `Error: ${error.message}`,
+        errorMessage: isAbort ? undefined : `Error: ${(error as Error).message}`,
       }));
       if (!isAbort) console.error('Load data error:', error);
     }
   }
 
-  async runQuery(query: string): Promise<any[]> {
+  async runQuery(query: string): Promise<Record<string, unknown>[]> {
     const conn = await this.getConnection();
     const result = await conn.query(query);
-    const data = (await (result as any).toArray?.()) ?? [];
+    const data =
+      (await (
+        result as unknown as { toArray?: () => { toJSON: () => Record<string, unknown> }[] }
+      ).toArray?.()) ?? [];
 
-    return data.map((row: any) => {
-      const newRow: Record<string, any> = {};
+    return data.map((row) => {
+      const newRow: Record<string, unknown> = {};
       for (const [key, value] of Object.entries(row.toJSON())) {
         newRow[key] = typeof value === 'bigint' ? Number(value) : value;
       }
@@ -518,8 +521,10 @@ export class DuckDbService {
     const describe = await this.runQuery(`DESCRIBE ${tableName}`);
     const geometryTypes = ['GEOMETRY', 'POINT', 'LINE', 'POLYGON'];
     return describe
-      .filter((row) => geometryTypes.some((type) => row.column_type.startsWith(type)))
-      .map((row) => row.column_name);
+      .filter((row) =>
+        geometryTypes.some((type) => (row['column_type'] as string)?.startsWith(type)),
+      )
+      .map((row) => row['column_name'] as string);
   }
 
   async getColumnType(query: string, columnName: string): Promise<string | undefined> {
@@ -530,7 +535,7 @@ export class DuckDbService {
     return result.get(0)?.['coltype'];
   }
 
-  async getHistogram(query: string, columnName: string): Promise<any> {
+  async getHistogram(query: string, columnName: string): Promise<unknown> {
     const conn = await this.getConnection();
     const result = await conn.query(`SELECT histogram("${columnName}") AS data FROM (${query});`);
     const data = result.get(0)?.['data'];

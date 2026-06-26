@@ -64,7 +64,7 @@ export class ConfigService {
   /**
    * Test if an object matches a set of filters.
    */
-  testExpressionFilters(filters: Filter[], object: any): boolean {
+  testExpressionFilters(filters: Filter[], object: Record<string, string | undefined>): boolean {
     const results: boolean[] = [];
     filters.forEach(function (filter, j) {
       const prop = object[filter.field];

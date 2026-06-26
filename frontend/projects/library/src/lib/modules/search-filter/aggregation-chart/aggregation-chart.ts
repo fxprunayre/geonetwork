@@ -262,16 +262,21 @@ export class AggregationChart extends SearchBase implements OnDestroy {
       this.isBarRangeFiltered.set(false);
     }
     this.chartInstance.off('click');
-    this.chartInstance.on('click', (params: any) => {
-      const key = params?.data?.key ?? keys[params?.dataIndex ?? -1];
+    this.chartInstance.on('click', (params: Record<string, unknown>) => {
+      const key =
+        (params?.['data'] as Record<string, unknown>)?.['key'] ??
+        keys[(params?.['dataIndex'] as number) ?? -1];
       if (key != null) {
         this.bucketClicked.emit(String(key));
       }
     });
     this.chartInstance.off('datazoom');
     if (this.layout() === 'bar' && this.isHistogram()) {
-      this.chartInstance.on('datazoom', (params: any) => {
-        const eventRange = this.getBarZoomRangeFromEvent(params, allBuckets.length);
+      this.chartInstance.on('datazoom', (params: unknown) => {
+        const eventRange = this.getBarZoomRangeFromEvent(
+          params as Record<string, unknown>,
+          allBuckets.length,
+        );
         if (eventRange) {
           this.currentBarZoomRange = eventRange;
           this.updateRangeResetButtonState(allBuckets.length);
@@ -325,26 +330,36 @@ export class AggregationChart extends SearchBase implements OnDestroy {
 
   private getCurrentBarZoomRange(bucketCount: number): BarVisibleRange | undefined {
     if (!this.chartInstance || bucketCount <= 0) return undefined;
-    const opt = this.chartInstance.getOption() as any;
-    const dz = opt?.dataZoom?.[0];
+    const opt = this.chartInstance.getOption() as EChartsOption;
+    const dataZoom = opt?.dataZoom;
+    const dz = Array.isArray(dataZoom) ? dataZoom[0] : dataZoom;
     if (!dz) return undefined;
 
-    return this.normalizeBarZoomRange(dz, bucketCount);
+    return this.normalizeBarZoomRange(dz as unknown as Record<string, unknown>, bucketCount);
   }
 
-  private getBarZoomRangeFromEvent(params: any, bucketCount: number): BarVisibleRange | undefined {
+  private getBarZoomRangeFromEvent(
+    params: Record<string, unknown>,
+    bucketCount: number,
+  ): BarVisibleRange | undefined {
     if (bucketCount <= 0 || !params) return undefined;
-    const payload = params?.batch?.[0] ?? params;
+    const batch = (params as Record<string, unknown>)?.['batch'] as
+      | Record<string, unknown>[]
+      | undefined;
+    const payload = batch?.[0] ?? params;
     return this.normalizeBarZoomRange(payload, bucketCount);
   }
 
-  private normalizeBarZoomRange(source: any, bucketCount: number): BarVisibleRange | undefined {
+  private normalizeBarZoomRange(
+    source: Record<string, unknown>,
+    bucketCount: number,
+  ): BarVisibleRange | undefined {
     if (!source) return undefined;
 
-    const startFromPercent = ((source.start ?? 0) / 100) * (bucketCount - 1);
-    const endFromPercent = ((source.end ?? 100) / 100) * (bucketCount - 1);
-    const rawStart = source.startValue ?? startFromPercent;
-    const rawEnd = source.endValue ?? endFromPercent;
+    const startFromPercent = (((source['start'] as number) ?? 0) / 100) * (bucketCount - 1);
+    const endFromPercent = (((source['end'] as number) ?? 100) / 100) * (bucketCount - 1);
+    const rawStart = (source['startValue'] as number) ?? startFromPercent;
+    const rawEnd = (source['endValue'] as number) ?? endFromPercent;
     const minRaw = Math.min(rawStart, rawEnd);
     const maxRaw = Math.max(rawStart, rawEnd);
     const start = Math.max(0, Math.min(bucketCount - 1, Math.floor(minRaw)));
@@ -390,13 +405,14 @@ export class AggregationChart extends SearchBase implements OnDestroy {
             label: {
               show: true,
               position: 'insideLeft',
-              formatter: (params: any) => compactLabels[params.dataIndex] ?? '',
+              formatter: (params: Record<string, unknown>) =>
+                compactLabels[params['dataIndex'] as number] ?? '',
             },
             data,
           },
         ],
-      } as any,
-      { notMerge: false, replaceMerge: ['series'] } as any,
+      } as EChartsOption,
+      { notMerge: false, replaceMerge: ['series'] },
     );
   }
 

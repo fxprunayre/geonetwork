@@ -39,14 +39,14 @@ Cypress.Commands.add('mockClipboard', (initialText = '') => {
 Cypress.Commands.add('initApp', (profile = '') => {
   const isAuthenticated = profile.trim().length > 0;
 
-  const withEditPermission = (responseBody: any) => {
+  const withEditPermission = (responseBody: Record<string, unknown>) => {
     if (!isAuthenticated) {
       return responseBody;
     }
 
     const patchedResponse = Cypress._.cloneDeep(responseBody);
 
-    const markEditable = (value: any) => {
+    const markEditable = (value: unknown) => {
       if (!value || typeof value !== 'object') {
         return;
       }
@@ -143,16 +143,30 @@ Cypress.Commands.add('initApp', (profile = '') => {
     },
   ];
 
-  const loadedMocks: any[] = [];
+  const loadedMocks: {
+    req: string;
+    res: string;
+    alias: string;
+    body?: unknown;
+    responseBody?: unknown;
+  }[] = [];
   return cy
     .wrap(mockMap)
-    .each((mock: any) => {
-      cy.fixture(mock.req).then((requestBody) => {
-        cy.fixture(mock.res).then((responseBody) => {
-          loadedMocks.push({ ...mock, body: requestBody, responseBody });
+    .each(
+      (mock: {
+        req: string;
+        res: string;
+        alias: string;
+        body?: unknown;
+        responseBody?: unknown;
+      }) => {
+        cy.fixture(mock.req).then((requestBody) => {
+          cy.fixture(mock.res).then((responseBody) => {
+            loadedMocks.push({ ...mock, body: requestBody, responseBody });
+          });
         });
-      });
-    })
+      },
+    )
     .then(() => {
       cy.intercept('POST', '**/search/records/_search*', (req) => {
         // Ensure body is an object to ignore JSON formatting differences (whitespace, etc.)
