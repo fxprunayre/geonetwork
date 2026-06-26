@@ -33,7 +33,7 @@ interface SharingPrivilegeRow {
   template: `
     <p-dialog
       class="m-10"
-      contentStyleClass="w-90vw max-w-4xl"
+      styleClass="w-[90vw] max-w-6xl"
       [(visible)]="visible"
       [modal]="true"
       [header]="'record.action.sharing.byGroup.label' | translate"
@@ -54,32 +54,37 @@ interface SharingPrivilegeRow {
 
             @if (isLoading()) {
               <tr [style.backgroundColor]="backgroundColor">
-                <td class="p-2"><p-skeleton width="10rem" height="1.5rem" /></td>
+                <td class="p-2 w-1/2"><p-skeleton width="10rem" height="1.5rem" /></td>
                 @for (operation of operationColumns(); track operation) {
-                  <td class="p-2">
-                    <div class="flex items-center justify-center">
-                      <p-skeleton width="1.5rem" height="1.5rem" borderRadius="4px" />
-                    </div>
-                  </td>
+                  <td class="p-2"></td>
                 }
               </tr>
             } @else {
               <tr [style.backgroundColor]="backgroundColor">
-                <td class="p-2">
+                <td
+                  class="p-2 w-1/2 font-bold cursor-pointer"
+                  [title]="'record.action.sharing.byGroup.dblClickToToggle' | translate"
+                  (dblclick)="setAllOperations(rowData)"
+                >
                   {{ rowData.label }}
                 </td>
                 @for (operation of operationColumns(); track operation) {
-                  <td class="p-2">
-                    <div
-                      class="flex items-center justify-center"
-                      [class.border-r-2]="operation === 'view'"
-                      [class.border-l-2]="operation === 'editing'"
-                    >
-                      <p-checkbox
-                        [(ngModel)]="rowData.operations[operation]"
-                        [binary]="true"
-                      ></p-checkbox>
-                    </div>
+                  <td
+                    class="p-2"
+                    [title]="'record.action.sharing.operations.' + operation + 'Help' | translate"
+                    [class.bg-[var(--p-primary-100)]]="
+                      operation === 'view' || operation === 'editing'
+                    "
+                  >
+                    @if (rowData.operations[operation] !== undefined) {
+                      <div class="flex items-center justify-center">
+                        <p-checkbox
+                          [(ngModel)]="rowData.operations[operation]"
+                          [binary]="true"
+                          [disabled]="isSaving()"
+                        ></p-checkbox>
+                      </div>
+                    }
                   </td>
                 }
               </tr>
@@ -94,7 +99,9 @@ interface SharingPrivilegeRow {
             [sortField]="'label'"
             [sortOrder]="1"
             [scrollable]="true"
-            scrollHeight="400px"
+            [paginator]="sharingRows().length > 20"
+            [rows]="20"
+            scrollHeight="500px"
           >
             <ng-template #header>
               <tr>
@@ -117,6 +124,7 @@ interface SharingPrivilegeRow {
                     <p-columnFilter
                       type="text"
                       field="label"
+                      matchMode="contains"
                       placeholder="Type to search"
                       ariaLabel="Filter group"
                       filterOn="input"
@@ -145,13 +153,13 @@ interface SharingPrivilegeRow {
       </div>
 
       <ng-template pTemplate="footer">
-        <p-button (onClick)="close()">
+        <p-button (onClick)="close()" [disabled]="isSaving()">
           <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
-          <span pButtonLabel>{{ 'cancel' | translate }}</span>
+          <span pButtonLabel>{{ 'record.action.sharing.cancel' | translate }}</span>
         </p-button>
-        <p-button (onClick)="confirm()" [disabled]="isFormInvalid()">
+        <p-button (onClick)="confirm()" [disabled]="isFormInvalid()" [loading]="isSaving()">
           <ng-icon name="faSolidCheck" pButtonIcon></ng-icon>
-          <span pButtonLabel>{{ 'save' | translate }}</span>
+          <span pButtonLabel>{{ 'record.action.sharing.save' | translate }}</span>
         </p-button>
       </ng-template>
     </p-dialog>
@@ -188,6 +196,7 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
   readonly reservedSharingRows = signal<SharingPrivilegeRow[]>([]);
   readonly operationColumns = signal<string[]>(OPERATION_COLUMNS_ORDER);
   readonly isLoading = signal(false);
+  readonly isSaving = signal(false);
   readonly loadError = signal<string | null>(null);
   readonly loadingSkeletonRows = computed(() =>
     this.isLoading()
@@ -233,6 +242,32 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
     return this.isLoading() || !!this.loadError();
   }
 
+  excludeUnsupportedOperations(privilege: GroupPrivilege): Record<string, boolean> | null {
+    const operations = privilege.operations ?? {};
+
+    const supportedOperations = OPERATION_COLUMNS_ORDER.filter((op) => op in operations);
+    if (supportedOperations.length === 0) {
+      return null;
+    }
+
+    // notify, editing are not allowed for reserved and recordPrivileges groups
+    if (privilege.reserved || privilege.recordPrivilege) {
+      supportedOperations.forEach((op) => {
+        if (op === 'notify' || op === 'editing') {
+          delete operations[op];
+        }
+      });
+    }
+
+    return supportedOperations.reduce(
+      (acc, op) => {
+        acc[op] = operations[op];
+        return acc;
+      },
+      {} as Record<string, boolean>,
+    );
+  }
+
   initializeMatrix(privileges: GroupPrivilege[]) {
     const rows: SharingPrivilegeRow[] = privileges.map((privilege) => {
       return {
@@ -242,6 +277,7 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
           : privilege.recordPrivilege
             ? this.translate.instant('record.action.sharing.byGroup.type.recordPrivilegeHelp')
             : this.translate.instant('record.action.sharing.byGroup.type.workspaceHelp'),
+        operations: this.excludeUnsupportedOperations(privilege) ?? {},
         ...privilege,
       } as SharingPrivilegeRow;
     });
@@ -266,31 +302,42 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
     return !!row.operations[operation];
   }
 
-  // toggleOperation(groupId: number | null, operation: string, checked: boolean) {
-  //   const updateRow = (rows: SharingPrivilegeRow[]) =>
-  //     rows.map((row) => {
-  //       if (row.group !== groupId) {
-  //         return row;
-  //       }
-  //       return {
-  //         ...row,
-  //         operations: {
-  //           ...row.operations,
-  //           [operation]: checked,
-  //         },
-  //       };
-  //     });
-
-  //   this.sharingRows.update(updateRow);
-  //   this.reservedSharingRows.update(updateRow);
-  // }
+  setAllOperations(row: SharingPrivilegeRow) {
+    const allChecked = this.operationColumns().every((op) => row.operations[op]);
+    this.operationColumns().forEach((op) => {
+      row.operations[op] = !allChecked;
+    });
+  }
 
   confirm() {
+    const uuid = this.record().uuid;
+
+    if (!uuid) {
+      return;
+    }
     if (this.isFormInvalid()) {
       return;
     }
-    this.confirmed.emit();
-    this.close();
+
+    this.isSaving.set(true);
+    this.recordsService
+      .share(uuid, {
+        privileges: [...this.reservedSharingRows(), ...this.sharingRows()].map((row) => ({
+          group: row.group ?? undefined,
+          operations: row.operations,
+        })),
+      })
+      .subscribe({
+        next: () => {
+          this.confirmed.emit();
+          this.close();
+          this.isSaving.set(false);
+        },
+        error: () => {
+          this.loadError.set('Unable to save sharing settings.');
+          this.isSaving.set(false);
+        },
+      });
   }
 
   close() {

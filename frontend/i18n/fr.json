@@ -175,24 +175,36 @@
       "relatedRecordsWarning": "Cette fiche est associée à d'autres ressources :",
       "sharing": {
         "byGroup": {
+          "dblClickToToggle": "Double-cliquez pour basculer toutes les opérations pour ce groupe",
           "groupLabel": "Groupe",
           "help": "Partager cette fiche avec des groupes spécifiques. Cela la rendra accessible uniquement aux groupes sélectionnés.",
           "label": "Partager par groupe",
           "type": {
             "recordPrivilege": "Privilège de fiche",
             "recordPrivilegeHelp": "Les groupes de privilèges de fiche peuvent se voir attribuer des privilèges pour des fiches spécifiques mais ne peuvent pas posséder de métadonnées.",
-            "reserved": "éservé",
+            "reserved": "Réservé",
             "reservedHelp": "Utilisez ces groupes spéciaux (par ex. internet, intranet) pour définir des privilèges globaux.",
             "systemPrivileges": "Privilèges système",
             "systemPrivilegesHelp": "Les groupes de privilèges système sont uniquement pour les permissions système ; ils ne peuvent pas posséder de métadonnées ni se voir attribuer des privilèges pour des fiches spécifiques.",
             "workspace": "Workspace",
-            "workspaceHelp": "Workspace groups can create, import, and own metadata records as well as be assigned privileges for specific records."
+            "workspaceHelp": "Les groupes de l'espace de travail peuvent créer, importer et posséder des fiches de métadonnées ainsi que se voir attribuer des privilèges pour des fiches spécifiques."
           }
         },
+        "cancel": "Annuler",
         "help": "Gérer les options de partage de la fiche",
         "label": "Partager",
+        "operations": {
+          "downloadHelp": "Autoriser les membres du groupe à télécharger le fichier associé à cette fiche.",
+          "dynamicHelp": "Autoriser les membres du groupe à visualiser cette fiche dans le visualiseur de cartes.",
+          "editingHelp": "Autoriser les membres du groupe à modifier cette fiche.",
+          "featuredHelp": "",
+          "notifyHelp": "Notifier les membres du groupe des modifications apportées à cette fiche.",
+          "processHelp": "Autoriser les membres du groupe à utiliser le service de traitement dans le visualiseur de cartes.",
+          "viewHelp": "Autoriser les membres du groupe à consulter cette fiche."
+        },
         "publish": "Publier",
         "publishHelp": "Publier cette fiche. Cela la rendra accessible au public.",
+        "save": "Enregistrer",
         "unpublish": "Dépublier",
         "unpublishHelp": "Dépublier cette fiche. Cela la rendra privée et supprimera l'accès public."
       },
