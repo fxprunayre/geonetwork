@@ -1,21 +1,29 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, effect, inject, model, output, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { GroupPrivilege, RecordsService, SharingResponse } from 'gn4-api-client';
 import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { RecordFieldBase } from '../../../record/record-field-base/record-field-base';
 
+const OPERATION_COLUMNS_ORDER = ['view', 'dynamic', 'download', 'process', 'editing'];
+
 interface SharingPrivilegeRow {
-  groupId: number | null;
-  groupLabel: string;
+  group: number | null;
+  label: string;
+  title?: string;
   operations: Record<string, boolean>;
   reserved?: boolean;
   restricted?: boolean;
+  recordPrivilege?: boolean;
   userGroup?: boolean;
+  userProfiles?: string[];
 }
 
 @Component({
@@ -35,6 +43,28 @@ interface SharingPrivilegeRow {
         } @else if (loadError()) {
           <p class="text-red-600">{{ loadError() }}</p>
         } @else if (sharingRows().length > 0 || reservedSharingRows().length > 0) {
+          <ng-template #sharingRow let-rowData>
+            <tr
+              [style.backgroundColor]="
+                rowData.reserved
+                  ? 'var(--p-primary-200)'
+                  : rowData.recordPrivilege
+                    ? 'var(--p-primary-100)'
+                    : ''
+              "
+              [title]="rowData.title"
+            >
+              <td class="p-2">
+                {{ rowData.label }}
+              </td>
+              @for (operation of operationColumns(); track operation) {
+                <td class="p-2">
+                  <p-checkbox [(ngModel)]="rowData.operations[operation]"></p-checkbox>
+                </td>
+              }
+            </tr>
+          </ng-template>
+
           <p-table
             #table
             [value]="sharingRows()"
@@ -42,7 +72,8 @@ interface SharingPrivilegeRow {
             [globalFilterFields]="['groupLabel']"
             sortField="groupLabel"
             [sortOrder]="1"
-            styleClass="p-datatable-sm"
+            [scrollable]="true"
+            scrollHeight="400px"
           >
             <ng-template #header>
               <tr>
@@ -59,40 +90,16 @@ interface SharingPrivilegeRow {
               </tr>
             </ng-template>
 
-            <ng-template #body let-rowData>
-              <tr>
-                <td class="p-2">
-                  {{ rowData.groupLabel }}
-                </td>
-                @for (operation of operationColumns(); track operation) {
-                  <td class="p-2">
-                    <input
-                      #checkbox
-                      type="checkbox"
-                      [checked]="isChecked(rowData, operation)"
-                      (change)="toggleOperation(rowData.groupId, operation, checkbox.checked)"
-                    />
-                  </td>
-                }
-              </tr>
+            <ng-template #frozenbody let-rowData>
+              <ng-container
+                *ngTemplateOutlet="sharingRow; context: { $implicit: rowData }"
+              ></ng-container>
             </ng-template>
 
-            <ng-template #frozenbody let-rowData>
-              <tr [style.backgroundColor]="rowData.reserved ? 'var(--p-primary-100)' : ''">
-                <td class="p-2">
-                  {{ rowData.groupLabel }}
-                </td>
-                @for (operation of operationColumns(); track operation) {
-                  <td class="p-2">
-                    <input
-                      #checkbox
-                      type="checkbox"
-                      [checked]="isChecked(rowData, operation)"
-                      (change)="toggleOperation(rowData.groupId, operation, checkbox.checked)"
-                    />
-                  </td>
-                }
-              </tr>
+            <ng-template #body let-rowData>
+              <ng-container
+                *ngTemplateOutlet="sharingRow; context: { $implicit: rowData }"
+              ></ng-container>
             </ng-template>
           </p-table>
         }
@@ -114,7 +121,17 @@ interface SharingPrivilegeRow {
     </p-dialog>
   `,
   standalone: true,
-  imports: [ButtonModule, DialogModule, InputTextModule, TableModule, NgIcon, TranslatePipe],
+  imports: [
+    ButtonModule,
+    DialogModule,
+    CheckboxModule,
+    NgTemplateOutlet,
+    InputTextModule,
+    TableModule,
+    FormsModule,
+    NgIcon,
+    TranslatePipe,
+  ],
   viewProviders: [
     provideIcons({
       faSolidCheck,
@@ -169,49 +186,56 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
   }
 
   initializeMatrix(privileges: GroupPrivilege[]) {
-    const operationSet = new Set<string>();
     const rows: SharingPrivilegeRow[] = privileges.map((privilege) => {
-      const operations = { ...(privilege.operations ?? {}) };
-      Object.keys(operations).forEach((operation) => operationSet.add(operation));
       return {
-        groupId: privilege.group ?? null,
-        groupLabel: privilege.group ? this.translate.instant(`group-${privilege.group}`) : 'N/A',
-        operations,
-        reserved: privilege.reserved,
-        restricted: privilege.restricted,
-        userGroup: privilege.userGroup,
-      };
+        label: privilege.group ? this.translate.instant(`group-${privilege.group}`) : 'N/A',
+        title: privilege.reserved
+          ? this.translate.instant('record.action.sharing.byGroup.type.reservedHelp')
+          : privilege.recordPrivilege
+            ? this.translate.instant('record.action.sharing.byGroup.type.recordPrivilegeHelp')
+            : this.translate.instant('record.action.sharing.byGroup.type.workspaceHelp'),
+        ...privilege,
+      } as SharingPrivilegeRow;
     });
 
-    this.operationColumns.set(Array.from(operationSet).sort((a, b) => a.localeCompare(b)));
-
-    const sortedRows = [...rows].sort((a, b) => a.groupLabel.localeCompare(b.groupLabel));
-    this.reservedSharingRows.set(sortedRows.filter((row) => !!row.reserved));
-    this.sharingRows.set(sortedRows.filter((row) => !row.reserved));
+    const sortedRows = [...rows].sort((a, b) => a.label.localeCompare(b.label));
+    this.reservedSharingRows.set(
+      sortedRows
+        .filter((row) => !!row.reserved || !!row.recordPrivilege)
+        .sort((a, b) => {
+          if (a.reserved && !b.reserved) return -1;
+          if (!a.reserved && b.reserved) return 1;
+          return 0;
+        }),
+    );
+    this.sharingRows.set(sortedRows.filter((row) => !row.reserved && !row.recordPrivilege));
+    this.operationColumns.set(
+      OPERATION_COLUMNS_ORDER.filter((op) => rows.some((row) => op in row.operations)),
+    );
   }
 
   isChecked(row: SharingPrivilegeRow, operation: string): boolean {
     return !!row.operations[operation];
   }
 
-  toggleOperation(groupId: number | null, operation: string, checked: boolean) {
-    const updateRow = (rows: SharingPrivilegeRow[]) =>
-      rows.map((row) => {
-        if (row.groupId !== groupId) {
-          return row;
-        }
-        return {
-          ...row,
-          operations: {
-            ...row.operations,
-            [operation]: checked,
-          },
-        };
-      });
+  // toggleOperation(groupId: number | null, operation: string, checked: boolean) {
+  //   const updateRow = (rows: SharingPrivilegeRow[]) =>
+  //     rows.map((row) => {
+  //       if (row.group !== groupId) {
+  //         return row;
+  //       }
+  //       return {
+  //         ...row,
+  //         operations: {
+  //           ...row.operations,
+  //           [operation]: checked,
+  //         },
+  //       };
+  //     });
 
-    this.sharingRows.update(updateRow);
-    this.reservedSharingRows.update(updateRow);
-  }
+  //   this.sharingRows.update(updateRow);
+  //   this.reservedSharingRows.update(updateRow);
+  // }
 
   confirm() {
     if (this.isFormInvalid()) {

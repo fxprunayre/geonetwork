@@ -177,7 +177,17 @@
       "sharing": {
         "byGroup": {
           "help": "Share this record with specific groups. This will make it accessible only to the selected groups.",
-          "label": "Share"
+          "label": "Share",
+          "type": {
+            "recordPrivilege": "Record privilege",
+            "recordPrivilegeHelp": "Record privilege groups can be assigned privileges for specific records but cannot own metadata.",
+            "reserved": "Reserved",
+            "reservedHelp": "Use those special groups (eg. internet, intranet) to define global privileges.",
+            "systemPrivileges": "System privileges",
+            "systemPrivilegesHelp": "System privilege groups are for system permissions only; they cannot own metadata or be assigned privileges for specific records.",
+            "workspace": "Workspace",
+            "workspaceHelp": "Workspace groups can create, import, and own metadata records as well as be assigned privileges for specific records."
+          }
         },
         "help": "Manage sharing options for the record",
         "label": "Share",
