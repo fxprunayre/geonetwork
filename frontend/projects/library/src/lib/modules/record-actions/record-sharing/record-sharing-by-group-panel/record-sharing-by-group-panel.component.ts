@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, effect, inject, model, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, model, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCheck, faSolidXmark } from '@ng-icons/font-awesome/solid';
@@ -9,6 +9,8 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { MessageModule } from 'primeng/message';
+import { SkeletonModule } from 'primeng/skeleton';
 import { TableModule } from 'primeng/table';
 import { RecordFieldBase } from '../../../record/record-field-base/record-field-base';
 
@@ -30,64 +32,98 @@ interface SharingPrivilegeRow {
   selector: 'app-record-sharing-by-group-panel',
   template: `
     <p-dialog
-      class="m-10 w-full max-w-4xl"
+      class="m-10"
+      contentStyleClass="w-90vw max-w-4xl"
       [(visible)]="visible"
       [modal]="true"
       [header]="'record.action.sharing.byGroup.label' | translate"
       (onHide)="reset()"
     >
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 w-full">
         <p>{{ 'record.action.sharing.byGroup.help' | translate }}</p>
-        @if (isLoading()) {
-          <p>Loading sharing settings...</p>
-        } @else if (loadError()) {
-          <p class="text-red-600">{{ loadError() }}</p>
-        } @else if (sharingRows().length > 0 || reservedSharingRows().length > 0) {
+        @if (loadError()) {
+          <p-message severity="error">{{ loadError() }}</p-message>
+        } @else {
           <ng-template #sharingRow let-rowData>
-            <tr
-              [style.backgroundColor]="
-                rowData.reserved
-                  ? 'var(--p-primary-200)'
-                  : rowData.recordPrivilege
-                    ? 'var(--p-primary-100)'
-                    : ''
-              "
-              [title]="rowData.title"
-            >
-              <td class="p-2">
-                {{ rowData.label }}
-              </td>
-              @for (operation of operationColumns(); track operation) {
+            @let backgroundColor =
+              rowData.reserved
+                ? 'var(--p-primary-200)'
+                : rowData.recordPrivilege
+                  ? 'var(--p-primary-100)'
+                  : '';
+
+            @if (isLoading()) {
+              <tr [style.backgroundColor]="backgroundColor">
+                <td class="p-2"><p-skeleton width="10rem" height="1.5rem" /></td>
+                @for (operation of operationColumns(); track operation) {
+                  <td class="p-2">
+                    <div class="flex items-center justify-center">
+                      <p-skeleton width="1.5rem" height="1.5rem" borderRadius="4px" />
+                    </div>
+                  </td>
+                }
+              </tr>
+            } @else {
+              <tr [style.backgroundColor]="backgroundColor">
                 <td class="p-2">
-                  <p-checkbox [(ngModel)]="rowData.operations[operation]"></p-checkbox>
+                  {{ rowData.label }}
                 </td>
-              }
-            </tr>
+                @for (operation of operationColumns(); track operation) {
+                  <td class="p-2">
+                    <div
+                      class="flex items-center justify-center"
+                      [class.border-r-2]="operation === 'view'"
+                      [class.border-l-2]="operation === 'editing'"
+                    >
+                      <p-checkbox
+                        [(ngModel)]="rowData.operations[operation]"
+                        [binary]="true"
+                      ></p-checkbox>
+                    </div>
+                  </td>
+                }
+              </tr>
+            }
           </ng-template>
 
           <p-table
             #table
-            [value]="sharingRows()"
-            [frozenValue]="reservedSharingRows()"
+            [value]="isLoading() ? loadingSkeletonRows() : sharingRows()"
+            [frozenValue]="isLoading() ? [] : reservedSharingRows()"
             [globalFilterFields]="['groupLabel']"
-            sortField="groupLabel"
+            [sortField]="'label'"
             [sortOrder]="1"
             [scrollable]="true"
             scrollHeight="400px"
           >
             <ng-template #header>
               <tr>
-                <th pSortableColumn="groupLabel" class="text-left p-2">
-                  Group
-                  <p-sortIcon field="groupLabel" />
+                <th pSortableColumn="label" class="text-left p-2">
+                  {{ 'record.action.sharing.byGroup.groupLabel' | translate }}
+                  <p-sortIcon field="label"></p-sortIcon>
                 </th>
                 @for (operation of operationColumns(); track operation) {
                   <th [pSortableColumn]="'operations.' + operation" class="text-left p-2">
-                    {{ operation }}
-                    <p-sortIcon [field]="'operations.' + operation" />
+                    <div class="flex items-center justify-center">
+                      {{ 'op-' + operation | translate }}
+                      <p-sortIcon [field]="'operations.' + operation" />
+                    </div>
                   </th>
                 }
               </tr>
+              @if (sharingRows().length > 10) {
+                <tr>
+                  <td [attr.colspan]="1 + operationColumns().length" class="py-2">
+                    <p-columnFilter
+                      type="text"
+                      field="label"
+                      placeholder="Type to search"
+                      ariaLabel="Filter group"
+                      filterOn="input"
+                    ></p-columnFilter>
+                  </td>
+                </tr>
+              }
             </ng-template>
 
             <ng-template #frozenbody let-rowData>
@@ -127,6 +163,8 @@ interface SharingPrivilegeRow {
     CheckboxModule,
     NgTemplateOutlet,
     InputTextModule,
+    MessageModule,
+    SkeletonModule,
     TableModule,
     FormsModule,
     NgIcon,
@@ -148,9 +186,19 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
   readonly sharingResponse = signal<SharingResponse | null>(null);
   readonly sharingRows = signal<SharingPrivilegeRow[]>([]);
   readonly reservedSharingRows = signal<SharingPrivilegeRow[]>([]);
-  readonly operationColumns = signal<string[]>([]);
+  readonly operationColumns = signal<string[]>(OPERATION_COLUMNS_ORDER);
   readonly isLoading = signal(false);
   readonly loadError = signal<string | null>(null);
+  readonly loadingSkeletonRows = computed(() =>
+    this.isLoading()
+      ? (Array.from({ length: 3 }, (_, index) => ({
+          group: index,
+          label: '',
+          reserved: index === 0,
+          operations: {},
+        })) as SharingPrivilegeRow[])
+      : [],
+  );
 
   constructor() {
     super();

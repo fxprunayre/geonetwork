@@ -176,6 +176,7 @@
       "relatedRecordsWarning": "This record is associated with other resources:",
       "sharing": {
         "byGroup": {
+          "groupLabel": "Group",
           "help": "Share this record with specific groups. This will make it accessible only to the selected groups.",
           "label": "Share",
           "type": {

@@ -175,15 +175,16 @@
       "relatedRecordsWarning": "Cette fiche est associée à d'autres ressources :",
       "sharing": {
         "byGroup": {
+          "groupLabel": "Groupe",
           "help": "Partager cette fiche avec des groupes spécifiques. Cela la rendra accessible uniquement aux groupes sélectionnés.",
           "label": "Partager par groupe",
           "type": {
-            "recordPrivilege": "Record privilege",
-            "recordPrivilegeHelp": "Record privilege groups can be assigned privileges for specific records but cannot own metadata.",
-            "reserved": "Reserved",
-            "reservedHelp": "Use those special groups (eg. internet, intranet) to define global privileges.",
-            "systemPrivileges": "System privileges",
-            "systemPrivilegesHelp": "System privilege groups are for system permissions only; they cannot own metadata or be assigned privileges for specific records.",
+            "recordPrivilege": "Privilège de fiche",
+            "recordPrivilegeHelp": "Les groupes de privilèges de fiche peuvent se voir attribuer des privilèges pour des fiches spécifiques mais ne peuvent pas posséder de métadonnées.",
+            "reserved": "éservé",
+            "reservedHelp": "Utilisez ces groupes spéciaux (par ex. internet, intranet) pour définir des privilèges globaux.",
+            "systemPrivileges": "Privilèges système",
+            "systemPrivilegesHelp": "Les groupes de privilèges système sont uniquement pour les permissions système ; ils ne peuvent pas posséder de métadonnées ni se voir attribuer des privilèges pour des fiches spécifiques.",
             "workspace": "Workspace",
             "workspaceHelp": "Workspace groups can create, import, and own metadata records as well as be assigned privileges for specific records."
           }
