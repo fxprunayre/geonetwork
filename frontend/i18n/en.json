@@ -177,6 +177,8 @@
       "sharing": {
         "byGroup": {
           "dblClickToToggle": "Double click to toggle all operations for this group",
+          "filterAriaLabel": "Filter group",
+          "filterPlaceholder": "Type to search",
           "groupLabel": "Group",
           "help": "Share this record with specific groups. This will make it accessible only to the selected groups.",
           "label": "Share",

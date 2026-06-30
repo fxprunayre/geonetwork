@@ -175,6 +175,8 @@
       "sharing": {
         "byGroup": {
           "dblClickToToggle": "Double click to toggle all operations for this group",
+          "filterAriaLabel": "Filter groep",
+          "filterPlaceholder": "Typ om te zoeken",
           "groupLabel": "Groep",
           "help": "Deel dit record met specifieke groepen. Dit maakt het alleen toegankelijk voor de geselecteerde groepen.",
           "label": "Delen per groep",

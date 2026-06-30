@@ -176,6 +176,8 @@
       "sharing": {
         "byGroup": {
           "dblClickToToggle": "Double-cliquez pour basculer toutes les opérations pour ce groupe",
+          "filterAriaLabel": "Filtrer le groupe",
+          "filterPlaceholder": "Tapez pour rechercher",
           "groupLabel": "Groupe",
           "help": "Partager cette fiche avec des groupes spécifiques. Cela la rendra accessible uniquement aux groupes sélectionnés.",
           "label": "Partager par groupe",

@@ -54,15 +54,16 @@ interface SharingPrivilegeRow {
 
             @if (isLoading()) {
               <tr [style.backgroundColor]="backgroundColor">
-                <td class="p-2 w-1/2"><p-skeleton width="10rem" height="1.5rem" /></td>
+                <td class="w-1/2" colspan="2"><p-skeleton width="10rem" height="1.5rem" /></td>
                 @for (operation of operationColumns(); track operation) {
-                  <td class="p-2"></td>
+                  <td></td>
                 }
               </tr>
             } @else {
               <tr [style.backgroundColor]="backgroundColor">
                 <td
-                  class="p-2 w-1/2 font-bold cursor-pointer"
+                  colspan="2"
+                  class=" w-1/2 font-bold cursor-pointer"
                   [title]="'record.action.sharing.byGroup.dblClickToToggle' | translate"
                   (dblclick)="setAllOperations(rowData)"
                 >
@@ -70,11 +71,7 @@ interface SharingPrivilegeRow {
                 </td>
                 @for (operation of operationColumns(); track operation) {
                   <td
-                    class="p-2"
                     [title]="'record.action.sharing.operations.' + operation + 'Help' | translate"
-                    [class.bg-[var(--p-primary-100)]]="
-                      operation === 'view' || operation === 'editing'
-                    "
                   >
                     @if (rowData.operations[operation] !== undefined) {
                       <div class="flex items-center justify-center">
@@ -105,12 +102,24 @@ interface SharingPrivilegeRow {
           >
             <ng-template #header>
               <tr>
-                <th pSortableColumn="label" class="text-left p-2">
+                <th pSortableColumn="label" class="w-1/4">
                   {{ 'record.action.sharing.byGroup.groupLabel' | translate }}
                   <p-sortIcon field="label"></p-sortIcon>
                 </th>
+                <th>
+                  @if (sharingRows().length > 10) {
+                    <p-columnFilter
+                      type="text"
+                      field="label"
+                      matchMode="contains"
+                      [placeholder]="'record.action.sharing.byGroup.filterPlaceholder' | translate"
+                      [ariaLabel]="'record.action.sharing.byGroup.filterAriaLabel' | translate"
+                      filterOn="input"
+                    ></p-columnFilter>
+                  }
+                </th>
                 @for (operation of operationColumns(); track operation) {
-                  <th [pSortableColumn]="'operations.' + operation" class="text-left p-2">
+                  <th [pSortableColumn]="'operations.' + operation" class="text-left">
                     <div class="flex items-center justify-center">
                       {{ 'op-' + operation | translate }}
                       <p-sortIcon [field]="'operations.' + operation" />
@@ -118,20 +127,6 @@ interface SharingPrivilegeRow {
                   </th>
                 }
               </tr>
-              @if (sharingRows().length > 10) {
-                <tr>
-                  <td [attr.colspan]="1 + operationColumns().length" class="py-2">
-                    <p-columnFilter
-                      type="text"
-                      field="label"
-                      matchMode="contains"
-                      placeholder="Type to search"
-                      ariaLabel="Filter group"
-                      filterOn="input"
-                    ></p-columnFilter>
-                  </td>
-                </tr>
-              }
             </ng-template>
 
             <ng-template #frozenbody let-rowData>
