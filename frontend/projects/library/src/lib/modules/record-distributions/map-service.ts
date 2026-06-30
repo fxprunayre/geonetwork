@@ -37,7 +37,7 @@ export class MapService {
     );
   }
 
-  async resolveEndpointLayers(link: Link): Promise<any[] | null> {
+  async resolveEndpointLayers(link: Link): Promise<unknown[] | null> {
     const url = link.urlObject?.['default'];
     if (!url) {
       return null;
@@ -56,9 +56,9 @@ export class MapService {
   }
 
   matchRequestedLayers(
-    layers: any[] | null,
+    layers: unknown[] | null,
     layerNamesValue: string | null | undefined,
-  ): any[] | null {
+  ): unknown[] | null {
     if (!layers || !layerNamesValue) {
       return null;
     }
@@ -72,16 +72,17 @@ export class MapService {
       return null;
     }
 
-    const matchedLayers = layers.filter((layer: any) => requestedLayerNames.includes(layer.name));
+    const typedLayers = layers as { name: string }[];
+    const matchedLayers = typedLayers.filter((layer) => requestedLayerNames.includes(layer.name));
     const allFound = requestedLayerNames.every((name) =>
-      matchedLayers.some((layer: any) => layer.name === name),
+      matchedLayers.some((layer) => layer.name === name),
     );
 
     return allFound ? matchedLayers : null;
   }
 
   matchRequestedLayerLabels(
-    layers: any[] | null,
+    layers: unknown[] | null,
     layerNamesValue: string | null | undefined,
   ): string[] | null {
     const matchedLayers = this.matchRequestedLayers(layers, layerNamesValue);
@@ -89,7 +90,8 @@ export class MapService {
       return null;
     }
 
-    return matchedLayers.map((layer: any) => layer.title || layer.name);
+    const typedLayers = matchedLayers as { name: string; title?: string }[];
+    return typedLayers.map((layer) => layer.title || layer.name);
   }
 
   async validateBulkWmsLinks(links: Link[], minLinks = 2): Promise<BulkWmsValidationResult | null> {

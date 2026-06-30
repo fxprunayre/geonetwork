@@ -38,26 +38,26 @@ import { Aggregation } from '../aggregation/aggregation';
   templateUrl: './aggregations-panel.component.html',
 })
 export class AggregationsPanel extends SearchBase {
-  @ContentChild('labelTemplate') labelTemplate: TemplateRef<any> | undefined;
+  @ContentChild('labelTemplate') labelTemplate: TemplateRef<unknown> | undefined;
 
   aggregationService = inject(AggregationService);
   panelType = input<'accordion' | 'none'>('accordion');
   position = input<'left' | 'top'>('left');
 
   get aggregations(): Record<string, elasticsearch.AggregationsAggregate> {
-    return this.search.aggregations();
+    return this.search().aggregations();
   }
 
   activePanels = computed(() => {
-    return this.aggregationService.getActive(this.search.aggregationsConfig());
+    return this.aggregationService.getActive(this.search().aggregationsConfig());
   });
 
   constructor() {
     super();
     effect(() => {
       this.aggregationService.loadTranslations(
-        this.search.aggregations(),
-        this.search.aggregationsConfig(),
+        this.search().aggregations(),
+        this.search().aggregationsConfig(),
       );
     });
   }
@@ -70,17 +70,17 @@ export class AggregationsPanel extends SearchBase {
   hasActiveFilter = (keyName: string) => {
     return this.aggregationService.hasActiveFilter(
       keyName,
-      this.search.aggregations(),
-      this.search.isFilterActive.bind(this.search),
+      this.search().aggregations(),
+      this.search().isFilterActive.bind(this.search),
     );
   };
 
   hasBuckets = (key: string) => {
-    return this.aggregationService.hasBuckets(key, this.search.aggregations());
+    return this.aggregationService.hasBuckets(key, this.search().aggregations());
   };
 
   getAggregationMetaLabel(key: string): string | null {
-    return this.aggregationService.getAggregationMetaLabel(key, this.search.aggregationsConfig());
+    return this.aggregationService.getAggregationMetaLabel(key, this.search().aggregationsConfig());
   }
 
   setPanelExpanded(event: AccordionTabOpenEvent) {
@@ -92,8 +92,8 @@ export class AggregationsPanel extends SearchBase {
   }
 
   private updatePanelState(index: string, isCollapsed: boolean) {
-    this.search.setAggregationsConfig(
-      this.aggregationService.setActive(index, !isCollapsed, this.search.aggregationsConfig()),
+    this.search().setAggregationsConfig(
+      this.aggregationService.setActive(index, !isCollapsed, this.search().aggregationsConfig()),
       true,
     );
   }

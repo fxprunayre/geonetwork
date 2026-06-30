@@ -1,10 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+vi.mock('@camptocamp/ogc-client', () => {
+  const mockWmsEndpoint = vi.fn();
+  mockWmsEndpoint.prototype.isReady = vi.fn().mockResolvedValue(undefined);
+  mockWmsEndpoint.prototype.getFlattenedLayers = vi.fn().mockReturnValue([
+    { name: 'layer-a', title: 'Layer A' },
+    { name: 'layer-b', title: 'Layer B' },
+  ]);
+  return { WmsEndpoint: mockWmsEndpoint };
+});
+
 import { signal } from '@angular/core';
-import { WmsEndpoint } from '@camptocamp/ogc-client';
+
 import { Configuration as GnConfiguration, Link } from 'gn-api-client';
 import { Configuration as Gn4Configuration } from 'gn4-api-client';
-import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
 import { AddAllLayersToMap } from './add-all-layers-to-map';
@@ -14,12 +24,6 @@ describe('AddAllLayersToMap', () => {
   let fixture: ComponentFixture<AddAllLayersToMap>;
 
   beforeEach(async () => {
-    spyOn(WmsEndpoint.prototype, 'isReady').and.resolveTo(undefined as any);
-    spyOn(WmsEndpoint.prototype, 'getFlattenedLayers').and.returnValue([
-      { name: 'layer-a', title: 'Layer A' },
-      { name: 'layer-b', title: 'Layer B' },
-    ] as any);
-
     await TestBed.configureTestingModule({
       imports: [AddAllLayersToMap],
       providers: [
@@ -32,7 +36,7 @@ describe('AddAllLayersToMap', () => {
 
     fixture = TestBed.createComponent(AddAllLayersToMap);
     component = fixture.componentInstance;
-    fixture.componentRef.setInput('record', { uuid: 'record-1' } as any);
+    fixture.componentRef.setInput('record', { uuid: 'record-1' } as Record<string, string>);
     fixture.componentRef.setInput('links', [
       {
         protocol: 'OGC:WMS',

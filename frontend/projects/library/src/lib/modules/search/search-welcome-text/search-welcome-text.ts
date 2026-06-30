@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
 import { TranslateDirective, TranslateService } from '@ngx-translate/core';
 import { SearchBase } from '../search-base/search-base';
 
@@ -9,7 +9,7 @@ import { SearchBase } from '../search-base/search-base';
   standalone: true,
   imports: [DecimalPipe, TranslateDirective],
 })
-export class SearchWelcomeText extends SearchBase {
+export class SearchWelcomeText extends SearchBase implements OnInit {
   maxBucketsToShow = input(3);
 
   translateService = inject(TranslateService);
@@ -18,15 +18,14 @@ export class SearchWelcomeText extends SearchBase {
 
   locale = signal(this.translateService.getCurrentLang());
 
-  override ngOnInit() {
-    super.ngOnInit();
+  ngOnInit() {
     this.translateService.onLangChange.subscribe((lang) => {
       this.locale.set(lang.lang);
     });
   }
 
   mainBuckets = computed(() => {
-    const mainBuckets = this.search.aggregations()[this.RESOURCE_TYPE_FIELD]?.buckets || [];
+    const mainBuckets = this.search().aggregations()[this.RESOURCE_TYPE_FIELD]?.buckets || [];
     if (Array.isArray(mainBuckets)) {
       return mainBuckets
         .slice(0, this.maxBucketsToShow())

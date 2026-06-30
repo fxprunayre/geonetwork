@@ -149,22 +149,68 @@
       },
       "bookmark": "Bookmark",
       "bookmarkTitle": "Add to bookmarks",
-      "deleteConfirmationMessage": "Are you sure you want to delete this record? This action cannot be undone.",
-      "deleteConfirmationTitle": "Delete confirmation",
-      "deleteError": "An error occurred while deleting the record.",
-      "deleteSuccess": "Record deleted successfully.",
-      "deleteTitle": "Delete this record",
-      "edit": "Edit",
-      "editTitle": "Edit this record",
+      "delete": {
+        "deleteConfirmationMessage": "Are you sure you want to delete this record? This action cannot be undone.",
+        "deleteConfirmationTitle": "Delete confirmation",
+        "deleteError": "An error occurred while deleting the record.",
+        "deleteSuccess": "Record deleted successfully.",
+        "help": "Delete this record",
+        "label": "Delete"
+      },
+      "edit": {
+        "help": "Edit this record",
+        "label": "Edit"
+      },
       "externalUrl": "View external resource",
       "importRecord": "Import record",
       "manageTitle": "Manage this record",
       "menu": "Quick actions",
-      "metadataDownload": "Metadata (XML)",
-      "metadataDownloadHelp": "Download the record in XML format",
+      "metadataDownload": {
+        "help": "Download the record in XML format",
+        "label": "Metadata (XML)"
+      },
+      "permalink": {
+        "help": "Permalink to the record",
+        "label": "Permalink"
+      },
       "relatedRecordsWarning": "This record is associated with other resources:",
-      "share": "Share",
-      "shareHelp": "Permalink to the record",
+      "sharing": {
+        "byGroup": {
+          "dblClickToToggle": "Double click to toggle all operations for this group",
+          "filterAriaLabel": "Filter group",
+          "filterPlaceholder": "Type to search",
+          "groupLabel": "Group",
+          "help": "Share this record with specific groups. This will make it accessible only to the selected groups.",
+          "label": "Share",
+          "type": {
+            "recordPrivilege": "Record privilege",
+            "recordPrivilegeHelp": "Record privilege groups can be assigned privileges for specific records but cannot own metadata.",
+            "reserved": "Reserved",
+            "reservedHelp": "Use those special groups (eg. internet, intranet) to define global privileges.",
+            "systemPrivileges": "System privileges",
+            "systemPrivilegesHelp": "System privilege groups are for system permissions only; they cannot own metadata or be assigned privileges for specific records.",
+            "workspace": "Workspace",
+            "workspaceHelp": "Workspace groups can create, import, and own metadata records as well as be assigned privileges for specific records."
+          }
+        },
+        "cancel": "Cancel",
+        "help": "Manage sharing options for the record",
+        "label": "Share",
+        "operations": {
+          "downloadHelp": "Allow group members to download file uploaded with this record.",
+          "dynamicHelp": "Allow group members to visualize this record in the map viewer.",
+          "editingHelp": "Allow group members to edit this record.",
+          "featuredHelp": "",
+          "notifyHelp": "Notify group members about changes to this record.",
+          "processHelp": "Allow group members using the processing service in the map viewer.",
+          "viewHelp": "Allow group members to view this record."
+        },
+        "publish": "Publish",
+        "publishHelp": "Publish this record. This will make it publicly accessible.",
+        "save": "Save",
+        "unpublish": "Unpublish",
+        "unpublishHelp": "Unpublish this record. This will make it private and remove it from public access."
+      },
       "typeToConfirm": "Type \"{{word}}\" to confirm",
       "unbookmark": "Remove bookmark",
       "unbookmarkTitle": "Remove from bookmarks"

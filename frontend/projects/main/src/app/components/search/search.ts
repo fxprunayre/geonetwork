@@ -27,6 +27,6 @@ export class Search extends SearchBase {
   );
 
   get hasResults(): boolean {
-    return this.search?.totalCount() > 0;
+    return this.search()?.totalCount() > 0;
   }
 }

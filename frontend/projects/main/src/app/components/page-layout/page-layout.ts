@@ -70,20 +70,20 @@ import { SearchPanelControls } from '../search-panel-controls/search-panel-contr
                   class="grow"
                   [showFilterButton]="isSearchActive()"
                   [filterPanelMode]="effectiveFilterPanelMode()"
-                  [placeholder]="search | searchWelcomeTextPipe: 'resourceType' : 3"
+                  [placeholder]="search() | searchWelcomeTextPipe: 'resourceType' : 3"
                   [(visible)]="visible"
                   (searchTriggered)="setRouteToSearch()"
                 />
 
                 <!-- Spacer to match the sidebar width and keep the search box aligned with the results -->
                 @if (isSearchActive()) {
-                  @if (effectiveFilterPanelMode() == 'side') {
+                  @if (effectiveFilterPanelMode() === 'side') {
                     <div
                       class="transition-all duration-300 ease-in-out min-w-0 max-w-100 border-l-2 border-transparent"
                       [ngClass]="visible ? 'sm:w-1/3' : 'sm:w-0!'"
                     ></div>
                   }
-                  @if (effectiveFilterPanelMode() == 'side-fixed') {
+                  @if (effectiveFilterPanelMode() === 'side-fixed') {
                     <div class="sm:w-1/3 min-w-0 border-l-2 border-transparent"></div>
                   }
                 }
@@ -173,8 +173,8 @@ import { SearchPanelControls } from '../search-panel-controls/search-panel-contr
 export class PageLayout extends SearchBase implements AfterViewInit, OnDestroy {
   @ViewChild('titleSection') titleSection!: ElementRef<HTMLElement>;
   @ViewChild('headerRow') headerRow!: ElementRef<HTMLElement>;
-  @ContentChild('header') header!: TemplateRef<any>;
-  @ContentChild('footer') footer!: TemplateRef<any>;
+  @ContentChild('header') header!: TemplateRef<unknown>;
+  @ContentChild('footer') footer!: TemplateRef<unknown>;
 
   withSearch = input(true);
 
@@ -197,7 +197,7 @@ export class PageLayout extends SearchBase implements AfterViewInit, OnDestroy {
   isSearchActive = toSignal(
     this.router.events.pipe(
       filter((e) => e instanceof NavigationEnd),
-      map((e: any) => e.urlAfterRedirects.startsWith(SEARCH_ROUTE_PATH)),
+      map((e: NavigationEnd) => e.urlAfterRedirects.startsWith(SEARCH_ROUTE_PATH)),
     ),
     { initialValue: this.router.url.startsWith(SEARCH_ROUTE_PATH) },
   );

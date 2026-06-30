@@ -15,5 +15,7 @@
       "gn-library": ["../../dist/gn-library"]
     }
   },
-  "exclude": ["**/*.spec.ts"]
+
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.mock.ts"]
 }

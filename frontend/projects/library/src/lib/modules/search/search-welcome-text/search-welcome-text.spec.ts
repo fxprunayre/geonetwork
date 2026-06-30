@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchWelcomeText } from './search-welcome-text';
 
-import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
-import { provideMockSearchService } from '../search-store.mock.spec';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock';
+import { provideMockSearchService } from '../search-store.mock';
 
 describe('SearchWelcomeText', () => {
   let component: SearchWelcomeText;

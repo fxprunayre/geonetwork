@@ -65,8 +65,12 @@ export class ExplorePanel {
   route = inject(ActivatedRoute);
   router = inject(Router);
 
-  mapContext = computed(
-    () => this.appConfiguration().config?.apps?.map?.context || DEFAULT_MAP_CONTEXT,
+  mapContext = computed<Record<string, unknown>>(
+    () =>
+      (this.appConfiguration().config?.apps?.map?.context || DEFAULT_MAP_CONTEXT) as Record<
+        string,
+        unknown
+      >,
   );
 
   mapLayerDisplayTarget = computed(

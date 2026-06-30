@@ -46,7 +46,8 @@ import { RecordViewContent } from './record-view-content';
         [layout]="layout()"
         [backButtonTplRef]="backButtonTplRef()"
         [headerTplRef]="headerTplRef()"
-        (onRecordClick)="onRecordClick.emit($event)"
+        (recordClick)="recordClick.emit($event)"
+        (sharingChanged)="refreshRecord()"
       />
     }
   `,
@@ -77,7 +78,7 @@ export class RecordView {
   backButtonTplRef = input<TemplateRef<unknown>>();
   headerTplRef = input<TemplateRef<unknown>>();
 
-  onRecordClick = output<string>();
+  recordClick = output<string>();
 
   searchService = inject(SearchService);
   private readonly titleService = inject(Title);
@@ -145,5 +146,9 @@ export class RecordView {
     destroyRef.onDestroy(() => {
       this.titleService.setTitle(initialTitle);
     });
+  }
+
+  refreshRecord() {
+    this.recordResource.reload();
   }
 }

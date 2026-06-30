@@ -20,14 +20,16 @@ interface SortOption {
 })
 export class ResultsSorterComponent extends SearchBase {
   sortOptions = computed<SortOption[]>(() =>
-    this.search.sort().map((sort) => ({
-      label: `search.sort.options.${sort}`,
-      value: sort,
-    })),
+    this.search()
+      .sort()
+      .map((sort) => ({
+        label: `search.sort.options.${sort}`,
+        value: sort,
+      })),
   );
 
   onSortChange(sort: string) {
-    this.search.setSort(sort);
-    this.search.setRouting();
+    this.search().setSort(sort);
+    this.search().setRouting();
   }
 }

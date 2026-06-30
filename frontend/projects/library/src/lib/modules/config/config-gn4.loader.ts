@@ -9,6 +9,7 @@ import {
   DEFAULT_MAP_CONTEXT,
   DEFAULT_RECORD_DETAILS_APP_CONFIGURATION,
   DEFAULT_SEARCH_APP_CONFIGURATION,
+  DEFAULT_SHARING_APP_CONFIGURATION,
   DEFAULT_USER_SELECTIONS_APP_CONFIGURATION,
 } from './gn-constants';
 import { DEFAULT_GN4_UI_CONFIGURATION } from './gn4constants';
@@ -28,7 +29,7 @@ export function migrateGn4AggregationConfig(
 ): (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[] {
   // Filter entries with property gnBuildFilterForRange
   const filteredEntries = Object.entries(gn4AggConfig).filter(
-    ([, value]) => !(value as any).gnBuildFilterForRange,
+    ([, value]) => !(value as Record<string, unknown>)['gnBuildFilterForRange'],
   );
   return filteredEntries.map(([key, value]) => ({
     [key]: value,
@@ -149,6 +150,7 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
   }
 
   conf.apps.userSelections = DEFAULT_USER_SELECTIONS_APP_CONFIGURATION;
+  conf.apps.sharing = DEFAULT_SHARING_APP_CONFIGURATION;
 
   const hasMap = Object.keys(gn4config.mods).includes('map');
   if (!hasMap) {

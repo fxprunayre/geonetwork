@@ -1,10 +1,14 @@
 <ng-template #defaultHeader let-record="record">
-  <app-record-view-title [record]="record" [backButtonTplRef]="backButtonTplRef()">
+  <app-record-view-title
+    [record]="record"
+    [backButtonTplRef]="backButtonTplRef()"
+    (sharingChanged)="sharingChanged.emit()"
+  >
   </app-record-view-title>
   <app-record-view-header
     [record]="record"
     [vocabularies]="mainVocabularies()"
-    (onRecordClick)="handleRecordClick($event)"
+    (recordClick)="handleRecordClick($event)"
   >
   </app-record-view-header>
 </ng-template>
@@ -56,7 +60,7 @@
     <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Sources, RelatedItemType.Hassources]"
-      (onRecordClick)="handleRecordClick($event)"
+      (recordClick)="handleRecordClick($event)"
     />
   </ng-template>-->
 
@@ -65,7 +69,7 @@
     <app-associated-panel
       [record]="record"
       [include]="[RelatedItemType.Services, RelatedItemType.Datasets]"
-      (onRecordClick)="handleRecordClick($event)"
+      (recordClick)="handleRecordClick($event)"
     />
   </ng-template>
 
@@ -129,7 +133,7 @@
     <app-associated-panel
       [record]="record"
       [exclude]="excludedTypesForAssociatedTab"
-      (onRecordClick)="handleRecordClick($event)"
+      (recordClick)="handleRecordClick($event)"
     />
   </ng-template>
 

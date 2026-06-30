@@ -26,7 +26,7 @@ export function buildPieOption(
         label: {
           show: true,
           position: 'outside',
-          formatter: (params: any) => truncateLabel(params.name, 20),
+          formatter: (params: { name: string }) => truncateLabel(params.name, 20),
           fontSize: 11,
           overflow: 'truncate',
         },

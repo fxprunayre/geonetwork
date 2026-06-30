@@ -55,7 +55,7 @@ export class RecordFieldDates extends RecordFieldBase implements OnInit {
     this.currentLocale = this.translateService.getCurrentLang();
   }
 
-  icons: { [key: string]: any } = {
+  icons: Record<string, unknown> = {
     creation: faLightbulb,
     publication: faSolidBullhorn,
     revision: faSolidPen,
@@ -74,7 +74,7 @@ export class RecordFieldDates extends RecordFieldBase implements OnInit {
     distribution: faSolidShareNodes,
   };
 
-  events = computed<any[]>(() => {
+  events = computed<{ icon?: unknown; color: string; date?: string; label: string }[]>(() => {
     const dates = this.record()?.resourceDate || [];
     return dates.map((date: ResourceDate) => {
       return {

@@ -40,7 +40,7 @@ export class RecordFieldVocabulary extends RecordFieldBase {
   });
 
   // Order vocabularies by those having an id (from a vocabulary) before others (which are free text)
-  private sortControlledBeforeFreeText(a: any, b: any) {
+  private sortControlledBeforeFreeText(a: { id?: string }, b: { id?: string }) {
     if (a.id && !b.id) {
       return -1;
     }

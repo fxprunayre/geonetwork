@@ -2,7 +2,7 @@
   [uuid]="uuid()"
   [tab]="tab()"
   [backButtonTplRef]="backButton"
-  (onRecordClick)="handleRecordClick($event)"
+  (recordClick)="handleRecordClick($event)"
 >
   <ng-template #backButton>
     <p-button (click)="goBack()" [title]="'search.backToResults' | translate">

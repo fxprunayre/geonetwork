@@ -18,7 +18,7 @@ export type EChartsOption = ComposeOption<
 export type ThemeColorFn = (variable: string, fallback: string) => string;
 export type TruncateLabelFn = (label: string, maxLength: number) => string;
 
-export type BarVisibleRange = {
+export interface BarVisibleRange {
   start: number;
   end: number;
-};
+}

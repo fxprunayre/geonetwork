@@ -40,7 +40,7 @@ export class AggregationBucket extends SearchBase {
   index = input(0);
 
   @Output()
-  onSelected = new EventEmitter<SearchFilterChange>();
+  selected = new EventEmitter<SearchFilterChange>();
 
   aggregationTranslate = inject(AggregationTranslatePipe);
   translateService = inject(TranslateService);
@@ -51,12 +51,12 @@ export class AggregationBucket extends SearchBase {
 
   layout = computed(() => {
     return (
-      this.displayType() || this.search.aggregations()[this.keyName()].meta?.layout || 'checkbox'
+      this.displayType() || this.search().aggregations()[this.keyName()].meta?.layout || 'checkbox'
     );
   });
 
   decorator = computed<Decorator | undefined>(() => {
-    return this.search.aggregations()[this.keyName()].meta?.decorator;
+    return this.search().aggregations()[this.keyName()].meta?.decorator;
   });
 
   label = computed(() => {
@@ -77,7 +77,7 @@ export class AggregationBucket extends SearchBase {
   });
 
   isActive = computed(() => {
-    return this.search.isFilterActive(this.keyName(), this.bucket().key);
+    return this.search().isFilterActive(this.keyName(), this.bucket().key);
   });
 
   isIconDecorator = computed(() => {
@@ -128,7 +128,7 @@ export class AggregationBucket extends SearchBase {
   tabSelected = output<string>();
 
   handleChange(bucketValue: string | number, addValue: boolean) {
-    this.onSelected.emit({
+    this.selected.emit({
       field: this.keyName(),
       values: [bucketValue],
       add: addValue,

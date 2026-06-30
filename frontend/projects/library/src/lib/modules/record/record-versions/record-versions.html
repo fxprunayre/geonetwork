@@ -5,7 +5,10 @@
     @if (isLatest()) {
       <span
         class="cursor-pointer text-primary font-medium hover:underline"
+        tabindex="0"
         (click)="togglePopover($event)"
+        (keydown.enter)="togglePopover($event)"
+        (keydown.space)="togglePopover($event); $event.preventDefault()"
       >
         {{ 'record.versions.pastVersions' | translate }}
       </span>
@@ -17,7 +20,13 @@
         {{ 'record.versions.newerVersionAvailable' | translate }}
       </a>
       <span class="text-surface-400">·</span>
-      <span class="cursor-pointer text-surface-500 hover:underline" (click)="togglePopover($event)">
+      <span
+        class="cursor-pointer text-surface-500 hover:underline"
+        tabindex="0"
+        (click)="togglePopover($event)"
+        (keydown.enter)="togglePopover($event)"
+        (keydown.space)="togglePopover($event); $event.preventDefault()"
+      >
         {{ 'record.versions.allVersions' | translate }}
       </span>
     }
@@ -41,7 +50,7 @@
                 <app-result-item-list
                   [result]="version"
                   layout="version"
-                  (onRecordClick)="handleRecordClick($event)"
+                  (recordClick)="handleRecordClick($event)"
                 />
               </p-overlaybadge>
             </div>
@@ -49,7 +58,7 @@
             <app-result-item-list
               [result]="version"
               layout="version"
-              (onRecordClick)="handleRecordClick($event)"
+              (recordClick)="handleRecordClick($event)"
             />
           }
         }

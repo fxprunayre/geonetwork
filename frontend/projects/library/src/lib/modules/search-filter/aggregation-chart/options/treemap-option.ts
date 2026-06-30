@@ -29,7 +29,7 @@ export function buildTreemapOption(
         breadcrumb: { show: false },
         label: {
           show: true,
-          formatter: (params: any) => truncateLabel(params.name, 18),
+          formatter: (params: { name: string }) => truncateLabel(params.name, 18),
           fontSize: 11,
           color: '#fff',
           overflow: 'truncate',

@@ -12,6 +12,7 @@ export interface GroupPrivilege {
   group?: number;
   operations?: { [key: string]: boolean };
   reserved?: boolean;
+  recordPrivilege?: boolean;
   restricted?: boolean;
   userGroup?: boolean;
   userProfile?: Array<GroupPrivilege.UserProfileEnum>;

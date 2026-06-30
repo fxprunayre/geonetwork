@@ -7,7 +7,7 @@ export default defineConfig({
     requestTimeout: 15000,
     experimentalRunAllSpecs: true,
     baseUrl: 'http://0.0.0.0:4200',
-    setupNodeEvents(on, config) {
+    setupNodeEvents(on, _config) {
       on('before:browser:launch', (browser, launchOptions) => {
         if (browser.family === 'chromium' && browser.name !== 'electron') {
           launchOptions.preferences.default['profile.managed_default_content_settings.clipboard'] =

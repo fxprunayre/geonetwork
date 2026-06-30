@@ -5,6 +5,7 @@ import { migrateSextantConfig } from './config-sextant.loader';
 import {
   DEFAULT_APPS_CONFIGURATION,
   DEFAULT_HEADER_APP_CONFIGURATION,
+  DEFAULT_SHARING_APP_CONFIGURATION,
   DEFAULT_SPACE,
 } from './gn-constants';
 import { SEXTANT_GN4_UI_CONFIGURATION } from './gn4constants';
@@ -21,13 +22,11 @@ export const APPLICATION_CONFIGURATION = new InjectionToken<
   WritableSignal<ApplicationConfiguration>
 >('app.config');
 
-let appConfig: ApplicationConfiguration = {
+const appConfig: ApplicationConfiguration = {
   config: undefined,
   space: DEFAULT_SPACE,
   catalogueUrl: '/',
 };
-
-let appConfigLoading = false;
 
 export interface LoadAppConfigOptions {
   apiUrl?: string;
@@ -36,8 +35,8 @@ export interface LoadAppConfigOptions {
   config?: string;
 }
 
-export function parseGn4Config(conf: any): UiConfiguration {
-  return JSON.parse(conf.configuration) as UiConfiguration;
+export function parseGn4Config(conf: Record<string, unknown>): UiConfiguration {
+  return JSON.parse(conf['configuration'] as string) as UiConfiguration;
 }
 
 export function getWebComponentAttribute(name: string): string | null {
@@ -61,16 +60,22 @@ function parseInlineConfig(configValue: string): UiConfiguration | undefined {
   }
 }
 
-function deepMerge(target: any, source: any): any {
-  if (target === undefined || target === null) return source;
-  if (source === undefined || source === null) return target;
+function deepMerge(
+  target: Record<string, unknown> | undefined | null,
+  source: Record<string, unknown> | undefined | null,
+): Record<string, unknown> {
+  if (target === undefined || target === null) return source as Record<string, unknown>;
+  if (source === undefined || source === null) return target as Record<string, unknown>;
   if (typeof target !== 'object' || Array.isArray(target)) return source;
   if (typeof source !== 'object' || Array.isArray(source)) return source;
 
   const merged = { ...target };
   for (const key of Object.keys(source)) {
     if (source[key] instanceof Object && !Array.isArray(source[key])) {
-      merged[key] = deepMerge(target[key], source[key]);
+      merged[key] = deepMerge(
+        target[key] as Record<string, unknown>,
+        source[key] as Record<string, unknown>,
+      );
     } else {
       merged[key] = source[key];
     }
@@ -78,11 +83,11 @@ function deepMerge(target: any, source: any): any {
   return merged;
 }
 
-export function loadAppConfig(options: LoadAppConfigOptions = {}) {
-  appConfigLoading = true;
-
+export function loadAppConfig(
+  options: LoadAppConfigOptions = {},
+): Promise<ApplicationConfiguration> {
   // Default to environment url, but allow override from web component attribute
-  let apiUrl = options.apiUrl || getWebComponentAttribute('url') || environment.geonetworkApiUrl;
+  const apiUrl = options.apiUrl || getWebComponentAttribute('url') || environment.geonetworkApiUrl;
   const webComponentSpace = options.space || getWebComponentAttribute('space');
   const languageOverride = options.language || getWebComponentAttribute('language') || undefined;
   const configOverride = options.config || getWebComponentAttribute('config') || undefined;
@@ -128,7 +133,10 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
     }
 
     if (inlineConfig && appConfig.config) {
-      appConfig.config = deepMerge(DEFAULT_APPS_CONFIGURATION, appConfig.config);
+      appConfig.config = deepMerge(
+        DEFAULT_APPS_CONFIGURATION as unknown as Record<string, unknown>,
+        appConfig.config as unknown as Record<string, unknown>,
+      ) as unknown as AppsConfiguration;
     }
 
     if (appConfig.config) {
@@ -148,6 +156,9 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
       }
       if (!appConfig.config.apps.banner) {
         appConfig.config.apps.banner = { enabled: true };
+      }
+      if (!appConfig.config.apps.sharing) {
+        appConfig.config.apps.sharing = DEFAULT_SHARING_APP_CONFIGURATION;
       }
 
       appConfig.config.apps.banner!.background =
@@ -171,7 +182,6 @@ export function loadAppConfig(options: LoadAppConfigOptions = {}) {
     }
 
     console.log('Application config:', appConfig);
-    appConfigLoading = false;
     return appConfig;
   });
 }

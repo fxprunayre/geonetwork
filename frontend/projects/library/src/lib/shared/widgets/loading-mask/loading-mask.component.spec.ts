@@ -1,6 +1,6 @@
 import { inputBinding } from '@angular/core';
 import { render, screen } from '@testing-library/angular';
-import { provideMockTranslateService } from '../../translate-service.mock.spec';
+import { provideMockTranslateService } from '../../translate-service.mock';
 import { LoadingMask } from './loading-mask.component';
 
 describe('"Loading mask', () => {

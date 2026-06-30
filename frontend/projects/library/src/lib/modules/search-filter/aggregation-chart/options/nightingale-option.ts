@@ -1,3 +1,4 @@
+import type { PieSeriesOption } from 'echarts/charts';
 import { AggregationBucketType } from '../../aggregation/aggregation.model';
 import { EChartsOption, ThemeColorFn, TruncateLabelFn } from './chart-option.types';
 import { buildPieOption } from './pie-option';
@@ -20,7 +21,7 @@ export function buildNightingaleOption(
     themeColor,
     truncateLabel,
   );
-  const series = (base.series as any[])[0];
+  const series = (base.series as PieSeriesOption[])[0];
   series.roseType = 'area';
   series.radius = ['10%', '70%'];
   series.itemStyle = {

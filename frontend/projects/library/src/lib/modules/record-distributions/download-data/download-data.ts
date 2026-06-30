@@ -1,5 +1,5 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import WFS from '@camptocamp/ogc-client/dist/wfs/endpoint.js';
+import { WfsEndpoint } from '@camptocamp/ogc-client';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidCloudArrowDown } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -57,7 +57,7 @@ export class DownloadData implements OnInit {
       try {
         const url = this.link().urlObject?.['default'] || '';
         if (!url) return;
-        const wfs = new WFS(url);
+        const wfs = new WfsEndpoint(url);
         await wfs.isReady();
         const info = wfs.getServiceInfo();
         let outputFormats = info?.outputFormats || [
@@ -135,13 +135,13 @@ export class DownloadData implements OnInit {
     return format;
   }
 
-  downloadWfs(format: string, wfs: any, typeName: string) {
+  downloadWfs(format: string, wfs: { getVersion?: () => string }, typeName: string) {
     const urlStr = this.link().urlObject?.['default'] || '';
     try {
       const url = new URL(urlStr);
       url.searchParams.set('request', 'GetFeature');
       url.searchParams.set('service', 'WFS');
-      url.searchParams.set('version', wfs?.getVersion() || '2.0.0');
+      url.searchParams.set('version', wfs.getVersion?.() || '2.0.0');
       if (typeName) {
         // Use typeName parameter
         url.searchParams.set('typeName', typeName);
@@ -150,7 +150,7 @@ export class DownloadData implements OnInit {
       }
       url.searchParams.set('outputFormat', format);
       window.open(url.toString(), '_blank');
-    } catch (e) {
+    } catch {
       window.open(urlStr, '_blank');
     }
   }

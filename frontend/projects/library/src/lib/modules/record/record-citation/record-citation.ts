@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, input, OnChanges, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidDownload, faSolidQuoteRight } from '@ng-icons/font-awesome/solid';
@@ -41,7 +41,7 @@ interface FormatOption {
   viewProviders: [provideIcons({ faSolidQuoteRight, faSolidDownload })],
   providers: [MessageService],
 })
-export class RecordCitation implements OnChanges {
+export class RecordCitation {
   uuid = input.required<string>();
   format = input('html');
   private readonly messageService = inject(MessageService);
@@ -62,14 +62,9 @@ export class RecordCitation implements OnChanges {
   citationAvailable = signal(false);
   loading = signal(false);
 
-  ngOnChanges() {
-    //if (!this.uuid()) return;
-    //this.loadFormats();
-  }
-
   private fetchCitation(
     output: 'html' | 'json' | 'txt' | 'xml' | 'jsonld' | 'pdf' | 'testpdf' | undefined,
-    params?: Record<string, any>,
+    params?: Record<string, string>,
     accept?:
       | 'text/html'
       | 'text/plain'
@@ -97,8 +92,10 @@ export class RecordCitation implements OnChanges {
 
   loadFormats() {
     this.fetchCitation('json', { format: '?' }).subscribe({
-      next: (resp: any) => {
-        const arr: string[] = Array.isArray(resp) ? resp : (resp?.formats ?? []);
+      next: (resp: unknown) => {
+        const arr: string[] = Array.isArray(resp)
+          ? resp
+          : ((resp as { formats?: string[] })?.formats ?? []);
 
         this.formats.set(
           arr.map((f: string) => ({
@@ -114,7 +111,7 @@ export class RecordCitation implements OnChanges {
         const initial = arr.includes('html') ? 'html' : arr[0];
         this.getCitation(initial);
       },
-      error: (err: any) => {
+      error: (err: unknown) => {
         console.log(err);
 
         this.messageService.add({
@@ -140,11 +137,11 @@ export class RecordCitation implements OnChanges {
     const accept = this.mapAccept(fmt);
 
     this.fetchCitation(output, params, accept).subscribe({
-      next: (resp: any) => {
+      next: (resp: string | object) => {
         this.citationText.set(typeof resp === 'string' ? resp : JSON.stringify(resp));
         this.loading.set(false);
       },
-      error: (err: any) => {
+      error: (err: unknown) => {
         console.log(err);
         this.messageService.add({
           severity: 'error',

@@ -3,11 +3,11 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidTrash } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
+import { AuthStore } from '../../../authentication/auth.store';
+import { AssociatedRecordsSummary } from '../../../record-associations/associated-records-summary/associated-records-summary';
+import { RecordFieldBase } from '../../../record/record-field-base/record-field-base';
 import { DeleteConfirmationDialog } from '../../../shared/widgets/delete-confirmation-dialog/delete-confirmation-dialog';
-import { AuthStore } from '../../authentication/auth.store';
-import { AssociatedRecordsSummary } from '../../record-associations/associated-records-summary/associated-records-summary';
-import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
-import { RecordActionService } from '../record-action.service';
+import { RecordActionService } from '../../record-action.service';
 
 @Component({
   selector: 'app-record-delete-button',
@@ -28,7 +28,7 @@ import { RecordActionService } from '../record-action.service';
         [message]="'record.action.deleteConfirmationMessage' | translate"
         [confirmInputLabel]="'record.action.typeToConfirm' | translate: { word: confirmationWord }"
         [confirmWord]="confirmationWord"
-        (onConfirm)="deleteRecord()"
+        (confirmed)="deleteRecord()"
       >
         <app-associated-records-summary [record]="record()" />
       </app-delete-confirmation-dialog>

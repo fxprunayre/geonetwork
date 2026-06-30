@@ -1,4 +1,4 @@
-export const formatNumber = (value: number, locale: string = 'en-US'): string => {
+export const formatNumber = (value: number, locale = 'en-US'): string => {
   return new Intl.NumberFormat(locale).format(value);
 };
 

@@ -21,7 +21,7 @@ export class TranslationsLoader implements TranslateLoader {
     this.http = new HttpClient(this._handler);
   }
 
-  public getTranslation(lang: string): Observable<any> {
+  public getTranslation(lang: string): Observable<Record<string, string>> {
     const requests = this._resourcesPrefix.map((resource) => {
       let path: string;
       let headers: HttpHeaders | undefined;
@@ -50,8 +50,14 @@ export class TranslationsLoader implements TranslateLoader {
       );
     });
 
-    return forkJoin(requests).pipe(
-      map((responses) => responses.reduce((acc, curr) => mergeDeep(acc, curr), {})),
+    return (forkJoin(requests) as Observable<Record<string, string>[]>).pipe(
+      map(
+        (responses) =>
+          responses.reduce(
+            (acc, curr) => mergeDeep(acc, curr),
+            {} as Record<string, string>,
+          ) as Record<string, string>,
+      ),
     );
   }
 }

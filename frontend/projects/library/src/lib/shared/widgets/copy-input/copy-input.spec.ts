@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessageService } from 'primeng/api';
-import { provideMockTranslateService } from '../../translate-service.mock.spec';
+import { provideMockTranslateService } from '../../translate-service.mock';
 import { CopyInput } from './copy-input';
 
 describe('CopyInput', () => {

@@ -15,7 +15,7 @@ describe('Record page', () => {
         .click()
         .then(() => {
           cy.get('a[title="Permalink to the record"]')
-            .should('have.text', 'Share')
+            .should('have.text', 'Permalink')
             .should('be.visible')
             .should('have.attr', 'href')
             .and('include', `https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea`);

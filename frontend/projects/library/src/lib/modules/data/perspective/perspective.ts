@@ -14,7 +14,6 @@ import {
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidTriangleExclamation, faSolidXmark } from '@ng-icons/font-awesome/solid';
 import { TranslateModule } from '@ngx-translate/core';
-import perspective from '@perspective-dev/client';
 import { Button, ButtonIcon } from 'primeng/button';
 import { FileSelectEvent, FileUploadModule, FileUploadPassThrough } from 'primeng/fileupload';
 import { Message } from 'primeng/message';
@@ -23,6 +22,15 @@ import { ProgressBar } from 'primeng/progressbar';
 import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { Datasource } from '../datasource.model';
 import { DuckDbService } from '../duck-db-service';
+
+interface PerspectiveWorkspaceNativeElement {
+  clear(): Promise<void>;
+  load(worker: unknown): Promise<void>;
+  addViewer(config: { table: string; settings: boolean; theme: string }): void;
+  flush(): Promise<void>;
+  restore(workspace: unknown): void;
+  workspace: { save(): Promise<unknown> };
+}
 
 @Component({
   selector: 'app-perspective',
@@ -159,7 +167,8 @@ import { DuckDbService } from '../duck-db-service';
 export class Perspective implements OnDestroy {
   datasource = input<Datasource | undefined>();
 
-  @ViewChild('perspectiveWorkspace') perspectiveWorkspace!: ElementRef<any>;
+  @ViewChild('perspectiveWorkspace')
+  perspectiveWorkspace!: ElementRef<PerspectiveWorkspaceNativeElement>;
 
   private duckDbService = inject(DuckDbService);
   private renderer = inject(Renderer2);
@@ -171,8 +180,8 @@ export class Perspective implements OnDestroy {
   limit = 100000;
   error: string | undefined;
 
-  private worker: any;
-  private table: any;
+  private worker: unknown;
+  private table: unknown;
   private workspaceLoaded = false;
   private readonly tableName = 'data';
 
@@ -180,7 +189,7 @@ export class Perspective implements OnDestroy {
     pcChooseButton: { root: 'p-button-outlined' },
   };
 
-  visualisation: Record<string, any> = {
+  visualisation: Record<string, unknown> = {
     IFR_LOCATION_PORTS: {
       sizes: [0.25, 0.75],
       detail: {
@@ -358,8 +367,9 @@ export class Perspective implements OnDestroy {
   }
 
   private async clearPreviousDataIfAny(): Promise<void> {
-    if (this.table?.delete) {
-      await this.table.delete();
+    const tbl = this.table as { delete?: () => Promise<void> } | undefined;
+    if (tbl?.delete) {
+      await tbl.delete();
       this.table = undefined;
     }
     if (this.perspectiveWorkspace?.nativeElement?.clear) {
@@ -367,20 +377,20 @@ export class Perspective implements OnDestroy {
     }
   }
 
-  private async initialize(): Promise<any> {
+  private async initialize(): Promise<void> {
     try {
       this.duckDbService.progress.update((p) => ({ ...p, status: 'initializing' }));
       await Promise.all([
         this.duckDbService.init(),
         this.duckDbService.initializePerspective(this.renderer),
       ]);
-    } catch (e: any) {
-      this.error = e.message;
+    } catch (e: unknown) {
+      this.error = (e as Error).message;
       console.error('Initialization failed:', e);
     }
   }
 
-  private sanitizeData(data: any): any {
+  private sanitizeData(data: unknown): unknown {
     if (typeof data === 'bigint') {
       const num = Number(data);
       return Number.isSafeInteger(num) ? num : data.toString();
@@ -397,6 +407,7 @@ export class Perspective implements OnDestroy {
   }
 
   private async loadDataIntoPerspective() {
+    const { perspective } = await import('./perspective-init');
     this.worker = this.worker || (await perspective.worker());
 
     if (!this.workspaceLoaded && this.perspectiveWorkspace?.nativeElement?.load) {
@@ -405,7 +416,7 @@ export class Perspective implements OnDestroy {
     }
 
     const countResult = await this.duckDbService.runQuery('SELECT count(*) as count FROM data');
-    this.totalCount.set(Number(countResult[0]?.count || 0));
+    this.totalCount.set(Number(countResult[0]?.['count'] || 0));
     this.isTruncated.set(this.totalCount() > this.limit);
     this.loadedCount.set(Math.min(this.totalCount(), this.limit));
 
@@ -420,7 +431,9 @@ export class Perspective implements OnDestroy {
       throw new Error('Unexpected result format from DuckDbService');
     }
 
-    this.table = this.worker.table(this.sanitizeData(result), { name: this.tableName });
+    this.table = (
+      this.worker as { table: (data: unknown, opts: { name: string }) => unknown }
+    ).table(this.sanitizeData(result), { name: this.tableName });
     await this.perspectiveWorkspace.nativeElement.addViewer({
       table: this.tableName,
       settings: true,

@@ -62,7 +62,6 @@ export class ThemeDesigner implements OnInit {
 
   ngOnInit() {
     this.initFromCssVariables();
-    const config = this.appConfig().config;
   }
 
   initFromCssVariables() {
@@ -70,7 +69,7 @@ export class ThemeDesigner implements OnInit {
       const cssVar = `--p-${colorName}-500`;
       const color = this.themingService.getCssVariable(cssVar);
       if (color) {
-        (this as any)[key + 'Color'].set(color);
+        (this as unknown as Record<string, { set: (v: string) => void }>)[key + 'Color'].set(color);
       }
     });
 
@@ -83,10 +82,12 @@ export class ThemeDesigner implements OnInit {
   setTheme() {
     const t = JSON.parse(JSON.stringify(this.theme())) as Preset;
     if (!t) return;
-    const primitive = (t.primitive as Record<string, any>) || (t.primitive = {});
+    const primitive = (t.primitive as Record<string, unknown>) || (t.primitive = {});
 
     for (const [key, color] of Object.entries(this.themePropertiesByColor)) {
-      primitive[color] = this.themingService.generateColorScale((this as any)[key + 'Color']());
+      primitive[color] = this.themingService.generateColorScale(
+        (this as unknown as Record<string, () => string>)[key + 'Color'](),
+      );
     }
 
     primitive['borderRadius'] = {
@@ -119,7 +120,7 @@ export class ThemeDesigner implements OnInit {
     if (currentConfig.config && currentConfig.config.apps?.banner) {
       currentConfig.config.theme = t;
       currentConfig.config.font = this.font();
-      (this.appConfig as any).set({ ...currentConfig });
+      (this.appConfig as unknown as { set: (v: unknown) => void }).set({ ...currentConfig });
     }
 
     this.themingService.updateCssVariable('--app-font-family-sans', this.font());

@@ -16,7 +16,7 @@
           [keyName]="keyName()"
           [bucket]="bucket"
           [displayType]="layout()"
-          (onSelected)="filter($event)"
+          (selected)="filter($event)"
         />
       </div>
     }
@@ -26,7 +26,7 @@
       [scope]="scope()"
       [keyName]="keyName()"
       [buckets]="buckets()"
-      (onSelected)="filter($event, true)"
+      (selected)="filter($event, true)"
     ></app-aggregation-tree>
   }
   @case ('button') {
@@ -36,7 +36,7 @@
         [keyName]="keyName()"
         [bucket]="bucket"
         [displayType]="layout()"
-        (onSelected)="filter($event)"
+        (selected)="filter($event)"
       />
     }
   }
@@ -48,7 +48,7 @@
         [keyName]="keyName()"
         [bucket]="bucket"
         [displayType]="layout()"
-        (onSelected)="filter($event)"
+        (selected)="filter($event)"
       />
     }
   }
@@ -157,19 +157,19 @@
   }
 }
 
-@if (search.hasMoreTerms(keyName()) || search.hasExpandedTerms(keyName())) {
+@if (search().hasMoreTerms(keyName()) || search().hasExpandedTerms(keyName())) {
   <div class="text-center">
-    @if (search.hasExpandedTerms(keyName())) {
+    @if (search().hasExpandedTerms(keyName())) {
       <p-button
         variant="text"
-        (click)="search.loadLessTerms(keyName(), 10)"
+        (click)="search().loadLessTerms(keyName(), 10)"
         [label]="'search.aggregations.less' | translate"
       ></p-button>
     }
-    @if (search.hasMoreTerms(keyName())) {
+    @if (search().hasMoreTerms(keyName())) {
       <p-button
         variant="text"
-        (click)="search.loadMoreTerms(keyName(), 10)"
+        (click)="search().loadMoreTerms(keyName(), 10)"
         [label]="'search.aggregations.more' | translate"
       ></p-button>
     }

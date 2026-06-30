@@ -77,15 +77,15 @@ export class SearchInput extends SearchBase {
     },
   };
 
-  onSearch = output();
+  searchEvent = output();
   queryString = '';
   items = signal<IndexRecord[]>([]);
-  value: any;
+  value: string | undefined;
 
   constructor() {
     super();
     effect(() => {
-      this.queryString = this.search.searchQuery() || '';
+      this.queryString = this.search().searchQuery() || '';
     });
   }
 
@@ -99,7 +99,7 @@ export class SearchInput extends SearchBase {
     }
 
     try {
-      const scopedFilter = this.scope() === 'main' ? undefined : this.search.filter();
+      const scopedFilter = this.scope() === 'main' ? undefined : this.search().filter();
       const results = await this.searchService.autocompleteSearch(query, scopedFilter);
       this.items.set(results);
     } catch (err) {
@@ -131,8 +131,8 @@ export class SearchInput extends SearchBase {
   }
 
   onModelChange(queryString: string) {
-    this.search.setFullTextQuery(queryString);
-    this.onSearch.emit();
+    this.search().setFullTextQuery(queryString);
+    this.searchEvent.emit();
   }
 
   handleInputClick(event: MouseEvent) {
@@ -143,7 +143,7 @@ export class SearchInput extends SearchBase {
 
   clearQuery() {
     this.queryString = '';
-    this.search.setFullTextQuery('');
+    this.search().setFullTextQuery('');
   }
 
   // FIXME: ShadowDOM:

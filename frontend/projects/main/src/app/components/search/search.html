@@ -3,15 +3,15 @@
     <app-page-layout [(filterPosition)]="filterPosition">
       <div class="mx-auto max-w-7xl w-full px-6 py-6 flex flex-col md:flex-row min-h-screen gap-6">
         <div class="w-full">
-          @if (search.layout()) {
+          @if (search().layout()) {
             <div class="mb-6">
               <app-results-info
-                [layout]="search.layout()"
-                (layoutChange)="search.setLayout($event)"
+                [layout]="search().layout()"
+                (layoutChange)="search().setLayout($event)"
                 [layoutOptions]="resultsLayoutOptions()"
               />
             </div>
-            <app-results-view [layout]="search.layout()" />
+            <app-results-view [layout]="search().layout()" />
           }
         </div>
       </div>

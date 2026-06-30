@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
-import { provideMockSearchService } from '../../search/search-store.mock.spec';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock';
+import { provideMockSearchService } from '../../search/search-store.mock';
 import { Aggregation } from './aggregation';
 
 @Component({
@@ -13,11 +13,10 @@ import { Aggregation } from './aggregation';
   imports: [Aggregation],
 })
 class TestHostComponent {
-  field: string = 'resourceType';
+  field = 'resourceType';
 }
 
 describe('AggregationComponent', () => {
-  let testHostComponent: TestHostComponent;
   let hostFixture: ComponentFixture<TestHostComponent>;
   let aggregationComponent: Aggregation;
 
@@ -32,7 +31,6 @@ describe('AggregationComponent', () => {
     }).compileComponents();
 
     hostFixture = TestBed.createComponent(TestHostComponent);
-    testHostComponent = hostFixture.componentInstance;
     const componentDebugEl: DebugElement = hostFixture.debugElement.query(
       By.directive(Aggregation),
     );

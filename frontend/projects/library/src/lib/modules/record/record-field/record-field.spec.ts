@@ -24,7 +24,11 @@ describe('RecordField', () => {
             instant: (key: string) => key.toUpperCase(),
             get: (key: string) => of(key),
             getCurrentLang: () => 'fr',
-            getParsedResult: (translations: any, key: any, interpolateParams?: any) => key,
+            getParsedResult: (
+              translations: Record<string, unknown>,
+              key: string,
+              _interpolateParams?: Record<string, unknown>,
+            ) => key,
             onLangChange: new EventEmitter<LangChangeEvent>(),
             onTranslationChange: new EventEmitter<TranslationChangeEvent>(),
             onDefaultLangChange: new EventEmitter<DefaultLangChangeEvent>(),

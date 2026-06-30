@@ -755,7 +755,8 @@ function migrateSextantFacetConfig(
       esFacetTemplate = {};
       if (sxtFacet.terms || sxtFacet.gnBuildFilterForRange || sxtFacet.filters) {
         // Already an ES-shaped aggregation — pass through as-is
-        esFacetTemplate[sxtFacet.key] = sxtFacet as any;
+        esFacetTemplate[sxtFacet.key] =
+          sxtFacet as unknown as elasticsearch.AggregationsAggregationContainer;
       } else {
         esFacetTemplate[sxtFacet.key] = {
           terms: { field: sxtFacet.key, size: 300 },
@@ -809,11 +810,11 @@ function migrateSextantFacetConfig(
     }
 
     Object.assign(esFacetConfig, esFacet);
-  } catch (e: any) {
+  } catch (e: unknown) {
     console.warn(
       'A legacy Sextant v6 facet could not be migrated to v7\n' +
         'The following error was thrown: ' +
-        e.message,
+        (e as Record<string, string>)['message'],
       sxtFacet,
     );
   }

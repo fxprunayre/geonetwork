@@ -1,12 +1,5 @@
 import { inject, Injectable, Renderer2, signal } from '@angular/core';
-import * as duckdb from '@duckdb/duckdb-wasm';
-import { AsyncDuckDB, AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
-import perspective from '@perspective-dev/client';
-import perspective_viewer from '@perspective-dev/viewer';
-import '@perspective-dev/viewer-d3fc';
-import '@perspective-dev/viewer-datagrid';
-import '@perspective-dev/viewer-openlayers';
-import '@perspective-dev/workspace';
+import type { AsyncDuckDB, AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
 import { IndexRecord } from 'gn-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { SearchService } from '../search/search-service';
@@ -68,6 +61,7 @@ export class DuckDbService {
   async init(): Promise<void> {
     if (this.initialized) return;
     try {
+      const duckdb = await import('@duckdb/duckdb-wasm');
       const logger = new duckdb.ConsoleLogger();
       const bundles = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
       const worker = await this.createWorkerFromUrl(bundles.mainWorker as string);
@@ -83,18 +77,22 @@ export class DuckDbService {
       // INSTALL arrow FROM community; LOAD arrow;
 
       this.initialized = true;
-    } catch (e: any) {
-      const errorMessage = `DuckDB initialization failed: ${e?.message || e}`;
+    } catch (e: unknown) {
+      const errorMessage = `DuckDB initialization failed: ${(e as Error)?.message || e}`;
       console.error(errorMessage, e);
       throw new Error(errorMessage);
     }
   }
 
-  async initializePerspective(renderer: Renderer2): Promise<any> {
+  async initializePerspective(_renderer: Renderer2): Promise<void> {
     if (this.perspectiveInitialized) return;
 
     try {
       const perspectiveVersion = '4.4.1';
+
+      // Dynamically load all perspective modules (side-effect imports register custom elements)
+      const { perspective, perspective_viewer } = await import('./perspective/perspective-init');
+
       const wasmUrls = [
         `https://cdn.jsdelivr.net/npm/@perspective-dev/server@${perspectiveVersion}/dist/wasm/perspective-server.wasm`,
         `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer@${perspectiveVersion}/dist/wasm/perspective-viewer.wasm`,
@@ -106,8 +104,8 @@ export class DuckDbService {
       ]);
 
       this.perspectiveInitialized = true;
-    } catch (e: any) {
-      const errorMessage = `Perspective initialization failed: ${e?.message || e}`;
+    } catch (e: unknown) {
+      const errorMessage = `Perspective initialization failed: ${(e as Error)?.message || e}`;
       console.error(errorMessage, e);
       throw new Error(errorMessage);
     }
@@ -136,8 +134,8 @@ export class DuckDbService {
       if (!response.ok) {
         throw new Error(`Direct fetch failed: ${response.status}`);
       }
-    } catch (e: any) {
-      if (e.name === 'AbortError' || signal.aborted) throw e;
+    } catch (e: unknown) {
+      if ((e as Error).name === 'AbortError' || signal.aborted) throw e;
       console.warn('Direct HEAD request failed. Switching to browser loading mode.', e);
       isDirect = false;
 
@@ -145,8 +143,8 @@ export class DuckDbService {
       try {
         if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
         response = await this.tryFetch(fileUrl, { method: 'HEAD', signal });
-      } catch (proxyError: any) {
-        if (proxyError.name === 'AbortError' || signal.aborted) throw proxyError;
+      } catch (proxyError: unknown) {
+        if ((proxyError as Error).name === 'AbortError' || signal.aborted) throw proxyError;
         // Even proxy failed. We can't determine size.
         console.warn('Proxy HEAD also failed', proxyError);
         return false;
@@ -222,7 +220,7 @@ export class DuckDbService {
 
   getFileType(contentType: string | null): string | null {
     if (!contentType) return null;
-    const typeMap: { [key: string]: string } = {
+    const typeMap: Record<string, string> = {
       csv: 'csv',
       parquet: 'parquet',
       'text/xml; subtype=gml/2.1.2': 'gdal',
@@ -256,8 +254,8 @@ export class DuckDbService {
     let isHeadOk = false;
     try {
       isHeadOk = await this.checkDatasourceSize(ds.url, signal);
-    } catch (e: any) {
-      if (e.name === 'AbortError') {
+    } catch (e: unknown) {
+      if ((e as Error).name === 'AbortError') {
         this.progress.update((p) => ({ ...p, status: 'canceled' }));
         return;
       }
@@ -279,7 +277,7 @@ export class DuckDbService {
   private async clearPreviousDataIfAny(): Promise<void> {
     if (this.conn) {
       try {
-        const dropResult = await this.conn.query('DROP TABLE IF EXISTS data');
+        await this.conn.query('DROP TABLE IF EXISTS data');
       } catch (e) {
         console.warn('Failed to drop data table', e);
       }
@@ -287,8 +285,8 @@ export class DuckDbService {
   }
 
   private sanitizeFileName(ds: Datasource): string {
-    let name = ds.url.split('/').pop() || 'data';
-    return name.replace(/[^a-zA-Z0-9_\-\.]/g, '_');
+    const name = ds.url.split('/').pop() || 'data';
+    return name.replace(/[^a-zA-Z0-9_\-.]/g, '_');
   }
 
   private buildFileName(ds: Datasource, extension?: string): string {
@@ -402,11 +400,11 @@ export class DuckDbService {
         ? this.buildFileName(ds, inferredExt)
         : this.buildFileName(ds);
       await this.loadData(finalFileName, finalBuffer, ds, signal);
-    } catch (e: any) {
-      if (e.name === 'AbortError' || signal.aborted) {
+    } catch (e: unknown) {
+      if ((e as Error).name === 'AbortError' || signal.aborted) {
         this.progress.update((p) => ({ ...p, status: 'canceled' }));
       } else {
-        console.warn(`Failed to load from URL: ${e?.message || e}`);
+        console.warn(`Failed to load from URL: ${(e as Error)?.message || e}`);
       }
     }
   }
@@ -415,7 +413,7 @@ export class DuckDbService {
     try {
       new TextDecoder('utf-8', { fatal: true }).decode(buffer);
       return buffer;
-    } catch (e) {
+    } catch {
       console.warn('File is not valid UTF-8. Attempting to convert from ISO-8859-1 to UTF-8.');
       const text = new TextDecoder('iso-8859-1').decode(buffer);
       return new TextEncoder().encode(text).buffer;
@@ -454,7 +452,7 @@ export class DuckDbService {
       this.progress.update((p) => ({ ...p, status: 'format', progress: p.progress + 10 }));
 
       const ext = datasource?.format || fileName.split('.').pop()?.toLowerCase() || '';
-      const readerMap: { [key: string]: string } = {
+      const readerMap: Record<string, string> = {
         csv: 'read_csv_auto',
         parquet: 'parquet_scan',
         arrows: 'read_arrow',
@@ -491,24 +489,27 @@ export class DuckDbService {
       console.log(`Loaded ${countResult.get(0)?.['count']} records into DuckDB.`);
 
       this.progress.update((p) => ({ ...p, status: 'completed', progress: 100 }));
-    } catch (error: any) {
-      const isAbort = error.name === 'AbortError' || signal?.aborted;
+    } catch (error: unknown) {
+      const isAbort = (error as Error).name === 'AbortError' || signal?.aborted;
       this.progress.update((p) => ({
         ...p,
         status: isAbort ? 'canceled' : 'error',
-        errorMessage: isAbort ? undefined : `Error: ${error.message}`,
+        errorMessage: isAbort ? undefined : `Error: ${(error as Error).message}`,
       }));
       if (!isAbort) console.error('Load data error:', error);
     }
   }
 
-  async runQuery(query: string): Promise<any[]> {
+  async runQuery(query: string): Promise<Record<string, unknown>[]> {
     const conn = await this.getConnection();
     const result = await conn.query(query);
-    const data = (await (result as any).toArray?.()) ?? [];
+    const data =
+      (await (
+        result as unknown as { toArray?: () => { toJSON: () => Record<string, unknown> }[] }
+      ).toArray?.()) ?? [];
 
-    return data.map((row: any) => {
-      const newRow: { [key: string]: any } = {};
+    return data.map((row) => {
+      const newRow: Record<string, unknown> = {};
       for (const [key, value] of Object.entries(row.toJSON())) {
         newRow[key] = typeof value === 'bigint' ? Number(value) : value;
       }
@@ -520,8 +521,10 @@ export class DuckDbService {
     const describe = await this.runQuery(`DESCRIBE ${tableName}`);
     const geometryTypes = ['GEOMETRY', 'POINT', 'LINE', 'POLYGON'];
     return describe
-      .filter((row) => geometryTypes.some((type) => row.column_type.startsWith(type)))
-      .map((row) => row.column_name);
+      .filter((row) =>
+        geometryTypes.some((type) => (row['column_type'] as string)?.startsWith(type)),
+      )
+      .map((row) => row['column_name'] as string);
   }
 
   async getColumnType(query: string, columnName: string): Promise<string | undefined> {
@@ -532,7 +535,7 @@ export class DuckDbService {
     return result.get(0)?.['coltype'];
   }
 
-  async getHistogram(query: string, columnName: string): Promise<any> {
+  async getHistogram(query: string, columnName: string): Promise<unknown> {
     const conn = await this.getConnection();
     const result = await conn.query(`SELECT histogram("${columnName}") AS data FROM (${query});`);
     const data = result.get(0)?.['data'];

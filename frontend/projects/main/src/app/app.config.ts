@@ -4,7 +4,6 @@ import localeFr from '@angular/common/locales/fr';
 import {
   ApplicationConfig,
   importProvidersFrom,
-  Injectable,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
   signal,
@@ -21,6 +20,7 @@ import Aura from '@primeuix/themes/aura';
 import { Configuration, GnApiModule } from 'gn-api-client';
 import {
   APPLICATION_CONFIGURATION,
+  ApplicationConfiguration,
   AuthenticationService,
   DEFAULT_SPACE,
   DEFAULT_THEME,
@@ -45,15 +45,15 @@ export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
     : `${environment.bundleName}.js`;
   let scriptBaseUrl = '';
   const scripts = document.getElementsByTagName('script');
-  for (let i = 0; i < scripts.length; i++) {
-    const src = scripts[i].src;
+  for (const script of scripts) {
+    const src = script.src;
     if (src && src.includes(`/${bundleFileName}`)) {
       scriptBaseUrl = src.substring(0, src.lastIndexOf('/') + 1);
       break;
     }
   }
 
-  let apiUrl = getWebComponentAttribute('url') || environment.geonetworkApiUrl;
+  const apiUrl = getWebComponentAttribute('url') || environment.geonetworkApiUrl;
 
   return new TranslationsLoader(_httpBackend, [
     // Order is important. The last files can override previous ones.
@@ -64,53 +64,6 @@ export function TranslationsLoaderFactory(_httpBackend: HttpBackend) {
     },
     { prefix: `${scriptBaseUrl}i18n/`, suffix: '.json' },
   ]);
-}
-
-/**
- * Custom implementation of LocationStrategy that keeps navigation in memory.
- * This prevents the Angular Web Component from interfering with the host page's URL.
- * But it will not support browser navigation buttons (back/forward).
- */
-@Injectable()
-export class InMemoryLocationStrategy extends LocationStrategy {
-  private _path = '';
-  private _baseHref = '';
-
-  override getState(): unknown {
-    return null;
-  }
-
-  override path(includeHash?: boolean): string {
-    return this._path;
-  }
-
-  override prepareExternalUrl(internal: string): string {
-    return this._baseHref + internal;
-  }
-
-  override pushState(state: any, title: string, url: string, queryParams: string): void {
-    this._path = url + (queryParams ? '?' + queryParams : '');
-  }
-
-  override replaceState(state: any, title: string, url: string, queryParams: string): void {
-    this._path = url + (queryParams ? '?' + queryParams : '');
-  }
-
-  override forward(): void {
-    // No-op: no history to navigate
-  }
-
-  override back(): void {
-    // No-op: no history to navigate
-  }
-
-  override onPopState(fn: (value: any) => void): void {
-    // No-op: the browser back/forward buttons won't affect this strategy
-  }
-
-  override getBaseHref(): string {
-    return this._baseHref;
-  }
 }
 
 export const appConfig: ApplicationConfig = {
@@ -162,7 +115,7 @@ export const appConfig: ApplicationConfig = {
 
 registerLocaleData(localeFr);
 
-export function getAppConfig(config: any): ApplicationConfig {
+export function getAppConfig(config: ApplicationConfiguration): ApplicationConfig {
   return {
     ...appConfig,
     providers: [

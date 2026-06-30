@@ -12,8 +12,10 @@
         <div class="flex-1 min-w-0">
           @if (isNetworkLink) {
             <p-iftalabel>
-              <label>{{ label }}</label>
-              <input pInputText class="w-full" [value]="link.urlObject?.['default']" readonly />
+              <label
+                >{{ label }}
+                <input pInputText class="w-full" [value]="link.urlObject?.['default']" readonly />
+              </label>
             </p-iftalabel>
           } @else {
             <a

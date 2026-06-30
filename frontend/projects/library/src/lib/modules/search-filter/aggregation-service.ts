@@ -41,15 +41,17 @@ export class AggregationService {
     return {};
   }
 
-  getBuckets(aggregation: elasticsearch.AggregationsAggregate | undefined | null): any[] {
+  getBuckets(
+    aggregation: elasticsearch.AggregationsAggregate | undefined | null,
+  ): Array<Record<string, unknown> & { doc_count: number }> {
     if (!aggregation || !aggregation.buckets) return [];
     if (Array.isArray(aggregation.buckets)) {
       return aggregation.buckets;
     } else if (typeof aggregation.buckets === 'object') {
       return Object.keys(aggregation.buckets).map((key) => ({
         key,
-        ...(aggregation.buckets as any)[key],
-      }));
+        ...((aggregation.buckets as Record<string, unknown>)[key] as Record<string, unknown>),
+      })) as unknown as Array<Record<string, unknown> & { doc_count: number }>;
     }
     return [];
   }
@@ -71,8 +73,8 @@ export class AggregationService {
     key: string,
     aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
   ): string | null {
-    const aggregationConfig = this.getAggregationConfig(key, aggregationsConfig) as any;
-    const labels = aggregationConfig?.meta?.labels as Record<string, string> | undefined;
+    const aggregationConfig = this.getAggregationConfig(key, aggregationsConfig);
+    const labels = aggregationConfig?.['meta']?.['labels'] as Record<string, string> | undefined;
     if (!labels || Object.keys(labels).length === 0) {
       return null;
     }
@@ -131,7 +133,7 @@ export class AggregationService {
 
       const bucketKeySet = new Set<string>();
       for (const bucket of buckets) {
-        const rawKey = String(bucket.key ?? '');
+        const rawKey = String(bucket['key'] ?? '');
         for (const part of rawKey.split('^')) {
           if (!this.alreadyLoadedTranslations.has(`${currentLang}-${part}`)) {
             bucketKeySet.add(part);
@@ -168,7 +170,7 @@ export class AggregationService {
         // Create a promise to track in-flight state
         const batchPromise = new Promise<void>((resolve) => {
           // Call service per batch; type the response to avoid implicit any
-          const subscription = this.registriesService
+          this.registriesService
             .getKeywordByIds(Array.from(batch).join(','), thesaurus, [currentLang])
             .subscribe(
               (keywords) => {
@@ -199,12 +201,14 @@ export class AggregationService {
     }
   }
 
-  getActive(aggregationsConfig: (string | Record<string, any>)[]) {
+  getActive(
+    aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
+  ) {
     if (!aggregationsConfig) {
       return [];
     }
     return aggregationsConfig
-      .map(this.parseAggregationConfig)
+      .map((config) => this.parseAggregationConfig(config))
       .filter((aggregation) => {
         return aggregation[Object.keys(aggregation)[0]]?.meta?.['collapsed'] !== true;
       })
@@ -213,7 +217,11 @@ export class AggregationService {
       });
   }
 
-  setActive(key: string, active: boolean, aggregationsConfig: (string | Record<string, any>)[]) {
+  setActive(
+    key: string,
+    active: boolean,
+    aggregationsConfig: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[],
+  ) {
     return aggregationsConfig.map((aggregation) => {
       if (typeof aggregation === 'string') {
         // TODO: handle string case if needed
@@ -222,16 +230,17 @@ export class AggregationService {
       const aggKey = Object.keys(aggregation)[0];
 
       if (aggKey === key) {
+        const aggValue = aggregation[aggKey] as Record<string, unknown>;
         return {
           ...aggregation,
           [aggKey]: {
-            ...aggregation[aggKey],
+            ...aggValue,
             meta: {
-              ...aggregation[aggKey].meta,
+              ...(aggValue['meta'] as Record<string, unknown>),
               collapsed: !active,
             },
           },
-        };
+        } as Record<string, elasticsearch.AggregationsAggregationContainer>;
       }
       return aggregation;
     });
@@ -244,7 +253,7 @@ export class AggregationService {
   ): boolean {
     const buckets = this.getBuckets(aggregations[keyName]);
     for (const bucket of buckets) {
-      if (isFilterActive(keyName, bucket.key)) {
+      if (isFilterActive(keyName, bucket['key'] as string)) {
         return true;
       }
     }

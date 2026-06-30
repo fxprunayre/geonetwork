@@ -27,7 +27,7 @@ export interface SextantLegacyFacet {
   // exclude: similaire à include mais permettant d'exclure des valeurs; prioritaire
   exclude?: string;
 
-  terms?: Record<string, any>;
-  gnBuildFilterForRange?: Record<string, any>;
-  filters?: any;
+  terms?: Record<string, unknown>;
+  gnBuildFilterForRange?: Record<string, unknown>;
+  filters?: Record<string, unknown>;
 }

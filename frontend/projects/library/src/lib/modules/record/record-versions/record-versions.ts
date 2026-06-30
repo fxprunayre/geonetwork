@@ -24,7 +24,7 @@ export class RecordVersions {
   protected readonly RECORD_ROUTE_PATH = RECORD_SLUG;
 
   record = input.required<IndexRecord>();
-  onRecordClick = output<string>();
+  recordClick = output<string>();
 
   @ViewChild('popover') popover: Popover | undefined;
 
@@ -45,12 +45,12 @@ export class RecordVersions {
 
   hasVersions = computed(() => this.versions().length > 0);
 
-  togglePopover(event: MouseEvent) {
+  togglePopover(event: Event) {
     this.popover?.toggle(event);
   }
 
   handleRecordClick(uuid: string) {
     this.popover?.hide();
-    this.onRecordClick.emit(uuid);
+    this.recordClick.emit(uuid);
   }
 }

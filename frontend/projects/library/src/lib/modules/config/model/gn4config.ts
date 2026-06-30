@@ -60,7 +60,7 @@ export interface Footer {
   enabled: boolean;
   showSocialBarInFooter: boolean;
   showApplicationInfoAndLinksInFooter: boolean;
-  footerCustomMenu: any[];
+  footerCustomMenu: unknown[];
   rssFeeds: RssFeed[];
 }
 
@@ -78,12 +78,10 @@ export interface Header {
   showGNName: boolean;
   isHeaderFixed: boolean;
   showPortalSwitcher: boolean;
-  topCustomMenu: any[];
+  topCustomMenu: unknown[];
 }
 
-export interface Languages {
-  [key: string]: string;
-}
+export type Languages = Record<string, string>;
 
 export interface CookieWarning {
   enabled: boolean;
@@ -135,7 +133,7 @@ export interface Search {
   queryTitleExactMatch: string;
   searchOptions: SearchOptions;
   languageStrategy: string;
-  languageWhitelist: any[];
+  languageWhitelist: string[];
   scoreConfig: ScoreConfig;
   autocompleteConfig: AutocompleteConfig;
   moreLikeThisSameType: boolean;
@@ -143,7 +141,7 @@ export interface Search {
   facetTabField: string;
   isVegaEnabled: boolean;
   facetConfig: Record<string, elasticsearch.AggregationsAggregationContainer>;
-  filters: any;
+  filters: Record<string, unknown>;
   sortbyValues: SortbyValue[];
   sortBy: string;
   resultViewTpls: ResultViewTpl[];
@@ -177,10 +175,13 @@ export interface SearchOptions {
   language: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ScoreConfig {}
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface AutocompleteConfig {}
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface MoreLikeThisConfig {}
 
 export interface SortbyValue {
@@ -281,9 +282,9 @@ export interface ExternalViewer {
 }
 
 export interface ListOfServices {
-  wms: any[];
-  wmts: any[];
-  wps: any[];
+  wms: Record<string, unknown>[];
+  wmts: Record<string, unknown>[];
+  wps: Record<string, unknown>[];
 }
 
 export interface ProjectionList {
@@ -313,31 +314,32 @@ export interface DisabledTools {
   scaleLine: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface GraticuleOgcService {}
 
 export interface MapViewer {
   context: string;
   extent: number[];
-  layers: any[];
+  layers: Record<string, unknown>[];
 }
 
 export interface MapSearch {
   context: string;
   extent: number[];
-  layers: any[];
+  layers: Record<string, unknown>[];
   geodesicExtents: boolean;
 }
 
 export interface MapEditor {
   context: string;
   extent: number[];
-  layers: any[];
+  layers: Record<string, unknown>[];
 }
 
 export interface MapThumbnail {
   context: string;
   extent: number[];
-  layers: any[];
+  layers: Record<string, unknown>[];
 }
 
 export interface Geocoder {
@@ -353,7 +355,7 @@ export interface Recordview {
   sortKeywordsAlphabetically?: boolean;
   mainThesaurus?: string[];
   locationThesaurus?: string[];
-  internalThesaurus?: any[];
+  internalThesaurus?: string[];
   collectionTableConfig?: CollectionTableConfig;
   distributionConfig?: DistributionConfig;
   relatedFacetConfig?: Record<string, elasticsearch.AggregationsAggregationContainer>;

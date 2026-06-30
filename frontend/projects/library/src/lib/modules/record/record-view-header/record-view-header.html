@@ -24,7 +24,7 @@
       <div class="grow flex flex-col">
         <app-record-field-resource-last-update [record]="record()" />
         <!--<app-record-field-resource-edition [record]="record()" />-->
-        <app-record-versions [record]="record()" (onRecordClick)="onRecordClick.emit($event)" />
+        <app-record-versions [record]="record()" (recordClick)="recordClick.emit($event)" />
         <app-record-field-doi [record]="record()" />
       </div>
 

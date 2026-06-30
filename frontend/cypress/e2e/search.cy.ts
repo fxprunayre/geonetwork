@@ -19,9 +19,9 @@ describe('Search', () => {
 
   it('should display main aggregations correctly', () => {
     cy.visitPage('search');
-    cy.wait('@apiMainSearch').then((search) => {
+    cy.wait('@apiMainSearch').then((_search) => {
       const keyname = 'resourceType';
-      const buckets = search.response?.body.aggregations[keyname].buckets;
+      const buckets = _search.response?.body.aggregations[keyname].buckets;
 
       cy.get('app-results-info app-aggregation').as('searchAggregation');
       cy.get('@searchAggregation')
@@ -59,7 +59,7 @@ describe('Search', () => {
 
   it('should have the sort by with default sort option', () => {
     cy.visitPage('search', { q: SURVAL_UUID });
-    cy.wait('@apiMainSearchByUuid').then((search) => {
+    cy.wait('@apiMainSearchByUuid').then(() => {
       cy.get('app-results-sorter').as('sortBy').should('exist');
       cy.get('@sortBy').find('p-select > span').should('contain.text', 'Popularity');
       cy.get('@sortBy')

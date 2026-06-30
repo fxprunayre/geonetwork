@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideMockTranslateService } from '../../../shared/translate-service.mock.spec';
+import { provideMockTranslateService } from '../../../shared/translate-service.mock';
 import { SearchWelcomeTextPipe } from './search-welcome-text-pipe';
 
 describe('SearchWelcomeTextPipe', () => {

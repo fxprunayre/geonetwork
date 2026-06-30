@@ -22,13 +22,13 @@ import { SearchBase } from '../../search/search-base/search-base';
           <span pButtonLabel class="w-0">&nbsp;</span>
         </p-button>
       </p-inputgroup-addon>
-      @if (search.activeFilterCount() > 0) {
+      @if (search().activeFilterCount() > 0) {
         <p-inputgroup-addon>
           <p-button
             size="large"
             [variant]="'text'"
-            (click)="search.reset()"
-            [badge]="search.activeFilterCount() + ''"
+            (click)="search().reset()"
+            [badge]="search().activeFilterCount() + ''"
           >
             <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
             <span pButtonLabel class="w-0">&nbsp;</span>

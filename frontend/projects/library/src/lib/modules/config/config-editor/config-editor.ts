@@ -80,7 +80,10 @@ import { App, Apps } from '../model/gnConfig';
               pRipple
               class="flex items-center py-2 px-3 no-underline cursor-pointer rounded transition-colors text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-800"
               [ngClass]="item.styleClass"
+              tabindex="0"
               (click)="item.command()"
+              (keydown.enter)="item.command()"
+              (keydown.space)="item.command(); $event.preventDefault()"
             >
               @if (item.icon) {
                 <ng-icon [name]="item.icon" class="mr-2"></ng-icon>
@@ -101,9 +104,12 @@ import { App, Apps } from '../model/gnConfig';
                 <p-toggleswitch
                   [ngModel]="apps[appName]?.enabled"
                   (ngModelChange)="updateAppEnabled(appName, $event)"
+                  [inputId]="appName + '-enabled'"
                 >
                 </p-toggleswitch>
-                <label>{{ 'config.editor.enabled' | translate }}</label>
+                <label [for]="appName + '-enabled'">{{
+                  'config.editor.enabled' | translate
+                }}</label>
               </div>
 
               @if (appName === 'banner') {
@@ -246,7 +252,7 @@ export class ConfigEditorComponent {
       'authentication',
       'userSelections',
     ];
-    const keys = Object.keys(apps) as Array<keyof Apps>;
+    const keys = Object.keys(apps) as (keyof Apps)[];
 
     return keys.sort((a, b) => {
       const idxA = predefinedOrder.indexOf(a);
@@ -335,7 +341,7 @@ export class ConfigEditorComponent {
   getAppConfigJson(appName: keyof Apps): string {
     const app = this.appConfig().config?.apps?.[appName];
     if (!app) return '{}';
-    const { enabled, ...rest } = app as any;
+    const { enabled: _enabled, ...rest } = app as App & Record<string, unknown>;
     return JSON.stringify(rest, null, 2);
   }
 
@@ -348,7 +354,7 @@ export class ConfigEditorComponent {
       if (!currentConfig.config.apps) {
         currentConfig.config.apps = {};
       }
-      (currentConfig.config.apps as any)[appName] = { enabled: isEnabled } as App;
+      (currentConfig.config.apps as Record<string, App>)[appName] = { enabled: isEnabled };
     } else {
       (currentConfig.config.apps[appName] as App).enabled = isEnabled;
     }
@@ -359,8 +365,8 @@ export class ConfigEditorComponent {
   updateBannerProperty(property: string, value: string) {
     const config = this.appConfig().config;
     if (config?.apps?.banner) {
-      (config.apps.banner as any)[property] = value;
-      (this.appConfig as any).set({ ...this.appConfig(), config });
+      (config.apps.banner as unknown as Record<string, string>)[property] = value;
+      this.appConfig.set({ ...this.appConfig(), config });
 
       if (property === 'textColor') {
         document.documentElement.style.setProperty('--app-background-text-color', value);
@@ -375,10 +381,10 @@ export class ConfigEditorComponent {
       const app = currentConfig.config?.apps?.[appName];
       if (app) {
         const enabled = app.enabled;
-        (currentConfig.config!.apps as any)[appName] = { ...parsed, enabled };
+        (currentConfig.config!.apps as Record<string, App>)[appName] = { ...parsed, enabled };
         this.appConfig.set({ ...currentConfig });
       }
-    } catch (e) {
+    } catch {
       // Ignore parsing errors
     }
   }
@@ -386,7 +392,7 @@ export class ConfigEditorComponent {
   updateRawConfig(event: string) {
     try {
       this.appConfig.set(JSON.parse(event));
-    } catch (e) {
+    } catch {
       // Ignore parse errors while typing
     }
   }

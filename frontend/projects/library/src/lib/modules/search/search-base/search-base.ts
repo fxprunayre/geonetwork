@@ -1,21 +1,12 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { SearchService } from '../search-service';
 import { SearchStoreType } from '../search-store';
 
-@Component({
-  selector: 'app-search-base',
-  imports: [],
-  template: '',
+@Directive({
   standalone: true,
 })
-export class SearchBase implements OnInit {
+export class SearchBase {
   scope = input<string>('main');
-
   searchService = inject(SearchService);
-
-  search: SearchStoreType = {} as SearchStoreType;
-
-  ngOnInit() {
-    this.search = this.searchService.getSearch<SearchStoreType>(this.scope());
-  }
+  search = computed(() => this.searchService.getSearch<SearchStoreType>(this.scope()));
 }

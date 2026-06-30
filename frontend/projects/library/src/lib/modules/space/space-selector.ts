@@ -44,6 +44,7 @@ import { TranslationsService } from '../i18n/translations-service';
               @if (item.icon) {
                 <img
                   [src]="apiBase() + '/images/harvesting/' + item.icon"
+                  [alt]="item.label || ''"
                   class="m-w-full h-20 object-contain my-4"
                 />
               }
@@ -114,7 +115,7 @@ export class SpaceSelector implements OnInit {
   }
 
   selectSpace(item: MenuItem): void {
-    item.command?.({} as any);
+    item.command?.({} as Parameters<NonNullable<MenuItem['command']>>[0]);
     this.popover?.hide();
   }
 }

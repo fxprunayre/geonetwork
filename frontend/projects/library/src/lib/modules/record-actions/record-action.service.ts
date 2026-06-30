@@ -52,7 +52,7 @@ export class RecordActionService {
     return this.gn4UrlService.getEditorUrl('create');
   }
 
-  openCreateRecord(target: string = '_blank') {
+  openCreateRecord(target = '_blank') {
     if (!this.hasTemplates()) {
       return;
     }
@@ -60,14 +60,14 @@ export class RecordActionService {
     window.open(this.getCreateRecordUrl(), target);
   }
 
-  deleteRecord(uuid: string): Observable<any> {
+  deleteRecord(uuid: string): Observable<unknown> {
     return this.recordsService.deleteRecord(uuid).pipe(
       tap({
         next: () => {
           this.messageService.add({
             severity: 'success',
             summary: this.translate.instant('success'),
-            detail: this.translate.instant('record.action.deleteSuccess'),
+            detail: this.translate.instant('record.action.delete.deleteSuccess'),
           });
           if (window.history.length > 1) {
             this.location.back();
@@ -80,7 +80,7 @@ export class RecordActionService {
           this.messageService.add({
             severity: 'error',
             summary: this.translate.instant('error'),
-            detail: this.translate.instant('record.action.deleteError'),
+            detail: this.translate.instant('record.action.delete.deleteError'),
           });
         },
       }),

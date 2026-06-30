@@ -50,7 +50,7 @@ export class SearchService {
   }
 
   escapeSpecialCharacters(queryString: string) {
-    return queryString.replace(/(\+|-|&&|\|\||!|\{|\}|\[|\]|\^|\~|\?|:|\\{1}|\(|\)|\/)/g, '\\$1');
+    return queryString.replace(/(\+|-|&&|\|\||!|\{|\}|\[|\]|\^|~|\?|:|\\{1}|\(|\)|\/)/g, '\\$1');
   }
 
   buildQuery(
@@ -162,18 +162,15 @@ export class SearchService {
     };
   }
 
-  buildSearchRequest(
-    searchRequestParameters: SearchRequestParameters,
-    withAggregation: boolean = true,
-  ) {
-    let request: elasticsearch.SearchRequest = {
+  buildSearchRequest(searchRequestParameters: SearchRequestParameters, withAggregation = true) {
+    const request: elasticsearch.SearchRequest = {
       from: searchRequestParameters.currentPage * searchRequestParameters.pageSize,
       size: searchRequestParameters.pageSize,
       track_total_hits: TRACK_TOTAL_HITS,
       query: this.buildQuery(
         searchRequestParameters.searchQuery,
         searchRequestParameters.filter,
-        searchRequestParameters.filters,
+        searchRequestParameters.filters ?? {},
         searchRequestParameters.aggregationsConfig,
       ),
       _source: SEARCH_SOURCE,
@@ -192,14 +189,14 @@ export class SearchService {
     aggregationName: string,
     searchRequestParameters: SearchRequestParameters,
   ) {
-    let request: elasticsearch.SearchRequest = {
+    const request: elasticsearch.SearchRequest = {
       from: 0,
       size: 0,
       track_total_hits: TRACK_TOTAL_HITS,
       query: this.buildQuery(
         searchRequestParameters.searchQuery,
         searchRequestParameters.filter,
-        searchRequestParameters.filters,
+        searchRequestParameters.filters ?? {},
         searchRequestParameters.aggregationsConfig,
       ),
     };
@@ -245,9 +242,9 @@ export class SearchService {
         const remainingSiblings: IndexRecord[] = [];
         parsedRelated[key].forEach((record) => {
           // properties are merged in the record in buildIndexRecord
-          const r = record as any;
-          if (r.associationType && r.initiativeType) {
-            const siblingKey = `siblings_${r.associationType}_${r.initiativeType}`;
+          const r = record;
+          if (r['associationType'] && r['initiativeType']) {
+            const siblingKey = `siblings_${r['associationType']}_${r['initiativeType']}`;
             if (!parsedRelated[siblingKey]) {
               parsedRelated[siblingKey] = [];
             }
@@ -262,8 +259,7 @@ export class SearchService {
     return parsedRelated;
   }
 
-  isMultiLingualField(obj: any, fieldName: string): boolean {
-    const keys = Object.keys(obj);
+  isMultiLingualField(obj: unknown, fieldName: string): boolean {
     const isMultiLingualField =
       fieldName.endsWith('Object') ||
       fieldName.startsWith('cl_') ||
@@ -297,7 +293,7 @@ export class SearchService {
       }
     }
 
-    const traverse = (obj: any, fieldName: string) => {
+    const traverse = (obj: unknown, fieldName: string) => {
       if (!obj || typeof obj !== 'object') return;
 
       const keys = Object.keys(obj);
@@ -305,8 +301,9 @@ export class SearchService {
       if (this.isMultiLingualField(obj, fieldName)) {
         if (keys.includes('default')) {
           const targetKey = 'lang' + iso3Lang;
-          if (obj[targetKey]) {
-            obj['default'] = obj[targetKey];
+          const dict = obj as Record<string, unknown>;
+          if (dict[targetKey]) {
+            dict['default'] = dict[targetKey];
             return;
           }
         }
@@ -317,11 +314,12 @@ export class SearchService {
         return;
       }
 
+      const dict = obj as Record<string, unknown>;
       keys.forEach((key) => {
-        const value = obj[key];
+        const value = dict[key];
         if (Array.isArray(value)) {
           value.forEach((item) => traverse(item, key));
-        } else if (typeof value === 'object') {
+        } else if (typeof value === 'object' && value !== null) {
           traverse(value, key);
         }
       });
@@ -371,7 +369,7 @@ export class SearchService {
         const layerName = link.nameObject?.['default'] || '';
         acc.push({ url, format: 'wfs', layer: layerName });
       } else if (protocol.startsWith('WWW:DOWNLOAD')) {
-        const formatMapping: { [key: string]: Datasource['format'] } = {
+        const formatMapping: Record<string, Datasource['format']> = {
           arrow: 'arrow',
           parquet: 'parquet',
           csv: 'csv',
@@ -395,7 +393,7 @@ export class SearchService {
 
   search(searchRequestParameters: SearchRequestParameters): Observable<{
     results: IndexRecord[];
-    aggregations: Record<string, elasticsearch.AggregationsAggregate> | {};
+    aggregations: Record<string, elasticsearch.AggregationsAggregate> | Record<string, never>;
     totalCount: number;
   }> {
     return this.searchService.search(this.buildSearchRequest(searchRequestParameters)).pipe(
@@ -451,7 +449,7 @@ export class SearchService {
     aggregationName: string,
     searchRequestParameters: SearchRequestParameters,
   ): Observable<{
-    aggregations: Record<string, elasticsearch.AggregationsAggregate> | {};
+    aggregations: Record<string, elasticsearch.AggregationsAggregate> | Record<string, never>;
   }> {
     return this.searchService
       .search(this.buildAggregationRequest(aggregationName, searchRequestParameters))
@@ -491,7 +489,7 @@ export class SearchService {
   }
 
   getById(id: string, relatedTypes?: RelatedItemType[]): Observable<IndexRecord | null> {
-    let searchRequest: elasticsearch.SearchRequest = {
+    const searchRequest: elasticsearch.SearchRequest = {
       query: {
         term: {
           _id: id,
@@ -541,7 +539,7 @@ export class SearchService {
             {
               multi_match: {
                 query,
-                type: 'bool_prefix' as any,
+                type: 'bool_prefix',
                 fields: [
                   'resourceTitleObject.*^6',
                   'resourceAbstractObject.*^5',
@@ -565,10 +563,12 @@ export class SearchService {
       _source: ['resourceTitleObject.*', 'resourceType'],
     };
 
-    const response: any = await this.searchService.search(request).toPromise();
+    const response = (await this.searchService.search(request).toPromise()) as
+      | elasticsearch.SearchResponse<IndexRecord>
+      | undefined;
 
     return (
-      response?.hits?.hits?.map((hit: any) => {
+      response?.hits?.hits?.map((hit: elasticsearch.SearchHit<IndexRecord>) => {
         const title = hit._source?.resourceTitleObject?.['default'];
         return {
           title,

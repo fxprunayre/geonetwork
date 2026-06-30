@@ -13,11 +13,12 @@ describe('User board panel', () => {
       const filters = body?.query?.bool?.filter ?? [];
 
       const isBookmarksSearch = filters.some(
-        (clause: any) =>
+        (clause: { terms?: { uuid?: string[] }; query_string?: { query?: string } }) =>
           Array.isArray(clause?.terms?.uuid) && clause.terms.uuid.includes(SURVAL_UUID),
       );
-      const isUserRecordsSearch = filters.some((clause: any) =>
-        clause?.query_string?.query?.includes('+owner:2'),
+      const isUserRecordsSearch = filters.some(
+        (clause: { terms?: { uuid?: string[] }; query_string?: { query?: string } }) =>
+          clause?.query_string?.query?.includes('+owner:2'),
       );
 
       if (isBookmarksSearch) {
@@ -48,7 +49,7 @@ describe('User board panel', () => {
         ? JSON.parse(interception.request.body)
         : interception.request.body;
       const hasUuidFilter = (body?.query?.bool?.filter ?? []).some(
-        (clause: any) =>
+        (clause: { terms?: { uuid?: string[] }; query_string?: { query?: string } }) =>
           Array.isArray(clause?.terms?.uuid) && clause.terms.uuid.includes(SURVAL_UUID),
       );
       expect(hasUuidFilter).to.eq(true);

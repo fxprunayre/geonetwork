@@ -155,28 +155,71 @@
       "deleteError": "Er is een fout opgetreden bij het verwijderen van het record.",
       "deleteSuccess": "Record deleted successfully.",
       "deleteTitle": "Delete this record",
-      "edit": "Bewerken",
-      "editTitle": "Edit record",
+      "edit": {
+        "help": "Bewerk dit record",
+        "label": "Bewerken"
+      },
       "externalUrl": "Bekijk externe bron",
       "importRecord": "Record importeren",
       "manageTitle": "Manage this record",
       "menu": "Quick actions",
-      "metadataDownload": "Metadata (XML)",
-      "metadataDownloadHelp": "Download the record in XML format",
+      "metadataDownload": {
+        "help": "Download the record in XML format",
+        "label": "Metadata (XML)"
+      },
+      "permalink": {
+        "help": "Permalink naar het record",
+        "label": "Permalink"
+      },
       "relatedRecordsWarning": "Dit record is gekoppeld aan andere bronnen:",
-      "share": "Share",
-      "shareHelp": "Permalink to the record",
-      "typeToConfirm": "Type \"{{word}}\" to confirm",
+      "sharing": {
+        "byGroup": {
+          "dblClickToToggle": "Double click to toggle all operations for this group",
+          "filterAriaLabel": "Filter groep",
+          "filterPlaceholder": "Typ om te zoeken",
+          "groupLabel": "Groep",
+          "help": "Deel dit record met specifieke groepen. Dit maakt het alleen toegankelijk voor de geselecteerde groepen.",
+          "label": "Delen per groep",
+          "type": {
+            "recordPrivilege": "Record privilege",
+            "recordPrivilegeHelp": "Record privilege groups can be assigned privileges for specific records but cannot own metadata.",
+            "reserved": "Reserved",
+            "reservedHelp": "Use those special groups (eg. internet, intranet) to define global privileges.",
+            "systemPrivileges": "System privileges",
+            "systemPrivilegesHelp": "System privilege groups are for system permissions only; they cannot own metadata or be assigned privileges for specific records.",
+            "workspace": "Workspace",
+            "workspaceHelp": "Workspace groups can create, import, and own metadata records as well as be assigned privileges for specific records."
+          }
+        },
+        "cancel": "Annuleren",
+        "help": "Beheer deelopties voor het record",
+        "label": "Delen",
+        "operations": {
+          "downloadHelp": "Allow group members to download file uploaded with this record.",
+          "dynamicHelp": "Allow group members to visualize this record in the map viewer.",
+          "editingHelp": "Allow group members to edit this record.",
+          "featuredHelp": "",
+          "notifyHelp": "Notify group members about changes to this record.",
+          "processHelp": "Allow group members using the processing service in the map viewer.",
+          "viewHelp": "Allow group members to view this record."
+        },
+        "publish": "Publiceren",
+        "publishHelp": "Publiceer dit record. Dit maakt het openbaar toegankelijk.",
+        "save": "Opslaan",
+        "unpublish": "Publicatie intrekken",
+        "unpublishHelp": "Trek de publicatie van dit record in. Dit maakt het privé en verwijdert de openbare toegang."
+      },
+      "typeToConfirm": "Typ \"{{word}}\" om te bevestigen",
       "unbookmark": "Bladwijzer verwijderen",
       "unbookmarkTitle": "Uit bladwijzers verwijderen"
     },
     "association": {
-      "associated": "Associated with {{count}} resource(s)",
-      "brothersAndSisters": "{{count}} Siblings",
-      "children": "Composed of {{count}} resource(s)",
+      "associated": "Gekoppeld aan {{count}} bron(nen)",
+      "brothersAndSisters": "{{count}} broers en zussen",
+      "children": "Bestaat uit {{count}} bron(nen)",
       "datasets": "{{count}} datasets",
-      "fcats": "{{count}}  data models",
-      "hasfeaturecats": "{{count}} associated data",
+      "fcats": "{{count}} datamodellen",
+      "hasfeaturecats": "{{count}} gekoppelde gegevens",
       "hassources": "Used for {{count}} resource(s)",
       "parent": "Part of {{count}} resource(s)",
       "services": "{{count}} services",

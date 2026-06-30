@@ -4,7 +4,10 @@
       <a
         [class]="sectionClass(section.id)"
         [attr.aria-selected]="isSectionActive(section.id) ? 'true' : null"
+        tabindex="0"
         (click)="scrollTo(section.id)"
+        (keydown.enter)="scrollTo(section.id)"
+        (keydown.space)="scrollTo(section.id); $event.preventDefault()"
       >
         {{ section.title }}
       </a>

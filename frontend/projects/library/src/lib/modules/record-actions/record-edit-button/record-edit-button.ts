@@ -16,11 +16,11 @@ import { RecordFieldBase } from '../../record/record-field-base/record-field-bas
       <a
         pButton
         [attr.href]="editorUrl()"
-        [title]="'record.action.editTitle' | translate"
+        [title]="'record.action.edit.help' | translate"
         target="_blank"
       >
         <ng-icon name="faSolidPenToSquare" pButtonIcon></ng-icon>
-        <span pButtonLabel>{{ 'record.action.edit' | translate }}</span>
+        <span pButtonLabel>{{ 'record.action.edit.label' | translate }}</span>
       </a>
     }
   `,

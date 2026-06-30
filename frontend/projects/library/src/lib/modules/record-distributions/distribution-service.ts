@@ -83,16 +83,21 @@ export class DistributionService {
   //     title: 'API',
   //   },
   linksBySections = (links: Link[] | null | undefined) => {
-    const linksBySections: { [key: string]: Link[] } = {};
+    const linksBySections: Record<string, Link[]> = {};
     if (!links) {
       return linksBySections;
     }
 
     this.distributionConfig()?.sections.map((section) => {
-      let sectionFilter = this.configService.parseFilterExpression(section.filter);
+      const sectionFilter = this.configService.parseFilterExpression(section.filter);
 
       for (const link of links!) {
-        if (this.configService.testExpressionFilters(sectionFilter, link)) {
+        if (
+          this.configService.testExpressionFilters(
+            sectionFilter,
+            link as unknown as Record<string, string | undefined>,
+          )
+        ) {
           if (!linksBySections[section.title]) {
             linksBySections[section.title] = [];
           }

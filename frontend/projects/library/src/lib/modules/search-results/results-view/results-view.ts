@@ -1,6 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ContentChild, inject, input, output, TemplateRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ContentChild, input, output, TemplateRef } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { faSolidPlugCircleExclamation } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -33,13 +32,11 @@ import { ResultsPaginatorComponent } from '../results-paginator/results-paginato
 })
 export class ResultsView extends SearchBase {
   layout = input<SearchAppLayout>('grid');
-  onRecordClick = output<string>();
+  recordClick = output<string>();
 
-  @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<any> | undefined;
-
-  private router = inject(Router);
+  @ContentChild('searchProgressTemplate') searchProgressTemplate: TemplateRef<unknown> | undefined;
 
   handleRecordClick(uuid: string) {
-    this.onRecordClick.emit(uuid);
+    this.recordClick.emit(uuid);
   }
 }

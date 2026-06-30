@@ -8,7 +8,6 @@ import {
   HostListener,
   inject,
   input,
-  OnDestroy,
   Output,
   signal,
   viewChild,
@@ -48,12 +47,12 @@ const CHART_LAYOUTS = ['bar', 'pie', 'treemap', 'nightingale'] as const;
   providers: [AggregationTranslatePipe, DecimalPipe],
   templateUrl: './aggregation.html',
 })
-export class Aggregation extends SearchBase implements OnDestroy {
+export class Aggregation extends SearchBase {
   keyName = input.required<string>();
   displayType = input<AggregationLayout | undefined>();
 
   @Output()
-  onSelected = new EventEmitter<SearchFilterChange>();
+  selected = new EventEmitter<SearchFilterChange>();
 
   DISPLAY_FILTER_THRESHOLD = 10;
 
@@ -72,12 +71,12 @@ export class Aggregation extends SearchBase implements OnDestroy {
     super();
     effect(() => {
       this.selectedDropdownOptions.set(
-        this.buckets().filter((bucket) => this.search.isFilterActive(this.keyName(), bucket.key)),
+        this.buckets().filter((bucket) => this.search().isFilterActive(this.keyName(), bucket.key)),
       );
       this.aggregationService.loadAggregationTranslation(
         this.keyName(),
-        this.search.aggregations()[this.keyName()],
-        this.search.aggregationsConfig(),
+        this.search().aggregations()[this.keyName()],
+        this.search().aggregationsConfig(),
       );
 
       if (this.isChartLayout()) {
@@ -85,8 +84,6 @@ export class Aggregation extends SearchBase implements OnDestroy {
       }
     });
   }
-
-  ngOnDestroy(): void {}
 
   displayFilter = computed(() => {
     return this.buckets().length > this.DISPLAY_FILTER_THRESHOLD;
@@ -102,7 +99,7 @@ export class Aggregation extends SearchBase implements OnDestroy {
 
   activeKeysList = computed(() =>
     this.buckets()
-      .filter((b) => this.search.isFilterActive(this.keyName(), b.key))
+      .filter((b) => this.search().isFilterActive(this.keyName(), b.key))
       .map((b) => String(b.key)),
   );
 
@@ -110,17 +107,22 @@ export class Aggregation extends SearchBase implements OnDestroy {
     this.translationChange();
     this.langChange();
 
-    let buckets = this.aggregationService.getBuckets(this.search.aggregations()[this.keyName()]);
+    const buckets = this.aggregationService.getBuckets(
+      this.search().aggregations()[this.keyName()],
+    );
     const aggregationConfig = this.aggregationService.getAggregationConfig(
       this.keyName(),
-      this.search.aggregationsConfig(),
+      this.search().aggregationsConfig(),
     );
     const histogramInterval = aggregationConfig?.histogram?.interval;
     if (buckets) {
       return buckets.map((bucket) => {
-        const displayLabel = this.getBucketDisplayLabel(bucket.key, histogramInterval);
+        const displayLabel = this.getBucketDisplayLabel(
+          bucket['key'] as string | number,
+          histogramInterval,
+        );
         return {
-          key: bucket.key,
+          key: bucket['key'],
           label: `${displayLabel} (${this.decimalPipe.transform(bucket.doc_count, undefined, this.translateService.getCurrentLang())})`,
           displayLabel,
           doc_count: bucket.doc_count,
@@ -162,23 +164,23 @@ export class Aggregation extends SearchBase implements OnDestroy {
   }
 
   layout = computed(() => {
-    const configuredLayout = this.search.aggregations()[this.keyName()]?.meta
+    const configuredLayout = this.search().aggregations()[this.keyName()]?.meta
       ?.layout as AggregationLayout;
     return this.displayType() || configuredLayout || 'checkbox';
   });
 
   decorator = computed<Decorator | undefined>(() => {
-    return this.search.aggregations()[this.keyName()]?.meta?.decorator;
+    return this.search().aggregations()[this.keyName()]?.meta?.decorator;
   });
 
   refreshPolicy = computed<'none' | undefined>(() => {
-    return this.search.aggregations()[this.keyName()]?.meta?.refreshPolicy;
+    return this.search().aggregations()[this.keyName()]?.meta?.refreshPolicy;
   });
 
   isHistogram = computed(() => {
     const aggregationConfig = this.aggregationService.getAggregationConfig(
       this.keyName(),
-      this.search.aggregationsConfig(),
+      this.search().aggregationsConfig(),
     );
     return typeof aggregationConfig?.histogram?.interval === 'number';
   });
@@ -198,15 +200,15 @@ export class Aggregation extends SearchBase implements OnDestroy {
   handleMultiSelectChange(event: MultiSelectChangeEvent) {
     const isSelected =
       event.itemValue &&
-      event.value.find((item: any) => {
-        return item.key === event.itemValue.key;
+      event.value.find((item: { key: string }) => {
+        return item.key === (event.itemValue as { key: string }).key;
       }) !== undefined;
 
-    const values = [];
+    const values: string[] = [];
     if (event.itemValue) {
-      values.push(event.itemValue.key);
+      values.push((event.itemValue as { key: string }).key);
     } else if (event.value.length > 0) {
-      event.value.forEach((item: any) => {
+      event.value.forEach((item: { key: string }) => {
         values.push(item.key);
       });
     }
@@ -219,27 +221,27 @@ export class Aggregation extends SearchBase implements OnDestroy {
   }
 
   handleMultiSelectClear() {
-    this.search.clearFilter(this.keyName());
+    this.search().clearFilter(this.keyName());
   }
 
-  filter(event: SearchFilterChange, clear: boolean = false) {
-    if (this.onSelected.observed) {
-      this.onSelected.emit(event);
+  filter(event: SearchFilterChange, _clear = false) {
+    if (this.selected.observed) {
+      this.selected.emit(event);
       return;
     }
 
     if (event.values.length === 0) {
-      this.search.clearFilter(this.keyName());
+      this.search().clearFilter(this.keyName());
     } else if (event.add) {
       const clearFilters = this.layout() === 'tree';
-      this.search.addFilter(this.keyName(), event.values, clearFilters);
+      this.search().addFilter(this.keyName(), event.values, clearFilters);
     } else if (!event.add) {
-      this.search.removeFilter(this.keyName(), event.values[0]);
+      this.search().removeFilter(this.keyName(), event.values[0]);
     }
   }
 
   onChartBucketClick(key: string) {
-    const isActive = this.search.isFilterActive(this.keyName(), key);
+    const isActive = this.search().isFilterActive(this.keyName(), key);
     this.filter({
       field: this.keyName(),
       values: [key],
@@ -248,7 +250,7 @@ export class Aggregation extends SearchBase implements OnDestroy {
   }
 
   onChartRangeSelect(keys: string[]) {
-    this.search.clearFilter(this.keyName());
+    this.search().clearFilter(this.keyName());
     if (keys.length > 0) {
       this.filter({
         field: this.keyName(),

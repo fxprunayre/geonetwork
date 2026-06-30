@@ -183,8 +183,8 @@ export class RecordViewContent {
   });
 
   contactRoles = computed(() => {
-    const contacts = this.record()?.['contactForResource'] || [];
-    const roles = new Set(contacts.map((c: any) => c.role).filter((r: any) => !!r));
+    const contacts = (this.record()?.['contactForResource'] || []) as Array<{ role: string }>;
+    const roles = new Set<string>(contacts.map((c) => c.role).filter((r): r is string => !!r));
     return Array.from(roles);
   });
 
@@ -247,9 +247,10 @@ export class RecordViewContent {
       };
     }
 
+    const recordAny = record as Record<string, unknown>;
     const hasAbout = this.hasContent([
-      (record as any).resourceCreditObject,
-      (record as any).lineageObject,
+      recordAny['resourceCreditObject'],
+      recordAny['lineageObject'],
     ]);
 
     // const hasLineage =
@@ -258,16 +259,16 @@ export class RecordViewContent {
     //   this.hasRelatedItems(RelatedItemType.Hassources);
 
     const hasDates = this.hasContent([
-      (record as any).resourceDate,
-      (record as any).resourceTemporalExtentDetails,
+      recordAny['resourceDate'],
+      recordAny['resourceTemporalExtentDetails'],
     ]);
 
     const hasCoverage = this.hasContent([
-      (record as any).shape,
-      (record as any).geom,
-      (record as any).extentDescription,
-      (record as any).extentIdentifier,
-      (record as any).verticalRange,
+      recordAny['shape'],
+      recordAny['geom'],
+      recordAny['extentDescription'],
+      recordAny['extentIdentifier'],
+      recordAny['verticalRange'],
     ]);
 
     const hasSpatialInfo = this.hasContent([
@@ -278,12 +279,12 @@ export class RecordViewContent {
     ]);
 
     const hasUsageAndAccess = this.hasContent([
-      (record as any).MD_LegalConstraintsUseLimitationObject,
-      (record as any).cl_accessConstraints,
-      (record as any).MD_LegalConstraintsOtherConstraintsObject,
+      recordAny['MD_LegalConstraintsUseLimitationObject'],
+      recordAny['cl_accessConstraints'],
+      recordAny['MD_LegalConstraintsOtherConstraintsObject'],
     ]);
 
-    const hasClassification = this.hasContent([(record as any).allKeywords]);
+    const hasClassification = this.hasContent([recordAny['allKeywords']]);
 
     return {
       about: hasAbout,
@@ -309,11 +310,12 @@ export class RecordViewContent {
       'lineage',
       'classification',
     ].filter((section) => visibility[section as keyof typeof visibility]);
-    const contactSections = this.contactRoles().map((role: any) => 'contact-' + role);
+    const contactSections = this.contactRoles().map((role: string) => 'contact-' + role);
     return [...staticSections, ...contactSections];
   });
 
-  onRecordClick = output<string>();
+  recordClick = output<string>();
+  sharingChanged = output<void>();
 
   constructor() {
     this.route.queryParamMap.subscribe((params) => {
@@ -338,11 +340,15 @@ export class RecordViewContent {
   }
 
   handleRecordClick(uuid: string) {
-    this.onRecordClick.emit(uuid);
+    this.recordClick.emit(uuid);
   }
 
   getLineage(): string {
-    return (this.record()?.lineageObject as any)?.['default'] ?? '';
+    return (
+      ((this.record() as Record<string, unknown>)?.['lineageObject'] as Record<string, string>)?.[
+        'default'
+      ] ?? ''
+    );
   }
 
   onTabChange(tab: string | number | undefined) {

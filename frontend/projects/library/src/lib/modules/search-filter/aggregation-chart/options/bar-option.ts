@@ -32,10 +32,7 @@ export function buildBarSeriesData(
   secondaryColor: string,
   visibleRange?: BarVisibleRange,
 ) {
-  const { lowBarThreshold, visibleMax, lowBarThresholdFromPercentile } = computeLowBarThreshold(
-    buckets,
-    visibleRange,
-  );
+  const { lowBarThreshold } = computeLowBarThreshold(buckets, visibleRange);
 
   return buckets.map((b) => {
     const isLowBar = b.doc_count <= lowBarThreshold;
@@ -126,7 +123,7 @@ export function buildBarOption(
         label: {
           show: true,
           position: 'insideLeft',
-          formatter: (params: any) => compactLabels[params.dataIndex] ?? '',
+          formatter: (params: { dataIndex: number }) => compactLabels[params.dataIndex] ?? '',
         },
         data: buildBarSeriesData(buckets, activeSet, primaryColor, secondaryColor, visibleRange),
       },
