@@ -31,133 +31,140 @@ interface SharingPrivilegeRow {
 @Component({
   selector: 'app-record-sharing-by-group-panel',
   template: `
-    <p-dialog
-      class="m-10"
-      styleClass="w-[90vw] max-w-6xl"
-      [(visible)]="visible"
-      [modal]="true"
-      [header]="'record.action.sharing.byGroup.label' | translate"
-      (onHide)="reset()"
-    >
-      <div class="flex flex-col gap-4 w-full">
-        <p>{{ 'record.action.sharing.byGroup.help' | translate }}</p>
-        @if (loadError()) {
-          <p-message severity="error">{{ loadError() }}</p-message>
-        } @else {
-          <ng-template #sharingRow let-rowData>
-            @let backgroundColor =
-              rowData.reserved
-                ? 'var(--p-primary-200)'
-                : rowData.recordPrivilege
-                  ? 'var(--p-primary-100)'
-                  : '';
+    @if (visible()) {
+      <p-dialog
+        styleClass="w-[90vw] max-w-6xl"
+        [(visible)]="visible"
+        [modal]="true"
+        [header]="'record.action.sharing.byGroup.label' | translate"
+        (onHide)="reset()"
+      >
+        <div class="flex flex-col gap-4 w-full">
+          <p>{{ 'record.action.sharing.byGroup.help' | translate }}</p>
+          @if (loadError()) {
+            <p-message severity="error">{{ loadError() }}</p-message>
+          } @else {
+            <ng-template #sharingRow let-rowData>
+              @let backgroundColor =
+                rowData.reserved
+                  ? 'var(--p-primary-200)'
+                  : rowData.recordPrivilege
+                    ? 'var(--p-primary-100)'
+                    : '';
 
-            @if (isLoading()) {
-              <tr [style.backgroundColor]="backgroundColor">
-                <td class="w-1/2" colspan="2"><p-skeleton width="10rem" height="1.5rem" /></td>
-                @for (operation of operationColumns(); track operation) {
-                  <td></td>
-                }
-              </tr>
-            } @else {
-              <tr [style.backgroundColor]="backgroundColor">
-                <td
-                  colspan="2"
-                  class=" w-1/2 font-bold cursor-pointer"
-                  [title]="'record.action.sharing.byGroup.dblClickToToggle' | translate"
-                  (dblclick)="setAllOperations(rowData)"
-                >
-                  {{ rowData.label }}
-                </td>
-                @for (operation of operationColumns(); track operation) {
-                  <td
-                    [title]="'record.action.sharing.operations.' + operation + 'Help' | translate"
-                  >
-                    @if (rowData.operations[operation] !== undefined) {
-                      <div class="flex items-center justify-center">
-                        <p-checkbox
-                          [(ngModel)]="rowData.operations[operation]"
-                          [binary]="true"
-                          [disabled]="isSaving()"
-                        ></p-checkbox>
-                      </div>
-                    }
-                  </td>
-                }
-              </tr>
-            }
-          </ng-template>
-
-          <p-table
-            #table
-            [value]="isLoading() ? loadingSkeletonRows() : sharingRows()"
-            [frozenValue]="isLoading() ? [] : reservedSharingRows()"
-            [globalFilterFields]="['groupLabel']"
-            [sortField]="'label'"
-            [sortOrder]="1"
-            [scrollable]="true"
-            [paginator]="sharingRows().length > 20"
-            [rows]="20"
-            scrollHeight="500px"
-          >
-            <ng-template #header>
-              <tr>
-                <th pSortableColumn="label" class="w-1/4">
-                  {{ 'record.action.sharing.byGroup.groupLabel' | translate }}
-                  <p-sortIcon field="label"></p-sortIcon>
-                </th>
-                <th>
-                  @if (sharingRows().length > 10) {
-                    <p-columnFilter
-                      type="text"
-                      field="label"
-                      matchMode="contains"
-                      [placeholder]="'record.action.sharing.byGroup.filterPlaceholder' | translate"
-                      [ariaLabel]="'record.action.sharing.byGroup.filterAriaLabel' | translate"
-                      filterOn="input"
-                    ></p-columnFilter>
+              @if (isLoading()) {
+                <tr [style.backgroundColor]="backgroundColor">
+                  <td class="w-1/2" colspan="2"><p-skeleton width="10rem" height="1.5rem" /></td>
+                  @for (operation of operationColumns(); track operation) {
+                    <td></td>
                   }
-                </th>
-                @for (operation of operationColumns(); track operation) {
-                  <th [pSortableColumn]="'operations.' + operation" class="text-left">
-                    <div class="flex items-center justify-center">
-                      {{ 'op-' + operation | translate }}
-                      <p-sortIcon [field]="'operations.' + operation" />
-                    </div>
+                </tr>
+              } @else {
+                <tr [style.backgroundColor]="backgroundColor">
+                  <td
+                    colspan="2"
+                    class=" w-1/2 font-bold cursor-pointer"
+                    [title]="'record.action.sharing.byGroup.dblClickToToggle' | translate"
+                    (dblclick)="setAllOperations(rowData)"
+                  >
+                    {{ rowData.label }}
+                  </td>
+                  @for (operation of operationColumns(); track operation) {
+                    <td
+                      [title]="'record.action.sharing.operations.' + operation + 'Help' | translate"
+                    >
+                      @if (rowData.operations[operation] !== undefined) {
+                        <div class="flex items-center justify-center">
+                          <p-checkbox
+                            [(ngModel)]="rowData.operations[operation]"
+                            [binary]="true"
+                            [disabled]="isSaving()"
+                            (ngModelChange)="markAsDirty()"
+                          ></p-checkbox>
+                        </div>
+                      }
+                    </td>
+                  }
+                </tr>
+              }
+            </ng-template>
+
+            <p-table
+              #table
+              [value]="isLoading() ? loadingSkeletonRows() : sharingRows()"
+              [frozenValue]="isLoading() ? [] : reservedSharingRows()"
+              [globalFilterFields]="['groupLabel']"
+              [sortField]="'label'"
+              [sortOrder]="1"
+              [scrollable]="true"
+              [paginator]="sharingRows().length > 20"
+              [rows]="20"
+              scrollHeight="500px"
+            >
+              <ng-template #header>
+                <tr>
+                  @let showFilter = sharingRows().length > showFilterThreshold;
+
+                  <th pSortableColumn="label" class="w-1/4" [attr.colspan]="showFilter ? 1 : 2">
+                    {{ 'record.action.sharing.byGroup.groupLabel' | translate }}
+                    <p-sortIcon field="label"></p-sortIcon>
                   </th>
-                }
-              </tr>
-            </ng-template>
+                  @if (showFilter) {
+                    <th>
+                      <p-columnFilter
+                        type="text"
+                        field="label"
+                        matchMode="contains"
+                        [placeholder]="
+                          'record.action.sharing.byGroup.filterPlaceholder' | translate
+                        "
+                        [ariaLabel]="'record.action.sharing.byGroup.filterAriaLabel' | translate"
+                        filterOn="input"
+                      ></p-columnFilter>
+                    </th>
+                  }
 
-            <ng-template #frozenbody let-rowData>
-              <ng-container
-                *ngTemplateOutlet="sharingRow; context: { $implicit: rowData }"
-              ></ng-container>
-            </ng-template>
+                  @for (operation of operationColumns(); track operation) {
+                    <th [pSortableColumn]="'operations.' + operation" class="text-left">
+                      <div class="flex items-center justify-center">
+                        {{ 'op-' + operation | translate }}
+                        <p-sortIcon [field]="'operations.' + operation" />
+                      </div>
+                    </th>
+                  }
+                </tr>
+              </ng-template>
 
-            <ng-template #body let-rowData>
-              <ng-container
-                *ngTemplateOutlet="sharingRow; context: { $implicit: rowData }"
-              ></ng-container>
-            </ng-template>
-          </p-table>
-        }
-      </div>
-      <div class="flex flex-col gap-4 mt-4">
-        <ng-content />
-      </div>
+              <ng-template #frozenbody let-rowData>
+                <ng-container
+                  *ngTemplateOutlet="sharingRow; context: { $implicit: rowData }"
+                ></ng-container>
+              </ng-template>
 
-      <ng-template pTemplate="footer">
-        <p-button (onClick)="close()" [disabled]="isSaving()">
-          <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
-          <span pButtonLabel>{{ 'record.action.sharing.cancel' | translate }}</span>
-        </p-button>
-        <p-button (onClick)="confirm()" [disabled]="isFormInvalid()" [loading]="isSaving()">
-          <ng-icon name="faSolidCheck" pButtonIcon></ng-icon>
-          <span pButtonLabel>{{ 'record.action.sharing.save' | translate }}</span>
-        </p-button>
-      </ng-template>
-    </p-dialog>
+              <ng-template #body let-rowData>
+                <ng-container
+                  *ngTemplateOutlet="sharingRow; context: { $implicit: rowData }"
+                ></ng-container>
+              </ng-template>
+            </p-table>
+          }
+        </div>
+        <div class="flex flex-col gap-4 mt-4">
+          <ng-content />
+        </div>
+
+        <ng-template pTemplate="footer">
+          <p-button (onClick)="close()" [disabled]="isSaving()">
+            <ng-icon name="faSolidXmark" pButtonIcon></ng-icon>
+            <span pButtonLabel>{{ 'record.action.sharing.cancel' | translate }}</span>
+          </p-button>
+          <p-button (onClick)="confirm()" [disabled]="isFormInvalid()" [loading]="isSaving()">
+            <ng-icon name="faSolidCheck" pButtonIcon></ng-icon>
+            <span pButtonLabel>{{ 'record.action.sharing.save' | translate }}</span>
+          </p-button>
+        </ng-template>
+      </p-dialog>
+    }
   `,
   standalone: true,
   imports: [
@@ -193,6 +200,7 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
   readonly isLoading = signal(false);
   readonly isSaving = signal(false);
   readonly loadError = signal<string | null>(null);
+  readonly isDirty = signal(false);
   readonly loadingSkeletonRows = computed(() =>
     this.isLoading()
       ? (Array.from({ length: 3 }, (_, index) => ({
@@ -203,6 +211,7 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
         })) as SharingPrivilegeRow[])
       : [],
   );
+  readonly showFilterThreshold = 10;
 
   constructor() {
     super();
@@ -234,7 +243,11 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
   }
 
   isFormInvalid() {
-    return this.isLoading() || !!this.loadError();
+    return this.isLoading() || !!this.loadError() || !this.isDirty();
+  }
+
+  markAsDirty() {
+    this.isDirty.set(true);
   }
 
   excludeUnsupportedOperations(privilege: GroupPrivilege): Record<string, boolean> | null {
@@ -264,6 +277,7 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
   }
 
   initializeMatrix(privileges: GroupPrivilege[]) {
+    this.isDirty.set(false);
     const rows: SharingPrivilegeRow[] = privileges.map((privilege) => {
       return {
         label: privilege.group ? this.translate.instant(`group-${privilege.group}`) : 'N/A',
@@ -302,6 +316,7 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
     this.operationColumns().forEach((op) => {
       row.operations[op] = !allChecked;
     });
+    this.isDirty.set(true);
   }
 
   confirm() {
@@ -342,5 +357,6 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
 
   reset() {
     this.loadError.set(null);
+    this.isDirty.set(false);
   }
 }
