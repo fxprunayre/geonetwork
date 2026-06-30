@@ -88,7 +88,7 @@ export class DuckDbService {
     if (this.perspectiveInitialized) return;
 
     try {
-      const perspectiveVersion = '4.4.1';
+      const perspectiveVersion = '4.5.1';
 
       // Dynamically load all perspective modules (side-effect imports register custom elements)
       const { perspective, perspective_viewer } = await import('./perspective/perspective-init');
