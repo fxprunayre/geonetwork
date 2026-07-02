@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 import { SURVAL_UUID } from '../support/utils';
 
 describe('Record page - Bookmarks', () => {
