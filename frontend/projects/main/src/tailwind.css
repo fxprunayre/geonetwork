@@ -2,6 +2,14 @@
 @import 'tailwindcss-primeui';
 @custom-variant dark (&:where(.p-dark, .p-dark *));
 
+@theme {
+  --color-profile-administrator: var(--color-orange-500);
+  --color-profile-useradmin: var(--color-gray-500);
+  --color-profile-reviewer: var(--color-purple-500);
+  --color-profile-editor: var(--color-green-500);
+  --color-profile-registereduser: var(--color-sky-500);
+}
+
 @layer appstyles {
   html {
     font-size: 14px;

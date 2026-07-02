@@ -82,15 +82,15 @@ export class UserAvatar implements OnInit {
     const profile = this.user()?.profile;
     switch (profile) {
       case 'Administrator':
-        return 'ring-orange-500';
+        return 'ring-profile-administrator';
       case 'UserAdmin':
-        return 'ring-grey-500';
+        return 'ring-profile-useradmin';
       case 'Reviewer':
-        return 'ring-purple-500';
+        return 'ring-profile-reviewer';
       case 'Editor':
-        return 'ring-green-500';
+        return 'ring-profile-editor';
       case 'RegisteredUser':
-        return 'ring-sky-500';
+        return 'ring-profile-registereduser';
       default:
         return 'ring-transparent';
     }

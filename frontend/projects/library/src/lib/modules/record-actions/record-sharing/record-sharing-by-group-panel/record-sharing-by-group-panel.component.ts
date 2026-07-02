@@ -1,4 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, effect, inject, model, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TableModule } from 'primeng/table';
+import { AuthStore } from '../../../authentication/auth.store';
 import { RecordFieldBase } from '../../../record/record-field-base/record-field-base';
 
 const OPERATION_COLUMNS_ORDER = ['view', 'dynamic', 'download', 'process', 'editing'];
@@ -26,6 +27,7 @@ interface SharingPrivilegeRow {
   recordPrivilege?: boolean;
   userGroup?: boolean;
   userProfiles?: string[];
+  userProfile?: string[];
 }
 
 @Component({
@@ -54,18 +56,36 @@ interface SharingPrivilegeRow {
 
               @if (isLoading()) {
                 <tr [style.backgroundColor]="backgroundColor">
-                  <td class="w-1/2" colspan="2"><p-skeleton width="10rem" height="1.5rem" /></td>
+                  <td
+                    class="w-1!"
+                    [ngClass]="getProfileClass(rowData)"
+                    [title]="getProfileLabel(rowData)"
+                  ></td>
+                  <td class="w-1/2" colspan="2">
+                    <p-skeleton width="10rem" height="1.5rem" />
+                  </td>
                   @for (operation of operationColumns(); track operation) {
                     <td></td>
                   }
                 </tr>
               } @else {
+                @let isGroupDisabled = isGroupOperationsDisabled(rowData);
                 <tr [style.backgroundColor]="backgroundColor">
                   <td
+                    class="w-1!"
+                    [ngClass]="getProfileClass(rowData)"
+                    [title]="getProfileLabel(rowData)"
+                  ></td>
+                  <td
                     colspan="2"
-                    class=" w-1/2 font-bold cursor-pointer"
-                    [title]="'record.action.sharing.byGroup.dblClickToToggle' | translate"
-                    (dblclick)="setAllOperations(rowData)"
+                    class=" w-1/2 font-bold"
+                    [class.cursor-pointer]="!isGroupDisabled"
+                    [title]="
+                      isGroupDisabled
+                        ? ''
+                        : ('record.action.sharing.byGroup.dblClickToToggle' | translate)
+                    "
+                    (dblclick)="isGroupDisabled ? null : setAllOperations(rowData)"
                   >
                     {{ rowData.label }}
                   </td>
@@ -78,7 +98,7 @@ interface SharingPrivilegeRow {
                           <p-checkbox
                             [(ngModel)]="rowData.operations[operation]"
                             [binary]="true"
-                            [disabled]="isSaving()"
+                            [disabled]="isGroupDisabled || isSaving()"
                             (ngModelChange)="markAsDirty()"
                           ></p-checkbox>
                         </div>
@@ -104,7 +124,7 @@ interface SharingPrivilegeRow {
               <ng-template #header>
                 <tr>
                   @let showFilter = sharingRows().length > showFilterThreshold;
-
+                  <th class="w-1!"></th>
                   <th pSortableColumn="label" class="w-1/4" [attr.colspan]="showFilter ? 1 : 2">
                     {{ 'record.action.sharing.byGroup.groupLabel' | translate }}
                     <p-sortIcon field="label"></p-sortIcon>
@@ -171,6 +191,7 @@ interface SharingPrivilegeRow {
     ButtonModule,
     DialogModule,
     CheckboxModule,
+    NgClass,
     NgTemplateOutlet,
     InputTextModule,
     MessageModule,
@@ -193,6 +214,7 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
 
   private readonly recordsService = inject(RecordsService);
   private readonly translate = inject(TranslateService);
+  private readonly authStore = inject(AuthStore);
   readonly sharingResponse = signal<SharingResponse | null>(null);
   readonly sharingRows = signal<SharingPrivilegeRow[]>([]);
   readonly reservedSharingRows = signal<SharingPrivilegeRow[]>([]);
@@ -212,6 +234,59 @@ export class RecordSharingByGroupPanelComponent extends RecordFieldBase {
       : [],
   );
   readonly showFilterThreshold = 10;
+
+  canPublishToReservedGroups() {
+    const user = this.authStore.user();
+    // TODO: We have settings for that now
+    // const profilesAllowedToPublishToReservedGroups = ['Administrator', 'Reviewer'];
+    if (user === null) {
+      return false;
+    }
+    if (user.admin) {
+      return true;
+    }
+
+    const recordGroup = this.record().groupOwner;
+    const isReviewer =
+      recordGroup && user.groupsWithReviewer && user.groupsWithReviewer.includes(recordGroup);
+    if (isReviewer) {
+      return true;
+    }
+    return false;
+  }
+
+  isGroupOperationsDisabled(row: SharingPrivilegeRow): boolean {
+    if (row.reserved && !this.canPublishToReservedGroups()) {
+      return true;
+    }
+    return false;
+  }
+
+  getProfileClass(row: SharingPrivilegeRow): string {
+    const isAdministrator = this.authStore.user()?.admin;
+    const profile = isAdministrator
+      ? 'Administrator'
+      : row.userProfiles?.[0] || row.userProfile?.[0];
+    switch (profile) {
+      case 'Administrator':
+        return '!border-l-4 !border-l-profile-administrator';
+      case 'UserAdmin':
+        return '!border-l-4 !border-l-profile-useradmin';
+      case 'Reviewer':
+        return '!border-l-4 !border-l-profile-reviewer';
+      case 'Editor':
+        return '!border-l-4 !border-l-profile-editor';
+      case 'RegisteredUser':
+        return '!border-l-4 !border-l-profile-registereduser';
+      default:
+        return '!border-l-4 !border-l-transparent';
+    }
+  }
+
+  getProfileLabel(row: SharingPrivilegeRow): string {
+    const isAdministrator = this.authStore.user()?.admin;
+    return isAdministrator ? 'Administrator' : row.userProfiles ? row.userProfiles.join(', ') : '';
+  }
 
   constructor() {
     super();
