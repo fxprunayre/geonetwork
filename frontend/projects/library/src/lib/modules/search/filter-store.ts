@@ -23,6 +23,9 @@ export const FilterStore = signalStore(
     }),
   })),
   withMethods((store) => ({
+    setFilters(filters: Record<string, SearchFilter>): void {
+      patchState(store, { filters: filters || {} });
+    },
     isFilterActive(field: string, value: string | number): boolean {
       const filter = store.filters()[field];
       if (!filter) {

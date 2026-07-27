@@ -163,7 +163,13 @@ export const SearchStore = signalStore(
           return;
         }
 
-        patchState(store, newState);
+        const { filters, ...searchStateUpdate } = newState as {
+          filters?: SearchFilterParameters['filters'];
+        } & Record<string, unknown>;
+
+        patchState(store, searchStateUpdate);
+
+        store.filterStore.setFilters(filters || {});
       });
     };
 
