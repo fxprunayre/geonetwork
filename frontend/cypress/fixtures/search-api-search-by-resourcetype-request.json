@@ -65,8 +65,7 @@
         "orderByTranslation": true,
         "filterByTranslation": true,
         "displayFilter": true,
-        "collapsed": true,
-        "layout": "multiselect",
+        "collapsed": false,
         "caseInsensitiveInclude": true
       }
     },
@@ -108,15 +107,6 @@
         }
       }
     },
-    "tag.default": {
-      "terms": {
-        "field": "tag.default",
-        "size": 15
-      },
-      "meta": {
-        "collapsed": true
-      }
-    },
     "OrgForResource": {
       "terms": {
         "field": "OrgForResource",
@@ -146,7 +136,7 @@
         "exclude": "map/.*|publication-.*"
       },
       "meta": {
-        "collapsed": true,
+        "collapsed": false,
         "layout": "nightingale",
         "decorator": {
           "type": "icon",

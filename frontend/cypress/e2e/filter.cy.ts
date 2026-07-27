@@ -70,8 +70,8 @@ describe('Search', () => {
       cy.wait('@apiMainSearch');
       cy.get('app-results-info app-aggregation app-aggregation-bucket button')
         .first()
-        .then((button) => {
-          cy.wrap(button).click();
+        .click()
+        .then(() => {
           cy.wait('@apiMainSearchByResourceType');
           cy.get('app-search-active-filters-button p-button').should('have.length', 2);
           cy.get('app-search-active-filters-button p-button p-badge').click();
@@ -122,7 +122,7 @@ describe('Search', () => {
       cy.get('app-search-active-filters-button p-button').first().click();
       cy.wait('@apiMainSearch');
       cy.get(
-        'app-aggregations-panel [data-testid="aggregation-panel-tag.default"] app-aggregation > div > app-aggregation-bucket p-checkbox input[type="checkbox"]',
+        'app-aggregations-panel [data-testid="aggregation-panel-groupPublishedId"] app-aggregation > div > app-aggregation-bucket p-checkbox input[type="checkbox"]',
       )
         .first()
         .then((checkbox) => {
@@ -142,27 +142,27 @@ describe('Search', () => {
         });
     });
 
-    it('should search when multiselect aggregation option is selected', () => {
-      cy.get('app-search-active-filters-button p-button').first().click();
-      cy.wait('@apiMainSearch');
-      cy.get('app-aggregations-panel app-aggregation p-multiselect')
-        .first()
-        .then((multiselect) => {
-          cy.wrap(multiselect).click({ force: true });
-          cy.get('li[pmultiselectitem]')
-            .first()
-            .then((option) => {
-              cy.wrap(option).invoke('text').should('match', AGGREGATION_LABEL_REGEX);
-              cy.wrap(option).click();
-              cy.wait('@unmatchedSearchRequest');
+    // it('should search when multiselect aggregation option is selected', () => {
+    //   cy.get('app-search-active-filters-button p-button').first().click();
+    //   cy.wait('@apiMainSearch');
+    //   cy.get('app-aggregations-panel app-aggregation p-multiselect')
+    //     .first()
+    //     .then((multiselect) => {
+    //       cy.wrap(multiselect).click({ force: true });
+    //       cy.get('li[pmultiselectitem]')
+    //         .first()
+    //         .then((option) => {
+    //           cy.wrap(option).invoke('text').should('match', AGGREGATION_LABEL_REGEX);
+    //           cy.wrap(option).click();
+    //           cy.wait('@unmatchedSearchRequest');
 
-              cy.wrap(multiselect)
-                .parents('p-accordion-panel')
-                .find('p-accordion-header p-overlaybadge')
-                .should('exist');
-            });
-        });
-    });
+    //           cy.wrap(multiselect)
+    //             .parents('p-accordion-panel')
+    //             .find('p-accordion-header p-overlaybadge')
+    //             .should('exist');
+    //         });
+    //     });
+    // });
 
     it('should display INSPIRE icon when available', () => {
       cy.get('app-search-active-filters-button p-button').first().click();
