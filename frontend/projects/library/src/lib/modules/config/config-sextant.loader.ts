@@ -286,9 +286,9 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
         field: 'groupPublishedId',
         orderByTranslation: true,
         filterByTranslation: true,
-        displayFilter: true,
+        displayFilter: false,
         collapsed: false,
-        layout: 'multiselect',
+        // layout: 'multiselect',
       },
     },
   },
@@ -773,7 +773,7 @@ function migrateSextantFacetConfig(
     // Ensure meta exists
     esFacet[facetName].meta = {
       ...esFacetTemplate[facetName]?.meta,
-      collapsed: !sxtFacet.opened,
+      collapsed: sxtFacet.opened ? false : (esFacetTemplate[facetName]?.meta?.collapsed ?? true),
       labels: sxtFacet.labels,
     };
 

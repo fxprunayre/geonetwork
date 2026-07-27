@@ -1,6 +1,16 @@
 <ng-template #defaultFilterTemplate>
-  @if (isInputFilter()) {
-    <!--   TODO? <input pInputText class="w-full" [(ngModel)]="filter"/>-->
+  @if (isFilterEnabled()) {
+    <p-iconfield class="mb-4">
+      <input
+        pInputText
+        class="w-full"
+        [ngModel]="currentFilter()"
+        (ngModelChange)="currentFilter.set($event ?? '')"
+      />
+      <p-inputicon>
+        <ng-icon name="faSolidMagnifyingGlass" />
+      </p-inputicon>
+    </p-iconfield>
   }
 </ng-template>
 
@@ -9,7 +19,7 @@
     <ng-container
       *ngTemplateOutlet="defaultFilterTemplate; context: { $implicit: this }"
     ></ng-container>
-    @for (bucket of buckets(); track bucket.key) {
+    @for (bucket of filteredBuckets(); track bucket.key) {
       <div class="flex items-center w-full min-w-0 mb-2">
         <app-aggregation-bucket
           [scope]="scope()"
@@ -25,12 +35,12 @@
     <app-aggregation-tree
       [scope]="scope()"
       [keyName]="keyName()"
-      [buckets]="buckets()"
+      [buckets]="filteredBuckets()"
       (selected)="filter($event, true)"
     ></app-aggregation-tree>
   }
   @case ('button') {
-    @for (bucket of buckets(); track bucket.key) {
+    @for (bucket of filteredBuckets(); track bucket.key) {
       <app-aggregation-bucket
         [scope]="scope()"
         [keyName]="keyName()"
@@ -41,7 +51,7 @@
     }
   }
   @case ('card') {
-    @for (bucket of buckets(); track bucket.key) {
+    @for (bucket of filteredBuckets(); track bucket.key) {
       <app-aggregation-bucket
         [index]="$index"
         [scope]="scope()"
@@ -54,7 +64,7 @@
   }
   @case ('multiselect') {
     <p-multiSelect
-      [options]="buckets()"
+      [options]="filteredBuckets()"
       optionLabel="label"
       display="chip"
       [filter]="displayFilter()"
@@ -89,7 +99,7 @@
   }
   @case ('select') {
     <p-select
-      [options]="buckets()"
+      [options]="filteredBuckets()"
       (onChange)="handleChange($event)"
       optionLabel="key"
       [placeholder]="placeholder()"
@@ -110,7 +120,7 @@
   }
   @case ('bar') {
     <app-aggregation-chart
-      [buckets]="buckets()"
+      [buckets]="filteredBuckets()"
       [activeKeys]="activeKeysList()"
       [layout]="'bar'"
       [keyName]="keyName()"
@@ -124,7 +134,7 @@
   }
   @case ('pie') {
     <app-aggregation-chart
-      [buckets]="buckets()"
+      [buckets]="filteredBuckets()"
       [activeKeys]="activeKeysList()"
       [layout]="'pie'"
       [keyName]="keyName()"
@@ -135,7 +145,7 @@
   }
   @case ('treemap') {
     <app-aggregation-chart
-      [buckets]="buckets()"
+      [buckets]="filteredBuckets()"
       [activeKeys]="activeKeysList()"
       [layout]="'treemap'"
       [keyName]="keyName()"
@@ -146,7 +156,7 @@
   }
   @case ('nightingale') {
     <app-aggregation-chart
-      [buckets]="buckets()"
+      [buckets]="filteredBuckets()"
       [activeKeys]="activeKeysList()"
       [layout]="'nightingale'"
       [keyName]="keyName()"

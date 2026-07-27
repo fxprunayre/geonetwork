@@ -14,9 +14,14 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { faSolidMagnifyingGlass } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AggregationLayout, Decorator } from 'gn-api-client';
 import { ButtonModule } from 'primeng/button';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
+import { InputText } from 'primeng/inputtext';
 import { MultiSelect, MultiSelectChangeEvent } from 'primeng/multiselect';
 import { Select, SelectChangeEvent } from 'primeng/select';
 import { SearchBase } from '../../search/search-base/search-base';
@@ -40,16 +45,23 @@ const CHART_LAYOUTS = ['bar', 'pie', 'treemap', 'nightingale'] as const;
     ButtonModule,
     FormsModule,
     MultiSelect,
+    InputText,
     NgTemplateOutlet,
     Select,
     TranslatePipe,
+    IconField,
+    InputIcon,
+    NgIcon,
   ],
   providers: [AggregationTranslatePipe, DecimalPipe],
+  viewProviders: [provideIcons({ faSolidMagnifyingGlass })],
   templateUrl: './aggregation.html',
 })
 export class Aggregation extends SearchBase {
   keyName = input.required<string>();
   displayType = input<AggregationLayout | undefined>();
+
+  currentFilter = signal<string>('');
 
   @Output()
   selected = new EventEmitter<SearchFilterChange>();
@@ -85,16 +97,35 @@ export class Aggregation extends SearchBase {
     });
   }
 
+  isFilteringEnabledForAgg = computed(() => {
+    return this.aggregationService.isDisplayFilterEnabled(
+      this.search().aggregations()[this.keyName()],
+    );
+  });
+
   displayFilter = computed(() => {
     return this.buckets().length > this.DISPLAY_FILTER_THRESHOLD;
   });
 
-  isInputFilter = computed(() => {
-    return this.displayFilter() && ['checkbox', 'button', 'card'].includes(this.layout());
+  isFilterEnabled = computed(() => {
+    if (this.currentFilter().trim() !== '') {
+      return true;
+    }
+    return (
+      this.isFilteringEnabledForAgg() &&
+      this.displayFilter() &&
+      ['checkbox', 'button', 'card'].includes(this.layout())
+    );
   });
 
   isChartLayout = computed(() => {
     return (CHART_LAYOUTS as readonly string[]).includes(this.layout());
+  });
+
+  shouldOrderByTranslation = computed(() => {
+    return this.aggregationService.isOrderByTranslationEnabled(
+      this.search().aggregations()[this.keyName()],
+    );
   });
 
   activeKeysList = computed(() =>
@@ -116,7 +147,7 @@ export class Aggregation extends SearchBase {
     );
     const histogramInterval = aggregationConfig?.histogram?.interval;
     if (buckets) {
-      return buckets.map((bucket) => {
+      const mappedBuckets = buckets.map((bucket) => {
         const displayLabel = this.getBucketDisplayLabel(
           bucket['key'] as string | number,
           histogramInterval,
@@ -128,8 +159,34 @@ export class Aggregation extends SearchBase {
           doc_count: bucket.doc_count,
         } as AggregationBucketType;
       });
+
+      if (this.shouldOrderByTranslation()) {
+        return this.aggregationService.sortBucketsByDisplayLabel(
+          mappedBuckets,
+          this.translateService.getCurrentLang(),
+        );
+      }
+
+      return mappedBuckets;
     }
     return [];
+  });
+
+  filteredBuckets = computed(() => {
+    const filter = this.currentFilter().trim().toLowerCase();
+    if (!filter) {
+      return this.buckets();
+    }
+
+    return this.buckets().filter((bucket) => {
+      return (
+        String(bucket.key).toLowerCase().includes(filter) ||
+        bucket.label.toLowerCase().includes(filter) ||
+        String(bucket.displayLabel ?? '')
+          .toLowerCase()
+          .includes(filter)
+      );
+    });
   });
 
   private getBucketDisplayLabel(key: string | number, histogramInterval?: number): string {

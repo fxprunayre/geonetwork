@@ -39,6 +39,7 @@ export type Metadata = Record<string, any> & {
   icon?: string;
   layout?: AggregationLayout;
   orderByTranslation?: boolean;
+  displayFilter?: boolean;
   userHasRole?: string;
 };
 

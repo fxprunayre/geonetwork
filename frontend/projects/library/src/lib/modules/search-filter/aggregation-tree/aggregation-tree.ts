@@ -16,6 +16,7 @@ import { Tree } from 'primeng/tree';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchFilterChange } from '../../search/search-store.model';
+import { AggregationService } from '../aggregation-service';
 import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
 import { AggregationBucketType } from '../aggregation/aggregation.model';
 
@@ -43,6 +44,7 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
   selected = new EventEmitter<SearchFilterChange>();
 
   translateService = inject(TranslateService);
+  aggregationService = inject(AggregationService);
   aggregationTranslatePipe = inject(AggregationTranslatePipe);
   decimalPipe = inject(DecimalPipe);
 
@@ -122,19 +124,15 @@ export class AggregationTree extends SearchBase implements AfterViewInit {
       });
     });
 
-    // order tree if meta.orderByTranslation is set
-    const orderTree = (nodes: TreeNode[]) => {
-      nodes.sort((a, b) => a.label!.localeCompare(b.label!));
-      nodes.forEach((node) => {
-        if (node.children && node.children.length > 0) {
-          orderTree(node.children);
-        }
-      });
-    };
-
-    const aggregationMeta = this.search().aggregations()[this.keyName()]?.meta;
-    if (aggregationMeta?.orderByTranslation) {
-      orderTree(root);
+    if (
+      this.aggregationService.isOrderByTranslationEnabled(
+        this.search().aggregations()[this.keyName()],
+      )
+    ) {
+      this.aggregationService.sortNodesByLabelRecursively(
+        root,
+        this.translateService.getCurrentLang(),
+      );
     }
 
     // Expand nodes that have selected children

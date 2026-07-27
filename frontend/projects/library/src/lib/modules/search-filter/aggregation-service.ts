@@ -4,6 +4,7 @@ import { elasticsearch } from 'gn-api-client';
 import { RegistriesService } from 'gn4-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { DEFAULT_AGGREGATION_SIZE } from '../search/search-store.model';
+import { AggregationBucketType } from './aggregation/aggregation.model';
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +55,46 @@ export class AggregationService {
       })) as unknown as Array<Record<string, unknown> & { doc_count: number }>;
     }
     return [];
+  }
+
+  isDisplayFilterEnabled(
+    aggregation: elasticsearch.AggregationsAggregate | undefined | null,
+  ): boolean {
+    return aggregation?.meta?.['displayFilter'] ?? true;
+  }
+
+  isOrderByTranslationEnabled(
+    aggregation: elasticsearch.AggregationsAggregate | undefined | null,
+  ): boolean {
+    return aggregation?.meta?.['orderByTranslation'] === true;
+  }
+
+  sortBucketsByDisplayLabel(
+    buckets: AggregationBucketType[],
+    locale: string,
+  ): AggregationBucketType[] {
+    return [...buckets].sort((a, b) => {
+      const left = String(a.displayLabel ?? a.label);
+      const right = String(b.displayLabel ?? b.label);
+      return left.localeCompare(right, locale, { sensitivity: 'base' });
+    });
+  }
+
+  sortNodesByLabelRecursively<T extends { label?: string | null; children?: T[] }>(
+    nodes: T[],
+    locale: string,
+  ): void {
+    nodes.sort((a, b) => {
+      return String(a.label ?? '').localeCompare(String(b.label ?? ''), locale, {
+        sensitivity: 'base',
+      });
+    });
+
+    nodes.forEach((node) => {
+      if (node.children && node.children.length > 0) {
+        this.sortNodesByLabelRecursively(node.children, locale);
+      }
+    });
   }
 
   getAggregationConfig(
@@ -210,7 +251,7 @@ export class AggregationService {
     return aggregationsConfig
       .map((config) => this.parseAggregationConfig(config))
       .filter((aggregation) => {
-        return aggregation[Object.keys(aggregation)[0]]?.meta?.['collapsed'] !== true;
+        return aggregation[Object.keys(aggregation)[0]]?.meta?.collapsed !== true;
       })
       .map((aggregation) => {
         return Object.keys(aggregation)[0];
