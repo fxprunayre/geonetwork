@@ -1,15 +1,11 @@
 @if (isMenuEnabled()) {
-  <nav
-    class="border-e border-surface-100 h-full"
-    (mouseenter)="expandMenu()"
-    (mouseleave)="collapseMenu()"
-  >
+  <nav class="h-full" (mouseenter)="expandMenu()" (mouseleave)="collapseMenu()">
     @if (layout() === 'menu') {
       <p-menu
         [model]="items()"
         class="h-full"
         [pt]="{
-          root: '!min-w-fit h-full transition-all duration-300 ease-in-out !border-none',
+          root: '!min-w-fit transition-all duration-300 ease-in-out !border-none',
           itemContent: 'text-2xl justify-center',
           itemLabel: {
             class: {
@@ -51,8 +47,31 @@
             />
           </div>
         </ng-template>
-
-        <ng-template pTemplate="end">
+      </p-menu>
+      <p-menu
+        [model]="userItems()"
+        class="h-full"
+        [pt]="{
+          root: '!min-w-fit h-full transition-all duration-300 ease-in-out !border-none',
+          itemContent: 'text-2xl justify-center',
+          itemLabel: {
+            class: {
+              'line-clamp-1': true,
+              'transition-all': true,
+              'duration-300': true,
+              'ease-in-out': true,
+              'max-w-0': isIconMode(),
+              'opacity-0': isIconMode(),
+              'ml-0': isIconMode(),
+              'max-w-50': !isIconMode(),
+              'opacity-100': !isIconMode(),
+              'ml-2': !isIconMode(),
+            },
+          },
+        }"
+        [dt]="dt"
+      >
+        <ng-template pTemplate="start">
           @if (isAuthenticated()) {
             <ul class="p-menu-list">
               <li

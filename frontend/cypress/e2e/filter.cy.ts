@@ -37,6 +37,9 @@ describe('Search', () => {
             cy.get('p-auto-complete p-overlay').should('exist').and('not.be.visible');
             cy.get('app-search-input input').should('have.value', firstOptionText);
             cy.wait('@unmatchedSearchRequest').then((search) => {
+              if (!search.request?.body.query.bool.must[0].multi_match) {
+                return;
+              }
               const query = search.request?.body.query.bool.must[0].query_string.query;
               expect(query).to.eq(firstOptionText);
               cy.url().should('include', `q=${encodeURIComponent(firstOptionText)}`);

@@ -102,7 +102,7 @@ describe('Record sharing by group panel', () => {
 
       cy.get('app-record-sharing-by-group-panel p-dialog p-table').should('exist');
 
-      const expectedThOrder = ['Group', 'Metadata', 'View', 'Download', 'Process', 'Edit'];
+      const expectedThOrder = ['', 'Group', 'Metadata', 'View', 'Download', 'Process', 'Edit'];
       cy.get('app-record-sharing-by-group-panel p-table th').each(($th, index) => {
         cy.wrap($th).should('contain', expectedThOrder[index]);
       });
@@ -123,6 +123,10 @@ describe('Record sharing by group panel', () => {
         'background-color: var(--p-primary-200);',
       );
       cy.contains('td', 'Public access').should('exist');
+      cy.contains('tr', 'group-2')
+        .find('td')
+        .first()
+        .should('have.class', '!border-l-profile-editor');
       cy.contains('tr', 'group-2').should(
         'have.attr',
         'style',
@@ -146,15 +150,35 @@ describe('Record sharing by group panel', () => {
       );
     });
 
+    it('should display the border color corresponding to user profile', () => {
+      setupSharingSettings(4);
+      openSharingDialog();
+
+      // group-2 row has userProfiles: ['Editor', 'Reviewer'], it should have border-profile-editor
+      cy.contains('tr', 'group-2')
+        .find('td')
+        .first()
+        .should('have.class', '!border-l-profile-editor');
+
+      // group-3 row has userProfiles: [], it should have border-transparent (default)
+      cy.contains('tr', 'group-3').find('td').first().should('have.class', '!border-l-transparent');
+    });
+
     it('should show filter input only when more than 10 groups (not reserved)', () => {
       setupSharingSettings(14);
 
       openSharingDialog();
 
-      cy.get('app-record-sharing-by-group-panel p-table th')
-        .eq(1)
-        .find('input[placeholder="Type to search"]')
-        .should('exist');
+      cy.get('app-record-sharing-by-group-panel p-table th').as('headerCells');
+      cy.get('@headerCells').eq(1);
+      cy.get('@headerCells').find('input[placeholder="Type to search"]').as('filterInput');
+      cy.get('@filterInput').should('exist');
+      cy.get('@filterInput').type('group-11');
+      cy.get('app-record-sharing-by-group-panel p-table tbody tr').should('have.length', 3);
+      cy.get('app-record-sharing-by-group-panel p-table tbody tr td').should(
+        'contain.text',
+        'group-11',
+      );
     });
 
     it('should hide filter input when 10 or fewer groups', () => {

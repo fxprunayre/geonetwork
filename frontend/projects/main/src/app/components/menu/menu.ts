@@ -17,13 +17,13 @@ import {
   faSolidArrowRightToBracket,
   faSolidBars,
   faSolidBookmark,
+  faSolidCirclePlus,
   faSolidEllipsisVertical,
   faSolidGear,
   faSolidHouse,
   faSolidLanguage,
   faSolidMagnifyingGlass,
   faSolidPaintRoller,
-  faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuDesignTokens } from '@primeuix/themes/types/menu';
@@ -36,6 +36,7 @@ import {
   Gn4UrlService,
   IconStyleService,
   MAP_ROUTE_PATH,
+  RecordActionService,
   RecordAddMenu,
   SEARCH_ROUTE_PATH,
   TranslationsService,
@@ -52,7 +53,7 @@ const ICONS = {
   faSolidHouse,
   faSolidBars,
   faSolidEllipsisVertical,
-  faSolidPlus,
+  faSolidCirclePlus,
   faSolidGear,
   faSolidMagnifyingGlass,
   faSolidPaintRoller,
@@ -108,6 +109,7 @@ export class MenuComponent implements OnInit {
   translateService = inject(TranslateService);
   translationsService = inject(TranslationsService);
   gn4UrlService = inject(Gn4UrlService);
+  recordAddAction = inject(RecordActionService);
   router = inject(Router);
   messageService = inject(MessageService);
 
@@ -160,6 +162,28 @@ export class MenuComponent implements OnInit {
         separator: true,
         styleClass: 'mb-10',
       },
+    ];
+  });
+
+  userItems = computed<MenuItem[] | undefined>(() => {
+    this.currentLang();
+    const appsConfig = this.appConfig().config?.apps;
+    return [
+      {
+        label: this.translateService.instant('record.action.addRecord.label'),
+        title: this.isIconMode()
+          ? this.translateService.instant('record.action.addRecord.label')
+          : '',
+        icon: 'faSolidCirclePlus',
+        command: () => {
+          if (!this.isAuthenticated()) {
+            this.router.navigate(['/signin'], { queryParams: { redirectUrl: location.href } });
+          } else {
+            this.recordAddAction.openCreateRecord('_blank');
+          }
+        },
+        ...this.itemConfig(),
+      },
       {
         label: this.translateService.instant('menu.signin'),
         title: this.isIconMode() ? this.translateService.instant('menu.signin') : '',
@@ -170,15 +194,6 @@ export class MenuComponent implements OnInit {
         },
         ...this.itemConfig(),
       },
-      // {
-      //   label: this.user()?.username,
-      //   title: this.translateService.instant('menu.dashboard'),
-      //   visible: this.isAuthenticated(),
-      //   icon: 'faSolidTachometerAlt',
-      //   routerLink: DASHBOARD_ROUTE_PATH,
-      //   routerLinkActiveOptions: { exact: false },
-      //   ...this.itemConfig(),
-      // },
       {
         label: this.translateService.instant('menu.signout'),
         title: this.isIconMode() ? this.translateService.instant('menu.signout') : '',
@@ -240,7 +255,7 @@ export class MenuComponent implements OnInit {
 
     this.styleService.createIconsStyle(
       'menu-icon-style',
-      this.items(),
+      this.items()?.concat(this.userItems() ?? []),
       ICONS,
       this.elementRef.nativeElement.getRootNode(),
     );
@@ -258,5 +273,9 @@ export class MenuComponent implements OnInit {
   collapseMenu() {
     if (!this.isExpandedOnHover()) return;
     this.isIconMode.set(true);
+  }
+
+  signOut() {
+    this.authStore.signOut();
   }
 }
