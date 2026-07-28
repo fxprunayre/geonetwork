@@ -9,7 +9,9 @@
       [mapContext]="mapContext()"
       [commands]="embeddedWmsCommands()"
       [focusCommands]="wmsCommands()"
-      [isActive]="activeTab() === 'explore'"
+      [isActive]="
+        activeTab() === 'explore' && (layout() !== 'selectbutton' || selectedPanel() === 'map')
+      "
     />
   </ng-template>
 
@@ -148,20 +150,28 @@
         </p-selectButton>
       }
 
-      @if (selectedPanel() === 'map' && isEmbeddedWmsMapEnabled() && hasEmbeddedWmsLayers()) {
-        <ng-container [ngTemplateOutlet]="mapPanelContent"></ng-container>
+      @if (isEmbeddedWmsMapEnabled() && hasEmbeddedWmsLayers()) {
+        <div [class.hidden]="selectedPanel() !== 'map'">
+          <ng-container [ngTemplateOutlet]="mapPanelContent"></ng-container>
+        </div>
       }
 
-      @if (selectedPanel() === 'table-data' && hasDatasourceSection()) {
-        <ng-container [ngTemplateOutlet]="tableDataPanelContent"></ng-container>
+      @if (hasDatasourceSection()) {
+        <div [class.hidden]="selectedPanel() !== 'table-data'">
+          <ng-container [ngTemplateOutlet]="tableDataPanelContent"></ng-container>
+        </div>
       }
 
-      @if (selectedPanel() === 'dataviz' && hasDatavizSection()) {
-        <ng-container [ngTemplateOutlet]="datavizPanelContent"></ng-container>
+      @if (hasDatavizSection()) {
+        <div [class.hidden]="selectedPanel() !== 'dataviz'">
+          <ng-container [ngTemplateOutlet]="datavizPanelContent"></ng-container>
+        </div>
       }
 
-      @if (selectedPanel() === 'data-model' && hasDataModel()) {
-        <ng-container [ngTemplateOutlet]="dataModelPanelContent"></ng-container>
+      @if (hasDataModel()) {
+        <div [class.hidden]="selectedPanel() !== 'data-model'">
+          <ng-container [ngTemplateOutlet]="dataModelPanelContent"></ng-container>
+        </div>
       }
     </div>
   }
