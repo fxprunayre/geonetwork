@@ -49,7 +49,8 @@ export class MapComponent implements OnInit, OnDestroy {
   viewer: unknown;
 
   ngOnInit() {
-    const scriptUrl = 'https://sextant.gitlab-pages.ifremer.fr/viewer/sxt-viewer.js';
+    const scriptUrl =
+      'https://cdn.jsdelivr.net/gh/camptocamp/sextant-viewer@dist-main/sxt-viewer.js';
     if (!document.querySelector(`script[src="\${scriptUrl}"]`)) {
       const script = document.createElement('script');
       script.type = 'module';
