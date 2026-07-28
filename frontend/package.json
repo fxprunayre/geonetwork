@@ -8,7 +8,7 @@
     "watch-gn-api-client": "ng build gn-api-client --watch",
     "watch-gn4-api-client": "ng build gn4-api-client --watch",
     "build": "ng build  gn-api-client && ng build gn4-api-client && ng build library && ng build --project=main && node scripts/rename-main-bundle.js dist/main/browser projects/library/src/environments/environment.prod.ts",
-    "build-sextant": "ng build  gn-api-client && ng build gn4-api-client && ng build library && ng build --project=main --base-href /sextant/ && node scripts/rename-main-bundle.js dist/main/browser projects/library/src/environments/environment.prod.ts",
+    "build-sextant": "ng build gn-api-client && ng build gn4-api-client && ng build library && ng build --project=main --output-hashing none --base-href /sextant/ && node scripts/rename-main-bundle.js dist/main/browser projects/library/src/environments/environment.prod.ts",
     "build-webcomponent": "ng build --project=main --output-hashing none --base-href /sextant/ --output-path=dist/webcomponent && node scripts/rename-main-bundle.js dist/webcomponent/browser projects/library/src/environments/environment.prod.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
