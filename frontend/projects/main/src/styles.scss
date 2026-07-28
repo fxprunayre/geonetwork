@@ -19,3 +19,9 @@
 :root {
   --app-font-family-sans: 'Inter', sans-serif;
 }
+
+sextant-app {
+  display: block;
+  min-height: 100dvh;
+  height: 100vh;
+}

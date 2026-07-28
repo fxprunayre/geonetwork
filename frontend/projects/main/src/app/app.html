@@ -1,4 +1,4 @@
-<main class="flex flex-row min-h-screen h-full overflow-hidden">
+<main class="flex flex-row h-full text-base">
   @if (catalogueStore.isServerDown()) {
     <div class="w-full flex p-8 items-center justify-center h-full">
       <app-alert-panel
@@ -10,14 +10,11 @@
       </app-alert-panel>
     </div>
   } @else {
-    <app-menu
-      class="sticky top-0 self-start z-40 border-e border-surface-100 print:hidden"
-      [style.height]="'stretch'"
-    />
+    <app-menu class="sticky top-0 self-start z-40 print:hidden" />
     <!-- <app-menu class="absolute top-0 m-2 self-start print:hidden"/> -->
 
     <section
-      class="grow"
+      class="grow border-s border-surface-100"
       appSearchContext="main"
       [aggregations]="searchConfig().aggregations"
       [filter]="searchConfig().filter"
