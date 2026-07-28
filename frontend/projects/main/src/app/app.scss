@@ -1,1 +1,10 @@
 @import '../tailwind.css';
+
+/* Fallback for embedded web component contexts where Tailwind preflight
+	 variable initialization may not be present inside the shadow root. */
+:host,
+:host *,
+:host *::before,
+:host *::after {
+  --tw-border-style: solid;
+}
