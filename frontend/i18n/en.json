@@ -105,6 +105,63 @@
   },
   "error": "Error",
   "exploreData": "Explore data",
+  "feedbacks": {
+    "dialog": {
+      "addFeedback": "Add your review",
+      "replyToComment": "Reply"
+    },
+    "errors": {
+      "approve": "Unable to approve this feedback.",
+      "create": "Unable to create feedback.",
+      "loadRecord": "Unable to load feedback for this record.",
+      "missingRecordUuid": "Record UUID is missing, feedback cannot be created.",
+      "remove": "Unable to remove this feedback."
+    },
+    "form": {
+      "anonymous": "Anonymous",
+      "authenticatedUser": "Authenticated user",
+      "cancelReply": "Cancel",
+      "email": "Your email address",
+      "errors": {
+        "invalidEmail": "Please enter a valid email address.",
+        "requiredGuestFields": "Please fill in your name, email and organization before submitting your review."
+      },
+      "loggedIn": "Logged in",
+      "name": "Your name",
+      "organization": "Your organization",
+      "postingAs": "Posting as",
+      "privacyConsent": "I allow publication of my personal details.",
+      "replyingTo": "Replying to {{author}}",
+      "saveReview": "Save review",
+      "saveReviewAfterModeration": "Your review will be publicly visible after moderation.",
+      "subtitle": "Share your experience related to the different aspects of this resource.",
+      "title": "Add your review",
+      "userInformation": "User information",
+      "userInformationSubtitle": "You are not logged in. Please fill in your information below to submit your review.",
+      "yourRating": "Your rating",
+      "yourReview": "Your review"
+    },
+    "header": {
+      "review": "review",
+      "reviews": "reviews",
+      "writeReview": "Write a review"
+    },
+    "moderation": {
+      "approveComment": "Publish",
+      "deleteComment": "Delete review",
+      "deleteMessage": "Delete this review from {{author}}?",
+      "pending": "Pending moderation",
+      "removeComment": "Remove",
+      "typeToConfirm": "Type to confirm: {{word}}"
+    },
+    "state": {
+      "noReviewsYet": "No reviews yet. Be the first to share your experience."
+    },
+    "success": {
+      "submittedModerationSoon": "Your review was submitted and will be moderated soon.",
+      "title": "Review submitted"
+    }
+  },
   "home": {
     "discover": "Discover our themes",
     "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",

@@ -9,6 +9,7 @@ describe('Navigation menu', () => {
 
     // Wait for the app to load and alias the menu items for all tests
     cy.wait('@apiI18nGnui');
+    cy.wait('@apiMe');
     cy.get('app-menu').should('exist');
     cy.get('app-menu [role="menuitem"]').as('menuItems');
   });

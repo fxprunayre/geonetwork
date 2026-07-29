@@ -23,8 +23,8 @@ import { RecordsService } from 'gn4-api-client';
 import { MenuItem } from 'primeng/api';
 
 import { MenubarModule } from 'primeng/menubar';
+import { DeleteConfirmationDialog } from '../../../shared/widgets/delete-confirmation-dialog/delete-confirmation-dialog';
 import { AssociatedRecordsSummary } from '../../record-associations/associated-records-summary/associated-records-summary';
-import { DeleteConfirmationDialog } from '../record-deletion/delete-confirmation-dialog/delete-confirmation-dialog';
 
 import { ButtonModule } from 'primeng/button';
 import { TieredMenu } from 'primeng/tieredmenu';

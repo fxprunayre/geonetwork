@@ -105,6 +105,62 @@
   },
   "error": "Fout",
   "exploreData": "Explore data",
+  "feedbacks": {
+    "dialog": {
+      "addFeedback": "Beoordeling toevoegen",
+      "replyToComment": "Reageren op opmerking"
+    },
+    "errors": {
+      "approve": "Kan deze feedback niet goedkeuren.",
+      "create": "Kan feedback niet aanmaken.",
+      "loadRecord": "Kan feedback voor deze bron niet laden.",
+      "missingRecordUuid": "Record-UUID ontbreekt, feedback kan niet worden aangemaakt.",
+      "remove": "Kan deze feedback niet verwijderen."
+    },
+    "form": {
+      "anonymous": "Anoniem",
+      "authenticatedUser": "Geverifieerde gebruiker",
+      "cancelReply": "Annuleren",
+      "email": "E-mail",
+      "errors": {
+        "invalidEmail": "Voer een geldig e-mailadres in.",
+        "requiredGuestFields": "Vul uw naam, e-mailadres en organisatie in voordat u uw beoordeling verzendt."
+      },
+      "loggedIn": "Ingelogd",
+      "name": "Naam",
+      "organization": "Organisatie",
+      "postingAs": "Plaatsen als",
+      "privacyConsent": "Ik sta publicatie van mijn persoonlijke gegevens toe.",
+      "replyingTo": "Reageren op {{author}}",
+      "saveReview": "Beoordeling opslaan",
+      "saveReviewAfterModeration": "Uw beoordeling wordt na moderatie openbaar zichtbaar.",
+      "subtitle": "Deel je ervaring over de verschillende aspecten van deze bron.",
+      "title": "Voeg je beoordeling toe",
+      "userInformation": "Gebruikersinformatie",
+      "userInformationSubtitle": "U bent niet ingelogd. Vul uw gegevens hieronder in om uw beoordeling te verzenden.",
+      "yourReview": "Jouw beoordeling"
+    },
+    "header": {
+      "review": "beoordeling",
+      "reviews": "beoordelingen",
+      "writeReview": "Schrijf een beoordeling"
+    },
+    "moderation": {
+      "approveComment": "Opmerking goedkeuren",
+      "deleteComment": "Opmerking verwijderen",
+      "deleteMessage": "Deze opmerking van {{author}} verwijderen?",
+      "pending": "In afwachting van moderatie",
+      "removeComment": "Opmerking verwijderen",
+      "typeToConfirm": "Typ om te bevestigen: {{word}}"
+    },
+    "state": {
+      "noReviewsYet": "Nog geen beoordelingen. Wees de eerste die je ervaring deelt."
+    },
+    "success": {
+      "submittedModerationSoon": "Uw beoordeling is verzonden en wordt binnenkort gemodereerd.",
+      "title": "Beoordeling verzonden"
+    }
+  },
   "home": {
     "discover": "Discover our themes",
     "subtitle": "Open, high-quality marine & coastal geospatial data for science-policy from Ifremer.",

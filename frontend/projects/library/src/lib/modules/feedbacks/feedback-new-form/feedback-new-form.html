@@ -1,0 +1,163 @@
+<div class="flex flex-col gap-10">
+  <p class="text-sm text-slate-600">
+    {{ 'feedbacks.form.subtitle' | translate }}
+  </p>
+
+  @if (parentComment(); as parent) {
+    <p-message severity="secondary">
+      <ng-template #icon>
+        <ng-icon name="faSolidReply" />
+      </ng-template>
+      {{
+        'feedbacks.form.replyingTo'
+          | translate
+            : {
+                author: parent.authorName || ('feedbacks.form.anonymous' | translate),
+              }
+      }}
+    </p-message>
+  }
+
+  <form class="flex flex-col gap-4" (ngSubmit)="submit()">
+    @if (validationErrorKey()) {
+      <p-message severity="error">{{ validationErrorKey() | translate }}</p-message>
+    }
+
+    @if (!isAuthenticated()) {
+      <div class="font-semibold">
+        <ng-icon name="faSolidUser" />
+        {{ 'feedbacks.form.userInformation' | translate }}
+      </div>
+
+      <p class="text-sm text-slate-600">
+        {{ 'feedbacks.form.userInformationSubtitle' | translate }}
+      </p>
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <label class="flex flex-col gap-1 text-sm">
+          <input
+            pInputText
+            type="text"
+            [title]="'feedbacks.form.name' | translate"
+            [placeholder]="'feedbacks.form.name' | translate"
+            name="authorName"
+            [(ngModel)]="authorName"
+            class="w-full"
+            required
+          />
+        </label>
+
+        <label class="flex flex-col gap-1 text-sm">
+          <input
+            pInputText
+            type="email"
+            [title]="'feedbacks.form.email' | translate"
+            [placeholder]="'feedbacks.form.email' | translate"
+            name="authorEmail"
+            [(ngModel)]="authorEmail"
+            class="w-full"
+            required
+          />
+        </label>
+
+        <label class="flex flex-col gap-1 text-sm md:col-span-2">
+          <input
+            pInputText
+            type="text"
+            [title]="'feedbacks.form.organization' | translate"
+            [placeholder]="'feedbacks.form.organization' | translate"
+            name="authorOrganization"
+            [(ngModel)]="authorOrganization"
+            class="w-full"
+            required
+          />
+        </label>
+      </div>
+
+      <label class="flex items-center gap-2 text-sm">
+        <input type="checkbox" name="optionPrivacy" [(ngModel)]="optionPrivacy" />
+        {{ 'feedbacks.form.privacyConsent' | translate }}
+      </label>
+    } @else {
+      <div
+        class="flex flex-row items-start gap-4 rounded border border-surface-100 bg-surface-50 p-4"
+        [title]="'feedbacks.form.userInformation' | translate"
+      >
+        <div>
+          <ng-icon class="text-4xl p-1" name="faUser" />
+        </div>
+        <div class="grow" [title]="'feedbacks.form.postingAs' | translate">
+          <div class="font-semibold">
+            {{ getAuthenticatedDisplayName() || ('feedbacks.form.authenticatedUser' | translate) }}
+          </div>
+          @if (currentUser()?.organisation) {
+            <div class="text-surface-700">{{ currentUser()?.organisation }}</div>
+          }
+        </div>
+        <div class="flex flex-row gap-2 items-center">
+          <ng-icon name="faCircleCheck" />
+          <div class="font-semibold">
+            {{ 'feedbacks.form.loggedIn' | translate }}
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (criteria().length) {
+      <div>
+        <span class="font-semibold">{{ 'feedbacks.form.yourRating' | translate }}</span>
+        <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+          @let isAverageVisible = criteria().length > 2;
+
+          @for (criterion of criteria(); track criterion.id || $index) {
+            @let isAverage = criterion.name === 'Average';
+
+            @if ((isAverageVisible && isAverage) || !isAverage) {
+              <div class="flex flex-col gap-1 text-sm">
+                <span [attr.title]="getCriterionTooltip(criterion)">
+                  {{ getCriterionLabel(criterion) }}
+                </span>
+                <p-rating
+                  [name]="'rating-' + (criterion.id || $index)"
+                  [readonly]="isAverage"
+                  [ngModel]="getRatingValue(criterion)"
+                  (ngModelChange)="setRatingValue(criterion, $event)"
+                />
+              </div>
+            }
+          }
+        </div>
+      </div>
+    }
+
+    <div>
+      <label class="flex flex-col gap-1">
+        <span class="font-semibold">{{ 'feedbacks.form.yourReview' | translate }}</span>
+        <textarea
+          pTextarea
+          name="commentText"
+          rows="4"
+          required
+          [(ngModel)]="commentText"
+          class="w-full"
+        ></textarea>
+      </label>
+    </div>
+
+    <div class="flex justify-end items-center gap-4">
+      <div class="grow text-sm">
+        {{ 'feedbacks.form.saveReviewAfterModeration' | translate }}
+      </div>
+      <p-button type="button" severity="secondary" [outlined]="true" (onClick)="cancelReply.emit()">
+        <span pButtonLabel>{{ 'feedbacks.form.cancelReply' | translate }}</span>
+      </p-button>
+      <p-button
+        type="submit"
+        severity="primary"
+        [disabled]="!commentText.trim()"
+        [loading]="submitting()"
+      >
+        <span pButtonLabel>{{ 'feedbacks.form.saveReview' | translate }}</span>
+      </p-button>
+    </div>
+  </form>
+</div>

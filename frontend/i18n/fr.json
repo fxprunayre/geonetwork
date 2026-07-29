@@ -106,6 +106,62 @@
   },
   "error": "Erreur",
   "exploreData": "Explorer les données",
+  "feedbacks": {
+    "dialog": {
+      "addFeedback": "Ajouter un avis",
+      "replyToComment": "Répondre"
+    },
+    "errors": {
+      "approve": "Impossible de publier cet avis.",
+      "create": "Impossible de créer l'avis.",
+      "loadRecord": "Impossible de charger les avis pour cette ressource.",
+      "missingRecordUuid": "L'identifiant de la ressource est manquant, l'avis ne peut pas être créé.",
+      "remove": "Impossible de supprimer cet avis."
+    },
+    "form": {
+      "anonymous": "Anonyme",
+      "authenticatedUser": "Utilisateur authentifié",
+      "cancelReply": "Annuler",
+      "email": "E-mail",
+      "errors": {
+        "invalidEmail": "Veuillez saisir une adresse e-mail valide.",
+        "requiredGuestFields": "Veuillez renseigner votre nom, votre e-mail et votre organisation avant d'envoyer votre avis."
+      },
+      "loggedIn": "Connecté",
+      "name": "Nom",
+      "organization": "Organisation",
+      "postingAs": "Publication en tant que",
+      "privacyConsent": "J'autorise la publication de mes informations personnelles.",
+      "replyingTo": "Réponse à {{author}}",
+      "saveReview": "Enregistrer l'avis",
+      "saveReviewAfterModeration": "Votre avis sera publiquement visible après modération.",
+      "subtitle": "Partagez votre expérience liée aux différents aspects de cette ressource.",
+      "title": "Ajoutez votre avis",
+      "userInformation": "Informations utilisateur",
+      "userInformationSubtitle": "Vous n'êtes pas connecté. Veuillez remplir vos informations ci-dessous pour soumettre votre avis.",
+      "yourReview": "Votre avis"
+    },
+    "header": {
+      "review": "avis",
+      "reviews": "avis",
+      "writeReview": "Rédiger un avis"
+    },
+    "moderation": {
+      "approveComment": "Publier",
+      "deleteComment": "Supprimer",
+      "deleteMessage": "Supprimer ce commentaire de {{author}} ?",
+      "pending": "En attente de modération",
+      "removeComment": "Supprimer",
+      "typeToConfirm": "Saisissez pour confirmer : {{word}}"
+    },
+    "state": {
+      "noReviewsYet": "Aucun avis pour le moment. Soyez le premier à partager votre expérience."
+    },
+    "success": {
+      "submittedModerationSoon": "Votre avis a été envoyé et sera bientôt modéré.",
+      "title": "Avis envoyé"
+    }
+  },
   "home": {
     "discover": "Découvrez nos thèmes",
     "subtitle": "Données géospatiales marines et côtières ouvertes et de haute qualité pour la science et les politiques publiques, fournies par l'Ifremer.",

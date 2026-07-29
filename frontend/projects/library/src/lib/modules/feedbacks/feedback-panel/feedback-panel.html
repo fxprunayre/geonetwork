@@ -1,1 +1,73 @@
-<p>{{ 'discussions' | translate }}</p>
+<section class="space-y-4">
+  <p-toast />
+  <div
+    class="flex flex-wrap items-center justify-between gap-3 rounded border border-surface-100 bg-surface-50 p-4"
+  >
+    @if (loading()) {
+      <p-skeleton height="1rem" width="20%" borderRadius="12px" />
+    } @else if (metadataReviewCount() > 0) {
+      <p class="text-lg">
+        <p-rating [ngModel]="metadataAverage()" readonly [stars]="5" />
+        ({{ metadataReviewCount() }}
+        {{
+          metadataReviewCount() === 1
+            ? ('feedbacks.header.review' | translate)
+            : ('feedbacks.header.reviews' | translate)
+        }})
+      </p>
+    } @else {
+      <p-message severity="secondary" class="items-center gap-2">
+        <ng-icon name="faSolidComments" />
+        <span>{{ 'feedbacks.state.noReviewsYet' | translate }}</span>
+      </p-message>
+    }
+
+    <p-button severity="primary" (onClick)="openNewFeedback()">
+      <ng-icon name="faSolidComment" pButtonIcon></ng-icon>
+      <span pButtonLabel>{{ 'feedbacks.header.writeReview' | translate }}</span>
+    </p-button>
+  </div>
+
+  <p-dialog
+    [(visible)]="feedbackDialogVisible"
+    [modal]="true"
+    [style]="{ width: 'min(760px, 95vw)' }"
+    (onHide)="onDialogClose()"
+  >
+    <ng-template #header>
+      <div class="inline-flex items-center justify-center gap-2">
+        <ng-icon name="faSolidComment"></ng-icon>
+        {{
+          replyTarget()
+            ? ('feedbacks.dialog.replyToComment' | translate)
+            : ('feedbacks.dialog.addFeedback' | translate)
+        }}
+      </div>
+    </ng-template>
+    <app-feedback-new-form
+      [criteria]="ratingCriteria()"
+      [parentComment]="replyTarget()"
+      [isAuthenticated]="authStore.isAuthenticated()"
+      [currentUser]="authStore.user()"
+      [submitting]="submitting()"
+      (submitFeedback)="submitFeedback($event)"
+      (cancelReply)="cancelReplyFromDialog()"
+    />
+  </p-dialog>
+
+  @if (!loading()) {
+    <div class="flex flex-col gap-4">
+      @for (node of commentTree(); track node.comment.uuid || $index) {
+        <app-feedback-thread-item
+          [node]="node"
+          [canEditCurrentRecord]="canEditCurrentRecord()"
+          [approvingCommentUuid]="approvingCommentUuid()"
+          [deletingCommentUuid]="deletingCommentUuid()"
+          (approve)="approveFeedback($event)"
+          (remove)="removeFeedback($event)"
+          (reply)="startReply($event)"
+        />
+      }
+    </div>
+  }
+</section>

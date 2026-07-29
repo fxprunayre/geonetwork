@@ -1,0 +1,31 @@
+@if (canEditCurrentRecord()) {
+  <div class="flex flex-row gap-4">
+    @if (!comment().published) {
+      <p-message severity="warn">
+        <ng-template #icon>
+          <ng-icon name="faSolidTriangleExclamation" />
+        </ng-template>
+        {{ 'feedbacks.moderation.pending' | translate }}
+      </p-message>
+
+      <p-button
+        severity="secondary"
+        [outlined]="true"
+        [loading]="approveInProgress()"
+        (onClick)="onApprove()"
+      >
+        <ng-icon name="faSolidCheck" pButtonIcon></ng-icon>
+        <span pButtonLabel>{{ 'feedbacks.moderation.approveComment' | translate }}</span>
+      </p-button>
+    }
+    <p-button
+      severity="secondary"
+      [outlined]="true"
+      [loading]="removeInProgress()"
+      (onClick)="onRemove()"
+    >
+      <ng-icon name="faSolidTrash" pButtonIcon></ng-icon>
+      <span pButtonLabel>{{ 'feedbacks.moderation.removeComment' | translate }}</span>
+    </p-button>
+  </div>
+}
