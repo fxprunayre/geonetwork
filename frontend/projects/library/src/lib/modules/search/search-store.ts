@@ -71,7 +71,11 @@ export const SearchStore = signalStore(
   withComputed((store) => {
     const authStore = inject(AuthStore);
     const apiConfiguration = inject(APPLICATION_CONFIGURATION);
+    const hasSpatialFilter = computed(
+      () => !!store.searchService.extractSpatialEnvelopeFilter(store.filter(), 'geom'),
+    );
     return {
+      hasSpatialFilter,
       searchFilterParameters: computed(() => {
         store.aggStore.aggregationsConfigTrigger();
         authStore.isAuthenticated();
@@ -96,8 +100,10 @@ export const SearchStore = signalStore(
       hasResults: computed(() => store.results().length > 0),
       isEmpty: computed(() => store.results().length === 0),
       totalPages: computed(() => Math.ceil(store.totalCount() / store.pageSize())),
-      hasActiveFilters: computed(() => store.filterStore.hasActiveFilters()),
-      activeFilterCount: computed(() => store.filterStore.activeFilterCount()),
+      hasActiveFilters: computed(() => store.filterStore.hasActiveFilters() || hasSpatialFilter()),
+      activeFilterCount: computed(
+        () => store.filterStore.activeFilterCount() + (hasSpatialFilter() ? 1 : 0),
+      ),
       aggregations: computed(() => store.aggStore.aggregations()),
       aggregationsConfig: computed(() => store.aggStore.aggregationsConfig()),
       aggregationsConfigTrigger: computed(() => store.aggStore.aggregationsConfigTrigger()),
@@ -148,12 +154,14 @@ export const SearchStore = signalStore(
           store.pageSize(),
           store.currentSort(),
           store.layout(),
+          store.filter(),
         );
 
         const currentState = {
           currentPage: store.currentPage(),
           pageSize: store.pageSize(),
           searchQuery: store.searchQuery(),
+          filter: store.filter(),
           filters: store.filterStore.filters(),
           currentSort: store.currentSort(),
           layout: store.layout(),
@@ -349,8 +357,12 @@ export const SearchStore = signalStore(
         patchState(store, { currentPage: 0 });
       },
       reset() {
+        const filterWithoutSpatial = store.searchService.removeSpatialEnvelopeFilters(
+          store.filter(),
+          'geom',
+        );
         store.filterStore.reset();
-        patchState(store, { searchQuery: '' });
+        patchState(store, { searchQuery: '', filter: filterWithoutSpatial, currentPage: 0 });
       },
       more(_pageSize: number) {
         patchState(store, { currentPage: store.currentPage() + store.pageSize() });

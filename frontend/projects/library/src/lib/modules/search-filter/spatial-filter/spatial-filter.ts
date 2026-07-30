@@ -135,6 +135,11 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
       }
       this.zoomToRecordExtent(request.recordId);
     });
+
+    effect(() => {
+      this.search().filter();
+      untracked(() => this.syncBboxFromSearchFilter());
+    });
   }
 
   ngAfterViewInit(): void {
@@ -155,7 +160,7 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
 
     this.syncResultsFeatures();
     this.syncHoveredFeature();
-    this.restoreBboxFromSearchFilter();
+    this.syncBboxFromSearchFilter();
   }
 
   ngOnDestroy(): void {
@@ -239,16 +244,26 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
     this.search().setFilter(nextFilter);
   }
 
-  private restoreBboxFromSearchFilter() {
+  private syncBboxFromSearchFilter() {
     const spatialFilterData = this.searchService.extractSpatialEnvelopeFilter(
       this.search().filter(),
       'geom',
     );
     if (!spatialFilterData) {
+      if (this.bbox()) {
+        this.bboxSource.clear();
+        this.bbox.set(null);
+        this.bboxCenter.set(null);
+        this.removeDrawInteraction();
+        this.map?.renderSync();
+      }
       return;
     }
 
     const restoredBbox = spatialFilterData.bbox;
+    if (this.bbox() && this.areBboxesEqual(this.bbox() as SpatialBBox, restoredBbox)) {
+      return;
+    }
 
     this.bbox.set(restoredBbox);
     this.bboxCenter.set([
@@ -257,6 +272,10 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
     ]);
 
     this.renderBboxFeature(restoredBbox);
+  }
+
+  private areBboxesEqual(a: SpatialBBox, b: SpatialBBox): boolean {
+    return a.west === b.west && a.south === b.south && a.east === b.east && a.north === b.north;
   }
 
   private renderBboxFeature(bbox: SpatialBBox) {

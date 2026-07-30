@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { Params, Router } from '@angular/router';
+import { elasticsearch } from 'gn-api-client';
 import { HistoryService } from '../../shared/history-service';
 import {
   DASHBOARD_ROUTE_PATH,
@@ -9,6 +10,8 @@ import {
   SEARCH_ROUTE_PATH,
   SIGNIN_ROUTE_PATH,
 } from './search-constant';
+import { SearchService } from './search-service';
+import { SpatialBBox, SpatialRelation } from './search-spatial.model';
 import { SearchFilter, SearchRequestParameters } from './search-store.model';
 
 @Injectable({
@@ -18,6 +21,11 @@ export class SearchRouteService {
   router = inject(Router);
   location = inject(Location);
   historyService = inject(HistoryService);
+  searchService = inject(SearchService);
+
+  private readonly SPATIAL_FIELD = 'geom';
+  private readonly SPATIAL_BBOX_PARAM = 'bbox';
+  private readonly SPATIAL_RELATION_PARAM = 'bboxRel';
 
   buildFilterQueryParams(filter: SearchFilter): string {
     return `"${filter.values.join('" OR "')}"`;
@@ -60,6 +68,15 @@ export class SearchRouteService {
       params['layout'] = store.layout;
     }
 
+    const spatialFilter = this.searchService.extractSpatialEnvelopeFilter(
+      store.filter,
+      this.SPATIAL_FIELD,
+    );
+    if (spatialFilter) {
+      params[this.SPATIAL_BBOX_PARAM] = this.serializeSpatialBbox(spatialFilter.bbox);
+      params[this.SPATIAL_RELATION_PARAM] = spatialFilter.relation;
+    }
+
     return params;
   }
 
@@ -68,9 +85,18 @@ export class SearchRouteService {
     pageSize: number,
     currentSort: string,
     currentLayout: string,
+    currentFilter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
   ): Record<string, unknown> {
     const filter: Record<string, SearchFilter> = {};
-    const nonFilterParams = ['from', 'size', 'q', 'sort', 'layout'];
+    const nonFilterParams = [
+      'from',
+      'size',
+      'q',
+      'sort',
+      'layout',
+      this.SPATIAL_BBOX_PARAM,
+      this.SPATIAL_RELATION_PARAM,
+    ];
 
     Object.entries(params).forEach(([key, value]) => {
       if (!nonFilterParams.includes(key)) {
@@ -82,14 +108,69 @@ export class SearchRouteService {
       }
     });
 
+    const nextFilter = this.buildSpatialFilterFromParams(params, currentFilter);
+
     return {
       currentPage: parseInt(params['from']) || 0,
       pageSize: parseInt(params['size']) || pageSize,
       searchQuery: params['q'] || '',
+      filter: nextFilter,
       filters: filter,
       currentSort: params['sort'] || currentSort,
       layout: params['layout'] || currentLayout,
     };
+  }
+
+  private serializeSpatialBbox(bbox: SpatialBBox): string {
+    return [bbox.west, bbox.south, bbox.east, bbox.north].join(',');
+  }
+
+  private parseSpatialBbox(raw: unknown): SpatialBBox | null {
+    if (!raw) {
+      return null;
+    }
+
+    const value = Array.isArray(raw) ? raw[0] : raw;
+    const parts = String(value)
+      .split(',')
+      .map((entry) => Number(entry.trim()));
+    if (parts.length !== 4 || parts.some((entry) => !Number.isFinite(entry))) {
+      return null;
+    }
+
+    const [west, south, east, north] = parts;
+    return { west, south, east, north };
+  }
+
+  private parseSpatialRelation(raw: unknown): SpatialRelation {
+    const value = Array.isArray(raw) ? raw[0] : raw;
+    if (value === 'within' || value === 'contains' || value === 'intersects') {
+      return value;
+    }
+    return 'intersects';
+  }
+
+  private buildSpatialFilterFromParams(
+    params: Params,
+    currentFilter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+  ): elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[] {
+    const filterWithoutSpatial = this.searchService.removeSpatialEnvelopeFilters(
+      currentFilter,
+      this.SPATIAL_FIELD,
+    );
+
+    const bbox = this.parseSpatialBbox(params[this.SPATIAL_BBOX_PARAM]);
+    if (!bbox) {
+      return filterWithoutSpatial;
+    }
+
+    const relation = this.parseSpatialRelation(params[this.SPATIAL_RELATION_PARAM]);
+    return this.searchService.applySpatialEnvelopeFilter(
+      filterWithoutSpatial,
+      this.SPATIAL_FIELD,
+      bbox,
+      relation,
+    );
   }
 
   shouldUpdateStateFromRoute(url: string): boolean {
