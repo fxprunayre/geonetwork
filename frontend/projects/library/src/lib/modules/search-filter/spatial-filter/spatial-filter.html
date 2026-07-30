@@ -1,21 +1,17 @@
 <div class="m-4">
-  <div
-    #mapContainer
-    class="w-full h-75 bg-slate-100 rounded border border-gray-200 shadow-sm"
-  ></div>
+  <div class="relative">
+    <div
+      #mapContainer
+      class="w-full h-75 bg-slate-100 rounded border border-gray-200 shadow-sm"
+    ></div>
 
-  <div class="mt-2 flex items-center gap-2">
-    <p-splitbutton
-      outlined
-      size="small"
-      [model]="relationSplitButtonItems()"
+    <p-button
+      class="absolute top-2 right-2 z-10"
       [pTooltip]="primaryActionTooltip()"
       tooltipPosition="top"
-      (onClick)="onPrimaryAction()"
+      (click)="onPrimaryAction()"
     >
-      <ng-template #content>
-        <ng-icon [name]="primaryActionIcon()" pButtonIcon></ng-icon>
-      </ng-template>
-    </p-splitbutton>
+      <ng-icon [name]="primaryActionIcon()" pButtonIcon></ng-icon>
+    </p-button>
   </div>
 </div>

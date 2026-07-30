@@ -57,9 +57,11 @@
                 <div
                   (mouseenter)="handleRecordHover(result)"
                   (mouseleave)="handleRecordHover(null)"
+                  (dblclick)="handleRecordDoubleClick(result)"
                 >
                   <app-result-item-list
                     [result]="result"
+                    [navigateOnClick]="false"
                     (recordClick)="handleRecordClick($event)"
                   />
                 </div>
@@ -74,9 +76,11 @@
                 <div
                   (mouseenter)="handleRecordHover(result)"
                   (mouseleave)="handleRecordHover(null)"
+                  (dblclick)="handleRecordDoubleClick(result)"
                 >
                   <app-result-item-grid
                     [result]="result"
+                    [navigateOnClick]="false"
                     (recordClick)="handleRecordClick($event)"
                   />
                 </div>
@@ -86,8 +90,10 @@
           @case ('table') {
             <app-result-item-table
               [results]="search().results()"
+              [navigateOnClick]="false"
               (recordClick)="handleRecordClick($event)"
               (recordHover)="handleRecordHover($event)"
+              (recordDoubleClick)="handleRecordDoubleClick($event)"
             />
           }
         }

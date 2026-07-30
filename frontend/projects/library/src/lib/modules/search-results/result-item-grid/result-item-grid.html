@@ -42,7 +42,7 @@
     </a>
   } @else {
     <a
-      [routerLink]="[RECORD_ROUTE_PATH, result.info?._id]"
+      [routerLink]="navigateOnClick() ? [RECORD_ROUTE_PATH, result.info?._id] : null"
       (click)="handleRecordClick()"
       class="cursor-pointer border border-surface-100 rounded-(--p-border-radius-md) flex flex-col h-full transition-shadow hover:shadow-md"
       [title]="description"

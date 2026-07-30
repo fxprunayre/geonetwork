@@ -7,13 +7,17 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-result>
-    <tr (mouseenter)="recordHover.emit(result)" (mouseleave)="recordHover.emit(null)">
+    <tr
+      (mouseenter)="recordHover.emit(result)"
+      (mouseleave)="recordHover.emit(null)"
+      (dblclick)="recordDoubleClick.emit(result)"
+    >
       <td>
         <app-record-field-type [record]="result" [mainTypeOnly]="true" [layout]="'icon'" />
       </td>
       <td>
         <a
-          [routerLink]="[RECORD_ROUTE_PATH, result.uuid]"
+          [routerLink]="navigateOnClick() ? [RECORD_ROUTE_PATH, result.uuid] : null"
           (click)="recordClick.emit(result.uuid)"
           class="font-bold hover:underline cursor-pointer text-primary"
         >

@@ -25,8 +25,10 @@ import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 })
 export class ResultItemTable {
   results = input<IndexRecord[]>([]);
+  navigateOnClick = input<boolean>(true);
   recordClick = output<string>();
   recordHover = output<IndexRecord | null>();
+  recordDoubleClick = output<IndexRecord>();
 
   protected readonly RECORD_ROUTE_PATH = RECORD_ROUTE_PATH;
 }

@@ -8,10 +8,10 @@ import {
   inject,
   OnDestroy,
   signal,
+  untracked,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { createMapFromContext } from '@geospatial-sdk/openlayers';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidEraser, faSolidPenToSquare } from '@ng-icons/font-awesome/solid';
@@ -22,8 +22,8 @@ import {
   SearchBase,
   SearchMapOverlayService,
   SpatialBBox,
-  SpatialRelation,
 } from 'gn-library';
+import { createEmpty, extend, isEmpty } from 'ol/extent';
 import Feature from 'ol/Feature';
 import GeoJSON from 'ol/format/GeoJSON';
 import type Geometry from 'ol/geom/Geometry';
@@ -37,19 +37,13 @@ import CircleStyle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
-import { MenuItem } from 'primeng/api';
-import { SplitButton } from 'primeng/splitbutton';
+import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-
-interface RelationOption {
-  label: string;
-  value: SpatialRelation;
-}
 
 @Component({
   selector: 'app-spatial-filter',
   standalone: true,
-  imports: [CommonModule, FormsModule, SplitButton, TooltipModule, NgIcon],
+  imports: [CommonModule, ButtonModule, TooltipModule, NgIcon],
   viewProviders: [
     provideIcons({
       faPenToSquare: faSolidPenToSquare,
@@ -78,28 +72,8 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
   private readonly searchMapOverlayService = inject(SearchMapOverlayService);
   private readonly geoJsonFormat = new GeoJSON();
 
-  relation = signal<SpatialRelation>('intersects');
   bbox = signal<SpatialBBox | null>(null);
   bboxCenter = signal<[number, number] | null>(null);
-
-  relationOptions: RelationOption[] = [
-    { label: 'Intersect', value: 'intersects' },
-    { label: 'Within', value: 'within' },
-  ];
-
-  relationSplitButtonItems = computed<MenuItem[]>(() =>
-    this.relationOptions.map((option) => ({
-      label: option.label,
-      disabled: this.relation() === option.value,
-      command: () => this.onRelationChange(option.value),
-    })),
-  );
-
-  relationLabel = computed(() => {
-    return (
-      this.relationOptions.find((option) => option.value === this.relation())?.label ?? 'Relation'
-    );
-  });
 
   primaryActionIcon = computed(() => (this.bbox() ? 'faSolidEraser' : 'faPenToSquare'));
 
@@ -145,12 +119,21 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
     super();
     effect(() => {
       this.searchMapOverlayService.getPageResultsState()();
-      this.syncResultsFeatures();
+      untracked(() => this.syncResultsFeatures());
     });
 
     effect(() => {
       this.searchMapOverlayService.getHoveredRecordState()();
       this.syncHoveredFeature();
+    });
+
+    effect(() => {
+      this.searchMapOverlayService.getZoomToRecordRequestState()();
+      const request = this.searchMapOverlayService.getZoomToRecordRequest(this.scope());
+      if (!request?.recordId) {
+        return;
+      }
+      this.zoomToRecordExtent(request.recordId);
     });
   }
 
@@ -241,13 +224,6 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
     this.startDrawBbox();
   }
 
-  onRelationChange(value: SpatialRelation) {
-    this.relation.set(value);
-    if (this.bbox()) {
-      this.applySpatialFilter();
-    }
-  }
-
   private applySpatialFilter() {
     const currentBbox = this.bbox();
     if (!currentBbox) {
@@ -258,7 +234,7 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
       this.search().filter(),
       'geom',
       currentBbox,
-      this.relation(),
+      'intersects',
     );
     this.search().setFilter(nextFilter);
   }
@@ -279,10 +255,6 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
       (restoredBbox.west + restoredBbox.east) / 2,
       (restoredBbox.south + restoredBbox.north) / 2,
     ]);
-
-    this.relation.set(
-      spatialFilterData.relation === 'contains' ? 'within' : spatialFilterData.relation,
-    );
 
     this.renderBboxFeature(restoredBbox);
   }
@@ -343,8 +315,36 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
       }
     }
 
+    this.zoomToAllPageFeatures();
     this.syncHoveredFeature();
     this.map.renderSync();
+  }
+
+  private zoomToAllPageFeatures() {
+    if (!this.map) {
+      return;
+    }
+
+    const extent = createEmpty();
+    for (const features of this.resultFeaturesByRecordId.values()) {
+      for (const feature of features) {
+        const geometryExtent = feature.getGeometry()?.getExtent();
+        if (!geometryExtent) {
+          continue;
+        }
+        extend(extent, geometryExtent);
+      }
+    }
+
+    if (isEmpty(extent)) {
+      return;
+    }
+
+    this.map.getView().fit(extent, {
+      duration: 250,
+      padding: [24, 24, 24, 24],
+      maxZoom: 12,
+    });
   }
 
   private syncHoveredFeature() {
@@ -362,6 +362,36 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
     }
 
     this.map?.renderSync();
+  }
+
+  private zoomToRecordExtent(recordId: string) {
+    if (!this.map) {
+      return;
+    }
+
+    const features = this.resultFeaturesByRecordId.get(recordId) || [];
+    if (features.length === 0) {
+      return;
+    }
+
+    const extent = createEmpty();
+    for (const feature of features) {
+      const geometryExtent = feature.getGeometry()?.getExtent();
+      if (!geometryExtent) {
+        continue;
+      }
+      extend(extent, geometryExtent);
+    }
+
+    if (isEmpty(extent)) {
+      return;
+    }
+
+    this.map.getView().fit(extent, {
+      duration: 250,
+      padding: [24, 24, 24, 24],
+      maxZoom: 12,
+    });
   }
 
   private removeDrawInteraction() {

@@ -56,6 +56,7 @@ export class ResultItemList {
   protected readonly RECORD_ROUTE_PATH = RECORD_ROUTE_PATH;
   result = input<IndexRecord>();
   layout = input<'default' | 'compact' | 'version'>('default');
+  navigateOnClick = input<boolean>(true);
   recordClick = output<string>();
 
   externalUrl = computed(() => {
@@ -68,7 +69,7 @@ export class ResultItemList {
   handleRecordClick() {
     const result = this.result();
     if (!result) return;
-    const id = result.info?._id;
+    const id = result.uuid || result.info?._id;
     if (!id) return;
     this.recordClick.emit(id);
   }
