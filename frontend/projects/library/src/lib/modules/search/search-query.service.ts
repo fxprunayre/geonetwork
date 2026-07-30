@@ -175,27 +175,14 @@ export class SearchQueryService {
                     }
                   }
 
-                  def locationItems = [];
-                  if (params['_source'].containsKey('location')) {
-                    def rawLocation = params['_source']['location'];
-                    if (rawLocation instanceof List) {
-                      locationItems = rawLocation;
-                    } else if (rawLocation != null) {
-                      locationItems.add(rawLocation);
-                    }
-                  }
-
                   int geomCount = geomItems.size();
-                  int locationCount = locationItems.size();
-                  int pairCount = geomCount > locationCount ? geomCount : locationCount;
-                  if (pairCount == 0) {
+                  if (geomCount == 0) {
                     return 0.0;
                   }
 
                   double bestScore = 0.0;
-                  for (int i = 0; i < pairCount; i++) {
-                    def geom = i < geomItems.size() ? geomItems[i] : null;
-                    def location = i < locationItems.size() ? locationItems[i] : null;
+                  for (int i = 0; i < geomCount; i++) {
+                    def geom = geomItems[i];
 
                     double docCenterLon = Double.NaN;
                     double docCenterLat = Double.NaN;
@@ -204,27 +191,6 @@ export class SearchQueryService {
                     double docSouth = Double.NaN;
                     double docEast = Double.NaN;
                     double docNorth = Double.NaN;
-
-                    if (location instanceof Map) {
-                      if (
-                        location.containsKey('lon') &&
-                        location.containsKey('lat') &&
-                        location['lon'] instanceof Number &&
-                        location['lat'] instanceof Number
-                      ) {
-                        docCenterLon = (double) location['lon'];
-                        docCenterLat = (double) location['lat'];
-                      }
-                    } else if (location instanceof List) {
-                      if (
-                        location.size() >= 2 &&
-                        location[0] instanceof Number &&
-                        location[1] instanceof Number
-                      ) {
-                        docCenterLon = (double) location[0];
-                        docCenterLat = (double) location[1];
-                      }
-                    }
 
                     if (geom instanceof Map && geom.containsKey('type') && geom.containsKey('coordinates')) {
                       def geomType = geom['type'];

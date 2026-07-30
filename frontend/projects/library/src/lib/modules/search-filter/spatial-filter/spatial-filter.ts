@@ -18,6 +18,7 @@ import { faSolidEraser, faSolidPenToSquare } from '@ng-icons/font-awesome/solid'
 import {
   DEFAULT_MAP_CONTEXT,
   DEFAULT_SPATIAL_FILTER_BBOX_LAYER_STYLE,
+  DEFAULT_SPATIAL_FILTER_DRAW_LAYER_STYLE,
   DEFAULT_SPATIAL_FILTER_HOVER_LAYER_STYLE,
   SearchBase,
   SearchMapOverlayService,
@@ -182,6 +183,7 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
       source: this.bboxSource,
       type: 'Circle',
       geometryFunction: createBox(),
+      style: DEFAULT_SPATIAL_FILTER_DRAW_LAYER_STYLE,
     });
 
     draw.on('drawstart', () => {

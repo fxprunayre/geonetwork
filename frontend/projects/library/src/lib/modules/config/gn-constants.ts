@@ -64,6 +64,18 @@ export const DEFAULT_SPATIAL_FILTER_BBOX_LAYER_STYLE = new Style({
   stroke: new Stroke({
     color: '#0f4c81',
     width: 3,
+    lineDash: [12, 8],
+  }),
+  fill: new Fill({
+    color: 'rgba(15, 76, 129, 0.02)',
+  }),
+});
+
+export const DEFAULT_SPATIAL_FILTER_DRAW_LAYER_STYLE = new Style({
+  stroke: new Stroke({
+    color: '#0f4c81',
+    width: 4,
+    lineDash: [8, 6],
   }),
   fill: new Fill({
     color: 'rgba(15, 76, 129, 0.02)',
@@ -82,10 +94,10 @@ export const DEFAULT_SPATIAL_FILTER_HOVER_LAYER_STYLE = new Style({
   image: new CircleStyle({
     radius: 8,
     fill: new Fill({
-      color: '#fff7ed',
+      color: 'rgba(245, 158, 11, 0.22)',
     }),
     stroke: new Stroke({
-      color: '#c2410c',
+      color: '#f8cc38',
       width: 3,
     }),
   }),
