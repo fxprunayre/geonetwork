@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AggregationsPanel } from 'gn-library';
+import { SpatialFilterComponent } from './spatial-filter/spatial-filter';
 
 @Component({
   selector: 'app-search-filters',
   templateUrl: './search-filters.html',
   standalone: true,
-  imports: [FormsModule, CommonModule, AggregationsPanel],
+  imports: [FormsModule, CommonModule, AggregationsPanel, SpatialFilterComponent],
 })
 export class SearchFilters {}

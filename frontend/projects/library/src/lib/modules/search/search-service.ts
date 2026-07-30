@@ -15,6 +15,20 @@ import {
   TRACK_TOTAL_HITS,
 } from './search-store.model';
 
+export interface SpatialBBox {
+  west: number;
+  south: number;
+  east: number;
+  north: number;
+}
+
+export type SpatialRelation = 'intersects' | 'within' | 'contains';
+
+export interface SpatialFilterData {
+  bbox: SpatialBBox;
+  relation: SpatialRelation;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -225,6 +239,128 @@ export class SearchService {
       }
     }
     return sort;
+  }
+
+  buildSpatialEnvelopeFilter(
+    field: string,
+    bbox: SpatialBBox,
+    relation: SpatialRelation,
+  ): elasticsearch.QueryDslQueryContainer {
+    return {
+      geo_shape: {
+        [field]: {
+          shape: {
+            type: 'envelope',
+            coordinates: [
+              [bbox.west, bbox.north],
+              [bbox.east, bbox.south],
+            ],
+          },
+          relation,
+        },
+      },
+    } as unknown as elasticsearch.QueryDslQueryContainer;
+  }
+
+  isSpatialEnvelopeFilter(filter: elasticsearch.QueryDslQueryContainer, field: string): boolean {
+    const geoShape = (
+      filter as {
+        geo_shape?: Record<string, { shape?: { type?: string; coordinates?: number[][] } }>;
+      }
+    ).geo_shape;
+
+    const shape = geoShape?.[field]?.shape;
+    return (
+      shape?.type === 'envelope' &&
+      Array.isArray(shape.coordinates) &&
+      (shape.coordinates?.length || 0) >= 2
+    );
+  }
+
+  removeSpatialEnvelopeFilters(
+    filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+    field: string,
+  ): elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[] {
+    const asArray = this.asFilterArray(filter);
+    const filtered = asArray.filter((entry) => !this.isSpatialEnvelopeFilter(entry, field));
+    return this.asFilterShape(filtered);
+  }
+
+  applySpatialEnvelopeFilter(
+    filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+    field: string,
+    bbox: SpatialBBox,
+    relation: SpatialRelation,
+  ): elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[] {
+    const asArray = this.asFilterArray(filter);
+    const baseFilters = asArray.filter((entry) => !this.isSpatialEnvelopeFilter(entry, field));
+    baseFilters.push(this.buildSpatialEnvelopeFilter(field, bbox, relation));
+    return this.asFilterShape(baseFilters);
+  }
+
+  extractSpatialEnvelopeFilter(
+    filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+    field: string,
+  ): SpatialFilterData | null {
+    const asArray = this.asFilterArray(filter);
+    const spatialFilter = asArray.find((entry) => this.isSpatialEnvelopeFilter(entry, field));
+    if (!spatialFilter) {
+      return null;
+    }
+
+    const geoShape = (
+      spatialFilter as {
+        geo_shape?: Record<
+          string,
+          {
+            shape?: { coordinates?: number[][] };
+            relation?: SpatialRelation;
+          }
+        >;
+      }
+    ).geo_shape?.[field];
+
+    const envelopeCoordinates = geoShape?.shape?.coordinates;
+    if (!envelopeCoordinates || envelopeCoordinates.length < 2) {
+      return null;
+    }
+
+    const [topLeft, bottomRight] = envelopeCoordinates;
+    if (!topLeft || !bottomRight || topLeft.length < 2 || bottomRight.length < 2) {
+      return null;
+    }
+
+    const relation =
+      geoShape?.relation === 'within' ||
+      geoShape?.relation === 'contains' ||
+      geoShape?.relation === 'intersects'
+        ? geoShape.relation
+        : 'intersects';
+
+    return {
+      bbox: {
+        west: topLeft[0],
+        north: topLeft[1],
+        east: bottomRight[0],
+        south: bottomRight[1],
+      },
+      relation,
+    };
+  }
+
+  private asFilterArray(
+    filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+  ): elasticsearch.QueryDslQueryContainer[] {
+    return Array.isArray(filter) ? filter : [filter];
+  }
+
+  private asFilterShape(
+    filters: elasticsearch.QueryDslQueryContainer[],
+  ): elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[] {
+    if (filters.length === 1) {
+      return filters[0];
+    }
+    return filters;
   }
 
   parseRelated(related: Record<string, elasticsearch.SearchHit<IndexRecord>[] | IndexRecord[]>) {
