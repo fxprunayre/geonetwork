@@ -79,6 +79,7 @@ export * from './lib/modules/space/space-selector';
 export * from './lib/shared/base-component';
 export * from './lib/shared/history-service';
 export * from './lib/shared/icon-style-service';
+export * from './lib/shared/map-layer-style';
 export * from './lib/shared/p-shadowdomstyle-component';
 export * from './lib/shared/theming-service';
 export * from './lib/shared/translate-service.mock';
