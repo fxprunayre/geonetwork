@@ -7,7 +7,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-result>
-    <tr>
+    <tr (mouseenter)="recordHover.emit(result)" (mouseleave)="recordHover.emit(null)">
       <td>
         <app-record-field-type [record]="result" [mainTypeOnly]="true" [layout]="'icon'" />
       </td>

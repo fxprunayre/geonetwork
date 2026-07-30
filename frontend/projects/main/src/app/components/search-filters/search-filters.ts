@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AggregationsPanel } from 'gn-library';
-import { SpatialFilterComponent } from './spatial-filter/spatial-filter';
+import { AggregationsPanel, SpatialFilterComponent } from 'gn-library';
 
 @Component({
   selector: 'app-search-filters',

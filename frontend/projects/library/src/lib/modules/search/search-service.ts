@@ -5,29 +5,9 @@ import { SearchService as ApiSearchService } from 'gn4-api-client';
 import { map, Observable } from 'rxjs';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { Datasource } from '../data/datasource.model';
-import { AggregationService } from '../search-filter/aggregation-service';
-import { SEARCH_SOURCE } from './search-constant';
-import {
-  SearchFilter,
-  SearchRegistry,
-  SearchRequestParameters,
-  SearchStoreContract,
-  TRACK_TOTAL_HITS,
-} from './search-store.model';
-
-export interface SpatialBBox {
-  west: number;
-  south: number;
-  east: number;
-  north: number;
-}
-
-export type SpatialRelation = 'intersects' | 'within' | 'contains';
-
-export interface SpatialFilterData {
-  bbox: SpatialBBox;
-  relation: SpatialRelation;
-}
+import { SearchQueryService } from './search-query.service';
+import { SpatialBBox, SpatialFilterData, SpatialRelation } from './search-spatial.model';
+import { SearchRegistry, SearchRequestParameters, SearchStoreContract } from './search-store.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,11 +18,10 @@ export class SearchService {
   store: SearchRegistry = {};
 
   searchService: ApiSearchService = inject(ApiSearchService);
+  searchQueryService = inject(SearchQueryService);
 
   translateService = inject(TranslateService);
   appConfig = inject(APPLICATION_CONFIGURATION);
-
-  aggregationService = inject(AggregationService);
 
   register<TStore extends SearchStoreContract>(searchId: string, searchStore: TStore) {
     if (this.store[searchId]) {
@@ -63,182 +42,34 @@ export class SearchService {
     }
   }
 
-  escapeSpecialCharacters(queryString: string) {
-    return queryString.replace(/(\+|-|&&|\|\||!|\{|\}|\[|\]|\^|~|\?|:|\\{1}|\(|\)|\/)/g, '\\$1');
-  }
-
   buildQuery(
     query: string,
     queryFilter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
-    filters: Record<string, SearchFilter>,
+    filters: Record<string, import('./search-store.model').SearchFilter>,
     aggregationsConfig?: (
       | string
       | Record<string, elasticsearch.AggregationsAggregationContainer>
     )[],
   ): elasticsearch.QueryDslQueryContainer {
-    const filter = queryFilter;
-    const must: elasticsearch.QueryDslQueryContainer[] = [];
-    if (query) {
-      const elasticQueryRegexTemplate = /q\((.*)\)/;
-      const isElasticQuery = query.match(elasticQueryRegexTemplate);
-      if (isElasticQuery) {
-        must.push({
-          query_string: {
-            query: query.replace(elasticQueryRegexTemplate, '$1').trim(),
-          },
-        });
-      } else {
-        must.push({
-          query_string: {
-            query: this.escapeSpecialCharacters(query),
-            default_operator: 'AND',
-            fields: ['resourceTitleObject.*^5', 'any.*', 'uuid'],
-          },
-        });
-      }
-    }
-    for (const field of Object.keys(filters)) {
-      let isFiltersAgg = false;
-      const matchedFilters: elasticsearch.QueryDslQueryContainer[] = [];
-      let aggDef: elasticsearch.AggregationsAggregationContainer | undefined;
-
-      if (aggregationsConfig) {
-        aggDef = this.aggregationService.getAggregationConfig(field, aggregationsConfig);
-        if (aggDef && aggDef['filters'] && aggDef['filters']['filters']) {
-          isFiltersAgg = true;
-          const aggFilters = aggDef['filters']['filters'] as Record<
-            string,
-            elasticsearch.QueryDslQueryContainer
-          >;
-          for (const val of filters[field].values) {
-            const v = String(val);
-            if (aggFilters[v]) {
-              matchedFilters.push(aggFilters[v]);
-            }
-          }
-        }
-      }
-
-      if (isFiltersAgg) {
-        if (matchedFilters.length > 0) {
-          must.push({
-            bool: {
-              should: matchedFilters,
-            },
-          });
-        }
-      } else {
-        const histogramInterval = aggDef?.histogram?.interval;
-        const isHistogramWithCustomInterval =
-          typeof histogramInterval === 'number' && histogramInterval !== 1;
-
-        if (isHistogramWithCustomInterval) {
-          const rangeFilters = filters[field].values
-            .map((value) => Number(value))
-            .filter((value) => Number.isFinite(value))
-            .map((from) => ({
-              range: {
-                [field]: {
-                  gte: from,
-                  lt: from + histogramInterval,
-                },
-              },
-            }));
-
-          if (rangeFilters.length > 0) {
-            must.push({
-              bool: {
-                should: rangeFilters,
-                minimum_should_match: 1,
-              },
-            });
-            continue;
-          }
-        }
-
-        const termQuery = {
-          terms: {
-            [field]: filters[field].values,
-          },
-        };
-        must.push(termQuery);
-      }
-    }
-    const must_not: elasticsearch.QueryDslQueryContainer[] = [];
-    const should: elasticsearch.QueryDslQueryContainer[] = [];
-    return {
-      bool: {
-        must,
-        must_not,
-        should,
-        filter,
-      },
-    };
+    return this.searchQueryService.buildQuery(query, queryFilter, filters, aggregationsConfig);
   }
 
   buildSearchRequest(searchRequestParameters: SearchRequestParameters, withAggregation = true) {
-    const request: elasticsearch.SearchRequest = {
-      from: searchRequestParameters.currentPage * searchRequestParameters.pageSize,
-      size: searchRequestParameters.pageSize,
-      track_total_hits: TRACK_TOTAL_HITS,
-      query: this.buildQuery(
-        searchRequestParameters.searchQuery,
-        searchRequestParameters.filter,
-        searchRequestParameters.filters ?? {},
-        searchRequestParameters.aggregationsConfig,
-      ),
-      _source: SEARCH_SOURCE,
-      sort: this.buildSort(searchRequestParameters.currentSort),
-    };
-
-    if (withAggregation) {
-      request.aggregations = this.aggregationService.buildAggregationQuery(
-        searchRequestParameters.aggregationsConfig ?? [],
-      );
-    }
-    return request;
+    return this.searchQueryService.buildSearchRequest(searchRequestParameters, withAggregation);
   }
 
   buildAggregationRequest(
     aggregationName: string,
     searchRequestParameters: SearchRequestParameters,
   ) {
-    const request: elasticsearch.SearchRequest = {
-      from: 0,
-      size: 0,
-      track_total_hits: TRACK_TOTAL_HITS,
-      query: this.buildQuery(
-        searchRequestParameters.searchQuery,
-        searchRequestParameters.filter,
-        searchRequestParameters.filters ?? {},
-        searchRequestParameters.aggregationsConfig,
-      ),
-    };
-
-    request.aggregations = {
-      [aggregationName]: this.aggregationService.buildAggregationQuery(
-        searchRequestParameters.aggregationsConfig ?? [],
-      )[aggregationName],
-    };
-
-    return request;
+    return this.searchQueryService.buildAggregationRequest(
+      aggregationName,
+      searchRequestParameters,
+    );
   }
 
   buildSort(currentSort: string): elasticsearch.SortCombinations[] {
-    if (!currentSort) {
-      return [];
-    }
-    const sort: elasticsearch.SortCombinations[] = [];
-    const sortFields = currentSort.split(',');
-    for (const field of sortFields) {
-      const trimmedField = field.trim();
-      if (trimmedField.startsWith('-')) {
-        sort.push({ [trimmedField.substring(1)]: 'desc' });
-      } else {
-        sort.push({ [trimmedField]: 'asc' });
-      }
-    }
-    return sort;
+    return this.searchQueryService.buildSort(currentSort);
   }
 
   buildSpatialEnvelopeFilter(
@@ -246,44 +77,18 @@ export class SearchService {
     bbox: SpatialBBox,
     relation: SpatialRelation,
   ): elasticsearch.QueryDslQueryContainer {
-    return {
-      geo_shape: {
-        [field]: {
-          shape: {
-            type: 'envelope',
-            coordinates: [
-              [bbox.west, bbox.north],
-              [bbox.east, bbox.south],
-            ],
-          },
-          relation,
-        },
-      },
-    } as unknown as elasticsearch.QueryDslQueryContainer;
+    return this.searchQueryService.buildSpatialEnvelopeFilter(field, bbox, relation);
   }
 
   isSpatialEnvelopeFilter(filter: elasticsearch.QueryDslQueryContainer, field: string): boolean {
-    const geoShape = (
-      filter as {
-        geo_shape?: Record<string, { shape?: { type?: string; coordinates?: number[][] } }>;
-      }
-    ).geo_shape;
-
-    const shape = geoShape?.[field]?.shape;
-    return (
-      shape?.type === 'envelope' &&
-      Array.isArray(shape.coordinates) &&
-      (shape.coordinates?.length || 0) >= 2
-    );
+    return this.searchQueryService.isSpatialEnvelopeFilter(filter, field);
   }
 
   removeSpatialEnvelopeFilters(
     filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
     field: string,
   ): elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[] {
-    const asArray = this.asFilterArray(filter);
-    const filtered = asArray.filter((entry) => !this.isSpatialEnvelopeFilter(entry, field));
-    return this.asFilterShape(filtered);
+    return this.searchQueryService.removeSpatialEnvelopeFilters(filter, field);
   }
 
   applySpatialEnvelopeFilter(
@@ -292,75 +97,14 @@ export class SearchService {
     bbox: SpatialBBox,
     relation: SpatialRelation,
   ): elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[] {
-    const asArray = this.asFilterArray(filter);
-    const baseFilters = asArray.filter((entry) => !this.isSpatialEnvelopeFilter(entry, field));
-    baseFilters.push(this.buildSpatialEnvelopeFilter(field, bbox, relation));
-    return this.asFilterShape(baseFilters);
+    return this.searchQueryService.applySpatialEnvelopeFilter(filter, field, bbox, relation);
   }
 
   extractSpatialEnvelopeFilter(
     filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
     field: string,
   ): SpatialFilterData | null {
-    const asArray = this.asFilterArray(filter);
-    const spatialFilter = asArray.find((entry) => this.isSpatialEnvelopeFilter(entry, field));
-    if (!spatialFilter) {
-      return null;
-    }
-
-    const geoShape = (
-      spatialFilter as {
-        geo_shape?: Record<
-          string,
-          {
-            shape?: { coordinates?: number[][] };
-            relation?: SpatialRelation;
-          }
-        >;
-      }
-    ).geo_shape?.[field];
-
-    const envelopeCoordinates = geoShape?.shape?.coordinates;
-    if (!envelopeCoordinates || envelopeCoordinates.length < 2) {
-      return null;
-    }
-
-    const [topLeft, bottomRight] = envelopeCoordinates;
-    if (!topLeft || !bottomRight || topLeft.length < 2 || bottomRight.length < 2) {
-      return null;
-    }
-
-    const relation =
-      geoShape?.relation === 'within' ||
-      geoShape?.relation === 'contains' ||
-      geoShape?.relation === 'intersects'
-        ? geoShape.relation
-        : 'intersects';
-
-    return {
-      bbox: {
-        west: topLeft[0],
-        north: topLeft[1],
-        east: bottomRight[0],
-        south: bottomRight[1],
-      },
-      relation,
-    };
-  }
-
-  private asFilterArray(
-    filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
-  ): elasticsearch.QueryDslQueryContainer[] {
-    return Array.isArray(filter) ? filter : [filter];
-  }
-
-  private asFilterShape(
-    filters: elasticsearch.QueryDslQueryContainer[],
-  ): elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[] {
-    if (filters.length === 1) {
-      return filters[0];
-    }
-    return filters;
+    return this.searchQueryService.extractSpatialEnvelopeFilter(filter, field);
   }
 
   parseRelated(related: Record<string, elasticsearch.SearchHit<IndexRecord>[] | IndexRecord[]>) {
@@ -532,53 +276,57 @@ export class SearchService {
     aggregations: Record<string, elasticsearch.AggregationsAggregate> | Record<string, never>;
     totalCount: number;
   }> {
-    return this.searchService.search(this.buildSearchRequest(searchRequestParameters)).pipe(
-      map(
-        (
-          response: elasticsearch.SearchResponse<
-            IndexRecord,
-            Record<string, elasticsearch.AggregationsAggregate>
-          >,
-        ) => {
-          if (!response || !response.hits || !response.hits.hits) {
-            throw new Error('Search API returned invalid or empty content.');
-          }
-          return {
-            results: response.hits.hits.map((hit) => {
-              return this.buildIndexRecord(hit);
-            }),
-            aggregations: response.aggregations ?? {},
-            totalCount: this.getTotalHits(response),
-          };
-        },
-      ),
-    );
+    return this.searchService
+      .search(this.searchQueryService.buildSearchRequest(searchRequestParameters))
+      .pipe(
+        map(
+          (
+            response: elasticsearch.SearchResponse<
+              IndexRecord,
+              Record<string, elasticsearch.AggregationsAggregate>
+            >,
+          ) => {
+            if (!response || !response.hits || !response.hits.hits) {
+              throw new Error('Search API returned invalid or empty content.');
+            }
+            return {
+              results: response.hits.hits.map((hit) => {
+                return this.buildIndexRecord(hit);
+              }),
+              aggregations: response.aggregations ?? {},
+              totalCount: this.getTotalHits(response),
+            };
+          },
+        ),
+      );
   }
 
   page(searchRequestParameters: SearchRequestParameters): Observable<{
     results: IndexRecord[];
     totalCount: number;
   }> {
-    return this.searchService.search(this.buildSearchRequest(searchRequestParameters, false)).pipe(
-      map(
-        (
-          response: elasticsearch.SearchResponse<
-            IndexRecord,
-            Record<string, elasticsearch.AggregationsAggregate>
-          >,
-        ) => {
-          if (!response || !response.hits || !response.hits.hits) {
-            throw new Error('Search API returned invalid or empty content.');
-          }
-          return {
-            results: response.hits.hits.map((hit) => {
-              return this.buildIndexRecord(hit);
-            }),
-            totalCount: this.getTotalHits(response),
-          };
-        },
-      ),
-    );
+    return this.searchService
+      .search(this.searchQueryService.buildSearchRequest(searchRequestParameters, false))
+      .pipe(
+        map(
+          (
+            response: elasticsearch.SearchResponse<
+              IndexRecord,
+              Record<string, elasticsearch.AggregationsAggregate>
+            >,
+          ) => {
+            if (!response || !response.hits || !response.hits.hits) {
+              throw new Error('Search API returned invalid or empty content.');
+            }
+            return {
+              results: response.hits.hits.map((hit) => {
+                return this.buildIndexRecord(hit);
+              }),
+              totalCount: this.getTotalHits(response),
+            };
+          },
+        ),
+      );
   }
 
   updateAggregation(

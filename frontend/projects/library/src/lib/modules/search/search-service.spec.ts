@@ -103,4 +103,8 @@ describe('SearchService', () => {
       },
     });
   });
+
+  it('sorts relevance by _score descending', () => {
+    expect(service.buildSort('_score')).toEqual([{ _score: 'desc' }]);
+  });
 });

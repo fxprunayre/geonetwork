@@ -54,7 +54,15 @@
           @case ('list') {
             <div class="results-list grid grid-cols-1 gap-4">
               @for (result of search().results(); track $index) {
-                <app-result-item-list [result]="result" (recordClick)="handleRecordClick($event)" />
+                <div
+                  (mouseenter)="handleRecordHover(result)"
+                  (mouseleave)="handleRecordHover(null)"
+                >
+                  <app-result-item-list
+                    [result]="result"
+                    (recordClick)="handleRecordClick($event)"
+                  />
+                </div>
               }
             </div>
           }
@@ -63,7 +71,15 @@
               class="results-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
             >
               @for (result of search().results(); track $index) {
-                <app-result-item-grid [result]="result" (recordClick)="handleRecordClick($event)" />
+                <div
+                  (mouseenter)="handleRecordHover(result)"
+                  (mouseleave)="handleRecordHover(null)"
+                >
+                  <app-result-item-grid
+                    [result]="result"
+                    (recordClick)="handleRecordClick($event)"
+                  />
+                </div>
               }
             </div>
           }
@@ -71,6 +87,7 @@
             <app-result-item-table
               [results]="search().results()"
               (recordClick)="handleRecordClick($event)"
+              (recordHover)="handleRecordHover($event)"
             />
           }
         }

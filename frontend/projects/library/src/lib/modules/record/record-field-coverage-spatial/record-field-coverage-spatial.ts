@@ -20,12 +20,13 @@ import WKT from 'ol/format/WKT';
 import type Geometry from 'ol/geom/Geometry';
 import GeometryCollection from 'ol/geom/GeometryCollection';
 import { transformExtent } from 'ol/proj';
-import CircleStyle from 'ol/style/Circle';
-import Fill from 'ol/style/Fill';
-import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { DEFAULT_MAP_CONTEXT, DEFAULT_SPACE } from '../../config/gn-constants';
+import {
+  createThemeAwareVectorLayerStyle,
+  DEFAULT_MAP_CONTEXT,
+  DEFAULT_SPACE,
+} from '../../config/gn-constants';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordinate/record-field-coverage-coordinate';
 
@@ -346,14 +347,6 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
 
   maps = viewChildren<ElementRef<HTMLDivElement>>('map');
 
-  // Convert hex color to rgba with alpha
-  hexToRgba(hex: string, alpha: number): string {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  }
-
   ngAfterViewInit() {
     const mapElements = this.maps();
 
@@ -380,20 +373,6 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
         setTimeout(() => {
           map.updateSize();
 
-          const computedStyle = getComputedStyle(document.documentElement);
-          const rawPrimaryColor =
-            computedStyle.getPropertyValue('--p-primary-500').trim() ||
-            computedStyle.getPropertyValue('--p-primary-color').trim() ||
-            '#093564';
-          const rawPrimaryColor900 =
-            computedStyle.getPropertyValue('--p-primary-900').trim() || '#000000';
-
-          const primaryColor = rawPrimaryColor.startsWith('#') ? rawPrimaryColor : '#093564';
-          const primaryColor900 = rawPrimaryColor900.startsWith('#')
-            ? rawPrimaryColor900
-            : '#000000';
-          const fillRgba = this.hexToRgba(primaryColor, 0.5);
-
           const layers = map.getLayers().getArray();
           const geojsonLayer: unknown = layers[layers.length - 1];
           if (
@@ -403,24 +382,13 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
             typeof (geojsonLayer as Record<string, unknown>)['setStyle'] === 'function'
           ) {
             (geojsonLayer as { setStyle: (style: Style) => void }).setStyle(
-              new Style({
-                stroke: new Stroke({
-                  color: primaryColor900,
-                  width: 2,
-                }),
-                fill: new Fill({
-                  color: fillRgba,
-                }),
-                image: new CircleStyle({
-                  radius: 6,
-                  fill: new Fill({
-                    color: fillRgba,
-                  }),
-                  stroke: new Stroke({
-                    color: primaryColor900,
-                    width: 2,
-                  }),
-                }),
+              createThemeAwareVectorLayerStyle({
+                strokeColorVarNames: ['--p-primary-900'],
+                fillColorVarNames: ['--p-primary-500', '--p-primary-color'],
+                fillAlpha: 0.5,
+                strokeWidth: 2,
+                markerRadius: 6,
+                markerStrokeWidth: 2,
               }),
             );
           }

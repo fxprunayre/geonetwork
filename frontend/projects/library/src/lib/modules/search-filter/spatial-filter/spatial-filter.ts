@@ -3,7 +3,9 @@ import {
   AfterViewInit,
   Component,
   computed,
+  effect,
   ElementRef,
+  inject,
   OnDestroy,
   signal,
   ViewChild,
@@ -13,14 +15,25 @@ import { FormsModule } from '@angular/forms';
 import { createMapFromContext } from '@geospatial-sdk/openlayers';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidEraser, faSolidPenToSquare } from '@ng-icons/font-awesome/solid';
-import { DEFAULT_MAP_CONTEXT, SearchBase, SpatialBBox, SpatialRelation } from 'gn-library';
+import {
+  DEFAULT_MAP_CONTEXT,
+  DEFAULT_SPATIAL_FILTER_BBOX_LAYER_STYLE,
+  DEFAULT_SPATIAL_FILTER_HOVER_LAYER_STYLE,
+  SearchBase,
+  SearchMapOverlayService,
+  SpatialBBox,
+  SpatialRelation,
+} from 'gn-library';
 import Feature from 'ol/Feature';
+import GeoJSON from 'ol/format/GeoJSON';
+import type Geometry from 'ol/geom/Geometry';
 import { fromExtent as polygonFromExtent } from 'ol/geom/Polygon';
 import Draw, { createBox } from 'ol/interaction/Draw';
 import VectorLayer from 'ol/layer/Vector';
-import Map from 'ol/Map';
+import OlMap from 'ol/Map';
 import { transformExtent } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
+import CircleStyle from 'ol/style/Circle';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
@@ -62,6 +75,9 @@ interface RelationOption {
 export class SpatialFilterComponent extends SearchBase implements AfterViewInit, OnDestroy {
   @ViewChild('mapContainer', { static: true }) mapContainer!: ElementRef<HTMLDivElement>;
 
+  private readonly searchMapOverlayService = inject(SearchMapOverlayService);
+  private readonly geoJsonFormat = new GeoJSON();
+
   relation = signal<SpatialRelation>('intersects');
   bbox = signal<SpatialBBox | null>(null);
   bboxCenter = signal<[number, number] | null>(null);
@@ -91,33 +107,71 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
     this.bbox() ? 'Clear spatial filter' : 'Draw a bounding box',
   );
 
-  private map: Map | null = null;
+  private map: OlMap | null = null;
   private drawInteraction: Draw | null = null;
+  private resultsSource = new VectorSource();
+  private hoverSource = new VectorSource();
+
+  private resultFeaturesByRecordId = new globalThis.Map<string, Feature<Geometry>[]>();
+
   private bboxSource = new VectorSource();
   private bboxLayer = new VectorLayer({
     source: this.bboxSource,
+    style: DEFAULT_SPATIAL_FILTER_BBOX_LAYER_STYLE,
+  });
+  private resultsLayer = new VectorLayer({
+    source: this.resultsSource,
     style: new Style({
       stroke: new Stroke({
-        color: '#093564',
-        width: 2,
+        color: 'rgba(9, 53, 100, 0.45)',
+        width: 1.5,
       }),
       fill: new Fill({
-        color: 'rgba(9, 53, 100, 0.18)',
+        color: 'rgba(9, 53, 100, 0.08)',
+      }),
+      image: new CircleStyle({
+        radius: 4,
+        fill: new Fill({ color: 'rgba(9, 53, 100, 0.5)' }),
       }),
     }),
   });
+
+  private hoverLayer = new VectorLayer({
+    source: this.hoverSource,
+    style: DEFAULT_SPATIAL_FILTER_HOVER_LAYER_STYLE,
+  });
+
+  constructor() {
+    super();
+    effect(() => {
+      this.searchMapOverlayService.getPageResultsState()();
+      this.syncResultsFeatures();
+    });
+
+    effect(() => {
+      this.searchMapOverlayService.getHoveredRecordState()();
+      this.syncHoveredFeature();
+    });
+  }
 
   ngAfterViewInit(): void {
     const mapContext = JSON.parse(JSON.stringify(DEFAULT_MAP_CONTEXT));
     this.map = createMapFromContext(mapContext, this.mapContainer.nativeElement);
 
+    this.resultsLayer.setZIndex(990);
+    this.hoverLayer.setZIndex(1000);
+
+    this.map.addLayer(this.resultsLayer);
     this.bboxLayer.setZIndex(999);
+    this.map.addLayer(this.hoverLayer);
     this.map.addLayer(this.bboxLayer);
 
     setTimeout(() => {
       this.map?.updateSize();
     });
 
+    this.syncResultsFeatures();
+    this.syncHoveredFeature();
     this.restoreBboxFromSearchFilter();
   }
 
@@ -241,9 +295,72 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
       'EPSG:4326',
       'EPSG:3857',
     );
-
     const feature = new Feature(polygonFromExtent(extent3857));
     this.bboxSource.addFeature(feature);
+    this.map?.renderSync();
+  }
+
+  private syncResultsFeatures() {
+    if (!this.map) {
+      return;
+    }
+
+    this.resultsSource.clear();
+    this.resultFeaturesByRecordId.clear();
+
+    const records = this.searchMapOverlayService.getPageResults(this.scope());
+    for (const record of records) {
+      const recordId = record?.info?._id || record?.uuid;
+      if (!recordId) {
+        continue;
+      }
+
+      const rawGeom = (record as Record<string, unknown>)['geom'];
+      const geoms = Array.isArray(rawGeom) ? rawGeom : rawGeom ? [rawGeom] : [];
+
+      const featuresForRecord: Feature<Geometry>[] = [];
+      for (const geom of geoms) {
+        if (!geom || typeof geom !== 'object') {
+          continue;
+        }
+
+        try {
+          const geometry = this.geoJsonFormat.readGeometry(geom as object, {
+            dataProjection: 'EPSG:4326',
+            featureProjection: 'EPSG:3857',
+          });
+          const feature = new Feature(geometry);
+          feature.setId(`${recordId}-${featuresForRecord.length}`);
+          this.resultsSource.addFeature(feature);
+          featuresForRecord.push(feature);
+        } catch {
+          // Ignore malformed geometry entries and continue with remaining records.
+        }
+      }
+
+      if (featuresForRecord.length > 0) {
+        this.resultFeaturesByRecordId.set(recordId, featuresForRecord);
+      }
+    }
+
+    this.syncHoveredFeature();
+    this.map.renderSync();
+  }
+
+  private syncHoveredFeature() {
+    this.hoverSource.clear();
+
+    const hoveredRecordId = this.searchMapOverlayService.getHoveredRecordId(this.scope());
+    if (!hoveredRecordId) {
+      this.map?.renderSync();
+      return;
+    }
+
+    const features = this.resultFeaturesByRecordId.get(hoveredRecordId) || [];
+    for (const feature of features) {
+      this.hoverSource.addFeature(feature.clone());
+    }
+
     this.map?.renderSync();
   }
 
