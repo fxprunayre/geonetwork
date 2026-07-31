@@ -15,15 +15,6 @@ import {
 import { createMapFromContext } from '@geospatial-sdk/openlayers';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidEraser, faSolidPenToSquare } from '@ng-icons/font-awesome/solid';
-import {
-  DEFAULT_MAP_CONTEXT,
-  DEFAULT_SPATIAL_FILTER_BBOX_LAYER_STYLE,
-  DEFAULT_SPATIAL_FILTER_DRAW_LAYER_STYLE,
-  DEFAULT_SPATIAL_FILTER_HOVER_LAYER_STYLE,
-  SearchBase,
-  SearchMapOverlayService,
-  SpatialBBox,
-} from 'gn-library';
 import { createEmpty, extend, isEmpty } from 'ol/extent';
 import Feature from 'ol/Feature';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -40,6 +31,15 @@ import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
+import {
+  DEFAULT_MAP_CONTEXT,
+  DEFAULT_SPATIAL_FILTER_BBOX_LAYER_STYLE,
+  DEFAULT_SPATIAL_FILTER_DRAW_LAYER_STYLE,
+  DEFAULT_SPATIAL_FILTER_HOVER_LAYER_STYLE,
+} from '../../config/gn-constants';
+import { SearchBase } from '../../search/search-base/search-base';
+import { SearchMapOverlayService } from '../../search/search-map-overlay.service';
+import { SpatialBBox } from '../../search/search-spatial.model';
 
 @Component({
   selector: 'app-spatial-filter',
