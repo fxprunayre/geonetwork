@@ -1,4 +1,18 @@
 <div class="m-4">
+  @if (showSortRecommendation()) {
+    <p-message severity="warn" styleClass="mb-3">
+      <span>{{ 'search.spatialFilter.sortRecommendation.message' | translate }}</span>
+      <p-button
+        [link]="true"
+        fluid="true"
+        (click)="switchToScoreSort()"
+        [label]="'search.spatialFilter.sortRecommendation.action' | translate"
+      >
+        <ng-icon name="faSolidArrowUpShortWide" pButtonIcon></ng-icon>
+      </p-button>
+    </p-message>
+  }
+
   <div class="relative">
     <div
       #mapContainer

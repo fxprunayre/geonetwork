@@ -463,6 +463,12 @@
       },
       "placeholder": "Trier par"
     },
+    "spatialFilter": {
+      "sortRecommendation": {
+        "action": "Cliquez ici pour trier par score",
+        "message": "Lors de l'utilisation d'un filtre spatial, il est recommandé de trier par pertinence."
+      }
+    },
     "welcome": {
       "default": "Explorez ...",
       "text": "Explorez plus de {{count}} {{mainBuckets}}, ..."

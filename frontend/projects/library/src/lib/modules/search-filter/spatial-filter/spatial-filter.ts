@@ -14,7 +14,12 @@ import {
 } from '@angular/core';
 import { createMapFromContext } from '@geospatial-sdk/openlayers';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidEraser, faSolidPenToSquare } from '@ng-icons/font-awesome/solid';
+import {
+  faSolidArrowUpShortWide,
+  faSolidEraser,
+  faSolidPenToSquare,
+} from '@ng-icons/font-awesome/solid';
+import { TranslateModule } from '@ngx-translate/core';
 import { createEmpty, extend, isEmpty } from 'ol/extent';
 import Feature from 'ol/Feature';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -30,6 +35,7 @@ import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
 import { ButtonModule } from 'primeng/button';
+import { Message } from 'primeng/message';
 import { TooltipModule } from 'primeng/tooltip';
 import {
   DEFAULT_MAP_CONTEXT,
@@ -44,10 +50,11 @@ import { SpatialBBox } from '../../search/search-spatial.model';
 @Component({
   selector: 'app-spatial-filter',
   standalone: true,
-  imports: [CommonModule, ButtonModule, TooltipModule, NgIcon],
+  imports: [CommonModule, ButtonModule, TooltipModule, Message, TranslateModule, NgIcon],
   viewProviders: [
     provideIcons({
-      faPenToSquare: faSolidPenToSquare,
+      faSolidPenToSquare,
+      faSolidArrowUpShortWide,
       faSolidEraser,
     }),
   ],
@@ -80,6 +87,10 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
 
   primaryActionTooltip = computed(() =>
     this.bbox() ? 'Clear spatial filter' : 'Draw a bounding box',
+  );
+
+  showSortRecommendation = computed(
+    () => Boolean(this.bbox()) && this.search().currentSort() !== '_score',
   );
 
   private map: OlMap | null = null;
@@ -229,6 +240,11 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
       return;
     }
     this.startDrawBbox();
+  }
+
+  switchToScoreSort() {
+    this.search().setSort('_score');
+    this.search().setRouting();
   }
 
   private applySpatialFilter() {

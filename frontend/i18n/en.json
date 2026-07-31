@@ -465,6 +465,12 @@
       },
       "placeholder": "Sort by"
     },
+    "spatialFilter": {
+      "sortRecommendation": {
+        "action": "Click here to sort by score",
+        "message": "When using spatial filter, it is recommended to sort by relevance."
+      }
+    },
     "welcome": {
       "default": "Search ...",
       "text": "Search over {{count}} {{mainBuckets}}, ..."

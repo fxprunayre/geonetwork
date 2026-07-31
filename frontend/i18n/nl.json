@@ -462,6 +462,12 @@
       },
       "placeholder": "Sorteer op"
     },
+    "spatialFilter": {
+      "sortRecommendation": {
+        "action": "Klik hier om op score te sorteren",
+        "message": "Bij gebruik van een ruimtelijke filter wordt sorteren op relevantie aanbevolen."
+      }
+    },
     "welcome": {
       "default": "Search ...",
       "text": "Search over {{count}} {{mainBuckets}}, ..."
