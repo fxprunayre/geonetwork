@@ -8,14 +8,19 @@
 
         @let label = link.nameObject?.['default'] || link.urlObject?.['default'];
         @let isNetworkLink = ['NETWORK:LINK', 'COPYFILE', 'FILE'].includes(link.protocol || '');
+        @let index = links().indexOf(link);
 
         <div class="flex-1 min-w-0">
           @if (isNetworkLink) {
             <p-iftalabel>
-              <label
-                >{{ label }}
-                <input pInputText class="w-full" [value]="link.urlObject?.['default']" readonly />
-              </label>
+              <label for="distribution-{{ index }}">{{ label }}</label>
+              <input
+                pInputText
+                id="distribution-{{ index }}"
+                class="w-full"
+                [value]="link.urlObject?.['default']"
+                readonly
+              />
             </p-iftalabel>
           } @else {
             <a
