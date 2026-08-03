@@ -30,10 +30,6 @@ import VectorLayer from 'ol/layer/Vector';
 import OlMap from 'ol/Map';
 import { transformExtent } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
-import CircleStyle from 'ol/style/Circle';
-import Fill from 'ol/style/Fill';
-import Stroke from 'ol/style/Stroke';
-import Style from 'ol/style/Style';
 import { ButtonModule } from 'primeng/button';
 import { Message } from 'primeng/message';
 import { TooltipModule } from 'primeng/tooltip';
@@ -42,6 +38,7 @@ import {
   DEFAULT_SPATIAL_FILTER_BBOX_LAYER_STYLE,
   DEFAULT_SPATIAL_FILTER_DRAW_LAYER_STYLE,
   DEFAULT_SPATIAL_FILTER_HOVER_LAYER_STYLE,
+  DEFAULT_SPATIAL_FILTER_LAYER_STYLE,
 } from '../../config/gn-constants';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchMapOverlayService } from '../../search/search-map-overlay.service';
@@ -82,8 +79,9 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
 
   bbox = signal<SpatialBBox | null>(null);
   bboxCenter = signal<[number, number] | null>(null);
+  isDrawing = signal(false);
 
-  primaryActionIcon = computed(() => (this.bbox() ? 'faSolidEraser' : 'faPenToSquare'));
+  primaryActionIcon = computed(() => (this.bbox() ? 'faSolidEraser' : 'faSolidPenToSquare'));
 
   primaryActionTooltip = computed(() =>
     this.bbox() ? 'Clear spatial filter' : 'Draw a bounding box',
@@ -107,21 +105,8 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
   });
   private resultsLayer = new VectorLayer({
     source: this.resultsSource,
-    style: new Style({
-      stroke: new Stroke({
-        color: 'rgba(9, 53, 100, 0.45)',
-        width: 1.5,
-      }),
-      fill: new Fill({
-        color: 'rgba(9, 53, 100, 0.08)',
-      }),
-      image: new CircleStyle({
-        radius: 4,
-        fill: new Fill({ color: 'rgba(9, 53, 100, 0.5)' }),
-      }),
-    }),
+    style: DEFAULT_SPATIAL_FILTER_LAYER_STYLE,
   });
-
   private hoverLayer = new VectorLayer({
     source: this.hoverSource,
     style: DEFAULT_SPATIAL_FILTER_HOVER_LAYER_STYLE,
@@ -188,6 +173,13 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
       return;
     }
 
+    if (this.isDrawing()) {
+      this.removeDrawInteraction();
+      this.isDrawing.set(false);
+      return;
+    }
+
+    this.isDrawing.set(true);
     this.removeDrawInteraction();
 
     const draw = new Draw({
@@ -204,6 +196,7 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
     draw.on('drawend', (event) => {
       const extent3857 = event.feature.getGeometry()?.getExtent();
       this.removeDrawInteraction();
+      this.isDrawing.set(false);
 
       if (!extent3857) {
         return;
