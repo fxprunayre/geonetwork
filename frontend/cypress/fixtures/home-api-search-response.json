@@ -1,5 +1,5 @@
 {
-  "took": 10,
+  "took": 6,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,750 +9,85 @@
   },
   "hits": {
     "total": {
-      "value": 15764,
+      "value": 877,
       "relation": "eq"
     },
     "max_score": null,
     "hits": [
       {
         "_index": "sextant-records",
-        "_id": "a9d11fe6-a93e-451f-b46e-85e617c1b1d5",
+        "_id": "6a26d690-c35c-11dc-9c70-000086f6a62e",
         "_score": 0.0,
         "_ignored": [
-          "resourceAbstractObject.default.keyword",
-          "resourceAbstractObject.default.sort",
-          "resourceAbstractObject.langeng.keyword"
+          "processSteps.descriptionObject.default.keyword",
+          "processSteps.descriptionObject.langfre.keyword"
         ],
         "_source": {
-          "dateStamp": "2025-10-27T09:44:40.888636Z",
-          "resourceType": ["series"],
-          "resourceTitleObject": {
-            "default": "Black Sea Mean Sea Level time series and trend from Observations Reprocessing",
-            "langeng": "Black Sea Mean Sea Level time series and trend from Observations Reprocessing"
-          },
-          "resourceAbstractObject": {
-            "default": "'''DEFINITION'''\n\nThe sea level ocean monitoring indicator has been presented in the Copernicus Ocean State Report #8. The ocean monitoring indicator on mean sea level is derived from the DUACS delayed-time (DT-2024 version, “my” (multi-year) dataset used when available) sea level anomaly maps from satellite altimetry based on a stable number of altimeters (two) in the satellite constellation. These products are distributed by the Copernicus Climate Change Service and the Copernicus Marine Service (SEALEVEL_GLO_PHY_CLIMATE_L4_MY_008_057). \n\nThe time series of area averaged anomalies correspond to the area average of the maps in the Black Sea weighted by the cosine of the latitude (to consider the changing area in each grid with latitude) and by the proportion of ocean in each grid (to consider the coastal areas). The time series are corrected from regional mean GIA correction (weighted GIA mean of a 27 ensemble model following Spada et Melini, 2019). The time series are adjusted for seasonal annual and semi-annual signals and low-pass filtered at 6 months. Then, the trends/accelerations are estimated on the time series using ordinary least square fit.The trend uncertainty is provided in a 90% confidence interval. It is calculated as the weighted mean uncertainties in the region from Prandi et al., 2021. This estimate only considers errors related to the altimeter observation system (i.e., orbit determination errors, geophysical correction errors and inter-mission bias correction errors). The presence of the interannual signal can strongly influence the trend estimation considering to the altimeter period considered (Wang et al., 2021; Cazenave et al., 2014). The uncertainty linked to this effect is not considered.\n\n'''CONTEXT'''\n\nChange in mean sea level is an essential indicator of our evolving climate, as it reflects both the thermal expansion of the ocean in response to its warming and the increase in ocean mass due to the melting of ice sheets and glaciers (WCRP Global Sea Level Budget Group, 2018). At regional scale, sea level does not change homogenously. It is influenced by various other processes, with different spatial and temporal scales, such as local ocean dynamic, atmospheric forcing, Earth gravity and vertical land motion changes (IPCC WGI, 2021). The adverse effects of floods, storms and tropical cyclones, and the resulting losses and damage, have increased as a result of rising sea levels, increasing people and infrastructure vulnerability and food security risks, particularly in low-lying areas and island states (IPCC, 2022b). Adaptation and mitigation measures such as the restoration of mangroves and coastal wetlands, reduce the risks from sea level rise (IPCC, 2022c). \n\nIn the Black Sea, major drivers of change have been attributed to anthropogenic climate change (steric expansion), and mass changes induced by various water exchanges with the Mediterranean Sea, river discharge, and precipitation/evaporation changes (e.g. Volkov and Landerer, 2015). The sea level variation in the basin also shows an important interannual variability, with an increase observed before 1999 predominantly linked to steric effects, and comparable lower values afterward (Vigo et al., 2005). \n\n'''KEY FINDINGS'''\n\nOver the [1999/02/20 to 2023/12/31] period, the area-averaged sea level in the Black Sea rises at a rate of 1.2 ± 0.8 mm/yr with an acceleration of 0.37 ± 0.06 mm/yr². Nevertheless, the area-averaged sea level anomaly is dominated by interannual variability and the trend estimate is not statistically significant at 95% confidence level. This trend estimation is based on the altimeter measurements corrected from the regional GIA correction (Spada et Melini, 2019) to consider the ongoing movement of land. The TOPEX-A is no longer included in the computation of regional mean sea level parameters (trend and acceleration) with version 2024 products due to potential drifts, and ongoing work aims to develop a new empirical correction. Calculation begins in February 1999 (the start of the TOPEX-B period). \n\n'''DOI (product):''' \nhttps://doi.org/10.48670/moi-00215",
-            "langeng": "'''DEFINITION'''\n\nThe sea level ocean monitoring indicator has been presented in the Copernicus Ocean State Report #8. The ocean monitoring indicator on mean sea level is derived from the DUACS delayed-time (DT-2024 version, “my” (multi-year) dataset used when available) sea level anomaly maps from satellite altimetry based on a stable number of altimeters (two) in the satellite constellation. These products are distributed by the Copernicus Climate Change Service and the Copernicus Marine Service (SEALEVEL_GLO_PHY_CLIMATE_L4_MY_008_057). \n\nThe time series of area averaged anomalies correspond to the area average of the maps in the Black Sea weighted by the cosine of the latitude (to consider the changing area in each grid with latitude) and by the proportion of ocean in each grid (to consider the coastal areas). The time series are corrected from regional mean GIA correction (weighted GIA mean of a 27 ensemble model following Spada et Melini, 2019). The time series are adjusted for seasonal annual and semi-annual signals and low-pass filtered at 6 months. Then, the trends/accelerations are estimated on the time series using ordinary least square fit.The trend uncertainty is provided in a 90% confidence interval. It is calculated as the weighted mean uncertainties in the region from Prandi et al., 2021. This estimate only considers errors related to the altimeter observation system (i.e., orbit determination errors, geophysical correction errors and inter-mission bias correction errors). The presence of the interannual signal can strongly influence the trend estimation considering to the altimeter period considered (Wang et al., 2021; Cazenave et al., 2014). The uncertainty linked to this effect is not considered.\n\n'''CONTEXT'''\n\nChange in mean sea level is an essential indicator of our evolving climate, as it reflects both the thermal expansion of the ocean in response to its warming and the increase in ocean mass due to the melting of ice sheets and glaciers (WCRP Global Sea Level Budget Group, 2018). At regional scale, sea level does not change homogenously. It is influenced by various other processes, with different spatial and temporal scales, such as local ocean dynamic, atmospheric forcing, Earth gravity and vertical land motion changes (IPCC WGI, 2021). The adverse effects of floods, storms and tropical cyclones, and the resulting losses and damage, have increased as a result of rising sea levels, increasing people and infrastructure vulnerability and food security risks, particularly in low-lying areas and island states (IPCC, 2022b). Adaptation and mitigation measures such as the restoration of mangroves and coastal wetlands, reduce the risks from sea level rise (IPCC, 2022c). \n\nIn the Black Sea, major drivers of change have been attributed to anthropogenic climate change (steric expansion), and mass changes induced by various water exchanges with the Mediterranean Sea, river discharge, and precipitation/evaporation changes (e.g. Volkov and Landerer, 2015). The sea level variation in the basin also shows an important interannual variability, with an increase observed before 1999 predominantly linked to steric effects, and comparable lower values afterward (Vigo et al., 2005). \n\n'''KEY FINDINGS'''\n\nOver the [1999/02/20 to 2023/12/31] period, the area-averaged sea level in the Black Sea rises at a rate of 1.2 ± 0.8 mm/yr with an acceleration of 0.37 ± 0.06 mm/yr². Nevertheless, the area-averaged sea level anomaly is dominated by interannual variability and the trend estimate is not statistically significant at 95% confidence level. This trend estimation is based on the altimeter measurements corrected from the regional GIA correction (Spada et Melini, 2019) to consider the ongoing movement of land. The TOPEX-A is no longer included in the computation of regional mean sea level parameters (trend and acceleration) with version 2024 products due to potential drifts, and ongoing work aims to develop a new empirical correction. Calculation begins in February 1999 (the start of the TOPEX-B period). \n\n'''DOI (product):''' \nhttps://doi.org/10.48670/moi-00215"
-          },
-          "resourceCreditObject": [
-            {
-              "default": "E.U. Copernicus Marine Service Information",
-              "langeng": "E.U. Copernicus Marine Service Information"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [27.0625, 40.0625],
-                  [41.9375, 40.0625],
-                  [41.9375, 46.9375],
-                  [27.0625, 46.9375],
-                  [27.0625, 40.0625]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "hash": "8388e9d850b034b98552c1d71bd99b8f",
-              "idx": 1,
-              "protocol": "WWW:STAC",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://stac.marine.copernicus.eu/metadata/OMI_CLIMATE_SL_BLKSEA_area_averaged_anomalies/omi_climate_sl_blksea_area_averaged_anomalies_202506/dataset.stac.json",
-                "langeng": "http://stac.marine.copernicus.eu/metadata/OMI_CLIMATE_SL_BLKSEA_area_averaged_anomalies/omi_climate_sl_blksea_area_averaged_anomalies_202506/dataset.stac.json"
-              },
-              "nameObject": {
-                "default": "omi_climate_sl_blksea_area_averaged_anomalies",
-                "langeng": "omi_climate_sl_blksea_area_averaged_anomalies"
-              },
-              "descriptionObject": {
-                "default": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint",
-                "langeng": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "a9d11fe6-a93e-451f-b46e-85e617c1b1d5",
-          "draft": "n",
-          "id": "337616417",
-          "owner": "3680846",
-          "groupOwner": "103",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "documentStandard": "iso19139",
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://documentation.marine.copernicus.eu/IMG/OMI_CLIMATE_SL_BLKSEA_area_averaged_anomalies.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "82affd77-f8fe-42f4-84d4-0c17db1218ae",
-        "_score": 0.0,
-        "_ignored": [
-          "lineageObject.default.keyword",
-          "lineageObject.default.sort",
-          "lineageObject.langfre.keyword"
-        ],
-        "_source": {
-          "dateStamp": "2025-05-15T23:06:31.53318Z",
+          "dateStamp": "2026-01-27T15:40:12.381963Z",
           "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Densité moyenne et écart-type de l'espèce Torpedo marmorata aux stades juvénile et adulte dans le Golfe du Lion (MEDITS, 1994-2019) - Cartographie sans interpolation",
-            "langfre": "Densité moyenne et écart-type de l'espèce Torpedo marmorata aux stades juvénile et adulte dans le Golfe du Lion (MEDITS, 1994-2019) - Cartographie sans interpolation"
-          },
-          "resourceAbstractObject": {
-            "default": "La densité (nombre individus/km²) a été calculée annuellement à partir des données de la campagne MEDITS entre 1994 et 2019 puis la moyenne et l'écart-type ont été calculés par station sur cette période. Les densités ont été calculées par stade de vie quand cela était possible (juvénile, adulte, indéterminé).",
-            "langfre": "La densité (nombre individus/km²) a été calculée annuellement à partir des données de la campagne MEDITS entre 1994 et 2019 puis la moyenne et l'écart-type ont été calculés par station sur cette période. Les densités ont été calculées par stade de vie quand cela était possible (juvénile, adulte, indéterminé)."
-          },
-          "resourceCreditObject": [
+          "cl_status": [
             {
-              "default": "Ifremer - Eolien flottant A06",
-              "langfre": "Ifremer - Eolien flottant A06"
+              "key": "completed",
+              "default": "Finalisé",
+              "langfre": "Finalisé",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
             }
           ],
+          "resourceTitleObject": {
+            "default": "Utilisation de la baie du Mont Saint-Michel par la bernache cravant à ventre noir (Branta bernicla bernicla) en hiver",
+            "langfre": "Utilisation de la baie du Mont Saint-Michel par la bernache cravant à ventre noir (Branta bernicla bernicla) en hiver"
+          },
+          "resourceAbstractObject": {
+            "default": "Carte, sous forme de polygones, représentant les zones de la baie du Mont Saint-Michel fréquentées par la bernache cravant à ventre noir (Branta bernicla bernicla) en période d'hivernage. Cette espèce atteint régulièrement le niveau d'importance internationale en baie du Mont Saint-Michel.",
+            "langfre": "Carte, sous forme de polygones, représentant les zones de la baie du Mont Saint-Michel fréquentées par la bernache cravant à ventre noir (Branta bernicla bernicla) en période d'hivernage. Cette espèce atteint régulièrement le niveau d'importance internationale en baie du Mont Saint-Michel."
+          },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [2.5, 42.0],
-                  [6.0, 42.0],
-                  [6.0, 44.0],
-                  [2.5, 44.0],
-                  [2.5, 42.0]
+                  [-1.589589, 48.64265],
+                  [-1.501886, 48.64265],
+                  [-1.501886, 48.822306],
+                  [-1.589589, 48.822306],
+                  [-1.589589, 48.64265]
                 ]
               ]
             }
           ],
           "link": [
             {
-              "protocol": "DOI",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.12770/82affd77-f8fe-42f4-84d4-0c17db1218ae",
-                "langfre": "https://doi.org/10.12770/82affd77-f8fe-42f4-84d4-0c17db1218ae"
-              },
-              "nameObject": {
-                "default": "DOI du jeu de données",
-                "langfre": "DOI du jeu de données"
-              },
-              "descriptionObject": {
-                "default": "DOI du jeu de données",
-                "langfre": "DOI du jeu de données"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://archimer.ifremer.fr/doc/00393/50467/",
-                "langfre": "https://archimer.ifremer.fr/doc/00393/50467/"
-              },
-              "nameObject": {
-                "default": "Campillo, 1992",
-                "langfre": "Campillo, 1992"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://gfcmsitestorage.blob.core.windows.net/documents/SAC/SAFs/DemersalSpecies/2016/ARS_GSA_09_2016_ITA.pdf",
-                "langfre": "https://gfcmsitestorage.blob.core.windows.net/documents/SAC/SAFs/DemersalSpecies/2016/ARS_GSA_09_2016_ITA.pdf"
-              },
-              "nameObject": {
-                "default": "Ligas et al ., 2017",
-                "langfre": "Ligas et al ., 2017"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://www.sciencedirect.com/science/article/pii/S2352485519301227",
-                "langfre": "https://www.sciencedirect.com/science/article/pii/S2352485519301227"
-              },
-              "nameObject": {
-                "default": "Porcu et al ., 2020",
-                "langfre": "Porcu et al ., 2020"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://onlinelibrary.wiley.com/doi/full/10.1111/j.1439-0426.2011.01893.x",
-                "langfre": "https://onlinelibrary.wiley.com/doi/full/10.1111/j.1439-0426.2011.01893.x"
-              },
-              "nameObject": {
-                "default": "Cikeš Keč & Zorica, 2012",
-                "langfre": "Cikeš Keč & Zorica, 2012"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://campagnes.flotteoceanographique.fr/series/7/fr/",
-                "langfre": "https://campagnes.flotteoceanographique.fr/series/7/fr/"
-              },
-              "nameObject": {
-                "default": "Campagne MEDITS",
-                "langfre": "Campagne MEDITS"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://www.sibm.it/SITO%20MEDITS/principaleprogramme.htm",
-                "langfre": "https://www.sibm.it/SITO%20MEDITS/principaleprogramme.htm"
-              },
-              "nameObject": {
-                "default": "The MEDITS Project",
-                "langfre": "The MEDITS Project"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/documentation/eolien_en_mer/data/Densite_2012_2019_TORPMAR.zip",
-                "langfre": "https://sextant.ifremer.fr/documentation/eolien_en_mer/data/Densite_2012_2019_TORPMAR.zip"
-              },
-              "nameObject": {
-                "default": "Densite_2012_2019_TORPMAR",
-                "langfre": "Densite_2012_2019_TORPMAR"
-              },
-              "descriptionObject": {
-                "default": "Densité moyenne et écart-type",
-                "langfre": "Densité moyenne et écart-type"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
               "protocol": "OGC:WMS",
               "mimeType": "",
               "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
+                "default": "https://sextant.ifremer.fr/services/wms/biologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
               },
               "nameObject": {
-                "default": "DENSITE_2012_2019_TORPMAR_TOTAL",
-                "langfre": "DENSITE_2012_2019_TORPMAR_TOTAL"
-              },
-              "descriptionObject": {
-                "default": "Densité moyenne sans interpolation",
-                "langfre": "Densité moyenne sans interpolation"
+                "default": "IFR_BERNACHE_CRAV_MSM_P",
+                "langfre": "IFR_BERNACHE_CRAV_MSM_P"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             },
             {
-              "protocol": "OGC:WMS",
+              "protocol": "FILE",
               "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
-              },
               "nameObject": {
-                "default": "DENSITE_2012_2019_TORPMAR_ADULT",
-                "langfre": "DENSITE_2012_2019_TORPMAR_ADULT"
-              },
-              "descriptionObject": {
-                "default": "Densité moyenne sans interpolation - stade adulte",
-                "langfre": "Densité moyenne sans interpolation - stade adulte"
+                "default": "IFR_BERNACHE_CRAV_MSM_P",
+                "langfre": "IFR_BERNACHE_CRAV_MSM_P"
               },
               "function": "",
               "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
-              },
-              "nameObject": {
-                "default": "DENSITE_2012_2019_TORPMAR_JUV",
-                "langfre": "DENSITE_2012_2019_TORPMAR_JUV"
-              },
-              "descriptionObject": {
-                "default": "Densité moyenne sans interpolation - stade juvénile",
-                "langfre": "Densité moyenne sans interpolation - stade juvénile"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 2
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
-              },
-              "nameObject": {
-                "default": "SD_DENSITE_2012_2019_TORPMAR_TOTAL",
-                "langfre": "SD_DENSITE_2012_2019_TORPMAR_TOTAL"
-              },
-              "descriptionObject": {
-                "default": "Ecart-type",
-                "langfre": "Ecart-type"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 3
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
-              },
-              "nameObject": {
-                "default": "SD_DENSITE_2012_2019_TORPMAR_ADULT",
-                "langfre": "SD_DENSITE_2012_2019_TORPMAR_ADULT"
-              },
-              "descriptionObject": {
-                "default": "Ecart-type - stade adulte",
-                "langfre": "Ecart-type - stade adulte"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 4
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
-              },
-              "nameObject": {
-                "default": "SD_DENSITE_2012_2019_TORPMAR_JUV",
-                "langfre": "SD_DENSITE_2012_2019_TORPMAR_JUV"
-              },
-              "descriptionObject": {
-                "default": "Ecart-type - stade juvénile",
-                "langfre": "Ecart-type - stade juvénile"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 5
+              "group": 0
             }
           ],
-          "uuid": "82affd77-f8fe-42f4-84d4-0c17db1218ae",
+          "uuid": "6a26d690-c35c-11dc-9c70-000086f6a62e",
           "draft": "n",
-          "id": "334599552",
-          "owner": "334266170",
-          "groupOwner": "334579404",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "documentStandard": "iso19115-3.2018",
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/documentation/eolien_en_mer/vignette/Densite_2012_2019_TORPMAR.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "a83fe207-85af-44eb-88ec-0dcfcf2f5365",
-        "_score": 0.0,
-        "_ignored": [
-          "resourceAbstractObject.default.keyword",
-          "resourceAbstractObject.default.sort",
-          "resourceAbstractObject.langeng.keyword"
-        ],
-        "_source": {
-          "dateStamp": "2025-10-27T09:34:51.665288Z",
-          "resourceType": ["series"],
-          "resourceTitleObject": {
-            "default": "Arctic Sea and Sea Ice Surface Temperature 2D trend from climatology based on reprocessed observations",
-            "langeng": "Arctic Sea and Sea Ice Surface Temperature 2D trend from climatology based on reprocessed observations"
-          },
-          "resourceAbstractObject": {
-            "default": "'''DEFINITION'''\n\nThe OMI_CLIMATE_sst_ist_ARCTIC_sst_ist_trend product includes the cumulative/net trend in combined sea and ice surface temperature anomalies for the Arctic Ocean from 1982-2024. The cumulative trend is the rate of change (°C/year) scaled by the number of years (43 years). The SST/IST Level 4 analysis that provides the input to the trend calculations are taken from the reprocessed product SEAICE_ARC_PHY_CLIMATE_L4_MY_011_016 with a recent update to include 2024. The product has a spatial resolution of 0.05 degrees in latitude and longitude. \nThe OMI time series runs from Jan 1, 1982 to December 31, 2024 and is constructed by calculating monthly averages from the reference climatology defined over the period 1991-2020, according to the WMO recommendation (WMO, 2017) and recent U.S. National Oceanic and Atmospheric Administration practice (https://wmo.int/media/news/updated-30-year-reference-period-reflects-changing-climate), using daily level 4 SST/IST analysis fields of the SEAICE_ARC_PHY_CLIMATE_L4_MY_011_016 product. See the Copernicus Marine Service Ocean State Reports (section 1.1 in Von Schuckmann et al., 2016; section 3 in Von Schuckmann et al., 2018) for more information on the temperature OMI product. The times series of monthly anomalies have been used to calculate the trend in surface temperature (combined SST and IST) using Sen’s method with confidence intervals from the Mann-Kendall test (section 3 in Von Schuckmann et al., 2018).\n\n'''CONTEXT'''\nSST and IST are essential climate variables that act as important input for initializing numerical weather prediction models and fundamental for understanding air-sea interactions and monitoring climate change. Especially in the Arctic, SST/IST feedbacks amplify climate change (AMAP, 2021). In the Arctic Ocean, the surface temperatures play a crucial role for the heat exchange between the ocean and atmosphere, sea ice growth and melt processes (Key et al., 1997) in addition to weather and sea ice forecasts through assimilation into ocean and atmospheric models (Rasmussen et al., 2018). \nThe Arctic Ocean is a region that requires special attention regarding the use of satellite SST and IST records and the assessment of climatic variability due to the presence of both seawater and ice, and the large seasonal and inter-annual fluctuations in the sea ice cover which lead to increased complexity in the SST mapping of the Arctic region. Combining SST and ice surface temperature (IST) is identified as the most appropriate method for determining the surface temperature of the Arctic (Minnett et al., 2020). \nPreviously, climate trends have been estimated individually for SST and IST records (Bulgin et al., 2020; Comiso and Hall, 2014). However, this is problematic in the Arctic region due to the large temporal variability in the sea ice cover including the overlying northward migration of the ice edge on decadal timescales, and thus, the resulting climate trends are not easy to interpret (Comiso, 2003). A combined surface temperature dataset of the ocean, sea ice and the marginal ice zone (MIZ) provides a consistent climate indicator, which is important for studying climate trends in the Arctic region.\n\n'''CMEMS KEY FINDINGS'''\nSST/IST trends were calculated for the Arctic Ocean over the period January 1982 to December 2024. The cumulative trends are upwards of 2°C for the greatest part of the Arctic Ocean, with the largest trends occur in the Beaufort Sea, Chukchi Sea, East Siberian Sea, Laptev Sea, Kara Sea and parts of Baffin Bay. Zero to slightly negative trends are found at the North Atlantic part of the Arctic Ocean. The combined sea and sea ice surface temperature trend is 0.104+/-0.005°C/yr, i.e. an increase by around 4.47°C between 1982 and 2024. The 2d map of Arctic anomalies reveals regional peak warming exceeding 5.5°C.\n\n'''DOI (product):''' \nhttps://doi.org/10.48670/mds-00324",
-            "langeng": "'''DEFINITION'''\n\nThe OMI_CLIMATE_sst_ist_ARCTIC_sst_ist_trend product includes the cumulative/net trend in combined sea and ice surface temperature anomalies for the Arctic Ocean from 1982-2024. The cumulative trend is the rate of change (°C/year) scaled by the number of years (43 years). The SST/IST Level 4 analysis that provides the input to the trend calculations are taken from the reprocessed product SEAICE_ARC_PHY_CLIMATE_L4_MY_011_016 with a recent update to include 2024. The product has a spatial resolution of 0.05 degrees in latitude and longitude. \nThe OMI time series runs from Jan 1, 1982 to December 31, 2024 and is constructed by calculating monthly averages from the reference climatology defined over the period 1991-2020, according to the WMO recommendation (WMO, 2017) and recent U.S. National Oceanic and Atmospheric Administration practice (https://wmo.int/media/news/updated-30-year-reference-period-reflects-changing-climate), using daily level 4 SST/IST analysis fields of the SEAICE_ARC_PHY_CLIMATE_L4_MY_011_016 product. See the Copernicus Marine Service Ocean State Reports (section 1.1 in Von Schuckmann et al., 2016; section 3 in Von Schuckmann et al., 2018) for more information on the temperature OMI product. The times series of monthly anomalies have been used to calculate the trend in surface temperature (combined SST and IST) using Sen’s method with confidence intervals from the Mann-Kendall test (section 3 in Von Schuckmann et al., 2018).\n\n'''CONTEXT'''\nSST and IST are essential climate variables that act as important input for initializing numerical weather prediction models and fundamental for understanding air-sea interactions and monitoring climate change. Especially in the Arctic, SST/IST feedbacks amplify climate change (AMAP, 2021). In the Arctic Ocean, the surface temperatures play a crucial role for the heat exchange between the ocean and atmosphere, sea ice growth and melt processes (Key et al., 1997) in addition to weather and sea ice forecasts through assimilation into ocean and atmospheric models (Rasmussen et al., 2018). \nThe Arctic Ocean is a region that requires special attention regarding the use of satellite SST and IST records and the assessment of climatic variability due to the presence of both seawater and ice, and the large seasonal and inter-annual fluctuations in the sea ice cover which lead to increased complexity in the SST mapping of the Arctic region. Combining SST and ice surface temperature (IST) is identified as the most appropriate method for determining the surface temperature of the Arctic (Minnett et al., 2020). \nPreviously, climate trends have been estimated individually for SST and IST records (Bulgin et al., 2020; Comiso and Hall, 2014). However, this is problematic in the Arctic region due to the large temporal variability in the sea ice cover including the overlying northward migration of the ice edge on decadal timescales, and thus, the resulting climate trends are not easy to interpret (Comiso, 2003). A combined surface temperature dataset of the ocean, sea ice and the marginal ice zone (MIZ) provides a consistent climate indicator, which is important for studying climate trends in the Arctic region.\n\n'''CMEMS KEY FINDINGS'''\nSST/IST trends were calculated for the Arctic Ocean over the period January 1982 to December 2024. The cumulative trends are upwards of 2°C for the greatest part of the Arctic Ocean, with the largest trends occur in the Beaufort Sea, Chukchi Sea, East Siberian Sea, Laptev Sea, Kara Sea and parts of Baffin Bay. Zero to slightly negative trends are found at the North Atlantic part of the Arctic Ocean. The combined sea and sea ice surface temperature trend is 0.104+/-0.005°C/yr, i.e. an increase by around 4.47°C between 1982 and 2024. The 2d map of Arctic anomalies reveals regional peak warming exceeding 5.5°C.\n\n'''DOI (product):''' \nhttps://doi.org/10.48670/mds-00324"
-          },
-          "resourceCreditObject": [
-            {
-              "default": "E.U. Copernicus Marine Service Information",
-              "langeng": "E.U. Copernicus Marine Service Information"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-180.0, 58.0],
-                  [180.0, 58.0],
-                  [180.0, 90.0],
-                  [-180.0, 90.0],
-                  [-180.0, 58.0]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "hash": "b7dd227c6d8a14f15bb182c843eea31e",
-              "idx": 1,
-              "protocol": "WWW:STAC",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://stac.marine.copernicus.eu/metadata/OMI_CLIMATE_SST_IST_ARCTIC_trend/omi_climate_sst_ist_arctic_anomaly_202311/dataset.stac.json",
-                "langeng": "https://stac.marine.copernicus.eu/metadata/OMI_CLIMATE_SST_IST_ARCTIC_trend/omi_climate_sst_ist_arctic_anomaly_202311/dataset.stac.json"
-              },
-              "nameObject": {
-                "default": "omi_climate_sst_ist_arctic_trend",
-                "langeng": "omi_climate_sst_ist_arctic_trend"
-              },
-              "descriptionObject": {
-                "default": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint",
-                "langeng": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "f42c33abf5312c29e0ea47d2ac0af265",
-              "idx": 2,
-              "protocol": "OGC:WMTS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://wmts.marine.copernicus.eu/teroWmts/OMI_CLIMATE_SST_IST_ARCTIC_trend/omi_climate_sst_ist_arctic_anomaly_202311",
-                "langeng": "https://wmts.marine.copernicus.eu/teroWmts/OMI_CLIMATE_SST_IST_ARCTIC_trend/omi_climate_sst_ist_arctic_anomaly_202311"
-              },
-              "nameObject": {
-                "default": "omi_climate_sst_ist_arctic_trend",
-                "langeng": "omi_climate_sst_ist_arctic_trend"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "a83fe207-85af-44eb-88ec-0dcfcf2f5365",
-          "draft": "n",
-          "id": "337616413",
-          "owner": "3680846",
-          "groupOwner": "103",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "documentStandard": "iso19139",
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://documentation.marine.copernicus.eu/IMG/OMI_CLIMATE_SST_IST_ARCTIC_trend.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "a3504bff-e583-4d59-ba55-ba3f97df0ac3",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2025-05-15T23:35:49.832924Z",
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Densité moyenne et écart-type interannuel de l'espèce Sardina pilchardus aux stades adulte et juvénile dans le Golfe du Lion (PELMED, 2015-2019)",
-            "langfre": "Densité moyenne et écart-type interannuel de l'espèce Sardina pilchardus aux stades adulte et juvénile dans le Golfe du Lion (PELMED, 2015-2019)"
-          },
-          "resourceAbstractObject": {
-            "default": "La densité (nombre individus/km²) moyenne et son écart-type ont été calculés sur la période 2015-2019 par stade de vie, à partir des cartes annuelles.",
-            "langfre": "La densité (nombre individus/km²) moyenne et son écart-type ont été calculés sur la période 2015-2019 par stade de vie, à partir des cartes annuelles."
-          },
-          "resourceCreditObject": [
-            {
-              "default": "Ifremer - Eolien flottant A06",
-              "langfre": "Ifremer - Eolien flottant A06"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [2.5, 42.0],
-                  [6.0, 42.0],
-                  [6.0, 44.0],
-                  [2.5, 44.0],
-                  [2.5, 42.0]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "DOI",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.12770/a3504bff-e583-4d59-ba55-ba3f97df0ac3",
-                "langfre": "https://doi.org/10.12770/a3504bff-e583-4d59-ba55-ba3f97df0ac3"
-              },
-              "nameObject": {
-                "default": "DOI du jeu de données",
-                "langfre": "DOI du jeu de données"
-              },
-              "descriptionObject": {
-                "default": "DOI du jeu de données",
-                "langfre": "DOI du jeu de données"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/documentation/eolien_en_mer/data/Densite_moyenne_SARDPIL.zip",
-                "langfre": "https://sextant.ifremer.fr/documentation/eolien_en_mer/data/Densite_moyenne_SARDPIL.zip"
-              },
-              "nameObject": {
-                "default": "Densite_moyenne_SARDPIL",
-                "langfre": "Densite_moyenne_SARDPIL"
-              },
-              "descriptionObject": {
-                "default": "Densité moyenne et écart-type interannuel",
-                "langfre": "Densité moyenne et écart-type interannuel"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
-              },
-              "nameObject": {
-                "default": "Densite_moyenne_SARDPIL_ADULT",
-                "langfre": "Densite_moyenne_SARDPIL_ADULT"
-              },
-              "descriptionObject": {
-                "default": "Densité moyenne - stade adulte",
-                "langfre": "Densité moyenne - stade adulte"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
-              },
-              "nameObject": {
-                "default": "Densite_moyenne_SARDPIL_JUV",
-                "langfre": "Densite_moyenne_SARDPIL_JUV"
-              },
-              "descriptionObject": {
-                "default": "Densité moyenne - stade juvénile",
-                "langfre": "Densité moyenne - stade juvénile"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
-              },
-              "nameObject": {
-                "default": "SD_Densite_moyenne_SARDPIL_ADULT",
-                "langfre": "SD_Densite_moyenne_SARDPIL_ADULT"
-              },
-              "descriptionObject": {
-                "default": "Ecart-type interannuel moyen - stade adulte",
-                "langfre": "Ecart-type interannuel moyen - stade adulte"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 2
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion",
-                "langfre": "https://sextant.ifremer.fr/services/wms/eolien_mer_golfe_du_lion"
-              },
-              "nameObject": {
-                "default": "SD_Densite_moyenne_SARDPIL_JUV",
-                "langfre": "SD_Densite_moyenne_SARDPIL_JUV"
-              },
-              "descriptionObject": {
-                "default": "Ecart-type interannuel moyen - stade juvénile",
-                "langfre": "Ecart-type interannuel moyen - stade juvénile"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 3
-            }
-          ],
-          "uuid": "a3504bff-e583-4d59-ba55-ba3f97df0ac3",
-          "draft": "n",
-          "id": "334599312",
-          "owner": "334266170",
-          "groupOwner": "334579404",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "documentStandard": "iso19115-3.2018",
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/documentation/eolien_en_mer/vignette/Densite_moyenne_SARDPIL_ADULT.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "6a9c202f-42f9-49d4-888d-d4bd4ee3ba4c",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2025-04-22T12:10:17.518291Z",
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "Tombolo des Chevrets (Saint-Coulomb) - Orthomosaïque en couleurs naturelles (RVB) du 2019-11-13",
-            "langfre": "Tombolo des Chevrets (Saint-Coulomb) - Orthomosaïque en couleurs naturelles (RVB) du 2019-11-13"
-          },
-          "resourceAbstractObject": {
-            "default": "La donnée est une orthomosaïque en couleurs naturelles (RVB) issue de levés par drone au dessus du tombolo des Chevrets (plage-dune-marais maritime ; Saint-Coulomb, Ille-Et-Vilaine, Bretagne).",
-            "langfre": "La donnée est une orthomosaïque en couleurs naturelles (RVB) issue de levés par drone au dessus du tombolo des Chevrets (plage-dune-marais maritime ; Saint-Coulomb, Ille-Et-Vilaine, Bretagne)."
-          },
-          "resourceCreditObject": [
-            {
-              "default": "CGEL-EPHE-PSL",
-              "langfre": "CGEL-EPHE-PSL"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-1.9553, 48.6882],
-                  [-1.9476, 48.6882],
-                  [-1.9476, 48.6931],
-                  [-1.9553, 48.6931],
-                  [-1.9553, 48.6882]
-                ]
-              ]
-            }
-          ],
-          "uuid": "6a9c202f-42f9-49d4-888d-d4bd4ee3ba4c",
-          "draft": "n",
-          "id": "339385857",
-          "owner": "160",
-          "groupOwner": "335589484",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "id": "238",
+          "owner": "13",
+          "groupOwner": "4",
           "documentStandard": "iso19115-3.2018",
           "valid": "0",
           "isTemplate": "n",
@@ -761,7 +96,7 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6a9c202f-42f9-49d4-888d-d4bd4ee3ba4c/attachments/Guimo_RVB_2019-11-13.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6a26d690-c35c-11dc-9c70-000086f6a62e/attachments/bernache_cravant.png"
             }
           ]
         },
@@ -773,82 +108,90 @@
         "view": true,
         "notify": false,
         "download": false,
-        "dynamic": false,
+        "dynamic": true,
         "featured": false,
         "guestdownload": false,
         "selected": false
       },
       {
         "_index": "sextant-records",
-        "_id": "afedaca5-b947-4a16-97a8-32f97a4f6467",
+        "_id": "6d108e90-97a2-11dc-8d32-000086f6a62e",
         "_score": 0.0,
-        "_ignored": [
-          "lineageObject.default.keyword",
-          "lineageObject.default.sort",
-          "lineageObject.langeng.keyword",
-          "lineageObject.langfre.keyword",
-          "processSteps.descriptionObject.default.keyword",
-          "processSteps.descriptionObject.langeng.keyword",
-          "processSteps.descriptionObject.langfre.keyword"
-        ],
         "_source": {
-          "dateStamp": "2025-05-15T23:45:50.510942Z",
-          "resourceType": ["series"],
+          "dateStamp": "2026-01-27T15:41:06.561237Z",
+          "resourceType": ["dataset"],
           "cl_status": [
             {
               "key": "onGoing",
               "default": "Mis à jour continue",
               "langfre": "Mis à jour continue",
-              "langeng": "On going",
               "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
             }
           ],
           "resourceTitleObject": {
-            "default": "Observations et prévisions côtières PREVIMER - Prévision à 4 jours (96h) -",
-            "langfre": "Observations et prévisions côtières PREVIMER - Prévision à 4 jours (96h) -",
-            "langeng": "PREVIMER Coastal Observations and Forecasts – 4 day forecast (96h) -"
+            "default": "Aires de camping des communes littorales bretonnes de la baie du Mont Saint-Michel. État 2007.",
+            "langfre": "Aires de camping des communes littorales bretonnes de la baie du Mont Saint-Michel. État 2007."
           },
           "resourceAbstractObject": {
-            "default": "Le démonstrateur PREVIMER s’adresse à un large public souhaitant à titre privé ou professionnel, obtenir des prévisions à court terme de l’environnement côtier sur les trois façades métropolitaines Manche, Atlantique et Méditerranée.",
-            "langfre": "Le démonstrateur PREVIMER s’adresse à un large public souhaitant à titre privé ou professionnel, obtenir des prévisions à court terme de l’environnement côtier sur les trois façades métropolitaines Manche, Atlantique et Méditerranée.",
-            "langeng": "The PREVIMER demonstrator is designed for a wide audience, including those who want to obtain short term coastal environmental forecasts for the Channel, Atlantic and Mediterranean coasts, be it for private or professional purposes."
+            "default": "Localisation des entrées d'aires de camping du littoral breton de la baie du Mont Saint-Michel (Ille-et-Vilaine) sous forme de points.",
+            "langfre": "Localisation des entrées d'aires de camping du littoral breton de la baie du Mont Saint-Michel (Ille-et-Vilaine) sous forme de points."
           },
-          "resourceCreditObject": [
-            {
-              "default": "Producteurs de données : IFREMER, SHOM, Météo-France, CETMEF, Mercator Ocean, IUEM, BRGM, IGN, DIREN - Serveur Producteur Coliane, Institution d'Aménagement de la Vilaine",
-              "langfre": "Producteurs de données : IFREMER, SHOM, Météo-France, CETMEF, Mercator Ocean, IUEM, BRGM, IGN, DIREN - Serveur Producteur Coliane, Institution d'Aménagement de la Vilaine",
-              "langeng": "Data Producers : IFREMER, SHOM, Météo-France, CETMEF, Mercator Ocean, IUEM, BRGM, IGN, DIREN - Serveur Producteur Coliane, Institution d'Aménagement de la Vilaine"
-            }
-          ],
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-10.08, 40.087],
-                  [10.25, 40.087],
-                  [10.25, 51.56],
-                  [-10.08, 51.56],
-                  [-10.08, 40.087]
+                  [-1.902885, 48.594375],
+                  [-1.598547, 48.594375],
+                  [-1.598547, 48.704114],
+                  [-1.902885, 48.704114],
+                  [-1.902885, 48.594375]
                 ]
               ]
             }
           ],
-          "uuid": "afedaca5-b947-4a16-97a8-32f97a4f6467",
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/ogive_agil",
+                "langfre": "https://sextant.ifremer.fr/services/wms/ogive_agil"
+              },
+              "nameObject": {
+                "default": "DRE_BZH_CAMPING_MSM_PT",
+                "langfre": "DRE_BZH_CAMPING_MSM_PT"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "DRE_BZH_CAMPING_MSM_PT",
+                "langfre": "DRE_BZH_CAMPING_MSM_PT"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "6d108e90-97a2-11dc-8d32-000086f6a62e",
           "draft": "n",
-          "id": "2853649",
-          "owner": "120",
-          "groupOwner": "126",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "id": "177",
+          "owner": "13",
+          "groupOwner": "4",
           "documentStandard": "iso19115-3.2018",
-          "valid": "-1",
+          "valid": "0",
           "isTemplate": "n",
           "rating": "0",
           "isHarvested": "false",
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/afedaca5-b947-4a16-97a8-32f97a4f6467/attachments/Previmer.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6d108e90-97a2-11dc-8d32-000086f6a62e/attachments/camping_bmsm.png"
             }
           ]
         },
@@ -859,17 +202,113 @@
         "isPublishedToAll": true,
         "view": true,
         "notify": false,
-        "download": true,
+        "download": false,
         "dynamic": true,
         "featured": false,
+        "guestdownload": false,
         "selected": false
       },
       {
         "_index": "sextant-records",
-        "_id": "0ba58900-8963-433d-93a1-5cbc98ef78f3",
+        "_id": "017d2eb0-b465-11dc-a954-000086f6a62e",
         "_score": 0.0,
         "_source": {
-          "dateStamp": "2016-11-17T12:37:36.000Z",
+          "dateStamp": "2026-01-27T14:50:48.765966Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Réserves de parcs ostréicoles de la baie du Mont Saint-Michel (Ille-et-Vilaine). État 1998.",
+            "langfre": "Réserves de parcs ostréicoles de la baie du Mont Saint-Michel (Ille-et-Vilaine). État 1998."
+          },
+          "resourceAbstractObject": {
+            "default": "Zones de dépôt d'huîtres, de palourdes et de moules à mi-hauteur sur l'estran accessibles à faible coefficient de marée.\nCette carte de 1998 réalisée par le service Cultures Marines de la DDAM d'Ille-et-Vilaine provient de la numérisation d'une orthophotographie aérienne.",
+            "langfre": "Zones de dépôt d'huîtres, de palourdes et de moules à mi-hauteur sur l'estran accessibles à faible coefficient de marée.\nCette carte de 1998 réalisée par le service Cultures Marines de la DDAM d'Ille-et-Vilaine provient de la numérisation d'une orthophotographie aérienne."
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-1.869327, 48.620996],
+                  [-1.693061, 48.620996],
+                  [-1.693061, 48.672894],
+                  [-1.869327, 48.672894],
+                  [-1.869327, 48.620996]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/biologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
+              },
+              "nameObject": {
+                "default": "DDAM35_RES_OSTREICOL_MSM_P",
+                "langfre": "DDAM35_RES_OSTREICOL_MSM_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "DDAM35_RES_OSTREICOL_MSM_P",
+                "langfre": "DDAM35_RES_OSTREICOL_MSM_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "017d2eb0-b465-11dc-a954-000086f6a62e",
+          "draft": "n",
+          "id": "217",
+          "owner": "13",
+          "groupOwner": "4",
+          "documentStandard": "iso19115-3.2018",
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/017d2eb0-b465-11dc-a954-000086f6a62e/attachments/reserve_parcs.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": true,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "8e7b40ef-c6f0-4285-86ac-27b0cda26e46",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2016-11-17T12:36:47.000Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
@@ -880,19 +319,19 @@
             }
           ],
           "resourceTitleObject": {
-            "default": "Zooplankton taxonomy-related abundance per unit volume of the water column | Abundance of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset",
-            "langeng": "Zooplankton taxonomy-related abundance per unit volume of the water column | Abundance of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset"
+            "default": "Zooplankton wet weight biomass | Wet weight biomass of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset",
+            "langeng": "Zooplankton wet weight biomass | Wet weight biomass of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset"
           },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [29.5, 41.6],
-                  [36.5, 41.6],
-                  [36.5, 43.2],
-                  [29.5, 43.2],
-                  [29.5, 41.6]
+                  [28.13, 41.0],
+                  [41.5, 41.0],
+                  [41.5, 43.4],
+                  [28.13, 43.4],
+                  [28.13, 41.0]
                 ]
               ]
             }
@@ -910,12 +349,12 @@
               "group": 0
             }
           ],
-          "uuid": "0ba58900-8963-433d-93a1-5cbc98ef78f3",
+          "uuid": "8e7b40ef-c6f0-4285-86ac-27b0cda26e46",
           "draft": "n",
-          "id": "153322764",
+          "id": "153356294",
           "owner": "141622272",
           "groupOwner": "139608974",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "logo": "/srv/api/sources/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3/logo",
           "documentStandard": "iso19115-3.2018",
           "valid": "-1",
           "isTemplate": "n",
@@ -943,31 +382,35 @@
       },
       {
         "_index": "sextant-records",
-        "_id": "4cb3e11f-f2c8-4c05-9438-de40f3ae8571",
+        "_id": "2b7e18d0-de01-11dc-af25-000086f6a603",
         "_score": 0.0,
+        "_ignored": [
+          "processSteps.descriptionObject.default.keyword",
+          "processSteps.descriptionObject.langfre.keyword"
+        ],
         "_source": {
-          "dateStamp": "2025-05-15T22:18:08.508513Z",
+          "dateStamp": "2026-01-22T21:30:27.631282Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
-              "key": "onGoing",
-              "default": "Mis à jour continue",
-              "langfre": "Mis à jour continue",
+              "key": "completed",
+              "default": "Finalisé",
+              "langfre": "Finalisé",
               "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
             }
           ],
           "resourceTitleObject": {
-            "default": "DCE – Bassin Loire-Bretagne - Etat Masse d'eau",
-            "langfre": "DCE – Bassin Loire-Bretagne - Etat Masse d'eau"
+            "default": "Trait de côte GSHHS",
+            "langfre": "Trait de côte GSHHS"
           },
           "resourceAbstractObject": {
-            "default": "L’analyse porte sur les caractéristiques des masses d'eaux côtières et de transition du bassin hydrographique Loire - Bretagne, leur état vis à vis de la mise en oeuvre de la surveillance pour la directive cadre européenne sur l'eau (DCE) et du risque estimé de non atteinte des objectifs de bon état aux échéances prévues lors de l'état des lieux initial ou révisé.\n\nLes caractéristiques physiques et morphologiques (type de substrat, de côte, profondeur, gamme de salinité, marnage ...) ont conduit à classer les masses d'eau en 17 types côtiers et 9 types pour les masses d'eau de transition pour l'Atlantique, la Manche et la Mer du Nord. \n\nUn nombre suffisant et représentatif de masses d'eau a été retenu pour exercer le contrôle de surveillance de la DCE permettant de dresser un tableau cohérent et complet de l'état des eaux au sein du bassin hydrographique Loire-Bretagne. \n\nLa situation actuelle est présentée dans l’atlas DCE Loire-Bretagne. Les états antérieurs sont accessibles dans des archives annuelles.",
-            "langfre": "L’analyse porte sur les caractéristiques des masses d'eaux côtières et de transition du bassin hydrographique Loire - Bretagne, leur état vis à vis de la mise en oeuvre de la surveillance pour la directive cadre européenne sur l'eau (DCE) et du risque estimé de non atteinte des objectifs de bon état aux échéances prévues lors de l'état des lieux initial ou révisé.\n\nLes caractéristiques physiques et morphologiques (type de substrat, de côte, profondeur, gamme de salinité, marnage ...) ont conduit à classer les masses d'eau en 17 types côtiers et 9 types pour les masses d'eau de transition pour l'Atlantique, la Manche et la Mer du Nord. \n\nUn nombre suffisant et représentatif de masses d'eau a été retenu pour exercer le contrôle de surveillance de la DCE permettant de dresser un tableau cohérent et complet de l'état des eaux au sein du bassin hydrographique Loire-Bretagne. \n\nLa situation actuelle est présentée dans l’atlas DCE Loire-Bretagne. Les états antérieurs sont accessibles dans des archives annuelles."
+            "default": "GSHHS est un trait de côte au 1/250000 disponible sur le site du National Geophysical Data Center (NGDC), NOAA. Il est issu de la fusion de 2 bases de données. Il s'agit d'un trait de côte très propre topologiquement.\n\nRéférence bibliographique :\nWessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, #B4, pp. 8741-8743, 1996. \n\nAdresse de téléchargement :\nhttp://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html\n\nClassification (Attribut \"NATURE\") :\n\nLAND : trait de côte de base\nLAKE : contour des lacs inclus par le trait de côte\nISLE : contour des îles incluses par les lacs inclus par le trait de côte\nPOND : contour des étangs inclus par les îles incluses par les lacs inclus par le trait de côte",
+            "langfre": "GSHHS est un trait de côte au 1/250000 disponible sur le site du National Geophysical Data Center (NGDC), NOAA. Il est issu de la fusion de 2 bases de données. Il s'agit d'un trait de côte très propre topologiquement.\n\nRéférence bibliographique :\nWessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, #B4, pp. 8741-8743, 1996. \n\nAdresse de téléchargement :\nhttp://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html\n\nClassification (Attribut \"NATURE\") :\n\nLAND : trait de côte de base\nLAKE : contour des lacs inclus par le trait de côte\nISLE : contour des îles incluses par les lacs inclus par le trait de côte\nPOND : contour des étangs inclus par les îles incluses par les lacs inclus par le trait de côte"
           },
           "resourceCreditObject": [
             {
-              "default": "DCE 2000/60/CE",
-              "langfre": "DCE 2000/60/CE"
+              "default": "Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, #B4, pp. 8741-8743, 1996",
+              "langfre": "Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, #B4, pp. 8741-8743, 1996"
             }
           ],
           "geom": [
@@ -975,97 +418,11 @@
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-5.24491, 45.51179],
-                  [-0.94284, 45.51179],
-                  [-0.94284, 49.334871],
-                  [-5.24491, 49.334871],
-                  [-5.24491, 45.51179]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "http://envlit.ifremer.fr/var/envlit/storage/documents/atlas_DCE/scripts/site/carte.php?map=LB",
-                "langfre": "http://envlit.ifremer.fr/var/envlit/storage/documents/atlas_DCE/scripts/site/carte.php?map=LB"
-              },
-              "nameObject": {
-                "default": "atlas DCE Loire - Bretagne",
-                "langfre": "atlas DCE Loire - Bretagne"
-              },
-              "descriptionObject": {
-                "default": "atlas interactif pour visualiser la qualité des eaux littorales du bassin Loire - Bretagne",
-                "langfre": "atlas interactif pour visualiser la qualité des eaux littorales du bassin Loire - Bretagne"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "4cb3e11f-f2c8-4c05-9438-de40f3ae8571",
-          "draft": "n",
-          "id": "100237",
-          "owner": "214",
-          "groupOwner": "120",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
-          "documentStandard": "iso19115-3.2018",
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/4cb3e11f-f2c8-4c05-9438-de40f3ae8571/attachments/atlasDCE_ME_1.JPG"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "3f5393bd-cf26-43db-9beb-2494ea4eaaf5",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2026-01-26T21:45:36.50864Z",
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "IOWAGA - WW3 - FORECAST - Mediterranean grid - ECMWF",
-            "langeng": "IOWAGA - WW3 - FORECAST - Mediterranean grid - ECMWF"
-          },
-          "resourceAbstractObject": {
-            "default": "IOWAGA sea-states forecast best estimate generated by the wave model WAVEWATCH-III and forced by ECMWF winds on the Mediterranean grid from 2017 to now",
-            "langeng": "IOWAGA sea-states forecast best estimate generated by the wave model WAVEWATCH-III and forced by ECMWF winds on the Mediterranean grid from 2017 to now"
-          },
-          "resourceCreditObject": [
-            {
-              "default": "Laboratoire d'Océanographie Physique et Spatiale",
-              "langeng": "Laboratoire d'Océanographie Physique et Spatiale"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-6.0, 30.0],
-                  [36.5, 30.0],
-                  [36.5, 46.0],
-                  [-6.0, 46.0],
-                  [-6.0, 30.0]
+                  [-180.0, -78.570358],
+                  [180.0, -78.570358],
+                  [180.0, 83.633392],
+                  [-180.0, 83.633392],
+                  [-180.0, -78.570358]
                 ]
               ]
             }
@@ -1075,100 +432,42 @@
               "protocol": "OGC:WMS",
               "mimeType": "",
               "urlObject": {
-                "default": "https://tds3.ifremer.fr/thredds/wms/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M?service=WMS&version=1.3.0&request=GetCapabilities",
-                "langeng": "https://tds3.ifremer.fr/thredds/wms/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M?service=WMS&version=1.3.0&request=GetCapabilities"
+                "default": "https://sextant.ifremer.fr/services/wms/wms1?",
+                "langfre": "https://sextant.ifremer.fr/services/wms/wms1?"
               },
               "nameObject": {
-                "default": "hs",
-                "langeng": "hs"
+                "default": "NOAA_NGDC_TC_GSHHS_A",
+                "langfre": "NOAA_NGDC_TC_GSHHS_A"
               },
               "descriptionObject": {
-                "default": "sea_surface_wave_significant_height",
-                "langeng": "sea_surface_wave_significant_height"
+                "default": "Trait de côte",
+                "langfre": "Trait de côte"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             },
             {
-              "protocol": "WWW:DOWNLOAD",
+              "protocol": "FILE",
               "mimeType": "",
               "urlObject": {
-                "default": "https://tds3.ifremer.fr/thredds/ncss/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M/dataset.html",
-                "langeng": "https://tds3.ifremer.fr/thredds/ncss/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M/dataset.html"
+                "default": "file:///home/sextant/data/NOAA/NOAA_NGDC_TC_GSHHS_A.shp",
+                "langfre": "file:///home/sextant/data/NOAA/NOAA_NGDC_TC_GSHHS_A.shp"
               },
               "nameObject": {
-                "default": "NetcdfSubset",
-                "langeng": "NetcdfSubset"
-              },
-              "descriptionObject": {
-                "default": "NetcdfSubset",
-                "langeng": "NetcdfSubset"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds3.ifremer.fr/thredds/IOWAGA-WW3-FORECAST/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M.html?dataset=IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M",
-                "langeng": "https://tds3.ifremer.fr/thredds/IOWAGA-WW3-FORECAST/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M.html?dataset=IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M"
-              },
-              "nameObject": {
-                "default": "Page listant les accès à toutes les variables du Dataset",
-                "langeng": "Page listant les accès à toutes les variables du Dataset"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds3.ifremer.fr/thredds/ncss/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M-SXT5_PREVIMER/dataset.html",
-                "langeng": "https://tds3.ifremer.fr/thredds/ncss/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M-SXT5_PREVIMER/dataset.html"
-              },
-              "nameObject": {
-                "default": "NetcdfSubset restricted",
-                "langeng": "NetcdfSubset restricted"
-              },
-              "descriptionObject": {
-                "default": "NetcdfSubset restricted",
-                "langeng": "NetcdfSubset restricted"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://tds3.ifremer.fr/thredds/IOWAGA-WW3-FORECAST-SXT5_PREVIMER/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M-SXT5_PREVIMER.html?dataset=IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M-SXT5_PREVIMER",
-                "langeng": "https://tds3.ifremer.fr/thredds/IOWAGA-WW3-FORECAST-SXT5_PREVIMER/IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M-SXT5_PREVIMER.html?dataset=IOWAGA-WW3-FORECAST_MEDMULTI_MED-6M_FIELD_NC_MARC_WW3-MED-6M-SXT5_PREVIMER"
-              },
-              "nameObject": {
-                "default": "Page listant les données à accès restreint",
-                "langeng": "Page listant les données à accès restreint"
-              },
-              "descriptionObject": {
-                "default": "Page listant les données à accès restreint",
-                "langeng": "Page listant les données à accès restreint"
+                "default": "NOAA_NGDC_TC_GSHHS_A",
+                "langfre": "NOAA_NGDC_TC_GSHHS_A"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             }
           ],
-          "uuid": "3f5393bd-cf26-43db-9beb-2494ea4eaaf5",
+          "uuid": "2b7e18d0-de01-11dc-af25-000086f6a603",
           "draft": "n",
-          "id": "334274499",
-          "owner": "217",
-          "groupOwner": "334250000",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "id": "256",
+          "owner": "13",
+          "groupOwner": "4",
           "documentStandard": "iso19115-3.2018",
           "valid": "0",
           "isTemplate": "n",
@@ -1177,7 +476,7 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/b57761fd-5f8a-4ee2-94e8-d148bbf9d5e4/attachments/MED_ECMWF.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/2b7e18d0-de01-11dc-af25-000086f6a603/attachments/apercu_grand.png"
             }
           ]
         },
@@ -1195,15 +494,11 @@
       },
       {
         "_index": "sextant-records",
-        "_id": "e4eb4034-74d8-4159-a65d-baf37c4807be",
+        "_id": "ab32de50-8d50-11dc-a35b-000086f6a603",
         "_score": 0.0,
-        "_ignored": [
-          "processSteps.descriptionObject.default.keyword",
-          "processSteps.descriptionObject.langfre.keyword"
-        ],
         "_source": {
-          "dateStamp": "2025-05-16T09:19:55.087641Z",
-          "resourceType": ["series"],
+          "dateStamp": "2026-01-27T16:00:43.519381Z",
+          "resourceType": ["dataset"],
           "cl_status": [
             {
               "key": "onGoing",
@@ -1213,44 +508,75 @@
             }
           ],
           "resourceTitleObject": {
-            "default": "Suivi à long terme des communautés benthiques de substrat meuble dans la Réserve Naturelle Marine de Cerbère Banyuls",
-            "langfre": "Suivi à long terme des communautés benthiques de substrat meuble dans la Réserve Naturelle Marine de Cerbère Banyuls"
+            "default": "Les pêcheries de la baie du Mont Saint-Michel. État 2002.",
+            "langfre": "Les pêcheries de la baie du Mont Saint-Michel. État 2002."
           },
           "resourceAbstractObject": {
-            "default": "Suivre l'évolution dans le temps des communautés benthiques des substrats meubles au sein du territoire de la réserve. Le suivi sur le long terme doit permettre d'apprécier d'éventuels changements quant à la richesse, l'abondance et la structure des peuplements.",
-            "langfre": "Suivre l'évolution dans le temps des communautés benthiques des substrats meubles au sein du territoire de la réserve. Le suivi sur le long terme doit permettre d'apprécier d'éventuels changements quant à la richesse, l'abondance et la structure des peuplements."
+            "default": "Pêcheries fixes en bois de la baie du Mont Saint-Michel numérisées sur l'ortholittorale 2000 (2002) par la DDAM d'Ille-et-Vilaine sous forme de polylignes.",
+            "langfre": "Pêcheries fixes en bois de la baie du Mont Saint-Michel numérisées sur l'ortholittorale 2000 (2002) par la DDAM d'Ille-et-Vilaine sous forme de polylignes."
           },
-          "resourceCreditObject": [
-            {
-              "default": "Producteurs de données : CREOCEAN",
-              "langfre": "Producteurs de données : CREOCEAN"
-            }
-          ],
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [2.99, 40.087],
-                  [10.259, 40.087],
-                  [10.259, 43.78],
-                  [2.99, 43.78],
-                  [2.99, 40.087]
+                  [-1.850716, 48.626154],
+                  [-1.650948, 48.626154],
+                  [-1.650948, 48.655237],
+                  [-1.850716, 48.655237],
+                  [-1.850716, 48.626154]
                 ]
               ]
             }
           ],
-          "uuid": "e4eb4034-74d8-4159-a65d-baf37c4807be",
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/ogive_agil",
+                "langfre": "https://sextant.ifremer.fr/services/wms/ogive_agil"
+              },
+              "nameObject": {
+                "default": "IFR_DDAM_PECHERIES_MSM_A",
+                "langfre": "IFR_DDAM_PECHERIES_MSM_A"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "IFR_DDAM_PECHERIES_MSM_A",
+                "langfre": "IFR_DDAM_PECHERIES_MSM_A"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "ab32de50-8d50-11dc-a35b-000086f6a603",
           "draft": "n",
-          "id": "22514901",
-          "owner": "120",
-          "groupOwner": "126",
-          "logo": "/images/logos/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3.png",
+          "id": "160",
+          "owner": "13",
+          "groupOwner": "4",
           "documentStandard": "iso19115-3.2018",
-          "valid": "-1",
+          "valid": "0",
           "isTemplate": "n",
           "rating": "0",
-          "isHarvested": "false"
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ab32de50-8d50-11dc-a35b-000086f6a603/attachments/PecheriesMSM_small.png"
+            },
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ab32de50-8d50-11dc-a35b-000086f6a603/attachments/PecheriesMSM_big.png"
+            }
+          ]
         },
         "sort": [0.0],
         "edit": false,
@@ -1260,7 +586,396 @@
         "view": true,
         "notify": false,
         "download": false,
-        "dynamic": false,
+        "dynamic": true,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "f496eb20-90f9-11dc-9328-000086f6a603",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2026-01-27T15:24:56.935801Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Périmètre autorisé du Conservatoire du Littoral aux Chausey. État 2007.",
+            "langfre": "Périmètre autorisé du Conservatoire du Littoral aux Chausey. État 2007."
+          },
+          "resourceAbstractObject": {
+            "default": "Périmètre qui a été adopté en Conseil d'administration pour lequel le Conservatoire du Littoral est autorisé à réaliser des interventions foncières (2007). Donnée, sous forme de polygone, créée et fournie par le Conservatoire du Littoral.",
+            "langfre": "Périmètre qui a été adopté en Conseil d'administration pour lequel le Conservatoire du Littoral est autorisé à réaliser des interventions foncières (2007). Donnée, sous forme de polygone, créée et fournie par le Conservatoire du Littoral."
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-1.827662, 48.868574],
+                  [-1.821286, 48.868574],
+                  [-1.821286, 48.873002],
+                  [-1.827662, 48.873002],
+                  [-1.827662, 48.868574]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/ogive_agil",
+                "langfre": "https://sextant.ifremer.fr/services/wms/ogive_agil"
+              },
+              "nameObject": {
+                "default": "CELRL_PERIM_AUT07_MSM_P",
+                "langfre": "CELRL_PERIM_AUT07_MSM_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "CELRL_PERIM_AUT07_MSM_P",
+                "langfre": "CELRL_PERIM_AUT07_MSM_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "f496eb20-90f9-11dc-9328-000086f6a603",
+          "draft": "n",
+          "id": "167",
+          "owner": "13",
+          "groupOwner": "4",
+          "documentStandard": "iso19115-3.2018",
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/f496eb20-90f9-11dc-9328-000086f6a603/attachments/simon.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": true,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "eec89870-e481-11dc-8369-000086f6a62e",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-05-16T09:29:10.556851Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "InterRisk - Argos PTR buoys drift - MERSEA experimentation",
+            "langfre": "InterRisk - Argos PTR buoys drift - MERSEA experimentation"
+          },
+          "resourceAbstractObject": {
+            "default": "8 buoys were dropped during the MERSEA experimentation, in order to compare to different models.\n\nWhen an oil spill occurs, the tracking of oil slicks by surface drifting is recommended in order to cross the information.\nThe prediction of the drift of slicks by computerized/modeling should always be validated by observation or by the mean of buoy-tracking satellite detection. Direct observation in good conditions is not always possible due to the weather conditions (visibility, ceiling). A reliable remote sensing of buoy is very helpful to track the slicks and guide aerial surveillance aircraft.",
+            "langfre": "8 buoys were dropped during the MERSEA experimentation, in order to compare to different models.\n\nWhen an oil spill occurs, the tracking of oil slicks by surface drifting is recommended in order to cross the information.\nThe prediction of the drift of slicks by computerized/modeling should always be validated by observation or by the mean of buoy-tracking satellite detection. Direct observation in good conditions is not always possible due to the weather conditions (visibility, ceiling). A reliable remote sensing of buoy is very helpful to track the slicks and guide aerial surveillance aircraft."
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [2.121477, 39.614625],
+                  [7.940194, 39.614625],
+                  [7.940194, 43.923607],
+                  [2.121477, 43.923607],
+                  [2.121477, 39.614625]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/wms1?",
+                "langfre": "https://sextant.ifremer.fr/services/wms/wms1?"
+              },
+              "nameObject": {
+                "default": "buoy_mersea",
+                "langfre": "buoy_mersea"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "eec89870-e481-11dc-8369-000086f6a62e",
+          "draft": "n",
+          "id": "265",
+          "owner": "13",
+          "groupOwner": "4",
+          "documentStandard": "iso19115-3.2018",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "nameObject": {
+                "default": "thumbnail",
+                "langfre": "thumbnail"
+              },
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/eec89870-e481-11dc-8369-000086f6a62e/attachments/mersea_buoys_small.PNG"
+            },
+            {
+              "data": "",
+              "nameObject": {
+                "default": "large_thumbnail",
+                "langfre": "large_thumbnail"
+              },
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/eec89870-e481-11dc-8369-000086f6a62e/attachments/mersea_buoys_big.PNG"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": true,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "a9b0a500-c9b2-11dc-b581-000086f6a62e",
+        "_score": 0.0,
+        "_ignored": [
+          "processSteps.descriptionObject.default.keyword",
+          "processSteps.descriptionObject.langfre.keyword"
+        ],
+        "_source": {
+          "dateStamp": "2026-01-27T15:59:06.120215Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "completed",
+              "default": "Finalisé",
+              "langfre": "Finalisé",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Cartographie des habitats naturels intertidaux de substrat meuble de l'archipel de Chausey selon la typologie Natura 2000. Carte 1/2 des habitats sous forme de polygone. État 2002-2006.",
+            "langfre": "Cartographie des habitats naturels intertidaux de substrat meuble de l'archipel de Chausey selon la typologie Natura 2000. Carte 1/2 des habitats sous forme de polygone. État 2002-2006."
+          },
+          "resourceAbstractObject": {
+            "default": "Carte (partie 1/2) des habitats élémentaires Natura 2000 des substrats meubles intertidaux de l'archipel de Chausey (1/25000) sous forme de polygones établie à partir de photo-interprétation, d'observations et de prélèvements sur l'estran.",
+            "langfre": "Carte (partie 1/2) des habitats élémentaires Natura 2000 des substrats meubles intertidaux de l'archipel de Chausey (1/25000) sous forme de polygones établie à partir de photo-interprétation, d'observations et de prélèvements sur l'estran."
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-1.879439, 48.866195],
+                  [-1.730105, 48.866195],
+                  [-1.730105, 48.9116],
+                  [-1.879439, 48.9116],
+                  [-1.879439, 48.866195]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/biologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
+              },
+              "nameObject": {
+                "default": "DIREN_BN_HAB_INTERTID_MSM_P",
+                "langfre": "DIREN_BN_HAB_INTERTID_MSM_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "DIREN_BN_HAB_INTERTID_MSM_P",
+                "langfre": "DIREN_BN_HAB_INTERTID_MSM_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "a9b0a500-c9b2-11dc-b581-000086f6a62e",
+          "draft": "n",
+          "id": "250",
+          "owner": "13",
+          "groupOwner": "4",
+          "documentStandard": "iso19115-3.2018",
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/a9b0a500-c9b2-11dc-b581-000086f6a62e/attachments/simon.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": true,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "f67f9700-cdaf-11dc-85fc-000086f6a62e",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2026-01-27T15:26:40.279306Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "historicalArchive",
+              "default": "historicalArchive",
+              "langfre": "historicalArchive",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Cadastre conchylicole historique breton (partie 2/2 : moules) de la baie du mont Saint-Michel sous forme d'arcs. État 1954-2004.",
+            "langfre": "Cadastre conchylicole historique breton (partie 2/2 : moules) de la baie du mont Saint-Michel sous forme d'arcs. État 1954-2004."
+          },
+          "resourceAbstractObject": {
+            "default": "Seconde partie du cadastre conchylicole historique en baie du Mont Saint-Michel relatif aux cultures de moules de bouchot. Les données sont sous forme d'arcs.",
+            "langfre": "Seconde partie du cadastre conchylicole historique en baie du Mont Saint-Michel relatif aux cultures de moules de bouchot. Les données sont sous forme d'arcs."
+          },
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-1.824313, 48.631079],
+                  [-1.656208, 48.631079],
+                  [-1.656208, 48.669858],
+                  [-1.824313, 48.669858],
+                  [-1.824313, 48.631079]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/biologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
+              },
+              "nameObject": {
+                "default": "EPHE_CAD_HISTO_MOULE_MSM_A",
+                "langfre": "EPHE_CAD_HISTO_MOULE_MSM_A"
+              },
+              "descriptionObject": {
+                "default": "ESRI Shapefile",
+                "langfre": "ESRI Shapefile"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "EPHE_CAD_HISTO_MOULE_MSM_A",
+                "langfre": "EPHE_CAD_HISTO_MOULE_MSM_A"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "f67f9700-cdaf-11dc-85fc-000086f6a62e",
+          "draft": "n",
+          "id": "252",
+          "owner": "13",
+          "groupOwner": "4",
+          "documentStandard": "iso19115-3.2018",
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/f67f9700-cdaf-11dc-85fc-000086f6a62e/attachments/simon.png"
+            }
+          ]
+        },
+        "sort": [0.0],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": true,
         "featured": false,
         "guestdownload": false,
         "selected": false
@@ -1287,43 +1002,35 @@
         }
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 130,
+      "sum_other_doc_count": 0,
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 11699
+          "doc_count": 772
         },
         {
           "key": "series",
-          "doc_count": 2216
+          "doc_count": 70
         },
         {
           "key": "publication",
-          "doc_count": 1017
+          "doc_count": 21
         },
         {
           "key": "nonGeographicDataset",
-          "doc_count": 321
+          "doc_count": 10
         },
         {
-          "key": "service",
-          "doc_count": 136
+          "key": "repository",
+          "doc_count": 3
         },
         {
-          "key": "map-static",
-          "doc_count": 100
+          "key": "document",
+          "doc_count": 1
         },
         {
           "key": "featureCatalog",
-          "doc_count": 82
-        },
-        {
-          "key": "initiative",
-          "doc_count": 81
-        },
-        {
-          "key": "map",
-          "doc_count": 55
+          "doc_count": 1
         }
       ]
     },
@@ -1350,31 +1057,31 @@
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947",
-          "doc_count": 2674
+          "doc_count": 189
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463",
-          "doc_count": 1875
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
-          "doc_count": 1533
+          "doc_count": 149
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b",
-          "doc_count": 587
+          "doc_count": 122
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
+          "doc_count": 107
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1",
-          "doc_count": 369
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f",
-          "doc_count": 344
+          "doc_count": 40
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921",
-          "doc_count": 27
+          "doc_count": 15
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f",
+          "doc_count": 5
         }
       ]
     },
@@ -1393,136 +1100,116 @@
       "sum_other_doc_count": 0,
       "buckets": [
         {
-          "key": "http://inspire.ec.europa.eu/theme/of",
-          "doc_count": 2464
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/sd",
-          "doc_count": 1359
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/el",
-          "doc_count": 1222
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/hb",
-          "doc_count": 1067
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/ef",
-          "doc_count": 746
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/hy",
-          "doc_count": 650
-        },
-        {
           "key": "http://inspire.ec.europa.eu/theme/am",
-          "doc_count": 561
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/ge",
-          "doc_count": 321
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/sr",
-          "doc_count": 226
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/oi",
-          "doc_count": 217
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/us",
-          "doc_count": 202
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/af",
-          "doc_count": 124
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/ps",
           "doc_count": 102
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/tn",
-          "doc_count": 89
+          "key": "http://inspire.ec.europa.eu/theme/of",
+          "doc_count": 99
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/mf",
-          "doc_count": 80
+          "key": "http://inspire.ec.europa.eu/theme/hb",
+          "doc_count": 94
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/pf",
-          "doc_count": 80
+          "key": "http://inspire.ec.europa.eu/theme/sd",
+          "doc_count": 88
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/au",
-          "doc_count": 79
+          "key": "http://inspire.ec.europa.eu/theme/el",
+          "doc_count": 76
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/nz",
-          "doc_count": 66
+          "key": "http://inspire.ec.europa.eu/theme/ge",
+          "doc_count": 57
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/hh",
-          "doc_count": 65
+          "key": "http://inspire.ec.europa.eu/theme/oi",
+          "doc_count": 46
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/lu",
-          "doc_count": 50
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/lc",
-          "doc_count": 42
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/er",
-          "doc_count": 38
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/su",
+          "key": "http://inspire.ec.europa.eu/theme/hy",
           "doc_count": 35
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/pd",
-          "doc_count": 34
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/ac",
+          "key": "http://inspire.ec.europa.eu/theme/ef",
           "doc_count": 32
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/bu",
-          "doc_count": 30
+          "key": "http://inspire.ec.europa.eu/theme/af",
+          "doc_count": 27
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/au",
+          "doc_count": 21
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/ps",
+          "doc_count": 20
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/pf",
+          "doc_count": 12
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/lu",
+          "doc_count": 10
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/mr",
-          "doc_count": 22
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/gg",
-          "doc_count": 17
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/cp",
-          "doc_count": 16
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/br",
-          "doc_count": 13
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/gn",
           "doc_count": 8
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/so",
+          "key": "http://inspire.ec.europa.eu/theme/sr",
+          "doc_count": 8
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/su",
+          "doc_count": 7
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/tn",
+          "doc_count": 7
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/cp",
           "doc_count": 4
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/rs",
+          "key": "http://inspire.ec.europa.eu/theme/nz",
+          "doc_count": 3
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/pd",
+          "doc_count": 3
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/er",
           "doc_count": 2
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/mf",
+          "doc_count": 2
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/ac",
+          "doc_count": 1
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/br",
+          "doc_count": 1
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/hh",
+          "doc_count": 1
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/lc",
+          "doc_count": 1
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/us",
+          "doc_count": 1
         }
       ]
     },
@@ -1533,43 +1220,23 @@
         "translateOnLoad": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 5,
+      "sum_other_doc_count": 0,
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/311abf2d-6be9-472f-9f1a-ac5729745a97",
-          "doc_count": 839
+          "doc_count": 32
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/202490d0-74e7-4a41-823e-7f54ec83b941",
-          "doc_count": 588
+          "doc_count": 23
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/5ffc6dd8-bdeb-4484-bbbd-3f813cff9da0",
-          "doc_count": 106
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/8cc9e95b-7746-4e90-8dbd-f62bd834aa19",
-          "doc_count": 21
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/cc26cbb5-4563-4443-8f9f-0baf3465a3c4",
-          "doc_count": 21
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/19e06ed7-0b27-4e15-8ea6-1c1fc63a4e26",
-          "doc_count": 19
+          "doc_count": 2
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/f6f29f14-e5c8-49a4-8a93-174897c436d6",
-          "doc_count": 10
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/4582caf4-bed1-4fc8-b53a-aac739b6e957",
-          "doc_count": 9
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/e23fee72-c17f-4b07-96bd-39b2b0e8dcd0",
-          "doc_count": 4
+          "doc_count": 1
         }
       ]
     },
@@ -1584,63 +1251,63 @@
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41",
-          "doc_count": 2124
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5dc22e69-c8de-4a13-bf4e-8541681a45f5",
-          "doc_count": 968
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/f3b1a057-7a6c-4970-8342-1abea177d29b",
-          "doc_count": 916
+          "doc_count": 169
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/02ae5489-80f4-4790-b7ef-ec7372037454",
-          "doc_count": 817
+          "doc_count": 69
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5dc22e69-c8de-4a13-bf4e-8541681a45f5",
+          "doc_count": 64
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ec646e7f-9c24-4182-a0e1-8e6524d2b91b",
-          "doc_count": 782
+          "doc_count": 50
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/f3b1a057-7a6c-4970-8342-1abea177d29b",
+          "doc_count": 31
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1",
-          "doc_count": 520
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/c30385c9-335a-4b4f-a98d-8e4ac658a60b",
-          "doc_count": 370
+          "doc_count": 18
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/71918e42-5660-483f-aa07-21537b75bc34",
-          "doc_count": 100
+          "doc_count": 10
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/7cec884a-14b2-49a4-9ff8-cabf4529593b",
-          "doc_count": 95
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ee3459a5-7a09-4627-92cc-0e5d27919a85",
-          "doc_count": 41
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/c30385c9-335a-4b4f-a98d-8e4ac658a60b",
+          "doc_count": 8
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5655729b-9a27-4a76-a96c-683564f4012c",
-          "doc_count": 26
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/4e1ec5be-1018-4580-87cd-fbcb49e669d5",
-          "doc_count": 14
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5b8eecd5-d8f1-4eab-8f08-ae88f4ee48d7",
-          "doc_count": 4
+          "doc_count": 2
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/1f1f5d20-8489-4c80-ac20-d6d091d4e30b",
-          "doc_count": 3
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/4e1ec5be-1018-4580-87cd-fbcb49e669d5",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5b8eecd5-d8f1-4eab-8f08-ae88f4ee48d7",
+          "doc_count": 1
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/c9fe0e8d-dd4c-4dd5-b1f3-94568b5fdbcc",
-          "doc_count": 3
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ee3459a5-7a09-4627-92cc-0e5d27919a85",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/7cec884a-14b2-49a4-9ff8-cabf4529593b",
+          "doc_count": 1
         }
       ]
     },
@@ -1653,88 +1320,48 @@
       "sum_other_doc_count": 0,
       "buckets": [
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/96f3277b-8532-4b80-9880-6bd351944db6",
-          "doc_count": 642
-        },
-        {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/26abbfb5-cfef-4e3f-97dd-e22bb4c64c66",
-          "doc_count": 173
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/48641aa2-57a6-44a3-b04c-223bc3ec153d",
-          "doc_count": 156
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/bb1b2158-73f1-4615-802f-c2b674192dc0",
-          "doc_count": 149
+          "doc_count": 3
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/67543ebd-8315-4571-be96-d4d223535118",
-          "doc_count": 138
+          "doc_count": 3
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/c06e5653-4018-4dc1-94ae-a29741717821",
-          "doc_count": 116
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/96f3277b-8532-4b80-9880-6bd351944db6",
+          "doc_count": 3
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/407a2910-a091-4451-aaff-ed9a8d5de3a5",
-          "doc_count": 92
+          "doc_count": 2
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/b1601512-73e9-4fa7-aa74-253cf3cd9257",
-          "doc_count": 92
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/2e916bb0-f2bc-4474-9698-2ad591b8b1cd",
-          "doc_count": 91
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/f2f9badd-d4f4-45d5-9e8a-ee6748d3705f",
-          "doc_count": 90
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/aad517cd-7e3c-42e5-bad6-706f3f5ac335",
-          "doc_count": 88
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/3ebb576b-5f22-4f1b-874b-6b894c8276f1",
-          "doc_count": 86
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/8add80f0-9c49-4f67-afe6-e046238f7228",
-          "doc_count": 72
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/48641aa2-57a6-44a3-b04c-223bc3ec153d",
+          "doc_count": 2
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/8f523066-c7ea-4197-b0db-83553095e380",
-          "doc_count": 67
+          "doc_count": 2
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/e090dc4a-0cd3-42e7-8211-9df6805f07a7",
-          "doc_count": 65
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/c06e5653-4018-4dc1-94ae-a29741717821",
+          "doc_count": 2
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/3ebb576b-5f22-4f1b-874b-6b894c8276f1",
+          "doc_count": 1
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/aad517cd-7e3c-42e5-bad6-706f3f5ac335",
+          "doc_count": 1
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/cf875f0d-33e6-4eb6-97f6-45c5d18a8cbf",
-          "doc_count": 63
+          "doc_count": 1
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/0443df40-e5f8-4df5-a9f0-d19eb60b2ffe",
-          "doc_count": 45
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/41b9c094-7d14-4853-90ed-a8ec56109474",
-          "doc_count": 44
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/4274c574-cd8a-470e-bb63-c92a801594a7",
-          "doc_count": 34
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/32a01774-5c60-49f3-9ed1-f91c9a40406c",
-          "doc_count": 32
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/96d61784-065d-41b6-aa39-960351bcc5a8",
-          "doc_count": 18
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/f2f9badd-d4f4-45d5-9e8a-ee6748d3705f",
+          "doc_count": 1
         }
       ]
     },
@@ -1747,36 +1374,20 @@
       "sum_other_doc_count": 0,
       "buckets": [
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/807b0273-8206-420f-91f4-e0dcdd13110c",
-          "doc_count": 110
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/720a0782-03c4-46a4-a35a-e5bd71d741b8",
-          "doc_count": 96
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/1500646c-46f5-4da2-b6b2-2bfa6eb9415d",
-          "doc_count": 88
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/34c66ea5-3b28-4a1f-9cd7-623c827dc525",
+          "doc_count": 2
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/5c8a927b-6d39-4506-9b8b-88908a2974c3",
-          "doc_count": 57
+          "doc_count": 2
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/34c66ea5-3b28-4a1f-9cd7-623c827dc525",
-          "doc_count": 35
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/720a0782-03c4-46a4-a35a-e5bd71d741b8",
+          "doc_count": 1
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/730d8bf9-3a8c-4a21-bdf3-614968c5e3cb",
-          "doc_count": 14
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/66b253d4-1e05-454b-9641-4e281c11431a",
-          "doc_count": 7
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/840271f5-c45f-46d3-9fcf-e23fcf802d71",
-          "doc_count": 7
+          "doc_count": 1
         }
       ]
     },
@@ -1787,127 +1398,123 @@
         "translateOnLoad": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 180,
+      "sum_other_doc_count": 0,
       "buckets": [
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BIOINFO/",
-          "doc_count": 262
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SHORE/",
-          "doc_count": 250
-        },
-        {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HUMACT/",
-          "doc_count": 220
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/MTBM/",
-          "doc_count": 178
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BATHY/",
-          "doc_count": 176
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CURR/",
-          "doc_count": 175
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEATEMP/",
-          "doc_count": 174
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEALVL/",
-          "doc_count": 147
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WAVES/",
-          "doc_count": 125
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BENTHA/",
-          "doc_count": 115
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SAL/",
-          "doc_count": 110
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/INVER/",
-          "doc_count": 93
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/GEOL/",
-          "doc_count": 84
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HCORAL/",
-          "doc_count": 80
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FISH/",
-          "doc_count": 77
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SGRAS/",
-          "doc_count": 49
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TIDES/",
-          "doc_count": 45
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PIGM/",
-          "doc_count": 42
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TURBID/",
-          "doc_count": 42
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WIND/",
-          "doc_count": 42
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOXY/",
           "doc_count": 39
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PRESS/",
-          "doc_count": 35
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/MTBM/",
+          "doc_count": 36
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SUSPMA/",
-          "doc_count": 33
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/GEOL/",
+          "doc_count": 18
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PHYTO/",
-          "doc_count": 31
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BIOINFO/",
+          "doc_count": 16
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CONT/",
-          "doc_count": 29
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BENTHA/",
+          "doc_count": 13
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEDFLUX/",
-          "doc_count": 26
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BATHY/",
+          "doc_count": 12
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/NUTS/",
-          "doc_count": 24
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CURR/",
+          "doc_count": 12
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FLUO/",
-          "doc_count": 21
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/INVER/",
+          "doc_count": 9
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/AIRPRES/",
-          "doc_count": 20
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEALVL/",
+          "doc_count": 9
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SHORE/",
+          "doc_count": 7
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEATEMP/",
+          "doc_count": 5
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WAVES/",
+          "doc_count": 5
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SAL/",
+          "doc_count": 4
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOXY/",
+          "doc_count": 3
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SGRAS/",
+          "doc_count": 3
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TIDES/",
+          "doc_count": 3
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/COLOUR/",
-          "doc_count": 20
+          "doc_count": 2
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOM/",
+          "doc_count": 2
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/NUTS/",
+          "doc_count": 2
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PIGM/",
+          "doc_count": 2
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BIOTOX/",
+          "doc_count": 1
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CONT/",
+          "doc_count": 1
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FISH/",
+          "doc_count": 1
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HUMI/",
+          "doc_count": 1
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PHYTO/",
+          "doc_count": 1
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SUSPMA/",
+          "doc_count": 1
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TURBID/",
+          "doc_count": 1
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WIND/",
+          "doc_count": 1
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/ZOO/",
+          "doc_count": 1
         }
       ]
     }

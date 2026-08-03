@@ -1,5 +1,5 @@
 {
-  "took": 15,
+  "took": 13,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,7 +9,7 @@
   },
   "hits": {
     "total": {
-      "value": 877,
+      "value": 754,
       "relation": "eq"
     },
     "max_score": null,
@@ -2861,361 +2861,6 @@
       },
       {
         "_index": "sextant-records",
-        "_id": "e5206a60-c561-11de-b55b-000086f6a603",
-        "_score": null,
-        "_source": {
-          "dateStamp": "2026-01-13T21:29:07.482426Z",
-          "resourceType": ["dataset"],
-          "cl_status": [
-            {
-              "key": "completed",
-              "default": "Finalisé",
-              "langfre": "Finalisé",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
-          "resourceTitleObject": {
-            "default": "CARTOMAR : Cartographie morphosédimentologique des fonds marins côtiers de La Réunion",
-            "langfre": "CARTOMAR : Cartographie morphosédimentologique des fonds marins côtiers de La Réunion"
-          },
-          "resourceAbstractObject": {
-            "default": "Nature des fonds et formes sédimentaires issues du projet CARTOMAR de cartographie sédimentologiques des fonds marins côtiers de La Réunion (de -20 à -100 m de profondeur).\n\nProjet co-financé par la DIREN Réunion et le BRGM (CARTOMAR mars-octobre 2007)",
-            "langfre": "Nature des fonds et formes sédimentaires issues du projet CARTOMAR de cartographie sédimentologiques des fonds marins côtiers de La Réunion (de -20 à -100 m de profondeur).\n\nProjet co-financé par la DIREN Réunion et le BRGM (CARTOMAR mars-octobre 2007)"
-          },
-          "resourceCreditObject": [
-            {
-              "default": "BRGM - DIREN",
-              "langfre": "BRGM - DIREN"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [55.158223, -21.383027],
-                  [55.843085, -21.383027],
-                  [55.843085, -20.843697],
-                  [55.158223, -20.843697],
-                  [55.158223, -21.383027]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wms/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_NATURE_FOND_P",
-                "langfre": "REUNION_CARTOMAR_NATURE_FOND_P"
-              },
-              "descriptionObject": {
-                "default": "Nature des fonds (polygones)",
-                "langfre": "Nature des fonds (polygones)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "urlObject": {
-                "default": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_NATURE_FOND_P.shp",
-                "langfre": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_NATURE_FOND_P.shp"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_NATURE_FOND_P",
-                "langfre": "REUNION_CARTOMAR_NATURE_FOND_P"
-              },
-              "descriptionObject": {
-                "default": "Nature des fonds (polygones)",
-                "langfre": "Nature des fonds (polygones)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WFS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wfs/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wfs/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_NATURE_FOND_P",
-                "langfre": "REUNION_CARTOMAR_NATURE_FOND_P"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wms/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_NATUR_FOND_PT",
-                "langfre": "REUNION_CARTOMAR_NATUR_FOND_PT"
-              },
-              "descriptionObject": {
-                "default": "Nature des fonds (points)",
-                "langfre": "Nature des fonds (points)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "urlObject": {
-                "default": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_NATUR_FOND_PT.shp",
-                "langfre": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_NATUR_FOND_PT.shp"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_NATUR_FOND_PT",
-                "langfre": "REUNION_CARTOMAR_NATUR_FOND_PT"
-              },
-              "descriptionObject": {
-                "default": "Nature des fonds (points)",
-                "langfre": "Nature des fonds (points)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "OGC:WFS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wfs/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wfs/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_NATUR_FOND_PT",
-                "langfre": "REUNION_CARTOMAR_NATUR_FOND_PT"
-              },
-              "descriptionObject": {
-                "default": "Nature des fonds (points)",
-                "langfre": "Nature des fonds (points)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wms/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_FORME_SEDI_P",
-                "langfre": "REUNION_CARTOMAR_FORME_SEDI_P"
-              },
-              "descriptionObject": {
-                "default": "Formes sédimentaires (polygones)",
-                "langfre": "Formes sédimentaires (polygones)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 2
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "urlObject": {
-                "default": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_FORME_SEDI_P.shp",
-                "langfre": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_FORME_SEDI_P.shp"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_FORME_SEDI_P",
-                "langfre": "REUNION_CARTOMAR_FORME_SEDI_P"
-              },
-              "descriptionObject": {
-                "default": "Formes sédimentaires (polygones)",
-                "langfre": "Formes sédimentaires (polygones)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 2
-            },
-            {
-              "protocol": "OGC:WFS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wfs/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wfs/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_FORME_SEDI_P",
-                "langfre": "REUNION_CARTOMAR_FORME_SEDI_P"
-              },
-              "descriptionObject": {
-                "default": "Formes sédimentaires (polygones)",
-                "langfre": "Formes sédimentaires (polygones)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 2
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wms/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_FORME_SED_A",
-                "langfre": "REUNION_CARTOMAR_FORME_SED_A"
-              },
-              "descriptionObject": {
-                "default": "Formes sédimentaires (lignes)",
-                "langfre": "Formes sédimentaires (lignes)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 3
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "urlObject": {
-                "default": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_FORME_SED_A.shp",
-                "langfre": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_FORME_SED_A.shp"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_FORME_SED_A",
-                "langfre": "REUNION_CARTOMAR_FORME_SED_A"
-              },
-              "descriptionObject": {
-                "default": "Formes sédimentaires (lignes)",
-                "langfre": "Formes sédimentaires (lignes)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 3
-            },
-            {
-              "protocol": "OGC:WFS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wfs/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wfs/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_FORME_SED_A",
-                "langfre": "REUNION_CARTOMAR_FORME_SED_A"
-              },
-              "descriptionObject": {
-                "default": "Formes sédimentaires (lignes)",
-                "langfre": "Formes sédimentaires (lignes)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 3
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wms/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_STRUCTURE_A",
-                "langfre": "REUNION_CARTOMAR_STRUCTURE_A"
-              },
-              "descriptionObject": {
-                "default": "Structures des fonds (lignes)",
-                "langfre": "Structures des fonds (lignes)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 4
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "urlObject": {
-                "default": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_STRUCTURE_A.shp",
-                "langfre": "file:///home/sextant/data/ocean_indien/REUNION_CARTOMAR_STRUCTURE_A.shp"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_STRUCTURE_A",
-                "langfre": "REUNION_CARTOMAR_STRUCTURE_A"
-              },
-              "descriptionObject": {
-                "default": "Structures des fonds (lignes)",
-                "langfre": "Structures des fonds (lignes)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 4
-            },
-            {
-              "protocol": "OGC:WFS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wfs/ocean_indien",
-                "langfre": "https://sextant.ifremer.fr/services/wfs/ocean_indien"
-              },
-              "nameObject": {
-                "default": "REUNION_CARTOMAR_STRUCTURE_A",
-                "langfre": "REUNION_CARTOMAR_STRUCTURE_A"
-              },
-              "descriptionObject": {
-                "default": "Structures des fonds (lignes)",
-                "langfre": "Structures des fonds (lignes)"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 4
-            }
-          ],
-          "uuid": "e5206a60-c561-11de-b55b-000086f6a603",
-          "draft": "n",
-          "id": "963",
-          "owner": "13",
-          "groupOwner": "4",
-          "documentStandard": "iso19115-3.2018",
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/e5206a60-c561-11de-b55b-000086f6a603/attachments/cartomar_sedim.png"
-            }
-          ]
-        },
-        "sort": [4155],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
         "_id": "81f62970-550e-11de-af3b-000086f6a603",
         "_score": null,
         "_ignored": [
@@ -5465,6 +5110,216 @@
         "dynamic": true,
         "featured": false,
         "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "29457d20-7104-11dc-83f9-000086f6a62e",
+        "_score": null,
+        "_source": {
+          "dateStamp": "2025-12-18T16:29:10.804717Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "completed",
+              "default": "Finalisé",
+              "langfre": "Finalisé",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Formations superficielles de la baie de Douarnenez (2005), données vectorielles",
+            "langfre": "Formations superficielles de la baie de Douarnenez (2005), données vectorielles"
+          },
+          "resourceAbstractObject": {
+            "default": "Ce jeu de données vectorielles provient de la numérisation de la carte des formations superficielles de la baie de Douarnenez, éditée en 2005 dans l'atlas thématique de l'environnement marin de la baie de Douarnenez. Echelle 1/25000.\nLes campagnes océanographiques à l'origine de la réalisation de cette carte sont : \n- AUGRIS Claude, NORMAND Alain (2000) CANADOU cruise, RV Thalia, https://doi.org/10.17600/70020\n- APPRIOUAL Ronan, BLANCHET-AURIGNY Aline (2001) CANADOU cruise, RV Thalia, https://doi.org/10.17600/1070050\n- APPRIOUAL Ronan, BLANCHET-AURIGNY Aline (2001) CANADOU 2 cruise, RV Thalia, https://doi.org/10.17600/1070080\n- AUGRIS Claude, MOUQUET Alain (2001) CANADOU RESON 2001 cruise, RV Unknown.\nRéférence bibliographique : AUGRIS C., MENESGUEN A., HAMON D., BLANCHET A., LE ROY P., ROLET J., JOUET G., VERON G., DELANNOY H., DROGOU M., BERNARD C., MAILLARD X. (2005), Atlas thématique de l'environnement marin de la baie de Douarnenez (Finistère). 10 cartes, échelle 1/25 000 et un livret d'accompagnement, 135 p. Ed. Ifremer - Ville de Douarnenez. Ce jeu de données correspond à la carte des formations superficielles de l'atlas.",
+            "langfre": "Ce jeu de données vectorielles provient de la numérisation de la carte des formations superficielles de la baie de Douarnenez, éditée en 2005 dans l'atlas thématique de l'environnement marin de la baie de Douarnenez. Echelle 1/25000.\nLes campagnes océanographiques à l'origine de la réalisation de cette carte sont : \n- AUGRIS Claude, NORMAND Alain (2000) CANADOU cruise, RV Thalia, https://doi.org/10.17600/70020\n- APPRIOUAL Ronan, BLANCHET-AURIGNY Aline (2001) CANADOU cruise, RV Thalia, https://doi.org/10.17600/1070050\n- APPRIOUAL Ronan, BLANCHET-AURIGNY Aline (2001) CANADOU 2 cruise, RV Thalia, https://doi.org/10.17600/1070080\n- AUGRIS Claude, MOUQUET Alain (2001) CANADOU RESON 2001 cruise, RV Unknown.\nRéférence bibliographique : AUGRIS C., MENESGUEN A., HAMON D., BLANCHET A., LE ROY P., ROLET J., JOUET G., VERON G., DELANNOY H., DROGOU M., BERNARD C., MAILLARD X. (2005), Atlas thématique de l'environnement marin de la baie de Douarnenez (Finistère). 10 cartes, échelle 1/25 000 et un livret d'accompagnement, 135 p. Ed. Ifremer - Ville de Douarnenez. Ce jeu de données correspond à la carte des formations superficielles de l'atlas."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Ifremer",
+              "langfre": "Ifremer"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-4.72738, 48.066738],
+                  [-4.282664, 48.066738],
+                  [-4.282664, 48.236602],
+                  [-4.72738, 48.236602],
+                  [-4.72738, 48.066738]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "DOI",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.12770/29457d20-7104-11dc-83f9-000086f6a62e",
+                "langfre": "https://doi.org/10.12770/29457d20-7104-11dc-83f9-000086f6a62e"
+              },
+              "nameObject": {
+                "default": "DOI du jeu de donnée",
+                "langfre": "DOI du jeu de donnée"
+              },
+              "descriptionObject": {
+                "default": "DOI du jeu de donnée",
+                "langfre": "DOI du jeu de donnée"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.17600/70020",
+                "langfre": "https://doi.org/10.17600/70020"
+              },
+              "descriptionObject": {
+                "default": "Campagne CANADOU (2000)",
+                "langfre": "Campagne CANADOU (2000)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.17600/1070050",
+                "langfre": "https://doi.org/10.17600/1070050"
+              },
+              "descriptionObject": {
+                "default": "Campagne CANADOU (2001)",
+                "langfre": "Campagne CANADOU (2001)"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://campagnes.flotteoceanographique.fr/",
+                "langfre": "https://campagnes.flotteoceanographique.fr/"
+              },
+              "descriptionObject": {
+                "default": "Campagne CANADOU RESON 2001",
+                "langfre": "Campagne CANADOU RESON 2001"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.17600/1070080",
+                "langfre": "https://doi.org/10.17600/1070080"
+              },
+              "descriptionObject": {
+                "default": "Campagne CANADOU 2",
+                "langfre": "Campagne CANADOU 2"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/gm_geologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/gm_geologie"
+              },
+              "nameObject": {
+                "default": "FormationsSup_BaieDouarnenez_Augris_2005_Facies",
+                "langfre": "FormationsSup_BaieDouarnenez_Augris_2005_Facies"
+              },
+              "descriptionObject": {
+                "default": "Faciès sédimentaires",
+                "langfre": "Faciès sédimentaires"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "urlObject": {
+                "default": "file:///home/sextant/data_QGIS/GM_CHANTIERS/ATLANTIQUE/Manche_Gascogne/SIG/08_INTERPRETATION/SEDIMENTOLOGIE/Atlas_BaieDouarnenez_Augris_2005/FormationsSuperficielles_BaieDouarnenez_Augris_2005",
+                "langfre": "file:///home/sextant/data_QGIS/GM_CHANTIERS/ATLANTIQUE/Manche_Gascogne/SIG/08_INTERPRETATION/SEDIMENTOLOGIE/Atlas_BaieDouarnenez_Augris_2005/FormationsSuperficielles_BaieDouarnenez_Augris_2005"
+              },
+              "nameObject": {
+                "default": "FormationsSuperficielles_BaieDouarnenez_Augris_2005",
+                "langfre": "FormationsSuperficielles_BaieDouarnenez_Augris_2005"
+              },
+              "descriptionObject": {
+                "default": "Faciès et figures sédimentaires",
+                "langfre": "Faciès et figures sédimentaires"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/gm_geologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/gm_geologie"
+              },
+              "nameObject": {
+                "default": "FormationsSup_BaieDouarnenez_Augris_2005_Figures",
+                "langfre": "FormationsSup_BaieDouarnenez_Augris_2005_Figures"
+              },
+              "descriptionObject": {
+                "default": "Figures sédimentaires",
+                "langfre": "Figures sédimentaires"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 2
+            }
+          ],
+          "uuid": "29457d20-7104-11dc-83f9-000086f6a62e",
+          "draft": "n",
+          "id": "116",
+          "owner": "8",
+          "groupOwner": "21",
+          "documentStandard": "iso19115-3.2018",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/29457d20-7104-11dc-83f9-000086f6a62e/attachments/FormationSuperficielles_BaieDouarnenez2005.png"
+            }
+          ]
+        },
+        "sort": [2077],
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
       }
     ]
   },
@@ -5483,31 +5338,31 @@
       "buckets": [
         {
           "key": "82",
-          "doc_count": 382
+          "doc_count": 363
         },
         {
           "key": "58",
-          "doc_count": 305
+          "doc_count": 301
         },
         {
           "key": "334291911",
-          "doc_count": 188
+          "doc_count": 171
         },
         {
           "key": "4",
-          "doc_count": 163
+          "doc_count": 145
         },
         {
           "key": "15",
-          "doc_count": 108
+          "doc_count": 104
         },
         {
           "key": "5",
-          "doc_count": 94
+          "doc_count": 93
         },
         {
           "key": "21",
-          "doc_count": 86
+          "doc_count": 80
         },
         {
           "key": "62",
@@ -5515,15 +5370,7 @@
         },
         {
           "key": "80",
-          "doc_count": 56
-        },
-        {
-          "key": "174375699",
-          "doc_count": 53
-        },
-        {
-          "key": "83566633",
-          "doc_count": 51
+          "doc_count": 55
         },
         {
           "key": "87",
@@ -5534,16 +5381,24 @@
           "doc_count": 48
         },
         {
-          "key": "92",
-          "doc_count": 48
-        },
-        {
           "key": "7",
           "doc_count": 45
         },
         {
+          "key": "174375699",
+          "doc_count": 43
+        },
+        {
           "key": "45",
           "doc_count": 43
+        },
+        {
+          "key": "83566633",
+          "doc_count": 42
+        },
+        {
+          "key": "92",
+          "doc_count": 40
         },
         {
           "key": "14",
@@ -5555,7 +5410,7 @@
         },
         {
           "key": "64",
-          "doc_count": 37
+          "doc_count": 36
         },
         {
           "key": "75",
@@ -5567,15 +5422,15 @@
         },
         {
           "key": "61",
-          "doc_count": 34
-        },
-        {
-          "key": "53",
-          "doc_count": 29
+          "doc_count": 33
         },
         {
           "key": "95",
           "doc_count": 28
+        },
+        {
+          "key": "53",
+          "doc_count": 27
         },
         {
           "key": "59",
@@ -5586,20 +5441,8 @@
           "doc_count": 26
         },
         {
-          "key": "74",
-          "doc_count": 25
-        },
-        {
-          "key": "104",
-          "doc_count": 21
-        },
-        {
           "key": "191227451",
           "doc_count": 21
-        },
-        {
-          "key": "192556831",
-          "doc_count": 20
         },
         {
           "key": "30",
@@ -5626,11 +5469,11 @@
           "doc_count": 17
         },
         {
-          "key": "83566259",
-          "doc_count": 17
+          "key": "18",
+          "doc_count": 16
         },
         {
-          "key": "18",
+          "key": "192556831",
           "doc_count": 16
         },
         {
@@ -5658,15 +5501,7 @@
           "doc_count": 13
         },
         {
-          "key": "85",
-          "doc_count": 13
-        },
-        {
           "key": "42",
-          "doc_count": 12
-        },
-        {
-          "key": "78",
           "doc_count": 12
         },
         {
@@ -5674,15 +5509,7 @@
           "doc_count": 11
         },
         {
-          "key": "81",
-          "doc_count": 11
-        },
-        {
           "key": "136009538",
-          "doc_count": 10
-        },
-        {
-          "key": "16",
           "doc_count": 10
         },
         {
@@ -5690,39 +5517,19 @@
           "doc_count": 10
         },
         {
-          "key": "113",
-          "doc_count": 9
-        },
-        {
-          "key": "117",
-          "doc_count": 9
-        },
-        {
           "key": "122",
           "doc_count": 9
         },
         {
-          "key": "139596738",
+          "key": "78",
           "doc_count": 9
         },
         {
-          "key": "334288365",
-          "doc_count": 9
-        },
-        {
-          "key": "41",
-          "doc_count": 9
-        },
-        {
-          "key": "129",
+          "key": "16",
           "doc_count": 8
         },
         {
           "key": "163141952",
-          "doc_count": 8
-        },
-        {
-          "key": "334274722",
           "doc_count": 8
         },
         {
@@ -5738,15 +5545,19 @@
           "doc_count": 7
         },
         {
-          "key": "230733018",
-          "doc_count": 7
-        },
-        {
           "key": "67",
           "doc_count": 7
         },
         {
-          "key": "131",
+          "key": "74",
+          "doc_count": 7
+        },
+        {
+          "key": "81",
+          "doc_count": 7
+        },
+        {
+          "key": "129",
           "doc_count": 6
         },
         {
@@ -5758,24 +5569,16 @@
           "doc_count": 6
         },
         {
-          "key": "334585654",
-          "doc_count": 6
-        },
-        {
-          "key": "139596691",
+          "key": "334274722",
           "doc_count": 5
         },
         {
-          "key": "6",
+          "key": "334585654",
           "doc_count": 5
         },
         {
           "key": "88",
           "doc_count": 5
-        },
-        {
-          "key": "103",
-          "doc_count": 4
         },
         {
           "key": "111",
@@ -5790,19 +5593,11 @@
           "doc_count": 4
         },
         {
-          "key": "139596777",
+          "key": "139596691",
           "doc_count": 4
         },
         {
-          "key": "139606182",
-          "doc_count": 4
-        },
-        {
-          "key": "139608974",
-          "doc_count": 4
-        },
-        {
-          "key": "334236504",
+          "key": "6",
           "doc_count": 4
         },
         {
@@ -5814,15 +5609,23 @@
           "doc_count": 4
         },
         {
-          "key": "139606189",
+          "key": "131",
           "doc_count": 3
         },
         {
-          "key": "334233983",
+          "key": "139596738",
           "doc_count": 3
         },
         {
-          "key": "100",
+          "key": "334288365",
+          "doc_count": 3
+        },
+        {
+          "key": "41",
+          "doc_count": 3
+        },
+        {
+          "key": "103",
           "doc_count": 2
         },
         {
@@ -5834,23 +5637,15 @@
           "doc_count": 2
         },
         {
-          "key": "128",
+          "key": "139596777",
           "doc_count": 2
         },
         {
-          "key": "134290417",
-          "doc_count": 2
-        },
-        {
-          "key": "334249059",
+          "key": "334236504",
           "doc_count": 2
         },
         {
           "key": "334569091",
-          "doc_count": 2
-        },
-        {
-          "key": "335589474",
           "doc_count": 2
         },
         {
@@ -5862,22 +5657,6 @@
           "doc_count": 2
         },
         {
-          "key": "73",
-          "doc_count": 2
-        },
-        {
-          "key": "8304386",
-          "doc_count": 2
-        },
-        {
-          "key": "89",
-          "doc_count": 2
-        },
-        {
-          "key": "119",
-          "doc_count": 1
-        },
-        {
           "key": "126",
           "doc_count": 1
         },
@@ -5887,10 +5666,6 @@
         },
         {
           "key": "139596794",
-          "doc_count": 1
-        },
-        {
-          "key": "139600461",
           "doc_count": 1
         },
         {
@@ -5906,11 +5681,11 @@
           "doc_count": 1
         },
         {
-          "key": "250019890",
+          "key": "32017965",
           "doc_count": 1
         },
         {
-          "key": "32017965",
+          "key": "334233983",
           "doc_count": 1
         },
         {
@@ -5919,6 +5694,10 @@
         },
         {
           "key": "334243827",
+          "doc_count": 1
+        },
+        {
+          "key": "334249059",
           "doc_count": 1
         },
         {
@@ -5946,15 +5725,11 @@
           "doc_count": 1
         },
         {
-          "key": "335589473",
+          "key": "335589474",
           "doc_count": 1
         },
         {
           "key": "335589477",
-          "doc_count": 1
-        },
-        {
-          "key": "335589485",
           "doc_count": 1
         },
         {
@@ -5970,11 +5745,15 @@
           "doc_count": 1
         },
         {
-          "key": "60",
+          "key": "68",
           "doc_count": 1
         },
         {
-          "key": "68",
+          "key": "85",
+          "doc_count": 1
+        },
+        {
+          "key": "89",
           "doc_count": 1
         }
       ]
@@ -5994,11 +5773,11 @@
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1",
-          "doc_count": 40
+          "doc_count": 36
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca",
-          "doc_count": 37
+          "doc_count": 34
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/657cb559-f758-497f-938c-fc505ad3c69c",
@@ -6006,15 +5785,15 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73cf1bad-b56b-4481-9461-9e7183c78a4c",
-          "doc_count": 2
+          "doc_count": 1
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/63f06d90-4f85-4d95-91c0-b41ba9015dca^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/80f15c76-4901-40c6-be47-0e004ca50028",
-          "doc_count": 30
+          "doc_count": 28
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b3946b91-cda0-4bee-a8a4-c6aba80d9382",
-          "doc_count": 2
+          "doc_count": 1
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d3c8deed-b81d-468b-b150-ff53b64a9d8f",
@@ -6026,19 +5805,19 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f",
-          "doc_count": 5
+          "doc_count": 4
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/a0889f3e-6ae4-4971-9488-5ddaa7bb9951",
-          "doc_count": 5
+          "doc_count": 4
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d2094c45-2ee9-443f-a95b-8aaa94894905",
-          "doc_count": 5
+          "doc_count": 4
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b",
-          "doc_count": 122
+          "doc_count": 119
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1188361d-ce72-449b-b7ab-89e73b764997",
@@ -6046,11 +5825,11 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/253c7dd3-c7d2-424d-8f2f-5877d5602c92",
-          "doc_count": 18
+          "doc_count": 17
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/327741a3-e81f-47f6-87e7-2c0b8978785d",
-          "doc_count": 17
+          "doc_count": 16
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/327741a3-e81f-47f6-87e7-2c0b8978785d^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44ba715a-5c8f-43e6-91cf-41a1fa0db69b",
@@ -6058,7 +5837,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/327741a3-e81f-47f6-87e7-2c0b8978785d^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b5278f34-acb4-4350-a2c4-9265b7cd3d3e",
-          "doc_count": 4
+          "doc_count": 3
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/327741a3-e81f-47f6-87e7-2c0b8978785d^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bb92d1a4-35b2-406a-95ab-de5d40c2ab94",
@@ -6066,7 +5845,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12",
-          "doc_count": 57
+          "doc_count": 56
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/346abc6c-bb24-4a02-8c89-1823c1d34f39",
@@ -6090,11 +5869,11 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/afb0f14a-54dc-41f1-89ec-68cee69c0b85",
-          "doc_count": 39
+          "doc_count": 38
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/afb0f14a-54dc-41f1-89ec-68cee69c0b85^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6cbc7d12-1e2a-40ee-9525-6c0a1250b744",
-          "doc_count": 37
+          "doc_count": 36
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/44c4e0a4-3afe-43d9-83a3-579d4a436b12^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/afb0f14a-54dc-41f1-89ec-68cee69c0b85^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b6d61b86-93ab-4a72-b8a8-7b4864ebf01a",
@@ -6138,7 +5917,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
-          "doc_count": 107
+          "doc_count": 105
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0d2356f4-bcea-4eb1-a584-05def26f19a6",
@@ -6170,7 +5949,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/999b46af-009b-4c50-abd8-c211134f0f2b",
-          "doc_count": 10
+          "doc_count": 9
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/a37b3eb2-f2c9-44fd-a942-bc3531eb9737",
@@ -6182,7 +5961,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ba57efdb-82bd-4c88-ac2c-075c42972413",
-          "doc_count": 14
+          "doc_count": 13
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bc2a8ec0-ec4c-4d42-a66a-20372d1ac0b3",
@@ -6246,7 +6025,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947",
-          "doc_count": 189
+          "doc_count": 173
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/1be82a30-c257-4305-8f27-7b3fcef241d8",
@@ -6274,15 +6053,15 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6ddaddc7-1f50-419a-b5af-6ea5177498de",
-          "doc_count": 64
+          "doc_count": 62
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/a4af5404-83cf-4420-9803-9b838dd619f1",
-          "doc_count": 6
+          "doc_count": 4
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb",
-          "doc_count": 107
+          "doc_count": 95
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0470b995-f8d8-4d18-9a33-bb537b91cfc5",
@@ -6294,7 +6073,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/611c44d1-ee38-4fd8-a80e-e6145d59cbec",
-          "doc_count": 15
+          "doc_count": 5
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/6f550a25-d637-4cdf-8c11-1b88316e7a6c",
@@ -6302,7 +6081,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c4baffb4-928d-46f2-9f98-af9fd0e1e34e",
-          "doc_count": 41
+          "doc_count": 39
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d347d418-2e5e-4279-951a-acbf1bda32eb^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/e5687e7d-5e37-4799-8240-4216b92b36d3",
@@ -6310,7 +6089,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463",
-          "doc_count": 149
+          "doc_count": 137
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/4c03a9de-4ab3-44c4-a058-e2b23f76ec71",
@@ -6330,11 +6109,11 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5f8480c3-a031-4fc7-93f4-01960b971611",
-          "doc_count": 6
+          "doc_count": 5
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5f8480c3-a031-4fc7-93f4-01960b971611^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5bb5ca1c-c6ee-4773-807d-717f11566257",
-          "doc_count": 5
+          "doc_count": 4
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/5f8480c3-a031-4fc7-93f4-01960b971611^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b2b3a773-328a-4308-9e76-27a1136863ee",
@@ -6358,7 +6137,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115",
-          "doc_count": 76
+          "doc_count": 71
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/0b7d8274-e377-4fe6-8cd5-a712530a38a1",
@@ -6366,19 +6145,15 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ba12df3c-e19d-4b55-a7f2-b23d67a1df88",
-          "doc_count": 65
+          "doc_count": 63
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/b0043d17-b853-40f3-8a0f-4393aa165115^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/cc1c27f0-8120-470a-bf65-53ba05616108",
           "doc_count": 3
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d0aee15b-7dd0-4992-a8c7-80e6f806d51c",
-          "doc_count": 3
-        },
-        {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299",
-          "doc_count": 32
+          "doc_count": 29
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/9761094f-e6c3-48e6-830e-44d50f88cf7f",
@@ -6386,7 +6161,7 @@
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/bb4b5072-f7df-49ee-8331-5928e450e855",
-          "doc_count": 11
+          "doc_count": 10
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/f0b5d6ed-da78-41aa-88f5-7f179c804299^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ff685e30-68d9-4403-8770-e457048651fc",
@@ -6422,11 +6197,11 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/am",
-          "doc_count": 102
+          "doc_count": 98
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/au",
-          "doc_count": 21
+          "doc_count": 20
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/br",
@@ -6438,11 +6213,11 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/ef",
-          "doc_count": 32
+          "doc_count": 25
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/el",
-          "doc_count": 76
+          "doc_count": 70
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/er",
@@ -6450,11 +6225,11 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/ge",
-          "doc_count": 57
+          "doc_count": 53
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/hb",
-          "doc_count": 94
+          "doc_count": 85
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/hh",
@@ -6462,7 +6237,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/hy",
-          "doc_count": 35
+          "doc_count": 16
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/lc",
@@ -6471,10 +6246,6 @@
         {
           "key": "http://inspire.ec.europa.eu/theme/lu",
           "doc_count": 10
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/mf",
-          "doc_count": 2
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/mr",
@@ -6486,11 +6257,11 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/of",
-          "doc_count": 99
+          "doc_count": 85
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/oi",
-          "doc_count": 46
+          "doc_count": 41
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/pd",
@@ -6498,7 +6269,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/pf",
-          "doc_count": 12
+          "doc_count": 11
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/ps",
@@ -6506,7 +6277,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/sd",
-          "doc_count": 88
+          "doc_count": 67
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/sr",
@@ -6514,7 +6285,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/su",
-          "doc_count": 7
+          "doc_count": 6
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/tn",
@@ -6546,10 +6317,6 @@
           "doc_count": 1
         },
         {
-          "key": 1950.0,
-          "doc_count": 1
-        },
-        {
           "key": 1979.0,
           "doc_count": 1
         },
@@ -6571,7 +6338,7 @@
         },
         {
           "key": 1993.0,
-          "doc_count": 11
+          "doc_count": 10
         },
         {
           "key": 1994.0,
@@ -6603,19 +6370,19 @@
         },
         {
           "key": 2001.0,
-          "doc_count": 10
+          "doc_count": 9
         },
         {
           "key": 2002.0,
-          "doc_count": 18
+          "doc_count": 17
         },
         {
           "key": 2003.0,
-          "doc_count": 14
+          "doc_count": 13
         },
         {
           "key": 2004.0,
-          "doc_count": 20
+          "doc_count": 19
         },
         {
           "key": 2005.0,
@@ -6627,11 +6394,11 @@
         },
         {
           "key": 2007.0,
-          "doc_count": 35
+          "doc_count": 34
         },
         {
           "key": 2008.0,
-          "doc_count": 31
+          "doc_count": 29
         },
         {
           "key": 2009.0,
@@ -6647,7 +6414,7 @@
         },
         {
           "key": 2012.0,
-          "doc_count": 6
+          "doc_count": 5
         },
         {
           "key": 2013.0,
@@ -6655,11 +6422,11 @@
         },
         {
           "key": 2014.0,
-          "doc_count": 4
+          "doc_count": 3
         },
         {
           "key": 2015.0,
-          "doc_count": 22
+          "doc_count": 18
         },
         {
           "key": 2016.0,
@@ -6667,23 +6434,23 @@
         },
         {
           "key": 2017.0,
-          "doc_count": 6
+          "doc_count": 2
         },
         {
           "key": 2018.0,
-          "doc_count": 48
+          "doc_count": 32
         },
         {
           "key": 2020.0,
-          "doc_count": 7
+          "doc_count": 3
         },
         {
           "key": 2021.0,
-          "doc_count": 23
+          "doc_count": 4
         },
         {
           "key": 2022.0,
-          "doc_count": 8
+          "doc_count": 2
         },
         {
           "key": 2023.0,
@@ -6691,11 +6458,11 @@
         },
         {
           "key": 2024.0,
-          "doc_count": 2
+          "doc_count": 1
         },
         {
           "key": 2025.0,
-          "doc_count": 9
+          "doc_count": 8
         }
       ]
     },
@@ -6722,19 +6489,15 @@
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 772
+          "doc_count": 684
         },
         {
           "key": "series",
-          "doc_count": 70
-        },
-        {
-          "key": "publication",
-          "doc_count": 21
+          "doc_count": 60
         },
         {
           "key": "nonGeographicDataset",
-          "doc_count": 10
+          "doc_count": 6
         },
         {
           "key": "repository",
@@ -6756,10 +6519,10 @@
       },
       "buckets": {
         "availableInDownloadService": {
-          "doc_count": 547
+          "doc_count": 503
         },
         "availableInViewService": {
-          "doc_count": 505
+          "doc_count": 473
         }
       }
     }

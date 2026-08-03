@@ -1,5 +1,5 @@
 {
-  "took": 14,
+  "took": 12,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,400 +9,11 @@
   },
   "hits": {
     "total": {
-      "value": 2,
+      "value": 0,
       "relation": "eq"
     },
     "max_score": null,
-    "hits": [
-      {
-        "_index": "sextant-records",
-        "_id": "cf5048f6-5bbf-4e44-ba74-e6f429af51ea",
-        "_score": null,
-        "_ignored": [
-          "link.applicationProfile.keyword",
-          "overview.data.keyword",
-          "resourceAbstractObject.default.keyword",
-          "resourceAbstractObject.default.sort",
-          "resourceAbstractObject.langfre.keyword"
-        ],
-        "_source": {
-          "dateStamp": "2026-07-24T08:35:25.650722Z",
-          "resourceType": ["dataset"],
-          "cl_status": [
-            {
-              "key": "onGoing",
-              "default": "Mis à jour continue",
-              "langfre": "Mis à jour continue",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
-          "resourceTitleObject": {
-            "default": "Données par paramètre",
-            "langfre": "Données par paramètre"
-          },
-          "resourceAbstractObject": {
-            "default": "Le produit Surval \"Données par paramètre\" met à disposition les données d'observation et de surveillance bancarisées dans Quadrige, validées et qui ne sont pas sous moratoire.\n\nCe système d'information contient des résultats sur la plupart des paramètres physiques, chimiques et biologiques de description de l'environnement. Les premières données datent par exemple de 1974 pour les paramètres de la qualité générale des eaux et les contaminants, 1987 pour le phytoplancton et les phycotoxines, 1989 pour la microbiologie, du début des années 2000 pour le benthos. \n\nLes données sous moratoire ou les données qualifiées \"Faux\" sont exclus de la diffusion Surval. Une donnée validée dans Quadrige aujourd’hui sera disponible dans Surval demain. Par contre, les fichiers associés à la donnée ne sont pas disponibles dans Surval.\n\nL'accès aux données d'observation se fait par lieu. Un lieu de surveillance est un lieu géographique où des observations, des mesures et/ou des prélèvements sont effectués. Il est localisé de façon unique par son emprise cartographique (surface, ligne ou point). Un lieu de mesure peut être utilisé par plusieurs programmes d'observation et de surveillance.\n\nConformément aux exigences de l’ « Open data », toutes les données validées sans moratoire sont diffusées à J+1 et sans traitement. Ainsi tous les paramètres et tous les programmes Quadrige sont diffusés, et regroupés sous forme de thème :\n- Benthos dont récifs coralliens\n- Contaminants chimiques et Écotoxicologie\n- Déchets marins\n- Microbiologie\n- Phytoplancton, hydrologie et phycotoxines\n- Suivi du cycle de vie du bivalve\n- Zooplancton\n- Autres\n\nUn thème regroupe un ou plusieurs programmes d'acquisition. Un programme correspond à une mise en œuvre d'un protocole, sur une période et un ensemble de lieux. Chaque programme est placé sous la responsabilité d'un animateur. \n\nPour accompagner le résultat, de nombreuses données sont diffusées (téléchargeables en tant que données d’observation), comme :\n- la description complète du « Paramètre-Support-Fraction-Méthode-Unité »;\n- la description complète des « Passages », « Prélèvements » et « Échantillons »;\n- le niveau de qualification du résultat;\n- une proposition de citation, afin d’identifier tous les organismes contribuant à cette observation.\n\nCes données sont décrites plus précisément sur la page suivante https://surval.ifremer.fr/Astuces/Telechargement-contenu-du-fichier-csv \n\nL'emprise géographique est nationale : la métropole et les départements et régions d'outre-mer.\n\nL'accès au téléchargement direct du jeu de données complet (~ 220 Mo) s'effectue par ce lien :\nhttps://sextant.ifremer.fr/documentation/surveillance_littorale/surval/data/surval.zip ou https://www.data.gouv.fr/fr/datasets/donnees-par-parametre/\n\nL'accès par le site Quadrige-Surval (https://surval.ifremer.fr/Les-produits/Donnees-par-parametre) permet de configurer des extractions et des graphes de visualisation sur demande (email demandé pour le téléchargement).\n\nPour en savoir plus : le vocabulaire employé sur ce site et dans les fichiers extraits est explicité dans des documents comme le manuel Quadrige web ; les thématiques sont plus détaillées dans les consignes thématiques au utilisateurs. https://quadrige.ifremer.fr/support/Mon-support-Quadrige/Je-consulte-les-manuels\n\nLe DOI faisant référence à ce jeu de données chez le producteur est https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea",
-            "langfre": "Le produit Surval \"Données par paramètre\" met à disposition les données d'observation et de surveillance bancarisées dans Quadrige, validées et qui ne sont pas sous moratoire.\n\nCe système d'information contient des résultats sur la plupart des paramètres physiques, chimiques et biologiques de description de l'environnement. Les premières données datent par exemple de 1974 pour les paramètres de la qualité générale des eaux et les contaminants, 1987 pour le phytoplancton et les phycotoxines, 1989 pour la microbiologie, du début des années 2000 pour le benthos. \n\nLes données sous moratoire ou les données qualifiées \"Faux\" sont exclus de la diffusion Surval. Une donnée validée dans Quadrige aujourd’hui sera disponible dans Surval demain. Par contre, les fichiers associés à la donnée ne sont pas disponibles dans Surval.\n\nL'accès aux données d'observation se fait par lieu. Un lieu de surveillance est un lieu géographique où des observations, des mesures et/ou des prélèvements sont effectués. Il est localisé de façon unique par son emprise cartographique (surface, ligne ou point). Un lieu de mesure peut être utilisé par plusieurs programmes d'observation et de surveillance.\n\nConformément aux exigences de l’ « Open data », toutes les données validées sans moratoire sont diffusées à J+1 et sans traitement. Ainsi tous les paramètres et tous les programmes Quadrige sont diffusés, et regroupés sous forme de thème :\n- Benthos dont récifs coralliens\n- Contaminants chimiques et Écotoxicologie\n- Déchets marins\n- Microbiologie\n- Phytoplancton, hydrologie et phycotoxines\n- Suivi du cycle de vie du bivalve\n- Zooplancton\n- Autres\n\nUn thème regroupe un ou plusieurs programmes d'acquisition. Un programme correspond à une mise en œuvre d'un protocole, sur une période et un ensemble de lieux. Chaque programme est placé sous la responsabilité d'un animateur. \n\nPour accompagner le résultat, de nombreuses données sont diffusées (téléchargeables en tant que données d’observation), comme :\n- la description complète du « Paramètre-Support-Fraction-Méthode-Unité »;\n- la description complète des « Passages », « Prélèvements » et « Échantillons »;\n- le niveau de qualification du résultat;\n- une proposition de citation, afin d’identifier tous les organismes contribuant à cette observation.\n\nCes données sont décrites plus précisément sur la page suivante https://surval.ifremer.fr/Astuces/Telechargement-contenu-du-fichier-csv \n\nL'emprise géographique est nationale : la métropole et les départements et régions d'outre-mer.\n\nL'accès au téléchargement direct du jeu de données complet (~ 220 Mo) s'effectue par ce lien :\nhttps://sextant.ifremer.fr/documentation/surveillance_littorale/surval/data/surval.zip ou https://www.data.gouv.fr/fr/datasets/donnees-par-parametre/\n\nL'accès par le site Quadrige-Surval (https://surval.ifremer.fr/Les-produits/Donnees-par-parametre) permet de configurer des extractions et des graphes de visualisation sur demande (email demandé pour le téléchargement).\n\nPour en savoir plus : le vocabulaire employé sur ce site et dans les fichiers extraits est explicité dans des documents comme le manuel Quadrige web ; les thématiques sont plus détaillées dans les consignes thématiques au utilisateurs. https://quadrige.ifremer.fr/support/Mon-support-Quadrige/Je-consulte-les-manuels\n\nLe DOI faisant référence à ce jeu de données chez le producteur est https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea"
-          },
-          "resourceCreditObject": [
-            {
-              "default": "Ifremer (Quadrige)",
-              "langfre": "Ifremer (Quadrige)"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-180.0, -70.0],
-                  [180.0, -70.0],
-                  [180.0, 70.0],
-                  [-180.0, 70.0],
-                  [-180.0, -70.0]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://envlit.ifremer.fr/Quadrige-la-base-de-donnees",
-                "langfre": "https://envlit.ifremer.fr/Quadrige-la-base-de-donnees"
-              },
-              "nameObject": {
-                "default": "La base de données Quadrige",
-                "langfre": "La base de données Quadrige"
-              },
-              "descriptionObject": {
-                "default": "La base de données Quadrige",
-                "langfre": "La base de données Quadrige"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://envlit.ifremer.fr/Surveillance-du-littoral",
-                "langfre": "https://envlit.ifremer.fr/Surveillance-du-littoral"
-              },
-              "nameObject": {
-                "default": "La surveillance du milieu marin et côtier",
-                "langfre": "La surveillance du milieu marin et côtier"
-              },
-              "descriptionObject": {
-                "default": "La surveillance du milieu marin et côtier",
-                "langfre": "La surveillance du milieu marin et côtier"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://archimer.ifremer.fr/doc/00471/58225/",
-                "langfre": "https://archimer.ifremer.fr/doc/00471/58225/"
-              },
-              "nameObject": {
-                "default": "Surval, Manuel utilisateur",
-                "langfre": "Surval, Manuel utilisateur"
-              },
-              "descriptionObject": {
-                "default": "Surval, Manuel utilisateur",
-                "langfre": "Surval, Manuel utilisateur"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:LINK",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.13155/89133",
-                "langfre": "https://doi.org/10.13155/89133"
-              },
-              "nameObject": {
-                "default": "Surval, Plaquette explicative",
-                "langfre": "Surval, Plaquette explicative"
-              },
-              "descriptionObject": {
-                "default": "Surval, Plaquette explicative",
-                "langfre": "Surval, Plaquette explicative"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "WWW:DOWNLOAD",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/documentation/surveillance_littorale/surval/data/surval.zip",
-                "langfre": "https://sextant.ifremer.fr/documentation/surveillance_littorale/surval/data/surval.zip"
-              },
-              "nameObject": {
-                "default": "Jeu de données complet",
-                "langfre": "Jeu de données complet"
-              },
-              "descriptionObject": {
-                "default": "Jeu de données complet",
-                "langfre": "Jeu de données complet"
-              },
-              "function": "download",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/environnement_marin",
-                "langfre": "https://sextant.ifremer.fr/services/wms/environnement_marin"
-              },
-              "nameObject": {
-                "default": "surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone",
-                "langfre": "surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone"
-              },
-              "descriptionObject": {
-                "default": "Surval données par paramètre",
-                "langfre": "Surval données par paramètre"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "protocol": "OGC:WFS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wfs/environnement_marin",
-                "langfre": "https://sextant.ifremer.fr/services/wfs/environnement_marin"
-              },
-              "nameObject": {
-                "default": "surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone",
-                "langfre": "surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone"
-              },
-              "descriptionObject": {
-                "default": "Surval données par paramètre",
-                "langfre": "Surval données par paramètre"
-              },
-              "function": "download",
-              "applicationProfile": "{\n\t\t\t\t\t\t\t\"tokenizedFields\":{\n\t\t\t\t\t\t\t \"THEME\":\";\",\n\t\t\t\t\t\t\t\t\"PROGRAMME\":\";\",\n\t\t\t\t\t\t\t\t\"PARAMETRE\":\";\"\n\t\t\t\t\t\t\t},\t\t\t\n\t\t\t\t\t\t\t\"fields\":[\n\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\"name\":\"THEME\",\n\t\t\t\t\t\t\t\t\t\"label\":{\n\t\t\t\t\t\t\t\t\t\t\"fr\":\"Thème\",\n\t\t\t\t\t\t\t\t\t\t\"en\":\"Thème\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t},{\n\t\t\t\t\t\t\t\t \"name\":\"PROGRAMME\",\n\t\t\t\t\t\t\t\t\t\"label\":{\n\t\t\t\t\t\t\t\t\t\t\"fr\":\"Programme de suivi\",\n\t\t\t\t\t\t\t\t\t\t\"en\":\"Programme de suivi\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t},{\n\t\t\t\t\t\t\t\t\t\"name\":\"PARAMETRE\",\n\t\t\t\t\t\t\t\t\t\"label\":{\n\t\t\t\t\t\t\t\t\t\t\"fr\":\"Paramètre\",\n\t\t\t\t\t\t\t\t\t\t\"en\":\"Paramètre\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t},{\n\t\t\t\t\t\t\t\t\t\"name\": \"range_Date\",\n\t\t\t\t\t\t\t\t\t\"type\": \"rangeDate\",\n\t\t\t\t\t\t\t\t\t\"minField\": \"DATEMIN\",\n\t\t\t\t\t\t\t\t\t\"maxField\": \"DATEMAX\",\n\t\t\t\t\t\t\t\t\t\"label\":{\n\t\t\t\t\t\t\t\t\t\t\"fr\":\"Date\",\n\t\t\t\t\t\t\t\t\t\t\"en\":\"Date\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t\"display\": \"graph\"\n\t\t\t\t\t\t\t\t},{\n\t\t\t\t\t\t\t\t\t\"name\":\"LIEU_LIBELLE\",\n\t\t\t\t\t\t\t\t\t\"label\":{\n\t\t\t\t\t\t\t\t\t\t\"fr\":\"Lieu\",\n\t\t\t\t\t\t\t\t\t\t\"en\":\"Lieu\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t},{\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\"name\":\"QUADRIGE_ZONEMARINE\",\n\t\t\t\t\t\t\t\t\t\"label\":{\n\t\t\t\t\t\t\t\t\t\t\"fr\":\"Zone marine Quadrige\",\n\t\t\t\t\t\t\t\t\t\t\"en\":\"Zone marine Quadrige\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t},{\n\t\t\t\t\t\t\t\t\t\"name\":\"DCSMM_SOUS_REGION\",\n\t\t\t\t\t\t\t\t\t\"label\":{\n\t\t\t\t\t\t\t\t\t\t\"fr\":\"Sous-région marine DCSMM\",\n\t\t\t\t\t\t\t\t\t\t\"en\":\"Sous-région marine DCSMM\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t},{\n\t\t\t\t\t\t\t\t\t\"name\":\"DCE_MASSE_EAU\",\n\t\t\t\t\t\t\t\t\t\"label\":{\n\t\t\t\t\t\t\t\t\t\t\"fr\":\"Masse d’eau DCE\",\n\t\t\t\t\t\t\t\t\t\t\"en\":\"Masse d’eau DCE\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t},{\n\t\t\t\t\t\t\t\t\t\"name\":\"GRAPHES\", \n\t\t\t\t\t\t\t\t\t\"hidden\": true,\n\t\t\t\t\t\t\t\t\t\"suffix\":\"from=${filtre_range_Date.from|format:MM-DD-YYYY}&to=${filtre_range_Date.to|format:MM-DD-YYYY}&typeParam=${filtre_PARAMETRE}\"\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\"treeFields\": [\n\t\t\t\t\t\t\t\t\"PARAMETRE\"\n\t\t\t\t\t\t\t]}",
-              "group": 1
-            },
-            {
-              "protocol": "OGC:WPS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wps3/surval",
-                "langfre": "https://sextant.ifremer.fr/services/wps3/surval"
-              },
-              "nameObject": {
-                "default": "script:surval-extraction",
-                "langfre": "script:surval-extraction"
-              },
-              "descriptionObject": {
-                "default": "Extraction des données d'observation",
-                "langfre": "Extraction des données d'observation"
-              },
-              "function": "",
-              "applicationProfile": "{\n \"inputs\":[\n {\n \"identifier\":\"theme\",\n \"linkedWfsFilter\":\"THEME\",\n \"hidden\": true,\n \"tokenizeWfsFilterValues\": true,\n \"wfsFilterValuesDelimiter\": \";\"\t\t \n }, {\n \"identifier\":\"programme_suivi\",\n \"linkedWfsFilter\":\"PROGRAMME\",\n \"hidden\": true,\n \"tokenizeWfsFilterValues\": true,\n \"wfsFilterValuesDelimiter\": \";\"\t\t \n },\n {\n \"identifier\":\"parametres\",\n \"linkedWfsFilter\":\"PARAMETRE\",\n \"hidden\": true,\n \"tokenizeWfsFilterValues\": true,\n \"wfsFilterValuesDelimiter\": \";\"\n },\n {\n \"identifier\":\"date_min\",\n \"linkedWfsFilter\":\"range_Date.from\",\n \"hidden\": true\n },\n {\n \"identifier\":\"date_max\",\n \"linkedWfsFilter\":\"range_Date.to\",\n \"hidden\": true\n },\n {\n \"identifier\":\"zone_marine_quadrige\",\n \"linkedWfsFilter\":\"QUADRIGE_ZONEMARINE\",\n \"hidden\": true,\n \"tokenizeWfsFilterValues\": true,\n \"wfsFilterValuesDelimiter\": \";\"\t\t \n },\n {\n \"identifier\":\"sous_region_marine_dcsmm\",\n \"linkedWfsFilter\":\"DCSMM_SOUS_REGION\",\n \"hidden\": true,\n \"tokenizeWfsFilterValues\": true,\n \"wfsFilterValuesDelimiter\": \";\"\t\t \n },\n {\n \"identifier\":\"masse_eau_dce\",\n \"linkedWfsFilter\":\"DCE_MASSE_EAU\",\n \"hidden\": true,\n \"tokenizeWfsFilterValues\": true,\n \"wfsFilterValuesDelimiter\": \";\"\t\t \n },\n {\n \"identifier\":\"supports_niveaux_prelevement\",\n \"hidden\": true\n },\n {\n \"identifier\":\"taxon\",\n \"hidden\": true\n },\n {\n \"identifier\":\"taxon_group\",\n \"hidden\": true\n }, \n {\n \"identifier\":\"entity_id\",\n \"hidden\": true\t\t \n },\n {\n \"identifier\":\"entity_label\",\n \"linkedWfsFilter\":\"LIEU_LIBELLE\",\n \"hidden\": true,\n \"tokenizeWfsFilterValues\": true,\n \"wfsFilterValuesDelimiter\": \";\"\t\t \n },\t \n {\n \"identifier\":\"limits\",\n \"linkedWfsFilter\":\"geometry\",\n \"hidden\": true\n }\n ]\n }",
-              "group": 1
-            },
-            {
-              "protocol": "DOI",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea",
-                "langfre": "https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea"
-              },
-              "nameObject": {
-                "default": "DOI du jeu de données",
-                "langfre": "DOI du jeu de données"
-              },
-              "descriptionObject": {
-                "default": "DOI du jeu de données",
-                "langfre": "DOI du jeu de données"
-              },
-              "function": "information",
-              "applicationProfile": "",
-              "group": 2
-            }
-          ],
-          "uuid": "cf5048f6-5bbf-4e44-ba74-e6f429af51ea",
-          "draft": "n",
-          "id": "334244563",
-          "owner": "96",
-          "groupOwner": "334243827",
-          "logo": "/srv/api/sources/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3/logo",
-          "documentStandard": "iso19115-3.2018",
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "data:image/png;base64, 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",
-              "nameObject": {
-                "default": "parametres.gif",
-                "langfre": "parametres.gif"
-              },
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/cf5048f6-5bbf-4e44-ba74-e6f429af51ea/attachments/parametres.gif"
-            }
-          ]
-        },
-        "sort": [23345],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "seanoe:101587",
-        "_score": null,
-        "_ignored": [
-          "resourceAbstractObject.default.keyword",
-          "resourceAbstractObject.default.sort",
-          "resourceAbstractObject.langeng.keyword"
-        ],
-        "_source": {
-          "dateStamp": "2024-09-16T22:00:00.000Z",
-          "resourceType": ["dataset"],
-          "resourceTitleObject": {
-            "default": "HYDROMED : Physical & biogeochemical dataset for North-Western Mediterranean Stations",
-            "langeng": "HYDROMED : Physical & biogeochemical dataset for North-Western Mediterranean Stations"
-          },
-          "resourceAbstractObject": {
-            "default": "HDROMED is a curated dataset built by aggregating and filtering already publicly available data. For a selection of physico-chemical parameters, the resulting dataset only contains measurements where all parameters meet minimal quality requirements. Moreover, only surface measurements for stations located in the north-western Mediterranean area and collected from january 2000 on are considered.\nThe Jupyter Notebook used to build the dataset is available at https://gitlab.sb-roscoff.fr/future-obs/wp5/hydrochimie-cotier-med\nParameter list\nThe following parameters are included in the output dataset.\n\t- Temperature\n\t- Salinity\n\t- Nitrates\n\t- Nitrites\n\t- Ammonium\n\t- Phosphates\n\t- Silicates\n\t- Chlorophyll a\nSource Datasets\nTwo datasets have been selected as primary sources for measurement data:\n\t- The dataset provided by the SOMLIT French National Observation Service, and available at https://doi.org/10.17882/100323\n\t- The dataset provided by the REPHY network, and available at https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea\nOutput Dataset\nThe output dataset columns are defined as follows:\n\t- SITE : the name of the sampling location\n\t- DATE : the sampling date\n\t- LATITUDE : the latitude of the sampling location\n\t- LONGITUDE : the longitude of the sampling location\nThen, for each parameter, three columns are defined, the first one with the actual parameter value, the second one with the quality flag associated to the value, and the third one with a comment relative to the parameter. For the temperature parameter, the columns will be named as follows : T, T_QUALITY, T_COMMENTS.\nSome parameters need special attention :\nAn additional NO2+NO3 parameter is included, as for some measurements no separate values are provided for NO2 and NO3, only the sum of both.\nDue to the variety of methods for measuring Chlorophyll A, columns had to be defined reflecting the measurement method :\n\t- CHLASPECTRO : Chlorphyll A measured using spectrometry\n\t- CHLAHPLC : Chlorophyll A measured using liquid chromatography\n\t- CHLAFLUO : Chlorophyll A measured using fluorimetry\n\t- DVCHLA : Divynil Chlorophyll A\nFinally, to more columns are added to explicit measurement provenance:\n\t- SOURCE : Either SOMLIT or REPHY\n\t- DOI : The DOI of the landing page where the original dataset was downloaded.",
-            "langeng": "HDROMED is a curated dataset built by aggregating and filtering already publicly available data. For a selection of physico-chemical parameters, the resulting dataset only contains measurements where all parameters meet minimal quality requirements. Moreover, only surface measurements for stations located in the north-western Mediterranean area and collected from january 2000 on are considered.\nThe Jupyter Notebook used to build the dataset is available at https://gitlab.sb-roscoff.fr/future-obs/wp5/hydrochimie-cotier-med\nParameter list\nThe following parameters are included in the output dataset.\n\t- Temperature\n\t- Salinity\n\t- Nitrates\n\t- Nitrites\n\t- Ammonium\n\t- Phosphates\n\t- Silicates\n\t- Chlorophyll a\nSource Datasets\nTwo datasets have been selected as primary sources for measurement data:\n\t- The dataset provided by the SOMLIT French National Observation Service, and available at https://doi.org/10.17882/100323\n\t- The dataset provided by the REPHY network, and available at https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea\nOutput Dataset\nThe output dataset columns are defined as follows:\n\t- SITE : the name of the sampling location\n\t- DATE : the sampling date\n\t- LATITUDE : the latitude of the sampling location\n\t- LONGITUDE : the longitude of the sampling location\nThen, for each parameter, three columns are defined, the first one with the actual parameter value, the second one with the quality flag associated to the value, and the third one with a comment relative to the parameter. For the temperature parameter, the columns will be named as follows : T, T_QUALITY, T_COMMENTS.\nSome parameters need special attention :\nAn additional NO2+NO3 parameter is included, as for some measurements no separate values are provided for NO2 and NO3, only the sum of both.\nDue to the variety of methods for measuring Chlorophyll A, columns had to be defined reflecting the measurement method :\n\t- CHLASPECTRO : Chlorphyll A measured using spectrometry\n\t- CHLAHPLC : Chlorophyll A measured using liquid chromatography\n\t- CHLAFLUO : Chlorophyll A measured using fluorimetry\n\t- DVCHLA : Divynil Chlorophyll A\nFinally, to more columns are added to explicit measurement provenance:\n\t- SOURCE : Either SOMLIT or REPHY\n\t- DOI : The DOI of the landing page where the original dataset was downloaded."
-          },
-          "resourceCreditObject": [
-            {
-              "default": "Data provided by ’’Service d’Observation en Milieu Littoral (SOMLIT)\", IR ILICO & \"REseau d'observation et de surveillance du PHYtoplancton et de l’hydrologie dans les eaux littorales\" (REPHY), Ifremer",
-              "langeng": "Data provided by ’’Service d’Observation en Milieu Littoral (SOMLIT)\", IR ILICO & \"REseau d'observation et de surveillance du PHYtoplancton et de l’hydrologie dans les eaux littorales\" (REPHY), Ifremer"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [2.725358, 41.371403],
-                  [9.558854, 41.371403],
-                  [9.558854, 43.765892],
-                  [2.725358, 43.765892],
-                  [2.725358, 41.371403]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "hash": "4b629f42dff0296271411c310ecfe626",
-              "idx": 1,
-              "protocol": "WWW:DOWNLOAD-1.0-link--download",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://www.seanoe.org/data/00904/101587/data/113083.csv",
-                "langeng": "https://www.seanoe.org/data/00904/101587/data/113083.csv"
-              },
-              "nameObject": {
-                "default": "Processed data",
-                "langeng": "Processed data"
-              },
-              "descriptionObject": {
-                "default": "Physical & biogeochemical measurements on the surface of the North Western Mediterranean sea - 628 KB",
-                "langeng": "Physical & biogeochemical measurements on the surface of the North Western Mediterranean sea - 628 KB"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "hash": "504fa381b7c5575ee482efb0ea83439b",
-              "idx": 2,
-              "protocol": "DOI",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://doi.org/10.17882/101587",
-                "langeng": "https://doi.org/10.17882/101587"
-              },
-              "nameObject": {
-                "default": "DOI of the product",
-                "langeng": "DOI of the product"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            },
-            {
-              "hash": "2fca06372256c6c35e5879f7ab3ebe48",
-              "idx": 3,
-              "protocol": "rel-canonical",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://www.seanoe.org/data/00904/101587/",
-                "langeng": "https://www.seanoe.org/data/00904/101587/"
-              },
-              "nameObject": {
-                "default": "Seanoe",
-                "langeng": "Seanoe"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 1
-            }
-          ],
-          "uuid": "seanoe:101587",
-          "draft": "n",
-          "id": "340341587",
-          "owner": "1",
-          "groupOwner": "335589474",
-          "logo": "/srv/api/sources/dfc66bad-98b5-429d-a7dc-c94290d6071b/logo",
-          "documentStandard": "iso19139",
-          "valid": "-1",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "true",
-          "overview": [
-            {
-              "data": "",
-              "nameObject": {
-                "default": "Map of sampling stations included in the dataset.",
-                "langeng": "Map of sampling stations included in the dataset."
-              },
-              "url": "https://www.seanoe.org/data/00904/101587/illustration.gif"
-            }
-          ]
-        },
-        "sort": [0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      }
-    ]
+    "hits": []
   },
   "aggregations": {
     "groupPublishedId": {
@@ -416,44 +27,7 @@
       },
       "doc_count_error_upper_bound": 0,
       "sum_other_doc_count": 0,
-      "buckets": [
-        {
-          "key": "174375699",
-          "doc_count": 1
-        },
-        {
-          "key": "334243827",
-          "doc_count": 1
-        },
-        {
-          "key": "334288365",
-          "doc_count": 1
-        },
-        {
-          "key": "334291911",
-          "doc_count": 1
-        },
-        {
-          "key": "334590726",
-          "doc_count": 1
-        },
-        {
-          "key": "335589474",
-          "doc_count": 1
-        },
-        {
-          "key": "335589512",
-          "doc_count": 1
-        },
-        {
-          "key": "78",
-          "doc_count": 1
-        },
-        {
-          "key": "82",
-          "doc_count": 1
-        }
-      ]
+      "buckets": []
     },
     "th_sextant-theme_tree.key": {
       "meta": {
@@ -467,16 +41,7 @@
       },
       "doc_count_error_upper_bound": 0,
       "sum_other_doc_count": 0,
-      "buckets": [
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
-          "doc_count": 1
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9^https://vocab.ifremer.fr/scheme/SXT/sextant-theme/110a9a47-6af7-488d-a57a-6de268026512",
-          "doc_count": 1
-        }
-      ]
+      "buckets": []
     },
     "th_httpinspireeceuropaeutheme-theme_tree.key": {
       "meta": {
@@ -491,12 +56,7 @@
       },
       "doc_count_error_upper_bound": 0,
       "sum_other_doc_count": 0,
-      "buckets": [
-        {
-          "key": "http://inspire.ec.europa.eu/theme/ef",
-          "doc_count": 1
-        }
-      ]
+      "buckets": []
     },
     "OrgForResource": {
       "meta": {
@@ -512,12 +72,7 @@
         "layout": "bar",
         "collapsed": true
       },
-      "buckets": [
-        {
-          "key": 2012.0,
-          "doc_count": 1
-        }
-      ]
+      "buckets": []
     },
     "resourceType": {
       "meta": {
@@ -539,12 +94,7 @@
       },
       "doc_count_error_upper_bound": 0,
       "sum_other_doc_count": 0,
-      "buckets": [
-        {
-          "key": "dataset",
-          "doc_count": 2
-        }
-      ]
+      "buckets": []
     },
     "availableInServices": {
       "meta": {
@@ -552,10 +102,10 @@
       },
       "buckets": {
         "availableInDownloadService": {
-          "doc_count": 2
+          "doc_count": 0
         },
         "availableInViewService": {
-          "doc_count": 1
+          "doc_count": 0
         }
       }
     }

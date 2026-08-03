@@ -127,6 +127,11 @@ Cypress.Commands.add('initApp', (profile = '') => {
       alias: 'apiMainSearchByQ',
     },
     {
+      req: 'search-api-search-by-bbox-request.json',
+      res: 'search-api-search-by-bbox-response.json',
+      alias: 'apiMainSearchByBbox',
+    },
+    {
       req: 'search-api-search-by-resourcetype-request.json',
       res: 'search-api-search-by-resourcetype-response.json',
       alias: 'apiMainSearchByResourceType',

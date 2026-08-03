@@ -13,13 +13,11 @@
       ],
       "must_not": [],
       "should": [],
-      "filter": [
-        {
-          "query_string": {
-            "query": "+isTemplate:n"
-          }
+      "filter": {
+        "query_string": {
+          "query": "+isTemplate:n"
         }
-      ]
+      }
     }
   },
   "_source": [

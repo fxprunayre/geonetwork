@@ -81,6 +81,44 @@ describe('Search', () => {
     });
   });
 
+  describe('Spatial filter', () => {
+    it('should display the spatial filter and run a spatial search', () => {
+      cy.visitPage('search', {
+        bbox: '-3,40,2,45',
+        bboxRel: 'intersects',
+      });
+      cy.wait('@apiMainSearchByBbox');
+      cy.get('app-search-active-filters-button p-button').first().click();
+      cy.get('app-spatial-filter .ol-viewport').should('be.visible');
+    });
+
+    it('should display a sort recommendation message', () => {
+      cy.visitPage('search', {
+        bbox: '-3,40,2,45',
+        bboxRel: 'intersects',
+      });
+      cy.get('app-search-active-filters-button p-button').first().click();
+      cy.get('app-spatial-filter span.p-message-text').contains(
+        'When using spatial filter, it is recommended to sort by relevance',
+      );
+
+      cy.get('app-spatial-filter span.p-message-text p-button').first().click();
+      cy.url().should('include', 'sort=_score');
+      cy.get('app-spatial-filter span.p-message-text').should('not.exist');
+    });
+
+    it('should restore and clear spatial envelope filter from route params', () => {
+      cy.visitPage('search', {
+        bbox: '-3,40,2,45',
+        bboxRel: 'intersects',
+      });
+      cy.url().should('include', 'bbox=-3,40,2,45').and('include', 'bboxRel=intersects');
+      cy.get('app-search-active-filters-button p-button').first().click();
+      cy.get('app-spatial-filter [data-testid="spatial-filter-button"]').click();
+      cy.url().should('not.include', 'bbox=').and('not.include', 'bboxRel=');
+    });
+  });
+
   describe('Aggregations', () => {
     it('should open side filter panel when filter button is clicked', () => {
       cy.get('app-aggregations-panel').closest('.sticky').should('have.class', 'sm:opacity-0');
