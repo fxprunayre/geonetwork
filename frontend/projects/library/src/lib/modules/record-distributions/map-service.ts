@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { WmsEndpoint, WmtsEndpoint } from '@camptocamp/ogc-client';
 import { Link } from 'gn-api-client';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import {
   MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
   MapLayerDisplayTarget,
@@ -26,6 +27,7 @@ export interface BulkWmsValidationResult {
 })
 export class MapService {
   private router = inject(Router);
+  private appConfiguration = inject(APPLICATION_CONFIGURATION);
 
   hasBulkWmsLinks(links: Link[], minLinks = 2): boolean {
     return links.length >= minLinks && links.every((link) => this.isWmsLink(link));
@@ -50,9 +52,21 @@ export class MapService {
       return endpoint.getLayers();
     }
 
-    const endpoint = new WmsEndpoint(url);
-    await endpoint.isReady();
-    return endpoint.getFlattenedLayers();
+    try {
+      const endpoint = new WmsEndpoint(url);
+      await endpoint.isReady();
+      return endpoint.getFlattenedLayers();
+    } catch (error) {
+      const proxyUrl = this.appConfiguration().config?.proxyUrl;
+      if (!proxyUrl) {
+        console.warn('WMS capabilities request failed and no proxy URL is configured.');
+        throw error;
+      }
+
+      const proxiedEndpoint = new WmsEndpoint(`${proxyUrl}${encodeURIComponent(url)}`);
+      await proxiedEndpoint.isReady();
+      return proxiedEndpoint.getFlattenedLayers();
+    }
   }
 
   matchRequestedLayers(
