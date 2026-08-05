@@ -39,7 +39,7 @@ Cypress.Commands.add('mockClipboard', (initialText = '') => {
 Cypress.Commands.add('initApp', (profile = '') => {
   const isAuthenticated = profile.trim().length > 0;
 
-  const withEditPermission = (responseBody: Record<string, unknown>) => {
+  const withEditPermission = (responseBody: unknown) => {
     if (!isAuthenticated) {
       return responseBody;
     }
@@ -51,17 +51,22 @@ Cypress.Commands.add('initApp', (profile = '') => {
         return;
       }
 
-      if ('edit' in value) {
-        value.edit = true;
+      const typedValue = value as Record<string, unknown> & {
+        edit?: boolean;
+        info?: { edit?: boolean };
+      };
+
+      if ('edit' in typedValue) {
+        typedValue.edit = true;
       }
 
-      if (value.info && typeof value.info === 'object') {
-        value.info.edit = true;
+      if (typedValue.info && typeof typedValue.info === 'object') {
+        typedValue.info.edit = true;
       }
 
-      for (const key in value) {
-        if (Object.prototype.hasOwnProperty.call(value, key)) {
-          markEditable(value[key]);
+      for (const key in typedValue) {
+        if (Object.prototype.hasOwnProperty.call(typedValue, key)) {
+          markEditable(typedValue[key]);
         }
       }
     };
@@ -70,9 +75,22 @@ Cypress.Commands.add('initApp', (profile = '') => {
     return patchedResponse;
   };
 
-  cy.intercept('GET', '**/srv/api/me', { fixture: `me-${profile}.json` }).as('apiMe');
+  if (isAuthenticated) {
+    cy.intercept('GET', '**/srv/api/me', { fixture: `me-${profile}.json` }).as('apiMe');
+  } else {
+    cy.intercept('GET', '**/srv/api/me', {
+      statusCode: 204,
+      body: null,
+    }).as('apiMe');
+  }
 
   cy.intercept('GET', 'https://tile.openstreetmap.org/**', { fixture: 'tile.png' }).as('osmTile');
+  cy.intercept('GET', /\/records\/[^/]+\/attachments\/.+/u, {
+    fixture: 'tile.png',
+    headers: {
+      'content-type': 'image/png',
+    },
+  }).as('recordAttachmentImage');
   cy.intercept('GET', '**/srv/api/ui/srv', { fixture: 'home-api-ui-srv.json' }).as('apiUiConfig');
   cy.intercept('GET', '**/srv/api/i18n/packages/gnui*', { fixture: 'home-api-i18n-gnui.json' }).as(
     'apiI18nGnui',

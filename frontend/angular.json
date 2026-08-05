@@ -76,6 +76,11 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "e2e": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": false
             }
           },
           "defaultConfiguration": "production"
@@ -88,6 +93,10 @@
             },
             "development": {
               "buildTarget": "main:build:development",
+              "proxyConfig": "proxy.config.js"
+            },
+            "e2e": {
+              "buildTarget": "main:build:e2e",
               "proxyConfig": "proxy.config.js"
             }
           },

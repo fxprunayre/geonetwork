@@ -1,6 +1,11 @@
 import { SURVAL_UUID } from '../support/utils';
 
 describe('User board panel', () => {
+  function visitDashboard() {
+    cy.visitPage('dashboard');
+    cy.wait('@apiMe');
+  }
+
   beforeEach(() => {
     cy.initApp('editor');
 
@@ -38,89 +43,87 @@ describe('User board panel', () => {
     });
   });
 
-  it('should display bookmarks panel with bookmarked results', () => {
-    cy.visitPage('dashboard');
+  describe('default dashboard', () => {
+    beforeEach(() => {
+      visitDashboard();
 
-    cy.wait('@apiMe');
-    cy.wait('@getUserBookmarks');
-    cy.wait('@apiUserRecordsSearch');
-    cy.wait('@apiUserBookmarksSearch').then((interception) => {
-      const body = Cypress._.isString(interception.request.body)
-        ? JSON.parse(interception.request.body)
-        : interception.request.body;
-      const hasUuidFilter = (body?.query?.bool?.filter ?? []).some(
-        (clause: { terms?: { uuid?: string[] }; query_string?: { query?: string } }) =>
-          Array.isArray(clause?.terms?.uuid) && clause.terms.uuid.includes(SURVAL_UUID),
-      );
-      expect(hasUuidFilter).to.eq(true);
-    });
-
-    cy.get('p-tablist p-tab[value="1"]').contains('Your bookmarks').click();
-
-    cy.get('div[appsearchcontext="user-bookmarks"]').should('exist');
-    cy.get('div[appsearchcontext="user-bookmarks"] app-results-view').should('exist');
-    cy.contains('No bookmarks yet.').should('not.exist');
-  });
-
-  it('should display user contributions results as table with resource type as icon, title and updated column', () => {
-    cy.visitPage('dashboard');
-
-    cy.wait('@apiMe');
-    cy.wait('@apiUserRecordsSearch');
-
-    cy.get('div[appsearchcontext="user-records"] app-results-view').should('exist');
-    cy.get('div[appsearchcontext="user-records"] p-table').should('exist');
-
-    cy.get('div[appsearchcontext="user-records"] p-table th')
-      .eq(0)
-      .should('contain', 'Resource type');
-    cy.get('div[appsearchcontext="user-records"] p-table th').eq(1).should('contain', 'Title');
-    cy.get('div[appsearchcontext="user-records"] p-table th').eq(2).should('contain', 'Updated');
-
-    cy.get('div[appsearchcontext="user-records"] p-table tbody tr')
-      .first()
-      .within(() => {
-        // First column: Resource type as icon
-        cy.get('td').eq(0).find('app-record-field-type ng-icon').should('exist');
-
-        // Second column: Title
-        cy.get('td').eq(1).find('app-record-field-title').should('exist');
-
-        // Third column: Updated date
-        cy.get('td').eq(2).find('span.text-sm').should('exist');
+      cy.wait('@getUserBookmarks');
+      cy.wait('@apiUserRecordsSearch');
+      cy.wait('@apiUserBookmarksSearch').then((interception) => {
+        const body = Cypress._.isString(interception.request.body)
+          ? JSON.parse(interception.request.body)
+          : interception.request.body;
+        const hasUuidFilter = (body?.query?.bool?.filter ?? []).some(
+          (clause: { terms?: { uuid?: string[] }; query_string?: { query?: string } }) =>
+            Array.isArray(clause?.terms?.uuid) && clause.terms.uuid.includes(SURVAL_UUID),
+        );
+        expect(hasUuidFilter).to.eq(true);
       });
-  });
-
-  it('should disable add record buttons when there are no templates', () => {
-    cy.intercept('POST', '**/search/records/_search*', (req) => {
-      const body = Cypress._.isString(req.body) ? JSON.parse(req.body) : req.body;
-      const serialized = JSON.stringify(body || {});
-      const isTemplateCountRequest = body?.size === 0 && serialized.includes('isTemplate');
-
-      if (isTemplateCountRequest) {
-        req.alias = 'apiTemplateCountNoTemplates';
-        req.reply({
-          took: 1,
-          timed_out: false,
-          _shards: { total: 1, successful: 1, skipped: 0, failed: 0 },
-          hits: { total: { value: 0, relation: 'eq' }, max_score: null, hits: [] },
-          aggregations: {},
-        });
-        return;
-      }
-
-      req.continue();
     });
 
-    cy.visitPage('dashboard');
+    it('should display bookmarks panel with bookmarked results', () => {
+      cy.get('p-tablist p-tab[value="1"]').contains('Your bookmarks').click();
 
-    cy.wait('@apiMe');
-    cy.wait('@apiTemplateCountNoTemplates');
+      cy.get('div[appsearchcontext="user-bookmarks"]').should('exist');
+      cy.get('div[appsearchcontext="user-bookmarks"] app-results-view').should('exist');
+      cy.contains('No bookmarks yet.').should('not.exist');
+    });
 
-    cy.contains('app-user-board-menu a, app-user-board-menu button', 'Add record')
-      .should('exist')
-      .closest('li')
-      .invoke('attr', 'class')
-      .should('match', /disabled/i);
+    it('should display user contributions results as table with resource type as icon, title and updated column', () => {
+      cy.get('div[appsearchcontext="user-records"] app-results-view').should('exist');
+      cy.get('div[appsearchcontext="user-records"] p-table').should('exist');
+
+      cy.get('div[appsearchcontext="user-records"] p-table th')
+        .eq(0)
+        .should('contain', 'Resource type');
+      cy.get('div[appsearchcontext="user-records"] p-table th').eq(1).should('contain', 'Title');
+      cy.get('div[appsearchcontext="user-records"] p-table th').eq(2).should('contain', 'Updated');
+
+      cy.get('div[appsearchcontext="user-records"] p-table tbody tr')
+        .first()
+        .within(() => {
+          cy.get('td').eq(0).find('app-record-field-type ng-icon').should('exist');
+
+          cy.get('td').eq(1).find('app-record-field-title').should('exist');
+
+          cy.get('td').eq(2).find('span.text-sm').should('exist');
+        });
+    });
+  });
+
+  describe('without templates', () => {
+    beforeEach(() => {
+      cy.intercept('POST', '**/search/records/_search*', (req) => {
+        const body = Cypress._.isString(req.body) ? JSON.parse(req.body) : req.body;
+        const serialized = JSON.stringify(body || {});
+        const isTemplateCountRequest = body?.size === 0 && serialized.includes('isTemplate');
+
+        if (isTemplateCountRequest) {
+          req.alias = 'apiTemplateCountNoTemplates';
+          req.reply({
+            took: 1,
+            timed_out: false,
+            _shards: { total: 1, successful: 1, skipped: 0, failed: 0 },
+            hits: { total: { value: 0, relation: 'eq' }, max_score: null, hits: [] },
+            aggregations: {},
+          });
+          return;
+        }
+
+        req.continue();
+      });
+
+      visitDashboard();
+
+      cy.wait('@apiTemplateCountNoTemplates');
+    });
+
+    it('should disable add record buttons when there are no templates', () => {
+      cy.contains('app-user-board-menu a, app-user-board-menu button', 'Add record')
+        .should('exist')
+        .closest('li')
+        .invoke('attr', 'class')
+        .should('match', /disabled/i);
+    });
   });
 });

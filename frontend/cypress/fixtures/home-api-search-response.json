@@ -1,5 +1,5 @@
 {
-  "took": 6,
+  "took": 9,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,21 +9,315 @@
   },
   "hits": {
     "total": {
-      "value": 877,
+      "value": 15763,
       "relation": "eq"
     },
-    "max_score": null,
+    "max_score": 0.0,
     "hits": [
       {
         "_index": "sextant-records",
-        "_id": "6a26d690-c35c-11dc-9c70-000086f6a62e",
+        "_id": "dffff66f-9b67-4f75-8ee9-2d4b602576a0",
+        "_score": 0.0,
+        "_ignored": [
+          "resourceAbstractObject.default.keyword",
+          "resourceAbstractObject.default.sort",
+          "resourceAbstractObject.langeng.keyword"
+        ],
+        "_source": {
+          "dateStamp": "2023-11-13T10:55:37.545Z",
+          "resourceType": ["series"],
+          "resourceTitleObject": {
+            "default": "[ARCHIVE] Global Ocean Mean Sea Level trend map from Observations Reprocessing",
+            "langeng": "[ARCHIVE] Global Ocean Mean Sea Level trend map from Observations Reprocessing"
+          },
+          "resourceAbstractObject": {
+            "default": "'''This product has been archived'''\n              \nFor operationnal and online products, please visit https://marine.copernicus.eu\n\n'''DEFINITION'''\n\nThe sea level ocean monitoring indicator is derived from the DUACS delayed-time (DT-2021 version) altimeter gridded maps of sea level anomalies based on a stable number of altimeters (two) in the satellite constellation. The product is distributed by the Copernicus Climate Change Service and the Copernicus Marine Service (SEALEVEL_GLO_PHY_CLIMATE_L4_MY_008_057). The regional sea level trends are derived from a linear fit of the altimeter sea level maps. The altimeter data have not been corrected for the effect of the Glacial Isostatic Adjustment nor the TOPEX-A instrumental drift during the period 1993-1998. The trend uncertainty is provided in a 90% confidence interval (Prandi et al., 2021). This estimate only considers errors related to the altimeter observation system (i.e., orbit determination errors, geophysical correction errors and inter-mission bias correction errors). The presence of the interannual signal can strongly influence the trend estimation considering to the altimeter period considered (Wang et al., 2021; Cazenave et al., 2014). The uncertainty linked to this effect is not taken into account.\n\n'''CONTEXT'''\n\nThe indicator on sea level trend is a crucial index of climate change, and individual components contribute to sea level rise, including expansion due to ocean warming and melting of glaciers and ice sheets (WCRP Global Sea Level Budget Group, 2018). According to the recent IPCC 6th assessment report, global mean sea level (GMSL) increased by 0.20 (0.15 to 0.25) m over the period 1901 to 2018 with a rate 25 of rise that has accelerated since the 1960s to 3.7 (3.2 to 4.2) mm yr-1 for the period 2006–2018. Human activity was very likely the main driver of observed GMSL rise since 1970 (IPCC WGII, 2021). The weight of the different contributions evolves with time and in the recent decades the mass change has increased, contributing to the on-going acceleration of the GMSL trend (IPCC, 2022a; Legeais et al., 2020; Horwath et al., 2022). At regional scale, sea level does not change homogenously, and regional sea level change is also influenced by various other processes, with different spatial and temporal scales, such as local ocean dynamic, atmospheric forcing, Earth gravity and vertical land motion changes (IPCC WGI, 2021). Rising sea level can strongly affect population and infrastructures in coastal areas, increase their vulnerability and risks for food security, particularly in low lying areas and island states. Adverse impacts from floods, storms and tropical cyclones with related losses and damages have increased due to sea level rise, and increase their vulnerability and increase risks for food security, particularly in low lying areas and island states (IPCC, 2019, 2022b). Adaptation and mitigation measures such as the restoration of mangroves and coastal wetlands, reduce the risks from sea level rise (IPCC, 2022c). \n\n'''CMEMS KEY FINDINGS'''\n\nThe altimeter mean sea level trends over the (1993/01/01, 2021/08/02) period exhibit large-scale variations at rates reaching up to more than +10 mm/yr in regions such as the western tropical Pacific Ocean. In this area, trends are mainly of thermosteric origin (Legeais et al., 2018; Meyssignac et al., 2017) in response to increased easterly winds during the last two decades associated with the decreasing Interdecadal Pacific Oscillation (IPO)/Pacific Decadal Oscillation (e.g., McGregor et al., 2012; Merrifield et al., 2012; Palanisamy et al., 2015; Rietbroek et al., 2016).\nPrandi et al. (2021) have estimated a regional altimeter sea level error budget from which they determine a regional error variance-covariance matrix and they provide uncertainties of the regional sea level trends. Over 1993-2019, the averaged local sea level trend uncertainty is around 0.83 mm/yr with local values ranging from 0.78 to 1.22 mm/yr. \n\n'''DOI (product):''' \nhttps://doi.org/10.48670/moi-00238",
+            "langeng": "'''This product has been archived'''\n              \nFor operationnal and online products, please visit https://marine.copernicus.eu\n\n'''DEFINITION'''\n\nThe sea level ocean monitoring indicator is derived from the DUACS delayed-time (DT-2021 version) altimeter gridded maps of sea level anomalies based on a stable number of altimeters (two) in the satellite constellation. The product is distributed by the Copernicus Climate Change Service and the Copernicus Marine Service (SEALEVEL_GLO_PHY_CLIMATE_L4_MY_008_057). The regional sea level trends are derived from a linear fit of the altimeter sea level maps. The altimeter data have not been corrected for the effect of the Glacial Isostatic Adjustment nor the TOPEX-A instrumental drift during the period 1993-1998. The trend uncertainty is provided in a 90% confidence interval (Prandi et al., 2021). This estimate only considers errors related to the altimeter observation system (i.e., orbit determination errors, geophysical correction errors and inter-mission bias correction errors). The presence of the interannual signal can strongly influence the trend estimation considering to the altimeter period considered (Wang et al., 2021; Cazenave et al., 2014). The uncertainty linked to this effect is not taken into account.\n\n'''CONTEXT'''\n\nThe indicator on sea level trend is a crucial index of climate change, and individual components contribute to sea level rise, including expansion due to ocean warming and melting of glaciers and ice sheets (WCRP Global Sea Level Budget Group, 2018). According to the recent IPCC 6th assessment report, global mean sea level (GMSL) increased by 0.20 (0.15 to 0.25) m over the period 1901 to 2018 with a rate 25 of rise that has accelerated since the 1960s to 3.7 (3.2 to 4.2) mm yr-1 for the period 2006–2018. Human activity was very likely the main driver of observed GMSL rise since 1970 (IPCC WGII, 2021). The weight of the different contributions evolves with time and in the recent decades the mass change has increased, contributing to the on-going acceleration of the GMSL trend (IPCC, 2022a; Legeais et al., 2020; Horwath et al., 2022). At regional scale, sea level does not change homogenously, and regional sea level change is also influenced by various other processes, with different spatial and temporal scales, such as local ocean dynamic, atmospheric forcing, Earth gravity and vertical land motion changes (IPCC WGI, 2021). Rising sea level can strongly affect population and infrastructures in coastal areas, increase their vulnerability and risks for food security, particularly in low lying areas and island states. Adverse impacts from floods, storms and tropical cyclones with related losses and damages have increased due to sea level rise, and increase their vulnerability and increase risks for food security, particularly in low lying areas and island states (IPCC, 2019, 2022b). Adaptation and mitigation measures such as the restoration of mangroves and coastal wetlands, reduce the risks from sea level rise (IPCC, 2022c). \n\n'''CMEMS KEY FINDINGS'''\n\nThe altimeter mean sea level trends over the (1993/01/01, 2021/08/02) period exhibit large-scale variations at rates reaching up to more than +10 mm/yr in regions such as the western tropical Pacific Ocean. In this area, trends are mainly of thermosteric origin (Legeais et al., 2018; Meyssignac et al., 2017) in response to increased easterly winds during the last two decades associated with the decreasing Interdecadal Pacific Oscillation (IPO)/Pacific Decadal Oscillation (e.g., McGregor et al., 2012; Merrifield et al., 2012; Palanisamy et al., 2015; Rietbroek et al., 2016).\nPrandi et al. (2021) have estimated a regional altimeter sea level error budget from which they determine a regional error variance-covariance matrix and they provide uncertainties of the regional sea level trends. Over 1993-2019, the averaged local sea level trend uncertainty is around 0.83 mm/yr with local values ranging from 0.78 to 1.22 mm/yr. \n\n'''DOI (product):''' \nhttps://doi.org/10.48670/moi-00238"
+          },
+          "resourceCreditObject": [
+            {
+              "default": "E.U. Copernicus Marine Service Information",
+              "langeng": "E.U. Copernicus Marine Service Information"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [-180.0, -90.0],
+                  [180.0, -90.0],
+                  [180.0, 90.0],
+                  [-180.0, 90.0],
+                  [-180.0, -90.0]
+                ]
+              ]
+            }
+          ],
+          "uuid": "dffff66f-9b67-4f75-8ee9-2d4b602576a0",
+          "draft": "n",
+          "id": "334238199",
+          "owner": "164187932",
+          "groupOwner": "334236504",
+          "logo": "/srv/api/sources/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3/logo",
+          "documentStandard": "iso19139",
+          "valid": "0",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://catalogue.marine.copernicus.eu/documents/IMG/GLOBAL_OMI_SL_regional_trends.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": true,
+        "dynamic": true,
+        "featured": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "4280fd70-57c0-11dd-a60f-000086f6a603",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-12-18T16:31:20.200262Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
+              "langeng": "On going",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Les Biocénoses Benthiques de la Baie de La Ciotat",
+            "langfre": "Les Biocénoses Benthiques de la Baie de La Ciotat",
+            "langeng": "Benthic biocenoses of the Bay of La Ciotat"
+          },
+          "resourceAbstractObject": {
+            "default": "Cette cartographie des biocénoses sur le secteur de la Ciotat (Calanque des Capucins à l'ouest, pointe du Défens à l'est, jusqu'à la limite bathymétrique de 35m) représente la phase 1 de l'étude menée par le Conseil Général des Bouches-du-Rhône sur le patrimoine environnant les domaines départementaux de l'Ile Verte et du Mugel.\n\nL'ensemble des informations recueillies sur les biocénoses marines de la Baie de la Ciotat a permis de mettre en avant les grandes tendances évolutives des peuplements en place , mais également d'identifier les lacunes en terme de connaissances, parmi les travaux déjà réalisés sur ce secteur.\n\nCette cartographie est une synthèse des données existantes associée au traitement de photographies aériennes (BDORTHO IGN 1998), de sonogrammes (campagne POSICART 2000) et d'images vidéo récentes. \nElle intègre notamment les données sur la baie de St-Cyr-Sur-Mer (Var) issue d'une étude sur l'Herbier de posidonie : « Cartographie des biocénoses marines de la baie de Saint-Cyr-sur-Mer. Volet n°1 : l'Herbier à Posidonia océanica », Février 2003, Agence de l'eau RM&C, Région PACA, DIREN PACA, Gis Posidonie, Ifremer, Centre d'Océanologie de Marseille.\n\nLe référentiel utilisé comme trait de côte est propre à l'étude, probablement numérisé par rapport aux photographies aériennes et aux différentes campagnes menées sur le secteur.",
+            "langfre": "Cette cartographie des biocénoses sur le secteur de la Ciotat (Calanque des Capucins à l'ouest, pointe du Défens à l'est, jusqu'à la limite bathymétrique de 35m) représente la phase 1 de l'étude menée par le Conseil Général des Bouches-du-Rhône sur le patrimoine environnant les domaines départementaux de l'Ile Verte et du Mugel.\n\nL'ensemble des informations recueillies sur les biocénoses marines de la Baie de la Ciotat a permis de mettre en avant les grandes tendances évolutives des peuplements en place , mais également d'identifier les lacunes en terme de connaissances, parmi les travaux déjà réalisés sur ce secteur.\n\nCette cartographie est une synthèse des données existantes associée au traitement de photographies aériennes (BDORTHO IGN 1998), de sonogrammes (campagne POSICART 2000) et d'images vidéo récentes. \nElle intègre notamment les données sur la baie de St-Cyr-Sur-Mer (Var) issue d'une étude sur l'Herbier de posidonie : « Cartographie des biocénoses marines de la baie de Saint-Cyr-sur-Mer. Volet n°1 : l'Herbier à Posidonia océanica », Février 2003, Agence de l'eau RM&C, Région PACA, DIREN PACA, Gis Posidonie, Ifremer, Centre d'Océanologie de Marseille.\n\nLe référentiel utilisé comme trait de côte est propre à l'étude, probablement numérisé par rapport aux photographies aériennes et aux différentes campagnes menées sur le secteur.",
+            "langeng": "This mapping of the biocenosis in the sector of the Ciotat (Capuchin cove on the west edge of Défens east, to the bathymetric boundary of 35m) represents phase 1 of the study conducted by the General Council of Bouches-du-Rhône on the heritage in the surrounding areas of the departmental l'Ile Verte (Green Island) and Mugel.\n\nAll information collected on marine biotic communities of the Bay of La has helped to highlight the main evolutionary population trends in place, but also to identify gaps in terms of knowledge, including previous work in this sector.\n\nThis mapping is a synthesis of existing data associated with the processing of aerial photographs (BDORTHO IGN 1998), sonograms (campaign POSICART 2000) and recent video images.\nIt incorporates the data on the bay of St-Cyr-sur-Mer (Var) from a study of the Posidonia Herbarium: \" Cartographie des biocénoses marines de la baie de Saint-Cyr-sur-Mer. Volet n°1 : l'Herbier à Posidonia océanica\", February 2003, Agence de l'eau RM&C, Région PACA, DIREN PACA, Gis Posidonie, Ifremer, Centre d'Océanologie de Marseille.\n\nThe reference used of the coastline is unique to the study, probably from digitized aerial photographs and various campaigns in the sector."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Medbenth",
+              "langfre": "Medbenth"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [5.590479, 43.139306],
+                  [5.711568, 43.139306],
+                  [5.711568, 43.188502],
+                  [5.590479, 43.188502],
+                  [5.590479, 43.139306]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/biologie?",
+                "langfre": "https://sextant.ifremer.fr/services/wms/biologie?"
+              },
+              "nameObject": {
+                "default": "BIOMED_BIOC_CIOTAT_P",
+                "langfre": "BIOMED_BIOC_CIOTAT_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "BIOMED_BIOC_CIOTAT_P",
+                "langfre": "BIOMED_BIOC_CIOTAT_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://doi.org/10.17600/450120",
+                "langfre": "https://doi.org/10.17600/450120"
+              },
+              "nameObject": {
+                "default": "Campagne à la mer : POSICART 1",
+                "langfre": "Campagne à la mer : POSICART 1"
+              },
+              "descriptionObject": {
+                "default": "Campagne à la mer : POSICART 1",
+                "langfre": "Campagne à la mer : POSICART 1"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            }
+          ],
+          "uuid": "4280fd70-57c0-11dd-a60f-000086f6a603",
+          "draft": "n",
+          "id": "498",
+          "owner": "13",
+          "groupOwner": "4",
+          "documentStandard": "iso19115-3.2018",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/4280fd70-57c0-11dd-a60f-000086f6a603/attachments/bioc_ciotat.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": true,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "2d664f80-57c0-11dd-a60f-000086f6a603",
+        "_score": 0.0,
+        "_source": {
+          "dateStamp": "2025-05-15T21:50:45.922946Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Cartographie des habitats marins - Plan de gestion de la rade de Marseille",
+            "langfre": "Cartographie des habitats marins - Plan de gestion de la rade de Marseille"
+          },
+          "resourceAbstractObject": {
+            "default": "Ces données sont issues d'une compilation d'informations spatiales sur les biocénoses issues de différentes études dans le cadre du plan de gestion de la rade de Marseille. Les études concernées sont : le Frioul en 2003, les calanques en 2005, Récifs Prado en 2006, et des compléments réalisés en 2007.",
+            "langfre": "Ces données sont issues d'une compilation d'informations spatiales sur les biocénoses issues de différentes études dans le cadre du plan de gestion de la rade de Marseille. Les études concernées sont : le Frioul en 2003, les calanques en 2005, Récifs Prado en 2006, et des compléments réalisés en 2007."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Medbenth",
+              "langfre": "Medbenth"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [5.200893, 43.16547],
+                  [5.530237, 43.16547],
+                  [5.530237, 43.360175],
+                  [5.200893, 43.360175],
+                  [5.200893, 43.16547]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/biologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
+              },
+              "nameObject": {
+                "default": "BIOMED_BIOC_MARSEILLE_P",
+                "langfre": "BIOMED_BIOC_MARSEILLE_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "BIOMED_BIOC_MARSEILLE_P",
+                "langfre": "BIOMED_BIOC_MARSEILLE_P"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            }
+          ],
+          "uuid": "2d664f80-57c0-11dd-a60f-000086f6a603",
+          "draft": "n",
+          "id": "497",
+          "owner": "13",
+          "groupOwner": "4",
+          "documentStandard": "iso19115-3.2018",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/2d664f80-57c0-11dd-a60f-000086f6a603/attachments/bioc_marseille.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": true,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "635d48a0-f050-11dc-a779-000086f6a603",
         "_score": 0.0,
         "_ignored": [
           "processSteps.descriptionObject.default.keyword",
-          "processSteps.descriptionObject.langfre.keyword"
+          "processSteps.descriptionObject.langfre.keyword",
+          "supplementalInformationObject.default.keyword",
+          "supplementalInformationObject.default.sort",
+          "supplementalInformationObject.langfre.keyword"
         ],
         "_source": {
-          "dateStamp": "2026-01-27T15:40:12.381963Z",
+          "dateStamp": "2026-01-27T10:45:44.060595Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
@@ -34,23 +328,23 @@
             }
           ],
           "resourceTitleObject": {
-            "default": "Utilisation de la baie du Mont Saint-Michel par la bernache cravant à ventre noir (Branta bernicla bernicla) en hiver",
-            "langfre": "Utilisation de la baie du Mont Saint-Michel par la bernache cravant à ventre noir (Branta bernicla bernicla) en hiver"
+            "default": "Cartographie morpho-sédimentaire intertidale de la baie du Mont Saint-Michel (État 2002). Partie 6/7 : aménagements sous forme de polygones (chemins, gabions, digue des Nielles, secteurs aménagés).",
+            "langfre": "Cartographie morpho-sédimentaire intertidale de la baie du Mont Saint-Michel (État 2002). Partie 6/7 : aménagements sous forme de polygones (chemins, gabions, digue des Nielles, secteurs aménagés)."
           },
           "resourceAbstractObject": {
-            "default": "Carte, sous forme de polygones, représentant les zones de la baie du Mont Saint-Michel fréquentées par la bernache cravant à ventre noir (Branta bernicla bernicla) en période d'hivernage. Cette espèce atteint régulièrement le niveau d'importance internationale en baie du Mont Saint-Michel.",
-            "langfre": "Carte, sous forme de polygones, représentant les zones de la baie du Mont Saint-Michel fréquentées par la bernache cravant à ventre noir (Branta bernicla bernicla) en période d'hivernage. Cette espèce atteint régulièrement le niveau d'importance internationale en baie du Mont Saint-Michel."
+            "default": "Cette carte bio-morpho-sédimentaire est issue d'un travail mené dans le cadre du Programme National pour l'Environnement Côtier (PNEC) \"Capacité trophique\" de 2002 à 2005 et coordonné par C. Bonnot (UMR CNRS 8586 PRODIG).",
+            "langfre": "Cette carte bio-morpho-sédimentaire est issue d'un travail mené dans le cadre du Programme National pour l'Environnement Côtier (PNEC) \"Capacité trophique\" de 2002 à 2005 et coordonné par C. Bonnot (UMR CNRS 8586 PRODIG)."
           },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-1.589589, 48.64265],
-                  [-1.501886, 48.64265],
-                  [-1.501886, 48.822306],
-                  [-1.589589, 48.822306],
-                  [-1.589589, 48.64265]
+                  [-1.868885, 48.603111],
+                  [-1.421737, 48.603111],
+                  [-1.421737, 48.732771],
+                  [-1.868885, 48.732771],
+                  [-1.868885, 48.603111]
                 ]
               ]
             }
@@ -64,8 +358,8 @@
                 "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
               },
               "nameObject": {
-                "default": "IFR_BERNACHE_CRAV_MSM_P",
-                "langfre": "IFR_BERNACHE_CRAV_MSM_P"
+                "default": "IFR_AMENAGEMENTS_MSM_P",
+                "langfre": "IFR_AMENAGEMENTS_MSM_P"
               },
               "function": "",
               "applicationProfile": "",
@@ -75,17 +369,17 @@
               "protocol": "FILE",
               "mimeType": "",
               "nameObject": {
-                "default": "IFR_BERNACHE_CRAV_MSM_P",
-                "langfre": "IFR_BERNACHE_CRAV_MSM_P"
+                "default": "IFR_AMENAGEMENTS_MSM_P",
+                "langfre": "IFR_AMENAGEMENTS_MSM_P"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             }
           ],
-          "uuid": "6a26d690-c35c-11dc-9c70-000086f6a62e",
+          "uuid": "635d48a0-f050-11dc-a779-000086f6a603",
           "draft": "n",
-          "id": "238",
+          "id": "399",
           "owner": "13",
           "groupOwner": "4",
           "documentStandard": "iso19115-3.2018",
@@ -96,11 +390,10 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6a26d690-c35c-11dc-9c70-000086f6a62e/attachments/bernache_cravant.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/635d48a0-f050-11dc-a779-000086f6a603/attachments/amenP.png"
             }
           ]
         },
-        "sort": [0.0],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -115,75 +408,74 @@
       },
       {
         "_index": "sextant-records",
-        "_id": "6d108e90-97a2-11dc-8d32-000086f6a62e",
+        "_id": "092e4075-ec9d-4a4a-b8ca-6f988ff27834",
         "_score": 0.0,
+        "_ignored": [
+          "resourceAbstractObject.default.keyword",
+          "resourceAbstractObject.default.sort",
+          "resourceAbstractObject.langeng.keyword"
+        ],
         "_source": {
-          "dateStamp": "2026-01-27T15:41:06.561237Z",
-          "resourceType": ["dataset"],
-          "cl_status": [
-            {
-              "key": "onGoing",
-              "default": "Mis à jour continue",
-              "langfre": "Mis à jour continue",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
+          "dateStamp": "2025-12-10T14:58:37.664472Z",
+          "resourceType": ["series"],
           "resourceTitleObject": {
-            "default": "Aires de camping des communes littorales bretonnes de la baie du Mont Saint-Michel. État 2007.",
-            "langfre": "Aires de camping des communes littorales bretonnes de la baie du Mont Saint-Michel. État 2007."
+            "default": "Arctic Monthly Mean Sea Ice Extent from Observations Reprocessing",
+            "langeng": "Arctic Monthly Mean Sea Ice Extent from Observations Reprocessing"
           },
           "resourceAbstractObject": {
-            "default": "Localisation des entrées d'aires de camping du littoral breton de la baie du Mont Saint-Michel (Ille-et-Vilaine) sous forme de points.",
-            "langfre": "Localisation des entrées d'aires de camping du littoral breton de la baie du Mont Saint-Michel (Ille-et-Vilaine) sous forme de points."
+            "default": "'''DEFINITION'''\n\nSea Ice Extent (SIE) is the area covered by sufficient sea ice, that is the area of ocean having more than 15% Sea Ice Concentration (SIC). SIC is the fractional area of ocean surface that is covered with sea ice. SIC is computed from Passive Microwave satellite observations since the 1970s. SIE is often reported with units of millions square kilometers. SIE includes all sea ice, and does not include lake and river ice. The change in sea ice extent (trend) is expressed in millions of km squared per decade. In addition, trends are expressed relative to the 1979-2024 period in % per decade. These trends are calculated (i) for the annual mean values; (ii) for the winter maximum cover (March in the Northern Hemisphere); (iii) for the summer minimum extent (September in the Northern Hemisphere). The annual mean trend is reported on the key figure. The March and September trends are reported in the text below. See also section 1.7 in Samuelsen et al. (2016) for an introduction to this Ocean Monitoring Indicator (OMI).\n\n\n'''CONTEXT'''\n\nSea ice is frozen seawater that floats at the ocean surface. This large blanket of millions of square kilometers insulates the relatively warm ocean waters from the cold polar atmosphere. The seasonal cycle of sea ice, forming and melting with the polar seasons, impacts both human activities and biological habitat. Knowing how and by how much the sea-ice cover is changing is essential for monitoring the health of the Earth (Meredith et al. 2019; Fox-Kemper et al. 2021).\n\n\n'''CMEMS KEY FINDINGS'''\n\nSince 1979, the Northern Hemisphere sea ice extent has decreased in all months. Loss of sea ice extent during summer exceeds the loss observed during winter periods. Over the period 1979-2024, the annual rate amounts to -0.49 +/- +0.02 millions km squared by decade (-4.27% per decade). Winter (March) sea ice extent trend amounts to -0.37 +/- +0.03 millions km squared by decade (-2.45% per decade). Summer (September) sea ice extent trend amounts to -0.79 +/- +0.06 millions km squared by decade (-12.57% per decade). These values are in agreement with those assessed in the IPCC SROCC (Meredith et al. 2019, with estimates up until year 2018). While 2024 started with the 20th lowest mean January sea ice extent, it ended with the lowest mean December sea ice extent, since 1979. September 2024 was the 5th lowest mean September sea ice extent since 1979. The record low mean September was in 2020.\n\n'''DOI (product):''' \nhttps://doi.org/10.48670/moi-00191",
+            "langeng": "'''DEFINITION'''\n\nSea Ice Extent (SIE) is the area covered by sufficient sea ice, that is the area of ocean having more than 15% Sea Ice Concentration (SIC). SIC is the fractional area of ocean surface that is covered with sea ice. SIC is computed from Passive Microwave satellite observations since the 1970s. SIE is often reported with units of millions square kilometers. SIE includes all sea ice, and does not include lake and river ice. The change in sea ice extent (trend) is expressed in millions of km squared per decade. In addition, trends are expressed relative to the 1979-2024 period in % per decade. These trends are calculated (i) for the annual mean values; (ii) for the winter maximum cover (March in the Northern Hemisphere); (iii) for the summer minimum extent (September in the Northern Hemisphere). The annual mean trend is reported on the key figure. The March and September trends are reported in the text below. See also section 1.7 in Samuelsen et al. (2016) for an introduction to this Ocean Monitoring Indicator (OMI).\n\n\n'''CONTEXT'''\n\nSea ice is frozen seawater that floats at the ocean surface. This large blanket of millions of square kilometers insulates the relatively warm ocean waters from the cold polar atmosphere. The seasonal cycle of sea ice, forming and melting with the polar seasons, impacts both human activities and biological habitat. Knowing how and by how much the sea-ice cover is changing is essential for monitoring the health of the Earth (Meredith et al. 2019; Fox-Kemper et al. 2021).\n\n\n'''CMEMS KEY FINDINGS'''\n\nSince 1979, the Northern Hemisphere sea ice extent has decreased in all months. Loss of sea ice extent during summer exceeds the loss observed during winter periods. Over the period 1979-2024, the annual rate amounts to -0.49 +/- +0.02 millions km squared by decade (-4.27% per decade). Winter (March) sea ice extent trend amounts to -0.37 +/- +0.03 millions km squared by decade (-2.45% per decade). Summer (September) sea ice extent trend amounts to -0.79 +/- +0.06 millions km squared by decade (-12.57% per decade). These values are in agreement with those assessed in the IPCC SROCC (Meredith et al. 2019, with estimates up until year 2018). While 2024 started with the 20th lowest mean January sea ice extent, it ended with the lowest mean December sea ice extent, since 1979. September 2024 was the 5th lowest mean September sea ice extent since 1979. The record low mean September was in 2020.\n\n'''DOI (product):''' \nhttps://doi.org/10.48670/moi-00191"
           },
+          "resourceCreditObject": [
+            {
+              "default": "E.U. Copernicus Marine Service Information",
+              "langeng": "E.U. Copernicus Marine Service Information"
+            }
+          ],
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-1.902885, 48.594375],
-                  [-1.598547, 48.594375],
-                  [-1.598547, 48.704114],
-                  [-1.902885, 48.704114],
-                  [-1.902885, 48.594375]
+                  [-180.0, 60.0],
+                  [180.0, 60.0],
+                  [180.0, 90.0],
+                  [-180.0, 90.0],
+                  [-180.0, 60.0]
                 ]
               ]
             }
           ],
           "link": [
             {
-              "protocol": "OGC:WMS",
+              "hash": "cb0f033114f79352a492fca955e543d5",
+              "idx": 1,
+              "protocol": "WWW:STAC",
               "mimeType": "",
               "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/ogive_agil",
-                "langfre": "https://sextant.ifremer.fr/services/wms/ogive_agil"
+                "default": "https://stac.marine.copernicus.eu/metadata/ARCTIC_OMI_SI_extent_obs/arctic_omi_si_extent_obs_202311/dataset.stac.json",
+                "langeng": "https://stac.marine.copernicus.eu/metadata/ARCTIC_OMI_SI_extent_obs/arctic_omi_si_extent_obs_202311/dataset.stac.json"
               },
               "nameObject": {
-                "default": "DRE_BZH_CAMPING_MSM_PT",
-                "langfre": "DRE_BZH_CAMPING_MSM_PT"
+                "default": "arctic_omi_si_extent_obs",
+                "langeng": "arctic_omi_si_extent_obs"
               },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "nameObject": {
-                "default": "DRE_BZH_CAMPING_MSM_PT",
-                "langfre": "DRE_BZH_CAMPING_MSM_PT"
+              "descriptionObject": {
+                "default": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint",
+                "langeng": "For accessing native data and Analysis-ready Cloud-optimized data services, consult this STAC metadata endpoint"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             }
           ],
-          "uuid": "6d108e90-97a2-11dc-8d32-000086f6a62e",
+          "uuid": "092e4075-ec9d-4a4a-b8ca-6f988ff27834",
           "draft": "n",
-          "id": "177",
-          "owner": "13",
-          "groupOwner": "4",
-          "documentStandard": "iso19115-3.2018",
+          "id": "334238194",
+          "owner": "164187932",
+          "groupOwner": "334236504",
+          "logo": "/srv/api/sources/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3/logo",
+          "documentStandard": "iso19139",
           "valid": "0",
           "isTemplate": "n",
           "rating": "0",
@@ -191,29 +483,27 @@
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/6d108e90-97a2-11dc-8d32-000086f6a62e/attachments/camping_bmsm.png"
+              "url": "https://documentation.marine.copernicus.eu/IMG/ARCTIC_OMI_SI_extent_obs.png"
             }
           ]
         },
-        "sort": [0.0],
         "edit": false,
         "canReview": false,
         "owner": false,
         "isPublishedToAll": true,
         "view": true,
         "notify": false,
-        "download": false,
+        "download": true,
         "dynamic": true,
         "featured": false,
-        "guestdownload": false,
         "selected": false
       },
       {
         "_index": "sextant-records",
-        "_id": "017d2eb0-b465-11dc-a954-000086f6a62e",
+        "_id": "a7615ae0-20f3-11dd-b298-000086f6a603",
         "_score": 0.0,
         "_source": {
-          "dateStamp": "2026-01-27T14:50:48.765966Z",
+          "dateStamp": "2025-05-15T23:38:52.124519Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
@@ -224,23 +514,29 @@
             }
           ],
           "resourceTitleObject": {
-            "default": "Réserves de parcs ostréicoles de la baie du Mont Saint-Michel (Ille-et-Vilaine). État 1998.",
-            "langfre": "Réserves de parcs ostréicoles de la baie du Mont Saint-Michel (Ille-et-Vilaine). État 1998."
+            "default": "Étude des sédiments superficiels marins, des herbiers à phanérogames et des peuplements à Caulerpa taxifolia de Menton au Cap d'Ail",
+            "langfre": "Étude des sédiments superficiels marins, des herbiers à phanérogames et des peuplements à Caulerpa taxifolia de Menton au Cap d'Ail"
           },
           "resourceAbstractObject": {
-            "default": "Zones de dépôt d'huîtres, de palourdes et de moules à mi-hauteur sur l'estran accessibles à faible coefficient de marée.\nCette carte de 1998 réalisée par le service Cultures Marines de la DDAM d'Ille-et-Vilaine provient de la numérisation d'une orthophotographie aérienne.",
-            "langfre": "Zones de dépôt d'huîtres, de palourdes et de moules à mi-hauteur sur l'estran accessibles à faible coefficient de marée.\nCette carte de 1998 réalisée par le service Cultures Marines de la DDAM d'Ille-et-Vilaine provient de la numérisation d'une orthophotographie aérienne."
+            "default": "Cette étude, dont l'objectif était de cerner l'impact écologique de Caulerpa Taxifolia sur le milieu marin, s'est réalisée sur le littoral monégasque et la Côte d'Azur, entre Menton et Cap d'Ail pour une profondeur comprise entre 0 et -100m, ce secteur étant le premier à avoir été colonisé par l'algue.\n\nLa majeure partie des données ayant permis la réalisation de la carte est issue des campagnes océanographiques de l'Ifremer (missions : Calife, 1995 ; Calife, 1996 ; Califa, 1997) effectuées dans le cadre du programme européen Life DG XI : Expansion et contrôle de l'algue Caulerpa Taxifolia.\nLes moyens et techniques mis en ½uvre sont l'analyse d'image sonar à balayage latéral, le traitement de vidéos sous-marines, et la lecture de photographies aériennes (IGN et prises de vue à faible altitude en 1992 à partir de l'hélicoptère des douanes)\n\nLe référentiel utilisé comme trait de côte est issu des photographies aériennes IGN - 1994.\n\nLes informations disponibles ici sont issues de la numérisation de la carte papier, initiée par l'lfremer en 2006.",
+            "langfre": "Cette étude, dont l'objectif était de cerner l'impact écologique de Caulerpa Taxifolia sur le milieu marin, s'est réalisée sur le littoral monégasque et la Côte d'Azur, entre Menton et Cap d'Ail pour une profondeur comprise entre 0 et -100m, ce secteur étant le premier à avoir été colonisé par l'algue.\n\nLa majeure partie des données ayant permis la réalisation de la carte est issue des campagnes océanographiques de l'Ifremer (missions : Calife, 1995 ; Calife, 1996 ; Califa, 1997) effectuées dans le cadre du programme européen Life DG XI : Expansion et contrôle de l'algue Caulerpa Taxifolia.\nLes moyens et techniques mis en ½uvre sont l'analyse d'image sonar à balayage latéral, le traitement de vidéos sous-marines, et la lecture de photographies aériennes (IGN et prises de vue à faible altitude en 1992 à partir de l'hélicoptère des douanes)\n\nLe référentiel utilisé comme trait de côte est issu des photographies aériennes IGN - 1994.\n\nLes informations disponibles ici sont issues de la numérisation de la carte papier, initiée par l'lfremer en 2006."
           },
+          "resourceCreditObject": [
+            {
+              "default": "Medbenth",
+              "langfre": "Medbenth"
+            }
+          ],
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-1.869327, 48.620996],
-                  [-1.693061, 48.620996],
-                  [-1.693061, 48.672894],
-                  [-1.869327, 48.672894],
-                  [-1.869327, 48.620996]
+                  [7.390581, 43.696414],
+                  [7.524047, 43.696414],
+                  [7.524047, 43.779256],
+                  [7.390581, 43.779256],
+                  [7.390581, 43.696414]
                 ]
               ]
             }
@@ -254,8 +550,12 @@
                 "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
               },
               "nameObject": {
-                "default": "DDAM35_RES_OSTREICOL_MSM_P",
-                "langfre": "DDAM35_RES_OSTREICOL_MSM_P"
+                "default": "BIOMED_MENTON_CAPAIL_SED_HRB_P",
+                "langfre": "BIOMED_MENTON_CAPAIL_SED_HRB_P"
+              },
+              "descriptionObject": {
+                "default": "Sédiments superficiels marins et herbiers",
+                "langfre": "Sédiments superficiels marins et herbiers"
               },
               "function": "",
               "applicationProfile": "",
@@ -265,32 +565,69 @@
               "protocol": "FILE",
               "mimeType": "",
               "nameObject": {
-                "default": "DDAM35_RES_OSTREICOL_MSM_P",
-                "langfre": "DDAM35_RES_OSTREICOL_MSM_P"
+                "default": "BIOMED_MENTON_CAPAIL_SED_HRB_P",
+                "langfre": "BIOMED_MENTON_CAPAIL_SED_HRB_P"
+              },
+              "descriptionObject": {
+                "default": "Sédiments superficiels marins et herbiers",
+                "langfre": "Sédiments superficiels marins et herbiers"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/biologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
+              },
+              "nameObject": {
+                "default": "BIOMED_MENTON_CAPAIL_CAULERP_P",
+                "langfre": "BIOMED_MENTON_CAPAIL_CAULERP_P"
+              },
+              "descriptionObject": {
+                "default": "Peuplements à Caulerpa taxifolia",
+                "langfre": "Peuplements à Caulerpa taxifolia"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "BIOMED_MENTON_CAPAIL_CAULERP_P",
+                "langfre": "BIOMED_MENTON_CAPAIL_CAULERP_P"
+              },
+              "descriptionObject": {
+                "default": "Peuplements à Caulerpa taxifolia",
+                "langfre": "Peuplements à Caulerpa taxifolia"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
             }
           ],
-          "uuid": "017d2eb0-b465-11dc-a954-000086f6a62e",
+          "uuid": "a7615ae0-20f3-11dd-b298-000086f6a603",
           "draft": "n",
-          "id": "217",
+          "id": "439",
           "owner": "13",
           "groupOwner": "4",
           "documentStandard": "iso19115-3.2018",
-          "valid": "0",
+          "valid": "-1",
           "isTemplate": "n",
           "rating": "0",
           "isHarvested": "false",
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/017d2eb0-b465-11dc-a954-000086f6a62e/attachments/reserve_parcs.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/a7615ae0-20f3-11dd-b298-000086f6a603/attachments/BIOMED_MENTON_CAPAIL_SED_HRB_P_big.png"
             }
           ]
         },
-        "sort": [0.0],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -305,10 +642,153 @@
       },
       {
         "_index": "sextant-records",
-        "_id": "8e7b40ef-c6f0-4285-86ac-27b0cda26e46",
+        "_id": "5f575840-57c0-11dd-a60f-000086f6a603",
         "_score": 0.0,
         "_source": {
-          "dateStamp": "2016-11-17T12:36:47.000Z",
+          "dateStamp": "2025-05-15T22:35:34.960533Z",
+          "resourceType": ["dataset"],
+          "cl_status": [
+            {
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
+              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
+            }
+          ],
+          "resourceTitleObject": {
+            "default": "Localisation des habitats naturels présents dans l'enveloppe de référence du site Natura 2000 « Posidonies du Cap d'Agde » - Atlas",
+            "langfre": "Localisation des habitats naturels présents dans l'enveloppe de référence du site Natura 2000 « Posidonies du Cap d'Agde » - Atlas"
+          },
+          "resourceAbstractObject": {
+            "default": "Cette cartographie intègre l'atlas du Document d'Objectifs du site Natura 2000 FR 9101414 « Posidonies du Cap d'Agde ».\n\nLe périmètre du site N2000 ou enveloppe de référence couvre 2329 hectares, entre la digue Ouest du Grau d'Agde et la digue Est du port Ambonne et se cale sur l'isobathe 20m, les conditions locales de turbidité ne permettant pas à la plante de se développer plus profond.\n\nDifférentes méthodes ont été employées : une analyse bibliographique, la photo-interprétation sur la base des photographies aériennes de l'IGN complétées par celles réalisées au cours des missions en ULM par l'ADENA depuis 1996, le sonar latéral, un travail de vérité terrain par plongées autonomes à l'air.\n\nLe référentiel utilisé comme trait de côte est celui des photographies aériennes de l¿IGN.",
+            "langfre": "Cette cartographie intègre l'atlas du Document d'Objectifs du site Natura 2000 FR 9101414 « Posidonies du Cap d'Agde ».\n\nLe périmètre du site N2000 ou enveloppe de référence couvre 2329 hectares, entre la digue Ouest du Grau d'Agde et la digue Est du port Ambonne et se cale sur l'isobathe 20m, les conditions locales de turbidité ne permettant pas à la plante de se développer plus profond.\n\nDifférentes méthodes ont été employées : une analyse bibliographique, la photo-interprétation sur la base des photographies aériennes de l'IGN complétées par celles réalisées au cours des missions en ULM par l'ADENA depuis 1996, le sonar latéral, un travail de vérité terrain par plongées autonomes à l'air.\n\nLe référentiel utilisé comme trait de côte est celui des photographies aériennes de l¿IGN."
+          },
+          "resourceCreditObject": [
+            {
+              "default": "Medbenth",
+              "langfre": "Medbenth"
+            }
+          ],
+          "geom": [
+            {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [3.438515, 43.232701],
+                  [3.547768, 43.232701],
+                  [3.547768, 43.291135],
+                  [3.438515, 43.291135],
+                  [3.438515, 43.232701]
+                ]
+              ]
+            }
+          ],
+          "link": [
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/biologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
+              },
+              "nameObject": {
+                "default": "BIOMED_BIOC_CAPAGLE_P",
+                "langfre": "BIOMED_BIOC_CAPAGLE_P"
+              },
+              "descriptionObject": {
+                "default": "Atlas.",
+                "langfre": "Atlas."
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "BIOMED_BIOC_CAPAGLE_P",
+                "langfre": "BIOMED_BIOC_CAPAGLE_P"
+              },
+              "descriptionObject": {
+                "default": "Atlas.",
+                "langfre": "Atlas."
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "OGC:WMS",
+              "mimeType": "",
+              "urlObject": {
+                "default": "https://sextant.ifremer.fr/services/wms/biologie",
+                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
+              },
+              "nameObject": {
+                "default": "BIOMED_CORA_CAPAGLE_PT",
+                "langfre": "BIOMED_CORA_CAPAGLE_PT"
+              },
+              "descriptionObject": {
+                "default": "Atlas. Coralligène",
+                "langfre": "Atlas. Coralligène"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            },
+            {
+              "protocol": "FILE",
+              "mimeType": "",
+              "nameObject": {
+                "default": "BIOMED_CORA_CAPAGLE_PT",
+                "langfre": "BIOMED_CORA_CAPAGLE_PT"
+              },
+              "descriptionObject": {
+                "default": "Atlas. Coralligène",
+                "langfre": "Atlas. Coralligène"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 1
+            }
+          ],
+          "uuid": "5f575840-57c0-11dd-a60f-000086f6a603",
+          "draft": "n",
+          "id": "499",
+          "owner": "13",
+          "groupOwner": "4",
+          "documentStandard": "iso19115-3.2018",
+          "valid": "-1",
+          "isTemplate": "n",
+          "rating": "0",
+          "isHarvested": "false",
+          "overview": [
+            {
+              "data": "",
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/5f575840-57c0-11dd-a60f-000086f6a603/attachments/habi_capagle.png"
+            }
+          ]
+        },
+        "edit": false,
+        "canReview": false,
+        "owner": false,
+        "isPublishedToAll": true,
+        "view": true,
+        "notify": false,
+        "download": false,
+        "dynamic": true,
+        "featured": false,
+        "guestdownload": false,
+        "selected": false
+      },
+      {
+        "_index": "sextant-records",
+        "_id": "6fe382df-16f9-4c9b-8b16-48d36ec66bfd",
+        "_score": 0.0,
+        "_ignored": ["dqValues.keyword"],
+        "_source": {
+          "dateStamp": "2018-04-11T13:05:03.000Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
@@ -319,19 +799,19 @@
             }
           ],
           "resourceTitleObject": {
-            "default": "Zooplankton wet weight biomass | Wet weight biomass of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset",
-            "langeng": "Zooplankton wet weight biomass | Wet weight biomass of Mnemiopsis leidyi (ITIS: 53917: WoRMS 106401) per unit volume of the water body | Institute of Marine Sciences, Middle East Technical University, Turkey | IMS METU Database, Gelatinous Plankton dataset"
+            "default": "Concentration of suspended particulate material in the water column | Concentration of suspended matters mg/L | European Environment Agency | Water Data Centre",
+            "langeng": "Concentration of suspended particulate material in the water column | Concentration of suspended matters mg/L | European Environment Agency | Water Data Centre"
           },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [28.13, 41.0],
-                  [41.5, 41.0],
-                  [41.5, 43.4],
-                  [28.13, 43.4],
-                  [28.13, 41.0]
+                  [-11.5, 35.3],
+                  [43.2, 35.3],
+                  [43.2, 81.4],
+                  [-11.5, 81.4],
+                  [-11.5, 35.3]
                 ]
               ]
             }
@@ -341,19 +821,34 @@
               "protocol": "WWW:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "http://www.ims.metu.edu.tr/IMS_Inventory/",
-                "langeng": "http://www.ims.metu.edu.tr/IMS_Inventory/"
+                "default": "http://www.eea.europa.eu/themes/water/dc",
+                "langeng": "http://www.eea.europa.eu/themes/water/dc"
+              },
+              "nameObject": {
+                "default": "Waterbase - Rivers",
+                "langeng": "Waterbase - Rivers"
+              },
+              "function": "",
+              "applicationProfile": "",
+              "group": 0
+            },
+            {
+              "protocol": "WWW:LINK",
+              "mimeType": "",
+              "urlObject": {
+                "default": "http://www.eea.europa.eu/data-and-maps/data/waterbase-rivers-10",
+                "langeng": "http://www.eea.europa.eu/data-and-maps/data/waterbase-rivers-10"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             }
           ],
-          "uuid": "8e7b40ef-c6f0-4285-86ac-27b0cda26e46",
+          "uuid": "6fe382df-16f9-4c9b-8b16-48d36ec66bfd",
           "draft": "n",
-          "id": "153356294",
-          "owner": "141622272",
-          "groupOwner": "139608974",
+          "id": "334238205",
+          "owner": "113110382",
+          "groupOwner": "139596764",
           "logo": "/srv/api/sources/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3/logo",
           "documentStandard": "iso19115-3.2018",
           "valid": "-1",
@@ -363,11 +858,10 @@
           "overview": [
             {
               "data": "",
-              "url": "http://emodnet-blacksea.eu/wp-content/uploads/2015/11/CH11_alien_species_n.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ba1daca8-9d5e-459c-bb1f-f7e460722aff/attachments/EAA_pdflogo-en.png"
             }
           ]
         },
-        "sort": [0.0],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -382,122 +876,10 @@
       },
       {
         "_index": "sextant-records",
-        "_id": "2b7e18d0-de01-11dc-af25-000086f6a603",
-        "_score": 0.0,
-        "_ignored": [
-          "processSteps.descriptionObject.default.keyword",
-          "processSteps.descriptionObject.langfre.keyword"
-        ],
-        "_source": {
-          "dateStamp": "2026-01-22T21:30:27.631282Z",
-          "resourceType": ["dataset"],
-          "cl_status": [
-            {
-              "key": "completed",
-              "default": "Finalisé",
-              "langfre": "Finalisé",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
-          "resourceTitleObject": {
-            "default": "Trait de côte GSHHS",
-            "langfre": "Trait de côte GSHHS"
-          },
-          "resourceAbstractObject": {
-            "default": "GSHHS est un trait de côte au 1/250000 disponible sur le site du National Geophysical Data Center (NGDC), NOAA. Il est issu de la fusion de 2 bases de données. Il s'agit d'un trait de côte très propre topologiquement.\n\nRéférence bibliographique :\nWessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, #B4, pp. 8741-8743, 1996. \n\nAdresse de téléchargement :\nhttp://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html\n\nClassification (Attribut \"NATURE\") :\n\nLAND : trait de côte de base\nLAKE : contour des lacs inclus par le trait de côte\nISLE : contour des îles incluses par les lacs inclus par le trait de côte\nPOND : contour des étangs inclus par les îles incluses par les lacs inclus par le trait de côte",
-            "langfre": "GSHHS est un trait de côte au 1/250000 disponible sur le site du National Geophysical Data Center (NGDC), NOAA. Il est issu de la fusion de 2 bases de données. Il s'agit d'un trait de côte très propre topologiquement.\n\nRéférence bibliographique :\nWessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, #B4, pp. 8741-8743, 1996. \n\nAdresse de téléchargement :\nhttp://www.ngdc.noaa.gov/mgg/shorelines/gshhs.html\n\nClassification (Attribut \"NATURE\") :\n\nLAND : trait de côte de base\nLAKE : contour des lacs inclus par le trait de côte\nISLE : contour des îles incluses par les lacs inclus par le trait de côte\nPOND : contour des étangs inclus par les îles incluses par les lacs inclus par le trait de côte"
-          },
-          "resourceCreditObject": [
-            {
-              "default": "Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, #B4, pp. 8741-8743, 1996",
-              "langfre": "Wessel, P., and W. H. F. Smith, A Global Self-consistent, Hierarchical, High-resolution Shoreline Database, J. Geophys. Res., 101, #B4, pp. 8741-8743, 1996"
-            }
-          ],
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-180.0, -78.570358],
-                  [180.0, -78.570358],
-                  [180.0, 83.633392],
-                  [-180.0, 83.633392],
-                  [-180.0, -78.570358]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/wms1?",
-                "langfre": "https://sextant.ifremer.fr/services/wms/wms1?"
-              },
-              "nameObject": {
-                "default": "NOAA_NGDC_TC_GSHHS_A",
-                "langfre": "NOAA_NGDC_TC_GSHHS_A"
-              },
-              "descriptionObject": {
-                "default": "Trait de côte",
-                "langfre": "Trait de côte"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "urlObject": {
-                "default": "file:///home/sextant/data/NOAA/NOAA_NGDC_TC_GSHHS_A.shp",
-                "langfre": "file:///home/sextant/data/NOAA/NOAA_NGDC_TC_GSHHS_A.shp"
-              },
-              "nameObject": {
-                "default": "NOAA_NGDC_TC_GSHHS_A",
-                "langfre": "NOAA_NGDC_TC_GSHHS_A"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "2b7e18d0-de01-11dc-af25-000086f6a603",
-          "draft": "n",
-          "id": "256",
-          "owner": "13",
-          "groupOwner": "4",
-          "documentStandard": "iso19115-3.2018",
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/2b7e18d0-de01-11dc-af25-000086f6a603/attachments/apercu_grand.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": true,
-        "dynamic": true,
-        "featured": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "ab32de50-8d50-11dc-a35b-000086f6a603",
+        "_id": "884f5e80-06f5-11dd-b92c-000086f6a62e",
         "_score": 0.0,
         "_source": {
-          "dateStamp": "2026-01-27T16:00:43.519381Z",
+          "dateStamp": "2025-05-15T23:12:13.573401Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
@@ -508,241 +890,47 @@
             }
           ],
           "resourceTitleObject": {
-            "default": "Les pêcheries de la baie du Mont Saint-Michel. État 2002.",
-            "langfre": "Les pêcheries de la baie du Mont Saint-Michel. État 2002."
+            "default": "Bande de 20 km autour des ports du Finistère dragués régulièrement",
+            "langfre": "Bande de 20 km autour des ports du Finistère dragués régulièrement"
           },
           "resourceAbstractObject": {
-            "default": "Pêcheries fixes en bois de la baie du Mont Saint-Michel numérisées sur l'ortholittorale 2000 (2002) par la DDAM d'Ille-et-Vilaine sous forme de polylignes.",
-            "langfre": "Pêcheries fixes en bois de la baie du Mont Saint-Michel numérisées sur l'ortholittorale 2000 (2002) par la DDAM d'Ille-et-Vilaine sous forme de polylignes."
+            "default": "Bande de 20 km autour des ports du Finistère dragués régulièrement",
+            "langfre": "Bande de 20 km autour des ports du Finistère dragués régulièrement"
           },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-1.850716, 48.626154],
-                  [-1.650948, 48.626154],
-                  [-1.650948, 48.655237],
-                  [-1.850716, 48.655237],
-                  [-1.850716, 48.626154]
+                  [-5.140333, 47.701198],
+                  [-3.447738, 47.701198],
+                  [-3.447738, 48.753743],
+                  [-5.140333, 48.753743],
+                  [-5.140333, 47.701198]
                 ]
               ]
             }
           ],
           "link": [
             {
-              "protocol": "OGC:WMS",
+              "protocol": "WWW:LINK",
               "mimeType": "",
               "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/ogive_agil",
-                "langfre": "https://sextant.ifremer.fr/services/wms/ogive_agil"
+                "default": "http://www.comitedespeches-finistere.fr/",
+                "langfre": "http://www.comitedespeches-finistere.fr/"
               },
               "nameObject": {
-                "default": "IFR_DDAM_PECHERIES_MSM_A",
-                "langfre": "IFR_DDAM_PECHERIES_MSM_A"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "nameObject": {
-                "default": "IFR_DDAM_PECHERIES_MSM_A",
-                "langfre": "IFR_DDAM_PECHERIES_MSM_A"
+                "default": "Comite des peches Finistere",
+                "langfre": "Comite des peches Finistere"
               },
               "function": "",
               "applicationProfile": "",
               "group": 0
             }
           ],
-          "uuid": "ab32de50-8d50-11dc-a35b-000086f6a603",
+          "uuid": "884f5e80-06f5-11dd-b92c-000086f6a62e",
           "draft": "n",
-          "id": "160",
-          "owner": "13",
-          "groupOwner": "4",
-          "documentStandard": "iso19115-3.2018",
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ab32de50-8d50-11dc-a35b-000086f6a603/attachments/PecheriesMSM_small.png"
-            },
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/ab32de50-8d50-11dc-a35b-000086f6a603/attachments/PecheriesMSM_big.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": false,
-        "dynamic": true,
-        "featured": false,
-        "guestdownload": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "f496eb20-90f9-11dc-9328-000086f6a603",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2026-01-27T15:24:56.935801Z",
-          "resourceType": ["dataset"],
-          "cl_status": [
-            {
-              "key": "onGoing",
-              "default": "Mis à jour continue",
-              "langfre": "Mis à jour continue",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
-          "resourceTitleObject": {
-            "default": "Périmètre autorisé du Conservatoire du Littoral aux Chausey. État 2007.",
-            "langfre": "Périmètre autorisé du Conservatoire du Littoral aux Chausey. État 2007."
-          },
-          "resourceAbstractObject": {
-            "default": "Périmètre qui a été adopté en Conseil d'administration pour lequel le Conservatoire du Littoral est autorisé à réaliser des interventions foncières (2007). Donnée, sous forme de polygone, créée et fournie par le Conservatoire du Littoral.",
-            "langfre": "Périmètre qui a été adopté en Conseil d'administration pour lequel le Conservatoire du Littoral est autorisé à réaliser des interventions foncières (2007). Donnée, sous forme de polygone, créée et fournie par le Conservatoire du Littoral."
-          },
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-1.827662, 48.868574],
-                  [-1.821286, 48.868574],
-                  [-1.821286, 48.873002],
-                  [-1.827662, 48.873002],
-                  [-1.827662, 48.868574]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/ogive_agil",
-                "langfre": "https://sextant.ifremer.fr/services/wms/ogive_agil"
-              },
-              "nameObject": {
-                "default": "CELRL_PERIM_AUT07_MSM_P",
-                "langfre": "CELRL_PERIM_AUT07_MSM_P"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "nameObject": {
-                "default": "CELRL_PERIM_AUT07_MSM_P",
-                "langfre": "CELRL_PERIM_AUT07_MSM_P"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "f496eb20-90f9-11dc-9328-000086f6a603",
-          "draft": "n",
-          "id": "167",
-          "owner": "13",
-          "groupOwner": "4",
-          "documentStandard": "iso19115-3.2018",
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/f496eb20-90f9-11dc-9328-000086f6a603/attachments/simon.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": false,
-        "dynamic": true,
-        "featured": false,
-        "guestdownload": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "eec89870-e481-11dc-8369-000086f6a62e",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2025-05-16T09:29:10.556851Z",
-          "resourceType": ["dataset"],
-          "cl_status": [
-            {
-              "key": "onGoing",
-              "default": "Mis à jour continue",
-              "langfre": "Mis à jour continue",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
-          "resourceTitleObject": {
-            "default": "InterRisk - Argos PTR buoys drift - MERSEA experimentation",
-            "langfre": "InterRisk - Argos PTR buoys drift - MERSEA experimentation"
-          },
-          "resourceAbstractObject": {
-            "default": "8 buoys were dropped during the MERSEA experimentation, in order to compare to different models.\n\nWhen an oil spill occurs, the tracking of oil slicks by surface drifting is recommended in order to cross the information.\nThe prediction of the drift of slicks by computerized/modeling should always be validated by observation or by the mean of buoy-tracking satellite detection. Direct observation in good conditions is not always possible due to the weather conditions (visibility, ceiling). A reliable remote sensing of buoy is very helpful to track the slicks and guide aerial surveillance aircraft.",
-            "langfre": "8 buoys were dropped during the MERSEA experimentation, in order to compare to different models.\n\nWhen an oil spill occurs, the tracking of oil slicks by surface drifting is recommended in order to cross the information.\nThe prediction of the drift of slicks by computerized/modeling should always be validated by observation or by the mean of buoy-tracking satellite detection. Direct observation in good conditions is not always possible due to the weather conditions (visibility, ceiling). A reliable remote sensing of buoy is very helpful to track the slicks and guide aerial surveillance aircraft."
-          },
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [2.121477, 39.614625],
-                  [7.940194, 39.614625],
-                  [7.940194, 43.923607],
-                  [2.121477, 43.923607],
-                  [2.121477, 39.614625]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/wms1?",
-                "langfre": "https://sextant.ifremer.fr/services/wms/wms1?"
-              },
-              "nameObject": {
-                "default": "buoy_mersea",
-                "langfre": "buoy_mersea"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "eec89870-e481-11dc-8369-000086f6a62e",
-          "draft": "n",
-          "id": "265",
+          "id": "408",
           "owner": "13",
           "groupOwner": "4",
           "documentStandard": "iso19115-3.2018",
@@ -753,23 +941,10 @@
           "overview": [
             {
               "data": "",
-              "nameObject": {
-                "default": "thumbnail",
-                "langfre": "thumbnail"
-              },
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/eec89870-e481-11dc-8369-000086f6a62e/attachments/mersea_buoys_small.PNG"
-            },
-            {
-              "data": "",
-              "nameObject": {
-                "default": "large_thumbnail",
-                "langfre": "large_thumbnail"
-              },
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/eec89870-e481-11dc-8369-000086f6a62e/attachments/mersea_buoys_big.PNG"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/884f5e80-06f5-11dd-b92c-000086f6a62e/attachments/bande20km.png"
             }
           ]
         },
-        "sort": [0.0],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -777,98 +952,65 @@
         "view": true,
         "notify": false,
         "download": false,
-        "dynamic": true,
+        "dynamic": false,
         "featured": false,
         "guestdownload": false,
         "selected": false
       },
       {
         "_index": "sextant-records",
-        "_id": "a9b0a500-c9b2-11dc-b581-000086f6a62e",
+        "_id": "773b2400-06fd-11dd-b92c-000086f6a62e",
         "_score": 0.0,
-        "_ignored": [
-          "processSteps.descriptionObject.default.keyword",
-          "processSteps.descriptionObject.langfre.keyword"
-        ],
         "_source": {
-          "dateStamp": "2026-01-27T15:59:06.120215Z",
+          "dateStamp": "2025-05-15T22:55:50.279868Z",
           "resourceType": ["dataset"],
           "cl_status": [
             {
-              "key": "completed",
-              "default": "Finalisé",
-              "langfre": "Finalisé",
+              "key": "onGoing",
+              "default": "Mis à jour continue",
+              "langfre": "Mis à jour continue",
               "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
             }
           ],
           "resourceTitleObject": {
-            "default": "Cartographie des habitats naturels intertidaux de substrat meuble de l'archipel de Chausey selon la typologie Natura 2000. Carte 1/2 des habitats sous forme de polygone. État 2002-2006.",
-            "langfre": "Cartographie des habitats naturels intertidaux de substrat meuble de l'archipel de Chausey selon la typologie Natura 2000. Carte 1/2 des habitats sous forme de polygone. État 2002-2006."
+            "default": "Servitudes des sites naturels dans le Finistère (polygones)",
+            "langfre": "Servitudes des sites naturels dans le Finistère (polygones)"
           },
           "resourceAbstractObject": {
-            "default": "Carte (partie 1/2) des habitats élémentaires Natura 2000 des substrats meubles intertidaux de l'archipel de Chausey (1/25000) sous forme de polygones établie à partir de photo-interprétation, d'observations et de prélèvements sur l'estran.",
-            "langfre": "Carte (partie 1/2) des habitats élémentaires Natura 2000 des substrats meubles intertidaux de l'archipel de Chausey (1/25000) sous forme de polygones établie à partir de photo-interprétation, d'observations et de prélèvements sur l'estran."
+            "default": "Servitudes des sites naturels dans le Finistère",
+            "langfre": "Servitudes des sites naturels dans le Finistère"
           },
           "geom": [
             {
               "type": "Polygon",
               "coordinates": [
                 [
-                  [-1.879439, 48.866195],
-                  [-1.730105, 48.866195],
-                  [-1.730105, 48.9116],
-                  [-1.879439, 48.9116],
-                  [-1.879439, 48.866195]
+                  [-5.146149, 47.625466],
+                  [-3.317944, 47.625466],
+                  [-3.317944, 48.762177],
+                  [-5.146149, 48.762177],
+                  [-5.146149, 47.625466]
                 ]
               ]
             }
           ],
-          "link": [
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/biologie",
-                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
-              },
-              "nameObject": {
-                "default": "DIREN_BN_HAB_INTERTID_MSM_P",
-                "langfre": "DIREN_BN_HAB_INTERTID_MSM_P"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "nameObject": {
-                "default": "DIREN_BN_HAB_INTERTID_MSM_P",
-                "langfre": "DIREN_BN_HAB_INTERTID_MSM_P"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "a9b0a500-c9b2-11dc-b581-000086f6a62e",
+          "uuid": "773b2400-06fd-11dd-b92c-000086f6a62e",
           "draft": "n",
-          "id": "250",
+          "id": "420",
           "owner": "13",
           "groupOwner": "4",
           "documentStandard": "iso19115-3.2018",
-          "valid": "0",
+          "valid": "-1",
           "isTemplate": "n",
           "rating": "0",
           "isHarvested": "false",
           "overview": [
             {
               "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/a9b0a500-c9b2-11dc-b581-000086f6a62e/attachments/simon.png"
+              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/773b2400-06fd-11dd-b92c-000086f6a62e/attachments/site_natu_surf.png"
             }
           ]
         },
-        "sort": [0.0],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -876,106 +1018,7 @@
         "view": true,
         "notify": false,
         "download": false,
-        "dynamic": true,
-        "featured": false,
-        "guestdownload": false,
-        "selected": false
-      },
-      {
-        "_index": "sextant-records",
-        "_id": "f67f9700-cdaf-11dc-85fc-000086f6a62e",
-        "_score": 0.0,
-        "_source": {
-          "dateStamp": "2026-01-27T15:26:40.279306Z",
-          "resourceType": ["dataset"],
-          "cl_status": [
-            {
-              "key": "historicalArchive",
-              "default": "historicalArchive",
-              "langfre": "historicalArchive",
-              "link": "http://standards.iso.org/iso/19115/resources/Codelists/cat/codelists.xml#MD_ProgressCode"
-            }
-          ],
-          "resourceTitleObject": {
-            "default": "Cadastre conchylicole historique breton (partie 2/2 : moules) de la baie du mont Saint-Michel sous forme d'arcs. État 1954-2004.",
-            "langfre": "Cadastre conchylicole historique breton (partie 2/2 : moules) de la baie du mont Saint-Michel sous forme d'arcs. État 1954-2004."
-          },
-          "resourceAbstractObject": {
-            "default": "Seconde partie du cadastre conchylicole historique en baie du Mont Saint-Michel relatif aux cultures de moules de bouchot. Les données sont sous forme d'arcs.",
-            "langfre": "Seconde partie du cadastre conchylicole historique en baie du Mont Saint-Michel relatif aux cultures de moules de bouchot. Les données sont sous forme d'arcs."
-          },
-          "geom": [
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-1.824313, 48.631079],
-                  [-1.656208, 48.631079],
-                  [-1.656208, 48.669858],
-                  [-1.824313, 48.669858],
-                  [-1.824313, 48.631079]
-                ]
-              ]
-            }
-          ],
-          "link": [
-            {
-              "protocol": "OGC:WMS",
-              "mimeType": "",
-              "urlObject": {
-                "default": "https://sextant.ifremer.fr/services/wms/biologie",
-                "langfre": "https://sextant.ifremer.fr/services/wms/biologie"
-              },
-              "nameObject": {
-                "default": "EPHE_CAD_HISTO_MOULE_MSM_A",
-                "langfre": "EPHE_CAD_HISTO_MOULE_MSM_A"
-              },
-              "descriptionObject": {
-                "default": "ESRI Shapefile",
-                "langfre": "ESRI Shapefile"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            },
-            {
-              "protocol": "FILE",
-              "mimeType": "",
-              "nameObject": {
-                "default": "EPHE_CAD_HISTO_MOULE_MSM_A",
-                "langfre": "EPHE_CAD_HISTO_MOULE_MSM_A"
-              },
-              "function": "",
-              "applicationProfile": "",
-              "group": 0
-            }
-          ],
-          "uuid": "f67f9700-cdaf-11dc-85fc-000086f6a62e",
-          "draft": "n",
-          "id": "252",
-          "owner": "13",
-          "groupOwner": "4",
-          "documentStandard": "iso19115-3.2018",
-          "valid": "0",
-          "isTemplate": "n",
-          "rating": "0",
-          "isHarvested": "false",
-          "overview": [
-            {
-              "data": "",
-              "url": "https://sextant.ifremer.fr/geonetwork/srv/api/records/f67f9700-cdaf-11dc-85fc-000086f6a62e/attachments/simon.png"
-            }
-          ]
-        },
-        "sort": [0.0],
-        "edit": false,
-        "canReview": false,
-        "owner": false,
-        "isPublishedToAll": true,
-        "view": true,
-        "notify": false,
-        "download": false,
-        "dynamic": true,
+        "dynamic": false,
         "featured": false,
         "guestdownload": false,
         "selected": false
@@ -983,57 +1026,6 @@
     ]
   },
   "aggregations": {
-    "resourceType": {
-      "meta": {
-        "layout": "nightingale",
-        "decorator": {
-          "prefix": "",
-          "type": "icon",
-          "map": {
-            "service": "faSolidCloud",
-            "series": "faSolidCopy",
-            "nonGeographicDataset": "faSolidChartColumn",
-            "document": "faSolidCopy",
-            "publication": "faSolidBook",
-            "featureCatalog": "faSolidTable",
-            "dataset": "faSolidDatabase",
-            "map": "faSolidMap"
-          }
-        }
-      },
-      "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 0,
-      "buckets": [
-        {
-          "key": "dataset",
-          "doc_count": 772
-        },
-        {
-          "key": "series",
-          "doc_count": 70
-        },
-        {
-          "key": "publication",
-          "doc_count": 21
-        },
-        {
-          "key": "nonGeographicDataset",
-          "doc_count": 10
-        },
-        {
-          "key": "repository",
-          "doc_count": 3
-        },
-        {
-          "key": "document",
-          "doc_count": 1
-        },
-        {
-          "key": "featureCatalog",
-          "doc_count": 1
-        }
-      ]
-    },
     "th_sextant-theme_tree.key": {
       "meta": {
         "layout": "card",
@@ -1057,31 +1049,90 @@
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947",
-          "doc_count": 189
+          "doc_count": 2674
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463",
-          "doc_count": 149
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b",
-          "doc_count": 122
+          "doc_count": 1875
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9",
-          "doc_count": 107
+          "doc_count": 1533
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b",
+          "doc_count": 587
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1",
-          "doc_count": 40
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921",
-          "doc_count": 15
+          "doc_count": 369
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f",
-          "doc_count": 5
+          "doc_count": 344
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921",
+          "doc_count": 27
+        }
+      ]
+    },
+    "resourceType": {
+      "meta": {
+        "layout": "nightingale",
+        "decorator": {
+          "prefix": "",
+          "type": "icon",
+          "map": {
+            "service": "faSolidCloud",
+            "series": "faSolidCopy",
+            "nonGeographicDataset": "faSolidChartColumn",
+            "document": "faSolidCopy",
+            "publication": "faSolidBook",
+            "featureCatalog": "faSolidTable",
+            "dataset": "faSolidDatabase",
+            "map": "faSolidMap"
+          }
+        }
+      },
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 130,
+      "buckets": [
+        {
+          "key": "dataset",
+          "doc_count": 11692
+        },
+        {
+          "key": "series",
+          "doc_count": 2224
+        },
+        {
+          "key": "publication",
+          "doc_count": 1017
+        },
+        {
+          "key": "nonGeographicDataset",
+          "doc_count": 321
+        },
+        {
+          "key": "service",
+          "doc_count": 134
+        },
+        {
+          "key": "map-static",
+          "doc_count": 100
+        },
+        {
+          "key": "initiative",
+          "doc_count": 81
+        },
+        {
+          "key": "featureCatalog",
+          "doc_count": 80
+        },
+        {
+          "key": "map",
+          "doc_count": 55
         }
       ]
     },
@@ -1100,116 +1151,136 @@
       "sum_other_doc_count": 0,
       "buckets": [
         {
-          "key": "http://inspire.ec.europa.eu/theme/am",
-          "doc_count": 102
-        },
-        {
           "key": "http://inspire.ec.europa.eu/theme/of",
-          "doc_count": 99
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/hb",
-          "doc_count": 94
+          "doc_count": 2465
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/sd",
-          "doc_count": 88
+          "doc_count": 1359
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/el",
-          "doc_count": 76
+          "doc_count": 1221
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/ge",
-          "doc_count": 57
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/oi",
-          "doc_count": 46
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/hy",
-          "doc_count": 35
+          "key": "http://inspire.ec.europa.eu/theme/hb",
+          "doc_count": 1067
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/ef",
-          "doc_count": 32
+          "doc_count": 746
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/af",
-          "doc_count": 27
+          "key": "http://inspire.ec.europa.eu/theme/hy",
+          "doc_count": 650
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/au",
-          "doc_count": 21
+          "key": "http://inspire.ec.europa.eu/theme/am",
+          "doc_count": 561
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/ps",
-          "doc_count": 20
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/pf",
-          "doc_count": 12
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/lu",
-          "doc_count": 10
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/mr",
-          "doc_count": 8
+          "key": "http://inspire.ec.europa.eu/theme/ge",
+          "doc_count": 321
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/sr",
-          "doc_count": 8
+          "doc_count": 226
         },
         {
-          "key": "http://inspire.ec.europa.eu/theme/su",
-          "doc_count": 7
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/tn",
-          "doc_count": 7
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/cp",
-          "doc_count": 4
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/nz",
-          "doc_count": 3
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/pd",
-          "doc_count": 3
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/er",
-          "doc_count": 2
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/mf",
-          "doc_count": 2
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/ac",
-          "doc_count": 1
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/br",
-          "doc_count": 1
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/hh",
-          "doc_count": 1
-        },
-        {
-          "key": "http://inspire.ec.europa.eu/theme/lc",
-          "doc_count": 1
+          "key": "http://inspire.ec.europa.eu/theme/oi",
+          "doc_count": 217
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/us",
-          "doc_count": 1
+          "doc_count": 202
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/af",
+          "doc_count": 124
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/ps",
+          "doc_count": 102
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/tn",
+          "doc_count": 89
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/mf",
+          "doc_count": 80
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/pf",
+          "doc_count": 80
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/au",
+          "doc_count": 79
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/nz",
+          "doc_count": 66
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/hh",
+          "doc_count": 65
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/lu",
+          "doc_count": 50
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/lc",
+          "doc_count": 42
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/er",
+          "doc_count": 38
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/su",
+          "doc_count": 35
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/pd",
+          "doc_count": 34
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/ac",
+          "doc_count": 32
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/bu",
+          "doc_count": 30
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/mr",
+          "doc_count": 22
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/gg",
+          "doc_count": 17
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/cp",
+          "doc_count": 16
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/br",
+          "doc_count": 13
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/gn",
+          "doc_count": 8
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/so",
+          "doc_count": 4
+        },
+        {
+          "key": "http://inspire.ec.europa.eu/theme/rs",
+          "doc_count": 2
         }
       ]
     },
@@ -1220,23 +1291,43 @@
         "translateOnLoad": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 0,
+      "sum_other_doc_count": 5,
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/311abf2d-6be9-472f-9f1a-ac5729745a97",
-          "doc_count": 32
+          "doc_count": 839
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/202490d0-74e7-4a41-823e-7f54ec83b941",
-          "doc_count": 23
+          "doc_count": 588
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/5ffc6dd8-bdeb-4484-bbbd-3f813cff9da0",
-          "doc_count": 2
+          "doc_count": 106
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/8cc9e95b-7746-4e90-8dbd-f62bd834aa19",
+          "doc_count": 21
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/cc26cbb5-4563-4443-8f9f-0baf3465a3c4",
+          "doc_count": 21
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/19e06ed7-0b27-4e15-8ea6-1c1fc63a4e26",
+          "doc_count": 19
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/f6f29f14-e5c8-49a4-8a93-174897c436d6",
-          "doc_count": 1
+          "doc_count": 10
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/4582caf4-bed1-4fc8-b53a-aac739b6e957",
+          "doc_count": 9
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/simm.reglementaire/e23fee72-c17f-4b07-96bd-39b2b0e8dcd0",
+          "doc_count": 4
         }
       ]
     },
@@ -1251,63 +1342,63 @@
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41",
-          "doc_count": 169
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/02ae5489-80f4-4790-b7ef-ec7372037454",
-          "doc_count": 69
+          "doc_count": 2126
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5dc22e69-c8de-4a13-bf4e-8541681a45f5",
-          "doc_count": 64
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ec646e7f-9c24-4182-a0e1-8e6524d2b91b",
-          "doc_count": 50
+          "doc_count": 969
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/f3b1a057-7a6c-4970-8342-1abea177d29b",
-          "doc_count": 31
+          "doc_count": 917
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/02ae5489-80f4-4790-b7ef-ec7372037454",
+          "doc_count": 819
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ec646e7f-9c24-4182-a0e1-8e6524d2b91b",
+          "doc_count": 783
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1",
-          "doc_count": 18
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/71918e42-5660-483f-aa07-21537b75bc34",
-          "doc_count": 10
+          "doc_count": 521
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/c30385c9-335a-4b4f-a98d-8e4ac658a60b",
-          "doc_count": 8
+          "doc_count": 371
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5655729b-9a27-4a76-a96c-683564f4012c",
-          "doc_count": 2
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/1f1f5d20-8489-4c80-ac20-d6d091d4e30b",
-          "doc_count": 1
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/4e1ec5be-1018-4580-87cd-fbcb49e669d5",
-          "doc_count": 1
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5b8eecd5-d8f1-4eab-8f08-ae88f4ee48d7",
-          "doc_count": 1
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/c9fe0e8d-dd4c-4dd5-b1f3-94568b5fdbcc",
-          "doc_count": 1
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ee3459a5-7a09-4627-92cc-0e5d27919a85",
-          "doc_count": 1
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/71918e42-5660-483f-aa07-21537b75bc34",
+          "doc_count": 101
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/7cec884a-14b2-49a4-9ff8-cabf4529593b",
-          "doc_count": 1
+          "doc_count": 96
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ee3459a5-7a09-4627-92cc-0e5d27919a85",
+          "doc_count": 42
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5655729b-9a27-4a76-a96c-683564f4012c",
+          "doc_count": 27
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/4e1ec5be-1018-4580-87cd-fbcb49e669d5",
+          "doc_count": 15
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5b8eecd5-d8f1-4eab-8f08-ae88f4ee48d7",
+          "doc_count": 5
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/1f1f5d20-8489-4c80-ac20-d6d091d4e30b",
+          "doc_count": 4
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/c9fe0e8d-dd4c-4dd5-b1f3-94568b5fdbcc",
+          "doc_count": 4
         }
       ]
     },
@@ -1320,48 +1411,88 @@
       "sum_other_doc_count": 0,
       "buckets": [
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/26abbfb5-cfef-4e3f-97dd-e22bb4c64c66",
-          "doc_count": 3
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/67543ebd-8315-4571-be96-d4d223535118",
-          "doc_count": 3
-        },
-        {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/96f3277b-8532-4b80-9880-6bd351944db6",
-          "doc_count": 3
+          "doc_count": 642
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/407a2910-a091-4451-aaff-ed9a8d5de3a5",
-          "doc_count": 2
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/26abbfb5-cfef-4e3f-97dd-e22bb4c64c66",
+          "doc_count": 173
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/48641aa2-57a6-44a3-b04c-223bc3ec153d",
-          "doc_count": 2
+          "doc_count": 156
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/8f523066-c7ea-4197-b0db-83553095e380",
-          "doc_count": 2
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/bb1b2158-73f1-4615-802f-c2b674192dc0",
+          "doc_count": 149
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/67543ebd-8315-4571-be96-d4d223535118",
+          "doc_count": 138
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/c06e5653-4018-4dc1-94ae-a29741717821",
-          "doc_count": 2
+          "doc_count": 116
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/3ebb576b-5f22-4f1b-874b-6b894c8276f1",
-          "doc_count": 1
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/407a2910-a091-4451-aaff-ed9a8d5de3a5",
+          "doc_count": 92
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/aad517cd-7e3c-42e5-bad6-706f3f5ac335",
-          "doc_count": 1
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/b1601512-73e9-4fa7-aa74-253cf3cd9257",
+          "doc_count": 92
         },
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/cf875f0d-33e6-4eb6-97f6-45c5d18a8cbf",
-          "doc_count": 1
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/2e916bb0-f2bc-4474-9698-2ad591b8b1cd",
+          "doc_count": 91
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/f2f9badd-d4f4-45d5-9e8a-ee6748d3705f",
-          "doc_count": 1
+          "doc_count": 90
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/aad517cd-7e3c-42e5-bad6-706f3f5ac335",
+          "doc_count": 88
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/3ebb576b-5f22-4f1b-874b-6b894c8276f1",
+          "doc_count": 86
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/8add80f0-9c49-4f67-afe6-e046238f7228",
+          "doc_count": 72
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/8f523066-c7ea-4197-b0db-83553095e380",
+          "doc_count": 67
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/e090dc4a-0cd3-42e7-8211-9df6805f07a7",
+          "doc_count": 65
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/cf875f0d-33e6-4eb6-97f6-45c5d18a8cbf",
+          "doc_count": 63
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/0443df40-e5f8-4df5-a9f0-d19eb60b2ffe",
+          "doc_count": 45
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/41b9c094-7d14-4853-90ed-a8ec56109474",
+          "doc_count": 44
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/4274c574-cd8a-470e-bb63-c92a801594a7",
+          "doc_count": 34
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/32a01774-5c60-49f3-9ed1-f91c9a40406c",
+          "doc_count": 32
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm-descripteur/96d61784-065d-41b6-aa39-960351bcc5a8",
+          "doc_count": 18
         }
       ]
     },
@@ -1374,20 +1505,36 @@
       "sum_other_doc_count": 0,
       "buckets": [
         {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/34c66ea5-3b28-4a1f-9cd7-623c827dc525",
-          "doc_count": 2
-        },
-        {
-          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/5c8a927b-6d39-4506-9b8b-88908a2974c3",
-          "doc_count": 2
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/807b0273-8206-420f-91f4-e0dcdd13110c",
+          "doc_count": 110
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/720a0782-03c4-46a4-a35a-e5bd71d741b8",
-          "doc_count": 1
+          "doc_count": 96
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/1500646c-46f5-4da2-b6b2-2bfa6eb9415d",
+          "doc_count": 88
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/5c8a927b-6d39-4506-9b8b-88908a2974c3",
+          "doc_count": 57
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/34c66ea5-3b28-4a1f-9cd7-623c827dc525",
+          "doc_count": 35
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/730d8bf9-3a8c-4a21-bdf3-614968c5e3cb",
-          "doc_count": 1
+          "doc_count": 14
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/66b253d4-1e05-454b-9641-4e281c11431a",
+          "doc_count": 7
+        },
+        {
+          "key": "https://vocab.ifremer.fr/scheme/SXT/odatis_centre_donnees/840271f5-c45f-46d3-9fcf-e23fcf802d71",
+          "doc_count": 7
         }
       ]
     },
@@ -1398,123 +1545,127 @@
         "translateOnLoad": true
       },
       "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 0,
+      "sum_other_doc_count": 180,
       "buckets": [
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HUMACT/",
-          "doc_count": 39
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/MTBM/",
-          "doc_count": 36
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/GEOL/",
-          "doc_count": 18
-        },
-        {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BIOINFO/",
-          "doc_count": 16
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BENTHA/",
-          "doc_count": 13
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BATHY/",
-          "doc_count": 12
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CURR/",
-          "doc_count": 12
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/INVER/",
-          "doc_count": 9
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEALVL/",
-          "doc_count": 9
+          "doc_count": 262
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SHORE/",
-          "doc_count": 7
+          "doc_count": 250
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HUMACT/",
+          "doc_count": 220
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/MTBM/",
+          "doc_count": 178
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BATHY/",
+          "doc_count": 176
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CURR/",
+          "doc_count": 175
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEATEMP/",
-          "doc_count": 5
+          "doc_count": 174
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEALVL/",
+          "doc_count": 147
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WAVES/",
-          "doc_count": 5
+          "doc_count": 125
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BENTHA/",
+          "doc_count": 115
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SAL/",
-          "doc_count": 4
+          "doc_count": 110
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOXY/",
-          "doc_count": 3
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/INVER/",
+          "doc_count": 93
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SGRAS/",
-          "doc_count": 3
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/GEOL/",
+          "doc_count": 84
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TIDES/",
-          "doc_count": 3
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/COLOUR/",
-          "doc_count": 2
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOM/",
-          "doc_count": 2
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/NUTS/",
-          "doc_count": 2
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PIGM/",
-          "doc_count": 2
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/BIOTOX/",
-          "doc_count": 1
-        },
-        {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CONT/",
-          "doc_count": 1
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HCORAL/",
+          "doc_count": 80
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FISH/",
-          "doc_count": 1
+          "doc_count": 77
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/HUMI/",
-          "doc_count": 1
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SGRAS/",
+          "doc_count": 49
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PHYTO/",
-          "doc_count": 1
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TIDES/",
+          "doc_count": 45
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SUSPMA/",
-          "doc_count": 1
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PIGM/",
+          "doc_count": 42
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/TURBID/",
-          "doc_count": 1
+          "doc_count": 42
         },
         {
           "key": "http://vocab.nerc.ac.uk/collection/OD1/current/WIND/",
-          "doc_count": 1
+          "doc_count": 42
         },
         {
-          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/ZOO/",
-          "doc_count": 1
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/DOXY/",
+          "doc_count": 39
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PRESS/",
+          "doc_count": 35
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SUSPMA/",
+          "doc_count": 33
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/PHYTO/",
+          "doc_count": 31
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/CONT/",
+          "doc_count": 29
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/SEDFLUX/",
+          "doc_count": 26
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/NUTS/",
+          "doc_count": 24
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/FLUO/",
+          "doc_count": 21
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/AIRPRES/",
+          "doc_count": 20
+        },
+        {
+          "key": "http://vocab.nerc.ac.uk/collection/OD1/current/COLOUR/",
+          "doc_count": 20
         }
       ]
     }

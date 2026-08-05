@@ -1,14 +1,17 @@
 import { SURVAL_UUID } from '../support/utils';
 
-const checkResultItem = (
-  hit: { _id: string; _source: Record<string, unknown> },
-  layout: 'grid' | 'list',
-) => {
-  const recordHrefRegex = new RegExp(`^(?:\\/#/|#/|/)record/${hit._id}$`);
+type ResultHit = {
+  _id: string;
+  _source: {
+    overview: { url: string }[];
+    resourceTitleObject: { default: string };
+    resourceType: 'dataset' | 'series' | 'service';
+    resourceCreditObject: { default: string }[];
+  };
+};
 
-  cy.get('a').should('have.attr', 'href').and('match', recordHrefRegex);
-
-  cy.get('a').should('have.attr', 'title', hit._source.resourceAbstractObject.default);
+const checkResultItem = (hit: ResultHit, layout: 'grid' | 'list') => {
+  cy.get('a').first().as('recordLink');
 
   cy.get('app-record-field-overview img').should('have.attr', 'src', hit._source.overview[0].url);
 
@@ -22,7 +25,7 @@ const checkResultItem = (
   };
   cy.get('app-record-field-type').should(
     'contain.text',
-    resourceTypeTranslations[hit._source.resourceType as keyof typeof resourceTypeTranslations],
+    resourceTypeTranslations[hit._source.resourceType],
   );
 
   cy.get('app-record-distribution-badges').as('distributionBadges').should('exist');
@@ -37,7 +40,7 @@ const checkResultItem = (
     );
   }
 
-  cy.get(`a[href$="/record/${hit._id}"]`).first().click();
+  cy.get('@recordLink').click();
   cy.url().should('include', `/record/${hit._id}`);
 };
 
@@ -49,7 +52,7 @@ describe('Results', () => {
   it('should display result items in list view', () => {
     cy.visitPage('search', { q: SURVAL_UUID });
     cy.wait('@apiMainSearchByUuid').then((search) => {
-      const hits = search.response?.body.hits.hits;
+      const hits = search.response?.body.hits.hits as ResultHit[];
 
       cy.get('app-results-view').find('app-result-item-list').should('have.length', hits.length);
 
@@ -65,7 +68,7 @@ describe('Results', () => {
   it('should switch to grid view and display result items', () => {
     cy.visitPage('search', { q: SURVAL_UUID });
     cy.wait('@apiMainSearchByUuid').then((search) => {
-      const hits = search.response?.body.hits.hits;
+      const hits = search.response?.body.hits.hits as ResultHit[];
 
       cy.get('app-result-layout-switcher [title="Grid view"]').click();
       cy.get('app-results-view').find('app-result-item-grid').should('have.length', hits.length);

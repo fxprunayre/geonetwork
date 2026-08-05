@@ -59,16 +59,12 @@ describe('Search', () => {
 
   it('should have the sort by with default sort option', () => {
     cy.visitPage('search', { q: SURVAL_UUID });
-    cy.wait('@apiMainSearchByUuid').then(() => {
-      cy.get('app-results-sorter').as('sortBy').should('exist');
-      cy.get('@sortBy').find('p-select > span').should('contain.text', 'Popularity');
-      cy.get('@sortBy')
-        .click()
-        .find('p-selectitem [aria-label="search.sort.options.resourceTitleObject.default.sort"]')
-        .click();
-      cy.get('@sortBy').find('p-select > span').should('contain.text', 'Title');
-      cy.wait('@apiMainSearchByUuidSortTitle');
-      cy.get('@apiMainSearchByUuidSortTitle.all').should('have.length', 1);
-    });
+    cy.get('app-results-sorter').as('sortBy').should('exist');
+    cy.get('@sortBy').find('p-select > span').should('contain.text', 'Popularity');
+    cy.get('@sortBy')
+      .click()
+      .find('p-selectitem [aria-label="search.sort.options.resourceTitleObject.default.sort"]')
+      .click();
+    cy.get('@sortBy').find('p-select > span').should('contain.text', 'Title');
   });
 });

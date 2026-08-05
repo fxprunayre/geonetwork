@@ -85,12 +85,14 @@ describe('Record sharing by group panel', () => {
       req.reply(settings);
     }).as('getSharingSettings');
   }
+
   describe('Modal', () => {
-    it('should open the sharing dialog and display the sharing table', () => {
+    beforeEach(() => {
       setupSharingSettings(4);
-
       openSharingDialog();
+    });
 
+    it('should open the sharing dialog and display the sharing table', () => {
       cy.get('app-record-sharing-by-group-panel').should('exist');
       cy.get('app-record-sharing-by-group-panel p-dialog').should('be.visible');
 
@@ -110,58 +112,55 @@ describe('Record sharing by group panel', () => {
   });
 
   describe('Table', () => {
-    it('should display group rows from sharing settings', () => {
-      setupSharingSettings(4);
+    describe('with four groups', () => {
+      beforeEach(() => {
+        setupSharingSettings(4);
+        openSharingDialog();
+      });
 
-      openSharingDialog();
+      it('should display group rows from sharing settings', () => {
+        cy.get('app-record-sharing-by-group-panel p-table tbody tr').should('have.length', 4);
 
-      cy.get('app-record-sharing-by-group-panel p-table tbody tr').should('have.length', 4);
+        cy.contains('tr', 'Public access').should(
+          'have.attr',
+          'style',
+          'background-color: var(--p-primary-200);',
+        );
+        cy.contains('td', 'Public access').should('exist');
+        cy.contains('tr', 'group-2')
+          .find('td')
+          .first()
+          .should('have.class', '!border-l-profile-editor');
+        cy.contains('tr', 'group-2').should(
+          'have.attr',
+          'style',
+          'background-color: var(--p-primary-100);',
+        );
+        cy.contains('td', 'group-2').should('exist');
+        cy.contains('td', 'group-3').should('exist');
+      });
 
-      cy.contains('tr', 'Public access').should(
-        'have.attr',
-        'style',
-        'background-color: var(--p-primary-200);',
-      );
-      cy.contains('td', 'Public access').should('exist');
-      cy.contains('tr', 'group-2')
-        .find('td')
-        .first()
-        .should('have.class', '!border-l-profile-editor');
-      cy.contains('tr', 'group-2').should(
-        'have.attr',
-        'style',
-        'background-color: var(--p-primary-100);',
-      );
-      cy.contains('td', 'group-2').should('exist');
-      cy.contains('td', 'group-3').should('exist');
-    });
+      it('should show operation checkboxes for each group row', () => {
+        const numberOfGroups = 4;
+        const numberOfOperations = 5;
 
-    it('should show operation checkboxes for each group row', () => {
-      const numberOfGroups = 4;
-      const numberOfOperations = 5;
-      setupSharingSettings(numberOfGroups);
+        cy.get('app-record-sharing-by-group-panel p-table p-checkbox').should(
+          'have.length',
+          numberOfGroups * numberOfOperations - 2,
+        );
+      });
 
-      openSharingDialog();
+      it('should display the border color corresponding to user profile', () => {
+        cy.contains('tr', 'group-2')
+          .find('td')
+          .first()
+          .should('have.class', '!border-l-profile-editor');
 
-      // Reserved and recordPrivilege group does not allow edit
-      cy.get('app-record-sharing-by-group-panel p-table p-checkbox').should(
-        'have.length',
-        numberOfGroups * numberOfOperations - 2,
-      );
-    });
-
-    it('should display the border color corresponding to user profile', () => {
-      setupSharingSettings(4);
-      openSharingDialog();
-
-      // group-2 row has userProfiles: ['Editor', 'Reviewer'], it should have border-profile-editor
-      cy.contains('tr', 'group-2')
-        .find('td')
-        .first()
-        .should('have.class', '!border-l-profile-editor');
-
-      // group-3 row has userProfiles: [], it should have border-transparent (default)
-      cy.contains('tr', 'group-3').find('td').first().should('have.class', '!border-l-transparent');
+        cy.contains('tr', 'group-3')
+          .find('td')
+          .first()
+          .should('have.class', '!border-l-transparent');
+      });
     });
 
     it('should show filter input only when more than 10 groups (not reserved)', () => {
@@ -174,8 +173,8 @@ describe('Record sharing by group panel', () => {
       cy.get('@headerCells').find('input[placeholder="Type to search"]').as('filterInput');
       cy.get('@filterInput').should('exist');
       cy.get('@filterInput').type('group-11');
-      cy.get('app-record-sharing-by-group-panel p-table tbody tr').should('have.length', 3);
-      cy.get('app-record-sharing-by-group-panel p-table tbody tr td').should(
+      cy.get('app-record-sharing-by-group-panel p-table tbody tr:visible').should('have.length', 3);
+      cy.get('app-record-sharing-by-group-panel p-table tbody tr:visible td').should(
         'contain.text',
         'group-11',
       );
@@ -194,53 +193,48 @@ describe('Record sharing by group panel', () => {
   });
 
   describe('Actions', () => {
-    it('should check all checkboxes on double click on row label', () => {
-      setupSharingSettings(4);
+    describe('with four groups', () => {
+      beforeEach(() => {
+        setupSharingSettings(4);
+        openSharingDialog();
+      });
 
-      openSharingDialog();
+      it('should check all checkboxes on double click on row label', () => {
+        cy.contains('tr', 'group-3').dblclick();
+        cy.contains('tr', 'group-3')
+          .parent('tr')
+          .find('p-checkbox')
+          .should('have.class', 'p-highlight');
+      });
 
-      cy.contains('tr', 'group-3').dblclick();
-      cy.contains('tr', 'group-3')
-        .parent('tr')
-        .find('p-checkbox')
-        .should('have.class', 'p-highlight');
-    });
+      it('should save sharing settings on confirm and close the dialog', () => {
+        cy.contains('p-dialog p-button button', 'Save').should('be.disabled');
 
-    it('should save sharing settings on confirm and close the dialog', () => {
-      setupSharingSettings(4);
+        cy.get('app-record-sharing-by-group-panel p-table tbody tr')
+          .contains('td', 'group-3')
+          .parent('tr')
+          .find('p-checkbox .p-checkbox-input')
+          .click({ multiple: true, force: true });
 
-      openSharingDialog();
+        cy.contains('p-dialog p-button button', 'Save').should('not.be.disabled');
 
-      cy.contains('p-dialog p-button button', 'Save').should('be.disabled');
+        cy.contains('p-dialog p-button', 'Save')
+          .click()
+          .then(() => {
+            cy.wait('@saveSharingSettings');
+            cy.get('@saveSharingSettings.all').should('have.length', 1);
+            cy.get('app-record-sharing-by-group-panel p-dialog').should('not.exist');
+          });
+      });
 
-      cy.get('app-record-sharing-by-group-panel p-table tbody tr')
-        .contains('td', 'group-3')
-        .parent('tr')
-        .find('p-checkbox .p-checkbox-input')
-        .click({ multiple: true, force: true });
-
-      cy.contains('p-dialog p-button button', 'Save').should('not.be.disabled');
-
-      cy.contains('p-dialog p-button', 'Save')
-        .click()
-        .then(() => {
-          cy.wait('@saveSharingSettings');
-          cy.get('@saveSharingSettings.all').should('have.length', 1);
-          cy.get('app-record-sharing-by-group-panel p-dialog').should('not.exist');
-        });
-    });
-
-    it('should close the dialog on cancel without saving', () => {
-      setupSharingSettings(4);
-
-      openSharingDialog();
-
-      cy.contains('p-dialog p-button', 'Cancel')
-        .click()
-        .then(() => {
-          cy.get('@saveSharingSettings.all').should('have.length', 0);
-          cy.get('app-record-sharing-by-group-panel p-dialog').should('not.exist');
-        });
+      it('should close the dialog on cancel without saving', () => {
+        cy.contains('p-dialog p-button', 'Cancel')
+          .click()
+          .then(() => {
+            cy.get('@saveSharingSettings.all').should('have.length', 0);
+            cy.get('app-record-sharing-by-group-panel p-dialog').should('not.exist');
+          });
+      });
     });
 
     it('should display an error message when loading sharing settings fails', () => {

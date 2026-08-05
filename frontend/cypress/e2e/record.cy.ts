@@ -6,68 +6,72 @@ describe('Record page', () => {
     cy.intercept('GET', `**/records/${SURVAL_UUID}/permalink`).as('getPermalink');
   });
 
+  function visitRecord(path = SURVAL_UUID) {
+    cy.visitPage(`record/${path}`);
+    cy.wait('@apiMainSearchGetRecord');
+  }
+
   describe('Header', () => {
-    it('should display the record menu with share and download options', () => {
-      cy.visitPage(`record/${SURVAL_UUID}`);
-      cy.wait('@apiMainSearchGetRecord');
-      cy.wait('@getPermalink');
-      cy.get('app-record-menu button')
-        .click()
-        .then(() => {
-          cy.get('a[title="Permalink to the record"]')
-            .should('have.text', 'Permalink')
-            .should('be.visible')
-            .should('have.attr', 'href')
-            .and('include', `https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea`);
+    describe('when viewing the record page directly', () => {
+      beforeEach(() => {
+        visitRecord();
+      });
 
-          cy.get('a[title="Download the record in XML format"]')
-            .should('have.text', 'Metadata (XML)')
-            .should('be.visible')
-            .should('have.attr', 'href')
-            .and('include', `/srv/api/records/${SURVAL_UUID}/formatters/xml`);
-        });
-    });
+      it('should display the record menu with share and download options', () => {
+        cy.wait('@getPermalink');
+        cy.get('app-record-menu button')
+          .click()
+          .then(() => {
+            cy.get('a[title="Permalink to the record"]')
+              .should('have.text', 'Permalink')
+              .should('be.visible')
+              .should('have.attr', 'href')
+              .and('include', `https://doi.org/10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea`);
 
-    it('should display the record header information', () => {
-      cy.visitPage(`record/${SURVAL_UUID}`);
-      cy.wait('@apiMainSearchGetRecord');
+            cy.get('a[title="Download the record in XML format"]')
+              .should('have.text', 'Metadata (XML)')
+              .should('be.visible')
+              .should('have.attr', 'href')
+              .and('include', `/srv/api/records/${SURVAL_UUID}/formatters/xml`);
+          });
+      });
 
-      cy.get('app-record-view-title h1').should('contain', 'Données par paramètre');
+      it('should display the record header information', () => {
+        cy.get('app-record-view-title h1').should('contain', 'Données par paramètre');
 
-      cy.get('app-record-view-title app-record-field-type')
-        .find('.p-chip span')
-        .first()
-        .should('contain', 'Dataset');
+        cy.get('app-record-view-title app-record-field-type')
+          .find('.p-chip span')
+          .first()
+          .should('contain', 'Dataset');
 
-      cy.get('app-show-more-toggle p').should(
-        'contain',
-        'Le produit Surval "Données par paramètre" met à disposition',
-      );
-
-      // last date should be the value of app-record-field-resource-last-update
-      cy.get('app-record-field-dates').as('datesField');
-      cy.get('@datesField')
-        .find('div:has(> span)')
-        .last()
-        .then((dateDiv) => {
-          // Only get the date part
-          const lastUpdateText = dateDiv.text().replace(dateDiv.find('span').text(), '').trim();
-
-          cy.get('app-record-field-resource-last-update').should('contain', lastUpdateText);
-        });
-
-      cy.get('app-record-field-doi a').should(
-        'contain',
-        '10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea',
-      );
-
-      cy.get('app-record-harvester-logo img')
-        .should('have.attr', 'alt', 'Catalogue logo')
-        .should(
-          'have.attr',
-          'src',
-          '/geonetwork/srv/api/sources/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3/logo',
+        cy.get('app-show-more-toggle p').should(
+          'contain',
+          'Le produit Surval "Données par paramètre" met à disposition',
         );
+
+        cy.get('app-record-field-dates').as('datesField');
+        cy.get('@datesField')
+          .find('div:has(> span)')
+          .last()
+          .then((dateDiv) => {
+            const lastUpdateText = dateDiv.text().replace(dateDiv.find('span').text(), '').trim();
+
+            cy.get('app-record-field-resource-last-update').should('contain', lastUpdateText);
+          });
+
+        cy.get('app-record-field-doi a').should(
+          'contain',
+          '10.12770/cf5048f6-5bbf-4e44-ba74-e6f429af51ea',
+        );
+
+        cy.get('app-record-harvester-logo img')
+          .should('have.attr', 'alt', 'Catalogue logo')
+          .should(
+            'have.attr',
+            'src',
+            '/geonetwork/srv/api/sources/b08fe709-1ced-4a07-8edf-06aa6ccdf2e3/logo',
+          );
+      });
     });
 
     it('should navigate back to search results', () => {
@@ -120,14 +124,12 @@ describe('Record page', () => {
 
   describe('Content', () => {
     it('should set the route to default tab if tab value is invalid', () => {
-      cy.visitPage(`record/${SURVAL_UUID}/invalid-tab`);
-      cy.wait('@apiMainSearchGetRecord');
+      visitRecord(`${SURVAL_UUID}/invalid-tab`);
       cy.url().should('include', `/record/${SURVAL_UUID}`);
     });
 
     it('should display the about tab content', () => {
-      cy.visitPage(`record/${SURVAL_UUID}`);
-      cy.wait('@apiMainSearchGetRecord');
+      visitRecord();
 
       // Check tab description is active
       cy.get('p-tablist p-tab[value="about"]').should('have.attr', 'aria-selected', 'true');

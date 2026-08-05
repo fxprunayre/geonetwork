@@ -3,6 +3,8 @@ import { SURVAL_UUID } from '../support/utils';
 describe('Record page editing', () => {
   beforeEach(() => {
     cy.initApp('administrator');
+    cy.visitPage(`record/${SURVAL_UUID}`);
+    cy.wait(['@apiMainSearchGetRecord', '@apiMe']);
 
     cy.window().then((win) => {
       cy.stub(win, 'open').as('windowOpen');
@@ -10,8 +12,6 @@ describe('Record page editing', () => {
   });
 
   it('should display the edit button linking to GN4 and delete action', () => {
-    cy.visitPage(`record/${SURVAL_UUID}`);
-    cy.wait(['@apiMainSearchGetRecord', '@apiMe']);
     cy.get('app-record-menu button')
       .click()
       .then(() => {

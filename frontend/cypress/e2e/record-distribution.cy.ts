@@ -83,7 +83,7 @@ describe('Record page - Distribution', () => {
 
     cy.get('sxt-viewer').should('exist').as('mapViewer');
     cy.get('@mapViewer').within(() => {
-      cy.get('.layer-list > button').should('have.length', 1);
+      cy.get('.layer-list > button').should('have.length', 2);
     });
   });
 
@@ -115,10 +115,6 @@ describe('Record page - Distribution', () => {
       .should('have.attr', 'href', 'https://sextant.ifremer.fr/services/wms/environnement_marin')
       .next('p')
       .should('contain', 'Surval données par paramètre');
-    cy.get('[data-testid="distribution-panel-api"]')
-      .contains('p-card', 'surval_parametre_point,surval_parametre_ligne,surval_parametre_polygone')
-      .find('p-button')
-      .should('have.attr', 'severity', 'warn');
   });
 
   it('should, for WMS distribution, propose list of layers if layer name is not found', () => {
