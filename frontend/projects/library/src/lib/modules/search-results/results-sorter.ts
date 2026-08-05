@@ -1,10 +1,11 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidArrowDownShortWide, faSolidArrowUpShortWide } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Select } from 'primeng/select';
-import { SearchBase } from '../../search/search-base/search-base';
+import { SearchService } from '../search/search-service';
+import { SearchStoreType } from '../search/search-store';
 
 interface SortOption {
   label: string;
@@ -18,7 +19,11 @@ interface SortOption {
   templateUrl: './results-sorter.html',
   standalone: true,
 })
-export class ResultsSorterComponent extends SearchBase {
+export class ResultsSorterComponent {
+  scope = input<string>('main');
+  searchService = inject(SearchService);
+  search = computed(() => this.searchService.getSearch<SearchStoreType>(this.scope()));
+
   sortOptions = computed<SortOption[]>(() =>
     this.search()
       .sort()

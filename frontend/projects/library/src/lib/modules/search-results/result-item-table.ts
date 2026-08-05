@@ -4,9 +4,9 @@ import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
 import { TableModule } from 'primeng/table';
-import { TimeAgoPipe } from '../../../shared/time-ago.pipe';
-import { RecordFieldTitle, RecordFieldType } from '../../record';
-import { RECORD_ROUTE_PATH } from '../../search/search-constant';
+import { TimeAgoPipe } from '../../shared/time-ago.pipe';
+import { RecordFieldTitle, RecordFieldType } from '../record';
+import { RECORD_ROUTE_PATH } from '../search/search-constant';
 
 @Component({
   selector: 'app-result-item-table',

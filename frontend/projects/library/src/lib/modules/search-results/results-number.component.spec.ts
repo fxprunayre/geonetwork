@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { provideMockTranslateService } from '../../../shared/translate-service.mock';
-import { provideMockSearchService } from '../../search/search-store.mock';
+import { provideMockTranslateService } from '../../shared/translate-service.mock';
+import { provideMockSearchService } from '../search/search-store.mock';
 import { ResultsNumberComponent } from './results-number.component';
 
 describe('ResultsNumberComponent', () => {

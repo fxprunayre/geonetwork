@@ -20,9 +20,9 @@ import {
   RecordFieldResourceLastUpdate,
   RecordFieldTitle,
   RecordFieldType,
-} from '../../record';
-import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
-import { RECORD_ROUTE_PATH } from '../../search/search-constant';
+} from '../record';
+import { RecordDistributionBadges } from '../record-distributions/record-distribution-badges/record-distribution-badges';
+import { RECORD_ROUTE_PATH } from '../search/search-constant';
 
 @Component({
   selector: 'app-result-item-list',

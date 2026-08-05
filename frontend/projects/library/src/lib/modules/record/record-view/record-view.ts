@@ -30,7 +30,7 @@ import { RecordViewContent } from './record-view-content';
     @if (recordResource.isLoading()) {
       <app-record-view-skeleton />
     } @else if (recordStatus()) {
-      <div class="p-8 pb-32 h-[450px]">
+      <div class="p-8 pb-32 h-112.5">
         <app-alert-panel
           severity="error"
           icon="faSolidLock"

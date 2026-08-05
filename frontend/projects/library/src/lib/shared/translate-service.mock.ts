@@ -23,6 +23,7 @@ export function provideMockTranslateService(): Provider {
       },
       instant: (key: string) => translations[key.toString()] || key.toString(),
       getParsedResult: (translations: unknown, key: unknown, _interpolateParams?: unknown) => key,
+      addLangs: (_langs: string[]) => undefined,
       use: (_lang: string) => of(undefined),
       getCurrentLang: () => 'en',
       onLangChange: mockEvent,

@@ -2,6 +2,7 @@ import { signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IndexRecord } from 'gn-api-client';
 import { Observable, of } from 'rxjs';
+import { vi } from 'vitest';
 import { SearchService } from './search-service';
 import { SearchStoreType, initialState } from './search-store';
 import { SearchFilterParameters, SearchRequestPageParameters } from './search-store.model';
@@ -15,12 +16,14 @@ export const createMockSearchStore = (): SearchStoreType => {
     id: signal(initialState.id),
     routing: signal(initialState.routing),
     searchQuery: signal(initialState.searchQuery),
+    filter: signal(initialState.filter),
     filters: signal({}),
     results: signal(mockSearchResults as IndexRecord[]), // Mock the results signal
     totalCount: signal(mockTotalCount), // Mock the total count
     pageSize: signal(initialState.pageSize),
     currentPage: signal(initialState.currentPage),
     isLoading: signal(initialState.isLoading),
+    layout: signal(initialState.layout),
     aggregations: signal({
       resourceType: {
         terms: {
@@ -63,11 +66,14 @@ export const createMockSearchStore = (): SearchStoreType => {
     clearFilter: vi.fn(),
     removeFilter: vi.fn(),
     reset: vi.fn(),
+    setFilter: vi.fn(),
     more: vi.fn(),
     setPage: vi.fn(),
     next: vi.fn(),
     previous: vi.fn(),
     setRouting: vi.fn(),
+    setLayout: vi.fn(),
+    setLanguage: vi.fn(),
     subscribeToRouteChange: vi.fn(),
     setSort: vi.fn(),
     hasMoreTerms: signal((_keyName: string) => false),
@@ -87,11 +93,20 @@ export const createMockSearchStore = (): SearchStoreType => {
 export function provideMockSearchService(mockStore?: SearchStoreType) {
   const mockSearchService = {
     getSearch: vi.fn().mockName('SearchService.getSearch'),
+    register: vi.fn().mockName('SearchService.register'),
+    autocompleteSearch: vi.fn().mockName('SearchService.autocompleteSearch'),
+    extractSpatialEnvelopeFilter: vi.fn().mockName('SearchService.extractSpatialEnvelopeFilter'),
+    applySpatialEnvelopeFilter: vi.fn().mockName('SearchService.applySpatialEnvelopeFilter'),
+    removeSpatialEnvelopeFilters: vi.fn().mockName('SearchService.removeSpatialEnvelopeFilters'),
     search: vi.fn().mockName('SearchService.search'),
     page: vi.fn().mockName('SearchService.page'),
     getSupportedDatasource: vi.fn().mockName('SearchService.getSupportedDatasource'),
   };
   mockSearchService.getSearch.mockReturnValue(mockStore ?? createMockSearchStore());
+  mockSearchService.autocompleteSearch.mockReturnValue(of([]));
+  mockSearchService.extractSpatialEnvelopeFilter.mockReturnValue(null);
+  mockSearchService.applySpatialEnvelopeFilter.mockImplementation((filter) => filter);
+  mockSearchService.removeSpatialEnvelopeFilters.mockImplementation((filter) => filter);
   mockSearchService.search.mockReturnValue(
     of({ results: mockSearchResults, aggregations: {}, totalCount: mockTotalCount }),
   );
@@ -101,3 +116,5 @@ export function provideMockSearchService(mockStore?: SearchStoreType) {
   mockSearchService.getSupportedDatasource.mockReturnValue([]);
   return { provide: SearchService, useValue: mockSearchService };
 }
+
+export const createMockSearchService = provideMockSearchService;
