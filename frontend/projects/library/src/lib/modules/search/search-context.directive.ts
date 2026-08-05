@@ -1,9 +1,10 @@
 import { Directive, effect, inject, input, model, OnInit, untracked } from '@angular/core';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
-import { DEFAULT_LANGUAGE, DEFAULT_SEARCH_LAYOUT_OPTIONS } from '../config/gn-constants';
 import { SearchAppLayout } from '../config/model/gnConfig';
+import { DEFAULT_LANGUAGE } from '../i18n/config/i18n-config';
 import { AggregationStore } from './aggregation-store';
+import { DEFAULT_SEARCH_LAYOUT_OPTIONS } from './config/search-config';
 import { FilterStore } from './filter-store';
 import { SearchRouteSyncService } from './search-route-sync.service';
 import { SearchService } from './search-service';

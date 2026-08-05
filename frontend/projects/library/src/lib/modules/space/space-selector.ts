@@ -8,8 +8,8 @@ import { Button } from 'primeng/button';
 import { Popover } from 'primeng/popover';
 import { ConfigService } from '../config/config-service';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
-import { DEFAULT_SPACE } from '../config/gn-constants';
 import { TranslationsService } from '../i18n/translations-service';
+import { DEFAULT_SPACE } from './config/space-config';
 
 @Component({
   selector: 'app-space-selector',

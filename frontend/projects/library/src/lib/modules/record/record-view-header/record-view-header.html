@@ -24,7 +24,9 @@
       <div class="grow flex flex-col gap-1">
         <app-record-field-resource-last-update [record]="record()" />
         <!--<app-record-field-resource-edition [record]="record()" />-->
-        <app-record-versions [record]="record()" (recordClick)="recordClick.emit($event)" />
+        @if (showVersionWidgets()) {
+          <app-record-versions [record]="record()" (recordClick)="recordClick.emit($event)" />
+        }
         <app-record-field-doi [record]="record()" />
       </div>
 

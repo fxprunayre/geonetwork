@@ -1,13 +1,11 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { DEFAULT_HEADER_APP_CONFIGURATION } from '../i18n/config/i18n-config';
+import { DEFAULT_SHARING_APP_CONFIGURATION } from '../sharing/config/sharing-config';
+import { DEFAULT_SPACE } from '../space/config/space-config';
 import { migrateGn4Config } from './config-gn4.loader';
 import { migrateSextantConfig } from './config-sextant.loader';
-import {
-  DEFAULT_APPS_CONFIGURATION,
-  DEFAULT_HEADER_APP_CONFIGURATION,
-  DEFAULT_SHARING_APP_CONFIGURATION,
-  DEFAULT_SPACE,
-} from './gn-constants';
+import { DEFAULT_APPS_CONFIGURATION } from './gn-constants';
 import { SEXTANT_GN4_UI_CONFIGURATION } from './gn4constants';
 import { UiConfiguration } from './model/gn4config';
 import { AppsConfiguration } from './model/gnConfig';

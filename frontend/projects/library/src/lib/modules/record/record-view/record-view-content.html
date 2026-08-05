@@ -170,9 +170,11 @@
         <p-tab value="citation" class="text-lg">{{
           'record.view.section.citation' | translate
         }}</p-tab>
-        <p-tab value="discussions" class="text-lg">{{
-          'record.view.section.discussions' | translate
-        }}</p-tab>
+        @if (showDiscussionTab()) {
+          <p-tab value="discussions" class="text-lg">{{
+            'record.view.section.discussions' | translate
+          }}</p-tab>
+        }
       </p-tablist>
 
       <p-tabpanels>
@@ -302,9 +304,11 @@
           <app-record-citation [uuid]="record.uuid!" [format]="'html'"></app-record-citation>
         </p-tabpanel>
 
-        <p-tabpanel value="discussions">
-          <app-feedback-panel [record]="record" />
-        </p-tabpanel>
+        @if (showDiscussionTab()) {
+          <p-tabpanel value="discussions">
+            <app-feedback-panel [record]="record" />
+          </p-tabpanel>
+        }
       </p-tabpanels>
     </p-tabs>
   </div>

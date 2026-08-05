@@ -10,7 +10,7 @@ import { Button, ButtonIcon } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { Checkbox } from 'primeng/checkbox';
 import { Tooltip } from 'primeng/tooltip';
-import { CARD_LINES_1, CARD_LINES_2 } from '../../config/gn-constants';
+import { CARD_LINES_1, CARD_LINES_2 } from '../../config/theme-card-lines';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchFilterChange } from '../../search/search-store.model';
 import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';

@@ -6,7 +6,7 @@ import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import {
   MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
   MapLayerDisplayTarget,
-} from '../config/gn-constants';
+} from '../record/config/record-config';
 import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../search/search-constant';
 
 export interface Gn4MapCommand {

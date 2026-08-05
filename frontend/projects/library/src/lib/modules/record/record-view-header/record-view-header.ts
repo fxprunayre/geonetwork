@@ -1,7 +1,8 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import { MarkdownPipe } from 'ngx-markdown';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldDoi } from '../record-field-doi/record-field-doi';
 import { RecordFieldOverviewComponent } from '../record-field-overview/record-field-overview.component';
@@ -26,6 +27,12 @@ import { RecordVersions } from '../record-versions/record-versions';
   templateUrl: './record-view-header.html',
 })
 export class RecordViewHeader extends RecordFieldBase {
+  appConfiguration = inject(APPLICATION_CONFIGURATION);
+
+  showVersionWidgets = computed(
+    () => this.appConfiguration().config?.apps?.record?.showVersionWidgets ?? true,
+  );
+
   vocabularies = input<string[]>([]);
   recordClick = output<string>();
 }

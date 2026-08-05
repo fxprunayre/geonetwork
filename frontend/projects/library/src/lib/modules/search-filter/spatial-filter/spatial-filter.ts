@@ -33,16 +33,16 @@ import VectorSource from 'ol/source/Vector';
 import { ButtonModule } from 'primeng/button';
 import { Message } from 'primeng/message';
 import { TooltipModule } from 'primeng/tooltip';
+import { DEFAULT_MAP_CONTEXT } from '../../data/config/map-config';
+import { SearchBase } from '../../search/search-base/search-base';
+import { SearchMapOverlayService } from '../../search/search-map-overlay.service';
+import { SpatialBBox } from '../../search/search-spatial.model';
 import {
-  DEFAULT_MAP_CONTEXT,
   DEFAULT_SPATIAL_FILTER_BBOX_LAYER_STYLE,
   DEFAULT_SPATIAL_FILTER_DRAW_LAYER_STYLE,
   DEFAULT_SPATIAL_FILTER_HOVER_LAYER_STYLE,
   DEFAULT_SPATIAL_FILTER_LAYER_STYLE,
-} from '../../config/gn-constants';
-import { SearchBase } from '../../search/search-base/search-base';
-import { SearchMapOverlayService } from '../../search/search-map-overlay.service';
-import { SpatialBBox } from '../../search/search-spatial.model';
+} from './config/spatial-filter-style-config';
 
 @Component({
   selector: 'app-spatial-filter',

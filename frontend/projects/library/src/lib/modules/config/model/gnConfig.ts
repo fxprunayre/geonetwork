@@ -1,6 +1,6 @@
 import { Preset } from '@primeuix/themes/types';
 import { elasticsearch } from 'gn-api-client';
-import type { MapLayerDisplayTarget } from '../gn-constants';
+import type { MapLayerDisplayTarget } from '../../record/config/record-config';
 import { DistributionConfig } from './gn4config';
 
 export interface AppsConfiguration {
@@ -86,4 +86,6 @@ export interface RecordDetailsApp extends App {
   mainThesaurus?: string[];
   mapLayerDisplayTarget?: MapLayerDisplayTarget;
   coverageSpatialDisplayType?: 'image' | 'dynamicMap';
+  showDiscussionTab?: boolean;
+  showVersionWidgets?: boolean;
 }

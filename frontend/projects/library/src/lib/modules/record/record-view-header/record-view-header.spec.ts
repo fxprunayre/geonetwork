@@ -1,6 +1,9 @@
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MarkdownService } from 'ngx-markdown';
 import { provideMockTranslateService } from '../../../shared/translate-service.mock';
+import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { DEFAULT_TEST_CONFIG } from '../../config/fixtures';
 import { RecordViewHeader } from './record-view-header';
 
 describe('RecordViewHeader', () => {
@@ -12,6 +15,7 @@ describe('RecordViewHeader', () => {
       imports: [RecordViewHeader],
       providers: [
         provideMockTranslateService(),
+        { provide: APPLICATION_CONFIGURATION, useValue: signal(DEFAULT_TEST_CONFIG) },
         {
           provide: MarkdownService,
           useValue: {

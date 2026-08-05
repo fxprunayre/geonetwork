@@ -29,16 +29,16 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import {
-  MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
-  MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
-} from '../../config/gn-constants';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
 import { AssociatedPanel } from '../../record-associations/associated-panel/associated-panel';
 import { RecordDistributionFormat } from '../../record-distributions/record-distribution-format/record-distribution-format';
 import { RecordDistributionPanel } from '../../record-distributions/record-distribution-panel/record-distribution-panel';
 import { RECORD_ROUTE_PATH } from '../../search/search-constant';
+import {
+  MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
+  MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
+} from '../config/record-config';
 import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
 import { RecordCitation } from '../record-citation/record-citation';
 import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
@@ -161,6 +161,10 @@ export class RecordViewContent {
         this.hasWmsLink()) ||
       this.hasDatavizLink() ||
       !!this.record()?.info?.hasDataModel,
+  );
+
+  showDiscussionTab = computed(
+    () => this.appConfiguration().config?.apps?.record?.showDiscussionTab ?? true,
   );
 
   dataAccessSectionLabelKey = computed(() => {

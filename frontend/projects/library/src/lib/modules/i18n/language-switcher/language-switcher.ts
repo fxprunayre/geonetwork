@@ -5,8 +5,8 @@ import { faSolidLanguage } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Select } from 'primeng/select';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { DEFAULT_LANGUAGE } from '../../config/gn-constants';
 import { I18nApp } from '../../config/model/gnConfig';
+import { DEFAULT_LANGUAGE } from '../config/i18n-config';
 
 interface Language {
   iso3code: string;

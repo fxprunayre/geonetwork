@@ -14,7 +14,7 @@ import { Link } from 'gn-api-client';
 import { Button } from 'primeng/button';
 import { SplitButton } from 'primeng/splitbutton';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB } from '../../config/gn-constants';
+import { MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB } from '../../record/config/record-config';
 import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
 import { MapService } from '../map-service';
 

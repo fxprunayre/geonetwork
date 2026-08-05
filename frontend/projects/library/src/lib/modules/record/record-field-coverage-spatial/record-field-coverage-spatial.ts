@@ -23,7 +23,8 @@ import { transformExtent } from 'ol/proj';
 import Style from 'ol/style/Style';
 import { createThemeAwareVectorLayerStyle } from '../../../shared/map-layer-style';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { DEFAULT_MAP_CONTEXT, DEFAULT_SPACE } from '../../config/gn-constants';
+import { DEFAULT_SPACE } from '../../config/gn-constants';
+import { DEFAULT_MAP_CONTEXT } from '../../data/config/map-config';
 import { RecordFieldBase } from '../record-field-base/record-field-base';
 import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordinate/record-field-coverage-coordinate';
 

@@ -15,12 +15,10 @@ import { IndexRecord, Link } from 'gn-api-client';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
 import { SelectButton } from 'primeng/selectbutton';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import {
-  DEFAULT_MAP_CONTEXT,
-  MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
-} from '../../config/gn-constants';
+import { MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB } from '../../config/gn-constants';
 import { Gn4MapCommand } from '../../record-distributions/map-service';
 import { DataModelPanel } from '../../record/datamodel/data-model-panel/data-model-panel';
+import { DEFAULT_MAP_CONTEXT } from '../config/map-config';
 import { DatasourceSelect } from '../datasource-select/datasource-select';
 import { Datasource } from '../datasource.model';
 import { ExploreDatavizPanel } from '../dataviz-panel/dataviz-panel';

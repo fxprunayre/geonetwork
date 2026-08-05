@@ -2,9 +2,8 @@ import { elasticsearch } from 'gn-api-client';
 import {
   DEFAULT_RECORD_DOWNLOAD_PROTOCOLS,
   DEFAULT_RECORD_VIEW_PROTOCOLS,
-  INSPIRE_AGGREGATION,
-  RESOURCE_TYPE_AGGREGATION,
-} from './gn-constants';
+} from '../record/config/record-config';
+import { INSPIRE_AGGREGATION, RESOURCE_TYPE_AGGREGATION } from '../search/config/search-config';
 import { UiConfiguration } from './model/gn4config';
 import { SextantLegacyFacet } from './model/sextantConfig';
 
@@ -729,6 +728,27 @@ const SEXTANT_LEGACY_FACET_MAPPING: Record<
   },
 };
 
+type MutableFacetEntry = {
+  meta?: {
+    collapsed?: boolean;
+    labels?: unknown;
+    orderByTranslation?: boolean;
+    thesaurus?: string;
+    translateOnLoad?: boolean;
+    displayFilter?: boolean;
+    filterByTranslation?: boolean;
+    caseInsensitiveInclude?: boolean;
+    [key: string]: unknown;
+  };
+  terms?: {
+    include?: string;
+    exclude?: string;
+    order?: { _key: 'asc' | 'desc' };
+    [key: string]: unknown;
+  };
+  [key: string]: unknown;
+};
+
 /**
  * Converts a single legacy Sextant v6 facet descriptor into an ES-compatible
  * aggregation entry and merges it into `esFacetConfig`.
@@ -764,8 +784,10 @@ function migrateSextantFacetConfig(
 
     const facetName = Object.keys(esFacetTemplate)[0];
     // Deep-clone so we don't mutate the template
-    const esFacet: Record<string, any> = {
-      [facetName]: { ...esFacetTemplate[facetName] },
+    const esFacet: Record<string, MutableFacetEntry> = {
+      [facetName]: {
+        ...(esFacetTemplate[facetName] as unknown as Record<string, unknown>),
+      },
     };
 
     // Ensure meta exists
