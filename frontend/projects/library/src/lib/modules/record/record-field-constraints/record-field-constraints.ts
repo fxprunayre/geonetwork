@@ -4,7 +4,17 @@ import { RecordFieldBase } from '../base';
 @Component({
   selector: 'app-record-field-constraints',
   imports: [],
-  templateUrl: 'record-field-constraints.html',
+  template: `
+    @for (constraint of constraints(); track $index) {
+      <p class="leading-relaxed">
+        @if (constraint.link) {
+          <a [href]="constraint.link" target="_blank">{{ constraint.default }}</a>
+        } @else {
+          {{ constraint.default }}
+        }
+      </p>
+    }
+  `,
 })
 export class RecordFieldConstraints extends RecordFieldBase {
   type = input<

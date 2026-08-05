@@ -1,9 +1,0 @@
-@for (constraint of constraints(); track $index) {
-  <p class="leading-relaxed">
-    @if (constraint.link) {
-      <a [href]="constraint.link" target="_blank">{{ constraint.default }}</a>
-    } @else {
-      {{ constraint.default }}
-    }
-  </p>
-}

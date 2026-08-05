@@ -4,7 +4,11 @@ import { RecordFieldBase } from '../base';
 @Component({
   selector: 'app-record-field-title',
   imports: [],
-  templateUrl: './record-field-title.html',
+  template: `
+    <span [title]="title()" [class]="class()">
+      {{ title() }}
+    </span>
+  `,
 })
 export class RecordFieldTitle extends RecordFieldBase {
   title = computed(() => {

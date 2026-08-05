@@ -5,7 +5,11 @@ import { AggregationsPanel, SpatialFilterComponent } from 'gn-library';
 
 @Component({
   selector: 'app-search-filters',
-  templateUrl: './search-filters.html',
+  template: `
+    <!--<app-active-filters></app-active-filters>-->
+    <app-spatial-filter></app-spatial-filter>
+    <app-aggregations-panel></app-aggregations-panel>
+  `,
   standalone: true,
   imports: [FormsModule, CommonModule, AggregationsPanel, SpatialFilterComponent],
 })

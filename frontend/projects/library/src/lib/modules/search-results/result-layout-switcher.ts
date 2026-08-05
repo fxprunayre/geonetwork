@@ -12,7 +12,29 @@ import { SearchStoreType } from '../search/search-store';
   selector: 'app-result-layout-switcher',
   standalone: true,
   imports: [FormsModule, NgIcon, SelectButton, TranslatePipe],
-  templateUrl: './result-layout-switcher.html',
+  template: `
+    @if (search().hasResults()) {
+      <p-selectButton
+        [options]="options()"
+        [ngModel]="layout()"
+        (ngModelChange)="setLayout($event)"
+        [allowEmpty]="false"
+      >
+        <ng-template let-item #item>
+          <ng-icon
+            [title]="'results.layout.' + item | translate"
+            [name]="
+              item === 'list'
+                ? 'faSolidList'
+                : item === 'grid'
+                  ? 'faSolidTableCellsLarge'
+                  : 'faSolidTable'
+            "
+          />
+        </ng-template>
+      </p-selectButton>
+    }
+  `,
   viewProviders: [provideIcons({ faSolidList, faSolidTableCellsLarge, faSolidTable })],
 })
 export class ResultLayoutSwitcher {

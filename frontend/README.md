@@ -382,6 +382,15 @@ Ongoing PR to improve GeoNetwork Open API documentation:
 
 
 
+### Component Templates
+
+Template placement follows a simple rule:
+
+* Use inline templates for small leaf or utility components where the markup is short, stable, and tightly coupled to a few local bindings.
+* Keep a separate `.html` file for components with larger layout structure, multiple branches, many child components, or templates that are likely to grow.
+
+In practice, inline templates are preferred for wrappers, counters, badges, and other compact UI helpers. External templates are preferred for orchestrators, result cards, panels, tables, and record/search views.
+
 
 # Deployment guide
 
