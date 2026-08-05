@@ -22,6 +22,7 @@ import {
   simpleZenodo,
 } from '@ng-icons/simple-icons';
 import { Link } from 'gn-api-client';
+import { selectRecordAppConfiguration } from '../config/app-config.selectors';
 import { ConfigService } from '../config/config-service';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 
@@ -30,7 +31,9 @@ import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 })
 export class DistributionService {
   appConfiguration = inject(APPLICATION_CONFIGURATION);
-  distributionConfig = computed(() => this.appConfiguration().config?.apps.record?.distribution);
+  distributionConfig = computed(
+    () => selectRecordAppConfiguration(this.appConfiguration()).distribution,
+  );
 
   configService = inject(ConfigService);
 

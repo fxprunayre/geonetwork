@@ -4,9 +4,9 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidLanguage } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Select } from 'primeng/select';
+import { selectI18nAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { I18nApp } from '../../config/model/gnConfig';
-import { DEFAULT_LANGUAGE } from '../config/i18n-config';
 
 interface Language {
   iso3code: string;
@@ -23,14 +23,7 @@ export class LanguageSwitcher {
   private translate = inject(TranslateService);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
-  i18nConfiguration = computed<I18nApp>(
-    () =>
-      this.appConfiguration().config?.apps.i18n ?? {
-        enabled: true,
-        language: DEFAULT_LANGUAGE,
-        languages: { DEFAULT_LANGUAGE: DEFAULT_LANGUAGE.substring(0, 2) },
-      },
-  );
+  i18nConfiguration = computed<I18nApp>(() => selectI18nAppConfiguration(this.appConfiguration()));
   languages = computed<Language[]>(() =>
     Object.entries(this.i18nConfiguration().languages).map(([iso3code, iso2code]) => ({
       iso3code,

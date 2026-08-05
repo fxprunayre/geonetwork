@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { SearchLink } from '../../search/search-link/search-link';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldBase } from '../base';
 
 @Component({
   selector: 'app-record-field-credit',

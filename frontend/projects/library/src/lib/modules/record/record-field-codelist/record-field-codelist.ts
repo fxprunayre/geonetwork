@@ -2,7 +2,7 @@ import { NgStyle } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Chip } from 'primeng/chip';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldBase } from '../base';
 
 interface CodelistDecorator {
   type: 'badge';

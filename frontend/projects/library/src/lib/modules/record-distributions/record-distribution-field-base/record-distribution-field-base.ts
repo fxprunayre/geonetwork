@@ -1,6 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
+import { selectRecordAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
+import { RecordFieldBase } from '../../record';
 import { DistributionService } from '../distribution-service';
 
 @Component({
@@ -12,7 +13,9 @@ export class RecordDistributionFieldBase extends RecordFieldBase {
   distributionService = inject(DistributionService);
   appConfiguration = inject(APPLICATION_CONFIGURATION);
 
-  distributionConfig = computed(() => this.appConfiguration().config?.apps.record?.distribution);
+  distributionConfig = computed(
+    () => selectRecordAppConfiguration(this.appConfiguration()).distribution,
+  );
 
   links = computed(() => {
     return this.record()?.link || [];

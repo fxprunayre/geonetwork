@@ -7,7 +7,7 @@ import { AuthStore } from '../../authentication/auth.store';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { Gn4UrlService } from '../../config/gn4-url.service';
 import { TranslationsService } from '../../i18n/translations-service';
-import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
+import { RecordFieldBase } from '../../record';
 
 @Component({
   selector: 'app-record-edit-button',

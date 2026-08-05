@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Chip } from 'primeng/chip';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldBase } from '../base';
 
 @Component({
   selector: 'app-record-field-doi',

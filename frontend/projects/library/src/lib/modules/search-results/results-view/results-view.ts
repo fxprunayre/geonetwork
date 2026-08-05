@@ -20,11 +20,13 @@ import { SearchAppLayout } from '../../config/model/gnConfig';
 import { SearchBase } from '../../search/search-base/search-base';
 import { RECORD_ROUTE_PATH } from '../../search/search-constant';
 import { SearchMapOverlayService } from '../../search/search-map-overlay.service';
-import { NoResultFound } from '../no-result-found/no-result-found';
-import { ResultItemGrid } from '../result-item-grid/result-item-grid';
-import { ResultItemList } from '../result-item-list/result-item-list';
-import { ResultItemTable } from '../result-item-table/result-item-table';
-import { ResultsPaginatorComponent } from '../results-paginator/results-paginator';
+import {
+  NoResultFound,
+  ResultItemGrid,
+  ResultItemList,
+  ResultItemTable,
+  ResultsPaginatorComponent,
+} from '../components';
 
 @Component({
   selector: 'app-results-view',

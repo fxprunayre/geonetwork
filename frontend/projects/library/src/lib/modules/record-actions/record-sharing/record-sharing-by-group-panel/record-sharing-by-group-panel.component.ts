@@ -13,7 +13,7 @@ import { MessageModule } from 'primeng/message';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TableModule } from 'primeng/table';
 import { AuthStore } from '../../../authentication/auth.store';
-import { RecordFieldBase } from '../../../record/record-field-base/record-field-base';
+import { RecordFieldBase } from '../../../record';
 
 const OPERATION_COLUMNS_ORDER = ['view', 'dynamic', 'download', 'process', 'editing'];
 

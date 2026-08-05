@@ -30,14 +30,15 @@ import { ButtonModule } from 'primeng/button';
 import { TieredMenu } from 'primeng/tieredmenu';
 import { IconStyleService } from '../../../shared/icon-style-service';
 import { AuthStore } from '../../authentication/auth.store';
+import { selectSharingAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { Gn4UrlService } from '../../config/gn4-url.service';
 import { SharingMode } from '../../config/model/gnConfig';
-import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
+import { RecordFieldBase } from '../../record';
 import { DEFAULT_SPACE } from '../../space/config/space-config';
 import { RecordActionService } from '../record-action.service';
 import { RecordSharingByGroupPanelComponent } from '../record-sharing/record-sharing-by-group-panel/record-sharing-by-group-panel.component';
-import { RecordSharingService } from '../record-sharing/record-sharing.services';
+import { RecordSharingService } from '../sharing';
 
 @Component({
   selector: 'app-record-menu',
@@ -77,7 +78,7 @@ export class RecordMenuComponent extends RecordFieldBase implements OnInit {
   readonly appConfiguration = inject(APPLICATION_CONFIGURATION);
   readonly catalogueUrl = computed(() => this.appConfiguration().catalogueUrl);
   readonly sharingMode = computed<SharingMode>(
-    () => this.appConfiguration().config?.apps?.sharing?.sharingMode ?? 'none',
+    () => selectSharingAppConfiguration(this.appConfiguration()).sharingMode ?? 'none',
   );
   isByGroupSharing = computed(() => this.sharingMode() === 'byGroup');
 

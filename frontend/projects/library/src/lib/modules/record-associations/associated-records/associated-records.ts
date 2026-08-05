@@ -31,7 +31,7 @@ import { IndexRecord } from 'gn-api-client';
 import { AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
 import { DataView } from 'primeng/dataview';
 import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
-import { ResultItemList } from '../../search-results/result-item-list/result-item-list';
+import { ResultItemList } from '../../search-results';
 import { getAssociationLabel } from '../association-utils';
 
 @Component({

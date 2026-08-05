@@ -7,8 +7,9 @@ import { UserselectionsService } from 'gn4-api-client';
 import { ButtonModule } from 'primeng/button';
 import { catchError, EMPTY, finalize, of } from 'rxjs';
 import { AuthStore } from '../../authentication/auth.store';
+import { selectUserSelectionsAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
+import { RecordFieldBase } from '../../record';
 
 @Component({
   selector: 'app-bookmark',
@@ -51,8 +52,12 @@ export class Bookmark extends RecordFieldBase {
   hasWarnedMissingSelection = signal(false);
   isBookmarked = signal(false);
 
+  private userSelectionsConfig = computed(() =>
+    selectUserSelectionsAppConfiguration(this.appConfiguration()),
+  );
+
   isVisible = computed(() => {
-    const appEnabled = this.appConfiguration().config?.apps?.userSelections?.enabled ?? true;
+    const appEnabled = this.userSelectionsConfig().enabled ?? true;
     return (
       appEnabled &&
       this.authStore.isAuthenticated() &&
@@ -81,7 +86,7 @@ export class Bookmark extends RecordFieldBase {
     super();
 
     effect((onCleanup) => {
-      const appEnabled = this.appConfiguration().config?.apps?.userSelections?.enabled ?? true;
+      const appEnabled = this.userSelectionsConfig().enabled ?? true;
       const isAuthenticated = this.authStore.isAuthenticated();
 
       if (!appEnabled || !isAuthenticated) {
@@ -120,7 +125,7 @@ export class Bookmark extends RecordFieldBase {
     });
 
     effect((onCleanup) => {
-      const appEnabled = this.appConfiguration().config?.apps?.userSelections?.enabled ?? true;
+      const appEnabled = this.userSelectionsConfig().enabled ?? true;
       const userId = Number(this.authStore.user()?.id);
       const recordUuid = this.record().uuid;
       const isSelectionAvailable = this.isSelectionAvailable();

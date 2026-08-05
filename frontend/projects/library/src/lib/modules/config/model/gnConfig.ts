@@ -1,6 +1,6 @@
 import { Preset } from '@primeuix/themes/types';
 import { elasticsearch } from 'gn-api-client';
-import type { MapLayerDisplayTarget } from '../../record/config/record-config';
+import type { MapLayerDisplayTarget } from '../../record';
 import { DistributionConfig } from './gn4config';
 
 export interface AppsConfiguration {

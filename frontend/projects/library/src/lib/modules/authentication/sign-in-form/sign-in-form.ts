@@ -22,6 +22,7 @@ import { ToastModule } from 'primeng/toast';
 import { ThemingService } from '../../../shared/theming-service';
 import { CatalogueLogo } from '../../catalogue/catalogue-logo/catalogue-logo';
 import { CatalogueStore } from '../../catalogue/catalogue.store';
+import { selectBannerAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { AuthStore } from '../auth.store';
 import { AuthenticationService } from '../authentication.service';
@@ -91,7 +92,9 @@ export class SignInFormComponent {
 
   hasOnlyOneProvider = computed(() => this.authenticationProviders().length === 1);
 
-  bannerBackground = computed(() => this.appConfiguration().config?.apps?.banner?.background || '');
+  bannerBackground = computed(
+    () => selectBannerAppConfiguration(this.appConfiguration()).background || '',
+  );
 
   bannerBackgroundStyle = computed(() =>
     this.themingService.getBannerBackgroundStyle(this.bannerBackground()),

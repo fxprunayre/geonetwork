@@ -1,5 +1,6 @@
 import { Directive, effect, inject, input, model, OnInit, untracked } from '@angular/core';
 import { elasticsearch, IndexRecord } from 'gn-api-client';
+import { selectSearchAppConfiguration } from '../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { SearchAppLayout } from '../config/model/gnConfig';
 import { DEFAULT_LANGUAGE } from '../i18n/config/i18n-config';
@@ -67,7 +68,7 @@ export class SearchContextDirective implements OnInit {
 
   ngOnInit(): void {
     const configLayout =
-      this.appConfig().config?.apps.search?.resultsLayoutOptions?.[0] ||
+      selectSearchAppConfiguration(this.appConfig()).resultsLayoutOptions?.[0] ||
       DEFAULT_SEARCH_LAYOUT_OPTIONS[0];
 
     this.searchStore.init(

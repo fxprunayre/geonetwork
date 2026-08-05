@@ -2,7 +2,7 @@ import { Component, computed, inject, input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Thesaurus } from 'gn-api-client';
 import { KeywordList } from '../../vocabularies/keyword-list/keyword-list';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldBase } from '../base';
 
 @Component({
   selector: 'app-record-field-vocabulary',

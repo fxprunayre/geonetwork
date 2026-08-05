@@ -1,13 +1,11 @@
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input, output, TemplateRef } from '@angular/core';
 import { ThemingService } from '../../../shared/theming-service';
+import { selectBannerAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { Bookmark } from '../../record-actions/bookmark/bookmark';
-import { RecordMenuComponent } from '../../record-actions/record-menu/record-menu.component';
+import { Bookmark, RecordMenuComponent } from '../../record-actions';
 import { RecordDistributionBadges } from '../../record-distributions/record-distribution-badges/record-distribution-badges';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
-import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
-import { RecordFieldType } from '../record-field-type/record-field-type';
+import { RecordFieldBase, RecordFieldCodelist, RecordFieldType } from '../field-components';
 
 @Component({
   selector: 'app-record-view-title',
@@ -67,7 +65,9 @@ export class RecordViewTitle extends RecordFieldBase {
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   themingService = inject(ThemingService);
 
-  bannerBackground = computed(() => this.appConfiguration().config?.apps?.banner?.background || '');
+  bannerBackground = computed(
+    () => selectBannerAppConfiguration(this.appConfiguration()).background || '',
+  );
 
   bannerBackgroundStyle = computed(() =>
     this.themingService.getBannerBackgroundStyle(this.bannerBackground()),

@@ -14,11 +14,14 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord, Link } from 'gn-api-client';
 import { Accordion, AccordionContent, AccordionHeader, AccordionPanel } from 'primeng/accordion';
 import { SelectButton } from 'primeng/selectbutton';
+import {
+  selectMapAppConfiguration,
+  selectRecordAppConfiguration,
+} from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB } from '../../config/gn-constants';
+import { DataModelPanel } from '../../record';
 import { Gn4MapCommand } from '../../record-distributions/map-service';
-import { DataModelPanel } from '../../record/datamodel/data-model-panel/data-model-panel';
-import { DEFAULT_MAP_CONTEXT } from '../config/map-config';
 import { DatasourceSelect } from '../datasource-select/datasource-select';
 import { Datasource } from '../datasource.model';
 import { ExploreDatavizPanel } from '../dataviz-panel/dataviz-panel';
@@ -64,16 +67,12 @@ export class ExplorePanel {
   router = inject(Router);
 
   mapContext = computed<Record<string, unknown>>(
-    () =>
-      (this.appConfiguration().config?.apps?.map?.context || DEFAULT_MAP_CONTEXT) as Record<
-        string,
-        unknown
-      >,
+    () => selectMapAppConfiguration(this.appConfiguration()).context as Record<string, unknown>,
   );
 
   mapLayerDisplayTarget = computed(
     () =>
-      this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget ||
+      selectRecordAppConfiguration(this.appConfiguration()).mapLayerDisplayTarget ||
       MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
   );
 

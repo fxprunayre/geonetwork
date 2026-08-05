@@ -1,7 +1,7 @@
 import { Component, computed, input, output, TemplateRef } from '@angular/core';
 import { IndexRecord, RelatedItemType } from 'gn-api-client';
 import { Accordion } from 'primeng/accordion';
-import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
+import { RecordFieldBase } from '../../record';
 import { AssociatedRecords } from '.././associated-records/associated-records';
 
 @Component({

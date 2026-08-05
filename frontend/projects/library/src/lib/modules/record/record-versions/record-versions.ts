@@ -6,7 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { IndexRecord } from 'gn-api-client';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { Popover } from 'primeng/popover';
-import { ResultItemList } from '../../search-results/result-item-list/result-item-list';
+import { ResultItemList } from '../../search-results';
 import { RECORD_SLUG } from '../../search/search-constant';
 
 @Component({

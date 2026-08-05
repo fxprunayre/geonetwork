@@ -9,7 +9,7 @@ import {
 } from '@ng-icons/font-awesome/solid';
 import { TranslateService } from '@ngx-translate/core';
 import { DateRangeDetailsInfo } from 'gn-api-client';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldBase } from '../base';
 
 @Component({
   selector: 'app-record-field-coverage-temporal',
@@ -36,7 +36,7 @@ import { RecordFieldBase } from '../record-field-base/record-field-base';
               {{ extent.start.label }}
             }
           </span>
-          <div class="h-[1px] w-8 bg-surface-300 dark:bg-surface-600"></div>
+          <div class="h-px w-8 bg-surface-300 dark:bg-surface-600"></div>
           <span [class.font-bold]="extent.isYearly">
             @if (extent.end.isDate) {
               {{

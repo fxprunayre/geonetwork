@@ -6,7 +6,7 @@ import { DEFAULT_AUTHENTICATION_APP_CONFIGURATION } from '../authentication/conf
 import { DEFAULT_MAP_CONTEXT } from '../data/config/map-config';
 import { DEFAULT_HOME_APP_CONFIGURATION } from '../home/config/home-config';
 import { DEFAULT_HEADER_APP_CONFIGURATION } from '../i18n/config/i18n-config';
-import { DEFAULT_RECORD_DETAILS_APP_CONFIGURATION } from '../record/config/record-config';
+import { DEFAULT_RECORD_DETAILS_APP_CONFIGURATION } from '../record';
 import { DEFAULT_SEARCH_APP_CONFIGURATION } from '../search/config/search-config';
 import { DEFAULT_SHARING_APP_CONFIGURATION } from '../sharing/config/sharing-config';
 import { DEFAULT_USER_SELECTIONS_APP_CONFIGURATION } from '../user-selections/config/user-selections-config';
@@ -40,7 +40,7 @@ export {
   MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
   MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
   type MapLayerDisplayTarget,
-} from '../record/config/record-config';
+} from '../record';
 
 export {
   DEFAULT_SEARCH_APP_AGGREGATIONS,

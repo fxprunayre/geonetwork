@@ -28,6 +28,7 @@ import { Chip } from 'primeng/chip';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
 import { ScrollSpy } from '../../../shared/widgets/scroll-spy/scroll-spy';
 import { ShowMoreToggle } from '../../../shared/widgets/show-more-toggle/show-more-toggle';
+import { selectRecordAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { ExplorePanel } from '../../data/explore-panel/explore-panel';
 import { FeedbackPanel } from '../../feedbacks/feedback-panel/feedback-panel';
@@ -40,20 +41,21 @@ import {
   MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
 } from '../config/record-config';
 import { DataModelPanel } from '../datamodel/data-model-panel/data-model-panel';
-import { RecordCitation } from '../record-citation/record-citation';
-import { RecordFieldCodelist } from '../record-field-codelist/record-field-codelist';
-import { RecordFieldConstraints } from '../record-field-constraints/record-field-constraints';
-import { RecordFieldContact } from '../record-field-contact/record-field-contact';
-import { RecordFieldCoverageSpatial } from '../record-field-coverage-spatial/record-field-coverage-spatial';
-import { RecordFieldCoverageTemporal } from '../record-field-coverage-temporal/record-field-coverage-temporal';
-import { RecordFieldCoverageVertical } from '../record-field-coverage-vertical/record-field-coverage-vertical';
-import { RecordFieldCredit } from '../record-field-credit/record-field-credit';
-import { RecordFieldDates } from '../record-field-dates/record-field-dates';
-import { RecordFieldType } from '../record-field-type/record-field-type';
-import { RecordFieldVocabulary } from '../record-field-vocabulary/record-field-vocabulary';
-import { RecordField } from '../record-field/record-field';
-import { RecordViewHeader } from '../record-view-header/record-view-header';
-import { RecordViewTitle } from '../record-view-title/record-view-title';
+import {
+  RecordCitation,
+  RecordField,
+  RecordFieldCodelist,
+  RecordFieldConstraints,
+  RecordFieldContact,
+  RecordFieldCoverageSpatial,
+  RecordFieldCoverageTemporal,
+  RecordFieldCoverageVertical,
+  RecordFieldCredit,
+  RecordFieldDates,
+  RecordFieldType,
+  RecordFieldVocabulary,
+} from '../field-components';
+import { RecordViewHeader, RecordViewTitle } from '../view-components';
 
 export const DEFAULT_TAB = 'about';
 export const VALID_TABS = [
@@ -129,14 +131,12 @@ export class RecordViewContent {
 
   private pendingScrollTarget = signal<string | undefined>(undefined);
 
-  mainVocabularies = computed(
-    () => this.appConfiguration().config?.apps.record?.mainThesaurus || [],
-  );
+  private recordConfig = computed(() => selectRecordAppConfiguration(this.appConfiguration()));
+
+  mainVocabularies = computed(() => this.recordConfig().mainThesaurus || []);
 
   mapLayerDisplayTarget = computed(
-    () =>
-      this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget ||
-      MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
+    () => this.recordConfig().mapLayerDisplayTarget || MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
   );
 
   hasWmsLink = computed(() => {
@@ -163,9 +163,7 @@ export class RecordViewContent {
       !!this.record()?.info?.hasDataModel,
   );
 
-  showDiscussionTab = computed(
-    () => this.appConfiguration().config?.apps?.record?.showDiscussionTab ?? true,
-  );
+  showDiscussionTab = computed(() => this.recordConfig().showDiscussionTab ?? true);
 
   dataAccessSectionLabelKey = computed(() => {
     const resourceTypes = this.record()?.resourceType || [];

@@ -22,11 +22,12 @@ import GeometryCollection from 'ol/geom/GeometryCollection';
 import { transformExtent } from 'ol/proj';
 import Style from 'ol/style/Style';
 import { createThemeAwareVectorLayerStyle } from '../../../shared/map-layer-style';
+import { selectRecordAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_SPACE } from '../../config/gn-constants';
 import { DEFAULT_MAP_CONTEXT } from '../../data/config/map-config';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
-import { RecordFieldCoverageCoordinate } from '../record-field-coverage-coordinate/record-field-coverage-coordinate';
+import { RecordFieldBase } from '../base';
+import { RecordFieldCoverageCoordinate } from '../coverage-components';
 
 interface SpatialBounds {
   north: number;
@@ -57,9 +58,7 @@ interface SpatialBounds {
       @for (bbox of displayedGeoms(); track $index) {
         @if (bbox) {
           <div class="relative w-4/5 mx-auto m-8">
-            @if (
-              appConfiguration().config?.apps?.record?.coverageSpatialDisplayType === 'dynamicMap'
-            ) {
+            @if (recordConfig().coverageSpatialDisplayType === 'dynamicMap') {
               <div
                 class="w-full h-75 bg-slate-100 rounded border border-gray-200 shadow-sm"
                 #map
@@ -120,6 +119,7 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
   translateService = inject(TranslateService);
 
   appConfiguration = inject(APPLICATION_CONFIGURATION);
+  recordConfig = computed(() => selectRecordAppConfiguration(this.appConfiguration()));
 
   overviewBaseUrl = computed(
     () =>

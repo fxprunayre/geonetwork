@@ -13,7 +13,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { Card } from 'primeng/card';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { SearchLink } from '../../search/search-link/search-link';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldBase } from '../base';
 import { RecordField } from '../record-field/record-field';
 
 // TODO: to add to IndexRecord in gn-api-client

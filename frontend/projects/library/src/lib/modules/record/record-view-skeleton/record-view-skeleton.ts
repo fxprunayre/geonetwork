@@ -2,6 +2,7 @@ import { NgStyle } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Skeleton } from 'primeng/skeleton';
 import { ThemingService } from '../../../shared/theming-service';
+import { selectBannerAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 
 @Component({
@@ -51,7 +52,9 @@ export class RecordViewSkeleton {
   appConfiguration = inject(APPLICATION_CONFIGURATION);
   themingService = inject(ThemingService);
 
-  bannerBackground = computed(() => this.appConfiguration().config?.apps?.banner?.background || '');
+  bannerBackground = computed(
+    () => selectBannerAppConfiguration(this.appConfiguration()).background || '',
+  );
 
   bannerBackgroundStyle = computed(() =>
     this.themingService.getBannerBackgroundStyle(this.bannerBackground()),

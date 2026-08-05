@@ -1,8 +1,8 @@
 import { InjectionToken, WritableSignal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { DEFAULT_HEADER_APP_CONFIGURATION } from '../i18n/config/i18n-config';
-import { DEFAULT_SHARING_APP_CONFIGURATION } from '../sharing/config/sharing-config';
 import { DEFAULT_SPACE } from '../space/config/space-config';
+import { normalizeAppsConfiguration } from './app-config.normalizer';
 import { migrateGn4Config } from './config-gn4.loader';
 import { migrateSextantConfig } from './config-sextant.loader';
 import { DEFAULT_APPS_CONFIGURATION } from './gn-constants';
@@ -138,6 +138,8 @@ export function loadAppConfig(
     }
 
     if (appConfig.config) {
+      appConfig.config = normalizeAppsConfiguration(appConfig.config);
+
       if (languageOverride) {
         appConfig.config.apps.i18n = {
           ...(appConfig.config.apps.i18n || DEFAULT_HEADER_APP_CONFIGURATION),
@@ -149,16 +151,6 @@ export function loadAppConfig(
 
       appConfig.config.proxyUrl = `${apiUrl}/proxy?url=`;
 
-      if (!appConfig.config.apps) {
-        appConfig.config.apps = {};
-      }
-      if (!appConfig.config.apps.banner) {
-        appConfig.config.apps.banner = { enabled: true };
-      }
-      if (!appConfig.config.apps.sharing) {
-        appConfig.config.apps.sharing = DEFAULT_SHARING_APP_CONFIGURATION;
-      }
-
       appConfig.config.apps.banner!.background =
         appConfig.config.apps.banner!.background || environment.backgroundUrl || '';
 
@@ -166,11 +158,6 @@ export function loadAppConfig(
         '--app-background-text-color',
         appConfig.config.apps.banner!.textColor || '#ffffff',
       );
-
-      appConfig.config.apps.banner!.title =
-        appConfig.config.apps.banner!.title ?? DEFAULT_APPS_CONFIGURATION.apps?.banner?.title;
-      appConfig.config.apps.banner!.subTitle =
-        appConfig.config.apps.banner!.subTitle ?? DEFAULT_APPS_CONFIGURATION.apps?.banner?.subTitle;
 
       if (appConfig.config.font) {
         document.documentElement.style.setProperty('--app-font-family-sans', appConfig.config.font);

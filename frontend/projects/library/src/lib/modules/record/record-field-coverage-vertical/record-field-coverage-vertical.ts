@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidChevronRight } from '@ng-icons/font-awesome/solid';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldBase } from '../base';
 
 @Component({
   selector: 'app-record-field-coverage-vertical',

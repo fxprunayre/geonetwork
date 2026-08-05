@@ -1,8 +1,5 @@
 import { elasticsearch } from 'gn-api-client';
-import {
-  DEFAULT_RECORD_DOWNLOAD_PROTOCOLS,
-  DEFAULT_RECORD_VIEW_PROTOCOLS,
-} from '../record/config/record-config';
+import { DEFAULT_RECORD_DOWNLOAD_PROTOCOLS, DEFAULT_RECORD_VIEW_PROTOCOLS } from '../record';
 import { INSPIRE_AGGREGATION, RESOURCE_TYPE_AGGREGATION } from '../search/config/search-config';
 import { UiConfiguration } from './model/gn4config';
 import { SextantLegacyFacet } from './model/sextantConfig';

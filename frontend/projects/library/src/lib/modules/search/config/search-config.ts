@@ -1,9 +1,6 @@
 import { elasticsearch } from 'gn-api-client';
 import { SearchApp, SearchAppLayout } from '../../config/model/gnConfig';
-import {
-  DEFAULT_RECORD_DOWNLOAD_PROTOCOLS,
-  DEFAULT_RECORD_VIEW_PROTOCOLS,
-} from '../../record/config/record-config';
+import { DEFAULT_RECORD_DOWNLOAD_PROTOCOLS, DEFAULT_RECORD_VIEW_PROTOCOLS } from '../../record';
 
 export const RESOURCE_TYPE_AGGREGATION: elasticsearch.AggregationsAggregationContainer = {
   terms: {

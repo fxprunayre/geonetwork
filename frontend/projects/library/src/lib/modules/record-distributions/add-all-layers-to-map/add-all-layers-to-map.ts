@@ -12,9 +12,9 @@ import { faSolidExclamation } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Link } from 'gn-api-client';
 import { Button } from 'primeng/button';
+import { selectRecordAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB } from '../../record/config/record-config';
-import { RecordFieldBase } from '../../record/record-field-base/record-field-base';
+import { MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB, RecordFieldBase } from '../../record';
 import { MapService } from '../map-service';
 
 @Component({
@@ -71,7 +71,7 @@ export class AddAllLayersToMap extends RecordFieldBase {
 
   mapLayerDisplayTarget = computed(
     () =>
-      this.appConfiguration().config?.apps?.record?.mapLayerDisplayTarget ||
+      selectRecordAppConfiguration(this.appConfiguration()).mapLayerDisplayTarget ||
       MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
   );
 

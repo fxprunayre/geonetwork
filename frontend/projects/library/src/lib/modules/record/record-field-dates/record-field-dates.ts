@@ -16,7 +16,7 @@ import {
 } from '@ng-icons/font-awesome/solid';
 import { TranslateService } from '@ngx-translate/core';
 import { ResourceDate } from 'gn-api-client';
-import { RecordFieldBase } from '../record-field-base/record-field-base';
+import { RecordFieldBase } from '../base';
 
 @Component({
   selector: 'app-record-field-dates',

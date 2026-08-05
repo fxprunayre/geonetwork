@@ -2,6 +2,7 @@ import { computed, inject, Injectable } from '@angular/core';
 import { RecordsService } from 'gn4-api-client';
 import { MenuItem } from 'primeng/api';
 import { Observable, of } from 'rxjs';
+import { selectSharingAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { SharingMode } from '../../config/model/gnConfig';
 
@@ -10,7 +11,7 @@ export class RecordSharingService {
   private readonly recordsService = inject(RecordsService);
   readonly appConfiguration = inject(APPLICATION_CONFIGURATION);
   readonly sharingMode = computed<SharingMode>(
-    () => this.appConfiguration().config?.apps?.sharing?.sharingMode ?? 'none',
+    () => selectSharingAppConfiguration(this.appConfiguration()).sharingMode ?? 'none',
   );
 
   createSharingMenuItem(options: {
