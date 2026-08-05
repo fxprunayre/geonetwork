@@ -22,15 +22,18 @@ import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { AggregationChartLayout, Decorator } from 'gn-api-client';
 import { ButtonModule } from 'primeng/button';
-import { SearchBase } from '../../search/search-base/search-base';
-import { AggregationBucketDecorator } from '../aggregation-bucket-decorator/aggregation-bucket-decorator';
-import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
-import { AggregationBucketType } from '../aggregation/aggregation.model';
-import { buildBarOption, buildBarSeriesData } from './options/bar-option';
-import { EChartsOption, type BarVisibleRange } from './options/chart-option.types';
-import { buildNightingaleOption } from './options/nightingale-option';
-import { buildPieOption } from './options/pie-option';
-import { buildTreemapOption } from './options/treemap-option';
+import { SearchBase } from '../search/search-base/search-base';
+import { AggregationBucketDecorator } from './aggregation-bucket-decorator';
+import { buildBarOption, buildBarSeriesData } from './aggregation-chart/options/bar-option';
+import {
+  EChartsOption,
+  type BarVisibleRange,
+} from './aggregation-chart/options/chart-option.types';
+import { buildNightingaleOption } from './aggregation-chart/options/nightingale-option';
+import { buildPieOption } from './aggregation-chart/options/pie-option';
+import { buildTreemapOption } from './aggregation-chart/options/treemap-option';
+import { AggregationTranslatePipe } from './aggregation-translate-pipe';
+import { AggregationBucketType } from './aggregation.model';
 
 echarts.use([
   BarChart,

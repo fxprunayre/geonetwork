@@ -14,11 +14,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { TreeNode } from 'primeng/api';
 import { Tree } from 'primeng/tree';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { SearchBase } from '../../search/search-base/search-base';
-import { SearchFilterChange } from '../../search/search-store.model';
-import { AggregationService } from '../aggregation-service';
-import { AggregationTranslatePipe } from '../aggregation-translate-pipe';
-import { AggregationBucketType } from '../aggregation/aggregation.model';
+import { SearchBase } from '../search/search-base/search-base';
+import { SearchFilterChange } from '../search/search-store.model';
+import { AggregationService } from './aggregation-service';
+import { AggregationTranslatePipe } from './aggregation-translate-pipe';
+import { AggregationBucketType } from './aggregation.model';
 
 @Component({
   selector: 'app-aggregation-tree',

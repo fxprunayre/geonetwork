@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Card } from 'primeng/card';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 
 @Component({
   selector: 'app-catalogue-logo',

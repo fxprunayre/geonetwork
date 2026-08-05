@@ -10,7 +10,7 @@ import { OverlayModule } from 'primeng/overlay';
 import { PopoverModule } from 'primeng/popover';
 import { Skeleton } from 'primeng/skeleton';
 import { firstValueFrom } from 'rxjs';
-import { InspireThemeStylesComponent } from '../../search-filter/aggregation-bucket-decorator/inspire-theme-styles';
+import { InspireThemeStylesComponent } from '../../search-filter/inspire-theme-styles';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchLink } from '../../search/search-link/search-link';
 

@@ -1,5 +1,5 @@
 import type { PieSeriesOption } from 'echarts/charts';
-import { AggregationBucketType } from '../../aggregation/aggregation.model';
+import { AggregationBucketType } from '../../aggregation.model';
 import { EChartsOption, ThemeColorFn, TruncateLabelFn } from './chart-option.types';
 import { buildPieOption } from './pie-option';
 

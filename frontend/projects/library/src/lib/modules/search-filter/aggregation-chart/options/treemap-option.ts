@@ -1,4 +1,4 @@
-import { AggregationBucketType } from '../../aggregation/aggregation.model';
+import { AggregationBucketType } from '../../aggregation.model';
 import { EChartsOption, ThemeColorFn, TruncateLabelFn } from './chart-option.types';
 
 export function buildTreemapOption(

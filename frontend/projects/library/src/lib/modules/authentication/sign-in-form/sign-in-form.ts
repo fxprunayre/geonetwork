@@ -20,7 +20,7 @@ import { MessageModule } from 'primeng/message';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
 import { ThemingService } from '../../../shared/theming-service';
-import { CatalogueLogo } from '../../catalogue/catalogue-logo/catalogue-logo';
+import { CatalogueLogo } from '../../catalogue/catalogue-logo';
 import { CatalogueStore } from '../../catalogue/catalogue.store';
 import { selectBannerAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';

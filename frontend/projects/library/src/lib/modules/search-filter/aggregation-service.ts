@@ -4,7 +4,7 @@ import { elasticsearch } from 'gn-api-client';
 import { RegistriesService } from 'gn4-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { DEFAULT_AGGREGATION_SIZE } from '../search/search-store.model';
-import { AggregationBucketType } from './aggregation/aggregation.model';
+import { AggregationBucketType } from './aggregation.model';
 
 @Injectable({
   providedIn: 'root',

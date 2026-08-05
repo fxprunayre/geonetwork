@@ -20,8 +20,8 @@ import {
 } from 'primeng/accordion';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
 import { SearchBase } from '../../search/search-base/search-base';
+import { Aggregation } from '../aggregation';
 import { AggregationService } from '../aggregation-service';
-import { Aggregation } from '../aggregation/aggregation';
 
 @Component({
   selector: 'app-aggregations-panel',

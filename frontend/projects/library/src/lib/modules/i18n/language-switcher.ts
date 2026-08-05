@@ -4,9 +4,9 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { faSolidLanguage } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Select } from 'primeng/select';
-import { selectI18nAppConfiguration } from '../../config/app-config.selectors';
-import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
-import { I18nApp } from '../../config/model/gnConfig';
+import { selectI18nAppConfiguration } from '../config/app-config.selectors';
+import { APPLICATION_CONFIGURATION } from '../config/config.loader';
+import { I18nApp } from '../config/model/gnConfig';
 
 interface Language {
   iso3code: string;
@@ -15,7 +15,26 @@ interface Language {
 
 @Component({
   selector: 'app-language-switcher',
-  templateUrl: './language-switcher.html',
+  template: `
+    @if (languages().length > 1) {
+      <p-select
+        [title]="'i18n.languageSwitcher.select' | translate"
+        [options]="languages()"
+        optionValue="iso3code"
+        [(ngModel)]="currentLanguage"
+      >
+        <ng-template #selectedItem let-selectedOption>
+          {{ 'languages.' + selectedOption.iso3code | translate }}
+        </ng-template>
+        <ng-template let-language #item>
+          {{ 'languages.' + language.iso3code | translate }}
+        </ng-template>
+        <ng-template #dropdownicon>
+          <ng-icon name="faSolidLanguage" />
+        </ng-template>
+      </p-select>
+    }
+  `,
   viewProviders: [provideIcons({ faSolidLanguage })],
   imports: [FormsModule, NgIcon, Select, TranslatePipe],
 })

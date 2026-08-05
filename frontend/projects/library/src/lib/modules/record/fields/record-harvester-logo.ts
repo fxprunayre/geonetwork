@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { CatalogueLogo } from '../../catalogue/catalogue-logo/catalogue-logo';
+import { CatalogueLogo } from '../../catalogue/catalogue-logo';
 import { RecordFieldBase } from '../base';
 
 @Component({

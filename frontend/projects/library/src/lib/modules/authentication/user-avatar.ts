@@ -13,10 +13,10 @@ import { ButtonModule } from 'primeng/button';
 import { Menu } from 'primeng/menu';
 import { PopoverModule } from 'primeng/popover';
 import { TieredMenu } from 'primeng/tieredmenu';
-import { IconStyleService } from '../../../shared/icon-style-service';
-import { AuthStore } from '../auth.store';
-import { InitialsPipe } from '../pipes/initials.pipe';
-import { UserFullNamePipe } from '../pipes/user-full-name.pipe';
+import { IconStyleService } from '../../shared/icon-style-service';
+import { AuthStore } from './auth.store';
+import { InitialsPipe } from './pipes/initials.pipe';
+import { UserFullNamePipe } from './pipes/user-full-name.pipe';
 
 @Component({
   selector: 'app-user-avatar',
@@ -37,7 +37,29 @@ import { UserFullNamePipe } from '../pipes/user-full-name.pipe';
       faSolidGear,
     }),
   ],
-  templateUrl: './user-avatar.html',
+  template: `
+    @if (isAuthenticated()) {
+      <p-avatar
+        [label]="user() | userFullName | initials"
+        [title]="user() | userFullName"
+        shape="circle"
+        size="normal"
+        [pt]="pt"
+        [dt]="dt"
+        (click)="toggle($event)"
+        [ngClass]="profileClass()"
+      />
+      @if (withLabel()) {
+        <span class="inline-flex flex-col items-start">
+          <span class="font-bold"> {{ user() | userFullName }}</span>
+          <span class="text-sm">{{ userRole() }}</span>
+        </span>
+      }
+      @if (withMenu()) {
+        <p-tieredmenu #menu [popup]="true" [model]="menuItems"></p-tieredmenu>
+      }
+    }
+  `,
 })
 export class UserAvatar implements OnInit {
   @ViewChild('menu') menu: Menu | undefined;
