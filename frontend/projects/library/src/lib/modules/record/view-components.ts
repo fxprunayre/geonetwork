@@ -1,3 +1,3 @@
-export * from './record-view-header/record-view-header';
-export * from './record-view-skeleton/record-view-skeleton';
-export * from './record-view-title/record-view-title';
+export * from './view/record-view-header';
+export * from './view/record-view-skeleton';
+export * from './view/record-view-title';

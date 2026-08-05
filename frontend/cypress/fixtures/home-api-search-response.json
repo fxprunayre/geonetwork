@@ -9,7 +9,7 @@
   },
   "hits": {
     "total": {
-      "value": 15763,
+      "value": 15764,
       "relation": "eq"
     },
     "max_score": 0.0,
@@ -1100,7 +1100,7 @@
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 11692
+          "doc_count": 11693
         },
         {
           "key": "series",
@@ -1160,7 +1160,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/el",
-          "doc_count": 1221
+          "doc_count": 1222
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/hb",
@@ -1342,63 +1342,63 @@
       "buckets": [
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41",
-          "doc_count": 2126
+          "doc_count": 2125
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5dc22e69-c8de-4a13-bf4e-8541681a45f5",
-          "doc_count": 969
+          "doc_count": 968
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/f3b1a057-7a6c-4970-8342-1abea177d29b",
-          "doc_count": 917
+          "doc_count": 916
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/02ae5489-80f4-4790-b7ef-ec7372037454",
-          "doc_count": 819
+          "doc_count": 818
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/8da8fe93-1795-4ddd-bcc9-e5fbbf3d7e41^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ec646e7f-9c24-4182-a0e1-8e6524d2b91b",
-          "doc_count": 783
+          "doc_count": 782
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1",
-          "doc_count": 521
+          "doc_count": 520
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/c30385c9-335a-4b4f-a98d-8e4ac658a60b",
-          "doc_count": 371
+          "doc_count": 370
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/71918e42-5660-483f-aa07-21537b75bc34",
-          "doc_count": 101
+          "doc_count": 100
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/7cec884a-14b2-49a4-9ff8-cabf4529593b",
-          "doc_count": 96
+          "doc_count": 95
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/ee3459a5-7a09-4627-92cc-0e5d27919a85",
-          "doc_count": 42
+          "doc_count": 41
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5655729b-9a27-4a76-a96c-683564f4012c",
-          "doc_count": 27
+          "doc_count": 26
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/4e1ec5be-1018-4580-87cd-fbcb49e669d5",
-          "doc_count": 15
+          "doc_count": 14
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/5b8eecd5-d8f1-4eab-8f08-ae88f4ee48d7",
-          "doc_count": 5
+          "doc_count": 4
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/1f1f5d20-8489-4c80-ac20-d6d091d4e30b",
-          "doc_count": 4
+          "doc_count": 3
         },
         {
           "key": "https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/0d3597b7-d3a4-43f7-8586-c5ec1b0876d1^https://vocab.ifremer.fr/scheme/SXT/dcsmm.area/c9fe0e8d-dd4c-4dd5-b1f3-94568b5fdbcc",
-          "doc_count": 4
+          "doc_count": 3
         }
       ]
     },

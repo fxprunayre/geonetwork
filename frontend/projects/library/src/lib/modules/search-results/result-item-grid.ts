@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TooltipModule } from 'primeng/tooltip';
 import { RecordFieldOverviewComponent, RecordFieldTitle, RecordFieldType } from '../record';
-import { RecordDistributionBadges } from '../record-distributions/record-distribution-badges/record-distribution-badges';
+import { RecordDistributionBadges } from '../record-distributions/record-distribution-badges';
 import { RECORD_ROUTE_PATH } from '../search/search-constant';
 
 @Component({

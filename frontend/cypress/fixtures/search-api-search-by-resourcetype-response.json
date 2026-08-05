@@ -1,5 +1,5 @@
 {
-  "took": 17,
+  "took": 28,
   "timed_out": false,
   "_shards": {
     "total": 1,
@@ -9,7 +9,7 @@
   },
   "hits": {
     "total": {
-      "value": 11692,
+      "value": 11693,
       "relation": "eq"
     },
     "max_score": null,
@@ -258,7 +258,7 @@
             }
           ]
         },
-        "sort": [23532],
+        "sort": [23566],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -830,7 +830,7 @@
             }
           ]
         },
-        "sort": [8222],
+        "sort": [8243],
         "edit": false,
         "canReview": false,
         "owner": false,
@@ -4439,7 +4439,7 @@
         },
         {
           "key": "334291911",
-          "doc_count": 1798
+          "doc_count": 1799
         },
         {
           "key": "62",
@@ -4710,15 +4710,15 @@
           "doc_count": 56
         },
         {
+          "key": "6",
+          "doc_count": 54
+        },
+        {
           "key": "109",
           "doc_count": 53
         },
         {
           "key": "214742408",
-          "doc_count": 53
-        },
-        {
-          "key": "6",
           "doc_count": 53
         },
         {
@@ -5878,7 +5878,7 @@
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/el",
-          "doc_count": 1143
+          "doc_count": 1144
         },
         {
           "key": "http://inspire.ec.europa.eu/theme/er",
@@ -6266,7 +6266,7 @@
       "buckets": [
         {
           "key": "dataset",
-          "doc_count": 11692
+          "doc_count": 11693
         },
         {
           "key": "featureCatalog",
@@ -6280,10 +6280,10 @@
       },
       "buckets": {
         "availableInDownloadService": {
-          "doc_count": 7886
+          "doc_count": 7887
         },
         "availableInViewService": {
-          "doc_count": 5111
+          "doc_count": 5112
         }
       }
     }

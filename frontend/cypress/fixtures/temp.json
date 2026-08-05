@@ -1,77 +1,17 @@
 {
   "from": 0,
-  "size": 20,
+  "size": 10,
   "track_total_hits": true,
   "query": {
-    "function_score": {
-      "query": {
-        "bool": {
-          "must": [],
-          "must_not": [],
-          "should": [],
-          "filter": [
-            {
-              "query_string": {
-                "query": "+isTemplate:n"
-              }
-            },
-            {
-              "geo_shape": {
-                "geom": {
-                  "shape": {
-                    "type": "envelope",
-                    "coordinates": [
-                      [-3, 45],
-                      [2, 40]
-                    ]
-                  },
-                  "relation": "intersects"
-                }
-              }
-            }
-          ]
-        }
-      },
-      "score_mode": "sum",
-      "boost_mode": "sum",
-      "functions": [
+    "bool": {
+      "must": [],
+      "must_not": [],
+      "should": [],
+      "filter": [
         {
-          "filter": {
-            "exists": {
-              "field": "location"
-            }
-          },
-          "gauss": {
-            "location": {
-              "origin": "42.5,-0.5",
-              "scale": "600km",
-              "offset": "0km",
-              "decay": 0.6
-            }
-          },
-          "weight": 2
-        },
-        {
-          "script_score": {
-            "script": {
-              "source": "\n                  if (params['_source'] == null) {\n                    return 0.0;\n                  }\n\n                  def geomItems = [];\n                  if (params['_source'].containsKey('geom')) {\n                    def rawGeom = params['_source']['geom'];\n                    if (rawGeom instanceof List) {\n                      geomItems = rawGeom;\n                    } else if (rawGeom != null) {\n                      geomItems.add(rawGeom);\n                    }\n                  }\n\n                  int geomCount = geomItems.size();\n                  if (geomCount == 0) {\n                    return 0.0;\n                  }\n\n                  double bestScore = 0.0;\n                  for (int i = 0; i < geomCount; i++) {\n                    def geom = geomItems[i];\n\n                    double docCenterLon = Double.NaN;\n                    double docCenterLat = Double.NaN;\n                    double docArea = 0.0;\n                    double docWest = Double.NaN;\n                    double docSouth = Double.NaN;\n                    double docEast = Double.NaN;\n                    double docNorth = Double.NaN;\n\n                    if (geom instanceof Map && geom.containsKey('type') && geom.containsKey('coordinates')) {\n                      def geomType = geom['type'];\n                      def coords = geom['coordinates'];\n\n                      if (geomType == 'Point') {\n                        if (\n                          coords instanceof List &&\n                          coords.size() >= 2 &&\n                          coords[0] instanceof Number &&\n                          coords[1] instanceof Number\n                        ) {\n                          if (Double.isNaN(docCenterLon) || Double.isNaN(docCenterLat)) {\n                            docCenterLon = (double) coords[0];\n                            docCenterLat = (double) coords[1];\n                          }\n                          docWest = (double) coords[0];\n                          docEast = (double) coords[0];\n                          docSouth = (double) coords[1];\n                          docNorth = (double) coords[1];\n                          docArea = 0.0;\n                        }\n                      } else if (coords instanceof List && !coords.isEmpty()) {\n                        def ring = coords[0];\n                        if (\n                          ring instanceof List &&\n                          ring.size() >= 3 &&\n                          ring[0] instanceof List &&\n                          ring[2] instanceof List\n                        ) {\n                          def p0 = ring[0];\n                          def p2 = ring[2];\n                          if (\n                            p0.size() >= 2 &&\n                            p2.size() >= 2 &&\n                            p0[0] instanceof Number &&\n                            p0[1] instanceof Number &&\n                            p2[0] instanceof Number &&\n                            p2[1] instanceof Number\n                          ) {\n                            double west = (double) p0[0];\n                            double south = (double) p0[1];\n                            double east = (double) p2[0];\n                            double north = (double) p2[1];\n\n                            docWest = Math.min(west, east);\n                            docEast = Math.max(west, east);\n                            docSouth = Math.min(south, north);\n                            docNorth = Math.max(south, north);\n\n                            if (Double.isNaN(docCenterLon) || Double.isNaN(docCenterLat)) {\n                              docCenterLon = (docWest + docEast) / 2.0;\n                              docCenterLat = (docSouth + docNorth) / 2.0;\n                            }\n\n                            double docWidth = Math.abs(docEast - docWest);\n                            double docHeight = Math.abs(docNorth - docSouth);\n                            docArea = Math.max(docWidth * docHeight, 0.0);\n                          }\n                        }\n                      }\n                    }\n\n                    if (Double.isNaN(docCenterLon) || Double.isNaN(docCenterLat)) {\n                      continue;\n                    }\n\n                    double dx = docCenterLon - params.queryCenterLon;\n                    double dy = docCenterLat - params.queryCenterLat;\n                    double centerDistanceDeg = Math.sqrt(dx * dx + dy * dy);\n                    double centerScore = Math.exp(-centerDistanceDeg / params.centerSigmaDeg);\n\n                    double areaRatio = Math.max(docArea, 0.000001) / params.queryAreaDeg;\n                    double areaScore = Math.exp(-Math.abs(Math.log(areaRatio)) / params.areaLogSigma);\n\n                    double overlapScore = 0.0;\n                    if (\n                      !Double.isNaN(docWest) &&\n                      !Double.isNaN(docEast) &&\n                      !Double.isNaN(docSouth) &&\n                      !Double.isNaN(docNorth)\n                    ) {\n                      double overlapWidth = Math.max(\n                        0.0,\n                        Math.min(docEast, params.queryEast) - Math.max(docWest, params.queryWest)\n                      );\n                      double overlapHeight = Math.max(\n                        0.0,\n                        Math.min(docNorth, params.queryNorth) - Math.max(docSouth, params.querySouth)\n                      );\n                      double overlapArea = overlapWidth * overlapHeight;\n                      overlapScore = overlapArea / Math.max(docArea, 0.000001);\n                    }\n\n                    double combined =\n                      (params.centerWeight * centerScore +\n                        params.areaWeight * areaScore +\n                        params.overlapWeight * overlapScore) /\n                      (params.centerWeight + params.areaWeight + params.overlapWeight);\n\n                    if (combined > bestScore) {\n                      bestScore = combined;\n                    }\n                  }\n\n                  return bestScore;\n                ",
-              "params": {
-                "queryCenterLon": -0.5,
-                "queryCenterLat": 42.5,
-                "queryWest": -3,
-                "querySouth": 40,
-                "queryEast": 2,
-                "queryNorth": 45,
-                "queryAreaDeg": 25,
-                "centerSigmaDeg": 10,
-                "areaLogSigma": 1.5,
-                "centerWeight": 1,
-                "areaWeight": 1,
-                "overlapWeight": 4
-              }
-            }
-          },
-          "weight": 1
+          "query_string": {
+            "query": "+isTemplate:n"
+          }
         }
       ]
     }
@@ -103,97 +43,45 @@
   ],
   "sort": [
     {
-      "popularity": "desc"
+      "_score": "desc"
     }
   ],
   "aggregations": {
-    "groupPublishedId": {
-      "terms": {
-        "field": "groupPublishedId",
-        "size": 300,
-        "include": ".*",
-        "exclude": "1"
-      },
-      "meta": {
-        "field": "groupPublishedId",
-        "orderByTranslation": true,
-        "filterByTranslation": true,
-        "displayFilter": true,
-        "collapsed": false,
-        "caseInsensitiveInclude": true
-      }
-    },
     "th_sextant-theme_tree.key": {
       "terms": {
         "field": "th_sextant-theme_tree.key",
-        "size": 300,
-        "order": {
-          "_key": "asc"
-        },
-        "include": ".*"
+        "size": 9,
+        "include": "[^^]+"
       },
       "meta": {
-        "collapsed": true,
-        "layout": "tree",
-        "translateOnLoad": true,
         "orderByTranslation": true,
-        "displayFilter": true,
-        "filterByTranslation": true,
-        "caseInsensitiveInclude": true
-      }
-    },
-    "th_httpinspireeceuropaeutheme-theme_tree.key": {
-      "terms": {
-        "field": "th_httpinspireeceuropaeutheme-theme_tree.key",
-        "size": 34,
-        "order": {
-          "_key": "asc"
-        }
-      },
-      "meta": {
-        "collapsed": true,
         "translateOnLoad": true,
-        "orderByTranslation": true,
+        "layout": "card",
         "decorator": {
-          "type": "icon",
-          "prefix": "iti-",
-          "expression": "http://inspire.ec.europa.eu/theme/(.*)"
+          "type": "img",
+          "map": {
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/34bad830-04ed-4d92-83ad-bf35d5c840a1": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/hyperspectrale-la-reunion/1603154-3-fre-FR/Hyperspectrale-La-Reunion.png",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/c17e50a2-5e3d-40da-94e0-b31327977947": "https://sextant.ifremer.fr/geonetwork/srv/api/records/d90bc6fa-5416-4064-97b6-8f671de3e407/attachments/zfhi.jpg",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/d6f5b49f-fa79-4788-a34c-ab342cb85463": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/habitats-physiques/1595588-2-fre-FR/Habitats-physiques.png",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/ac4c92ba-171b-4e0a-aa3b-a81adf497921": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bathymetrie-emodnet/1595576-2-fre-FR/Bathymetrie-Emodnet.png",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/73a55b62-adf3-4b89-9fd2-5f277cffb47b": "https://sextant.ifremer.fr/geonetwork/srv/api/records/d275ec6a-603b-4170-add2-9b52ce190793/attachments/165.JPG",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/7898b87e-208a-421f-b1b4-3697f895ddd9": "https://sextant.ifremer.fr/documentation/emodnet_chemistry/images/2023/mlf_density_nb_l_other.png",
+            "https://vocab.ifremer.fr/scheme/SXT/sextant-theme/355023fd-7289-40ce-8c5c-c725232e039f": "https://sextant.ifremer.fr/var/storage/images/_aliases/listitem_thumbnail/medias-ifremer/medias-sextant/accueil/cartes-thematiques/bigood/1595612-3-fre-FR/BIGOOD.png"
+          }
         }
-      }
-    },
-    "OrgForResource": {
-      "terms": {
-        "field": "OrgForResource",
-        "include": ".*",
-        "size": 15
-      },
-      "meta": {
-        "caseInsensitiveInclude": true,
-        "collapsed": true
-      }
-    },
-    "creationYearForResource": {
-      "histogram": {
-        "field": "creationYearForResource",
-        "interval": 1,
-        "min_doc_count": 1
-      },
-      "meta": {
-        "layout": "bar",
-        "collapsed": true
       }
     },
     "resourceType": {
       "terms": {
         "field": "resourceType",
-        "size": 10,
-        "exclude": "map/.*|publication-.*"
+        "size": 9,
+        "exclude": "publication-.*"
       },
       "meta": {
-        "collapsed": false,
         "layout": "nightingale",
         "decorator": {
           "type": "icon",
+          "prefix": "",
           "map": {
             "dataset": "faSolidDatabase",
             "map": "faSolidMap",
@@ -207,23 +95,73 @@
         }
       }
     },
-    "availableInServices": {
-      "filters": {
-        "filters": {
-          "availableInViewService": {
-            "query_string": {
-              "query": "+linkProtocol:/OGC:WMS|OGC:OWS-C|OGC Web Map Service|OGC:WMTS|ESRI:REST/"
-            }
-          },
-          "availableInDownloadService": {
-            "query_string": {
-              "query": "+linkProtocol:/WWW:DOWNLOAD|WWW:DOWNLOAD.*|WWW:OPENDAP|WWW:FTP|OGC:WFS|OGC Web Feature Service|OGC:WCS|MYO:MOTU-SUB|FILE|COPYFILE|DB|KML/"
-            }
-          }
-        }
+    "th_httpinspireeceuropaeutheme-theme_tree.key": {
+      "terms": {
+        "field": "th_httpinspireeceuropaeutheme-theme_tree.key",
+        "size": 34
       },
       "meta": {
-        "collapsed": true
+        "collapsed": true,
+        "translateOnLoad": true,
+        "orderByTranslation": true,
+        "decorator": {
+          "type": "icon",
+          "prefix": "iti-",
+          "expression": "http://inspire.ec.europa.eu/theme/(.*)"
+        }
+      }
+    },
+    "th_simm-reglementaire_tree.key": {
+      "terms": {
+        "field": "th_simm-reglementaire_tree.key",
+        "size": 9
+      },
+      "meta": {
+        "thesaurus": "simm.reglementaire",
+        "translateOnLoad": true,
+        "layout": "card"
+      }
+    },
+    "th_dcsmm-area_tree.key": {
+      "terms": {
+        "field": "th_dcsmm-area_tree.key",
+        "size": 30
+      },
+      "meta": {
+        "layout": "bar",
+        "thesaurus": "dcsmm.area",
+        "translateOnLoad": true
+      }
+    },
+    "th_dcsmm-descripteur_tree.key": {
+      "terms": {
+        "field": "th_dcsmm-descripteur_tree.key",
+        "size": 30
+      },
+      "meta": {
+        "translateOnLoad": true,
+        "layout": "card"
+      }
+    },
+    "th_odatis_centre_donnees_tree.key": {
+      "terms": {
+        "field": "th_odatis_centre_donnees_tree.key",
+        "size": 30
+      },
+      "meta": {
+        "translateOnLoad": true,
+        "layout": "treemap"
+      }
+    },
+    "th_NVS-OD1_tree.key": {
+      "terms": {
+        "field": "th_NVS-OD1_tree.key",
+        "size": 30
+      },
+      "meta": {
+        "thesaurus": "NVS.OD1",
+        "translateOnLoad": true,
+        "layout": "card"
       }
     }
   }

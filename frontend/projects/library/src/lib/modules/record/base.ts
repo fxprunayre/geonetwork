@@ -1,1 +1,1 @@
-export * from './record-field-base/record-field-base';
+export * from './fields/record-field-base';

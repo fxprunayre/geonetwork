@@ -1,1 +1,1 @@
-export * from './record-field-coverage-coordinate/record-field-coverage-coordinate';
+export * from './fields/record-field-coverage-coordinate';
