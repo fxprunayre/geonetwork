@@ -6,27 +6,19 @@ import {
   OnDestroy,
   OnInit,
   computed,
+  effect,
   inject,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { APPLICATION_CONFIGURATION, DEFAULT_MAP_CONTEXT, Gn4MapCommand } from 'gn-library';
+import {
+  APPLICATION_CONFIGURATION,
+  DEFAULT_MAP_CONTEXT,
+  Gn4MapCommand,
+  MapViewerLike,
+  SEXTANT_VIEWER_SCRIPT_URL,
+  ensureSxtViewer,
+} from 'gn-library';
 import { Subscription } from 'rxjs';
-
-interface ViewerElement extends HTMLElement {
-  setContext(context: unknown): void;
-  addLayer(
-    layer: {
-      type: string;
-      id: string;
-      url: string;
-      name: string;
-      label: string;
-      visibility: boolean;
-      attributions: string;
-    },
-    focus: boolean,
-  ): void;
-}
 
 @Component({
   selector: 'app-map',
@@ -46,36 +38,52 @@ export class MapComponent implements OnInit, OnDestroy {
     () => this.appConfiguration().config?.apps?.map?.context || DEFAULT_MAP_CONTEXT,
   );
 
-  viewer: unknown;
+  viewer: MapViewerLike | null = null;
+  private lastMapContext: unknown = null;
+
+  constructor() {
+    effect(() => {
+      this.mapContext();
+      this.applyMapContext();
+    });
+  }
 
   ngOnInit() {
-    const scriptUrl =
-      'https://cdn.jsdelivr.net/gh/camptocamp/sextant-viewer@dist-main/sxt-viewer.js';
-    if (!document.querySelector(`script[src="\${scriptUrl}"]`)) {
+    if (!document.querySelector(`script[src="${SEXTANT_VIEWER_SCRIPT_URL}"]`)) {
       const script = document.createElement('script');
       script.type = 'module';
-      script.src = scriptUrl;
+      script.src = SEXTANT_VIEWER_SCRIPT_URL;
       script.crossOrigin = 'anonymous';
       script.onload = () => {
         this.initMap();
       };
       document.body.appendChild(script);
+    } else {
+      this.initMap();
     }
   }
 
   async initMap() {
-    await customElements.whenDefined('sxt-viewer');
-    if (this.viewer) return;
-
-    this.viewer = this.elementRef.nativeElement.querySelector('sxt-viewer');
+    this.viewer = await ensureSxtViewer(
+      SEXTANT_VIEWER_SCRIPT_URL,
+      this.elementRef.nativeElement as HTMLElement,
+    );
     if (this.viewer) {
-      (this.viewer as ViewerElement).setContext(this.mapContext());
+      this.applyMapContext();
       this.monitorRoute();
     }
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe();
+  }
+
+  private applyMapContext() {
+    const context = this.mapContext();
+    if (this.viewer && this.lastMapContext !== context) {
+      this.viewer.setContext(context);
+      this.lastMapContext = context;
+    }
   }
 
   private monitorRoute() {
@@ -87,7 +95,7 @@ export class MapComponent implements OnInit, OnDestroy {
             if (this.viewer) {
               commands.forEach((cmd) => {
                 const layerType = cmd.type || 'wms';
-                (this.viewer as ViewerElement).addLayer(
+                this.viewer!.addLayer(
                   {
                     type: layerType,
                     id: layerType + ':' + cmd.url + '#' + cmd.name,

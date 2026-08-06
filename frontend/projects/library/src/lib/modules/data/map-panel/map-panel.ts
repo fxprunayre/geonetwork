@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { Gn4MapCommand } from '../../record-distributions/map-service';
+import { SEXTANT_VIEWER_SCRIPT_URL, ensureSxtViewer, type MapViewerLike } from '../map-utils';
 
 @Component({
   selector: 'app-map-panel',
@@ -23,24 +24,27 @@ export class MapPanel {
 
   private elementRef = inject(ElementRef);
 
-  private viewer: {
-    setContext: (ctx: Record<string, unknown>) => void;
-    addLayer: (layer: Record<string, unknown>, focus: boolean) => void;
-  } | null = null;
+  private viewer: MapViewerLike | null = null;
   private addedLayerIds = new Set<string>();
+  private lastMapContext: Record<string, unknown> | null = null;
 
   constructor() {
     effect(() => {
       const active = this.isActive();
       const commands = this.commands();
+      const mapContext = this.mapContext();
       this.focusCommands();
-      this.mapContext();
 
       if (!active || commands.length === 0) {
         return;
       }
 
       this.ensureViewerReady().then(() => {
+        if (this.viewer && this.lastMapContext !== mapContext) {
+          this.viewer.setContext(mapContext);
+          this.lastMapContext = mapContext;
+        }
+
         this.addLayersToEmbeddedMap(this.commands(), this.focusCommands());
       });
     });
@@ -51,21 +55,10 @@ export class MapPanel {
       return;
     }
 
-    const scriptUrl = 'https://sextant.gitlab-pages.ifremer.fr/viewer/sxt-viewer.js';
-    if (!document.querySelector(`script[src="${scriptUrl}"]`)) {
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = scriptUrl;
-      script.crossOrigin = 'anonymous';
-      document.body.appendChild(script);
-      await new Promise<void>((resolve) => {
-        script.onload = () => resolve();
-      });
-    }
-
-    await customElements.whenDefined('sxt-viewer');
-
-    this.viewer = this.elementRef.nativeElement.querySelector('sxt-viewer');
+    this.viewer = await ensureSxtViewer(
+      SEXTANT_VIEWER_SCRIPT_URL,
+      this.elementRef.nativeElement as HTMLElement,
+    );
     if (this.viewer) {
       this.viewer.setContext(this.mapContext());
     }

@@ -23,6 +23,7 @@ export * from './lib/modules/config/gn4-url.service';
 export * from './lib/modules/config/model/gn4config';
 export * from './lib/modules/config/model/gnConfig';
 export * from './lib/modules/data/dataviz-panel/dataviz-panel';
+export * from './lib/modules/data/map-utils';
 export * from './lib/modules/i18n/language-switcher';
 export * from './lib/modules/i18n/translations-service';
 export * from './lib/modules/i18n/translations.loader';
