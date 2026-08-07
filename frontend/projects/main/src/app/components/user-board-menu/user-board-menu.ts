@@ -7,22 +7,18 @@ import {
   faSolidPaintRoller,
   faSolidPlus,
 } from '@ng-icons/font-awesome/solid';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
   APPLICATION_CONFIGURATION,
   AuthStore,
-  ConfigEditorComponent,
   Gn4UrlService,
   IconStyleService,
-  LanguageSwitcher,
   RecordActionService,
   TranslationsService,
 } from 'gn-library';
 import { MenuItem } from 'primeng/api';
-import { Drawer } from 'primeng/drawer';
 import { MenubarModule } from 'primeng/menubar';
-
-import { TabsModule } from 'primeng/tabs';
+import { AppConfigurationPanelService } from '../app-configuration-panel.service';
 
 const ICONS = {
   faSolidPlus,
@@ -34,16 +30,10 @@ const ICONS = {
 
 @Component({
   selector: 'app-user-board-menu',
-  imports: [
-    MenubarModule,
-    TranslatePipe,
-    Drawer,
-    LanguageSwitcher,
-    ConfigEditorComponent,
-    TabsModule,
-  ],
+  imports: [MenubarModule],
   viewProviders: [provideIcons(ICONS)],
-  template: ` <p-menubar
+  template: `
+    <p-menubar
       [model]="items()"
       (click)="$event.stopPropagation()"
       [pt]="{
@@ -54,33 +44,7 @@ const ICONS = {
         <!-- <app-user-avatar /> -->
       </ng-template>
     </p-menubar>
-
-    <p-drawer
-      [(visible)]="isConfigurationVisible"
-      [header]="'menu.settings' | translate"
-      position="right"
-      styleClass="!w-3/4"
-      [pt]="{ header: 'header-row' }"
-    >
-      <p-tabs value="preferences">
-        <p-tablist>
-          <p-tab value="preferences">{{ 'user.boardMenu.preferences' | translate }}</p-tab>
-          @if (userRole() === 'Administrator') {
-            <p-tab value="configuration">{{ 'user.boardMenu.configuration' | translate }}</p-tab>
-          }
-        </p-tablist>
-        <p-tabpanels>
-          <p-tabpanel value="preferences">
-            <app-language-switcher />
-          </p-tabpanel>
-          @if (userRole() === 'Administrator') {
-            <p-tabpanel value="configuration">
-              <app-config-editor />
-            </p-tabpanel>
-          }
-        </p-tabpanels>
-      </p-tabs>
-    </p-drawer>`,
+  `,
 })
 export class UserBoardMenu implements OnInit {
   items = computed<MenuItem[] | undefined>(() => {
@@ -127,7 +91,7 @@ export class UserBoardMenu implements OnInit {
         visible: this.isAuthenticated(),
         icon: 'faSolidPaintRoller',
         command: () => {
-          this.isConfigurationVisible.update((v) => !v);
+          this.panelService.open();
         },
       },
     ];
@@ -138,6 +102,7 @@ export class UserBoardMenu implements OnInit {
   styleService = inject(IconStyleService);
 
   readonly authStore = inject(AuthStore);
+  readonly panelService = inject(AppConfigurationPanelService);
 
   gn4UrlService = inject(Gn4UrlService);
   recordAddAction = inject(RecordActionService);
@@ -173,9 +138,5 @@ export class UserBoardMenu implements OnInit {
       ICONS,
       this.elementRef.nativeElement.getRootNode(),
     );
-  }
-
-  toggleConfiguration() {
-    //this.isConfigurationVisible.update((v) => !v);
   }
 }

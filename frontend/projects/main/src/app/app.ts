@@ -32,7 +32,7 @@ import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-root',
-  providers: [SearchService, provideIcons({ faSolidPlugCircleExclamation })],
+  providers: [provideIcons({ faSolidPlugCircleExclamation })],
   imports: [
     RouterOutlet,
     FormsModule,

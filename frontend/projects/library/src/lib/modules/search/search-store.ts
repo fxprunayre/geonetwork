@@ -399,7 +399,9 @@ export const SearchStore = signalStore(
         patchState(store, { currentPage: store.currentPage() + store.pageSize() });
       },
       previous() {
-        patchState(store, { currentPage: store.currentPage() - store.pageSize() });
+        patchState(store, {
+          currentPage: Math.max(0, store.currentPage() - store.pageSize()),
+        });
       },
       setRouting,
       subscribeToRouteChange,
