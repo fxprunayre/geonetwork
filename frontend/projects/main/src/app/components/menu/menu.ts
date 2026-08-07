@@ -39,6 +39,7 @@ import {
   RecordActionService,
   RecordAddMenu,
   SEARCH_ROUTE_PATH,
+  SearchRouteService,
   TranslationsService,
   UserAvatar,
   UserFullNamePipe,
@@ -111,6 +112,7 @@ export class MenuComponent implements OnInit {
   gn4UrlService = inject(Gn4UrlService);
   recordAddAction = inject(RecordActionService);
   router = inject(Router);
+  searchRouteService = inject(SearchRouteService);
   messageService = inject(MessageService);
 
   elementRef = inject(ElementRef);
@@ -141,7 +143,11 @@ export class MenuComponent implements OnInit {
         title: this.isIconMode() ? this.translateService.instant('menu.search') : '',
         visible: appsConfig?.search?.enabled ?? true,
         icon: 'faSolidMagnifyingGlass',
-        routerLink: SEARCH_ROUTE_PATH,
+        command: () => {
+          this.router.navigate([SEARCH_ROUTE_PATH], {
+            queryParams: this.searchRouteService.getLastSearchRouteParams(),
+          });
+        },
         routerLinkActiveOptions: { exact: false },
         ...this.itemConfig(),
       },

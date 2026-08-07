@@ -26,6 +26,21 @@ export class SearchRouteService {
   private readonly SPATIAL_FIELD = 'geom';
   private readonly SPATIAL_BBOX_PARAM = 'bbox';
   private readonly SPATIAL_RELATION_PARAM = 'bboxRel';
+  private lastSearchRouteParams: Params = {};
+
+  rememberSearchRouteParams(params: Params) {
+    this.lastSearchRouteParams = this.filterSearchRouteParams(params);
+  }
+
+  getLastSearchRouteParams(): Params {
+    return { ...this.lastSearchRouteParams };
+  }
+
+  private filterSearchRouteParams(params: Params): Params {
+    return Object.fromEntries(
+      Object.entries(params).filter(([key]) => !['add', 'wmsAdd'].includes(key)),
+    );
+  }
 
   buildFilterQueryParams(filter: SearchFilter): string {
     return `"${filter.values.join('" OR "')}"`;
@@ -33,6 +48,7 @@ export class SearchRouteService {
 
   setRoute(store: SearchRequestParameters, _pageSize: number) {
     const urlParams = this.convertSearchToRouteParams(store);
+    this.rememberSearchRouteParams(urlParams);
 
     this.router.navigate([SEARCH_ROUTE_PATH], { queryParams: urlParams });
   }
@@ -87,6 +103,7 @@ export class SearchRouteService {
     currentLayout: string,
     currentFilter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
   ): Record<string, unknown> {
+    this.rememberSearchRouteParams(params);
     const filter: Record<string, SearchFilter> = {};
     const nonFilterParams = [
       'from',

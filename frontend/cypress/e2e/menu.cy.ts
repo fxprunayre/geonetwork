@@ -1,3 +1,5 @@
+import { SURVAL_UUID } from '../support/utils';
+
 describe('Navigation menu', () => {
   const MENU_ITEMS_COUNT = 6;
   const ROLE_ADMIN_MENU_ITEMS_COUNT = 1;
@@ -48,6 +50,13 @@ describe('Navigation menu', () => {
     it('should navigate to the Map', () => {
       cy.get('@menuItems').eq(3).click();
       cy.url().should('include', '/map');
+    });
+
+    it('should preserve the search state', () => {
+      cy.visitPage('search', { q: SURVAL_UUID });
+      cy.get('@menuItems').eq(3).click();
+      cy.get('@menuItems').eq(2).click();
+      cy.url().should('include', '/search?q=' + SURVAL_UUID);
     });
 
     // it('should open the Map in a new window', () => {
