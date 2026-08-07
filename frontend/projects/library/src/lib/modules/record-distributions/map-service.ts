@@ -95,14 +95,14 @@ export class MapService {
   matchRequestedLayerLabels(
     layers: unknown[] | null,
     layerNamesValue: string | null | undefined,
-  ): string[] | null {
+  ): string | null {
     const matchedLayers = this.matchRequestedLayers(layers, layerNamesValue);
     if (!matchedLayers) {
       return null;
     }
 
     const typedLayers = matchedLayers as { name: string; title?: string }[];
-    return typedLayers.map((layer) => layer.title || layer.name);
+    return typedLayers.map((layer) => layer.title || layer.name).join(', ');
   }
 
   async validateBulkWmsLinks(links: Link[], minLinks = 2): Promise<BulkWmsValidationResult | null> {
@@ -122,7 +122,7 @@ export class MapService {
     };
   }
 
-  private async resolveWmsLinkLabels(link: Link): Promise<string[] | null> {
+  private async resolveWmsLinkLabels(link: Link): Promise<string | null> {
     const layers = await this.resolveEndpointLayers(link);
     return this.matchRequestedLayerLabels(layers, link.nameObject?.['default']);
   }
@@ -131,7 +131,7 @@ export class MapService {
     links: Link[],
     recordUuid: string | undefined,
     type: 'wms' | 'wmts',
-    label?: string,
+    label?: string[],
   ): Gn4MapCommand[] {
     if (!recordUuid) {
       return [];
@@ -150,7 +150,7 @@ export class MapService {
           command.name = encodeURIComponent(link.nameObject['default']);
         }
 
-        command.label = encodeURIComponent(label || command.name || '');
+        command.label = encodeURIComponent(label?.[links.indexOf(link)] || command.name || '');
         return command;
       });
   }

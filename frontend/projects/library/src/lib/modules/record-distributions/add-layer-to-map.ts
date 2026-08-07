@@ -164,7 +164,7 @@ export class AddLayerToMap extends RecordFieldBase {
       links,
       this.record().uuid,
       this.serviceType(),
-      label,
+      label ? [label] : undefined,
     );
 
     this.mapService.navigateToMap(command, this.record().uuid, this.mapLayerDisplayTarget());

@@ -28,6 +28,7 @@ import { MapService } from './map-service';
   template: `
     @if (status() === 'loading') {
       <p-button
+        data-testid="add-all-layers-to-map-button"
         styleClass="w-full md:w-auto"
         [label]="'record.action.addWms.addAllToMap' | translate"
         size="small"
@@ -37,6 +38,7 @@ import { MapService } from './map-service';
       />
     } @else if (status() === 'error') {
       <p-button
+        data-testid="add-all-layers-to-map-button"
         severity="warn"
         [rounded]="true"
         size="small"
@@ -46,8 +48,9 @@ import { MapService } from './map-service';
       </p-button>
     } @else if (status() === 'found') {
       <p-button
+        data-testid="add-all-layers-to-map-button"
         styleClass="w-full md:w-auto"
-        (click)="addWmsLayers(validLinks(), matchingLayersLabel())"
+        (click)="addWmsLayers(validLinks())"
         [title]="
           'record.action.addWms.allLayersFound' | translate: { layerNames: matchingLayersLabel() }
         "
@@ -128,8 +131,13 @@ export class AddAllLayersToMap extends RecordFieldBase {
     }
   }
 
-  addWmsLayers = (links: Link[], label?: string) => {
-    const command = this.mapService.buildMapCommands(links, this.record().uuid, 'wms', label);
+  addWmsLayers = (links: Link[]) => {
+    const command = this.mapService.buildMapCommands(
+      links,
+      this.record().uuid,
+      'wms',
+      this.matchedLayers(),
+    );
 
     this.mapService.navigateToMap(command, this.record().uuid, this.mapLayerDisplayTarget());
   };

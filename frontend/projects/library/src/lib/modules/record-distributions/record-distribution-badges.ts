@@ -25,7 +25,25 @@ import { RecordDistributionFieldBase } from './record-distribution-field-base';
       faSolidNetworkWired,
     }),
   ],
-  templateUrl: './record-distribution-badges.html',
+  template: ` @if (distributionConfig()) {
+    <div class="flex flex-wrap gap-2">
+      @for (section of linksBySectionsSelected() | keyvalue; track $index) {
+        @let label = 'record.field.distribution.sections.' + section.key | translate;
+        <a
+          pButton
+          [title]="getSectionTooltip(section.key, section.value, label)"
+          [routerLink]="getSectionRouterLink(section.key, section.value)"
+          [queryParams]="getSectionQueryParams(section.key)"
+          (click)="onSectionClick($event, section.key, section.value)"
+          severity="success"
+          size="small"
+        >
+          <ng-icon [svg]="iconsByType[section.key]" pButtonIcon />
+          <span pButtonLabel class="hidden 2xl:inline">{{ label }}</span>
+        </a>
+      }
+    </div>
+  }`,
 })
 export class RecordDistributionBadges extends RecordDistributionFieldBase {
   private readonly mapService = inject(MapService);
@@ -73,7 +91,6 @@ export class RecordDistributionBadges extends RecordDistributionFieldBase {
     if (!this.shouldTriggerAddAllToMap(sectionKey, links)) {
       return defaultLabel;
     }
-
     return this.translateService.instant('record.action.addWms.addAllToMap');
   }
 
@@ -92,12 +109,11 @@ export class RecordDistributionBadges extends RecordDistributionFieldBase {
         return;
       }
 
-      const matchingLayersLabel = validation.matchedLayerLabels.join(', ');
       const command = this.mapService.buildMapCommands(
         validation.validLinks,
         this.record().uuid,
         'wms',
-        matchingLayersLabel,
+        validation.matchedLayerLabels,
       );
 
       this.mapService.navigateToMap(command, this.record().uuid, this.mapLayerDisplayTarget());
