@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --project main",
+    "geolibre:up": "docker compose -f docker-compose.geolibre.yml up -d",
+    "geolibre:down": "docker compose -f docker-compose.geolibre.yml down",
     "watch-lib": "ng build library --watch",
     "watch-gn-api-client": "ng build gn-api-client --watch",
     "watch-gn4-api-client": "ng build gn4-api-client --watch",
@@ -64,6 +66,7 @@
     "@angular/router": "^21.2.17",
     "@camptocamp/ogc-client": "^1.3.1-dev.bb345f0",
     "@duckdb/duckdb-wasm": "^1.33.1-dev45.0",
+    "@geolibre/embed": "^2.5.0",
     "@geospatial-sdk/core": "^0.0.5-dev.61",
     "@geospatial-sdk/openlayers": "^0.0.5-dev.61",
     "@ng-icons/core": "^33.2.2",

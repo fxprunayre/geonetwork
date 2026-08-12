@@ -28,6 +28,7 @@ import { ExploreDatavizPanel } from '../dataviz-panel/dataviz-panel';
 import { DatavizSelect } from '../dataviz-select/dataviz-select';
 import { DatavizSource } from '../dataviz.model';
 import { DuckDbService } from '../duck-db-service';
+import { GeoLibreMapPanel } from '../geolibre-map-panel/geolibre-map-panel';
 import { MapPanel } from '../map-panel/map-panel';
 import { Perspective } from '../perspective/perspective';
 
@@ -43,6 +44,7 @@ import { Perspective } from '../perspective/perspective';
     DatavizSelect,
     ExploreDatavizPanel,
     FormsModule,
+    GeoLibreMapPanel,
     MapPanel,
     NgTemplateOutlet,
     NgIcon,
@@ -66,9 +68,23 @@ export class ExplorePanel {
   route = inject(ActivatedRoute);
   router = inject(Router);
 
-  mapContext = computed<Record<string, unknown>>(
-    () => selectMapAppConfiguration(this.appConfiguration()).context as Record<string, unknown>,
-  );
+  mapApp = computed(() => selectMapAppConfiguration(this.appConfiguration()));
+
+  mapType = computed(() => this.mapApp().type);
+
+  mapContext = computed<Record<string, unknown>>(() => {
+    const mapApp = this.mapApp();
+
+    if (this.mapType() === 'geolibre') {
+      return {
+        geolibre: {
+          ...(mapApp.geolibre || {}),
+        },
+      };
+    }
+
+    return (mapApp.geospatialsdk?.context as Record<string, unknown> | undefined) || {};
+  });
 
   mapLayerDisplayTarget = computed(
     () =>

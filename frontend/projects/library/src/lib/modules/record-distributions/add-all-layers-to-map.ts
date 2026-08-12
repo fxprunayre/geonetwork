@@ -71,6 +71,7 @@ export class AddAllLayersToMap extends RecordFieldBase {
   status = signal<'idle' | 'loading' | 'found' | 'error'>('idle');
   validLinks = signal<Link[]>([]);
   matchedLayers = signal<string[]>([]);
+  boundsByLinkKey = signal<Record<string, [number, number, number, number]>>({});
 
   mapLayerDisplayTarget = computed(
     () =>
@@ -92,6 +93,7 @@ export class AddAllLayersToMap extends RecordFieldBase {
       if (!this.mapService.hasBulkWmsLinks(links)) {
         this.validLinks.set([]);
         this.matchedLayers.set([]);
+        this.boundsByLinkKey.set({});
         this.status.set('idle');
         return;
       }
@@ -113,12 +115,14 @@ export class AddAllLayersToMap extends RecordFieldBase {
       if (!validation) {
         this.validLinks.set([]);
         this.matchedLayers.set([]);
+        this.boundsByLinkKey.set({});
         this.status.set('idle');
         return;
       }
 
       this.validLinks.set(validation.validLinks);
       this.matchedLayers.set(validation.matchedLayerLabels);
+      this.boundsByLinkKey.set(validation.boundsByLinkKey);
       this.status.set('found');
     } catch (e) {
       console.error(e);
@@ -126,6 +130,7 @@ export class AddAllLayersToMap extends RecordFieldBase {
       if (runId === this.validationRun) {
         this.validLinks.set([]);
         this.matchedLayers.set([]);
+        this.boundsByLinkKey.set({});
         this.status.set('error');
       }
     }
@@ -137,6 +142,7 @@ export class AddAllLayersToMap extends RecordFieldBase {
       this.record().uuid,
       'wms',
       this.matchedLayers(),
+      this.boundsByLinkKey(),
     );
 
     this.mapService.navigateToMap(command, this.record().uuid, this.mapLayerDisplayTarget());

@@ -1,6 +1,10 @@
 import { elasticsearch } from 'gn-api-client';
 import { DEFAULT_AUTHENTICATION_APP_CONFIGURATION } from '../authentication/config/authentication-config';
-import { DEFAULT_MAP_CONTEXT } from '../data/config/map-config';
+import {
+  DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
+  DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
+  DEFAULT_MAP_TYPE,
+} from '../data/config/map-config';
 import { DEFAULT_HOME_APP_CONFIGURATION } from '../home/config/home-config';
 import { DEFAULT_HEADER_APP_CONFIGURATION, DEFAULT_LANGUAGE } from '../i18n/config/i18n-config';
 import { DEFAULT_SEARCH_APP_CONFIGURATION } from '../search/config/search-config';
@@ -110,7 +114,9 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
       const mapConfig = module as Map;
       conf.apps.map = {
         enabled: mapConfig.enabled ?? true,
-        context: DEFAULT_MAP_CONTEXT,
+        type: DEFAULT_MAP_TYPE,
+        geolibre: DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
+        geospatialsdk: DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
       };
     } else if (modKey === 'home') {
       const homeConfig = module as Home;
@@ -155,7 +161,9 @@ export function migrateGn4Config(gn4config: UiConfiguration): AppsConfiguration 
   if (!hasMap) {
     conf.apps.map = {
       enabled: true,
-      context: DEFAULT_MAP_CONTEXT,
+      type: DEFAULT_MAP_TYPE,
+      geolibre: DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
+      geospatialsdk: DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
     };
   }
   conf.apps.menu = {

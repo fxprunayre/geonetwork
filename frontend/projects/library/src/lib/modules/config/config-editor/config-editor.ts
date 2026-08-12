@@ -32,7 +32,7 @@ import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
 import { ThemeDesigner } from '../../../shared/widgets/theme-designer/theme-designer';
 import { APPLICATION_CONFIGURATION } from '../config.loader';
 import { DEFAULT_THEME } from '../default-theme';
-import { App, Apps } from '../model/gnConfig';
+import { App, Apps, MapApp, MapType } from '../model/gnConfig';
 
 @Component({
   selector: 'app-config-editor',
@@ -162,6 +162,21 @@ import { App, Apps } from '../model/gnConfig';
                     (colorChange)="updateBannerProperty('textColor', $event)"
                   ></app-color-picker>
                 </div>
+              }
+
+              @if (appName === 'map') {
+                <p-iftalabel>
+                  <select
+                    [id]="appName + '-map-type'"
+                    class="w-full p-inputtext"
+                    [ngModel]="apps.map?.type || 'geospatialsdk'"
+                    (ngModelChange)="updateMapType($event)"
+                  >
+                    <option value="geospatialsdk">geospatialsdk</option>
+                    <option value="geolibre">geolibre</option>
+                  </select>
+                  <label [for]="appName + '-map-type'">Map type</label>
+                </p-iftalabel>
               }
 
               <p-iftalabel>
@@ -372,6 +387,31 @@ export class ConfigEditorComponent {
         document.documentElement.style.setProperty('--app-background-text-color', value);
       }
     }
+  }
+
+  updateMapType(type: MapType) {
+    const current = this.appConfig();
+    const config = current.config ?? { apps: {} };
+    const apps = config.apps ?? {};
+    const currentMap = apps.map;
+
+    const nextMap: MapApp = {
+      enabled: currentMap?.enabled ?? true,
+      type,
+      geolibre: currentMap?.geolibre,
+      geospatialsdk: currentMap?.geospatialsdk,
+    };
+
+    this.appConfig.set({
+      ...current,
+      config: {
+        ...config,
+        apps: {
+          ...apps,
+          map: nextMap,
+        },
+      },
+    });
   }
 
   updateAppConfig(appName: keyof Apps, jsonStr: string) {

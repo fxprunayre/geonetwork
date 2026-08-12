@@ -103,8 +103,24 @@ export interface SearchAppAdvanced {
   score: string;
 }
 
+export type MapType = 'geolibre' | 'geospatialsdk';
+
+export interface GeoLibreEmbedConfiguration {
+  embedUrl?: string;
+  origin?: string;
+  projectUrl?: string;
+}
+
+export interface GeoSpatialSdkConfiguration {
+  context: MapContext;
+}
+
+export type MapContext = Record<string, unknown>;
+
 export interface MapApp extends App {
-  context: unknown;
+  type: MapType;
+  geolibre?: GeoLibreEmbedConfiguration;
+  geospatialsdk?: GeoSpatialSdkConfiguration;
 }
 
 export interface RecordDetailsApp extends App {

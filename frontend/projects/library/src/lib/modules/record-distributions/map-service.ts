@@ -12,11 +12,13 @@ export interface Gn4MapCommand {
   url: string;
   name?: string;
   label?: string;
+  boundsWgs84?: [number, number, number, number];
 }
 
 export interface BulkWmsValidationResult {
   validLinks: Link[];
   matchedLayerLabels: string[];
+  boundsByLinkKey: Record<string, [number, number, number, number]>;
 }
 
 @Injectable({
@@ -52,7 +54,9 @@ export class MapService {
     try {
       const endpoint = new WmsEndpoint(url);
       await endpoint.isReady();
-      return endpoint.getFlattenedLayers();
+      return endpoint.getFlattenedLayers().map((layer) => {
+        return endpoint.getLayerByName(layer.name) || layer;
+      });
     } catch (error) {
       const proxyUrl = this.appConfiguration().config?.proxyUrl;
       if (!proxyUrl) {
@@ -62,7 +66,9 @@ export class MapService {
 
       const proxiedEndpoint = new WmsEndpoint(`${proxyUrl}${encodeURIComponent(url)}`);
       await proxiedEndpoint.isReady();
-      return proxiedEndpoint.getFlattenedLayers();
+      return proxiedEndpoint.getFlattenedLayers().map((layer) => {
+        return proxiedEndpoint.getLayerByName(layer.name) || layer;
+      });
     }
   }
 
@@ -111,20 +117,40 @@ export class MapService {
       return null;
     }
 
-    const results = await Promise.all(wmsLinks.map((link) => this.resolveWmsLinkLabels(link)));
+    const results = await Promise.all(wmsLinks.map((link) => this.resolveWmsLinkValidation(link)));
     if (results.some((result) => result === null)) {
       return null;
     }
 
+    const boundsByLinkKey: Record<string, [number, number, number, number]> = {};
+    wmsLinks.forEach((link, index) => {
+      const bounds = results[index]!.boundsWgs84;
+      if (bounds) {
+        boundsByLinkKey[this.linkKey(link)] = bounds;
+      }
+    });
+
     return {
       validLinks: wmsLinks,
-      matchedLayerLabels: results.flatMap((result) => result!),
+      matchedLayerLabels: results.map((result) => result!.label),
+      boundsByLinkKey,
     };
   }
 
-  private async resolveWmsLinkLabels(link: Link): Promise<string | null> {
+  private async resolveWmsLinkValidation(
+    link: Link,
+  ): Promise<{ label: string; boundsWgs84: [number, number, number, number] | null } | null> {
     const layers = await this.resolveEndpointLayers(link);
-    return this.matchRequestedLayerLabels(layers, link.nameObject?.['default']);
+    const matchedLayers = this.matchRequestedLayers(layers, link.nameObject?.['default']);
+    if (!matchedLayers) {
+      return null;
+    }
+
+    const typedLayers = matchedLayers as { name: string; title?: string }[];
+    return {
+      label: typedLayers.map((layer) => layer.title || layer.name).join(', '),
+      boundsWgs84: this.resolveMatchedLayersBoundsWgs84(matchedLayers),
+    };
   }
 
   buildMapCommands(
@@ -132,6 +158,7 @@ export class MapService {
     recordUuid: string | undefined,
     type: 'wms' | 'wmts',
     label?: string[],
+    boundsByLinkKey?: Record<string, [number, number, number, number]>,
   ): Gn4MapCommand[] {
     if (!recordUuid) {
       return [];
@@ -150,9 +177,79 @@ export class MapService {
           command.name = encodeURIComponent(link.nameObject['default']);
         }
 
+        const bounds = boundsByLinkKey?.[this.linkKey(link)];
+        if (bounds) {
+          command.boundsWgs84 = bounds;
+        }
+
         command.label = encodeURIComponent(label?.[links.indexOf(link)] || command.name || '');
         return command;
       });
+  }
+
+  private linkKey(link: Link): string {
+    return `${link.urlObject?.['default'] || ''}::${link.nameObject?.['default'] || ''}`;
+  }
+
+  private resolveMatchedLayersBoundsWgs84(
+    matchedLayers: unknown[],
+  ): [number, number, number, number] | null {
+    const extents = matchedLayers
+      .map((layer) => this.readLayerExtentWgs84(layer as Record<string, unknown>))
+      .filter((extent): extent is [number, number, number, number] => extent !== null);
+
+    if (extents.length === 0) {
+      return null;
+    }
+
+    return extents.reduce(
+      (acc, current) => [
+        Math.min(acc[0], current[0]),
+        Math.min(acc[1], current[1]),
+        Math.max(acc[2], current[2]),
+        Math.max(acc[3], current[3]),
+      ],
+      [...extents[0]] as [number, number, number, number],
+    );
+  }
+
+  private readLayerExtentWgs84(
+    layer: Record<string, unknown>,
+  ): [number, number, number, number] | null {
+    return this.parseBboxCandidateWgs84(layer['boundingBoxes']);
+  }
+
+  private parseBboxCandidateWgs84(value: unknown): [number, number, number, number] | null {
+    if (!value || typeof value !== 'object') {
+      return null;
+    }
+
+    const boxes = value as Record<string, unknown>;
+    const epsg4326 = boxes['EPSG:4326'] ?? boxes['epsg:4326'];
+    if (!Array.isArray(epsg4326) || epsg4326.length !== 4) {
+      return null;
+    }
+
+    const bbox = this.normalizeBbox(epsg4326.map((candidate) => Number(candidate)));
+    return bbox && this.isWgs84Box(bbox) ? bbox : null;
+  }
+
+  private normalizeBbox(values: number[]): [number, number, number, number] | null {
+    if (
+      values.length !== 4 ||
+      values.some((value) => Number.isNaN(value) || !Number.isFinite(value))
+    ) {
+      return null;
+    }
+
+    const [minx, miny, maxx, maxy] = values;
+    return [Math.min(minx, maxx), Math.min(miny, maxy), Math.max(minx, maxx), Math.max(miny, maxy)];
+  }
+
+  private isWgs84Box([minx, miny, maxx, maxy]: [number, number, number, number]): boolean {
+    return (
+      minx >= -180 && maxx <= 180 && miny >= -90 && maxy <= 90 && minx !== maxx && miny !== maxy
+    );
   }
 
   navigateToMap(

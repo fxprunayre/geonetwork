@@ -1,0 +1,10 @@
+services:
+  geolibre:
+    image: ghcr.io/opengeos/geolibre:latest
+    container_name: geolibre-local
+    ports:
+      - '8091:80'
+    environment:
+      # Allow the frontend dev server to use the embed API.
+      GEOLIBRE_EMBED_ORIGINS: 'http://localhost:4200,http://127.0.0.1:4200'
+    restart: unless-stopped

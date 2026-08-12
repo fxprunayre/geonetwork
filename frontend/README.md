@@ -78,6 +78,58 @@ If you change `bundleName`, update your embedding snippet to load the same file 
 <script src="<your-bundle-name>.js" type="module"></script>
 ```
 
+## Local GeoLibre for development
+
+To use `apps.map.type = geolibre` with add-to-map actions in local development,
+run a local GeoLibre instance with embed API authorization enabled and proxy it
+through the Angular dev server.
+
+1. Start GeoLibre container:
+
+```bash
+npm run geolibre:up
+```
+
+This starts `ghcr.io/opengeos/geolibre` on `http://localhost:8091` with:
+
+* `GEOLIBRE_EMBED_ORIGINS=http://localhost:4200,http://127.0.0.1:4200`
+
+2. Start frontend dev server (already configured with `proxy.config.js`):
+
+```bash
+npm start
+```
+
+3. Use the following map config values (inline config or UI config):
+
+```json
+{
+  "apps": {
+    "map": {
+      "enabled": true,
+      "type": "geolibre",
+      "context": {
+        "geolibre": {
+          "embedUrl": "/geolibre/?embed=1"
+        }
+      }
+    }
+  }
+}
+```
+
+4. Stop GeoLibre when done:
+
+```bash
+npm run geolibre:down
+```
+
+Notes:
+
+* `/geolibre` target is controlled by `proxy.config.js` and can be overridden with `GEOLIBRE_PROXY_TARGET`.
+* Example: `GEOLIBRE_PROXY_TARGET=http://localhost:8091 npm start`
+* After changing proxy settings, restart `ng serve` / `npm start`.
+
 ### Properties
 
 The `<sextant-app>` Web Component accepts the following properties (attributes):

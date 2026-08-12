@@ -3,7 +3,11 @@ import {
   DEFAULT_MENU_APP_CONFIGURATION,
 } from '../app-shell/config/app-shell-config';
 import { DEFAULT_AUTHENTICATION_APP_CONFIGURATION } from '../authentication/config/authentication-config';
-import { DEFAULT_MAP_CONTEXT } from '../data/config/map-config';
+import {
+  DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
+  DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
+  DEFAULT_MAP_TYPE,
+} from '../data/config/map-config';
 import { DEFAULT_HOME_APP_CONFIGURATION } from '../home/config/home-config';
 import { DEFAULT_HEADER_APP_CONFIGURATION } from '../i18n/config/i18n-config';
 import { DEFAULT_RECORD_DETAILS_APP_CONFIGURATION } from '../record';
@@ -30,7 +34,12 @@ export { DEFAULT_USER_SELECTIONS_APP_CONFIGURATION } from '../user-selections/co
 
 export { DEFAULT_SPACE } from '../space/config/space-config';
 
-export { DEFAULT_MAP_CONTEXT } from '../data/config/map-config';
+export {
+  DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
+  DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
+  DEFAULT_MAP_CONTEXT,
+  DEFAULT_MAP_TYPE,
+} from '../data/config/map-config';
 
 export {
   DEFAULT_RECORD_DETAILS_APP_CONFIGURATION,
@@ -72,7 +81,9 @@ export const DEFAULT_APPS_CONFIGURATION: AppsConfiguration = {
     search: DEFAULT_SEARCH_APP_CONFIGURATION,
     map: {
       enabled: true,
-      context: DEFAULT_MAP_CONTEXT,
+      type: DEFAULT_MAP_TYPE,
+      geolibre: DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
+      geospatialsdk: DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
     },
     record: DEFAULT_RECORD_DETAILS_APP_CONFIGURATION,
     banner: DEFAULT_BANNER_APP_CONFIGURATION,

@@ -114,6 +114,7 @@ export class RecordDistributionBadges extends RecordDistributionFieldBase {
         this.record().uuid,
         'wms',
         validation.matchedLayerLabels,
+        validation.boundsByLinkKey,
       );
 
       this.mapService.navigateToMap(command, this.record().uuid, this.mapLayerDisplayTarget());
