@@ -61,9 +61,35 @@ export interface HomeApp extends App {
 
 export type SearchAppLayout = 'list' | 'grid' | 'table';
 
+export type SearchFunctionScoreFunction = Omit<
+  elasticsearch.QueryDslFunctionScoreContainer,
+  'filter'
+> & {
+  // Some valid Elasticsearch DSL filters (eg. exists) are missing in generated API types.
+  filter?: elasticsearch.QueryDslQueryContainer | Record<string, unknown>;
+};
+
+export type SearchFunctionScoreConfig = Omit<
+  elasticsearch.QueryDslFunctionScoreQuery,
+  'query' | 'functions'
+> & {
+  functions?: SearchFunctionScoreFunction[];
+};
+
+export interface SearchKnnConfig {
+  field: string;
+  query_vector?: string | number[];
+  k: number;
+  num_candidates: number;
+  filter?: elasticsearch.QueryDslQueryContainer | Record<string, unknown>;
+}
+
 export interface SearchApp extends App {
   filter?: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
   aggregations: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
+  functionScore?: SearchFunctionScoreConfig;
+  minScore?: number;
+  knn?: SearchKnnConfig;
   advanced?: SearchAppAdvanced;
   sort?: string[];
   currentSort?: string;

@@ -1,5 +1,9 @@
 import { elasticsearch, IndexRecord } from 'gn-api-client';
-import { SearchAppLayout } from '../config/model/gnConfig';
+import {
+  SearchAppLayout,
+  SearchFunctionScoreConfig,
+  SearchKnnConfig,
+} from '../config/model/gnConfig';
 
 export const DEFAULT_PAGE_SIZE = 10;
 export const TRACK_TOTAL_HITS = true;
@@ -42,6 +46,9 @@ export interface SearchFilterParameters {
   filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[];
   filters?: Record<string, SearchFilter>;
   aggregationsConfig?: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
+  functionScore?: SearchFunctionScoreConfig;
+  minScore?: number;
+  knn?: SearchKnnConfig;
   currentSort: string;
   language?: string;
 }

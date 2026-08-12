@@ -69,7 +69,7 @@ export class SearchRouteService {
     }
 
     if (store.currentPage && store.currentPage !== 0) {
-      params['from'] = store.currentPage.toString();
+      params['from'] = (store.currentPage * store.pageSize).toString();
     }
 
     if (store.pageSize) {
@@ -127,9 +127,12 @@ export class SearchRouteService {
 
     const nextFilter = this.buildSpatialFilterFromParams(params, currentFilter);
 
+    const parsedPageSize = parseInt(params['size']) || pageSize;
+    const parsedFrom = parseInt(params['from']) || 0;
+
     return {
-      currentPage: parseInt(params['from']) || 0,
-      pageSize: parseInt(params['size']) || pageSize,
+      currentPage: Math.max(0, Math.floor(parsedFrom / parsedPageSize)),
+      pageSize: parsedPageSize,
       searchQuery: params['q'] || '',
       filter: nextFilter,
       filters: filter,

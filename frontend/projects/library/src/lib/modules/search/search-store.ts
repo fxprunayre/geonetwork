@@ -81,12 +81,18 @@ export const SearchStore = signalStore(
         authStore.isAuthenticated();
         const _space = apiConfiguration().space;
         const _catalogueUrl = apiConfiguration().catalogueUrl;
+        const functionScore = apiConfiguration().config?.apps.search?.functionScore;
+        const minScore = apiConfiguration().config?.apps.search?.minScore;
+        const knn = apiConfiguration().config?.apps.search?.knn;
         return {
           searchQuery: store.searchQuery(),
           filter: store.filter(),
           filters: store.filterStore.filters(),
           currentSort: store.currentSort(),
           aggregationsConfig: untracked(store.aggStore.aggregationsConfig),
+          functionScore,
+          minScore,
+          knn,
           language: store.language(),
         } as SearchFilterParameters;
       }),
@@ -232,14 +238,13 @@ export const SearchStore = signalStore(
           }),
           switchMap((searchFilterParameters) => {
             patchState(store, {
-              currentPage: 0,
               pageSize: store.pageSize(),
               results: [],
             });
             return store.searchService
               .search({
                 ...searchFilterParameters,
-                currentPage: store.currentPage() || 0,
+                currentPage: store.currentPage(),
                 pageSize: store.pageSize(),
               } as SearchRequestParameters)
               .pipe(
@@ -331,7 +336,7 @@ export const SearchStore = signalStore(
         ),
       ),
       setFullTextQuery(value: string) {
-        patchState(store, { searchQuery: value });
+        patchState(store, { searchQuery: value, currentPage: 0 });
       },
       setFilter(
         filter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
@@ -396,11 +401,14 @@ export const SearchStore = signalStore(
         patchState(store, { currentPage, pageSize, results });
       },
       next() {
-        patchState(store, { currentPage: store.currentPage() + store.pageSize() });
+        const maxPage = Math.max(0, store.totalPages() - 1);
+        patchState(store, {
+          currentPage: Math.min(maxPage, store.currentPage() + 1),
+        });
       },
       previous() {
         patchState(store, {
-          currentPage: Math.max(0, store.currentPage() - store.pageSize()),
+          currentPage: Math.max(0, store.currentPage() - 1),
         });
       },
       setRouting,

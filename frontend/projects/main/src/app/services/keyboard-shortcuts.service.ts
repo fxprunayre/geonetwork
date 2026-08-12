@@ -119,7 +119,6 @@ export class KeyboardShortcutsService {
     ) {
       return true;
     }
-
     return false;
   }
 

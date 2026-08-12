@@ -146,6 +146,20 @@ export class SearchInput extends SearchBase {
     this.search().setFullTextQuery('');
   }
 
+  handleAutocompleteArrowKey(event: KeyboardEvent) {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+      return;
+    }
+
+    const target = event.target as HTMLInputElement | null;
+    if (!target || target.tagName !== 'INPUT') {
+      return;
+    }
+
+    // Keep native caret movement in the input while preventing global shortcut handlers.
+    event.stopPropagation();
+  }
+
   // FIXME: ShadowDOM:
   // Listen for clicks outside the component to close the autocomplete suggestions
   // because when app is using Shadow DOM, p-auto-complete's do not close on outside clicks

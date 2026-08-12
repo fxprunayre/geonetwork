@@ -107,4 +107,69 @@ describe('SearchService', () => {
   it('sorts relevance by _score descending', () => {
     expect(service.buildSort('_score')).toEqual([{ _score: 'desc' }]);
   });
+
+  it('wraps query with configured function score', () => {
+    const query = service.buildSearchRequest({
+      searchQuery: 'fish',
+      filter: [],
+      filters: {},
+      aggregationsConfig: [],
+      functionScore: {
+        score_mode: 'multiply',
+        boost_mode: 'multiply',
+        functions: [
+          {
+            filter: { exists: { field: 'parentUuid' } },
+            weight: 0.3,
+          },
+        ],
+      },
+      currentSort: '_score',
+      currentPage: 0,
+      pageSize: 10,
+      layout: 'list',
+    });
+
+    const functionScore = (
+      query.query as {
+        function_score?: elasticsearch.QueryDslFunctionScoreQuery;
+      }
+    ).function_score;
+
+    expect(functionScore).toBeDefined();
+    expect(functionScore?.score_mode).toBe('multiply');
+    expect(functionScore?.functions?.[0]).toEqual({
+      filter: { exists: { field: 'parentUuid' } },
+      weight: 0.3,
+    });
+  });
+
+  it('sets min_score and knn query vector from search input', () => {
+    const request = service.buildSearchRequest({
+      searchQuery: 'marine protected areas',
+      filter: [],
+      filters: {
+        resourceType: { field: 'resourceType', values: ['dataset'] },
+      },
+      aggregationsConfig: [],
+      knn: {
+        field: 'text_vector',
+        query_vector: '',
+        k: 10,
+        num_candidates: 100,
+      },
+      minScore: 0.75,
+      currentSort: '_score',
+      currentPage: 0,
+      pageSize: 10,
+      layout: 'list',
+    });
+
+    expect((request as unknown as { min_score?: number }).min_score).toBe(0.75);
+
+    const knn = (request as unknown as { knn?: Record<string, unknown> }).knn;
+    expect(knn?.['field']).toBe('text_vector');
+    expect(knn?.['query_vector']).toBe('marine protected areas');
+    expect(knn?.['filter']).toBeDefined();
+  });
 });

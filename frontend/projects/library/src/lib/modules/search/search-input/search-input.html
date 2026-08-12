@@ -29,6 +29,7 @@
         [placeholder]="placeholder() || ('search.input.placeholder' | translate)"
         (ngModelChange)="searchOnInputChange($event)"
         (keyup.enter)="searchOnClick()"
+        (keydown)="handleAutocompleteArrowKey($event)"
         [showClear]="true"
         (click)="handleInputClick($event)"
         scrollHeight="400px"

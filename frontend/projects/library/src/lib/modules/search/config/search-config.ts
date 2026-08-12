@@ -167,6 +167,68 @@ export const DEFAULT_SEARCH_APP_HITS_PER_PAGE_OPTIONS = [20, 100];
 export const DEFAULT_SEARCH_APP_CONFIGURATION: SearchApp = {
   enabled: true,
   aggregations: DEFAULT_SEARCH_APP_AGGREGATIONS,
+  functionScore: {
+    score_mode: 'sum',
+    boost_mode: 'sum',
+    functions: [
+      // {
+      //   filter: { term: { resourceType: 'series' } },
+      //   weight: 1.1,
+      // },
+      {
+        filter: { exists: { field: 'parentUuid' } },
+        weight: 0.3,
+      },
+      {
+        filter: { match: { 'cl_status.key': 'obsolete' } },
+        weight: 0.2,
+      },
+      {
+        filter: { match: { 'cl_status.key': 'superseded' } },
+        weight: 0.3,
+      },
+      {
+        gauss: {
+          publicationDateForResource: {
+            origin: 'now',
+            scale: '365d',
+            offset: '30d',
+            decay: 0.5,
+          },
+        },
+        weight: 1.5,
+      },
+      {
+        gauss: {
+          revisionDateForResource: {
+            origin: 'now',
+            scale: '365d',
+            offset: '30d',
+            decay: 0.5,
+          },
+        },
+        weight: 1.2,
+      },
+      {
+        gauss: {
+          creationDateForResource: {
+            origin: 'now',
+            scale: '365d',
+            offset: '90d',
+            decay: 0.5,
+          },
+        },
+        weight: 1.0,
+      },
+    ],
+  },
+  minScore: 0.75,
+  knn: {
+    field: 'text_vector',
+    query_vector: '',
+    k: 10,
+    num_candidates: 100,
+  },
   topTabAggregation: 'resourceType',
   hitsPerPageOptions: DEFAULT_SEARCH_APP_HITS_PER_PAGE_OPTIONS,
   sort: DEFAULT_SEARCH_APP_SORTOPTIONS,

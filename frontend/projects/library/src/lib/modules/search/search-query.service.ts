@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { elasticsearch } from 'gn-api-client';
+import { SearchFunctionScoreConfig, SearchKnnConfig } from '../config/model/gnConfig';
 import { AggregationService } from '../search-filter/aggregation-service';
 import { SEARCH_SOURCE } from './search-constant';
 import { SpatialBBox, SpatialFilterData, SpatialRelation } from './search-spatial.model';
@@ -11,40 +12,15 @@ import { SearchFilter, SearchRequestParameters, TRACK_TOTAL_HITS } from './searc
 export class SearchQueryService {
   private readonly aggregationService = inject(AggregationService);
 
-  escapeSpecialCharacters(queryString: string) {
-    return queryString.replace(/(\+|-|&&|\|\||!|\{|\}|\[|\]|\^|~|\?|:|\\{1}|\(|\)|\/)/g, '\\$1');
-  }
-
-  buildQuery(
-    query: string,
-    queryFilter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+  private buildFacetMustClauses(
     filters: Record<string, SearchFilter>,
     aggregationsConfig?: (
       | string
       | Record<string, elasticsearch.AggregationsAggregationContainer>
     )[],
-  ): elasticsearch.QueryDslQueryContainer {
-    const filter = queryFilter;
+  ): elasticsearch.QueryDslQueryContainer[] {
     const must: elasticsearch.QueryDslQueryContainer[] = [];
-    if (query) {
-      const elasticQueryRegexTemplate = /q\((.*)\)/;
-      const isElasticQuery = query.match(elasticQueryRegexTemplate);
-      if (isElasticQuery) {
-        must.push({
-          query_string: {
-            query: query.replace(elasticQueryRegexTemplate, '$1').trim(),
-          },
-        });
-      } else {
-        must.push({
-          query_string: {
-            query: this.escapeSpecialCharacters(query),
-            default_operator: 'AND',
-            fields: ['resourceTitleObject.*^5', 'any.*', 'uuid'],
-          },
-        });
-      }
-    }
+
     for (const field of Object.keys(filters)) {
       let isFiltersAgg = false;
       const matchedFilters: elasticsearch.QueryDslQueryContainer[] = [];
@@ -113,6 +89,46 @@ export class SearchQueryService {
       }
     }
 
+    return must;
+  }
+
+  escapeSpecialCharacters(queryString: string) {
+    return queryString.replace(/(\+|-|&&|\|\||!|\{|\}|\[|\]|\^|~|\?|:|\\{1}|\(|\)|\/)/g, '\\$1');
+  }
+
+  buildQuery(
+    query: string,
+    queryFilter: elasticsearch.QueryDslQueryContainer | elasticsearch.QueryDslQueryContainer[],
+    filters: Record<string, SearchFilter>,
+    aggregationsConfig?: (
+      | string
+      | Record<string, elasticsearch.AggregationsAggregationContainer>
+    )[],
+    functionScoreConfig?: SearchFunctionScoreConfig,
+  ): elasticsearch.QueryDslQueryContainer {
+    const filter = queryFilter;
+    const must: elasticsearch.QueryDslQueryContainer[] = [];
+    if (query) {
+      const elasticQueryRegexTemplate = /q\((.*)\)/;
+      const isElasticQuery = query.match(elasticQueryRegexTemplate);
+      if (isElasticQuery) {
+        must.push({
+          query_string: {
+            query: query.replace(elasticQueryRegexTemplate, '$1').trim(),
+          },
+        });
+      } else {
+        must.push({
+          query_string: {
+            query: this.escapeSpecialCharacters(query),
+            default_operator: 'AND',
+            fields: ['resourceTitleObject.*^5', 'any.*', 'uuid'],
+          },
+        });
+      }
+    }
+    must.push(...this.buildFacetMustClauses(filters, aggregationsConfig));
+
     const must_not: elasticsearch.QueryDslQueryContainer[] = [];
     const should: elasticsearch.QueryDslQueryContainer[] = [];
     const baseQuery: elasticsearch.QueryDslQueryContainer = {
@@ -126,7 +142,7 @@ export class SearchQueryService {
 
     const spatialFilter = this.extractSpatialEnvelopeFilter(queryFilter, 'geom');
     if (!spatialFilter) {
-      return baseQuery;
+      return this.wrapWithFunctionScore(baseQuery, functionScoreConfig);
     }
 
     const centerLon = (spatialFilter.bbox.west + spatialFilter.bbox.east) / 2;
@@ -320,7 +336,29 @@ export class SearchQueryService {
       },
     };
 
-    return scoringQuery as unknown as elasticsearch.QueryDslQueryContainer;
+    return this.wrapWithFunctionScore(
+      scoringQuery as unknown as elasticsearch.QueryDslQueryContainer,
+      functionScoreConfig,
+    );
+  }
+
+  private wrapWithFunctionScore(
+    query: elasticsearch.QueryDslQueryContainer,
+    functionScoreConfig?: SearchFunctionScoreConfig,
+  ): elasticsearch.QueryDslQueryContainer {
+    if (!functionScoreConfig) {
+      return query;
+    }
+
+    const { query: _ignoredQuery, ...scoreConfig } =
+      functionScoreConfig as unknown as elasticsearch.QueryDslFunctionScoreQuery;
+
+    return {
+      function_score: {
+        ...scoreConfig,
+        query,
+      },
+    } as elasticsearch.QueryDslQueryContainer;
   }
 
   buildSearchRequest(searchRequestParameters: SearchRequestParameters, withAggregation = true) {
@@ -333,10 +371,19 @@ export class SearchQueryService {
         searchRequestParameters.filter,
         searchRequestParameters.filters ?? {},
         searchRequestParameters.aggregationsConfig,
+        searchRequestParameters.functionScore,
       ),
       _source: SEARCH_SOURCE,
       sort: this.buildSort(searchRequestParameters.currentSort),
     };
+
+    if (searchRequestParameters.minScore !== undefined) {
+      (request as unknown as { min_score?: number }).min_score = searchRequestParameters.minScore;
+    }
+
+    if (searchRequestParameters.knn) {
+      this.applyHybridKnn(request, searchRequestParameters);
+    }
 
     if (withAggregation) {
       request.aggregations = this.aggregationService.buildAggregationQuery(
@@ -344,6 +391,34 @@ export class SearchQueryService {
       );
     }
     return request;
+  }
+
+  private applyHybridKnn(
+    request: elasticsearch.SearchRequest,
+    searchRequestParameters: SearchRequestParameters,
+  ) {
+    const configuredKnn = searchRequestParameters.knn as SearchKnnConfig;
+    const knn = { ...configuredKnn } as Record<string, unknown>;
+
+    knn['query_vector'] = searchRequestParameters.searchQuery;
+
+    const hasAggregationFilters = Object.values(searchRequestParameters.filters ?? {}).some(
+      (entry) => (entry.values?.length || 0) > 0,
+    );
+
+    if (hasAggregationFilters) {
+      knn['filter'] = {
+        bool: {
+          must: this.buildFacetMustClauses(
+            searchRequestParameters.filters ?? {},
+            searchRequestParameters.aggregationsConfig,
+          ),
+          filter: searchRequestParameters.filter,
+        },
+      } as elasticsearch.QueryDslQueryContainer;
+    }
+
+    (request as unknown as { knn?: unknown }).knn = knn;
   }
 
   buildAggregationRequest(
@@ -359,6 +434,7 @@ export class SearchQueryService {
         searchRequestParameters.filter,
         searchRequestParameters.filters ?? {},
         searchRequestParameters.aggregationsConfig,
+        searchRequestParameters.functionScore,
       ),
     };
 
