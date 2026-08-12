@@ -90,9 +90,10 @@ through the Angular dev server.
 npm run geolibre:up
 ```
 
-This starts `ghcr.io/opengeos/geolibre` on `http://localhost:8091` with:
+This builds and starts the local image in `services/geolibre` on `http://localhost:8091` with:
 
 * `GEOLIBRE_EMBED_ORIGINS=http://localhost:4200,http://127.0.0.1:4200`
+* `GEOLIBRE_APP_BASE=/geolibre/` baked at image build time
 
 2. Start frontend dev server (already configured with `proxy.config.js`):
 
@@ -108,10 +109,9 @@ npm start
     "map": {
       "enabled": true,
       "type": "geolibre",
-      "context": {
-        "geolibre": {
-          "embedUrl": "/geolibre/?embed=1"
-        }
+      "geolibre": {
+        "embedUrl": "/geolibre/?embed=1",
+        "projectUrl": "/assets/geolibre/sextant-project.json"
       }
     }
   }
@@ -128,6 +128,7 @@ Notes:
 
 * `/geolibre` target is controlled by `proxy.config.js` and can be overridden with `GEOLIBRE_PROXY_TARGET`.
 * Example: `GEOLIBRE_PROXY_TARGET=http://localhost:8091 npm start`
+* With the base-path image in `services/geolibre`, GeoLibre assets resolve under `/geolibre/*`, so extra `/assets` proxy rules are no longer required.
 * After changing proxy settings, restart `ng serve` / `npm start`.
 
 ### Properties

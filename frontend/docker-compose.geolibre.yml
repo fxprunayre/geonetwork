@@ -1,6 +1,11 @@
 services:
   geolibre:
-    image: ghcr.io/opengeos/geolibre:latest
+    build:
+      context: .
+      dockerfile: services/geolibre/Dockerfile
+      args:
+        GEOLIBRE_REF: ${GEOLIBRE_REF:-main}
+    image: geolibre-local-basepath:latest
     container_name: geolibre-local
     ports:
       - '8091:80'
