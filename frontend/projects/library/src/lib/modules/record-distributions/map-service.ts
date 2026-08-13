@@ -1,13 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { WmsEndpoint, WmtsEndpoint } from '@camptocamp/ogc-client';
+import { WfsEndpoint, WmsEndpoint, WmtsEndpoint } from '@camptocamp/ogc-client';
 import { Link } from 'gn-api-client';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
+import { MapType } from '../config/model/gnConfig';
 import { MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP, MapLayerDisplayTarget } from '../record';
 import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../search/search-constant';
 
 export interface Gn4MapCommand {
-  type?: 'wms' | 'wmts';
+  type?: 'wms' | 'wmts' | 'wfs';
   uuid?: string;
   url: string;
   name?: string;
@@ -21,6 +22,11 @@ export interface BulkWmsValidationResult {
   boundsByLinkKey: Record<string, [number, number, number, number]>;
 }
 
+export interface BulkWfsValidationResult {
+  validLinks: Link[];
+  matchedLayerLabels: string[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -32,10 +38,64 @@ export class MapService {
     return links.length >= minLinks && links.every((link) => this.isWmsLink(link));
   }
 
+  hasBulkWfsLinks(links: Link[], minLinks = 2): boolean {
+    return links.length >= minLinks && links.every((link) => this.isWfsLink(link));
+  }
+
+  hasBulkMapLinks(links: Link[], mapType: MapType, minLinks = 2): boolean {
+    return (
+      this.hasBulkWmsLinks(links, minLinks) ||
+      (mapType === 'geolibre' && this.hasBulkWfsLinks(links, minLinks))
+    );
+  }
+
   isWmsLink(link: Link): boolean {
     return (
       !!link.urlObject?.['default'] && !!link.protocol?.match('OGC:WMS|application/vnd.ogc.wms_xml')
     );
+  }
+
+  isWmtsLink(link: Link): boolean {
+    return !!link.urlObject?.['default'] && !!link.protocol?.includes('OGC:WMTS');
+  }
+
+  isWfsLink(link: Link): boolean {
+    return (
+      !!link.urlObject?.['default'] && !!link.protocol?.match('OGC:WFS|application/vnd.ogc.wfs_xml')
+    );
+  }
+
+  isMapAddLink(link: Link, mapType: MapType): boolean {
+    return (
+      this.isWmsLink(link) ||
+      this.isWmtsLink(link) ||
+      (mapType === 'geolibre' && this.isWfsLink(link))
+    );
+  }
+
+  async supportsWfsGeoJsonOutput(link: Link): Promise<boolean> {
+    if (!this.isWfsLink(link)) {
+      return false;
+    }
+
+    const url = link.urlObject?.['default'];
+    if (!url) {
+      return false;
+    }
+
+    try {
+      const endpoint = new WfsEndpoint(url);
+      await endpoint.isReady();
+      const formats = endpoint.getServiceInfo()?.outputFormats || [];
+
+      if (formats.length > 0) {
+        return formats.some((format) => this.isGeoJsonOutputFormat(format));
+      }
+
+      return this.isGeoJsonOutputFormat(this.readQueryParam(url, 'outputFormat'));
+    } catch {
+      return false;
+    }
   }
 
   async resolveEndpointLayers(link: Link): Promise<unknown[] | null> {
@@ -137,6 +197,25 @@ export class MapService {
     };
   }
 
+  async validateBulkWfsLinks(links: Link[], minLinks = 2): Promise<BulkWfsValidationResult | null> {
+    const wfsLinks = links.filter((link) => this.isWfsLink(link));
+    if (!this.hasBulkWfsLinks(wfsLinks, minLinks)) {
+      return null;
+    }
+
+    const validLinks = wfsLinks.filter((link) => !!link.urlObject?.['default']);
+    if (validLinks.length < minLinks) {
+      return null;
+    }
+
+    return {
+      validLinks,
+      matchedLayerLabels: validLinks.map(
+        (link) => link.nameObject?.['default'] || link.descriptionObject?.['default'] || '',
+      ),
+    };
+  }
+
   private async resolveWmsLinkValidation(
     link: Link,
   ): Promise<{ label: string; boundsWgs84: [number, number, number, number] | null } | null> {
@@ -156,7 +235,7 @@ export class MapService {
   buildMapCommands(
     links: Link[],
     recordUuid: string | undefined,
-    type: 'wms' | 'wmts',
+    type: 'wms' | 'wmts' | 'wfs',
     label?: string[],
     boundsByLinkKey?: Record<string, [number, number, number, number]>,
   ): Gn4MapCommand[] {
@@ -250,6 +329,19 @@ export class MapService {
     return (
       minx >= -180 && maxx <= 180 && miny >= -90 && maxy <= 90 && minx !== maxx && miny !== maxy
     );
+  }
+
+  private readQueryParam(url: string, name: string): string {
+    try {
+      const parsed = new URL(url);
+      return parsed.searchParams.get(name) || parsed.searchParams.get(name.toUpperCase()) || '';
+    } catch {
+      return '';
+    }
+  }
+
+  private isGeoJsonOutputFormat(format: string | null | undefined): boolean {
+    return !!format && format.toLowerCase().includes('json');
   }
 
   navigateToMap(

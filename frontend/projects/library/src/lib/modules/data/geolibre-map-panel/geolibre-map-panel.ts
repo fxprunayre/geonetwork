@@ -11,7 +11,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { connect, type GeoLibreEmbedClient } from '@geolibre/embed';
 import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { Gn4MapCommand } from '../../record-distributions/map-service';
-import { buildGeoLibreLayerSpec, resolveCommandBoundsWgs84 } from '../geolibre-command-utils';
+import {
+  buildGeoLibreLayerSpec,
+  hydrateWfsLayerSpecWithGeoJson,
+  resolveCommandBoundsWgs84,
+} from '../geolibre-command-utils';
 
 type GeoLibreConfig = {
   embedUrl?: string;
@@ -136,7 +140,9 @@ export class GeoLibreMapPanel {
       }
 
       const layerBounds = resolveCommandBoundsWgs84(cmd);
-      const layerSpec = buildGeoLibreLayerSpec(layerId, cmd, layerBounds);
+      const layerSpec = await hydrateWfsLayerSpecWithGeoJson(
+        buildGeoLibreLayerSpec(layerId, cmd, layerBounds),
+      );
       await this.client.addLayer(layerSpec);
 
       if (focusLayerIds.has(layerId)) {

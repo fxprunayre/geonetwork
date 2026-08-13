@@ -203,7 +203,8 @@
         "checking": "Vérification du service WMS...",
         "chooseServiceLayer": "Choisir une couche dans le service.",
         "layerNotFoundButChooseAnother": "La couche '{{layerName}}' n'a pas été trouvée dans le service WMS. Choisir une autre couche dans le service.",
-        "unreachable": "Le service WMS est inaccessible."
+        "unreachable": "Le service WMS est inaccessible.",
+        "wfsGeoJsonOnly": "Ce service WFS n'annonce pas la prise en charge du format de sortie GeoJSON."
       },
       "bookmark": "Ajouter aux favoris",
       "bookmarkTitle": "Ajouter cette fiche aux favoris",

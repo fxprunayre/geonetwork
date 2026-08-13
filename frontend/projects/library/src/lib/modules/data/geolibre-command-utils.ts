@@ -94,6 +94,37 @@ export function buildGeoLibreLayerSpec(
     };
   }
 
+  if (layerType === 'wfs') {
+    const wfs = buildWfsSource(url, name);
+    return {
+      id: layerId,
+      type: 'geojson',
+      name: label,
+      source: {
+        type: 'geojson',
+        url: wfs.url,
+        service: 'wfs',
+        typeName: wfs.typeName,
+        version: wfs.version,
+        outputFormat: wfs.outputFormat,
+        srsName: wfs.srsName,
+        ...(boundsWgs84 ? { bounds: boundsWgs84 } : {}),
+      },
+      visible: true,
+      opacity: 1,
+      metadata: {
+        featureCount: readOptionalPositiveIntegerQueryParam(wfs.url, ['count', 'maxFeatures']),
+        service: 'wfs',
+        sourceKind: 'wfs-getfeature',
+        typeName: wfs.typeName,
+        layerName: name,
+        layerType: 'wfs',
+        ...(boundsWgs84 ? { bounds: boundsWgs84 } : {}),
+        ...(boundsWgs84 ? { boundsWgs84: formatBounds(boundsWgs84) } : {}),
+      },
+    };
+  }
+
   const wmsLayerName = extractWmsLayerName(url) || name;
   const wmsTilesUrl = buildWmsTileUrl(url, wmsLayerName);
   const wmsEndpoint = extractEndpoint(url);
@@ -128,6 +159,154 @@ export function buildGeoLibreLayerSpec(
       ...(boundsWgs84 ? { boundsWgs84: formatBounds(boundsWgs84) } : {}),
     },
   };
+}
+
+export async function hydrateWfsLayerSpecWithGeoJson(spec: AddLayerSpec): Promise<AddLayerSpec> {
+  if (spec.type !== 'geojson') {
+    return spec;
+  }
+
+  const source = (spec.source || {}) as Record<string, unknown>;
+  if (source['service'] !== 'wfs') {
+    return spec;
+  }
+
+  const sourceUrl = source['url'];
+  if (typeof sourceUrl !== 'string' || !sourceUrl) {
+    return spec;
+  }
+
+  try {
+    const response = await fetch(sourceUrl);
+    if (!response.ok) {
+      return spec;
+    }
+
+    const payload: unknown = await response.json();
+    if (!isGeoJsonFeatureCollection(payload)) {
+      return spec;
+    }
+
+    const featureCount = payload.features.length;
+    return {
+      ...spec,
+      geojson: payload,
+      metadata: {
+        ...(spec.metadata || {}),
+        ...(featureCount >= 0 ? { featureCount } : {}),
+      },
+    };
+  } catch {
+    return spec;
+  }
+}
+
+function readOptionalPositiveIntegerQueryParam(url: string, names: string[]): number | undefined {
+  try {
+    const parsed = new URL(url);
+    for (const name of names) {
+      const value =
+        parsed.searchParams.get(name) ||
+        parsed.searchParams.get(name.toUpperCase()) ||
+        parsed.searchParams.get(name.toLowerCase());
+      if (!value) {
+        continue;
+      }
+      const num = Number(value);
+      if (Number.isInteger(num) && num > 0) {
+        return num;
+      }
+    }
+  } catch {
+    return undefined;
+  }
+
+  return undefined;
+}
+
+function isGeoJsonFeatureCollection(
+  value: unknown,
+): value is { type: 'FeatureCollection'; features: unknown[] } {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return candidate['type'] === 'FeatureCollection' && Array.isArray(candidate['features']);
+}
+
+export function buildWfsSource(
+  url: string,
+  typeName: string,
+): {
+  url: string;
+  typeName: string;
+  version: string;
+  outputFormat: string;
+  srsName: string;
+} {
+  try {
+    const parsed = new URL(url);
+    parsed.searchParams.set('SERVICE', parsed.searchParams.get('SERVICE') || 'WFS');
+    parsed.searchParams.set('REQUEST', parsed.searchParams.get('REQUEST') || 'GetFeature');
+    parsed.searchParams.set('VERSION', parsed.searchParams.get('VERSION') || '1.1.0');
+    const resolvedVersion = parsed.searchParams.get('VERSION') || '1.1.0';
+
+    const typeParamName = resolveWfsTypeNameParameter(resolvedVersion, parsed.searchParams);
+
+    if (typeName) {
+      parsed.searchParams.set(typeParamName, typeName);
+    }
+
+    parsed.searchParams.set('SRSNAME', parsed.searchParams.get('SRSNAME') || 'EPSG:4326');
+
+    const outputFormat =
+      parsed.searchParams.get('OUTPUTFORMAT') || parsed.searchParams.get('outputFormat');
+    if (!outputFormat) {
+      parsed.searchParams.set('OUTPUTFORMAT', 'application/json');
+    }
+
+    const resolvedTypeName =
+      parsed.searchParams.get('TYPENAMES') ||
+      parsed.searchParams.get('typenames') ||
+      parsed.searchParams.get('TYPENAME') ||
+      parsed.searchParams.get('typename') ||
+      typeName ||
+      '';
+
+    return {
+      url: parsed.toString(),
+      typeName: resolvedTypeName,
+      version: resolvedVersion,
+      outputFormat:
+        parsed.searchParams.get('OUTPUTFORMAT') ||
+        parsed.searchParams.get('outputFormat') ||
+        'application/json',
+      srsName: parsed.searchParams.get('SRSNAME') || 'EPSG:4326',
+    };
+  } catch {
+    return {
+      url,
+      typeName: typeName || '',
+      version: '1.1.0',
+      outputFormat: 'application/json',
+      srsName: 'EPSG:4326',
+    };
+  }
+}
+
+function resolveWfsTypeNameParameter(
+  version: string,
+  params: URLSearchParams,
+): 'TYPENAME' | 'TYPENAMES' {
+  if (params.has('TYPENAMES') || params.has('typenames')) {
+    return 'TYPENAMES';
+  }
+  if (params.has('TYPENAME') || params.has('typename')) {
+    return 'TYPENAME';
+  }
+
+  return version.startsWith('2.') ? 'TYPENAMES' : 'TYPENAME';
 }
 
 function normalizeBbox(values: number[]): [number, number, number, number] | null {

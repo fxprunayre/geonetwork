@@ -2,12 +2,17 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 vi.mock('@camptocamp/ogc-client', () => {
   const mockWmsEndpoint = vi.fn();
+  const mockWfsEndpoint = vi.fn();
   mockWmsEndpoint.prototype.isReady = vi.fn().mockResolvedValue(undefined);
   mockWmsEndpoint.prototype.getFlattenedLayers = vi.fn().mockReturnValue([
     { name: 'layer-a', title: 'Layer A' },
     { name: 'layer-b', title: 'Layer B' },
   ]);
-  return { WmsEndpoint: mockWmsEndpoint };
+  mockWfsEndpoint.prototype.isReady = vi.fn().mockResolvedValue(undefined);
+  mockWfsEndpoint.prototype.getServiceInfo = vi.fn().mockReturnValue({
+    outputFormats: ['application/json'],
+  });
+  return { WfsEndpoint: mockWfsEndpoint, WmsEndpoint: mockWmsEndpoint };
 });
 
 import { signal } from '@angular/core';

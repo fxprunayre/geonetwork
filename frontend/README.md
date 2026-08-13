@@ -128,7 +128,7 @@ Notes:
 
 * `/geolibre` target is controlled by `proxy.config.js` and can be overridden with `GEOLIBRE_PROXY_TARGET`.
 * Example: `GEOLIBRE_PROXY_TARGET=http://localhost:8091 npm start`
-* With the base-path image in `services/geolibre`, GeoLibre assets resolve under `/geolibre/*`, so extra `/assets` proxy rules are no longer required.
+* With the base-path image in `services/geolibre`, GeoLibre assets resolve under `/geolibre/*`.
 * After changing proxy settings, restart `ng serve` / `npm start`.
 
 ### Properties

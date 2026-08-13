@@ -21,6 +21,7 @@ import {
   DEFAULT_MAP_TYPE,
   ensureSxtViewer,
   Gn4MapCommand,
+  hydrateWfsLayerSpecWithGeoJson,
   MapViewerLike,
   resolveCommandBoundsWgs84,
   SEXTANT_VIEWER_SCRIPT_URL,
@@ -286,7 +287,10 @@ export class MapComponent implements OnDestroy {
       }
 
       const layerBounds = resolveCommandBoundsWgs84(cmd);
-      await this.geolibreClient.addLayer(buildGeoLibreLayerSpec(layerId, cmd, layerBounds));
+      const layerSpec = await hydrateWfsLayerSpecWithGeoJson(
+        buildGeoLibreLayerSpec(layerId, cmd, layerBounds),
+      );
+      await this.geolibreClient.addLayer(layerSpec);
       this.addedGeoLibreLayerIds.add(layerId);
 
       if (layerBounds) {

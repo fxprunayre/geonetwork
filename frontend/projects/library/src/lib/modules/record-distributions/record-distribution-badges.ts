@@ -10,7 +10,10 @@ import {
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Link } from 'gn-api-client';
 import { ButtonIcon, ButtonLabel, ButtonModule } from 'primeng/button';
-import { selectRecordAppConfiguration } from '../config/app-config.selectors';
+import {
+  selectMapAppConfiguration,
+  selectRecordAppConfiguration,
+} from '../config/app-config.selectors';
 import { MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB } from '../record';
 import { MapService } from './map-service';
 import { RecordDistributionFieldBase } from './record-distribution-field-base';
@@ -104,17 +107,39 @@ export class RecordDistributionBadges extends RecordDistributionFieldBase {
     event.preventDefault();
 
     try {
-      const validation = await this.mapService.validateBulkWmsLinks(links, 1);
-      if (!validation) {
+      const mapType = this.mapType();
+      const isWmsBulk = this.mapService.hasBulkWmsLinks(links, 1);
+      const isWfsBulk = mapType === 'geolibre' && this.mapService.hasBulkWfsLinks(links, 1);
+
+      if (!isWmsBulk && !isWfsBulk) {
+        return;
+      }
+
+      if (isWmsBulk) {
+        const validation = await this.mapService.validateBulkWmsLinks(links, 1);
+        if (!validation) {
+          return;
+        }
+
+        const command = this.mapService.buildMapCommands(
+          validation.validLinks,
+          this.record().uuid,
+          'wms',
+          validation.matchedLayerLabels,
+          validation.boundsByLinkKey,
+        );
+
+        this.mapService.navigateToMap(command, this.record().uuid, this.mapLayerDisplayTarget());
         return;
       }
 
       const command = this.mapService.buildMapCommands(
-        validation.validLinks,
+        links,
         this.record().uuid,
-        'wms',
-        validation.matchedLayerLabels,
-        validation.boundsByLinkKey,
+        'wfs',
+        links.map(
+          (link) => link.nameObject?.['default'] || link.descriptionObject?.['default'] || '',
+        ),
       );
 
       this.mapService.navigateToMap(command, this.record().uuid, this.mapLayerDisplayTarget());
@@ -129,7 +154,12 @@ export class RecordDistributionBadges extends RecordDistributionFieldBase {
       MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
   );
 
+  private mapType = computed(() => selectMapAppConfiguration(this.appConfiguration()).type);
+
   private shouldTriggerAddAllToMap(sectionKey: string, links: Link[]): boolean {
-    return sectionKey.toLowerCase() === 'api' && this.mapService.hasBulkWmsLinks(links, 1);
+    return (
+      sectionKey.toLowerCase() === 'api' &&
+      this.mapService.hasBulkMapLinks(links, this.mapType(), 1)
+    );
   }
 }

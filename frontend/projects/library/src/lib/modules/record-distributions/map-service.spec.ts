@@ -13,11 +13,21 @@ import { DEFAULT_TEST_CONFIG } from '../config/fixtures';
 import { MapService } from './map-service';
 
 const mocks = vi.hoisted(() => ({
+  wfsEndpoint: vi.fn(),
   wmsEndpoint: vi.fn(),
   wmtsEndpoint: vi.fn(),
 }));
 
 vi.mock('@camptocamp/ogc-client', () => {
+  mocks.wfsEndpoint.mockImplementation(() => {
+    return {
+      isReady: vi.fn().mockResolvedValue(undefined),
+      getServiceInfo: vi.fn().mockReturnValue({
+        outputFormats: ['text/xml; subtype=gml/3.1.1', 'application/json'],
+      }),
+    };
+  });
+
   mocks.wmsEndpoint.mockImplementation((url: string) => {
     return {
       isReady: vi.fn().mockImplementation(() => {
@@ -39,6 +49,7 @@ vi.mock('@camptocamp/ogc-client', () => {
   });
 
   return {
+    WfsEndpoint: mocks.wfsEndpoint,
     WmsEndpoint: mocks.wmsEndpoint,
     WmtsEndpoint: mocks.wmtsEndpoint,
   };
@@ -48,6 +59,7 @@ describe('MapService', () => {
   let service: MapService;
 
   beforeEach(() => {
+    mocks.wfsEndpoint.mockClear();
     mocks.wmsEndpoint.mockClear();
     mocks.wmtsEndpoint.mockClear();
 
@@ -95,5 +107,15 @@ describe('MapService', () => {
     expect(mocks.wmsEndpoint.mock.calls[1][0]).toBe(
       '/geonetwork/proxy?url=https%3A%2F%2Fexample.org%2Fwms',
     );
+  });
+
+  it('detects GeoJSON output support on WFS services', async () => {
+    const supported = await service.supportsWfsGeoJsonOutput({
+      protocol: 'OGC:WFS',
+      urlObject: { default: 'https://example.org/wfs' },
+    } as Link);
+
+    expect(supported).toBe(true);
+    expect(mocks.wfsEndpoint).toHaveBeenCalledWith('https://example.org/wfs');
   });
 });

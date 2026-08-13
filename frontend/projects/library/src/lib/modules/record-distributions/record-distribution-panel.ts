@@ -15,11 +15,13 @@ import { Card } from 'primeng/card';
 import { IftaLabel } from 'primeng/iftalabel';
 import { InputText } from 'primeng/inputtext';
 import { CopyInput } from '../../shared/widgets/copy-input/copy-input';
+import { selectMapAppConfiguration } from '../config/app-config.selectors';
 import { RECORD_ROUTE_PATH } from '../search/search-constant';
 import { AddAllLayersToMap } from './add-all-layers-to-map';
 import { AddLayerToMap } from './add-layer-to-map';
 import { DownloadData } from './download-data';
 import { LinkBadge } from './link-badge';
+import { MapService } from './map-service';
 import { RecordDistributionFieldBase } from './record-distribution-field-base';
 
 @Component({
@@ -54,6 +56,7 @@ import { RecordDistributionFieldBase } from './record-distribution-field-base';
 })
 export class RecordDistributionPanel extends RecordDistributionFieldBase {
   private router = inject(Router);
+  private mapService = inject(MapService);
 
   activePanels = computed(() => {
     const sections = this.linksBySections();
@@ -83,11 +86,14 @@ export class RecordDistributionPanel extends RecordDistributionFieldBase {
     return link.protocol === 'WWW:LINK:JUPYTER-NOTEBOOK' || link.protocol === 'WWW:LINK:DATAVIZ';
   };
 
-  hasBulkWmsLinks = (links: Link[]) => {
-    return (
-      links.length > 1 &&
-      links.every((link) => !!link.protocol?.match('OGC:WMS|application/vnd.ogc.wms_xml'))
-    );
+  mapType = computed(() => selectMapAppConfiguration(this.appConfiguration()).type);
+
+  canAddLinkToMap = (link: Link) => {
+    return this.mapService.isMapAddLink(link, this.mapType());
+  };
+
+  hasBulkMapLinks = (links: Link[]) => {
+    return this.mapService.hasBulkMapLinks(links, this.mapType());
   };
 
   exploreData = (link: Link) => {

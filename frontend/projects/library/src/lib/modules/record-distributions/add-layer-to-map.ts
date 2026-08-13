@@ -8,12 +8,15 @@ import {
   signal,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { faSolidExclamation } from '@ng-icons/font-awesome/solid';
+import { faSolidDrawPolygon, faSolidExclamation } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Link } from 'gn-api-client';
 import { Button } from 'primeng/button';
 import { SplitButton } from 'primeng/splitbutton';
-import { selectRecordAppConfiguration } from '../config/app-config.selectors';
+import {
+  selectMapAppConfiguration,
+  selectRecordAppConfiguration,
+} from '../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../config/config.loader';
 import { MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB, RecordFieldBase } from '../record';
 import { MapService } from './map-service';
@@ -23,6 +26,7 @@ import { MapService } from './map-service';
   imports: [Button, NgIcon, SplitButton, TranslatePipe],
   viewProviders: [
     provideIcons({
+      faSolidDrawPolygon,
       faSolidExclamation,
     }),
   ],
@@ -32,6 +36,7 @@ import { MapService } from './map-service';
         styleClass="w-full md:w-auto"
         [label]="'record.action.addWms.checking' | translate"
         size="small"
+        [fluid]="true"
         [outlined]="true"
         [loading]="true"
         [disabled]="true"
@@ -59,16 +64,36 @@ import { MapService } from './map-service';
         />
       }
     } @else if (status() === 'found') {
-      <p-button
-        styleClass="w-full md:w-auto"
-        (click)="addWmsLayers([link()], matchingLayersLabel())"
-        [title]="
-          'record.action.addWms.allLayersFound' | translate: { layerNames: matchingLayersLabel() }
-        "
-        [label]="'record.action.addWms.addToMap' | translate"
-        size="small"
-        [outlined]="true"
-      />
+      @if (isWfsMode()) {
+        <p-button
+          styleClass="w-full md:w-auto"
+          [fluid]="true"
+          (click)="addLayers([link()], linkName() || undefined)"
+          [title]="
+            (wfsGeoJsonSupported()
+              ? 'record.action.addWms.addToMap'
+              : 'record.action.addWms.wfsGeoJsonOnly'
+            ) | translate
+          "
+          [label]="'record.action.addWms.addToMap' | translate"
+          size="small"
+          [outlined]="true"
+          [disabled]="!wfsGeoJsonSupported()"
+        >
+        </p-button>
+      } @else {
+        <p-button
+          styleClass="w-full md:w-auto"
+          [fluid]="true"
+          (click)="addLayers([link()], matchingLayersLabel())"
+          [title]="
+            'record.action.addWms.allLayersFound' | translate: { layerNames: matchingLayersLabel() }
+          "
+          [label]="'record.action.addWms.addToMap' | translate"
+          size="small"
+          [outlined]="true"
+        />
+      }
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,8 +105,20 @@ export class AddLayerToMap extends RecordFieldBase {
   private mapService = inject(MapService);
 
   status = signal<'idle' | 'loading' | 'found' | 'not-found' | 'error'>('idle');
+  wfsGeoJsonSupported = signal(true);
+  private validationRun = 0;
 
-  serviceType = computed<'wms' | 'wmts'>(() => {
+  mapType = computed(() => selectMapAppConfiguration(this.appConfiguration()).type);
+
+  isWfsMode = computed(
+    () => this.mapType() === 'geolibre' && this.mapService.isWfsLink(this.link()),
+  );
+
+  serviceType = computed<'wms' | 'wmts' | 'wfs'>(() => {
+    if (this.isWfsMode()) {
+      return 'wfs';
+    }
+
     const protocol = this.link().protocol || '';
     return protocol.includes('OGC:WMTS') ? 'wmts' : 'wms';
   });
@@ -102,7 +139,7 @@ export class AddLayerToMap extends RecordFieldBase {
       command: () => {
         const linkCopy = { ...this.link() };
         linkCopy.nameObject = { default: layer.name || '' };
-        this.addWmsLayers([linkCopy], layer.title || layer.name);
+        this.addLayers([linkCopy], layer.title || layer.name);
       },
     }));
   });
@@ -130,12 +167,43 @@ export class AddLayerToMap extends RecordFieldBase {
     super();
     effect(() => {
       const url = this.serviceUrl();
+      const serviceType = this.serviceType();
+      const runId = ++this.validationRun;
 
       if (!url) {
         this.status.set('idle');
+        this.wfsGeoJsonSupported.set(true);
         return;
       }
 
+      if (serviceType === 'wfs') {
+        this.status.set('loading');
+        this.serviceLayers.set([]);
+        this.matchingLayers.set([]);
+
+        void this.mapService
+          .supportsWfsGeoJsonOutput(this.link())
+          .then((supported) => {
+            if (runId !== this.validationRun) {
+              return;
+            }
+
+            this.wfsGeoJsonSupported.set(supported);
+            this.status.set('found');
+          })
+          .catch(() => {
+            if (runId !== this.validationRun) {
+              return;
+            }
+
+            this.wfsGeoJsonSupported.set(false);
+            this.status.set('found');
+          });
+
+        return;
+      }
+
+      this.wfsGeoJsonSupported.set(true);
       this.status.set('loading');
 
       this.mapService
@@ -159,7 +227,7 @@ export class AddLayerToMap extends RecordFieldBase {
     });
   }
 
-  addWmsLayers = (links: Link[], label?: string) => {
+  addLayers = (links: Link[], label?: string) => {
     const command = this.mapService.buildMapCommands(
       links,
       this.record().uuid,

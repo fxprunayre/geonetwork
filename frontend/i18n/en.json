@@ -202,7 +202,8 @@
         "checking": "Checking WMS service...",
         "chooseServiceLayer": "Choose a layer from the service.",
         "layerNotFoundButChooseAnother": "Layer '{{layerName}}' not found in the WMS service. Choose another layer from the service.",
-        "unreachable": "The WMS service is unreachable."
+        "unreachable": "The WMS service is unreachable.",
+        "wfsGeoJsonOnly": "This WFS service does not advertise GeoJSON outputFormat support."
       },
       "bookmark": "Bookmark",
       "bookmarkTitle": "Add to bookmarks",
