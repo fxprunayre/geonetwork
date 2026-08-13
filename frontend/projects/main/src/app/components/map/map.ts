@@ -13,19 +13,15 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { connect, type AddLayerSpec, type GeoLibreEmbedClient } from '@geolibre/embed';
+import { connect, type GeoLibreEmbedClient } from '@geolibre/embed';
 import {
   APPLICATION_CONFIGURATION,
-  buildWmsTileUrl,
+  buildGeoLibreLayerSpec,
   DEFAULT_MAP_CONTEXT,
   DEFAULT_MAP_TYPE,
   ensureSxtViewer,
-  extractEndpoint,
-  extractWmsLayerName,
-  formatBounds,
   Gn4MapCommand,
   MapViewerLike,
-  readQueryParam,
   resolveCommandBoundsWgs84,
   SEXTANT_VIEWER_SCRIPT_URL,
 } from 'gn-library';
@@ -290,7 +286,7 @@ export class MapComponent implements OnDestroy {
       }
 
       const layerBounds = resolveCommandBoundsWgs84(cmd);
-      await this.geolibreClient.addLayer(this.toGeoLibreLayerSpec(layerId, cmd, layerBounds));
+      await this.geolibreClient.addLayer(buildGeoLibreLayerSpec(layerId, cmd, layerBounds));
       this.addedGeoLibreLayerIds.add(layerId);
 
       if (layerBounds) {
@@ -303,67 +299,6 @@ export class MapComponent implements OnDestroy {
       }
       break;
     }
-  }
-
-  private toGeoLibreLayerSpec(
-    layerId: string,
-    cmd: Gn4MapCommand,
-    boundsWgs84: [number, number, number, number] | null,
-  ): AddLayerSpec {
-    const layerType = cmd.type || 'wms';
-    const url = decodeURIComponent(cmd.url);
-    const name = decodeURIComponent(cmd.name || '');
-    const label = decodeURIComponent(cmd.label || name || layerId);
-
-    if (layerType === 'wmts') {
-      return {
-        id: layerId,
-        type: 'raster',
-        name: label,
-        source: {
-          type: 'raster',
-          tiles: [url],
-          tileSize: 256,
-        },
-        visible: true,
-        opacity: 1,
-      };
-    }
-
-    const wmsLayerName = extractWmsLayerName(url) || name;
-    const wmsTilesUrl = buildWmsTileUrl(url, wmsLayerName);
-    const wmsEndpoint = extractEndpoint(url);
-    const wmsVersion = readQueryParam(url, 'VERSION') || '1.1.1';
-    const wmsFormat = readQueryParam(url, 'FORMAT') || 'image/png';
-    const wmsTransparent = (readQueryParam(url, 'TRANSPARENT') || 'true').toLowerCase() !== 'false';
-    const wmsStyles = readQueryParam(url, 'STYLES') || '';
-
-    return {
-      id: layerId,
-      type: 'raster',
-      name: label,
-      source: {
-        type: 'raster',
-        tiles: [wmsTilesUrl],
-        tileSize: 256,
-        url: wmsEndpoint,
-        layers: wmsLayerName,
-        styles: wmsStyles,
-        format: wmsFormat,
-        transparent: wmsTransparent,
-        version: wmsVersion,
-        ...(boundsWgs84 ? { bounds: boundsWgs84 } : {}),
-      },
-      visible: true,
-      opacity: 1,
-      metadata: {
-        service: 'wms',
-        layerName: wmsLayerName || name,
-        layerType: 'wms',
-        ...(boundsWgs84 ? { bounds: boundsWgs84 } : {}),
-        ...(boundsWgs84 ? { boundsWgs84: formatBounds(boundsWgs84) } : {}),
-      },
-    };
   }
 
   private parseCommands(rawCommands: string | undefined): Gn4MapCommand[] {

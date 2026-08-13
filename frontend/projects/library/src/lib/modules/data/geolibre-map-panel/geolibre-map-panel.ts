@@ -8,17 +8,10 @@ import {
   input,
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { connect, type AddLayerSpec, type GeoLibreEmbedClient } from '@geolibre/embed';
+import { connect, type GeoLibreEmbedClient } from '@geolibre/embed';
 import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { Gn4MapCommand } from '../../record-distributions/map-service';
-import {
-  buildWmsTileUrl,
-  extractEndpoint,
-  extractWmsLayerName,
-  formatBounds,
-  readQueryParam,
-  resolveCommandBoundsWgs84,
-} from '../geolibre-command-utils';
+import { buildGeoLibreLayerSpec, resolveCommandBoundsWgs84 } from '../geolibre-command-utils';
 
 type GeoLibreConfig = {
   embedUrl?: string;
@@ -143,7 +136,7 @@ export class GeoLibreMapPanel {
       }
 
       const layerBounds = resolveCommandBoundsWgs84(cmd);
-      const layerSpec = this.toLayerSpec(layerId, cmd, layerBounds);
+      const layerSpec = buildGeoLibreLayerSpec(layerId, cmd, layerBounds);
       await this.client.addLayer(layerSpec);
 
       if (focusLayerIds.has(layerId)) {
@@ -162,68 +155,6 @@ export class GeoLibreMapPanel {
     } else if (commands.length > 0) {
       console.debug('[GeoLibre] No bbox resolved from commands; skipping setView');
     }
-  }
-
-  private toLayerSpec(
-    layerId: string,
-    cmd: Gn4MapCommand,
-    boundsWgs84: [number, number, number, number] | null,
-  ): AddLayerSpec {
-    const type = cmd.type || 'wms';
-    const rawUrl = decodeURIComponent(cmd.url);
-    const decodedName = decodeURIComponent(cmd.name || '');
-    const decodedLabel = decodeURIComponent(cmd.label || decodedName || layerId);
-
-    if (type === 'wmts') {
-      return {
-        id: layerId,
-        type: 'raster',
-        name: decodedLabel,
-        source: {
-          type: 'raster',
-          tiles: [rawUrl],
-          tileSize: 256,
-        },
-        visible: true,
-        opacity: 1,
-      };
-    }
-
-    const wmsLayerName = extractWmsLayerName(rawUrl) || decodedName;
-    const wmsTilesUrl = buildWmsTileUrl(rawUrl, wmsLayerName);
-    const wmsEndpoint = extractEndpoint(rawUrl);
-    const wmsVersion = readQueryParam(rawUrl, 'VERSION') || '1.1.1';
-    const wmsFormat = readQueryParam(rawUrl, 'FORMAT') || 'image/png';
-    const wmsTransparent =
-      (readQueryParam(rawUrl, 'TRANSPARENT') || 'true').toLowerCase() !== 'false';
-    const wmsStyles = readQueryParam(rawUrl, 'STYLES') || '';
-
-    return {
-      id: layerId,
-      type: 'raster',
-      name: decodedLabel,
-      source: {
-        type: 'raster',
-        tiles: [wmsTilesUrl],
-        tileSize: 256,
-        url: wmsEndpoint,
-        layers: wmsLayerName,
-        styles: wmsStyles,
-        format: wmsFormat,
-        transparent: wmsTransparent,
-        version: wmsVersion,
-        ...(boundsWgs84 ? { bounds: boundsWgs84 } : {}),
-      },
-      visible: true,
-      opacity: 1,
-      metadata: {
-        service: 'wms',
-        layerName: wmsLayerName || decodedName,
-        layerType: 'wms',
-        ...(boundsWgs84 ? { bounds: boundsWgs84 } : {}),
-        ...(boundsWgs84 ? { boundsWgs84: formatBounds(boundsWgs84) } : {}),
-      },
-    };
   }
 
   private readString(value: unknown): string {

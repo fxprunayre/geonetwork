@@ -1,4 +1,8 @@
+import type { AddLayerSpec } from '@geolibre/embed';
 import { Gn4MapCommand } from '../record-distributions/map-service';
+
+export const DEFAULT_TILE_SIZE = 512;
+export const DEFAULT_WMS_VERSION = '1.3.0';
 
 export function extractWmsLayerName(url: string): string {
   try {
@@ -12,15 +16,17 @@ export function extractWmsLayerName(url: string): string {
 export function buildWmsTileUrl(url: string, layerName: string): string {
   try {
     const parsed = new URL(url);
+    const version = parsed.searchParams.get('VERSION') || DEFAULT_WMS_VERSION;
     parsed.searchParams.set('SERVICE', parsed.searchParams.get('SERVICE') || 'WMS');
     parsed.searchParams.set('REQUEST', parsed.searchParams.get('REQUEST') || 'GetMap');
-    parsed.searchParams.set('VERSION', parsed.searchParams.get('VERSION') || '1.1.1');
+    parsed.searchParams.set('VERSION', version);
     parsed.searchParams.set('FORMAT', parsed.searchParams.get('FORMAT') || 'image/png');
     parsed.searchParams.set('TRANSPARENT', parsed.searchParams.get('TRANSPARENT') || 'true');
     parsed.searchParams.set('STYLES', parsed.searchParams.get('STYLES') || '');
-    parsed.searchParams.set('WIDTH', '256');
-    parsed.searchParams.set('HEIGHT', '256');
-    parsed.searchParams.set('SRS', parsed.searchParams.get('SRS') || 'EPSG:3857');
+    parsed.searchParams.set('WIDTH', DEFAULT_TILE_SIZE.toString());
+    parsed.searchParams.set('HEIGHT', DEFAULT_TILE_SIZE.toString());
+    const crsParam = version === '1.3.0' ? 'CRS' : 'SRS';
+    parsed.searchParams.set(crsParam, parsed.searchParams.get(crsParam) || 'EPSG:3857');
     if (layerName) {
       parsed.searchParams.set('LAYERS', layerName);
     }
@@ -61,6 +67,67 @@ export function resolveCommandBoundsWgs84(
 
 export function formatBounds([minx, miny, maxx, maxy]: [number, number, number, number]): string {
   return `${minx}, ${miny}, ${maxx}, ${maxy}`;
+}
+
+export function buildGeoLibreLayerSpec(
+  layerId: string,
+  cmd: Gn4MapCommand,
+  boundsWgs84: [number, number, number, number] | null,
+): AddLayerSpec {
+  const layerType = cmd.type || 'wms';
+  const url = decodeURIComponent(cmd.url);
+  const name = decodeURIComponent(cmd.name || '');
+  const label = decodeURIComponent(cmd.label || name || layerId);
+
+  if (layerType === 'wmts') {
+    return {
+      id: layerId,
+      type: 'raster',
+      name: label,
+      source: {
+        type: 'raster',
+        tiles: [url],
+        tileSize: DEFAULT_TILE_SIZE,
+      },
+      visible: true,
+      opacity: 1,
+    };
+  }
+
+  const wmsLayerName = extractWmsLayerName(url) || name;
+  const wmsTilesUrl = buildWmsTileUrl(url, wmsLayerName);
+  const wmsEndpoint = extractEndpoint(url);
+  const wmsVersion = readQueryParam(url, 'VERSION') || DEFAULT_WMS_VERSION;
+  const wmsFormat = readQueryParam(url, 'FORMAT') || 'image/png';
+  const wmsTransparent = (readQueryParam(url, 'TRANSPARENT') || 'true').toLowerCase() !== 'false';
+  const wmsStyles = readQueryParam(url, 'STYLES') || '';
+
+  return {
+    id: layerId,
+    type: 'wms',
+    name: label,
+    source: {
+      type: 'raster',
+      tiles: [wmsTilesUrl],
+      tileSize: DEFAULT_TILE_SIZE,
+      url: wmsEndpoint,
+      layers: wmsLayerName,
+      styles: wmsStyles,
+      format: wmsFormat,
+      transparent: wmsTransparent,
+      version: wmsVersion,
+      ...(boundsWgs84 ? { bounds: boundsWgs84 } : {}),
+    },
+    visible: true,
+    opacity: 1,
+    metadata: {
+      service: 'wms',
+      layerName: wmsLayerName || name,
+      layerType: 'wms',
+      ...(boundsWgs84 ? { bounds: boundsWgs84 } : {}),
+      ...(boundsWgs84 ? { boundsWgs84: formatBounds(boundsWgs84) } : {}),
+    },
+  };
 }
 
 function normalizeBbox(values: number[]): [number, number, number, number] | null {
