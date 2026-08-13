@@ -455,12 +455,23 @@ export class SearchQueryService {
     const sortFields = currentSort.split(',');
     for (const field of sortFields) {
       const trimmedField = field.trim();
-      if (trimmedField === '_score') {
-        sort.push({ [trimmedField]: 'desc' });
-      } else if (trimmedField.startsWith('-')) {
-        sort.push({ [trimmedField.substring(1)]: 'desc' });
+      const isDescending = trimmedField.startsWith('-');
+      const sortBy = isDescending ? trimmedField.substring(1) : trimmedField;
+      const sortOrder: elasticsearch.SortOrder = isDescending ? 'desc' : 'asc';
+      if (sortBy === '_score') {
+        sort.push({ [sortBy]: { order: 'desc' } });
+      } else if (sortBy === 'resourceDate') {
+        const resourceDateSort: elasticsearch.FieldSort = {
+          order: sortOrder,
+          mode: isDescending ? 'max' : 'min',
+          missing: '_last',
+          nested: {
+            path: 'resourceDate',
+          },
+        };
+        sort.push({ 'resourceDate.date': resourceDateSort });
       } else {
-        sort.push({ [trimmedField]: 'asc' });
+        sort.push({ [sortBy]: sortOrder });
       }
     }
     return sort;

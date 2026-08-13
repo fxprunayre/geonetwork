@@ -460,7 +460,7 @@
         "-createDate": "New record",
         "-popularity": "Popularity",
         "-rating": "Rating",
-        "-revisionDateForResource,-publicationDateForResource,-creationDateForResource": "Last update",
+        "-resourceDate": "Last updated",
         "resourceTitleObject.default.sort": "Title"
       },
       "placeholder": "Sort by"

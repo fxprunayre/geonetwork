@@ -156,7 +156,7 @@ export const DEFAULT_SEARCH_APP_AGGREGATIONS: (
 export const DEFAULT_SEARCH_APP_SORTOPTIONS = [
   '-popularity',
   '_score',
-  '-revisionDateForResource,-publicationDateForResource,-creationDateForResource',
+  '-resourceDate',
   'resourceTitleObject.default.sort',
 ];
 
@@ -186,6 +186,14 @@ export const DEFAULT_SEARCH_APP_CONFIGURATION: SearchApp = {
       {
         filter: { match: { 'cl_status.key': 'superseded' } },
         weight: 0.3,
+      },
+      {
+        field_value_factor: {
+          field: 'popularity',
+          modifier: 'log1p',
+          factor: 0.1,
+          missing: 0,
+        },
       },
       {
         gauss: {
