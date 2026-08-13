@@ -71,7 +71,7 @@ const ICONS = {
       [header]="'menu.settings' | translate"
       position="right"
       modal="false"
-      styleClass="!w-1/3"
+      styleClass="!w-2/5"
       [pt]="{ header: 'header-row' }"
     >
       <ng-container [ngTemplateOutlet]="appConfiguration"></ng-container>

@@ -110,18 +110,15 @@ export class AddLayerToMap extends RecordFieldBase {
 
   mapType = computed(() => selectMapAppConfiguration(this.appConfiguration()).type);
 
-  isWfsMode = computed(
-    () => this.mapType() === 'geolibre' && this.mapService.isWfsLink(this.link()),
+  commandType = computed(() =>
+    this.mapService.resolveLinkMapCommandType(this.link(), this.mapType()),
   );
 
-  serviceType = computed<'wms' | 'wmts' | 'wfs'>(() => {
-    if (this.isWfsMode()) {
-      return 'wfs';
-    }
+  isWfsMode = computed(() => this.commandType() === 'wfs');
 
-    const protocol = this.link().protocol || '';
-    return protocol.includes('OGC:WMTS') ? 'wmts' : 'wms';
-  });
+  serviceType = computed<'wms' | 'wmts' | 'wfs' | 'geojson' | 'geoparquet' | 'cog' | null>(() =>
+    this.commandType(),
+  );
 
   serviceUrl = computed(() => {
     return this.link().urlObject?.['default'] || null;
@@ -170,9 +167,17 @@ export class AddLayerToMap extends RecordFieldBase {
       const serviceType = this.serviceType();
       const runId = ++this.validationRun;
 
-      if (!url) {
+      if (!url || !serviceType) {
         this.status.set('idle');
         this.wfsGeoJsonSupported.set(true);
+        return;
+      }
+
+      if (serviceType === 'geojson' || serviceType === 'geoparquet' || serviceType === 'cog') {
+        this.wfsGeoJsonSupported.set(true);
+        this.serviceLayers.set([]);
+        this.matchingLayers.set([]);
+        this.status.set('found');
         return;
       }
 
@@ -228,10 +233,15 @@ export class AddLayerToMap extends RecordFieldBase {
   }
 
   addLayers = (links: Link[], label?: string) => {
+    const serviceType = this.serviceType();
+    if (!serviceType) {
+      return;
+    }
+
     const command = this.mapService.buildMapCommands(
       links,
       this.record().uuid,
-      this.serviceType(),
+      serviceType,
       label ? [label] : undefined,
     );
 

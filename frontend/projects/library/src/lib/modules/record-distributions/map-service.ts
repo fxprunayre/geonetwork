@@ -8,13 +8,15 @@ import { MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP, MapLayerDisplayTarget } 
 import { MAP_ROUTE_PATH, RECORD_ROUTE_PATH } from '../search/search-constant';
 
 export interface Gn4MapCommand {
-  type?: 'wms' | 'wmts' | 'wfs';
+  type?: 'wms' | 'wmts' | 'wfs' | 'geojson' | 'geoparquet' | 'cog';
   uuid?: string;
   url: string;
   name?: string;
   label?: string;
   boundsWgs84?: [number, number, number, number];
 }
+
+export type Gn4MapCommandType = 'wms' | 'wmts' | 'wfs' | 'geojson' | 'geoparquet' | 'cog';
 
 export interface BulkWmsValidationResult {
   validLinks: Link[];
@@ -69,8 +71,29 @@ export class MapService {
     return (
       this.isWmsLink(link) ||
       this.isWmtsLink(link) ||
-      (mapType === 'geolibre' && this.isWfsLink(link))
+      (mapType === 'geolibre' &&
+        (this.isWfsLink(link) || this.resolveGeoLibreFileLayerType(link) !== null))
     );
+  }
+
+  resolveLinkMapCommandType(link: Link, mapType: MapType): Gn4MapCommandType | null {
+    if (this.isWmtsLink(link)) {
+      return 'wmts';
+    }
+
+    if (this.isWmsLink(link)) {
+      return 'wms';
+    }
+
+    if (mapType === 'geolibre' && this.isWfsLink(link)) {
+      return 'wfs';
+    }
+
+    if (mapType === 'geolibre') {
+      return this.resolveGeoLibreFileLayerType(link);
+    }
+
+    return null;
   }
 
   async supportsWfsGeoJsonOutput(link: Link): Promise<boolean> {
@@ -235,7 +258,7 @@ export class MapService {
   buildMapCommands(
     links: Link[],
     recordUuid: string | undefined,
-    type: 'wms' | 'wmts' | 'wfs',
+    type: Gn4MapCommandType,
     label?: string[],
     boundsByLinkKey?: Record<string, [number, number, number, number]>,
   ): Gn4MapCommand[] {
@@ -342,6 +365,45 @@ export class MapService {
 
   private isGeoJsonOutputFormat(format: string | null | undefined): boolean {
     return !!format && format.toLowerCase().includes('json');
+  }
+
+  private resolveGeoLibreFileLayerType(link: Link): 'geojson' | 'geoparquet' | 'cog' | null {
+    const url = link.urlObject?.['default'];
+    if (!url) {
+      return null;
+    }
+
+    const protocol = (link.protocol || '').toLowerCase();
+    const path = this.readUrlPath(url);
+    if (!path) {
+      return null;
+    }
+
+    if (path.endsWith('.geojson') || path.endsWith('.json') || protocol.endsWith('geojson')) {
+      return 'geojson';
+    }
+
+    if (
+      path.endsWith('.parquet') ||
+      path.endsWith('.geoparquet') ||
+      protocol.endsWith('geoparquet')
+    ) {
+      return 'geoparquet';
+    }
+
+    if (path.endsWith('.tif') || path.endsWith('.tiff') || protocol.endsWith('cog')) {
+      return 'cog';
+    }
+
+    return null;
+  }
+
+  private readUrlPath(url: string): string {
+    try {
+      return new URL(url).pathname.toLowerCase();
+    } catch {
+      return url.split('?')[0]?.split('#')[0]?.toLowerCase() || '';
+    }
   }
 
   navigateToMap(
