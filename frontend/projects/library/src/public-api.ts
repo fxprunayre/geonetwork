@@ -24,6 +24,7 @@ export * from './lib/modules/config/model/gn4config';
 export * from './lib/modules/config/model/gnConfig';
 export * from './lib/modules/data/dataviz-panel/dataviz-panel';
 export * from './lib/modules/data/geolibre-command-utils';
+export * from './lib/modules/data/geolibre-map/geolibre-map';
 export * from './lib/modules/data/map-utils';
 export * from './lib/modules/i18n/language-switcher';
 export * from './lib/modules/i18n/translations-service';

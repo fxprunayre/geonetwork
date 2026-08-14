@@ -110,7 +110,7 @@ npm start
       "enabled": true,
       "type": "geolibre",
       "geolibre": {
-        "embedUrl": "/geolibre/?embed=1",
+        "embedUrl": "/geolibre/?embed=1&toolbar=none",
         "projectUrl": "/assets/geolibre/sextant-project.json"
       }
     }
