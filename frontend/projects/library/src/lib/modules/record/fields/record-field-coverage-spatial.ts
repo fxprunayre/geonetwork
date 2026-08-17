@@ -25,7 +25,7 @@ import { createThemeAwareVectorLayerStyle } from '../../../shared/map-layer-styl
 import { selectRecordAppConfiguration } from '../../config/app-config.selectors';
 import { APPLICATION_CONFIGURATION } from '../../config/config.loader';
 import { DEFAULT_SPACE } from '../../config/gn-constants';
-import { DEFAULT_MAP_CONTEXT } from '../../data/config/map-config';
+import { DEFAULT_BASIC_MAP_CONTEXT } from '../../data/config/map-config';
 import { RecordFieldBase } from '../base';
 import { RecordFieldCoverageCoordinate } from '../coverage-components';
 
@@ -352,7 +352,7 @@ export class RecordFieldCoverageSpatial extends RecordFieldBase implements After
       const mapElement = mapElements[index]?.nativeElement;
       if (mapElement) {
         // Deep clone so multiple bbox maps on the same page don't append to a single reference
-        const mapContext = JSON.parse(JSON.stringify(DEFAULT_MAP_CONTEXT));
+        const mapContext = JSON.parse(JSON.stringify(DEFAULT_BASIC_MAP_CONTEXT));
         mapContext.layers.push({
           type: 'geojson',
           data: {

@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -39,6 +40,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent {
+  private document = inject(DOCUMENT);
   private elementRef = inject(ElementRef);
   private route = inject(ActivatedRoute);
 
@@ -122,12 +124,12 @@ export class MapComponent {
   }
 
   private async initGeospatialSdkMap() {
-    if (!document.querySelector(`script[src="${SEXTANT_VIEWER_SCRIPT_URL}"]`)) {
-      const script = document.createElement('script');
+    if (!this.document.querySelector(`script[src="${SEXTANT_VIEWER_SCRIPT_URL}"]`)) {
+      const script = this.document.createElement('script');
       script.type = 'module';
       script.src = SEXTANT_VIEWER_SCRIPT_URL;
       script.crossOrigin = 'anonymous';
-      document.body.appendChild(script);
+      this.document.body.appendChild(script);
       await new Promise<void>((resolve) => {
         script.onload = () => resolve();
       });

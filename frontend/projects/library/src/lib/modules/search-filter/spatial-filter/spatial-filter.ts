@@ -33,7 +33,7 @@ import VectorSource from 'ol/source/Vector';
 import { ButtonModule } from 'primeng/button';
 import { Message } from 'primeng/message';
 import { TooltipModule } from 'primeng/tooltip';
-import { DEFAULT_MAP_CONTEXT } from '../../data/config/map-config';
+import { DEFAULT_BASIC_MAP_CONTEXT } from '../../data/config/map-config';
 import { SearchBase } from '../../search/search-base/search-base';
 import { SearchMapOverlayService } from '../../search/search-map-overlay.service';
 import { SpatialBBox } from '../../search/search-spatial.model';
@@ -140,7 +140,7 @@ export class SpatialFilterComponent extends SearchBase implements AfterViewInit,
   }
 
   ngAfterViewInit(): void {
-    const mapContext = JSON.parse(JSON.stringify(DEFAULT_MAP_CONTEXT));
+    const mapContext = JSON.parse(JSON.stringify(DEFAULT_BASIC_MAP_CONTEXT));
     this.map = createMapFromContext(mapContext, this.mapContainer.nativeElement);
 
     this.resultsLayer.setZIndex(990);
