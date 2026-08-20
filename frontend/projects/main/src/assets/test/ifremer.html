@@ -1,8 +1,9 @@
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="generator" content="quarto-1.6.40" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 
     <title>Catalogue Sextant – Démo Quarto — Composants &amp; Mise en Page</title>
@@ -10,34 +11,27 @@
       code {
         white-space: pre-wrap;
       }
-
       span.smallcaps {
         font-variant: small-caps;
       }
-
       div.columns {
         display: flex;
         gap: min(4vw, 1.5em);
       }
-
       div.column {
         flex: auto;
         overflow-x: auto;
       }
-
       div.hanging-indent {
         margin-left: 1.5em;
         text-indent: -1.5em;
       }
-
       ul.task-list {
         list-style: none;
       }
-
       ul.task-list li input[type='checkbox'] {
         width: 0.8em;
-        margin: 0 0.8em 0.2em -1em;
-        /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
+        margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
         vertical-align: middle;
       }
     </style>
@@ -47,7 +41,7 @@
     <script src="https://sextant.gitlab-pages.ifremer.fr/website/site_libs/quarto-search/autocomplete.umd.js"></script>
     <script src="https://sextant.gitlab-pages.ifremer.fr/website/site_libs/quarto-search/fuse.min.js"></script>
     <script src="https://sextant.gitlab-pages.ifremer.fr/website/site_libs/quarto-search/quarto-search.js"></script>
-    <meta name="quarto:offset" content="../" />
+    <meta name="quarto:offset" content="https://sextant.gitlab-pages.ifremer.fr/website/" />
     <link
       href="https://sextant.gitlab-pages.ifremer.fr/website/images/favicon.png"
       rel="icon"
@@ -108,49 +102,30 @@
       }
     </style>
 
-    <link rel="stylesheet" href="../custom.css" />
-    <style id="quarto-target-style">
-      section:target::before {
-        content: '';
-        display: block;
-        height: 62px;
-        margin: -62px 0 0;
-      }
-    </style>
+    <link
+      rel="stylesheet"
+      href="https://static.ifremer.fr/libs/ifremer/jupyterbook-quarto/latest/css/quarto.css"
+    />
   </head>
 
-  <body class="nav-fixed quarto-light" data-bs-offset="62" style="padding-top: 62px">
+  <body class="nav-fixed">
     <div id="quarto-search-results"></div>
     <header id="quarto-header" class="headroom fixed-top">
       <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
         <div class="navbar-container container-fluid">
           <div class="navbar-brand-container mx-auto">
             <a
-              href="https://sextant.gitlab-pages.ifremer.fr/website/"
+              href="https://sextant.gitlab-pages.ifremer.fr/website/index.html"
               class="navbar-brand navbar-brand-logo"
-              data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/index.html"
             >
               <img
-                src="https://sextant.gitlab-pages.ifremer.fr/website/images/logoifremer.png"
+                src="https://static.ifremer.fr/libs/ifremer/logo/v1.0.0/logo_marianne_ifremer_2025.svg"
                 alt="Logo Demo"
                 class="navbar-logo"
               />
             </a>
           </div>
-          <div id="quarto-search" class="type-overlay" title="Search">
-            <div
-              class="aa-Autocomplete"
-              role="combobox"
-              aria-controls="quarto-search-results"
-              aria-expanded="false"
-              aria-haspopup="listbox"
-            >
-              <button type="button" class="aa-DetachedSearchButton">
-                <div class="aa-DetachedSearchButtonPlaceholder"></div>
-                <div class="aa-DetachedSearchButtonQuery"></div>
-              </button>
-            </div>
-          </div>
+          <div id="quarto-search" class="" title="Search"></div>
           <button
             class="navbar-toggler"
             type="button"
@@ -173,8 +148,7 @@
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  href="https://sextant.gitlab-pages.ifremer.fr/website/"
-                  data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/index.html"
+                  href="https://sextant.gitlab-pages.ifremer.fr/website/index.html"
                 >
                   <span class="menu-text">Accueil</span></a
                 >
@@ -182,12 +156,11 @@
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
-                  href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
+                  href="#"
                   id="nav-menu-composants"
                   role="link"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
                 >
                   <span class="menu-text">Composants</span>
                 </a>
@@ -196,7 +169,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/typographie.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/typographie.html"
                     >
                       <span class="dropdown-text">Mise en forme texte</span></a
                     >
@@ -205,7 +177,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/callouts.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/callouts.html"
                     >
                       <span class="dropdown-text">Callouts &amp; Alertes</span></a
                     >
@@ -214,7 +185,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/code.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/code.html"
                     >
                       <span class="dropdown-text">Code source</span></a
                     >
@@ -223,7 +193,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/figures.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/figures.html"
                     >
                       <span class="dropdown-text">Figures &amp; Images</span></a
                     >
@@ -232,7 +201,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/tableaux.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/tableaux.html"
                     >
                       <span class="dropdown-text">Tableaux</span></a
                     >
@@ -241,7 +209,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/mathematiques.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/mathematiques.html"
                     >
                       <span class="dropdown-text">Expressions mathématiques</span></a
                     >
@@ -250,7 +217,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/layout.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/layout.html"
                     >
                       <span class="dropdown-text">Mise en page</span></a
                     >
@@ -260,12 +226,11 @@
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
-                  href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
+                  href="#"
                   id="nav-menu-données"
                   role="link"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
                 >
                   <span class="menu-text">Données</span>
                 </a>
@@ -274,7 +239,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/catalogue.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/catalogue.html"
                     >
                       <span class="dropdown-text">Catalogue</span></a
                     >
@@ -283,7 +247,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/interactif.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/interactif.html"
                     >
                       <span class="dropdown-text">Interactif</span></a
                     >
@@ -293,12 +256,11 @@
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
-                  href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
+                  href="#"
                   id="nav-menu-référence"
                   role="link"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
                 >
                   <span class="menu-text">Référence</span>
                 </a>
@@ -307,7 +269,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/metadonnees.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/metadonnees.html"
                     >
                       <span class="dropdown-text">Métadonnées &amp; YAML</span></a
                     >
@@ -316,7 +277,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/references.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/references.html"
                     >
                       <span class="dropdown-text">Références croisées</span></a
                     >
@@ -325,7 +285,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/bibliographie.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/bibliographie.html"
                     >
                       <span class="dropdown-text">Bibliographie</span></a
                     >
@@ -335,12 +294,11 @@
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
-                  href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
+                  href="#"
                   id="nav-menu-variantes-de-mise-en-page"
                   role="link"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
                 >
                   <span class="menu-text">Variantes de mise en page</span>
                 </a>
@@ -349,7 +307,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/avec-menu-avec-ancre.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/avec-menu-avec-ancre.html"
                     >
                       <span class="dropdown-text">Avec menu + avec ancre</span></a
                     >
@@ -358,7 +315,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/sans-menu-sans-ancre.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/sans-menu-sans-ancre.html"
                     >
                       <span class="dropdown-text">Sans menu + sans ancre</span></a
                     >
@@ -367,7 +323,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/sans-menu-avec-ancre.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/sans-menu-avec-ancre.html"
                     >
                       <span class="dropdown-text">Sans menu + avec ancre</span></a
                     >
@@ -376,7 +331,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/avec-menu-sans-ancre.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/avec-menu-sans-ancre.html"
                     >
                       <span class="dropdown-text">Avec menu + sans ancre</span></a
                     >
@@ -386,12 +340,11 @@
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
-                  href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
+                  href="#"
                   id="nav-menu-application-intégrée"
                   role="link"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html#"
                 >
                   <span class="menu-text">Application intégrée</span>
                 </a>
@@ -400,7 +353,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree.html"
                     >
                       <span class="dropdown-text">Sextant V1</span></a
                     >
@@ -409,7 +361,6 @@
                     <a
                       class="dropdown-item"
                       href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html"
-                      data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/application-integree-new.html"
                     >
                       <span class="dropdown-text">Sextant V2</span></a
                     >
@@ -422,7 +373,6 @@
                 <a
                   class="nav-link"
                   href="https://gitlab.ifremer.fr/osc/community/ability_demo/quarto_demo_ability#"
-                  data-original-href="https://gitlab.ifremer.fr/osc/community/ability_demo/quarto_demo_ability#"
                 >
                   <i class="bi bi-github" role="img" aria-label="GitHub"> </i>
                   <span class="menu-text"></span
@@ -440,15 +390,10 @@
     <div
       id="quarto-content"
       class="quarto-container page-columns page-rows-contents page-layout-full page-navbar"
-      style="min-height: calc(-122px + 100vh)"
     >
       <!-- sidebar -->
       <!-- margin-sidebar -->
-      <div
-        id="quarto-margin-sidebar"
-        class="sidebar margin-sidebar zindex-bottom"
-        style="top: 62px; max-height: calc(-62px + 100vh)"
-      ></div>
+      <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom"></div>
       <!-- main -->
       <main class="content column-page" id="quarto-document-content">
         <header id="title-block-header" class="quarto-title-block default">
@@ -459,27 +404,8 @@
           <div class="quarto-title-meta column-page"></div>
         </header>
 
-        <script src="../sextant-app.js" type="module"></script>
-        <link rel="stylesheet" href="../styles.css" />
-
-        <sextant-app
-          url="https://sextant.ifremer.fr/geonetwork"
-          config='
-{
-"config": {
-  "apps": {
-    "banner": {
-      "enabled": false,
-      "background": "#FFF",
-      "title": "",
-      "subTitle": "",
-      "textColor": "#093564"
-    }
-  },
-  "font": "SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
-}
-}'
-        ></sextant-app>
+        <sextant-app url="https://sextant.ifremer.fr/geonetwork"></sextant-app>
+        <script src="../../sextant-app.js" type="module"></script>
 
         <a
           onclick="
@@ -959,7 +885,6 @@
               <a
                 class="nav-link"
                 href="https://sextant.gitlab-pages.ifremer.fr/website/pages/metadonnees.html"
-                data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/pages/metadonnees.html"
               >
                 <p>À propos</p>
               </a>
@@ -968,7 +893,6 @@
               <a
                 class="nav-link"
                 href="https://sextant.gitlab-pages.ifremer.fr/website/LICENSE.html"
-                data-original-href="https://sextant.gitlab-pages.ifremer.fr/website/LICENSE.html"
               >
                 <p>Licence</p>
               </a>
@@ -976,24 +900,11 @@
           </ul>
         </div>
         <div class="nav-footer-right">
-          <p>
-            Construit avec
-            <a
-              href="https://quarto.org/"
-              data-original-href="https://quarto.org/"
-              target="_blank"
-              rel="noopener"
-              class="external"
-              >Quarto</a
-            >
-          </p>
+          <p>Construit avec <a href="https://quarto.org">Quarto</a></p>
         </div>
       </div>
     </footer>
 
     <script src="https://sextant.gitlab-pages.ifremer.fr/website/site_libs/quarto-html/zenscroll-min.js"></script>
-    <protonpass-root-2540 data-protonpass-role="root" data-protonpass-theme="os"
-      ><template shadowrootmode="closed"></template
-    ></protonpass-root-2540>
   </body>
 </html>
