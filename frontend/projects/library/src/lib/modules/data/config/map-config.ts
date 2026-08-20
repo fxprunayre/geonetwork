@@ -1,7 +1,7 @@
 import { MapContext, MapType } from '../../config/model/gnConfig';
 
 // export const DEFAULT_MAP_TYPE: MapType = 'geolibre';
-export const DEFAULT_MAP_TYPE: MapType = 'geospatialsdk';
+export const DEFAULT_MAP_TYPE: MapType = 'sextant';
 
 export const DEFAULT_MAP_VIEW = {
   extent: [-180, -90, 180, 90],
@@ -46,9 +46,9 @@ export const SEXTANT_MAP_CONTEXT: MapContext = {
       attributions: '© OpenStreetMap contributors',
     },
     {
-      type: 'wmts',
+      type: 'xyz',
       id: 'sextant',
-      url: 'https://sextant.ifremer.fr/geowebcache/service/wmts?SERVICE=wmts&amp;REQUEST=getcapabilities&amp;VERSION=1.0.0',
+      url: 'https://sextant.ifremer.fr/geowebcache/service/wmts?layer=sextant&style=&tilematrixset=EPSG%3A3857&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A3857%3A{z}&TileCol={x}&TileRow={y}',
       visibility: false,
       opacity: 1,
       name: 'sextant',

@@ -103,7 +103,7 @@ export interface SearchAppAdvanced {
   score: string;
 }
 
-export type MapType = 'geolibre' | 'geospatialsdk';
+export type MapType = 'geolibre' | 'sextant';
 
 export interface GeoLibreEmbedConfiguration {
   embedUrl?: string;

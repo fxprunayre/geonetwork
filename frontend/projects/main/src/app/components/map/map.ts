@@ -18,6 +18,7 @@ import {
   ensureSxtViewer,
   GeoLibreMap,
   Gn4MapCommand,
+  MapType,
   MapViewerLike,
   SEXTANT_VIEWER_SCRIPT_URL,
 } from 'gn-library';
@@ -77,7 +78,7 @@ export class MapComponent {
   viewer: MapViewerLike | null = null;
   private lastMapContext: unknown = null;
   private geospatialInitPromise: Promise<void> | null = null;
-  private lastMapType: 'geolibre' | 'geospatialsdk' | null = null;
+  private lastMapType: MapType | null = null;
 
   constructor() {
     effect(() => {
