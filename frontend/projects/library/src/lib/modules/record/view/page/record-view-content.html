@@ -229,23 +229,49 @@
                     </p-accordion-panel>
 
                     @if (section.label === contactAfterSection) {
-                      @for (role of contactRoles(); track role) {
+                      @if (allContactRolesInOnePanel()) {
                         <p-accordion-panel
-                          [value]="'contact-' + role"
-                          [attr.data-testid]="'accordion-panel-contact-' + role"
+                          [value]="'allContact'"
+                          [attr.data-testid]="'accordion-panel-allContact'"
                         >
                           <p-accordion-header class="text-primary! text-2xl!">{{
-                            role + '' | translate
+                            'record.view.section.contacts' | translate
                           }}</p-accordion-header>
                           <p-accordion-content>
-                            <ng-container
-                              *ngTemplateOutlet="
-                                contactsContent;
-                                context: { record: record, role: role }
-                              "
-                            />
+                            @for (role of contactRoles(); track role) {
+                              <div class="mb-4">
+                                <p class="text-lg text-primary-500 font-semibold mb-2">
+                                  {{ role + '' | translate }}
+                                </p>
+                              </div>
+                              <ng-container
+                                *ngTemplateOutlet="
+                                  contactsContent;
+                                  context: { record: record, role: role }
+                                "
+                              />
+                            }
                           </p-accordion-content>
                         </p-accordion-panel>
+                      } @else {
+                        @for (role of contactRoles(); track role) {
+                          <p-accordion-panel
+                            [value]="'contact-' + role"
+                            [attr.data-testid]="'accordion-panel-contact-' + role"
+                          >
+                            <p-accordion-header class="text-primary! text-2xl!">{{
+                              role + '' | translate
+                            }}</p-accordion-header>
+                            <p-accordion-content>
+                              <ng-container
+                                *ngTemplateOutlet="
+                                  contactsContent;
+                                  context: { record: record, role: role }
+                                "
+                              />
+                            </p-accordion-content>
+                          </p-accordion-panel>
+                        }
                       }
                     }
                   }

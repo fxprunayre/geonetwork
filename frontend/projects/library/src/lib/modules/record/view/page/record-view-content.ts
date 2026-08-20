@@ -121,6 +121,7 @@ export class RecordViewContent {
   record = input<IndexRecord | undefined>();
   tab = input<string>(DEFAULT_TAB);
   layout = input<'fieldset' | 'panel' | ''>('');
+  allContactRolesInOnePanel = input<boolean>(true);
   backButtonTplRef = input<TemplateRef<unknown>>();
   headerTplRef = input<TemplateRef<unknown>>();
 
@@ -246,6 +247,7 @@ export class RecordViewContent {
         dataModel: false,
         usageAndAccess: false,
         classification: false,
+        allContact: false,
       };
     }
 
@@ -297,6 +299,7 @@ export class RecordViewContent {
       dataModel: !!record.info?.hasDataModel,
       usageAndAccess: hasUsageAndAccess,
       classification: hasClassification,
+      allContact: this.contactRoles().length > 0,
     };
   });
 
@@ -311,6 +314,7 @@ export class RecordViewContent {
       'spatialInfo',
       'lineage',
       'classification',
+      'allContact',
     ].filter((section) => visibility[section as keyof typeof visibility]);
     const contactSections = this.contactRoles().map((role: string) => 'contact-' + role);
     return [...staticSections, ...contactSections];
