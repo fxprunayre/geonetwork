@@ -20,6 +20,8 @@ import {
 import { ScrollTop } from 'primeng/scrolltop';
 import { Toast } from 'primeng/toast';
 import { filter } from 'rxjs';
+import { AppConfigurationPanel } from './components/app-configuration-panel';
+import { KeyboardShortcutsHelpComponent } from './components/keyboard-shortcuts-help/keyboard-shortcuts-help';
 import { MapComponent } from './components/map/map';
 import { MenuComponent } from './components/menu/menu';
 import { Search } from './components/search/search';
@@ -45,6 +47,8 @@ import { MessageModule } from 'primeng/message';
     MessageModule,
     TranslateModule,
     AlertPanel,
+    AppConfigurationPanel,
+    KeyboardShortcutsHelpComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

@@ -38,6 +38,11 @@ export class KeyboardShortcutsService {
       action: () => this.panelService.toggle(),
     },
     {
+      key: 'b',
+      description: 'Go to home',
+      action: () => this.router.navigate(['/']),
+    },
+    {
       key: 's',
       description: 'Go to search',
       action: () => this.router.navigate([SEARCH_ROUTE_PATH]),
@@ -70,7 +75,7 @@ export class KeyboardShortcutsService {
     {
       key: 'h',
       description: 'Show keyboard shortcuts',
-      action: () => this.helpVisible.set(true),
+      action: () => this.helpVisible.set(this.helpVisible() ? false : true),
     },
   ];
 

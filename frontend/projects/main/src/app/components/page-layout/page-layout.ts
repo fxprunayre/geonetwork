@@ -31,8 +31,6 @@ import { Button } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
 import { filter, map } from 'rxjs';
 import { FilterPanelLayout } from '../../shared/models/search-layout.model';
-import { AppConfigurationPanel } from '../app-configuration-panel';
-import { KeyboardShortcutsHelpComponent } from '../keyboard-shortcuts-help/keyboard-shortcuts-help';
 import { SearchFilters } from '../search-filters/search-filters';
 import { SearchPanelControls } from '../search-panel-controls/search-panel-controls';
 
@@ -42,8 +40,6 @@ import { SearchPanelControls } from '../search-panel-controls/search-panel-contr
     SearchPanelControls,
     SearchWelcomeTextPipe,
     Drawer,
-    AppConfigurationPanel,
-    KeyboardShortcutsHelpComponent,
     SearchFilters,
     NgIcon,
     Button,
@@ -150,9 +146,6 @@ import { SearchPanelControls } from '../search-panel-controls/search-panel-contr
         </div>
       </div>
     </div>
-
-    <app-configuration-panel />
-    <app-keyboard-shortcuts-help />
   `,
   styles: [
     `
