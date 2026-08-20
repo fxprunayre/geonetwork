@@ -27,7 +27,7 @@ export const OSM_MAP_CONTEXT: MapContext = {
   view: DEFAULT_MAP_VIEW,
   dataSources: [
     {
-      url: '/geonetwork/index/features',
+      url: 'https://sextant.ifremer.fr/geonetwork/index/features',
       type: 'geonetwork-index',
     },
   ],
@@ -58,7 +58,7 @@ export const SEXTANT_MAP_CONTEXT: MapContext = {
   view: DEFAULT_MAP_VIEW,
   dataSources: [
     {
-      url: '/geonetwork/index/features',
+      url: 'https://sextant.ifremer.fr/geonetwork/index/features',
       type: 'geonetwork-index',
     },
   ],
