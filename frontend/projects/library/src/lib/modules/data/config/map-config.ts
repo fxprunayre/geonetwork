@@ -25,6 +25,12 @@ export const OSM_MAP_CONTEXT: MapContext = {
     },
   ],
   view: DEFAULT_MAP_VIEW,
+  dataSources: [
+    {
+      url: '/geonetwork/index/features',
+      type: 'geonetwork-index',
+    },
+  ],
 };
 
 export const SEXTANT_MAP_CONTEXT: MapContext = {
@@ -50,6 +56,12 @@ export const SEXTANT_MAP_CONTEXT: MapContext = {
     },
   ],
   view: DEFAULT_MAP_VIEW,
+  dataSources: [
+    {
+      url: '/geonetwork/index/features',
+      type: 'geonetwork-index',
+    },
+  ],
 };
 
 export const DEFAULT_MAP_CONTEXT = SEXTANT_MAP_CONTEXT;
