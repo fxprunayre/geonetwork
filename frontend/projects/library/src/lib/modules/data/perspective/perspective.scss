@@ -1,11 +1,9 @@
 @import '@perspective-dev/viewer/dist/css/themes.css';
 
-perspective-workspace {
-  height: 80vh;
-}
-
 perspective-viewer,
 perspective-workspace {
+  display: block;
+  min-height: 20rem;
   font-family: var(--app-font-family-sans, 'Inter', sans-serif);
   --psp-interface-monospace--font-family: var(--app-font-family-sans, 'Inter', sans-serif);
   --psp-font-family: var(--app-font-family-sans, 'Inter', sans-serif);

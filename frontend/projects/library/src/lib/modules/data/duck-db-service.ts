@@ -88,7 +88,7 @@ export class DuckDbService {
     if (this.perspectiveInitialized) return;
 
     try {
-      const perspectiveVersion = '4.5.1';
+      const perspectiveVersion = '5.2.0';
 
       // Dynamically load all perspective modules (side-effect imports register custom elements)
       const { perspective, perspective_viewer } = await import('./perspective/perspective-init');
@@ -98,10 +98,8 @@ export class DuckDbService {
         `https://cdn.jsdelivr.net/npm/@perspective-dev/viewer@${perspectiveVersion}/dist/wasm/perspective-viewer.wasm`,
       ];
 
-      await Promise.all([
-        perspective.init_server(fetch(wasmUrls[0])),
-        perspective_viewer.init_client(fetch(wasmUrls[1])),
-      ]);
+      perspective.init_server(fetch(wasmUrls[0]));
+      await perspective_viewer.init_client(fetch(wasmUrls[1]));
 
       this.perspectiveInitialized = true;
     } catch (e: unknown) {

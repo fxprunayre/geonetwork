@@ -22,14 +22,16 @@ import { ProgressBar } from 'primeng/progressbar';
 import { FullScreenPanel } from '../../../shared/widgets/full-screen-panel/full-screen-panel';
 import { Datasource } from '../datasource.model';
 import { DuckDbService } from '../duck-db-service';
+import { SAMPLE_VISUALISATIONS } from './perspective-visualisations';
 
-interface PerspectiveWorkspaceNativeElement {
-  clear(): Promise<void>;
-  load(worker: unknown): Promise<void>;
-  addViewer(config: { table: string; settings: boolean; theme: string }): void;
-  flush(): Promise<void>;
-  restore(workspace: unknown): void;
-  workspace: { save(): Promise<unknown> };
+interface PerspectiveViewerNativeElement {
+  delete(): Promise<unknown>;
+  load(client: unknown): Promise<unknown>;
+  restore(update: Record<string, unknown>, options?: unknown): Promise<void>;
+  restoreWorkspace(update: Record<string, unknown>): Promise<void>;
+  save(options?: unknown): Promise<unknown>;
+  saveWorkspace(): Promise<unknown>;
+  flush(): Promise<unknown>;
 }
 
 @Component({
@@ -131,11 +133,12 @@ interface PerspectiveWorkspaceNativeElement {
         </ng-template>
 
         <app-full-screen-panel
-          [contentClass]="'flex flex-col gap-3'"
-          [fullScreenContentClass]="'flex-1 min-h-0 flex flex-col gap-3'"
+          [normalContainerClass]="'relative h-[60vh]'"
+          [contentClass]="'flex flex-col gap-3 h-full min-h-0'"
+          [fullScreenContentClass]="'flex-1 h-full min-h-0 flex flex-col gap-3'"
           [toolbarTplRef]="perspectiveToolbar"
         >
-          <div class="grow min-h-0">
+          <div class="grow h-full min-h-0 min-w-0">
             <div #viewerContainer class="relative h-full min-h-0 overflow-hidden flex flex-col">
               @if (progress().status === 'completed' && isTruncated()) {
                 <p-message
@@ -154,7 +157,11 @@ interface PerspectiveWorkspaceNativeElement {
                 </p-message>
               }
 
-              <perspective-workspace #perspectiveWorkspace theme="GeoNetwork" class="w-full grow" />
+              <perspective-viewer
+                #perspectiveViewer
+                theme="GeoNetwork"
+                class="block w-full h-full min-h-0"
+              />
             </div>
           </div>
         </app-full-screen-panel>
@@ -167,8 +174,8 @@ interface PerspectiveWorkspaceNativeElement {
 export class Perspective implements OnDestroy {
   datasource = input<Datasource | undefined>();
 
-  @ViewChild('perspectiveWorkspace')
-  perspectiveWorkspace!: ElementRef<PerspectiveWorkspaceNativeElement>;
+  @ViewChild('perspectiveViewer')
+  perspectiveViewer!: ElementRef<PerspectiveViewerNativeElement>;
 
   private duckDbService = inject(DuckDbService);
   private renderer = inject(Renderer2);
@@ -181,173 +188,15 @@ export class Perspective implements OnDestroy {
   error: string | undefined;
 
   private worker: unknown;
-  private table: unknown;
-  private workspaceLoaded = false;
-  private readonly tableName = 'data';
+  private viewerLoaded = false;
+  private readonly sourceTableName = 'data';
+  private readonly perspectiveTableName = 'data_view';
 
   fileUploadPt: FileUploadPassThrough = {
     pcChooseButton: { root: 'p-button-outlined' },
   };
 
-  visualisation: Record<string, unknown> = {
-    IFR_LOCATION_PORTS: {
-      sizes: [0.25, 0.75],
-      detail: {
-        main: {
-          type: 'split-area',
-          orientation: 'horizontal',
-          children: [
-            {
-              type: 'tab-area',
-              widgets: ['PERSPECTIVE_GENERATED_ID_0'],
-              currentIndex: 0,
-            },
-            {
-              type: 'tab-area',
-              widgets: ['PERSPECTIVE_GENERATED_ID_1'],
-              currentIndex: 0,
-            },
-          ],
-          sizes: [0.5, 0.5],
-        },
-      },
-      viewers: {
-        PERSPECTIVE_GENERATED_ID_2: {
-          version: '4.4.1',
-          columns_config: {},
-          plugin: 'Datagrid',
-          plugin_config: {
-            columns: {},
-            scroll_lock: false,
-            edit_mode: 'SELECT_ROW_TREE',
-          },
-          settings: false,
-          table: 'data',
-          theme: null,
-          title: null,
-          group_by: ['Country', 'Status'],
-          split_by: [],
-          sort: [],
-          filter: [],
-          group_rollup_mode: 'rollup',
-          expressions: {},
-          columns: ['id'],
-          aggregates: {},
-        },
-        PERSPECTIVE_GENERATED_ID_0: {
-          version: '4.4.1',
-          columns_config: {},
-          plugin: 'Map Scatter',
-          plugin_config: {
-            center: [333110.2341381438, 2510973.7509061927],
-            zoom: 5,
-          },
-          settings: false,
-          table: 'data',
-          theme: null,
-          title: null,
-          group_by: [],
-          split_by: ['Country'],
-          sort: [],
-          filter: [['Country', '==', 'FRA']],
-          group_rollup_mode: 'rollup',
-          expressions: {},
-          columns: ['Longitude', 'Latitude', null, null, 'Name', 'LOCODE', 'Group', 'Status'],
-          aggregates: {},
-        },
-        PERSPECTIVE_GENERATED_ID_1: {
-          version: '4.4.1',
-          columns_config: {},
-          plugin: 'Sunburst',
-          plugin_config: {
-            sunburstLevel: {},
-          },
-          settings: false,
-          table: 'data',
-          theme: null,
-          title: null,
-          group_by: ['Status'],
-          split_by: [],
-          sort: [],
-          filter: [['Country', '==', 'FRA']],
-          group_rollup_mode: 'flat',
-          expressions: {},
-          columns: ['OGC_FID', 'Status', null],
-          aggregates: {
-            OGC_FID: 'count',
-          },
-        },
-      },
-      master: {
-        widgets: ['PERSPECTIVE_GENERATED_ID_2'],
-        sizes: [1],
-      },
-    },
-    sno_memo: {
-      sizes: [0.25, 0.75],
-      detail: {
-        main: {
-          type: 'tab-area',
-          widgets: ['map'],
-          currentIndex: 0,
-        },
-      },
-      viewers: {
-        table: {
-          version: '4.4.1',
-          columns_config: {},
-          plugin: 'Datagrid',
-          plugin_config: {
-            columns: {},
-            scroll_lock: false,
-            edit_mode: 'SELECT_ROW_TREE',
-          },
-          settings: false,
-          table: 'data',
-          theme: null,
-          title: 'Individus',
-          group_by: ['Nom_deploi', 'Nom_indivi'],
-          split_by: [],
-          sort: [],
-          filter: [],
-          group_rollup_mode: 'rollup',
-          expressions: {},
-          columns: ['Date', 'Latitude', 'Longitude', 'Variables'],
-          aggregates: {
-            Date: 'last by index',
-            Longitude: 'high minus low',
-            Variables: 'dominant',
-            Latitude: 'high minus low',
-          },
-        },
-        map: {
-          version: '4.4.1',
-          columns_config: {},
-          plugin: 'Map Scatter',
-          plugin_config: {
-            center: [-1500901.6277789047, -3924407.7503462345],
-            zoom: 2,
-          },
-          settings: false,
-          table: 'data',
-          theme: null,
-          title: 'Map',
-          group_by: [],
-          split_by: ['Nom_indivi'],
-          sort: [['Nom_indivi', 'asc']],
-          filter: [['Nom_deploi', '==', 'ct139']],
-          group_rollup_mode: 'rollup',
-          expressions: {},
-          columns: ['Latitude', 'Longitude', null, null, 'Nom_deploi', 'Nom_indivi', 'Variables'],
-          aggregates: {},
-        },
-      },
-      master: {
-        widgets: ['table'],
-        sizes: [1],
-      },
-    },
-  };
+  visualisation: Record<string, unknown> = SAMPLE_VISUALISATIONS;
 
   constructor() {
     effect(async () => {
@@ -367,13 +216,9 @@ export class Perspective implements OnDestroy {
   }
 
   private async clearPreviousDataIfAny(): Promise<void> {
-    const tbl = this.table as { delete?: () => Promise<void> } | undefined;
-    if (tbl?.delete) {
-      await tbl.delete();
-      this.table = undefined;
-    }
-    if (this.perspectiveWorkspace?.nativeElement?.clear) {
-      await this.perspectiveWorkspace.nativeElement.clear();
+    if (this.perspectiveViewer?.nativeElement?.delete) {
+      await this.perspectiveViewer.nativeElement.delete();
+      this.viewerLoaded = false;
     }
   }
 
@@ -390,73 +235,83 @@ export class Perspective implements OnDestroy {
     }
   }
 
-  private sanitizeData(data: unknown): unknown {
-    if (typeof data === 'bigint') {
-      const num = Number(data);
-      return Number.isSafeInteger(num) ? num : data.toString();
-    }
-    if (Array.isArray(data)) {
-      return data.map((item) => this.sanitizeData(item));
-    }
-    if (data !== null && typeof data === 'object') {
-      return Object.fromEntries(
-        Object.entries(data).map(([key, value]) => [key, this.sanitizeData(value)]),
-      );
-    }
-    return data;
-  }
-
   private async loadDataIntoPerspective() {
     const { perspective } = await import('./perspective-init');
-    this.worker = this.worker || (await perspective.worker());
 
-    if (!this.workspaceLoaded && this.perspectiveWorkspace?.nativeElement?.load) {
-      await this.perspectiveWorkspace.nativeElement.load(this.worker);
-      this.workspaceLoaded = true;
-    }
+    // Import DuckDBHandler dynamically to avoid static dependency cycles with duckdb
+    const { DuckDBHandler } =
+      await import('@perspective-dev/client/dist/esm/virtual_servers/duckdb.js');
 
-    const countResult = await this.duckDbService.runQuery('SELECT count(*) as count FROM data');
-    this.totalCount.set(Number(countResult[0]?.['count'] || 0));
-    this.isTruncated.set(this.totalCount() > this.limit);
-    this.loadedCount.set(Math.min(this.totalCount(), this.limit));
-
-    // Perspective does not support GEOMETRY columns
-    const geomColumns = await this.duckDbService.getGeometryColumns('data');
-    const excludeStatement = geomColumns.length > 0 ? ` EXCLUDE (${geomColumns.join(', ')})` : '';
-    const result = await this.duckDbService.runQuery(
-      `SELECT *${excludeStatement} FROM data LIMIT ${this.limit}`,
+    const duckdbConn = await this.duckDbService.getConnection();
+    const countResult = await this.duckDbService.runQuery(
+      `SELECT count(*) as count FROM ${this.sourceTableName}`,
     );
 
-    if (!Array.isArray(result)) {
-      throw new Error('Unexpected result format from DuckDbService');
+    this.totalCount.set(Number(countResult[0]?.['count'] || 0));
+    // No more truncation since we use virtual server directly
+    this.isTruncated.set(false);
+    this.loadedCount.set(this.totalCount());
+
+    // Perspective does not support GEOMETRY columns
+    const geomColumns = await this.duckDbService.getGeometryColumns(this.sourceTableName);
+    const excludeStatement = geomColumns.length > 0 ? ` EXCLUDE (${geomColumns.join(', ')})` : '';
+
+    // Create a duckdb view without geometries and with a stable row id used by Perspective's DuckDB handler.
+    await this.duckDbService.runQuery(
+      `CREATE OR REPLACE VIEW ${this.perspectiveTableName} AS SELECT row_number() OVER () AS rowid, *${excludeStatement} FROM ${this.sourceTableName}`,
+    );
+
+    const handler = new DuckDBHandler(duckdbConn);
+    const port = await perspective.createMessageHandler(handler);
+    this.worker = await perspective.worker(Promise.resolve(port));
+
+    if (!this.viewerLoaded && this.perspectiveViewer?.nativeElement?.load) {
+      await this.perspectiveViewer.nativeElement.load(this.worker);
+      this.viewerLoaded = true;
     }
 
-    this.table = (
-      this.worker as { table: (data: unknown, opts: { name: string }) => unknown }
-    ).table(this.sanitizeData(result), { name: this.tableName });
-    await this.perspectiveWorkspace.nativeElement.addViewer({
-      table: this.tableName,
+    await this.perspectiveViewer.nativeElement.restore({
+      table: `memory.${this.perspectiveTableName}`,
+      plugin: 'Datagrid',
       settings: true,
       theme: 'GeoNetwork',
     });
-    await this.perspectiveWorkspace.nativeElement.flush?.();
+
+    await this.perspectiveViewer.nativeElement.flush?.();
   }
 
   async ngOnDestroy() {
     await this.clearPreviousDataIfAny();
   }
 
-  loadVisualisation(layer: string) {
-    this.perspectiveWorkspace.nativeElement.restore(this.visualisation[layer]);
+  async loadVisualisation(layer: string) {
+    const selectedState = this.visualisation[layer];
+
+    if (!selectedState || typeof selectedState !== 'object') {
+      return;
+    }
+
+    const restoreConfig = this.withRuntimeTableRef(selectedState as Record<string, unknown>);
+
+    try {
+      if (this.isWorkspaceConfig(restoreConfig)) {
+        await this.perspectiveViewer.nativeElement.restoreWorkspace(restoreConfig);
+      } else {
+        await this.perspectiveViewer.nativeElement.restore(restoreConfig);
+      }
+      await this.perspectiveViewer.nativeElement.flush?.();
+    } catch (error) {
+      console.error('Failed to load visualisation config:', error, restoreConfig);
+    }
   }
 
   async exportWorkspace() {
-    const workspaceState = await this.perspectiveWorkspace.nativeElement.workspace.save();
-    const blob = new Blob([JSON.stringify(workspaceState, null, 2)], { type: 'application/json' });
+    const viewerState = await this.perspectiveViewer.nativeElement.saveWorkspace();
+    const blob = new Blob([JSON.stringify(viewerState, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'perspective_workspace.json';
+    a.download = 'perspective_viewer.json';
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -467,13 +322,56 @@ export class Perspective implements OnDestroy {
       const reader = new FileReader();
       reader.onload = () => {
         try {
-          const workspaceState = JSON.parse(reader.result as string);
-          this.perspectiveWorkspace.nativeElement.restore(workspaceState);
+          const viewerState = JSON.parse(reader.result as string) as Record<string, unknown>;
+          const restoreConfig = this.withRuntimeTableRef(viewerState);
+          if (this.isWorkspaceConfig(restoreConfig)) {
+            void this.perspectiveViewer.nativeElement.restoreWorkspace(restoreConfig);
+          } else {
+            void this.perspectiveViewer.nativeElement.restore(restoreConfig);
+          }
         } catch (e) {
           console.error('Failed to restore workspace:', e);
         }
       };
       reader.readAsText(file);
     }
+  }
+
+  private withRuntimeTableRef(config: Record<string, unknown>): Record<string, unknown> {
+    const tableName = `memory.${this.perspectiveTableName}`;
+
+    if (config['panels'] && typeof config['panels'] === 'object') {
+      const patchedPanels = Object.fromEntries(
+        Object.entries(config['panels'] as Record<string, unknown>).map(([id, panel]) => {
+          if (!panel || typeof panel !== 'object') {
+            return [id, panel];
+          }
+          return [id, { ...(panel as Record<string, unknown>), table: tableName }];
+        }),
+      );
+      return { ...config, panels: patchedPanels };
+    }
+
+    if (config['viewers'] && typeof config['viewers'] === 'object') {
+      const patchedViewers = Object.fromEntries(
+        Object.entries(config['viewers'] as Record<string, unknown>).map(([id, viewer]) => {
+          if (!viewer || typeof viewer !== 'object') {
+            return [id, viewer];
+          }
+          return [id, { ...(viewer as Record<string, unknown>), table: tableName }];
+        }),
+      );
+      return { ...config, viewers: patchedViewers };
+    }
+
+    return { ...config, table: tableName };
+  }
+
+  private isWorkspaceConfig(config: Record<string, unknown>): boolean {
+    return (
+      config['layout'] !== undefined &&
+      config['panels'] !== undefined &&
+      typeof config['panels'] === 'object'
+    );
   }
 }
