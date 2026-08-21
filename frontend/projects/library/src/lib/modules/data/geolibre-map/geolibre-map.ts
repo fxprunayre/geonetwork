@@ -187,6 +187,19 @@ export class GeoLibreMap implements OnDestroy {
 
     for (const cmd of syncCommands) {
       const layerType = cmd.type || 'wms';
+      const layerId = `${layerType}:${cmd.url}#${cmd.name || ''}`;
+      const layerBounds = resolveCommandBoundsWgs84(cmd);
+
+      if (this.addedLayerIds.has(layerId)) {
+        if (focusLayerIds.has(layerId)) {
+          await this.client.setLayerVisibility(layerId, true);
+        }
+        if (!bboxToZoom && layerBounds) {
+          bboxToZoom = layerBounds;
+        }
+        continue;
+      }
+
       if (this.isDataUrlCommand(layerType)) {
         const dataUrl = decodeURIComponent(cmd.url);
         const dataOptions: GeoLibreAddDataOptions = {
@@ -197,7 +210,7 @@ export class GeoLibreMap implements OnDestroy {
 
         if (this.canAddData(this.client)) {
           await this.client.addData(dataUrl, dataOptions);
-          this.addedLayerIds.add(`${layerType}:${cmd.url}#${cmd.name || ''}`);
+          this.addedLayerIds.add(layerId);
           this.lastDataFallbackKey = null;
         } else {
           const commandApplied = await this.tryAddDataViaEmbedCommand(
@@ -207,12 +220,12 @@ export class GeoLibreMap implements OnDestroy {
             dataOptions,
           );
           if (commandApplied) {
-            this.addedLayerIds.add(`${layerType}:${cmd.url}#${cmd.name || ''}`);
+            this.addedLayerIds.add(layerId);
             this.lastDataFallbackKey = null;
             continue;
           }
 
-          const fallbackKey = `${layerType}:${cmd.url}#${cmd.name || ''}`;
+          const fallbackKey = layerId;
           if (this.lastDataFallbackKey !== fallbackKey) {
             console.warn('[GeoLibre] addData bridge unavailable; falling back to iframe data URL', {
               layerType,
@@ -222,16 +235,7 @@ export class GeoLibreMap implements OnDestroy {
           }
           return;
         }
-        continue;
-      }
 
-      const layerId = `${layerType}:${cmd.url}#${cmd.name || ''}`;
-      const layerBounds = resolveCommandBoundsWgs84(cmd);
-
-      if (this.addedLayerIds.has(layerId)) {
-        if (focusLayerIds.has(layerId)) {
-          await this.client.setLayerVisibility(layerId, true);
-        }
         if (!bboxToZoom && layerBounds) {
           bboxToZoom = layerBounds;
         }

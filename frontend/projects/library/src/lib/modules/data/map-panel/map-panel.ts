@@ -69,9 +69,6 @@ export class MapPanel {
       return;
     }
 
-    // Rebuild the layer stack when query params change so focus/zoom can be reapplied.
-    this.addedLayerIds.clear();
-
     const focusLayerIds = new Set(
       focusCommands.map((cmd) => `${cmd.type || 'wms'}:${cmd.url}#${cmd.name || ''}`),
     );
