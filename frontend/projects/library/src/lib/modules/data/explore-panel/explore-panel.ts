@@ -83,7 +83,7 @@ export class ExplorePanel {
       };
     }
 
-    return (mapApp.geospatialsdk?.context as Record<string, unknown> | undefined) || {};
+    return (mapApp.sextant?.context as Record<string, unknown> | undefined) || {};
   });
 
   mapLayerDisplayTarget = computed(

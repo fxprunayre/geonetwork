@@ -5,8 +5,8 @@ import {
 import { DEFAULT_AUTHENTICATION_APP_CONFIGURATION } from '../authentication/config/authentication-config';
 import {
   DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
-  DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
   DEFAULT_MAP_TYPE,
+  DEFAULT_SEXTANTVIEWER_MAP_CONFIGURATION,
 } from '../data/config/map-config';
 import { DEFAULT_HOME_APP_CONFIGURATION } from '../home/config/home-config';
 import { DEFAULT_HEADER_APP_CONFIGURATION } from '../i18n/config/i18n-config';
@@ -36,7 +36,7 @@ export { DEFAULT_SPACE } from '../space/config/space-config';
 
 export {
   DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
-  DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
+  DEFAULT_SEXTANTVIEWER_MAP_CONFIGURATION as DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
   DEFAULT_MAP_CONTEXT,
   DEFAULT_MAP_TYPE,
 } from '../data/config/map-config';
@@ -83,7 +83,7 @@ export const DEFAULT_APPS_CONFIGURATION: AppsConfiguration = {
       enabled: true,
       type: DEFAULT_MAP_TYPE,
       geolibre: DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
-      geospatialsdk: DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
+      sextant: DEFAULT_SEXTANTVIEWER_MAP_CONFIGURATION,
     },
     record: DEFAULT_RECORD_DETAILS_APP_CONFIGURATION,
     banner: DEFAULT_BANNER_APP_CONFIGURATION,

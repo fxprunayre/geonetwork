@@ -111,7 +111,7 @@ export interface GeoLibreEmbedConfiguration {
   projectUrl?: string;
 }
 
-export interface GeoSpatialSdkConfiguration {
+export interface SextantViewerConfiguration {
   context: MapContext;
 }
 
@@ -120,7 +120,7 @@ export type MapContext = Record<string, unknown>;
 export interface MapApp extends App {
   type: MapType;
   geolibre?: GeoLibreEmbedConfiguration;
-  geospatialsdk?: GeoSpatialSdkConfiguration;
+  sextant?: SextantViewerConfiguration;
 }
 
 export interface RecordDetailsApp extends App {

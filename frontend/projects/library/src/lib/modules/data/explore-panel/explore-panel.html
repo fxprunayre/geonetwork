@@ -15,7 +15,7 @@
     />
   </ng-template>
 
-  <ng-template #mapPanelGeospatialSdkContent>
+  <ng-template #mapPanelSextantViewerContent>
     <app-map-panel
       [mapContext]="mapContext()"
       [commands]="embeddedWmsCommands()"
@@ -96,7 +96,7 @@
             @if (mapType() === 'geolibre') {
               <ng-container [ngTemplateOutlet]="mapPanelGeolibreContent"></ng-container>
             } @else {
-              <ng-container [ngTemplateOutlet]="mapPanelGeospatialSdkContent"></ng-container>
+              <ng-container [ngTemplateOutlet]="mapPanelSextantViewerContent"></ng-container>
             }
           </p-accordion-content>
         </p-accordion-panel>
@@ -170,7 +170,7 @@
           @if (mapType() === 'geolibre') {
             <ng-container [ngTemplateOutlet]="mapPanelGeolibreContent"></ng-container>
           } @else {
-            <ng-container [ngTemplateOutlet]="mapPanelGeospatialSdkContent"></ng-container>
+            <ng-container [ngTemplateOutlet]="mapPanelSextantViewerContent"></ng-container>
           }
         </div>
       }

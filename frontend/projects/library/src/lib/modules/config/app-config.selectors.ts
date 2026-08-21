@@ -4,8 +4,8 @@ import {
 } from '../app-shell/config/app-shell-config';
 import {
   DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
-  DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
   DEFAULT_MAP_TYPE,
+  DEFAULT_SEXTANTVIEWER_MAP_CONFIGURATION,
 } from '../data/config/map-config';
 import { DEFAULT_HEADER_APP_CONFIGURATION } from '../i18n/config/i18n-config';
 import { DEFAULT_RECORD_DETAILS_APP_CONFIGURATION } from '../record';
@@ -67,7 +67,7 @@ export function selectMapAppConfiguration(appConfig: ApplicationConfiguration): 
       enabled: true,
       type: DEFAULT_MAP_TYPE,
       geolibre: DEFAULT_GEOLIBRE_MAP_CONFIGURATION,
-      geospatialsdk: DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION,
+      sextant: DEFAULT_SEXTANTVIEWER_MAP_CONFIGURATION,
     }
   );
 }

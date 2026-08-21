@@ -169,10 +169,10 @@ import { App, Apps, MapApp, MapType } from '../model/gnConfig';
                   <select
                     [id]="appName + '-map-type'"
                     class="w-full p-inputtext"
-                    [ngModel]="apps.map?.type || 'geospatialsdk'"
+                    [ngModel]="apps.map?.type || 'sextant'"
                     (ngModelChange)="updateMapType($event)"
                   >
-                    <option value="geospatialsdk">geospatialsdk</option>
+                    <option value="sextant">sextant</option>
                     <option value="geolibre">geolibre</option>
                   </select>
                   <label [for]="appName + '-map-type'">Map type</label>
@@ -399,7 +399,7 @@ export class ConfigEditorComponent {
       enabled: currentMap?.enabled ?? true,
       type,
       geolibre: currentMap?.geolibre,
-      geospatialsdk: currentMap?.geospatialsdk,
+      sextant: currentMap?.sextant,
     };
 
     this.appConfig.set({

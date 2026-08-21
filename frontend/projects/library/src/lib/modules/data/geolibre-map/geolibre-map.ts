@@ -41,7 +41,65 @@ type GeoLibreConfig = {
   embedUrl?: string;
   origin?: string;
   projectUrl?: string;
+  settingUrl?: string;
 };
+
+export function buildGeoLibreEmbedUrl(
+  config: Pick<GeoLibreConfig, 'embedUrl' | 'settingUrl'>,
+): string {
+  const configuredUrl = config.embedUrl?.trim();
+  const settingUrl = config.settingUrl?.trim();
+  const baseUrl = configuredUrl || 'https://web.geolibre.app/?embed=1';
+
+  try {
+    const url = new URL(
+      baseUrl,
+      typeof window !== 'undefined' ? window.location.origin : 'http://localhost',
+    );
+
+    if (settingUrl) {
+      url.searchParams.set('settingUrl', settingUrl);
+    }
+
+    return url.toString();
+  } catch {
+    const fallbackUrl = new URL('https://web.geolibre.app/?embed=1');
+    if (settingUrl) {
+      fallbackUrl.searchParams.set('settingUrl', settingUrl);
+    }
+    return fallbackUrl.toString();
+  }
+}
+
+export function buildGeoLibreProjectUrl(embedUrl: string, projectUrl?: string): string {
+  if (!projectUrl) {
+    return embedUrl;
+  }
+
+  try {
+    const base = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
+    const url = new URL(embedUrl, base);
+    const resolvedProjectUrl = resolveHostRelativeUrl(projectUrl);
+
+    url.searchParams.set('url', resolvedProjectUrl);
+    return url.toString();
+  } catch {
+    return embedUrl;
+  }
+}
+
+function resolveHostRelativeUrl(value: string): string {
+  try {
+    const baseOrigin =
+      typeof window !== 'undefined' && window.location?.origin
+        ? window.location.origin
+        : 'http://localhost';
+
+    return new URL(value, baseOrigin).toString();
+  } catch {
+    return value;
+  }
+}
 
 const GEOLIBRE_CONNECT_TIMEOUT_MS = 45000;
 const GEOLIBRE_REQUEST_TIMEOUT_MS = 30000;
@@ -97,16 +155,15 @@ export class GeoLibreMap implements OnDestroy {
       origin: this.readString(nested.origin) || this.readString(mapContext['origin']) || '',
       projectUrl:
         this.readString(nested.projectUrl) || this.readString(mapContext['projectUrl']) || '',
+      settingUrl:
+        this.readString(nested.settingUrl) || this.readString(mapContext['settingUrl']) || '',
     };
   });
 
-  embedUrl = computed(() => {
-    const configuredUrl = this.geolibreConfig().embedUrl;
-    return configuredUrl || 'https://web.geolibre.app/?embed=1';
-  });
+  embedUrl = computed(() => buildGeoLibreEmbedUrl(this.geolibreConfig()));
 
   runtimeUrl = computed(() =>
-    this.buildProjectUrl(this.embedUrl(), this.geolibreConfig().projectUrl),
+    buildGeoLibreProjectUrl(this.embedUrl(), this.geolibreConfig().projectUrl),
   );
 
   origin = computed(() => {
@@ -341,37 +398,6 @@ export class GeoLibreMap implements OnDestroy {
       return url.toString();
     } catch {
       return this.runtimeUrl();
-    }
-  }
-
-  private buildProjectUrl(embedUrl: string, projectUrl?: string): string {
-    if (!projectUrl) {
-      return embedUrl;
-    }
-
-    try {
-      const base = typeof window !== 'undefined' ? window.location.origin : 'http://localhost';
-      const url = new URL(embedUrl, base);
-      const resolvedProjectUrl = this.resolveHostRelativeUrl(projectUrl);
-
-      url.searchParams.set('url', resolvedProjectUrl);
-
-      return url.toString();
-    } catch {
-      return embedUrl;
-    }
-  }
-
-  private resolveHostRelativeUrl(value: string): string {
-    try {
-      if (typeof window !== 'undefined') {
-        const baseUri = document.baseURI || window.location.href;
-        return new URL(value, baseUri).toString();
-      }
-
-      return value;
-    } catch {
-      return value;
     }
   }
 

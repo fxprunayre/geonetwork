@@ -1,4 +1,5 @@
 import { MapContext, MapType } from '../../config/model/gnConfig';
+import { SEXTANT_VIEWER_SCRIPT_URL } from '../map-utils';
 
 // export const DEFAULT_MAP_TYPE: MapType = 'geolibre';
 export const DEFAULT_MAP_TYPE: MapType = 'sextant';
@@ -75,11 +76,13 @@ export const DEFAULT_BASIC_MAP_CONTEXT: MapContext = {
   view: DEFAULT_MAP_VIEW,
 };
 
-export const DEFAULT_GEOSPATIALSDK_MAP_CONFIGURATION = {
+export const DEFAULT_SEXTANTVIEWER_MAP_CONFIGURATION = {
   context: SEXTANT_MAP_CONTEXT,
+  libUrl: SEXTANT_VIEWER_SCRIPT_URL,
 };
 
 export const DEFAULT_GEOLIBRE_MAP_CONFIGURATION = {
   embedUrl: '/geolibre/?embed=1',
   projectUrl: '/assets/geolibre/sextant-project.json',
+  settingUrl: '/assets/geolibre/sextant-settings.json',
 };

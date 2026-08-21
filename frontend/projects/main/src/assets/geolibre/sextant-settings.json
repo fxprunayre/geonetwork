@@ -1,0 +1,93 @@
+{
+  "additionalPluginDirectories": [],
+  "language": "en",
+  "layout": {
+    "browserPanelVisible": false,
+    "commentsPanelVisible": false,
+    "layerPanelVisible": true,
+    "showProjectInfo": true,
+    "stylePanelVisible": true,
+    "toolbarLabels": false
+  },
+  "pluginManifestUrls": [],
+  "shareToken": "",
+  "cesiumIonToken": "",
+  "aiProfiles": [],
+  "defaultAiProfileId": null,
+  "theme": {
+    "scheme": "blue",
+    "customColor": "#0ea5e9"
+  },
+  "uiProfile": {
+    "enabled": true,
+    "level": null,
+    "onboarded": true,
+    "locked": false,
+    "hiddenDataSources": [],
+    "hiddenPlugins": [
+      "maplibre-layer-control",
+      "maplibre-gl-fema-wms",
+      "maplibre-gl-enviroatlas",
+      "maplibre-gl-earthdata-gis",
+      "maplibre-gl-arcgis-hub",
+      "maplibre-gl-ckan",
+      "maplibre-gl-source-coop",
+      "maplibre-gl-huggingface",
+      "maplibre-gl-geo-editor",
+      "maplibre-gl-basemap-control",
+      "maplibre-gl-nasa-earthdata",
+      "maplibre-gl-national-map",
+      "maplibre-gl-openaerialmap",
+      "maplibre-gl-socrata",
+      "geolibre-stac-catalogs",
+      "maplibre-gl-geolens",
+      "maplibre-gl-natural-earth",
+      "maplibre-gl-esri-wayback",
+      "maplibre-gl-geoagent",
+      "maplibre-gl-overture-maps",
+      "maplibre-gl-usgs-lidar",
+      "maplibre-gl-mapillary",
+      "maplibre-gl-streetview",
+      "maplibre-s2-grid",
+      "maplibre-h3-grid",
+      "maplibre-a5-grid",
+      "maplibre-dggrid",
+      "maplibre-dggal",
+      "maplibre-geohash",
+      "maplibre-olc",
+      "maplibre-tilecode",
+      "maplibre-gl-clouds",
+      "maplibre-gl-swipe",
+      "maplibre-gl-precipitation",
+      "geolibre-route-animation",
+      "maplibre-gl-components",
+      "geolibre-sun",
+      "geolibre-flight-simulator"
+    ],
+    "hiddenMenus": [],
+    "hiddenMenuItems": [
+      "project.saveAsTemplate",
+      "project.collaborate",
+      "project.offlineRegion",
+      "view.googleEarth",
+      "view.googleMaps",
+      "settings.environment",
+      "help.website",
+      "help.diagnostics",
+      "help.checkForUpdates",
+      "help.github",
+      "help.feedback",
+      "help.about"
+    ]
+  },
+  "updates": {
+    "checkOnStartup": true,
+    "notificationLevel": "all"
+  },
+  "startup": {
+    "mode": "default",
+    "projectPath": null,
+    "projectName": null,
+    "globeByDefault": true
+  }
+}

@@ -70,7 +70,7 @@ export class MapComponent {
       };
     }
 
-    return mapApp.geospatialsdk?.context || DEFAULT_MAP_CONTEXT;
+    return mapApp.sextant?.context || DEFAULT_MAP_CONTEXT;
   });
 
   parsedCommands = computed(() => this.parseCommands(this.queryParams()['add']));
