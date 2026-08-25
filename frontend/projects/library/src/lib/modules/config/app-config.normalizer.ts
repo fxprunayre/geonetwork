@@ -71,6 +71,7 @@ export function normalizeAppsConfiguration(config: AppsConfiguration): AppsConfi
         type: apps.map?.type ?? DEFAULT_MAP_APP_CONFIGURATION.type,
         sextant: {
           context: apps.map?.sextant?.context ?? DEFAULT_SEXTANTVIEWER_MAP_CONFIGURATION.context,
+          libUrl: apps.map?.sextant?.libUrl ?? DEFAULT_SEXTANTVIEWER_MAP_CONFIGURATION.libUrl,
         },
         geolibre: {
           ...DEFAULT_GEOLIBRE_MAP_CONFIGURATION,

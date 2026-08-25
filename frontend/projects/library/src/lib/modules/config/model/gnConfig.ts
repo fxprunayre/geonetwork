@@ -113,6 +113,7 @@ export interface GeoLibreEmbedConfiguration {
 
 export interface SextantViewerConfiguration {
   context: MapContext;
+  libUrl: string;
 }
 
 export type MapContext = Record<string, unknown>;
