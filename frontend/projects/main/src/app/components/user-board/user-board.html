@@ -125,7 +125,7 @@
                     </div>
                   </div>
                 }
-                @default {
+                @case ('side-fixed') {
                   <div class="w-full border rounded-(--p-border-radius-md) border-surface-100 p-4">
                     <h2 class="text-2xl sm:text-3xl md:text-4xl text-primary font-bold mb-6">
                       <ng-icon name="faSolidFilter"></ng-icon>
@@ -134,6 +134,9 @@
                     <app-aggregations-panel scope="user-records" />
                   </div>
 
+                  <ng-container *ngTemplateOutlet="allWorkResults" />
+                }
+                @default {
                   <ng-container *ngTemplateOutlet="allWorkResults" />
                 }
               }

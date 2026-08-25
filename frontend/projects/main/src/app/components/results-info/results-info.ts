@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, model } from '@angular/core';
+import { Component, computed, inject, Input, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   Aggregation,
@@ -34,7 +34,9 @@ export class ResultsInfo extends SearchBase {
   layout = model<SearchAppLayout>('list');
   @Input() layoutOptions: SearchAppLayout[] = [];
 
-  appConfig = inject(APPLICATION_CONFIGURATION)().config;
-  topTabFilter = this.appConfig?.apps.search?.topTabAggregation;
-  filterPosition = this.appConfig?.apps.search?.filterPosition || 'side';
+  private appConfiguration = inject(APPLICATION_CONFIGURATION);
+  topTabFilter = computed(() => this.appConfiguration().config?.apps.search?.topTabAggregation);
+  filterPosition = computed(
+    () => this.appConfiguration().config?.apps.search?.filterPosition || 'side',
+  );
 }

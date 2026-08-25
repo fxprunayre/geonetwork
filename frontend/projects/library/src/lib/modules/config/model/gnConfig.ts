@@ -40,13 +40,17 @@ export interface Menu extends App {}
 export interface I18nApp extends App {
   languages: Record<string, string>;
   language: string;
-  detection?: 'browser' | 'url' | 'html' | 'none';
+  detection?: I18nDetection;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface AuthenticationApp extends App {}
 
-export type SharingMode = 'none' | 'simple' | 'byGroup' | 'byWorkflow';
+export const I18N_DETECTION_OPTIONS = ['browser', 'url', 'html', 'none'] as const;
+export type I18nDetection = (typeof I18N_DETECTION_OPTIONS)[number];
+
+export const SHARING_MODE_OPTIONS = ['none', 'simple', 'byGroup', 'byWorkflow'] as const;
+export type SharingMode = (typeof SHARING_MODE_OPTIONS)[number];
 
 export interface SharingApp extends App {
   sharingMode: SharingMode;
@@ -59,7 +63,17 @@ export interface HomeApp extends App {
   aggregations: (string | Record<string, elasticsearch.AggregationsAggregationContainer>)[];
 }
 
-export type SearchAppLayout = 'list' | 'grid' | 'table';
+export const SEARCH_LAYOUT_OPTIONS = ['list', 'grid', 'table'] as const;
+export type SearchAppLayout = (typeof SEARCH_LAYOUT_OPTIONS)[number];
+
+export const SEARCH_FILTER_POSITION_OPTIONS = [
+  'drawer',
+  'side',
+  'side-fixed',
+  'top',
+  'none',
+] as const;
+export type SearchFilterPosition = (typeof SEARCH_FILTER_POSITION_OPTIONS)[number];
 
 export type SearchFunctionScoreFunction = Omit<
   elasticsearch.QueryDslFunctionScoreContainer,
@@ -96,14 +110,18 @@ export interface SearchApp extends App {
   hitsPerPageOptions: number[];
   resultsLayoutOptions?: SearchAppLayout[];
   topTabAggregation?: string;
-  filterPosition?: 'drawer' | 'side' | 'side-fixed' | 'top';
+  filterPosition?: SearchFilterPosition;
 }
 
 export interface SearchAppAdvanced {
   score: string;
 }
 
-export type MapType = 'geolibre' | 'sextant';
+export const MAP_TYPE_OPTIONS = ['geolibre', 'sextant'] as const;
+export type MapType = (typeof MAP_TYPE_OPTIONS)[number];
+
+export const COVERAGE_SPATIAL_DISPLAY_TYPE_OPTIONS = ['image', 'dynamicMap'] as const;
+export type CoverageSpatialDisplayType = (typeof COVERAGE_SPATIAL_DISPLAY_TYPE_OPTIONS)[number];
 
 export interface GeoLibreEmbedConfiguration {
   embedUrl?: string;
@@ -128,7 +146,7 @@ export interface RecordDetailsApp extends App {
   distribution?: DistributionConfig;
   mainThesaurus?: string[];
   mapLayerDisplayTarget?: MapLayerDisplayTarget;
-  coverageSpatialDisplayType?: 'image' | 'dynamicMap';
+  coverageSpatialDisplayType?: CoverageSpatialDisplayType;
   showDiscussionTab?: boolean;
   showVersionWidgets?: boolean;
 }

@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
@@ -6,59 +5,92 @@ import { faCompass } from '@ng-icons/font-awesome/regular';
 import {
   faSolidBars,
   faSolidBookmark,
-  faSolidCode,
   faSolidCube,
   faSolidFile,
   faSolidGear,
-  faSolidHouse,
   faSolidImage,
   faSolidLanguage,
   faSolidLock,
   faSolidMagnifyingGlass,
   faSolidMap,
-  faSolidPaintRoller,
 } from '@ng-icons/font-awesome/solid';
 import { TranslatePipe } from '@ngx-translate/core';
-import { MenuItem } from 'primeng/api';
-import { FloatLabel } from 'primeng/floatlabel';
-import { IftaLabelModule } from 'primeng/iftalabel';
-import { InputText } from 'primeng/inputtext';
-import { Menu } from 'primeng/menu';
-import { Panel } from 'primeng/panel';
-import { TextareaModule } from 'primeng/textarea';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
-import { ColorPicker } from '../../../shared/widgets/color-picker/color-picker';
-import { CopyInput } from '../../../shared/widgets/copy-input/copy-input';
-import { ThemeDesigner } from '../../../shared/widgets/theme-designer/theme-designer';
-import { APPLICATION_CONFIGURATION } from '../config.loader';
+import { WELL_KNOWN_HOME_AGGREGATION_GROUPS } from '../../home/config/home-config';
+import {
+  MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
+  MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
+} from '../../record';
+import {
+  type AggregationItem,
+  WELL_KNOWN_AGGREGATION_GROUPS,
+} from '../../search/config/search-config';
 import { DEFAULT_THEME } from '../default-theme';
-import { App, Apps, MapApp, MapType } from '../model/gnConfig';
+import {
+  App,
+  Apps,
+  COVERAGE_SPATIAL_DISPLAY_TYPE_OPTIONS,
+  I18N_DETECTION_OPTIONS,
+  MAP_TYPE_OPTIONS,
+  SEARCH_FILTER_POSITION_OPTIONS,
+  SEARCH_LAYOUT_OPTIONS,
+  SHARING_MODE_OPTIONS,
+} from '../model/gnConfig';
+import { ConfigEditorFieldsComponent } from './components/config-editor-fields';
+import { ConfigEditorRawTabComponent } from './components/config-editor-raw-tab';
+import { ConfigEditorSidebarComponent } from './components/config-editor-sidebar';
+import { ConfigEditorThemeTabComponent } from './components/config-editor-theme-tab';
+import { ConfigEditorStateService } from './state/config-editor-state.service';
+
+type FieldKind =
+  | 'section'
+  | 'string'
+  | 'number'
+  | 'boolean'
+  | 'select'
+  | 'array'
+  | 'select-array'
+  | 'json';
+
+type ArrayItemKind = 'string' | 'number' | 'boolean';
+
+interface EditableField {
+  path: string;
+  label: string;
+  kind: FieldKind;
+  value?: unknown;
+  options?: readonly string[];
+  arrayItemKind?: ArrayItemKind;
+}
+
+interface AggregationPresetOption {
+  key: string;
+  label: string;
+  aggregation?: AggregationItem;
+}
+
+interface AggregationPresetOptionGroup {
+  label: string;
+  items: AggregationPresetOption[];
+}
 
 @Component({
   selector: 'app-config-editor',
   standalone: true,
   imports: [
-    NgClass,
     FormsModule,
     ToggleSwitchModule,
-    TextareaModule,
-    IftaLabelModule,
-    CopyInput,
-    ThemeDesigner,
-    Menu,
     NgIconComponent,
-    Panel,
-    FloatLabel,
-    InputText,
-    ColorPicker,
     TranslatePipe,
+    ConfigEditorFieldsComponent,
+    ConfigEditorRawTabComponent,
+    ConfigEditorSidebarComponent,
+    ConfigEditorThemeTabComponent,
   ],
+  providers: [ConfigEditorStateService],
   viewProviders: [
     provideIcons({
       faSolidCube,
-      faSolidPaintRoller,
-      faSolidCode,
-      faSolidHouse,
       faCompass,
       faSolidMagnifyingGlass,
       faSolidMap,
@@ -74,24 +106,12 @@ import { App, Apps, MapApp, MapType } from '../model/gnConfig';
   template: `
     @if (appConfig().config?.apps; as apps) {
       <div class="flex flex-row gap-4 h-full min-h-125">
-        <p-menu [model]="menuItems()" styleClass="w-1/4">
-          <ng-template #item let-item let-options="options">
-            <a
-              pRipple
-              class="flex items-center py-2 px-3 no-underline cursor-pointer rounded transition-colors text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-800"
-              [ngClass]="item.styleClass"
-              tabindex="0"
-              (click)="item.command()"
-              (keydown.enter)="item.command()"
-              (keydown.space)="item.command(); $event.preventDefault()"
-            >
-              @if (item.icon) {
-                <ng-icon [name]="item.icon" class="mr-2"></ng-icon>
-              }
-              <span>{{ item.label }}</span>
-            </a>
-          </ng-template>
-        </p-menu>
+        <app-config-editor-sidebar
+          class="w-1/4"
+          [appNames]="appNames()"
+          [selectedTab]="selectedTab()"
+          (selectedTabChange)="selectedTab.set($event)"
+        ></app-config-editor-sidebar>
         <div class="flex-1 w-3/4 pl-2 overflow-y-auto">
           @if (selectedApp(); as appName) {
             <div class="flex flex-col gap-4">
@@ -112,121 +132,46 @@ import { App, Apps, MapApp, MapType } from '../model/gnConfig';
                 }}</label>
               </div>
 
-              @if (appName === 'banner') {
-                <div class="flex flex-col gap-6 mt-4 mb-4">
-                  <p-float-label>
-                    <label for="bannerBackground">{{
-                      'config.theme.designer.field.apps.banner.background' | translate
-                    }}</label>
-                    <input
-                      type="text"
-                      id="bannerBackground"
-                      class="w-full"
-                      pInputText
-                      [ngModel]="apps.banner?.background"
-                      (ngModelChange)="updateBannerProperty('background', $event)"
-                    />
-                  </p-float-label>
-
-                  <p-float-label>
-                    <label for="bannerTitle">{{
-                      'config.theme.designer.field.apps.banner.title' | translate
-                    }}</label>
-                    <input
-                      type="text"
-                      id="bannerTitle"
-                      class="w-full"
-                      pInputText
-                      [ngModel]="apps.banner?.title"
-                      (ngModelChange)="updateBannerProperty('title', $event)"
-                    />
-                  </p-float-label>
-
-                  <p-float-label>
-                    <label for="bannerSubTitle">{{
-                      'config.theme.designer.field.apps.banner.subTitle' | translate
-                    }}</label>
-                    <input
-                      type="text"
-                      id="bannerSubTitle"
-                      class="w-full"
-                      pInputText
-                      [ngModel]="apps.banner?.subTitle"
-                      (ngModelChange)="updateBannerProperty('subTitle', $event)"
-                    />
-                  </p-float-label>
-
-                  <app-color-picker
-                    [label]="'config.theme.designer.field.apps.banner.textColor' | translate"
-                    [color]="apps.banner?.textColor || '#ffffff'"
-                    (colorChange)="updateBannerProperty('textColor', $event)"
-                  ></app-color-picker>
-                </div>
+              @if (getAppEditableEntries(appName); as entries) {
+                @if (entries.length > 0) {
+                  <app-config-editor-fields
+                    [appName]="appName"
+                    [entries]="entries"
+                    [asColorFn]="asColorFn"
+                    [asArrayFn]="asArrayFn"
+                    [toJsonFn]="toJsonFn"
+                    [isAggregationPathFn]="isAggregationPathFn"
+                    [getAggregationPresetOptionsFn]="getAggregationPresetOptionsFn"
+                    [getAggregationPickerValueFn]="getAggregationPickerValueFn"
+                    [setAggregationPickerValueFn]="setAggregationPickerValueFn"
+                    [addWellKnownAggregationFn]="addWellKnownAggregationFn"
+                    [addArrayEntryFn]="addArrayEntryFn"
+                    [updateAggregationItemByRefFn]="updateAggregationItemByRefFn"
+                    [removeAggregationItemFn]="removeAggregationItemFn"
+                    [persistAggregationOrderFn]="persistAggregationOrderFn"
+                    [persistArrayOrderFn]="persistArrayOrderFn"
+                    [updateArrayEntryFn]="updateArrayEntryFn"
+                    [updateArrayPrimitiveEntryFn]="updateArrayPrimitiveEntryFn"
+                    [removeArrayEntryFn]="removeArrayEntryFn"
+                    [updatePrimitiveFieldFn]="updatePrimitiveFieldFn"
+                    [updateStringFieldFn]="updateStringFieldFn"
+                    [updateBooleanFieldFn]="updateBooleanFieldFn"
+                    [updateBannerTextColorFn]="updateBannerTextColorFn"
+                    [updateJsonFieldFn]="updateJsonFieldFn"
+                    [trackByItemFn]="trackByAggregationItem"
+                    [aggregationJsonValueFn]="aggregationJsonValueFn"
+                  ></app-config-editor-fields>
+                }
               }
-
-              @if (appName === 'map') {
-                <p-iftalabel>
-                  <select
-                    [id]="appName + '-map-type'"
-                    class="w-full p-inputtext"
-                    [ngModel]="apps.map?.type || 'sextant'"
-                    (ngModelChange)="updateMapType($event)"
-                  >
-                    <option value="sextant">sextant</option>
-                    <option value="geolibre">geolibre</option>
-                  </select>
-                  <label [for]="appName + '-map-type'">Map type</label>
-                </p-iftalabel>
-              }
-
-              <p-iftalabel>
-                <textarea
-                  pTextarea
-                  [id]="appName + '-config'"
-                  [ngModel]="getAppConfigJson(appName)"
-                  (ngModelChange)="updateAppConfig(appName, $event)"
-                  rows="20"
-                  style="resize: none; width: 100%; font-family: monospace; font-size: 0.875rem;"
-                ></textarea>
-                <label [for]="appName + '-config'">{{
-                  'config.editor.advancedProperties' | translate
-                }}</label>
-              </p-iftalabel>
             </div>
           } @else if (selectedTab() === 'theme') {
-            <div class="flex flex-col gap-4">
-              <div class="text-xl font-bold mb-2 flex items-center">
-                <ng-icon name="faSolidPaintRoller" class="mr-2"></ng-icon>
-                {{ 'config.editor.themeConfiguration' | translate }}
-              </div>
-              <app-theme-designer [theme]="theme()" />
-            </div>
+            <app-config-editor-theme-tab [theme]="theme()"></app-config-editor-theme-tab>
           } @else if (selectedTab() === 'raw') {
-            <div class="flex flex-col gap-4">
-              <div class="text-xl font-bold mb-2 flex items-center">
-                <ng-icon name="faSolidCode" class="mr-2"></ng-icon>
-                {{ 'config.editor.rawConfiguration' | translate }}
-              </div>
-              <p-iftalabel>
-                <textarea
-                  pTextarea
-                  id="raw-config"
-                  [ngModel]="appConfigJson()"
-                  (ngModelChange)="updateRawConfig($event)"
-                  rows="25"
-                  style="resize: none; width: 100%; font-family: monospace; font-size: 0.875rem;"
-                ></textarea>
-                <label for="raw-config">{{ 'config.editor.fullJson' | translate }}</label>
-              </p-iftalabel>
-
-              <div class="text-xl font-bold mt-4">
-                {{ 'config.editor.embedApplication' | translate }}
-              </div>
-              <app-copy-input [value]="embedSnippet()" layout="buttonWithIcon"></app-copy-input>
-              <p-panel class="bg-neutral-900! text-neutral-200! w-full overflow-auto">
-                <pre class="">{{ embedSnippet() }}</pre>
-              </p-panel>
-            </div>
+            <app-config-editor-raw-tab
+              [appConfigJson]="appConfigJson()"
+              [embedSnippet]="embedSnippet()"
+              (rawConfigChange)="updateRawConfig($event)"
+            ></app-config-editor-raw-tab>
           }
         </div>
       </div>
@@ -242,7 +187,101 @@ import { App, Apps, MapApp, MapType } from '../model/gnConfig';
   ],
 })
 export class ConfigEditorComponent {
-  appConfig = inject(APPLICATION_CONFIGURATION);
+  private readonly defaultTermAggregationPresetKey = '__default_term__';
+
+  private readonly selectOptions: Record<string, readonly string[]> = {
+    'map.type': MAP_TYPE_OPTIONS,
+    'i18n.detection': I18N_DETECTION_OPTIONS,
+    'sharing.sharingMode': SHARING_MODE_OPTIONS,
+    'search.filterPosition': SEARCH_FILTER_POSITION_OPTIONS,
+    'search.resultsLayoutOptions': SEARCH_LAYOUT_OPTIONS,
+    'record.mapLayerDisplayTarget': [
+      MAP_LAYER_DISPLAY_TARGET_MAIN_MAP_TAB,
+      MAP_LAYER_DISPLAY_TARGET_EXPLORE_EMBEDDED_MAP,
+    ],
+    'record.coverageSpatialDisplayType': COVERAGE_SPATIAL_DISPLAY_TYPE_OPTIONS,
+  };
+
+  private readonly jsonFallbackKeys = new Set([
+    'search.filter',
+    'search.functionScore',
+    'search.knn',
+    'map.sextant.context',
+    'record.distribution',
+    'i18n.languages',
+  ]);
+
+  readonly wellKnownAggregationGroups = WELL_KNOWN_AGGREGATION_GROUPS;
+  readonly wellKnownHomeAggregationGroups = WELL_KNOWN_HOME_AGGREGATION_GROUPS;
+  private readonly aggregationPickerByPath = signal<Record<string, string>>({});
+  private readonly aggregationJsonDraftByItem = signal<Record<string, string>>({});
+  private readonly aggregationTrackKeys = new WeakMap<object, string>();
+  private aggregationTrackCounter = 0;
+  private readonly state = inject(ConfigEditorStateService);
+
+  readonly asColorFn = (value: unknown) => this.asColor(value);
+  readonly asArrayFn = (value: unknown) => this.asArray(value);
+  readonly toJsonFn = (value: unknown) => this.toJson(value);
+  readonly isAggregationPathFn = (path: string) => this.isAggregationPath(path);
+  readonly getAggregationPresetOptionsFn = (appName: keyof Apps, path: string) =>
+    this.getAggregationPresetOptions(appName, path);
+  readonly getAggregationPickerValueFn = (appName: keyof Apps, path: string) =>
+    this.getAggregationPickerValue(appName, path);
+  readonly setAggregationPickerValueFn = (appName: keyof Apps, path: string, value: string) =>
+    this.setAggregationPickerValue(appName, path, value);
+  readonly addWellKnownAggregationFn = (appName: keyof Apps, path: string) =>
+    this.addWellKnownAggregation(appName, path);
+  readonly addArrayEntryFn = (
+    appName: keyof Apps,
+    path: string,
+    kind: 'array' | 'select-array',
+    itemKind: ArrayItemKind | undefined,
+    options: readonly string[],
+  ) => this.addArrayEntry(appName, path, kind, itemKind, options);
+  readonly updateAggregationItemByRefFn = (
+    appName: keyof Apps,
+    path: string,
+    item: unknown,
+    jsonValue: string,
+  ) => this.updateAggregationItemByRef(appName, path, item, jsonValue);
+  readonly removeAggregationItemFn = (appName: keyof Apps, path: string, item: unknown) =>
+    this.removeAggregationItem(appName, path, item);
+  readonly persistAggregationOrderFn = (appName: keyof Apps, path: string, values: unknown[]) =>
+    this.persistAggregationOrder(appName, path, values);
+  readonly persistArrayOrderFn = (appName: keyof Apps, path: string, values: unknown[]) =>
+    this.persistArrayOrder(appName, path, values);
+  readonly updateArrayEntryFn = (
+    appName: keyof Apps,
+    path: string,
+    index: number,
+    value: unknown,
+  ) => this.updateArrayEntry(appName, path, index, value);
+  readonly updateArrayPrimitiveEntryFn = (
+    appName: keyof Apps,
+    path: string,
+    index: number,
+    itemKind: ArrayItemKind | undefined,
+    value: unknown,
+  ) => this.updateArrayPrimitiveEntry(appName, path, index, itemKind, value);
+  readonly removeArrayEntryFn = (appName: keyof Apps, path: string, index: number) =>
+    this.removeArrayEntry(appName, path, index);
+  readonly updatePrimitiveFieldFn = (
+    appName: keyof Apps,
+    path: string,
+    kind: 'string' | 'number',
+    value: unknown,
+  ) => this.updatePrimitiveField(appName, path, kind, value);
+  readonly updateStringFieldFn = (appName: keyof Apps, path: string, value: string) =>
+    this.updateStringField(appName, path, value);
+  readonly updateBooleanFieldFn = (appName: keyof Apps, path: string, value: boolean) =>
+    this.updateBooleanField(appName, path, value);
+  readonly updateBannerTextColorFn = (value: string) => this.updateBannerTextColor(value);
+  readonly updateJsonFieldFn = (appName: keyof Apps, path: string, jsonValue: string) =>
+    this.updateJsonField(appName, path, jsonValue);
+  readonly aggregationJsonValueFn = (appName: keyof Apps, path: string, item: unknown) =>
+    this.getAggregationJsonValue(appName, path, item);
+
+  appConfig = this.state.appConfig;
   theme = computed(() => this.appConfig().config?.theme || DEFAULT_THEME);
 
   selectedTab = signal<string>('theme');
@@ -296,50 +335,13 @@ export class ConfigEditorComponent {
     userSelections: 'Bookmark',
   };
 
-  menuItems = computed<MenuItem[]>(() => {
-    const apps = this.appNames();
-    const currentTab = this.selectedTab();
-
-    return [
-      {
-        label: 'Apps',
-        items: apps.map((appName) => ({
-          label: this.getAppDisplayLabel(appName),
-          icon: this.iconMap[appName] || 'faSolidGear',
-          command: () => this.selectedTab.set(appName),
-          styleClass:
-            currentTab === appName ? 'bg-primary-100/50 dark:bg-primary-900/50 font-bold' : '',
-        })),
-      },
-      {
-        label: 'Settings',
-        items: [
-          {
-            label: 'Theme',
-            icon: 'faSolidPaintRoller',
-            command: () => this.selectedTab.set('theme'),
-            styleClass:
-              currentTab === 'theme' ? 'bg-primary-100/50 dark:bg-primary-900/50 font-bold' : '',
-          },
-          {
-            label: 'Raw Configuration',
-            icon: 'faSolidCode',
-            command: () => this.selectedTab.set('raw'),
-            styleClass:
-              currentTab === 'raw' ? 'bg-primary-100/50 dark:bg-primary-900/50 font-bold' : '',
-          },
-        ],
-      },
-    ];
-  });
-
   appConfigJson = computed(() => JSON.stringify(this.appConfig(), null, 2));
   embedSnippet = computed(() => {
     const escapedConfig = JSON.stringify(this.appConfig()).replace(/"/g, '&quot;');
     const assetBaseUrl = this.getEmbedAssetBaseUrl();
     const catalogueUrl = this.appConfig().catalogueUrl;
     return [
-      `<script src="${assetBaseUrl}/main.js" type="module"></script>`,
+      `<script src="${assetBaseUrl}/sextant-app.js" type="module"></script>`,
       `<link rel="stylesheet" href="${assetBaseUrl}/styles.css" />`,
       `<sextant-app url="${catalogueUrl}" config="${escapedConfig}"></sextant-app>`,
     ].join('\n');
@@ -353,11 +355,139 @@ export class ConfigEditorComponent {
     return this.appLabelMap[appName] || appName.charAt(0).toUpperCase() + appName.slice(1);
   }
 
-  getAppConfigJson(appName: keyof Apps): string {
-    const app = this.appConfig().config?.apps?.[appName];
-    if (!app) return '{}';
-    const { enabled: _enabled, ...rest } = app as App & Record<string, unknown>;
-    return JSON.stringify(rest, null, 2);
+  getAppEditableEntries(appName: keyof Apps): EditableField[] {
+    const app = this.appConfig().config?.apps?.[appName] as
+      | (App & Record<string, unknown>)
+      | undefined;
+    if (!app) {
+      return [];
+    }
+
+    const { enabled: _enabled, ...rest } = app;
+    return this.buildFields(appName, rest, '');
+  }
+
+  private buildFields(
+    appName: keyof Apps,
+    source: Record<string, unknown>,
+    parentPath: string,
+  ): EditableField[] {
+    const entries: EditableField[] = [];
+
+    for (const key of Object.keys(source)) {
+      const value = source[key];
+      if (value === undefined) {
+        continue;
+      }
+
+      const path = parentPath ? `${parentPath}.${key}` : key;
+      const label = this.humanizeKey(key);
+      const enumOptions = this.getSelectOptions(appName, path);
+
+      if (this.isJsonFallback(appName, path)) {
+        entries.push({ path, label, kind: 'json', value });
+        continue;
+      }
+
+      if (enumOptions && !Array.isArray(value)) {
+        entries.push({ path, label, kind: 'select', value, options: enumOptions });
+        continue;
+      }
+
+      if (Array.isArray(value)) {
+        if (this.isAggregationPath(path)) {
+          entries.push({
+            path,
+            label,
+            kind: 'array',
+            value,
+            arrayItemKind: 'string',
+          });
+          continue;
+        }
+
+        if (enumOptions) {
+          entries.push({
+            path,
+            label,
+            kind: 'select-array',
+            value,
+            options: enumOptions,
+            arrayItemKind: 'string',
+          });
+          continue;
+        }
+
+        if (value.every((item) => ['string', 'number', 'boolean'].includes(typeof item))) {
+          entries.push({
+            path,
+            label,
+            kind: 'array',
+            value,
+            arrayItemKind: this.detectArrayItemKind(value),
+          });
+        } else {
+          entries.push({ path, label, kind: 'json', value });
+        }
+        continue;
+      }
+
+      if (value && typeof value === 'object') {
+        entries.push({ path, label, kind: 'section' });
+        const nestedEntries = this.buildFields(appName, value as Record<string, unknown>, path);
+        if (nestedEntries.length === 0) {
+          entries.push({ path, label, kind: 'json', value });
+        } else {
+          entries.push(...nestedEntries);
+        }
+        continue;
+      }
+
+      if (typeof value === 'boolean') {
+        entries.push({ path, label, kind: 'boolean', value });
+        continue;
+      }
+
+      if (typeof value === 'number') {
+        entries.push({ path, label, kind: 'number', value });
+        continue;
+      }
+
+      entries.push({ path, label, kind: 'string', value: value ?? '' });
+    }
+
+    return entries;
+  }
+
+  private isJsonFallback(appName: keyof Apps, path: string): boolean {
+    const fullPath = `${appName}.${path}`;
+    return (
+      this.jsonFallbackKeys.has(fullPath) ||
+      fullPath.includes('.distribution.sections') ||
+      fullPath.includes('.context.backgroundLayers')
+    );
+  }
+
+  private getSelectOptions(appName: keyof Apps, path: string): readonly string[] | null {
+    return this.selectOptions[`${appName}.${path}`] || null;
+  }
+
+  private humanizeKey(key: string): string {
+    const spaced = key
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/[_-]/g, ' ')
+      .trim();
+    return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+  }
+
+  private detectArrayItemKind(value: unknown[]): ArrayItemKind {
+    if (value.every((item) => typeof item === 'number')) {
+      return 'number';
+    }
+    if (value.every((item) => typeof item === 'boolean')) {
+      return 'boolean';
+    }
+    return 'string';
   }
 
   updateAppEnabled(appName: keyof Apps, isEnabled: boolean) {
@@ -377,63 +507,339 @@ export class ConfigEditorComponent {
     this.appConfig.set({ ...currentConfig });
   }
 
-  updateBannerProperty(property: string, value: string) {
-    const config = this.appConfig().config;
-    if (config?.apps?.banner) {
-      (config.apps.banner as unknown as Record<string, string>)[property] = value;
-      this.appConfig.set({ ...this.appConfig(), config });
+  updatePrimitiveField(
+    appName: keyof Apps,
+    path: string,
+    kind: 'string' | 'number',
+    value: unknown,
+  ) {
+    if (kind === 'number') {
+      const parsed = Number(value);
+      this.updateField(appName, path, Number.isNaN(parsed) ? 0 : parsed);
+      return;
+    }
+    this.updateField(appName, path, String(value ?? ''));
+  }
 
-      if (property === 'textColor') {
-        document.documentElement.style.setProperty('--app-background-text-color', value);
-      }
+  updateStringField(appName: keyof Apps, path: string, value: string) {
+    this.updateField(appName, path, value);
+  }
+
+  updateBooleanField(appName: keyof Apps, path: string, value: boolean) {
+    this.updateField(appName, path, value);
+  }
+
+  updateBannerTextColor(value: string) {
+    this.updateField('banner', 'textColor', value);
+    document.documentElement.style.setProperty('--app-background-text-color', value);
+  }
+
+  asColor(value: unknown): string {
+    return typeof value === 'string' && value.trim() ? value : '#ffffff';
+  }
+
+  asArray(value: unknown): unknown[] {
+    return Array.isArray(value) ? value : [];
+  }
+
+  isAggregationPath(path: string): boolean {
+    return path.endsWith('aggregations');
+  }
+
+  isHomeAggregationPath(appName: keyof Apps, path: string): boolean {
+    return appName === 'home' && this.isAggregationPath(path);
+  }
+
+  getAggregationPresetOptions(appName: keyof Apps, path: string): AggregationPresetOptionGroup[] {
+    const baseGroups = this.isHomeAggregationPath(appName, path)
+      ? this.wellKnownHomeAggregationGroups
+      : this.wellKnownAggregationGroups;
+
+    return [
+      {
+        label: 'Quick Add',
+        items: [{ key: this.defaultTermAggregationPresetKey, label: 'Default term aggregation' }],
+      },
+      ...baseGroups.map((group) => ({
+        label: group.label,
+        items: group.presets.map((preset) => ({
+          key: preset.key,
+          label: preset.label,
+          aggregation: preset.aggregation,
+        })),
+      })),
+    ];
+  }
+
+  getAggregationPickerValue(appName: keyof Apps, path: string): string {
+    const key = this.getAggregationPickerPathKey(appName, path);
+    return (
+      this.aggregationPickerByPath()[key] ||
+      this.getAggregationPresetOptions(appName, path)[0]?.items[0]?.key ||
+      ''
+    );
+  }
+
+  setAggregationPickerValue(appName: keyof Apps, path: string, selectedKey: string) {
+    const key = this.getAggregationPickerPathKey(appName, path);
+    this.aggregationPickerByPath.update((state) => ({
+      ...state,
+      [key]: selectedKey,
+    }));
+  }
+
+  addWellKnownAggregation(appName: keyof Apps, path: string) {
+    const selectedKey = this.getAggregationPickerValue(appName, path);
+
+    if (selectedKey === this.defaultTermAggregationPresetKey) {
+      this.addEmptyAggregation(appName, path);
+      return;
+    }
+
+    const selected = this.getAggregationPresetOptions(appName, path)
+      .flatMap((group) => group.items)
+      .find((item) => item.key === selectedKey);
+    if (!selected) {
+      return;
+    }
+
+    if (!selected.aggregation) {
+      return;
+    }
+
+    const currentValue = this.getFieldValue(appName, path);
+    const currentArray = Array.isArray(currentValue) ? [...currentValue] : [];
+    currentArray.push(this.cloneAggregationItem(selected.aggregation));
+    this.updateField(appName, path, currentArray);
+  }
+
+  addEmptyAggregation(appName: keyof Apps, path: string) {
+    const currentValue = this.getFieldValue(appName, path);
+    const currentArray = Array.isArray(currentValue) ? [...currentValue] : [];
+    currentArray.push(this.createDefaultTermAggregation());
+    this.updateField(appName, path, currentArray);
+  }
+
+  updateAggregationItem(appName: keyof Apps, path: string, index: number, jsonValue: string) {
+    try {
+      const parsed = JSON.parse(jsonValue) as AggregationItem;
+      this.updateArrayEntry(appName, path, index, parsed);
+    } catch {
+      // Keep current value while JSON is invalid.
     }
   }
 
-  updateMapType(type: MapType) {
-    const current = this.appConfig();
-    const config = current.config ?? { apps: {} };
-    const apps = config.apps ?? {};
-    const currentMap = apps.map;
+  moveAggregationItem(appName: keyof Apps, path: string, index: number, offset: -1 | 1) {
+    const currentValue = this.getFieldValue(appName, path);
+    if (!Array.isArray(currentValue)) {
+      return;
+    }
 
-    const nextMap: MapApp = {
-      enabled: currentMap?.enabled ?? true,
-      type,
-      geolibre: currentMap?.geolibre,
-      sextant: currentMap?.sextant,
-    };
+    const targetIndex = index + offset;
+    if (targetIndex < 0 || targetIndex >= currentValue.length) {
+      return;
+    }
 
-    this.appConfig.set({
-      ...current,
-      config: {
-        ...config,
-        apps: {
-          ...apps,
-          map: nextMap,
+    const nextArray = [...currentValue];
+    const [movedItem] = nextArray.splice(index, 1);
+    nextArray.splice(targetIndex, 0, movedItem);
+    this.updateField(appName, path, nextArray);
+  }
+
+  updateAggregationItemByRef(appName: keyof Apps, path: string, item: unknown, jsonValue: string) {
+    this.setAggregationJsonValue(appName, path, item, jsonValue);
+    const index = this.getAggregationItemIndex(appName, path, item);
+    if (index < 0) {
+      return;
+    }
+    this.updateAggregationItem(appName, path, index, jsonValue);
+  }
+
+  removeAggregationItem(appName: keyof Apps, path: string, item: unknown) {
+    const index = this.getAggregationItemIndex(appName, path, item);
+    if (index < 0) {
+      return;
+    }
+    this.removeArrayEntry(appName, path, index);
+  }
+
+  persistAggregationOrder(appName: keyof Apps, path: string, reorderedValues: unknown[]) {
+    if (!Array.isArray(reorderedValues)) {
+      return;
+    }
+    this.updateField(appName, path, [...reorderedValues]);
+  }
+
+  persistArrayOrder(appName: keyof Apps, path: string, reorderedValues: unknown[]) {
+    if (!Array.isArray(reorderedValues)) {
+      return;
+    }
+    this.updateField(appName, path, [...reorderedValues]);
+  }
+
+  trackByAggregationItem = (index: number, item: unknown): string => {
+    if (item && typeof item === 'object') {
+      return this.getAggregationItemIdentity(item);
+    }
+
+    return `agg-primitive-${index}-${String(item)}`;
+  };
+
+  addArrayEntry(
+    appName: keyof Apps,
+    path: string,
+    kind: 'array' | 'select-array',
+    itemKind: ArrayItemKind | undefined,
+    options: readonly string[],
+  ) {
+    const currentValue = this.getFieldValue(appName, path);
+    const currentArray = Array.isArray(currentValue) ? [...currentValue] : [];
+
+    if (kind === 'select-array') {
+      currentArray.push(options[0] ?? '');
+    } else if (itemKind === 'number') {
+      currentArray.push(0);
+    } else if (itemKind === 'boolean') {
+      currentArray.push(false);
+    } else {
+      currentArray.push('');
+    }
+
+    this.updateField(appName, path, currentArray);
+  }
+
+  removeArrayEntry(appName: keyof Apps, path: string, index: number) {
+    const currentValue = this.getFieldValue(appName, path);
+    if (!Array.isArray(currentValue)) {
+      return;
+    }
+    const nextArray = [...currentValue];
+    nextArray.splice(index, 1);
+    this.updateField(appName, path, nextArray);
+  }
+
+  updateArrayEntry(appName: keyof Apps, path: string, index: number, value: unknown) {
+    const currentValue = this.getFieldValue(appName, path);
+    if (!Array.isArray(currentValue)) {
+      return;
+    }
+    const nextArray = [...currentValue];
+    nextArray[index] = value;
+    this.updateField(appName, path, nextArray);
+  }
+
+  updateArrayPrimitiveEntry(
+    appName: keyof Apps,
+    path: string,
+    index: number,
+    itemKind: ArrayItemKind | undefined,
+    value: unknown,
+  ) {
+    if (itemKind === 'number') {
+      const parsed = Number(value);
+      this.updateArrayEntry(appName, path, index, Number.isNaN(parsed) ? 0 : parsed);
+      return;
+    }
+    if (itemKind === 'boolean') {
+      this.updateArrayEntry(appName, path, index, Boolean(value));
+      return;
+    }
+    this.updateArrayEntry(appName, path, index, String(value ?? ''));
+  }
+
+  toJson(value: unknown): string {
+    return JSON.stringify(value ?? {}, null, 2);
+  }
+
+  getAggregationJsonValue(appName: keyof Apps, path: string, item: unknown): string {
+    const key = this.getAggregationJsonDraftKey(appName, path, item);
+    return this.aggregationJsonDraftByItem()[key] || this.toJson(item);
+  }
+
+  updateJsonField(appName: keyof Apps, path: string, jsonValue: string) {
+    try {
+      const parsed = JSON.parse(jsonValue);
+      this.updateField(appName, path, parsed);
+    } catch {
+      // Keep current value while JSON is invalid.
+    }
+  }
+
+  private getFieldValue(appName: keyof Apps, path: string): unknown {
+    return this.state.getFieldValue(appName, path);
+  }
+
+  private updateField(appName: keyof Apps, path: string, value: unknown) {
+    this.state.updateField(appName, path, value);
+  }
+
+  private getAggregationPickerPathKey(appName: keyof Apps, path: string): string {
+    return `${appName}.${path}`;
+  }
+
+  private getAggregationJsonDraftKey(appName: keyof Apps, path: string, item: unknown): string {
+    return `${this.getAggregationPickerPathKey(appName, path)}.${this.getAggregationItemIdentity(item)}`;
+  }
+
+  private getAggregationItemIdentity(item: unknown): string {
+    if (item && typeof item === 'object') {
+      const objectItem = item as object;
+      const existing = this.aggregationTrackKeys.get(objectItem);
+      if (existing) {
+        return existing;
+      }
+
+      const createdKey = `agg-${++this.aggregationTrackCounter}`;
+      this.aggregationTrackKeys.set(objectItem, createdKey);
+      return createdKey;
+    }
+
+    return `agg-primitive-${String(item)}`;
+  }
+
+  private setAggregationJsonValue(
+    appName: keyof Apps,
+    path: string,
+    item: unknown,
+    jsonValue: string,
+  ) {
+    const key = this.getAggregationJsonDraftKey(appName, path, item);
+    this.aggregationJsonDraftByItem.update((state) => ({
+      ...state,
+      [key]: jsonValue,
+    }));
+  }
+
+  private getAggregationItemIndex(appName: keyof Apps, path: string, item: unknown): number {
+    const currentValue = this.getFieldValue(appName, path);
+    if (!Array.isArray(currentValue)) {
+      return -1;
+    }
+    return currentValue.indexOf(item);
+  }
+
+  private cloneAggregationItem(item: AggregationItem): AggregationItem {
+    if (typeof structuredClone === 'function') {
+      return structuredClone(item);
+    }
+    return JSON.parse(JSON.stringify(item)) as AggregationItem;
+  }
+
+  private createDefaultTermAggregation(): AggregationItem {
+    return {
+      newAggregation: {
+        terms: {
+          field: 'fieldName.keyword',
+          size: 10,
+        },
+        meta: {
+          collapsed: false,
         },
       },
-    });
-  }
-
-  updateAppConfig(appName: keyof Apps, jsonStr: string) {
-    try {
-      const parsed = JSON.parse(jsonStr);
-      const currentConfig = this.appConfig();
-      const app = currentConfig.config?.apps?.[appName];
-      if (app) {
-        const enabled = app.enabled;
-        (currentConfig.config!.apps as Record<string, App>)[appName] = { ...parsed, enabled };
-        this.appConfig.set({ ...currentConfig });
-      }
-    } catch {
-      // Ignore parsing errors
-    }
+    };
   }
 
   updateRawConfig(event: string) {
-    try {
-      this.appConfig.set(JSON.parse(event));
-    } catch {
-      // Ignore parse errors while typing
-    }
+    this.state.updateRawConfig(event);
   }
 }

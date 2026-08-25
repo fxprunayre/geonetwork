@@ -1,4 +1,9 @@
 import { HomeApp } from '../../config/model/gnConfig';
+import type {
+  AggregationItem,
+  WellKnownAggregationGroup,
+  WellKnownAggregationPreset,
+} from '../../search/config/search-config';
 
 export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
   enabled: true,
@@ -152,3 +157,86 @@ export const DEFAULT_HOME_APP_CONFIGURATION: HomeApp = {
     },
   ],
 };
+
+function cloneAggregationItem(item: AggregationItem): AggregationItem {
+  if (typeof structuredClone === 'function') {
+    return structuredClone(item);
+  }
+
+  return JSON.parse(JSON.stringify(item)) as AggregationItem;
+}
+
+export const WELL_KNOWN_HOME_AGGREGATION_GROUPS: WellKnownAggregationGroup[] = [
+  {
+    key: 'theme-card',
+    label: 'Themes',
+    presets: [
+      {
+        key: 'th_sextant-theme_tree.key:card',
+        label: 'Sextant Theme - Card',
+        aggregation: cloneAggregationItem(DEFAULT_HOME_APP_CONFIGURATION.aggregations[0]),
+      },
+      {
+        key: 'th_sextant-theme_tree.key:nightingale',
+        label: 'Sextant Theme - Nightingale',
+        aggregation: cloneAggregationItem(DEFAULT_HOME_APP_CONFIGURATION.aggregations[0]),
+      },
+      {
+        key: 'th_httpinspireeceuropaeutheme-theme_tree.key:card',
+        label: 'Inspire Theme - Card',
+        aggregation: cloneAggregationItem(DEFAULT_HOME_APP_CONFIGURATION.aggregations[2]),
+      },
+    ],
+  },
+  {
+    key: 'resourceType',
+    label: 'Resource Type',
+    presets: [
+      {
+        key: 'resourceType:nightingale',
+        label: 'Resource Type - Nightingale',
+        aggregation: cloneAggregationItem(DEFAULT_HOME_APP_CONFIGURATION.aggregations[1]),
+      },
+    ],
+  },
+  {
+    key: 'regulations',
+    label: 'Regulations',
+    presets: [
+      {
+        key: 'th_simm-reglementaire_tree.key',
+        label: 'SIMM Regulation',
+        aggregation: cloneAggregationItem(DEFAULT_HOME_APP_CONFIGURATION.aggregations[3]),
+      },
+      {
+        key: 'th_dcsmm-area_tree.key',
+        label: 'DCSMM Area',
+        aggregation: cloneAggregationItem(DEFAULT_HOME_APP_CONFIGURATION.aggregations[4]),
+      },
+      {
+        key: 'th_dcsmm-descripteur_tree.key',
+        label: 'DCSMM Descriptor',
+        aggregation: cloneAggregationItem(DEFAULT_HOME_APP_CONFIGURATION.aggregations[5]),
+      },
+    ],
+  },
+  {
+    key: 'organizations',
+    label: 'Organizations',
+    presets: [
+      {
+        key: 'th_odatis_centre_donnees_tree.key',
+        label: 'ODATIS Centre Donnees',
+        aggregation: cloneAggregationItem(DEFAULT_HOME_APP_CONFIGURATION.aggregations[6]),
+      },
+      {
+        key: 'th_NVS-OD1_tree.key',
+        label: 'NVS OD1',
+        aggregation: cloneAggregationItem(DEFAULT_HOME_APP_CONFIGURATION.aggregations[7]),
+      },
+    ],
+  },
+];
+
+export const WELL_KNOWN_HOME_AGGREGATIONS: WellKnownAggregationPreset[] =
+  WELL_KNOWN_HOME_AGGREGATION_GROUPS.flatMap((group) => group.presets);

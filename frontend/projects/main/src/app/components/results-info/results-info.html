@@ -9,14 +9,14 @@
         }
       </div>
 
-      @if (filterPosition === 'top') {
+      @if (filterPosition() === 'top') {
         <div>
           <app-search-filters />
         </div>
       }
 
       <div>
-        @if (topTabFilter) {
+        @if (topTabFilter(); as topTabFilter) {
           <app-aggregation
             [keyName]="topTabFilter"
             [displayType]="'button'"

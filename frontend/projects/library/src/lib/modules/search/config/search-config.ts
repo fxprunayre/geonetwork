@@ -2,6 +2,22 @@ import { elasticsearch } from 'gn-api-client';
 import { SearchApp, SearchAppLayout } from '../../config/model/gnConfig';
 import { DEFAULT_RECORD_DOWNLOAD_PROTOCOLS, DEFAULT_RECORD_VIEW_PROTOCOLS } from '../../record';
 
+export type AggregationItem =
+  | string
+  | Record<string, elasticsearch.AggregationsAggregationContainer>;
+
+export interface WellKnownAggregationPreset {
+  key: string;
+  label: string;
+  aggregation: AggregationItem;
+}
+
+export interface WellKnownAggregationGroup {
+  key: string;
+  label: string;
+  presets: WellKnownAggregationPreset[];
+}
+
 export const RESOURCE_TYPE_AGGREGATION: elasticsearch.AggregationsAggregationContainer = {
   terms: {
     field: 'resourceType',
@@ -45,113 +61,188 @@ export const INSPIRE_AGGREGATION: elasticsearch.AggregationsAggregationContainer
   },
 };
 
-export const DEFAULT_SEARCH_APP_AGGREGATIONS: (
-  | string
-  | Record<string, elasticsearch.AggregationsAggregationContainer>
-)[] = [
+export const WELL_KNOWN_AGGREGATION_GROUPS: WellKnownAggregationGroup[] = [
   {
-    groupPublishedId: {
-      terms: {
-        field: 'groupPublishedId',
-        size: 300,
-        include: '.*',
-        exclude: '1',
-      },
-      meta: {
-        field: 'groupPublishedId',
-        orderByTranslation: true,
-        filterByTranslation: true,
-        displayFilter: true,
-        collapsed: false,
-        layout: 'multiselect',
-      },
-    },
-  },
-  {
-    'th_sextant-theme_tree.key': {
-      terms: {
-        field: 'th_sextant-theme_tree.key',
-        size: 300,
-        order: { _key: 'asc' },
-      },
-      meta: {
-        collapsed: false,
-        orderByTranslation: true,
-        translateOnLoad: true,
-        layout: 'tree',
-        refreshPolicy: 'none',
-      },
-    },
-  },
-  {
-    'th_httpinspireeceuropaeutheme-theme_tree.key': INSPIRE_AGGREGATION,
-  },
-  {
-    creationYearForResource: {
-      terms: {
-        field: 'creationYearForResource',
-        size: 10,
-        order: {
-          _key: 'desc',
-        },
-      },
-      meta: {
-        collapsed: false,
-        // layout: 'multiselect',
-      },
-    },
-  },
-  {
-    OrgForResource: {
-      terms: {
-        field: 'OrgForResourceObject.default',
-        include: '.*',
-        size: 10,
-      },
-      meta: {
-        collapsed: true,
-        // Always display filter even no more elements
-        // This can be used when all facet values are loaded
-        // with a large size and you want to provide filtering.
-        // displayFilter: true,
-        caseInsensitiveInclude: true,
-      },
-    },
-  },
-  {
-    availableInServices: {
-      filters: {
-        //"other_bucket_key": "others",
-        // But does not support to click on it
-        filters: {
-          availableInViewService: {
-            query_string: {
-              query: '+linkProtocol:/' + DEFAULT_RECORD_VIEW_PROTOCOLS.join('|') + '/',
+    key: 'sharing',
+    label: 'Sharing',
+    presets: [
+      {
+        key: 'groupPublishedId',
+        label: 'Group Published Id',
+        aggregation: {
+          groupPublishedId: {
+            terms: {
+              field: 'groupPublishedId',
+              size: 300,
+              include: '.*',
+              exclude: '1',
             },
-          },
-          availableInDownloadService: {
-            query_string: {
-              query: '+linkProtocol:/' + DEFAULT_RECORD_DOWNLOAD_PROTOCOLS.join('|') + '/',
+            meta: {
+              field: 'groupPublishedId',
+              orderByTranslation: true,
+              filterByTranslation: true,
+              displayFilter: true,
+              collapsed: false,
+              layout: 'multiselect',
             },
           },
         },
       },
-      meta: {
-        collapsed: true,
-        decorator: {
-          type: 'icon',
-          map: {
-            availableInViewService: 'faSolidMap',
-            availableInDownloadService: 'faSolidCloudArrowDown',
+    ],
+  },
+  {
+    key: 'themes',
+    label: 'Themes',
+    presets: [
+      {
+        key: 'th_sextant-theme_tree.key',
+        label: 'Sextant Theme',
+        aggregation: {
+          'th_sextant-theme_tree.key': {
+            terms: {
+              field: 'th_sextant-theme_tree.key',
+              size: 300,
+              order: { _key: 'asc' },
+            },
+            meta: {
+              collapsed: false,
+              orderByTranslation: true,
+              translateOnLoad: true,
+              layout: 'tree',
+              refreshPolicy: 'none',
+            },
           },
         },
       },
-    },
+      {
+        key: 'th_httpinspireeceuropaeutheme-theme_tree.key',
+        label: 'Inspire Theme',
+        aggregation: {
+          'th_httpinspireeceuropaeutheme-theme_tree.key': INSPIRE_AGGREGATION,
+        },
+      },
+    ],
   },
   {
-    resourceType: RESOURCE_TYPE_AGGREGATION,
+    key: 'statistics',
+    label: 'Statistics',
+    presets: [
+      {
+        key: 'creationYearForResource',
+        label: 'Creation Year',
+        aggregation: {
+          creationYearForResource: {
+            terms: {
+              field: 'creationYearForResource',
+              size: 10,
+              order: {
+                _key: 'desc',
+              },
+            },
+            meta: {
+              collapsed: false,
+              // layout: 'multiselect',
+            },
+          },
+        },
+      },
+    ],
+  },
+  {
+    key: 'organization',
+    label: 'Organization',
+    presets: [
+      {
+        key: 'OrgForResource',
+        label: 'Organization',
+        aggregation: {
+          OrgForResource: {
+            terms: {
+              field: 'OrgForResourceObject.default',
+              include: '.*',
+              size: 10,
+            },
+            meta: {
+              collapsed: true,
+              // Always display filter even no more elements
+              // This can be used when all facet values are loaded
+              // with a large size and you want to provide filtering.
+              // displayFilter: true,
+              caseInsensitiveInclude: true,
+            },
+          },
+        },
+      },
+    ],
+  },
+  {
+    key: 'services',
+    label: 'Services',
+    presets: [
+      {
+        key: 'availableInServices',
+        label: 'Available In Services',
+        aggregation: {
+          availableInServices: {
+            filters: {
+              //"other_bucket_key": "others",
+              // But does not support to click on it
+              filters: {
+                availableInViewService: {
+                  query_string: {
+                    query: '+linkProtocol:/' + DEFAULT_RECORD_VIEW_PROTOCOLS.join('|') + '/',
+                  },
+                },
+                availableInDownloadService: {
+                  query_string: {
+                    query: '+linkProtocol:/' + DEFAULT_RECORD_DOWNLOAD_PROTOCOLS.join('|') + '/',
+                  },
+                },
+              },
+            },
+            meta: {
+              collapsed: true,
+              decorator: {
+                type: 'icon',
+                map: {
+                  availableInViewService: 'faSolidMap',
+                  availableInDownloadService: 'faSolidCloudArrowDown',
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
+  },
+  {
+    key: 'resourceType',
+    label: 'Resource Type',
+    presets: [
+      {
+        key: 'resourceType',
+        label: 'Resource Type',
+        aggregation: {
+          resourceType: RESOURCE_TYPE_AGGREGATION,
+        },
+      },
+    ],
   },
 ];
+
+export const WELL_KNOWN_AGGREGATIONS: WellKnownAggregationPreset[] =
+  WELL_KNOWN_AGGREGATION_GROUPS.flatMap((group) => group.presets);
+
+function cloneAggregationItem(item: AggregationItem): AggregationItem {
+  if (typeof structuredClone === 'function') {
+    return structuredClone(item);
+  }
+  return JSON.parse(JSON.stringify(item)) as AggregationItem;
+}
+
+export const DEFAULT_SEARCH_APP_AGGREGATIONS: AggregationItem[] = WELL_KNOWN_AGGREGATIONS.map(
+  (item) => cloneAggregationItem(item.aggregation),
+);
 
 export const DEFAULT_SEARCH_APP_SORTOPTIONS = [
   '-popularity',
