@@ -104,7 +104,7 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
       children: [
         {
           type: 'tab-layout',
-          tabs: ['PERSPECTIVE_GENERATED_ID_1'],
+          tabs: ['PERSPECTIVE_GENERATED_ID_13'],
           selected: 0,
         },
         {
@@ -112,12 +112,12 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
           children: [
             {
               type: 'tab-layout',
-              tabs: ['PERSPECTIVE_GENERATED_ID_2'],
+              tabs: ['PERSPECTIVE_GENERATED_ID_14'],
               selected: 0,
             },
             {
               type: 'tab-layout',
-              tabs: ['PERSPECTIVE_GENERATED_ID_3'],
+              tabs: ['PERSPECTIVE_GENERATED_ID_15'],
               selected: 0,
             },
           ],
@@ -129,7 +129,7 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
       orientation: 'horizontal',
     },
     panels: {
-      PERSPECTIVE_GENERATED_ID_1: {
+      PERSPECTIVE_GENERATED_ID_13: {
         version: '5.2.0',
         columns_config: {
           id: {
@@ -153,11 +153,13 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         columns: ['id'],
         aggregates: {},
       },
-      PERSPECTIVE_GENERATED_ID_2: {
+      PERSPECTIVE_GENERATED_ID_14: {
         version: '5.2.0',
         columns_config: {},
         plugin: 'Map Scatter',
-        plugin_config: {},
+        plugin_config: {
+          point_size_px: 2,
+        },
         table: 'memory.data_view',
         theme: 'Pro Light',
         title: 'Carte',
@@ -167,11 +169,17 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         filter: [],
         group_rollup_mode: 'flat',
         split_rollup_mode: 'flat',
-        expressions: {},
-        columns: ['Longitude', 'Latitude', 'Nom_indivi', null, null, null],
-        aggregates: {},
+        expressions: {
+          LAT: 'cast(Latitude as DOUBLE)',
+          LON: 'cast(Longitude as DOUBLE)',
+          VariableList: "string_split(Variables, ';')",
+        },
+        columns: ['LAT', 'LON', 'Nom_indivi', null, null, 'Nom_deploi', 'Variables'],
+        aggregates: {
+          Nom_indivi: 'first',
+        },
       },
-      PERSPECTIVE_GENERATED_ID_3: {
+      PERSPECTIVE_GENERATED_ID_15: {
         version: '5.2.0',
         columns_config: {},
         plugin: 'Datagrid',
@@ -190,6 +198,6 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         aggregates: {},
       },
     },
-    masters: ['PERSPECTIVE_GENERATED_ID_1'],
+    masters: ['PERSPECTIVE_GENERATED_ID_13'],
   },
 };
