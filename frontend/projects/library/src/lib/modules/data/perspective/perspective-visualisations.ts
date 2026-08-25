@@ -14,7 +14,7 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
           children: [
             {
               type: 'tab-layout',
-              tabs: ['PERSPECTIVE_GENERATED_ID_0'],
+              tabs: ['PERSPECTIVE_GENERATED_ID_1'],
               selected: 0,
             },
             {
@@ -23,7 +23,7 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
               selected: 0,
             },
           ],
-          sizes: [0.5, 0.5],
+          sizes: [0.715475401929553, 0.28452459807044705],
           orientation: 'vertical',
         },
       ],
@@ -31,14 +31,15 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
       orientation: 'horizontal',
     },
     panels: {
-      PERSPECTIVE_GENERATED_ID_0: {
+      PERSPECTIVE_GENERATED_ID_1: {
         version: '5.2.0',
         columns_config: {},
         plugin: 'Map Scatter',
         plugin_config: {
-          map_tile_provider: 'carto-dark-matter',
+          point_size_px: 10,
+          facet_zoom_mode: 'independent',
         },
-        table: 'memory.perspective_data',
+        table: 'memory.data_view',
         theme: 'GeoNetwork',
         title: 'Ports par type',
         group_by: [],
@@ -48,7 +49,7 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         group_rollup_mode: 'flat',
         split_rollup_mode: 'flat',
         expressions: {},
-        columns: ['Longitude', 'Latitude', 'Status', null, null, null],
+        columns: ['Longitude', 'Latitude', 'Status', null, null, 'Group', 'Country', 'Name'],
         aggregates: {},
       },
       PERSPECTIVE_GENERATED_ID_2: {
@@ -56,7 +57,7 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         columns_config: {},
         plugin: 'Datagrid',
         plugin_config: {},
-        table: 'memory.data',
+        table: 'memory.data_view',
         theme: 'Pro Light',
         title: 'Liste',
         group_by: [],
@@ -77,8 +78,10 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
           },
         },
         plugin: 'Datagrid',
-        plugin_config: {},
-        table: 'memory.data',
+        plugin_config: {
+          edit_mode: 'SELECT_ROW_TREE',
+        },
+        table: 'memory.data_view',
         theme: 'Pro Light',
         title: 'Nombre de ports par pays',
         group_by: ['Country'],
@@ -92,16 +95,16 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         aggregates: {},
       },
     },
+    masters: ['PERSPECTIVE_GENERATED_ID_3'],
   },
   sno_memo: {
     version: '5.2.0',
-    active: 'PERSPECTIVE_GENERATED_ID_1',
     layout: {
       type: 'split-layout',
       children: [
         {
           type: 'tab-layout',
-          tabs: ['PERSPECTIVE_GENERATED_ID_0'],
+          tabs: ['PERSPECTIVE_GENERATED_ID_1'],
           selected: 0,
         },
         {
@@ -109,12 +112,12 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
           children: [
             {
               type: 'tab-layout',
-              tabs: ['PERSPECTIVE_GENERATED_ID_1'],
+              tabs: ['PERSPECTIVE_GENERATED_ID_2'],
               selected: 0,
             },
             {
               type: 'tab-layout',
-              tabs: ['PERSPECTIVE_GENERATED_ID_2'],
+              tabs: ['PERSPECTIVE_GENERATED_ID_3'],
               selected: 0,
             },
           ],
@@ -126,7 +129,7 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
       orientation: 'horizontal',
     },
     panels: {
-      PERSPECTIVE_GENERATED_ID_0: {
+      PERSPECTIVE_GENERATED_ID_1: {
         version: '5.2.0',
         columns_config: {
           id: {
@@ -135,9 +138,9 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         },
         plugin: 'Datagrid',
         plugin_config: {
-          edit_mode: 'SELECT_ROW',
+          edit_mode: 'SELECT_ROW_TREE',
         },
-        table: 'memory.data',
+        table: 'memory.data_view',
         theme: 'GeoNetwork',
         title: 'Individus',
         group_by: ['Nom_deploi', 'Nom_indivi'],
@@ -150,12 +153,12 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         columns: ['id'],
         aggregates: {},
       },
-      PERSPECTIVE_GENERATED_ID_1: {
+      PERSPECTIVE_GENERATED_ID_2: {
         version: '5.2.0',
         columns_config: {},
         plugin: 'Map Scatter',
         plugin_config: {},
-        table: 'memory.data',
+        table: 'memory.data_view',
         theme: 'Pro Light',
         title: 'Carte',
         group_by: [],
@@ -168,12 +171,12 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         columns: ['Longitude', 'Latitude', 'Nom_indivi', null, null, null],
         aggregates: {},
       },
-      PERSPECTIVE_GENERATED_ID_2: {
+      PERSPECTIVE_GENERATED_ID_3: {
         version: '5.2.0',
         columns_config: {},
         plugin: 'Datagrid',
         plugin_config: {},
-        table: 'memory.data',
+        table: 'memory.data_view',
         theme: 'Pro Light',
         title: 'Data',
         group_by: [],
@@ -187,5 +190,6 @@ export const SAMPLE_VISUALISATIONS: Record<string, unknown> = {
         aggregates: {},
       },
     },
+    masters: ['PERSPECTIVE_GENERATED_ID_1'],
   },
 };
